@@ -1,10 +1,13 @@
-import { ComingSoon } from "@/components/layout/coming-soon"
 
-export default function CompressPdfPage() {
-    return (
-        <ComingSoon
-            title="Compress PDF Coming Soon"
-            description="We're working hard on bringing high-quality compression to the browser. Stay tuned!"
-        />
-    )
+import { Metadata } from "next"
+import CompressPdfClient from "./client"
+
+export const metadata: Metadata = {
+    title: "Compress PDF - Reduce PDF File Size Online",
+    description: "Optimize your PDF files for email and web. Reduce file size by up to 90% without losing quality.",
+    keywords: ["compress pdf", "shrink pdf", "reduce pdf size", "optimize pdf"],
+}
+
+export default function Page() {
+    return <CompressPdfClient />
 }

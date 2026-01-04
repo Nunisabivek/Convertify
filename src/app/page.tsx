@@ -5,8 +5,11 @@ import {
   Minimize2,
   Image as ImageIcon,
   FileImage,
-  FileText
+  FileText,
+  Sheet,
+  Presentation
 } from "lucide-react";
+import { AdBanner } from "@/components/ads/banner";
 
 const tools = [
   {
@@ -31,13 +34,6 @@ const tools = [
     href: "/compress-pdf",
   },
   {
-    title: "PDF to JPG",
-    description: "Convert PDF pages to images.",
-    icon: FileImage,
-    color: "bg-yellow-100 text-yellow-600",
-    href: "/pdf-to-jpg",
-  },
-  {
     title: "JPG to PDF",
     description: "Turn your images into a PDF.",
     icon: ImageIcon,
@@ -45,11 +41,60 @@ const tools = [
     href: "/jpg-to-pdf",
   },
   {
+    title: "PNG to PDF",
+    description: "Convert PNG images to PDF.",
+    icon: ImageIcon,
+    color: "bg-emerald-100 text-emerald-600",
+    href: "/png-to-pdf",
+  },
+  {
     title: "Word to PDF",
     description: "Make DOC and DOCX files easy to read.",
     icon: FileText,
     color: "bg-indigo-100 text-indigo-600",
     href: "/word-to-pdf",
+  },
+  {
+    title: "Excel to PDF",
+    description: "Convert Spreadsheets to PDF.",
+    icon: Sheet,
+    color: "bg-green-100 text-green-600",
+    href: "/excel-to-pdf",
+  },
+  {
+    title: "PowerPoint to PDF",
+    description: "Convert PPTX presentations to PDF.",
+    icon: Presentation,
+    color: "bg-orange-100 text-orange-600",
+    href: "/powerpoint-to-pdf",
+  },
+  {
+    title: "Text to PDF",
+    description: "Convert simple text files to PDF.",
+    icon: FileText,
+    color: "bg-slate-100 text-slate-600",
+    href: "/text-to-pdf",
+  },
+  {
+    title: "PDF to JPG",
+    description: "Convert PDF pages to images.",
+    icon: FileImage,
+    color: "bg-yellow-100 text-yellow-600",
+    href: "/pdf-to-jpg",
+  },
+  {
+    title: "PDF to PNG",
+    description: "Get high-quality PNGs from PDF.",
+    icon: FileImage,
+    color: "bg-cyan-100 text-cyan-600",
+    href: "/pdf-to-png",
+  },
+  {
+    title: "PDF to Text",
+    description: "Extract text content from PDF.",
+    icon: FileText,
+    color: "bg-gray-100 text-gray-600",
+    href: "/pdf-to-text",
   },
 ];
 
@@ -66,6 +111,11 @@ export default function Home() {
           Perfect for everyone, from students to pros.
         </p>
       </section>
+
+      {/* Ad Section (High Visibility) */}
+      <div className="w-full flex justify-center py-8 bg-slate-50 border-b">
+        <AdBanner variant="rectangle" />
+      </div>
 
       {/* Tools Grid */}
       <section className="w-full max-w-6xl px-4 py-16">

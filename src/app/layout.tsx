@@ -18,6 +18,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Convertify - Easy PDF Tools",
   description: "Merge, Split, Compress, and Convert PDFs easily. Free and secure.",
+  icons: {
+    icon: '/images/Convertify.png',
+  },
 };
 
 export default function RootLayout({

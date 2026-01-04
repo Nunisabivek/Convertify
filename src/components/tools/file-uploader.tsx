@@ -17,7 +17,18 @@ export function FileUploader({
     multiple = true
 }: FileUploaderProps) {
     const onDrop = useCallback((acceptedFiles: File[]) => {
-        onFilesSelected(acceptedFiles)
+        const MAX_SIZE = 50 * 1024 * 1024; // 50MB
+        const validFiles = acceptedFiles.filter(file => {
+            if (file.size > MAX_SIZE) {
+                alert(`File "${file.name}" is too large! Maximum size is 50MB.`);
+                return false;
+            }
+            return true;
+        });
+
+        if (validFiles.length > 0) {
+            onFilesSelected(validFiles);
+        }
     }, [onFilesSelected])
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
