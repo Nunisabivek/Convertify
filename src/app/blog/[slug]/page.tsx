@@ -21,6 +21,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 }
 
+export async function generateStaticParams() {
+    return blogPosts.map((post) => ({
+        slug: post.slug,
+    }))
+}
+
 // In Next.js 15+, params is a Promise but in standard 13/14 it's an object. 
 // Assuming 14 based on scaffold, but to be safe for newer versions I'll treat it as standard.
 export default function BlogPostPage({ params }: Props) {
