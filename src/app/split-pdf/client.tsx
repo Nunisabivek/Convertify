@@ -39,7 +39,7 @@ export default function SplitPdfPage() {
 
                 // Pad page number with leading zeros: 001, 002, etc.
                 const pageNum = (i + 1).toString().padStart(3, '0')
-                zip.file(`${file.name.replace('.pdf', '')}-page-${pageNum}.pdf`, pdfBytes)
+                zip.file(`${file.name.replace('.pdf', '')}-page-${pageNum}.pdf`, pdfBytes as any)
             }
 
             const zipContent = await zip.generateAsync({ type: "blob" })
