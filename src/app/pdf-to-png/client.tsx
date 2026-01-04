@@ -34,7 +34,7 @@ export default function PdfToPngPage() {
                 canvas.width = viewport.width
                 canvas.height = viewport.height
                 if (ctx) {
-                    await page.render({ canvasContext: ctx, viewport }).promise
+                    await page.render({ canvasContext: ctx, viewport } as any).promise
                     const imgData = canvas.toDataURL("image/png")
                     zip.file(`page-${i}.png`, imgData.split(',')[1], { base64: true })
                 }
