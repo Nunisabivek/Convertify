@@ -102,37 +102,37 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center">
       {/* Hero Section */}
-      <section className="w-full py-20 bg-white border-b text-center px-4">
-        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6">
+      <section className="w-full pt-12 pb-6 bg-gradient-to-b from-indigo-50 to-white text-center px-4">
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-4">
           Every PDF Tool You Need
         </h1>
-        <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-10">
+        <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-6">
           Simple, fast, and secure tools to manage your documents.
           Perfect for everyone, from students to pros.
         </p>
       </section>
 
       {/* Ad Section (High Visibility) */}
-      <div className="w-full flex justify-center py-8 bg-slate-50 border-b">
+      <div className="w-full flex justify-center py-4 bg-white">
         <AdBanner variant="rectangle" />
       </div>
 
       {/* Tools Grid */}
-      <section className="w-full max-w-6xl px-4 py-16">
+      <section className="w-full max-w-6xl px-4 pt-4 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {tools.map((tool) => (
             <Link
               key={tool.title}
               href={tool.href}
-              className="group relative flex flex-col p-8 bg-white rounded-2xl shadow-sm border hover:shadow-xl hover:scale-105 transition-all duration-300"
+              className="group relative flex flex-col p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
             >
-              <div className={`p-4 rounded-xl w-16 h-16 flex items-center justify-center mb-6 ${tool.color}`}>
-                <tool.icon className="w-8 h-8" />
+              <div className={`p-3 rounded-xl w-14 h-14 flex items-center justify-center mb-4 ${tool.color}`}>
+                <tool.icon className="w-7 h-7" />
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">
+              <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">
                 {tool.title}
               </h3>
-              <p className="text-slate-500 text-lg">
+              <p className="text-slate-500 text-base">
                 {tool.description}
               </p>
             </Link>
@@ -141,22 +141,22 @@ export default function Home() {
       </section>
 
       {/* How it Works (Simple) */}
-      <section className="w-full bg-slate-100 py-16 text-center">
+      <section className="w-full bg-slate-50 py-16 text-center border-t">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-3xl font-bold mb-12">How It Works</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-xl font-bold border-2 border-indigo-600 mb-4">1</div>
+              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-xl font-bold border-2 border-indigo-600 mb-4 shadow-sm">1</div>
               <h4 className="text-xl font-semibold mb-2">Choose a Tool</h4>
               <p className="text-slate-500">Select what you want to do with your file.</p>
             </div>
             <div className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-xl font-bold border-2 border-indigo-600 mb-4">2</div>
+              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-xl font-bold border-2 border-indigo-600 mb-4 shadow-sm">2</div>
               <h4 className="text-xl font-semibold mb-2">Upload File</h4>
               <p className="text-slate-500">Pick your file from your computer or phone.</p>
             </div>
             <div className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-xl font-bold border-2 border-indigo-600 mb-4">3</div>
+              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-xl font-bold border-2 border-indigo-600 mb-4 shadow-sm">3</div>
               <h4 className="text-xl font-semibold mb-2">Download</h4>
               <p className="text-slate-500">Get your processed file instantly.</p>
             </div>
