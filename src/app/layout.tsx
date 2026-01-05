@@ -66,9 +66,24 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-slate-50`}
       >
         <Header />
-        <main className="flex-1">
-          {children}
-        </main>
+
+        <div className="flex justify-center w-full max-w-[1920px] mx-auto">
+          {/* Left Ad Sidebar */}
+          <aside className="hidden 2xl:flex w-[180px] shrink-0 flex-col items-center pt-8 sticky top-0 h-screen">
+            <AdBanner variant="skyscraper" />
+          </aside>
+
+          {/* Main Content */}
+          <main className="flex-1 min-w-0">
+            {children}
+          </main>
+
+          {/* Right Ad Sidebar */}
+          <aside className="hidden 2xl:flex w-[180px] shrink-0 flex-col items-center pt-8 sticky top-0 h-screen">
+            <AdBanner variant="skyscraper" />
+          </aside>
+        </div>
+
         <AdBanner />
         <Footer />
         <JsonLd />

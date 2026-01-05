@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react"
 
 interface AdBannerProps {
-    variant?: "footer" | "rectangle" | "native"
+    variant?: "footer" | "rectangle" | "native" | "skyscraper"
 }
 
 export function AdBanner({ variant = "footer" }: AdBannerProps) {
@@ -32,6 +32,17 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
                 width: 728,
                 url: "//entertainenslave.com/d84ed579e24fb0e02224fedd00bed35b/invoke.js",
             }
+
+        if (variant === "skyscraper") {
+            // Skyscraper (160x600) - TODO: Replace with actual key
+            // Using rectangle key temporarily for demo
+            Object.assign(conf, {
+                key: "616f9cf69cb04c34acb730e9239646e0",
+                height: 600,
+                width: 160,
+                // url: "//entertainenslave.com/YOUR_SKYSCRAPER_KEY/invoke.js"
+            })
+        }
 
         // Create a friendly iframe to house the ad script
         const iframe = document.createElement("iframe")
@@ -78,6 +89,18 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
                     ref={containerRef}
                     className="flex items-center justify-center bg-slate-50 border rounded-lg overflow-hidden"
                     style={{ width: 300, height: 250 }}
+                />
+            </div>
+        )
+    }
+
+    if (variant === "skyscraper") {
+        return (
+            <div className="flex items-center justify-center h-full">
+                <div
+                    ref={containerRef}
+                    className="flex items-center justify-center bg-slate-50 border rounded-lg overflow-hidden sticky top-24"
+                    style={{ width: 160, height: 600 }}
                 />
             </div>
         )
