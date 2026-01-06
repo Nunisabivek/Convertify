@@ -69,7 +69,7 @@ export default function RootLayout({
 
         <div className="flex justify-center w-full max-w-[1920px] mx-auto">
           {/* Left Ad Sidebar */}
-          <aside className="hidden 2xl:flex w-[180px] shrink-0 flex-col items-center pt-8 sticky top-0 h-screen">
+          <aside className="hidden xl:flex w-[180px] shrink-0 flex-col items-center pt-8 sticky top-0 h-screen">
             <AdBanner variant="skyscraper" />
           </aside>
 
@@ -79,7 +79,7 @@ export default function RootLayout({
           </main>
 
           {/* Right Ad Sidebar */}
-          <aside className="hidden 2xl:flex w-[180px] shrink-0 flex-col items-center pt-8 sticky top-0 h-screen">
+          <aside className="hidden xl:flex w-[180px] shrink-0 flex-col items-center pt-8 sticky top-0 h-screen">
             <AdBanner variant="skyscraper" />
           </aside>
         </div>

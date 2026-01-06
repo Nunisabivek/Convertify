@@ -108,12 +108,14 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
 
     // Sticky Footer
     return (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 border-t backdrop-blur supports-[backdrop-filter]:bg-white/60 p-2 shadow-lg flex justify-center">
-            <div
-                ref={containerRef}
-                className="flex items-center justify-center overflow-hidden"
-                style={{ width: 728, height: 90 }}
-            />
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 border-t backdrop-blur supports-[backdrop-filter]:bg-white/60 p-2 shadow-lg flex justify-center overflow-hidden">
+            <div className="transform scale-[0.45] sm:scale-[0.6] md:scale-[0.8] lg:scale-100 origin-bottom transition-transform duration-300 ease-out">
+                <div
+                    ref={containerRef}
+                    className="flex items-center justify-center overflow-hidden"
+                    style={{ width: 728, height: 90 }}
+                />
+            </div>
         </div>
     )
 }
