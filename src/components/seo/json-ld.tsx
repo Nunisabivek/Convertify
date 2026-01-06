@@ -25,18 +25,18 @@ export function JsonLd() {
                     name: 'Convertify',
                     logo: {
                         '@type': 'ImageObject',
-                        url: 'https://convertify.vercel.app/images/Convertify.png',
+                        url: 'https://convertify.work/images/Convertify.png',
                     },
                 },
             },
             {
                 '@type': 'Organization',
-                '@id': 'https://convertify.vercel.app/#organization',
+                '@id': 'https://convertify.work/#organization',
                 name: 'Convertify',
-                url: 'https://convertify.vercel.app',
+                url: 'https://convertify.work',
                 logo: {
                     '@type': 'ImageObject',
-                    url: 'https://convertify.vercel.app/images/Convertify.png',
+                    url: 'https://convertify.work/images/Convertify.png',
                     width: 512,
                     height: 512,
                     caption: 'Convertify Logo'
@@ -47,7 +47,7 @@ export function JsonLd() {
                 contactPoint: {
                     '@type': 'ContactPoint',
                     contactType: 'customer support',
-                    email: 'support@convertify.vercel.app',
+                    email: 'support@convertify.work',
                 },
             },
         ],

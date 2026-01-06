@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/private/',
         },
-        sitemap: 'https://convertify.vercel.app/sitemap.xml',
+        sitemap: 'https://convertify.work/sitemap.xml',
     }
 }

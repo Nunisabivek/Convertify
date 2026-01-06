@@ -3,7 +3,7 @@ import { MetadataRoute } from 'next'
 export const dynamic = 'force-static'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://convertify.vercel.app'
+    const baseUrl = 'https://convertify.work'
 
     const tools = [
         'merge-pdf',

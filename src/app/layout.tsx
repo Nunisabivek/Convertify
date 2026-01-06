@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://convertify.vercel.app",
+    url: "https://convertify.work",
     siteName: "Convertify",
     title: "Convertify - Free Online PDF Tools",
     description: "The best free online PDF tools to manage your documents. Merge, split, compress, and convert PDFs instantly.",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     images: ["/images/og-banner.png"],
     creator: "@convertify",
   },
-  metadataBase: new URL("https://convertify.vercel.app"),
+  metadataBase: new URL("https://convertify.work"),
 };
 
 export default function RootLayout({
