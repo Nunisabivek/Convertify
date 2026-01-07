@@ -26,8 +26,13 @@ export const metadata: Metadata = {
   authors: [{ name: "Convertify Team" }],
   keywords: ["free pdf tools online", "merge pdf files free", "compress pdf to 100kb", "jpg to pdf converter", "pdf to jpg online", "split pdf pages", "combine pdf files no watermark", "reduce pdf size for email", "convert image to pdf free"],
   icons: {
-    icon: '/images/Convertify.png',
+    icon: [
+      { url: '/icon.png', sizes: '512x512', type: 'image/png' },
+      { url: '/favicon.png', sizes: '512x512', type: 'image/png' },
+      { url: '/images/Convertify.png', sizes: '512x512', type: 'image/png' },
+    ],
     apple: '/images/Convertify.png',
+    shortcut: '/icon.png',
   },
   openGraph: {
     type: "website",
