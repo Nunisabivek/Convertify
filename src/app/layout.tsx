@@ -18,13 +18,13 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Convertify - Free Online PDF Tools",
+    default: "Free Online PDF Tools - Merge, Compress, Convert PDF | Convertify",
     template: "%s | Convertify",
   },
-  description: "Merge, Split, Compress, and Convert PDFs easily. Free, secure, and no installation required.",
+  description: "Free online PDF tools to merge PDF files, compress PDF to smaller size, convert JPG to PDF, and more. No watermarks, no sign up, works on all devices. 100% secure.",
   applicationName: "Convertify",
   authors: [{ name: "Convertify Team" }],
-  keywords: ["pdf tools", "merge pdf", "split pdf", "compress pdf", "convert pdf", "pdf converter", "free pdf tools"],
+  keywords: ["free pdf tools online", "merge pdf files free", "compress pdf to 100kb", "jpg to pdf converter", "pdf to jpg online", "split pdf pages", "combine pdf files no watermark", "reduce pdf size for email", "convert image to pdf free"],
   icons: {
     icon: '/images/Convertify.png',
     apple: '/images/Convertify.png',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     url: "https://convertify.work",
     siteName: "Convertify",
     title: "Convertify - Free Online PDF Tools",
-    description: "The best free online PDF tools to manage your documents. Merge, split, compress, and convert PDFs instantly.",
+    description: "Free online PDF tools - merge PDF files, compress PDF size, convert images to PDF. No watermarks, no sign up required. Works on mobile and desktop.",
     images: [
       {
         url: "/images/og-banner.png",
