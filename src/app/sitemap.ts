@@ -1,10 +1,12 @@
 import { MetadataRoute } from 'next'
+import { blogPosts } from '@/lib/blog-data'
 
 export const dynamic = 'force-static'
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://convertify.work'
 
+    // All PDF tools
     const tools = [
         'merge-pdf',
         'split-pdf',
@@ -27,37 +29,39 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
     }))
 
-    const blogUrls = [
-        'how-to-merge-pdf-files-free',
-        'convert-jpg-to-pdf-online',
-        'compress-pdf-reduce-file-size'
-    ].map(slug => ({
-        url: `${baseUrl}/blog/${slug}`,
-        lastModified: new Date(),
+    // All blog posts (dynamically from blog-data.ts)
+    const blogUrls = blogPosts.map(post => ({
+        url: `${baseUrl}/blog/${post.slug}`,
+        lastModified: new Date(post.date),
         changeFrequency: 'monthly' as const,
-        priority: 0.6,
+        priority: 0.7,
     }))
 
     return [
+        // Homepage - highest priority
         {
             url: baseUrl,
             lastModified: new Date(),
             changeFrequency: 'daily',
             priority: 1,
         },
+        // All tools page
         {
             url: `${baseUrl}/all-tools`,
             lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 0.9,
         },
+        // Blog index
         {
             url: `${baseUrl}/blog`,
             lastModified: new Date(),
             changeFrequency: 'daily',
             priority: 0.8,
         },
+        // Tool pages
         ...toolUrls,
-        ...blogUrls
+        // Blog posts
+        ...blogUrls,
     ]
 }
