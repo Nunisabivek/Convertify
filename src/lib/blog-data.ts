@@ -2205,4 +2205,320 @@ Ready to combine your PDF files? [Open the Merge PDF tool](/merge-pdf) on your A
       { question: "Which Android browser works best?", answer: "Chrome offers the best experience, but Samsung Internet, Firefox, and others work perfectly too." },
     ]
   },
+
+  // ===== POST 18 =====
+  {
+    slug: "combine-scanned-documents-into-one-pdf",
+    title: "How to Combine Scanned Documents into One PDF - Complete Guide",
+    excerpt: "Learn how to merge multiple scanned pages into a single PDF document. Perfect for organizing receipts, contracts, and multi-page documents.",
+    date: "2026-01-13",
+    category: "tutorial",
+    relatedTool: "/merge-pdf",
+    readingTime: 6,
+    keywords: ["combine scanned documents pdf", "merge scanned pages", "scan to pdf", "combine scans into one pdf", "merge scanned files", "scanned document merger"],
+    content: `
+## Why Combine Scanned Documents?
+
+Scanning documents is essential in today's digital world, but dealing with multiple separate files can be frustrating. Whether you're scanning receipts, contracts, invoices, or multi-page forms, combining them into a single PDF makes organization and sharing much easier.
+
+**Common scenarios where you need to combine scanned documents:**
+* Merging multi-page contracts scanned separately
+* Combining monthly receipts for expense reports
+* Organizing medical records into one file
+* Creating a complete application package from scanned forms
+* Consolidating tax documents for filing
+* Assembling legal documents with exhibits
+
+## The Challenge of Scanned Documents
+
+When you scan documents, each page often becomes a separate file:
+* **Flatbed scanners** typically save each page individually
+* **Phone camera scans** create one image per page
+* **Document feeders** may create multiple files
+* **Email scans** arrive as separate attachments
+
+This creates clutter and makes it difficult to:
+* Keep pages in the correct order
+* Share complete documents via email
+* Submit to portals requiring single-file uploads
+* Archive and organize efficiently
+
+## The Complete Workflow: Scan to Combined PDF
+
+### Step 1: Scan Your Documents
+
+First, digitize your physical documents using any of these methods:
+
+#### Using a Flatbed Scanner:
+1. Place document on scanner glass
+2. Scan each page (save as JPG or PDF)
+3. Repeat for all pages
+
+#### Using Your Smartphone:
+1. **iPhone:** Use Notes app → Camera → Scan Documents
+2. **Android:** Use Google Drive → + → Scan
+3. Or simply take photos with your camera app
+
+#### Using a Document Feeder Scanner:
+1. Load all pages into feeder
+2. Scan in batch mode
+3. Save output files
+
+### Step 2: Convert Images to PDF (If Needed)
+
+If your scans are images (JPG, PNG), convert them first:
+
+1. Go to [Convertify JPG to PDF](/jpg-to-pdf)
+2. Upload all scanned images
+3. Arrange in correct page order
+4. Convert to individual PDFs or one combined PDF
+
+**Pro tip:** If you have many scanned images, converting them all to one PDF here saves you a step!
+
+### Step 3: Combine Multiple PDF Scans
+
+If you already have separate PDF files from scanning:
+
+1. Open [Convertify Merge PDF](/merge-pdf)
+2. Upload all your scanned PDF files
+3. Drag and drop to arrange in correct order
+4. Click "Merge PDFs"
+5. Download your combined document
+
+**Total time: Under 2 minutes!**
+
+## Method Comparison: Different Scanning Scenarios
+
+### Scenario 1: Phone Camera Scans (Images)
+**Workflow:**
+1. Take photos of each page with phone camera
+2. Upload all photos to [JPG to PDF](/jpg-to-pdf)
+3. Arrange page order
+4. Convert to single PDF
+
+**Best for:** Quick scans, receipts, on-the-go scanning
+
+### Scenario 2: Scanner App Scans (Separate PDFs)
+**Workflow:**
+1. Scan each page using scanner app (creates individual PDFs)
+2. Upload all PDFs to [Merge PDF](/merge-pdf)
+3. Arrange and merge
+
+**Best for:** High-quality scans, important documents
+
+### Scenario 3: Mixed Sources (Images + PDFs)
+**Workflow:**
+1. Convert images to PDF using [JPG to PDF](/jpg-to-pdf)
+2. Combine all PDFs using [Merge PDF](/merge-pdf)
+
+**Best for:** Documents from multiple sources
+
+## Why Use Convertify for Scanned Documents?
+
+[Convertify's PDF tools](/merge-pdf) are perfect for handling scanned documents:
+
+✅ **No file size limits** - Combine large scanned files without restrictions
+✅ **Preserve quality** - Scans maintain their original resolution
+✅ **Unlimited pages** - Merge documents with hundreds of pages
+✅ **No watermarks** - Professional, clean output
+✅ **Works on any device** - Desktop, tablet, or phone
+✅ **100% free** - No hidden costs or subscriptions
+✅ **Secure** - Files processed locally in your browser
+
+## Organizing Scanned Documents: Best Practices
+
+### Before Scanning:
+1. **Remove staples and clips** - Prevents paper jams
+2. **Arrange pages in order** - Saves time later
+3. **Check for double-sided pages** - Don't miss content
+4. **Clean scanner glass** - Ensures clear scans
+
+### During Scanning:
+1. **Use consistent settings** - Same resolution for all pages
+2. **Check each scan** - Verify quality before moving on
+3. **Name files sequentially** - page-01.jpg, page-02.jpg, etc.
+4. **Scan in batches** - Group related documents
+
+### After Combining:
+1. **Verify page order** - Open and check the merged PDF
+2. **Compress if needed** - Use [Compress PDF](/compress-pdf) for large files
+3. **Name descriptively** - "Contract_Smith_2026-01-13.pdf"
+4. **Back up** - Save to cloud storage
+
+## File Size Management for Scanned PDFs
+
+Scanned documents can be very large because they're essentially images. Here's how to manage size:
+
+### Understanding Scan Sizes:
+| Scan Quality | Pages | Typical Size |
+|--------------|-------|-------------|
+| 150 DPI B&W | 10 pages | 2-5 MB |
+| 300 DPI Color | 10 pages | 15-30 MB |
+| 600 DPI Color | 10 pages | 50-100 MB |
+
+### When to Compress:
+* **Email attachments** - Most services limit to 25MB
+* **Online submissions** - Many portals cap at 2-10MB
+* **Long-term storage** - Save space without losing readability
+* **Mobile sharing** - WhatsApp limits to 16MB
+
+### How to Compress Scanned PDFs:
+1. After combining, go to [Compress PDF](/compress-pdf)
+2. Upload your merged scanned document
+3. Choose compression level:
+   - **Medium** - For text documents (minimal quality loss)
+   - **High** - For image-heavy scans (some quality reduction)
+4. Download compressed file
+
+**Typical results:** 30MB scanned PDF → 3-5MB compressed
+
+## Industry-Specific Use Cases
+
+### Legal Professionals
+**Need:** Combine case documents, exhibits, contracts
+**Workflow:**
+1. Scan all case documents
+2. Organize by exhibit number
+3. Combine using [Merge PDF](/merge-pdf)
+4. Create table of contents page
+
+### Healthcare
+**Need:** Patient records, test results, insurance forms
+**Workflow:**
+1. Scan medical documents
+2. Combine by patient or date
+3. Ensure HIPAA compliance (files stay on your device)
+4. Archive securely
+
+### Accounting & Finance
+**Need:** Receipts, invoices, tax documents
+**Workflow:**
+1. Scan receipts throughout month
+2. Combine at month-end
+3. Name by month/category
+4. Submit for expense reports
+
+### Real Estate
+**Need:** Property documents, inspections, disclosures
+**Workflow:**
+1. Scan all property-related documents
+2. Combine by property address
+3. Share with clients/agents
+4. Archive for records
+
+### Education
+**Need:** Student records, transcripts, assignments
+**Workflow:**
+1. Scan handwritten assignments or forms
+2. Combine with typed documents
+3. Submit as single PDF
+4. Keep organized by semester
+
+## Advanced Tips for Better Scanned PDFs
+
+### Improve Scan Quality:
+1. **Use 300 DPI** for documents you'll print
+2. **Use 150 DPI** for digital-only documents
+3. **Scan in color** for forms with colored text
+4. **Use black & white** for text-only documents (smaller file size)
+
+### Handling Special Documents:
+
+**Double-sided pages:**
+1. Scan all front sides first
+2. Scan all back sides
+3. Combine and reorder using [Merge PDF](/merge-pdf)
+
+**Oversized documents:**
+11. Scan in sections if too large for scanner
+2. Convert each section to PDF
+3. Combine sections in order
+
+**Mixed page sizes:**
+1. Scan each size separately
+2. Combine - PDF format handles mixed sizes well
+3. Pages will display at their original dimensions
+
+## Troubleshooting Common Issues
+
+### Problem: Pages are in wrong order
+**Solution:** Use [Merge PDF](/merge-pdf) and drag thumbnails to reorder before merging
+
+### Problem: Some pages are upside down
+**Solution:** Rotate images before converting, or use a PDF editor after combining
+
+### Problem: File is too large to email
+**Solution:** Use [Compress PDF](/compress-pdf) to reduce size by 70-90%
+
+### Problem: Scans are blurry
+**Solution:** Re-scan at higher DPI (300 instead of 150)
+
+### Problem: Mixed image and PDF files
+**Solution:** Convert images to PDF first with [JPG to PDF](/jpg-to-pdf), then merge all PDFs
+
+## Mobile Scanning Workflow
+
+### On iPhone:
+1. **Scan:** Notes app → Camera → Scan Documents
+2. **Save:** Share → Save to Files as PDF
+3. **Combine:** Open Safari → [Merge PDF](/merge-pdf)
+4. **Upload:** Select all scanned PDFs from Files
+5. **Download:** Save combined PDF back to Files
+
+### On Android:
+1. **Scan:** Google Drive → + → Scan
+2. **Save:** Save to Drive or Downloads
+3. **Combine:** Open Chrome → [Merge PDF](/merge-pdf)
+4. **Upload:** Select scanned PDFs
+5. **Download:** Save to Downloads folder
+
+## Related Tools for Complete Document Management
+
+After combining your scanned documents, you might need:
+
+* [Compress PDF](/compress-pdf) - Reduce file size for email or storage
+* [Split PDF](/split-pdf) - Extract specific pages later
+* [PDF to JPG](/pdf-to-jpg) - Convert pages back to images
+* [JPG to PDF](/jpg-to-pdf) - Convert scanned images to PDF first
+
+## Frequently Asked Questions
+
+**Q: What's the best resolution for scanning documents?**
+For most documents, 300 DPI provides excellent quality. Use 150 DPI for simple text documents to save space, or 600 DPI for documents you'll print at large sizes.
+
+**Q: Can I combine scans from different scanners?**
+Yes! Convertify handles PDFs from any source. Quality and resolution may vary between scans, but they'll combine perfectly.
+
+**Q: How many scanned pages can I combine?**
+Unlimited! Combine as many pages as you need. We've successfully merged documents with 500+ scanned pages.
+
+**Q: Will combining scanned PDFs reduce quality?**
+No. When you merge PDFs, each page maintains its original scan quality. No compression or quality loss occurs during merging.
+
+**Q: What if my scans are different sizes?**
+No problem! PDFs can contain pages of different dimensions. Each page will display at its scanned size.
+
+**Q: Can I combine color and black & white scans?**
+Absolutely! You can mix color and B&W scans in the same PDF without any issues.
+
+**Q: How do I ensure pages stay in order?**
+Name your scan files sequentially (01, 02, 03) before uploading, or use the drag-and-drop reordering in [Merge PDF](/merge-pdf).
+
+## Start Combining Your Scanned Documents
+
+Ready to organize your scanned documents into one professional PDF? 
+
+1. **Have images?** Start with [JPG to PDF](/jpg-to-pdf) to convert them
+2. **Have PDFs?** Go straight to [Merge PDF](/merge-pdf) to combine them
+3. **Need to reduce size?** Use [Compress PDF](/compress-pdf) after merging
+
+All tools are free, unlimited, and work on any device. No software installation required!
+`,
+    faqs: [
+      { question: "What's the best way to scan multiple pages?", answer: "Use a document feeder scanner for speed, or a phone scanning app like Notes (iPhone) or Google Drive (Android) for convenience. Then combine all scans using Convertify." },
+      { question: "Can I combine scans from my phone and scanner?", answer: "Yes! Convertify merges PDFs from any source - phone scans, flatbed scanners, or document feeders all work together." },
+      { question: "How do I reduce the file size of scanned PDFs?", answer: "After combining, use Convertify's Compress PDF tool to reduce file size by 70-90% while maintaining readability." },
+      { question: "Will the quality decrease when combining scanned documents?", answer: "No! Merging PDFs preserves the original scan quality. Each page maintains its resolution and clarity." },
+    ]
+  },
 ];

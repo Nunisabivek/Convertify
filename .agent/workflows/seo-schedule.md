@@ -15,7 +15,7 @@ description: Daily SEO schedule to drive traffic to Convertify website
 
 ---
 
-## ✅ ALREADY PUBLISHED BLOG POSTS (12 Posts)
+## ✅ ALREADY PUBLISHED BLOG POSTS (13 Posts)
 
 | # | Slug | Title | Date | Tool |
 |---|------|-------|------|------|
@@ -31,9 +31,10 @@ description: Daily SEO schedule to drive traffic to Convertify website
 | 10 | `pdf-tips-for-students` | 10 PDF Tips Every Student Should Know | 2025-12-29 | /all-tools |
 | 11 | `merge-pdf-windows-10-without-software` | How to Merge PDF Files on Windows 10 Without Software | 2026-01-09 | /merge-pdf |
 | 12 | `merge-pdf-android-phone-free` | How to Merge PDF Files on Android Phone Free | 2026-01-11 | /merge-pdf |
+| 13 | `combine-scanned-documents-into-one-pdf` | How to Combine Scanned Documents into One PDF | 2026-01-13 | /merge-pdf |
 
 ### Topics Already Covered (DO NOT DUPLICATE):
-- ❌ Merge PDF basics (covered in posts 1, 6, 11, 12)
+- ❌ Merge PDF basics (covered in posts 1, 6, 11, 12, 13)
 - ❌ JPG to PDF conversion (covered in posts 2, 8)
 - ❌ Compress PDF to 100KB (covered in post 3)
 - ❌ Split PDF by page (covered in post 4)
@@ -43,6 +44,7 @@ description: Daily SEO schedule to drive traffic to Convertify website
 - ❌ Student PDF tips (covered in post 10)
 - ❌ Merge on Windows 10 (covered in post 11)
 - ❌ Merge on Android (covered in post 12)
+- ❌ Combine scanned documents (covered in post 13)
 
 ---
 
@@ -122,15 +124,16 @@ description: Daily SEO schedule to drive traffic to Convertify website
 
 ---
 
-### January 13, 2026 (Monday)
+### ✅ January 13, 2026 (Monday) - COMPLETED
 **Focus: Content Creation**
 
-1. **Publish Blog Post** (Priority: MEDIUM)
+1. **Publish Blog Post** (Priority: MEDIUM) ✅ **DONE**
    - Topic: "Combine Scanned Documents into One PDF"
+   - Slug: `combine-scanned-documents-into-one-pdf`
    - Target Keywords: `combine scanned documents pdf`, `merge scanned pages`, `scan to pdf`
    - Tool to Link: `/merge-pdf`
 
-2. **Competitor Analysis**
+2. **Competitor Analysis** (Optional)
    - Check top 3 competitors' recent content
    - Note gaps you can fill
 
