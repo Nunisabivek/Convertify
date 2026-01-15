@@ -4,8 +4,254 @@ description: Daily SEO schedule to drive traffic to Convertify website
 
 # 📊 Convertify SEO Master Schedule
 
-**Last Updated:** January 10, 2026  
+**Last Updated:** January 15, 2026  
 **Goal:** Increase organic traffic through consistent SEO efforts
+
+---
+
+## 🚨 EMERGENCY INDEXING ACCELERATION PLAN (JAN 15 - FEB 15, 2026)
+
+**PROBLEM IDENTIFIED:** 27 pages "Discovered - currently not indexed"  
+**GOAL:** Get 25+ pages indexed and start getting organic traffic within 30 days  
+**START DATE:** January 15, 2026  
+
+### 📊 Current Status (Jan 15, 2026):
+- ✅ 5 pages indexed
+- ❌ 27 pages NOT indexed ("Discovered - currently not indexed")
+- 📈 0 organic traffic
+- 🎯 Need: Backlinks + Manual requests + More content
+
+---
+
+## 🔥 WEEK 1: EMERGENCY ACTIONS (Jan 15-21, 2026)
+
+### ✅ Day 1 - TODAY (January 15, 2026) - WEDNESDAY
+**FOCUS: Manual Indexing Requests + First Backlinks**
+
+#### Morning Session (1 hour):
+- [ ] **Request Manual Indexing** (30 mins)
+  1. Open Google Search Console → URL Inspection
+  2. Request indexing for these 10 URLs (one by one):
+     - `https://convertify.work`
+     - `https://convertify.work/blog`
+     - `https://convertify.work/compress-pdf`
+     - `https://convertify.work/merge-pdf`
+     - `https://convertify.work/jpg-to-pdf`
+     - `https://convertify.work/blog/reduce-pdf-size-without-losing-quality`
+     - `https://convertify.work/blog/compress-pdf-for-whatsapp-sharing`
+     - `https://convertify.work/blog/combine-scanned-documents-into-one-pdf`
+     - `https://convertify.work/all-tools`
+     - `https://convertify.work/split-pdf`
+  3. Mark each as complete in Search Console
+
+- [ ] **GitHub Profile Backlink** (5 mins)
+  1. Go to https://github.com/Nunisabivek
+  2. Click "Edit profile"
+  3. Add to bio: "Creator of https://convertify.work - Free PDF Tools"
+  4. Save
+
+#### Afternoon Session (1 hour):
+- [ ] **Product Hunt Submission** (30 mins) ← **HIGHEST PRIORITY**
+  1. Go to https://producthunt.com
+  2. Sign up / Log in
+  3. Click "Submit" (top right)
+  4. Fill out:
+     - **Name:** Convertify
+     - **Tagline:** "Privacy-First PDF Tools - All Processing in Your Browser"
+     - **Description:** "Free online PDF tools that process everything in your browser using WebAssembly. No file uploads, no tracking, works offline. 12 tools including merge, compress, convert JPG/Word to PDF and more."
+     - **Link:** https://convertify.work
+     - **Category:** Productivity
+     - **Topics:** Privacy, PDF, Tools, Free, Open Source
+  5. Submit and share with friends for upvotes
+
+- [ ] **AlternativeTo.net Submission** (20 mins)
+  1. Go to https://alternativeto.net
+  2. Search for "SmallPDF"
+  3. Click "Suggest alternative"
+  4. Add Convertify with description
+  5. Also add as alternative to "iLovePDF"
+
+#### Evening Check:
+- [ ] Check Search Console - Note any changes
+- [ ] Screenshot your progress
+- [ ] Celebrate! You took massive action today 🎉
+
+---
+
+### Day 2 - January 16, 2026 (Thursday)
+**FOCUS: Content Creation + More Backlinks**
+
+#### Morning (1.5 hours):
+- [ ] **Write Blog Post** - Target ultra long-tail keyword
+  - Topic: "How to Merge PDF Files on iPhone Without App Free 2026"
+  - Length: 2,000+ words
+  - Include: Screenshots, step-by-step, FAQs
+  - Add to blog-data.ts
+
+- [ ] **Request Indexing for Yesterday's Pages** (check if any need re-request)
+
+#### Afternoon (1 hour):
+- [ ] **Reddit Post** (r/SideProject)
+  ```
+  Title: "Show: Built privacy-first PDF tools - 100% client-side processing"
+  
+  Body:
+  I was frustrated with PDF tools that upload your files to random servers, 
+  so I built Convertify - everything runs in your browser.
+  
+  Tech: Next.js 15, TypeScript, pdf-lib, WebAssembly
+  Features: 12 PDF tools, works offline, no sign-up
+  
+  Check it out: https://convertify.work
+  
+  Would love feedback on the UX!
+  ```
+
+- [ ] **Dev.to Account Setup**
+  - Create account
+  - Start drafting article: "Building Privacy-First PDF Tools with Next.js"
+
+#### Evening:
+- [ ] Request indexing for new blog post
+- [ ] Check Product Hunt - respond to comments
+
+---
+
+### Day 3 - January 17, 2026 (Friday)
+**FOCUS: More Backlinks + Content**
+
+#### Morning (1 hour):
+- [ ] **Publish Dev.to Article**
+  - Title: "How I Built Client-Side PDF Tools Using Next.js and WebAssembly"
+  - Explain tech stack
+  - Link to Convertify 3-4 times naturally
+  - Add code snippets
+
+- [ ] **Request Indexing** for 5 more blog post URLs
+
+#### Afternoon (1 hour):
+- [ ] **Write Blog Post**
+  - Topic: "Best Free PDF Compressor for Mac Users 2026"
+  - 1,500+ words
+  - Add to blog-data.ts
+
+- [ ] **Submit to More Directories:**
+  - https://free-for.dev (add Convertify to list)
+  - https://stackshare.io/convertify
+
+#### Evening:
+- [ ] Check Search Console Performance tab
+- [ ] Note any impressions appearing
+- [ ] Request indexing for new post
+
+---
+
+### Day 4-5 - WEEKEND (January 18-19, 2026)
+**FOCUS: Monitoring + Light Content**
+
+#### Saturday:
+- [ ] Check Search Console - Are any pages indexed yet?
+- [ ] Write 1 blog post (Topic: "How to Compress PDF Without Adobe Acrobat Free")
+- [ ] Share on Twitter/X
+- [ ] Request indexing for 5 more URLs
+
+#### Sunday:
+- [ ] **Analytics Review Day**
+  - Check how many pages indexed (should be 8-12 by now)
+  - Check for any impressions in Performance tab
+  - Note which pages got indexed first
+- [ ] Write notes on what's working
+- [ ] Plan next week's content
+
+---
+
+### Days 6-7 - January 20-21, 2026 (Mon-Tue)
+**FOCUS: Double Down on What's Working**
+
+#### Monday:
+- [ ] Check which blog posts got indexed
+- [ ] Write similar content to successful posts
+- [ ] Topic: "Convert PDF to JPG on iPhone Without App 2026"
+- [ ] Request indexing for all new content
+- [ ] Share new post on Reddit
+
+#### Tuesday:
+- [ ] **Backlink Day**
+  - Comment on 5 relevant blog posts with helpful insights
+  - Mention Convertify naturally where relevant
+  - Find one .edu site to reach out to
+- [ ] Write blog post: "PDF Tips for College Students 2026"
+- [ ] Request indexing
+
+---
+
+## 🎯 WEEK 2-4: ACCELERATION PHASE (Jan 22 - Feb 15, 2026)
+
+### Week 2 Goals (Jan 22-28):
+- [ ] Get to 15-20 indexed pages
+- [ ] See first organic impressions (target: 100+)
+- [ ] Publish 5 blog posts
+- [ ] Get 5 more backlinks
+- [ ] Request indexing for remaining high-priority pages
+
+#### Daily Tasks:
+- **Monday:** Blog post + backlink outreach
+- **Tuesday:** Blog post + request indexing
+- **Wednesday:** Analytics review + optimization
+- **Thursday:** Blog post + social sharing
+- **Friday:** Blog post + directory submissions
+- **Weekend:** Monitor + light content
+
+### Week 3 Goals (Jan 29 - Feb 4):
+- [ ] Get to 20-25 indexed pages
+- [ ] See 200+ impressions, target first clicks
+- [ ] Publish 5 blog posts
+- [ ] Get 3-5 more high-quality backlinks
+- [ ] Start seeing which keywords are working
+
+#### Focus Areas:
+- Double down on keyword topics getting impressions
+- Write longer, more comprehensive content
+- Build internal linking structure
+- Get mentioned in industry blogs
+
+### Week 4 Goals (Feb 5-15):
+- [ ] All or most pages indexed (target: 28-32 pages)
+- [ ] 500+ impressions, 5-20 clicks
+- [ ] Publish 7 blog posts
+- [ ] Reach 20 total backlinks
+- [ ] Start ranking for long-tail keywords
+
+#### Focus Areas:
+- Optimize best-performing content
+- Build topical authority clusters
+- Guest post opportunities
+- YouTube tutorial videos (optional)
+
+---
+
+## 📊 SUCCESS METRICS TO TRACK
+
+### Daily Checks:
+- [ ] Number of indexed pages (in Search Console)
+- [ ] Any new impressions in Performance tab
+- [ ] Backlinks acquired today
+- [ ] Content published
+
+### Weekly Reviews:
+- [ ] Total indexed pages (target growth: +5 per week)
+- [ ] Total impressions (target: 2x weekly)
+- [ ] Total clicks (celebrate every single one!)
+- [ ] Average position (should improve slowly)
+- [ ] Content published count
+- [ ] Backlinks count
+
+### Monthly Goal (By Feb 15, 2026):
+- 🎯 **25-30 pages indexed** (from 5 currently)
+- 🎯 **1,000+ impressions** (from 0 currently)
+- 🎯 **20-50 clicks** (from 0 currently)
+- 🎯 **20+ backlinks** (from ~0-2 currently)
+- 🎯 **30+ blog posts** (from 15 currently)
 
 ---
 
