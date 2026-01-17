@@ -603,6 +603,7 @@ When you're ready to work on SEO tasks, just tell me:
 - **"add blog post [title]"** - I'll add a new post to blog-data.ts
 - **"update schedule"** - I'll refresh dates for next week
 - **"keyword research for [tool]"** - I'll suggest keywords to target
+- **"npm run seo:ping"** - Run this in your terminal to instantly notify Google of new content (No login required!)
 
 ---
 

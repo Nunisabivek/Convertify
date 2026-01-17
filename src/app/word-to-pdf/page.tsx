@@ -4,7 +4,10 @@ import WordToPdfClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
 import { toolSeoData } from "@/lib/seo-data"
+import { blogPosts } from "@/lib/blog-data"
+import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
 
 const seoData = toolSeoData["word-to-pdf"]
 
@@ -24,6 +27,9 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
+    const relatedBlogSlugs = getBlogPostsForTool('word-to-pdf')
+    const relatedBlogs = blogPosts.filter(post => relatedBlogSlugs.includes(post.slug))
+
     return (
         <div className="flex flex-col items-center">
             <section className="w-full py-8 bg-gradient-to-b from-indigo-50 to-white">
@@ -47,6 +53,12 @@ export default function Page() {
             <FAQSchema
                 toolName="Word to PDF Conversion"
                 faqs={seoData.faqs}
+            />
+
+            <RelatedBlogPosts
+                toolSlug="word-to-pdf"
+                posts={relatedBlogs}
+                title="📚 Guides: Word to PDF"
             />
 
             <RelatedTools currentTool="/word-to-pdf" />

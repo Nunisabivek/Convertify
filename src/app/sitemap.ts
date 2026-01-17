@@ -6,7 +6,7 @@ export const dynamic = 'force-static'
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://convertify.work'
 
-    // All PDF tools
+    // All PDF tools - COMPLETE LIST
     const tools = [
         'merge-pdf',
         'split-pdf',
@@ -16,10 +16,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
         'word-to-pdf',
         'pdf-to-jpg',
         'pdf-to-png',
-        'text-to-pdf',
-        'pdf-to-text',
-        'excel-to-pdf',
-        'powerpoint-to-pdf',
+        'text-to-pdf',       // ✅ Now included
+        'pdf-to-text',       // ✅ Now included
+        'excel-to-pdf',      // ✅ Now included
+        'powerpoint-to-pdf', // ✅ Now included
     ]
 
     const toolUrls = tools.map((tool) => ({

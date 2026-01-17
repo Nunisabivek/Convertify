@@ -7,9 +7,11 @@ import {
   FileImage,
   FileText,
   Sheet,
-  Presentation
+  Presentation,
+  BookOpen
 } from "lucide-react";
 import { AdBanner } from "@/components/ads/banner";
+import { blogPosts } from "@/lib/blog-data";
 
 const tools = [
   {
@@ -137,6 +139,55 @@ export default function Home() {
               </p>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* Latest Guides Section - NEW for SEO */}
+      <section className="w-full max-w-6xl px-4 py-16">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-bold text-slate-900 mb-3 flex items-center justify-center gap-2">
+            <BookOpen className="w-8 h-8 text-indigo-600" />
+            Latest Guides & Tutorials
+          </h2>
+          <p className="text-slate-600">
+            Learn how to get the most out of your PDF tools
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          {blogPosts.slice(0, 6).map((post) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="group bg-white rounded-xl shadow-sm border border-slate-100 hover:shadow-lg hover:border-indigo-200 transition-all duration-300 overflow-hidden"
+            >
+              <div className="p-6">
+                <div className="text-xs text-indigo-600 font-semibold uppercase mb-2">
+                  {post.category}
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 group-hover:text-indigo-600 mb-2 line-clamp-2">
+                  {post.title}
+                </h3>
+                <p className="text-sm text-slate-600 mb-4 line-clamp-2">
+                  {post.excerpt}
+                </p>
+                <div className="flex items-center justify-between text-xs text-slate-500">
+                  <span>{post.readingTime} min read</span>
+                  <span className="text-indigo-600 group-hover:text-indigo-700 font-medium">
+                    Read Guide →
+                  </span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="text-center">
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium"
+          >
+            View All Guides
+            <BookOpen className="w-4 h-4" />
+          </Link>
         </div>
       </section>
 

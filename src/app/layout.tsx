@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     description: "Free online PDF tools - merge PDF files, compress PDF size, convert images to PDF. No watermarks, no sign up required. Works on mobile and desktop.",
     images: [
       {
-        url: "/images/og-banner.png",
+        url: "https://convertify.work/images/og-banner.png",
         width: 1200,
         height: 630,
         alt: "Convertify - Free PDF Tools",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Convertify - Free Online PDF Tools",
     description: "Manage your PDF documents easily with our free online tools.",
-    images: ["/images/og-banner.png"],
+    images: ["https://convertify.work/images/og-banner.png"],
     creator: "@convertify",
   },
   metadataBase: new URL("https://convertify.work"),

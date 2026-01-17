@@ -4,7 +4,10 @@ import MergePdfClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
 import { toolSeoData } from "@/lib/seo-data"
+import { blogPosts } from "@/lib/blog-data"
+import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
 
 const seoData = toolSeoData["merge-pdf"]
 
@@ -31,6 +34,9 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
+    const relatedBlogSlugs = getBlogPostsForTool('merge-pdf')
+    const relatedBlogs = blogPosts.filter(post => relatedBlogSlugs.includes(post.slug))
+
     return (
         <div className="flex flex-col items-center">
             {/* Main Tool Section */}
@@ -57,6 +63,13 @@ export default function Page() {
             <FAQSchema
                 toolName="Merging PDFs"
                 faqs={seoData.faqs}
+            />
+
+            {/* Related Blog Posts for SEO */}
+            <RelatedBlogPosts
+                toolSlug="merge-pdf"
+                posts={relatedBlogs}
+                title="📚 Guides & Tutorials: How to Merge PDFs"
             />
 
             {/* Related Tools for Internal Linking */}

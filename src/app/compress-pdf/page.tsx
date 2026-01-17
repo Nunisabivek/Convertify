@@ -4,7 +4,10 @@ import CompressPdfClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
 import { toolSeoData } from "@/lib/seo-data"
+import { blogPosts } from "@/lib/blog-data"
+import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
 
 const seoData = toolSeoData["compress-pdf"]
 
@@ -31,6 +34,9 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
+    const relatedBlogSlugs = getBlogPostsForTool('compress-pdf')
+    const relatedBlogs = blogPosts.filter(post => relatedBlogSlugs.includes(post.slug))
+
     return (
         <div className="flex flex-col items-center">
             <section className="w-full py-8 bg-gradient-to-b from-green-50 to-white">
@@ -54,6 +60,12 @@ export default function Page() {
             <FAQSchema
                 toolName="Compressing PDFs"
                 faqs={seoData.faqs}
+            />
+
+            <RelatedBlogPosts
+                toolSlug="compress-pdf"
+                posts={relatedBlogs}
+                title="📚 Guides: How to Compress PDFs"
             />
 
             <RelatedTools currentTool="/compress-pdf" />
