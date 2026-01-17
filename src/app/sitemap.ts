@@ -6,20 +6,51 @@ export const dynamic = 'force-static'
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://convertify.work'
 
-    // All PDF tools - COMPLETE LIST
+    // All PDF tools - COMPLETE LIST (30+ tools)
     const tools = [
+        // Organize PDF
         'merge-pdf',
         'split-pdf',
+        'organize-pdf',
+        'rotate-pdf',
+
+        // Optimize PDF
         'compress-pdf',
-        'jpg-to-pdf',
-        'png-to-pdf',
-        'word-to-pdf',
+        'repair-pdf',
+        'ocr-pdf',
+
+        // Convert from PDF
+        'pdf-to-word',
+        'pdf-to-excel',
+        'pdf-to-powerpoint',
         'pdf-to-jpg',
         'pdf-to-png',
-        'text-to-pdf',       // ✅ Now included
-        'pdf-to-text',       // ✅ Now included
-        'excel-to-pdf',      // ✅ Now included
-        'powerpoint-to-pdf', // ✅ Now included
+        'pdf-to-text',
+
+        // Convert to PDF
+        'word-to-pdf',
+        'excel-to-pdf',
+        'powerpoint-to-pdf',
+        'jpg-to-pdf',
+        'png-to-pdf',
+        'text-to-pdf',
+        'html-to-pdf',
+
+        // Edit PDF
+        'edit-pdf',
+        'sign-pdf',
+        'watermark-pdf',
+        'add-page-numbers',
+        'crop-pdf',
+
+        // Security
+        'protect-pdf',
+        'unlock-pdf',
+        'redact-pdf',
+
+        // Advanced Tools
+        'compare-pdf',
+        'pdf-to-pdfa',
     ]
 
     const toolUrls = tools.map((tool) => ({
