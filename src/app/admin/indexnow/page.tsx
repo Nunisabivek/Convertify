@@ -3,11 +3,76 @@
 import { useState } from 'react'
 import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react'
 
+const INDEXNOW_KEY = 'a29f8518-295e-44e3-a00c-469addc370ce2'
+const SITE_URL = 'https://convertify.work'
+
+const INDEXNOW_ENDPOINTS = [
+    'https://api.indexnow.org/indexnow',
+    'https://www.bing.com/indexnow',
+    'https://yandex.com/indexnow',
+]
+
+const TOP_PAGES = [
+    '/',
+    '/all-tools',
+    '/merge-pdf',
+    '/split-pdf',
+    '/compress-pdf',
+    '/pdf-to-word',
+    '/pdf-to-jpg',
+    '/pdf-to-png',
+    '/jpg-to-pdf',
+    '/png-to-pdf',
+    '/rotate-pdf',
+    '/watermark-pdf',
+    '/protect-pdf',
+    '/unlock-pdf',
+    '/html-to-pdf',
+]
+
 export default function IndexNowAdmin() {
     const [urls, setUrls] = useState('')
     const [loading, setLoading] = useState(false)
     const [result, setResult] = useState<any>(null)
     const [error, setError] = useState<string | null>(null)
+
+    const submitToIndexNow = async (urlList: string[]) => {
+        const results = await Promise.all(
+            INDEXNOW_ENDPOINTS.map(async (endpoint) => {
+                try {
+                    const response = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            host: 'convertify.work',
+                            key: INDEXNOW_KEY,
+                            keyLocation: `${SITE_URL}/${INDEXNOW_KEY}.txt`,
+                            urlList: urlList.map(url =>
+                                url.startsWith('http') ? url : `${SITE_URL}${url}`
+                            ),
+                        }),
+                    })
+
+                    return {
+                        endpoint,
+                        status: response.status,
+                        success: response.ok,
+                    }
+                } catch (error) {
+                    return {
+                        endpoint,
+                        status: 0,
+                        success: false,
+                        error: error instanceof Error ? error.message : 'Unknown error',
+                    }
+                }
+            })
+        )
+
+        return results
+    }
 
     const submitUrls = async () => {
         setLoading(true)
@@ -20,21 +85,8 @@ export default function IndexNowAdmin() {
                 .map(url => url.trim())
                 .filter(url => url.length > 0)
 
-            const response = await fetch('/api/indexnow', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ urls: urlList }),
-            })
-
-            const data = await response.json()
-
-            if (response.ok) {
-                setResult(data)
-            } else {
-                setError(data.error || 'Submission failed')
-            }
+            const results = await submitToIndexNow(urlList)
+            setResult({ results, urlsSubmitted: urlList.length })
         } catch (err) {
             setError('Failed to submit URLs')
         } finally {
@@ -48,14 +100,12 @@ export default function IndexNowAdmin() {
         setResult(null)
 
         try {
-            const response = await fetch('/api/indexnow')
-            const data = await response.json()
-
-            if (response.ok) {
-                setResult(data)
-            } else {
-                setError(data.error || 'Submission failed')
-            }
+            const results = await submitToIndexNow(TOP_PAGES)
+            setResult({
+                results,
+                urlsSubmitted: TOP_PAGES.length,
+                urls: TOP_PAGES.map(url => `${SITE_URL}${url}`)
+            })
         } catch (err) {
             setError('Failed to submit')
         } finally {
@@ -160,7 +210,7 @@ export default function IndexNowAdmin() {
                                             {r.endpoint.replace('https://', '').split('/')[0]}
                                         </span>
                                         <span className={r.success ? 'text-green-700' : 'text-red-700'}>
-                                            {r.success ? '✓ Success' : '✗ Failed'} (HTTP {r.status})
+                                            {r.success ? '✓ Success' : '✗ Failed'} {r.status > 0 ? `(HTTP ${r.status})` : ''}
                                         </span>
                                     </div>
                                 </div>
