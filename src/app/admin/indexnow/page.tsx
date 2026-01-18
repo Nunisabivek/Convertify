@@ -3,15 +3,7 @@
 import { useState } from 'react'
 import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react'
 
-const INDEXNOW_KEY = 'a29f8518-295e-44e3-a00c-469addc370ce2'
-const SITE_URL = 'https://convertify.work'
-
-const INDEXNOW_ENDPOINTS = [
-    'https://api.indexnow.org/indexnow',
-    'https://www.bing.com/indexnow',
-    'https://yandex.com/indexnow',
-]
-
+// Top pages to submit
 const TOP_PAGES = [
     '/',
     '/all-tools',
@@ -36,81 +28,45 @@ export default function IndexNowAdmin() {
     const [result, setResult] = useState<any>(null)
     const [error, setError] = useState<string | null>(null)
 
-    const submitToIndexNow = async (urlList: string[]) => {
-        const results = await Promise.all(
-            INDEXNOW_ENDPOINTS.map(async (endpoint) => {
-                try {
-                    const response = await fetch(endpoint, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            host: 'convertify.work',
-                            key: INDEXNOW_KEY,
-                            keyLocation: `${SITE_URL}/${INDEXNOW_KEY}.txt`,
-                            urlList: urlList.map(url =>
-                                url.startsWith('http') ? url : `${SITE_URL}${url}`
-                            ),
-                        }),
-                    })
+    const submitToApi = async (urlList: string[]) => {
+        setLoading(true)
+        setError(null)
+        setResult(null)
 
-                    return {
-                        endpoint,
-                        status: response.status,
-                        success: response.ok,
-                    }
-                } catch (error) {
-                    return {
-                        endpoint,
-                        status: 0,
-                        success: false,
-                        error: error instanceof Error ? error.message : 'Unknown error',
-                    }
-                }
+        try {
+            const response = await fetch('/api/indexnow', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ urls: urlList }),
             })
-        )
 
-        return results
+            const data = await response.json()
+
+            if (response.ok) {
+                setResult(data)
+            } else {
+                setError(data.error || 'Submission failed')
+            }
+        } catch (err) {
+            setError('Failed to contact API')
+        } finally {
+            setLoading(false)
+        }
     }
 
     const submitUrls = async () => {
-        setLoading(true)
-        setError(null)
-        setResult(null)
+        const urlList = urls
+            .split('\n')
+            .map(url => url.trim())
+            .filter(url => url.length > 0)
 
-        try {
-            const urlList = urls
-                .split('\n')
-                .map(url => url.trim())
-                .filter(url => url.length > 0)
-
-            const results = await submitToIndexNow(urlList)
-            setResult({ results, urlsSubmitted: urlList.length })
-        } catch (err) {
-            setError('Failed to submit URLs')
-        } finally {
-            setLoading(false)
-        }
+        await submitToApi(urlList)
     }
 
     const submitTopPages = async () => {
-        setLoading(true)
-        setError(null)
-        setResult(null)
-
-        try {
-            const results = await submitToIndexNow(TOP_PAGES)
-            setResult({
-                results,
-                urlsSubmitted: TOP_PAGES.length,
-                urls: TOP_PAGES.map(url => `${SITE_URL}${url}`)
-            })
-        } catch (err) {
-            setError('Failed to submit')
-        } finally {
-            setLoading(false)
-        }
+        await submitToApi(TOP_PAGES)
     }
 
     return (
@@ -131,7 +87,7 @@ export default function IndexNowAdmin() {
                         Quick Submit - Top 15 Pages
                     </h2>
                     <p className="text-slate-600 mb-6">
-                        Submit your most important pages (homepage + top tools) instantly to IndexNow.
+                        Submit your most important pages (homepage + top tools) instantly to IndexNow via server-side proxy (bypasses CORS).
                     </p>
                     <button
                         onClick={submitTopPages}
@@ -211,6 +167,7 @@ export default function IndexNowAdmin() {
                                         </span>
                                         <span className={r.success ? 'text-green-700' : 'text-red-700'}>
                                             {r.success ? '✓ Success' : '✗ Failed'} {r.status > 0 ? `(HTTP ${r.status})` : ''}
+                                            {r.error && <span className="text-xs block text-red-600">{r.error}</span>}
                                         </span>
                                     </div>
                                 </div>
@@ -229,31 +186,6 @@ export default function IndexNowAdmin() {
                         <p className="text-red-800 mt-2">{error}</p>
                     </div>
                 )}
-
-                {/* Info */}
-                <div className="bg-slate-50 rounded-xl p-6 mt-6">
-                    <h3 className="text-lg font-semibold text-slate-900 mb-3">
-                        How IndexNow Works
-                    </h3>
-                    <ul className="space-y-2 text-slate-600">
-                        <li className="flex items-start gap-2">
-                            <span className="text-indigo-600 font-bold">•</span>
-                            <span>Instantly notifies Bing, Yandex, and other search engines</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                            <span className="text-indigo-600 font-bold">•</span>
-                            <span>Much faster than waiting for crawlers (minutes vs days)</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                            <span className="text-indigo-600 font-bold">•</span>
-                            <span>Submit after creating new content or updating pages</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                            <span className="text-indigo-600 font-bold">•</span>
-                            <span>Free and unlimited submissions</span>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
     )
