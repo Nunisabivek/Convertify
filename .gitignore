@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Antigravity Skills
+.agent/skills
+.claude/skills
+.gemini/skills
+.cursor/skills

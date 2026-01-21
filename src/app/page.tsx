@@ -293,13 +293,14 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center">
       {/* Hero Section */}
-      <section className="w-full pt-12 pb-6 bg-gradient-to-b from-indigo-50 to-white text-center px-4">
-        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-4">
-          Every PDF Tool You Need
+      <section className="w-full pt-20 pb-12 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-100/50 via-slate-50 to-white text-center px-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
+        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 drop-shadow-sm">
+          Every PDF Tool <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">You Need</span>
         </h1>
-        <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-6">
-          Simple, fast, and secure tools to manage your documents.
-          Perfect for everyone, from students to pros.
+        <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-8 leading-relaxed">
+          Simple, fast, and secure tools to manage your documents. <br className="hidden md:inline" />
+          Perfect for everyone, from students to professionals.
         </p>
       </section>
 
@@ -323,20 +324,20 @@ export default function Home() {
             </div>
 
             {/* Tools Grid for this category */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {category.tools.map((tool) => (
                 <Link
                   key={tool.title}
                   href={tool.href}
-                  className="group relative flex flex-col p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
+                  className="group relative flex flex-col p-6 bg-white/50 backdrop-blur-sm rounded-2xl border border-slate-200/60 hover:border-indigo-300/50 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300"
                 >
-                  <div className={`p-3 rounded-xl w-14 h-14 flex items-center justify-center mb-4 ${tool.color}`}>
+                  <div className={`p-3.5 rounded-2xl w-14 h-14 flex items-center justify-center mb-5 ${tool.color} group-hover:scale-110 transition-transform duration-300`}>
                     <tool.icon className="w-7 h-7" />
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">
+                  <h3 className="text-lg font-bold text-slate-800 group-hover:text-indigo-600 transition-colors mb-2">
                     {tool.title}
                   </h3>
-                  <p className="text-slate-500 text-sm">
+                  <p className="text-slate-500 text-sm leading-relaxed">
                     {tool.description}
                   </p>
                 </Link>

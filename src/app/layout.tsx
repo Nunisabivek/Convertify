@@ -57,6 +57,12 @@ export const metadata: Metadata = {
     images: ["https://convertify.work/images/og-banner.png"],
     creator: "@convertify",
   },
+  alternates: {
+    canonical: './',
+  },
+  verification: {
+    google: "ghwXtP5nTeKojcTtLh5jNBXQOHfhcwBGfwiLLO0_4Yc",
+  },
   metadataBase: new URL("https://convertify.work"),
 };
 
