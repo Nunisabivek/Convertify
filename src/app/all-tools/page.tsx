@@ -29,6 +29,16 @@ import {
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: "All PDF Tools | Convertify",
+    description: "Browse our complete collection of 30+ free PDF tools. Merge, split, compress, convert, and edit PDFs online with privacy-first client-side processing.",
+    keywords: ["pdf tools list", "all pdf converters", "free pdf tools", "online pdf editor", "convertify tools"],
+    alternates: {
+        canonical: "/all-tools",
+    },
+}
 
 const tools = [
     {
