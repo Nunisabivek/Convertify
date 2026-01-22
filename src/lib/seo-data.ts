@@ -297,5 +297,173 @@ export const toolSeoData = {
             { name: "Convert to PDF", text: "Each slide becomes a page in your PDF." },
             { name: "Download PDF", text: "Download your presentation as a PDF for easy sharing." }
         ]
+    },
+    "add-page-numbers": {
+        title: "Add Page Numbers to PDF Online Free | Convertify",
+        description: "Insert page numbers into your PDF document. customizable position and style. Free online tool.",
+        keywords: ["add page numbers to pdf", "page numbering pdf", "number pdf pages"],
+        h1: "Add Page Numbers - Number PDF Pages",
+        faqs: [
+            { question: "Can I choose where page numbers appear?", answer: "Yes, you can position page numbers at the top or bottom, left, center, or right." },
+            { question: "Is it free?", answer: "Yes, completely free." }
+        ],
+        howToSteps: [
+            { name: "Upload PDF", text: "Select your PDF file." },
+            { name: "Configure Numbers", text: "Choose position and style." },
+            { name: "Download", text: "Get your numbered PDF." }
+        ]
+    },
+    "compare-pdf": {
+        title: "Compare PDF Files Online Free | Convertify",
+        description: "Compare two PDF files side by side to find differences. Free online PDF comparison tool.",
+        keywords: ["compare pdf", "pdf diff", "compare two pdfs"],
+        h1: "Compare PDF - Find Differences",
+        faqs: [
+            { question: "How does it work?", answer: "Upload two PDFs and we highlight the text and visual differences." }
+        ],
+        howToSteps: [
+            { name: "Upload PDFs", text: "Select the two files you want to compare." },
+            { name: "View Differences", text: "See highlighted changes side-by-side." }
+        ]
+    },
+    "crop-pdf": {
+        title: "Crop PDF Online Free | Convertify",
+        description: "Crop PDF pages to remove margins or unwanted areas. Free online PDF cropper.",
+        keywords: ["crop pdf", "trim pdf", "cut pdf pages"],
+        h1: "Crop PDF - Trim PDF Pages",
+        faqs: [
+            { question: "Does it crop all pages?", answer: "You can apply the crop area to all pages or specific ones." }
+        ],
+        howToSteps: [
+            { name: "Upload PDF", text: "Select your PDF file." },
+            { name: "Select Area", text: "Draw the crop area on the preview." },
+            { name: "Download", text: "Get your cropped PDF." }
+        ]
+    },
+    "edit-pdf": {
+        title: "Edit PDF Online Free - Add Text & Images | Convertify",
+        description: "Edit PDF documents online. Add text, images, shapes, and annotations. Free PDF editor.",
+        keywords: ["edit pdf", "pdf editor online", "add text to pdf", "annotate pdf"],
+        h1: "Edit PDF - Free Online PDF Editor",
+        faqs: [
+            { question: "Can I edit existing text?", answer: "Our current tool allows adding new content. Full text editing is coming soon." }
+        ],
+        howToSteps: [
+            { name: "Upload PDF", text: "Open your PDF in our editor." },
+            { name: "Add Content", text: "Use tools to add text, images, or drawings." },
+            { name: "Save", text: "Download your edited PDF." }
+        ]
+    },
+    "ocr-pdf": {
+        title: "OCR PDF Online Free - Recognize Text | Convertify",
+        description: "Convert scanned PDFs to searchable and editable text using OCR. Free online OCR tool.",
+        keywords: ["ocr pdf", "pdf to text ocr", "scanned pdf to text"],
+        h1: "OCR PDF - Make PDF Searchable",
+        faqs: [
+            { question: "What languages are supported?", answer: "We support English and major world languages." }
+        ],
+        howToSteps: [
+            { name: "Upload Scan", text: "Upload your scanned PDF." },
+            { name: "Process OCR", text: "We recognize and extract the text." },
+            { name: "Download", text: "Get a searchable PDF or text file." }
+        ]
+    },
+    "organize-pdf": {
+        title: "Organize PDF Pages Online Free | Convertify",
+        description: "Rearrange, rotate, and delete PDF pages. Organize your PDF document structure. Free online tool.",
+        keywords: ["organize pdf", "reorder pdf pages", "delete pdf pages"],
+        h1: "Organize PDF - Rearrange Pages",
+        faqs: [
+            { question: "Can I delete pages?", answer: "Yes, simply select and remove unwanted pages." }
+        ],
+        howToSteps: [
+            { name: "Upload PDF", text: "Import your PDF file." },
+            { name: "Arrange Pages", text: "Drag and drop to reorder or click trash icon to delete." },
+            { name: "Download", text: "Save your organized PDF." }
+        ]
+    },
+    "pdf-to-excel": {
+        title: "Convert PDF to Excel Online Free | Convertify",
+        description: "Convert PDF tables to Excel spreadsheets (XLSX). Extract data from PDF to Excel.",
+        keywords: ["pdf to excel", "pdf to xlsx", "convert pdf to spreadsheet"],
+        h1: "PDF to Excel - Convert Tables",
+        faqs: [
+            { question: "Are tables preserved?", answer: "Yes, we detect tables and export them to Excel cells." }
+        ],
+        howToSteps: [
+            { name: "Upload PDF", text: "Select your PDF with tables." },
+            { name: "Convert", text: "We extract the data to Excel." },
+            { name: "Download", text: "Get your XLSX file." }
+        ]
+    },
+    "pdf-to-pdfa": {
+        title: "Convert PDF to PDF/A Online Free | Convertify",
+        description: "Convert PDF to PDF/A format for long-term archiving. ISO-compliant archiving tool.",
+        keywords: ["pdf to pdf/a", "pdf archive format", "convert to pdfa"],
+        h1: "PDF to PDF/A - Archive PDF",
+        faqs: [
+            { question: "What is PDF/A?", answer: "It is a standard version of PDF designed for long-term preservation." }
+        ],
+        howToSteps: [
+            { name: "Upload PDF", text: "Select any PDF file." },
+            { name: "Convert", text: "We process it to meet PDF/A standards." },
+            { name: "Download", text: "Save your archival PDF." }
+        ]
+    },
+    "pdf-to-powerpoint": {
+        title: "Convert PDF to PowerPoint Online Free | Convertify",
+        description: "Convert PDF documents to PowerPoint presentation (PPTX). Turn PDF slides back into editable slides.",
+        keywords: ["pdf to powerpoint", "pdf to ppt", "convert pdf to presentation"],
+        h1: "PDF to PowerPoint - Convert to PPTX",
+        faqs: [
+            { question: "Can I edit the slides?", answer: "Yes, the converted PPTX file is editable in PowerPoint." }
+        ],
+        howToSteps: [
+            { name: "Upload PDF", text: "Select your PDF presentation." },
+            { name: "Convert", text: "We turn pages into slides." },
+            { name: "Download", text: "Get your PPTX file." }
+        ]
+    },
+    "redact-pdf": {
+        title: "Redact PDF Online Free - Hide Sensitive Info | Convertify",
+        description: "Permanently blackout sensitive text and information in your PDF. Free online redaction tool.",
+        keywords: ["redact pdf", "blackout text pdf", "hide pdf info"],
+        h1: "Redact PDF - Blackout Secure Info",
+        faqs: [
+            { question: "Is it permanent?", answer: "Yes, redacted content is permanently removed from the file." }
+        ],
+        howToSteps: [
+            { name: "Upload PDF", text: "Open your secure document." },
+            { name: "Mark Text", text: "Select text or areas to blackout." },
+            { name: "Apply & Download", text: "Apply redaction and save." }
+        ]
+    },
+    "repair-pdf": {
+        title: "Repair PDF Online Free - Fix Corrupt Files | Convertify",
+        description: "Recover and repair corrupt or damaged PDF files. Restore PDF data online free.",
+        keywords: ["repair pdf", "fix corrupt pdf", "recover pdf"],
+        h1: "Repair PDF - Fix Broken Files",
+        faqs: [
+            { question: "Can all files be fixed?", answer: "We try our best to recover data, but severely damaged files may not be recoverable." }
+        ],
+        howToSteps: [
+            { name: "Upload Corrupt PDF", text: "Select the damaged file." },
+            { name: "Repair", text: "We analyze and fix structure errors." },
+            { name: "Download", text: "Get your repaired PDF." }
+        ]
+    },
+    "sign-pdf": {
+        title: "Sign PDF Online Free - Add Digital Signature | Convertify",
+        description: "Add your signature to PDF documents. Draw, type, or upload signature. Free e-sign tool.",
+        keywords: ["sign pdf", "e-sign pdf", "digital signature"],
+        h1: "Sign PDF - Add Your Signature",
+        faqs: [
+            { question: "Is it legally binding?", answer: "Our e-signatures are valid for most general purposes, but check local laws for specific legal requirements." }
+        ],
+        howToSteps: [
+            { name: "Upload PDF", text: "Select the document to sign." },
+            { name: "Create Signature", text: "Draw, type, or upload your signature." },
+            { name: "Place & Save", text: "Place it on the page and download." }
+        ]
     }
 }

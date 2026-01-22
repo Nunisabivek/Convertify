@@ -1,76 +1,63 @@
-
 import { Metadata } from "next"
-import { ToolSwapper } from "@/components/tools/tool-swapper"
-import JpgToPdfClient from "./client"
+import OrganizePdfClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
-import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
 import { toolSeoData } from "@/lib/seo-data"
-import { blogPosts } from "@/lib/blog-data"
-import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
 
-const seoData = toolSeoData["jpg-to-pdf"]
+const toolName = "organize-pdf"
+// @ts-ignore
+const seoData = toolSeoData[toolName]
 
 export const metadata: Metadata = {
     title: seoData.title,
     description: seoData.description,
     keywords: seoData.keywords,
     alternates: {
-        canonical: "/jpg-to-pdf",
+        canonical: `/${toolName}`,
     },
     openGraph: {
         title: seoData.title,
         description: seoData.description,
-        url: "/jpg-to-pdf",
+        url: `/${toolName}`,
         images: [
             {
                 url: "/images/og-banner.png",
                 width: 1200,
                 height: 630,
-                alt: "JPG to PDF Converter - Convertify",
+                alt: seoData.title,
             },
         ],
     },
 }
 
 export default function Page() {
-    const relatedBlogSlugs = getBlogPostsForTool('jpg-to-pdf')
-    const relatedBlogs = blogPosts.filter(post => relatedBlogSlugs.includes(post.slug))
-
     return (
         <div className="flex flex-col items-center">
-            <section className="w-full py-8 bg-gradient-to-b from-purple-50 to-white">
+            <section className="w-full py-8 bg-gradient-to-b from-slate-50 to-white">
                 <div className="max-w-4xl mx-auto px-4 text-center mb-8">
                     <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Convert JPG, JPEG, PNG images to PDF instantly. Combine multiple photos into one document.
+                        {seoData.description}
                     </p>
                 </div>
-                <ToolSwapper />
-                <JpgToPdfClient />
+                <OrganizePdfClient />
             </section>
 
             <HowToSchema
-                toolName="Convert JPG to PDF"
-                description="Learn how to convert JPG images to PDF documents using Convertify's free online image to PDF converter."
+                toolName={seoData.title}
+                description={seoData.description}
                 steps={seoData.howToSteps}
             />
 
             <FAQSchema
-                toolName="JPG to PDF Conversion"
+                toolName={seoData.h1}
                 faqs={seoData.faqs}
             />
 
-            <RelatedBlogPosts
-                toolSlug="jpg-to-pdf"
-                posts={relatedBlogs}
-                title="📚 Guides: JPG to PDF"
-            />
-
-            <RelatedTools currentTool="/jpg-to-pdf" />
+            <RelatedTools currentTool={`/${toolName}`} />
         </div>
     )
 }

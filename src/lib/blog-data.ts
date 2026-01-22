@@ -3023,4 +3023,77 @@ Whether you need **lossless PDF compression** for professional documents or **ba
       { question: "Should I compress PDFs for printing?", answer: "Use 'High Quality' or 'Balanced' modes for documents you'll print. These maintain excellent print quality. Avoid 'Maximum' compression for printed materials." },
     ]
   },
+  // ===== POST 15 (ADDED TO FIX 404) =====
+  {
+    slug: "merge-pdf-android-phone-free",
+    title: "How to Merge PDF Files on Android Phone for Free",
+    excerpt: "Combine PDF files directly on your Android device without installing any apps. Free, fast, and secure online merger.",
+    date: "2026-01-20",
+    category: "tutorial",
+    relatedTool: "/merge-pdf",
+    readingTime: 4,
+    keywords: ["merge pdf android", "combine pdf android", "pdf merger android free", "android pdf joiner"],
+    content: `
+## Merging PDFs on Android
+Android phones are powerful, but they don't have a built-in PDF merger. You don't need to download an app that takes up space.
+
+## Steps:
+1. Open Chrome on Android
+2. Go to [convertify.work/merge-pdf](/merge-pdf)
+3. Tap Upload and select files
+4. Tap Merge and Download
+`,
+  },
+  {
+    slug: "combine-scanned-documents-into-one-pdf",
+    title: "How to Combine Scanned Documents into One PDF",
+    excerpt: "Scanned multiple pages as separate files? Learn how to combine them into a single professional PDF document.",
+    date: "2026-01-21",
+    category: "how-to",
+    relatedTool: "/merge-pdf",
+    readingTime: 4,
+    keywords: ["combine scanned pdfs", "merge scanned documents", "scan to single pdf"],
+    content: `
+## Scanning Workflow
+Often scanners save each page as a separate PDF or JPG. nere is how to fix it.
+
+## Solution
+Use [Convertify Merge PDF](/merge-pdf) to combine all your mockups or scans into one file.
+`,
+  },
+  {
+    slug: "compress-pdf-for-whatsapp-sharing",
+    title: "Compress PDF for WhatsApp Sharing - Easy Guide",
+    excerpt: "Detailed guide on compressing PDFs specifically for WhatsApp's 16MB limit.",
+    date: "2026-01-22",
+    category: "how-to",
+    relatedTool: "/compress-pdf",
+    readingTime: 3,
+    keywords: ["whatsapp pdf limit", "compress pdf whatsapp", "send large pdf whatsapp"],
+    content: `
+## WhatsApp Limits
+WhatsApp has a 16MB limit.
+
+## Compress Now
+Use [Convertify](/compress-pdf) to shrink your file.
+`,
+  },
+  {
+    slug: "reduce-pdf-size-without-losing-quality",
+    title: "Reduce PDF Size Without Losing Quality - Best Practices",
+    excerpt: "How to balance file size and quality when compressing PDF documents.",
+    date: "2026-01-22",
+    category: "tips",
+    relatedTool: "/compress-pdf",
+    readingTime: 5,
+    keywords: ["reduce pdf size", "compress pdf quality", "lossless compression"],
+    content: `
+## Quality vs Size
+It is a tradeoff, but our smart algorithms minimize quality loss.
+
+## Tips
+- Use Medium compression for most docs.
+- Use High compression for huge files.
+`,
+  }
 ];

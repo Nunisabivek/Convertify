@@ -17,10 +17,10 @@ export function FileUploader({
     multiple = true
 }: FileUploaderProps) {
     const onDrop = useCallback((acceptedFiles: File[]) => {
-        const MAX_SIZE = 50 * 1024 * 1024; // 50MB
+        const MAX_SIZE = 200 * 1024 * 1024; // 200MB
         const validFiles = acceptedFiles.filter(file => {
             if (file.size > MAX_SIZE) {
-                alert(`File "${file.name}" is too large! Maximum size is 50MB.`);
+                alert(`File "${file.name}" is too large! Maximum size is 200MB.`);
                 return false;
             }
             return true;
