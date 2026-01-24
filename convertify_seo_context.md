@@ -1,81 +1,283 @@
-// Blog Content Calendar & SEO-Optimized Blog Posts
-// Each post targets specific long-tail keywords with high search intent
+# Convertify Website Content for SEO Analysis
 
-export interface BlogPost {
-  slug: string
-  title: string
-  excerpt: string
-  date: string
-  content: string
-  keywords: string[]
-  relatedTool: string
-  category: 'tutorial' | 'comparison' | 'tips' | 'how-to'
-  readingTime: number
-  faqs?: { question: string; answer: string }[]
-}
+This document contains all the text content, SEO metadata, and blog posts from the Convertify website. Used for analysis in NotebookLM.
 
-// ===========================================
-// CONTENT CALENDAR (30 Topics for Daily Posting)
-// ===========================================
-export const blogContentCalendar = [
-  // Week 1: Merge & Combine
-  { day: 1, topic: "How to Merge PDF Files on Windows 10 Without Software", tool: "/merge-pdf", priority: "high" },
-  { day: 2, topic: "Combine PDF Files on iPhone - Complete Guide", tool: "/merge-pdf", priority: "high" },
-  { day: 3, topic: "How to Merge PDF Files Without Adobe Acrobat", tool: "/merge-pdf", priority: "high" },
-  { day: 4, topic: "Combine Scanned Documents into One PDF", tool: "/merge-pdf", priority: "medium" },
-  { day: 5, topic: "Merge PDF Files on Android Phone Free", tool: "/merge-pdf", priority: "medium" },
+## 1. Tool Pages SEO Data
+The following section lists every tool available on the site, along with its meta title, description, keywords, and on-page FAQs.
 
-  // Week 2: Compress & Reduce
-  { day: 6, topic: "How to Compress PDF to Under 100KB for Email", tool: "/compress-pdf", priority: "high" },
-  { day: 7, topic: "Reduce PDF Size Without Losing Quality", tool: "/compress-pdf", priority: "high" },
-  { day: 8, topic: "Compress PDF for WhatsApp Sharing", tool: "/compress-pdf", priority: "medium" },
-  { day: 9, topic: "How to Make PDF Smaller Than 1MB", tool: "/compress-pdf", priority: "high" },
-  { day: 10, topic: "Best PDF Compressor for Large Documents", tool: "/compress-pdf", priority: "medium" },
+### Tool: merge-pdf
+**Title:** Merge PDF Files Online Free - No Watermark, Unlimited | Convertify
+**Description:** Combine multiple PDF files into one document instantly. Free online PDF merger with no watermarks, no file size limits, no sign up required. Works on all devices.
+**H1:** Merge PDF Files Online - Fast & Free
+**Keywords:** merge pdf, combine pdf files, pdf joiner online free, merge pdf files without watermark, combine multiple pdfs into one, pdf merger no limit, join pdf files free
+**FAQs:**
+- Q: How many PDF files can I merge at once?
+  A: You can merge unlimited PDF files at once with Convertify. There's no limit on the number of files or total file size. Simply upload all your PDFs and we'll combine them instantly.
+- Q: Is there a watermark on merged PDFs?
+  A: No, Convertify never adds watermarks to your merged PDF files. Your documents remain completely clean and professional, ready for any use.
+- Q: Is my data secure when merging PDFs online?
+  A: Yes, your privacy is our priority. All PDF processing happens in your browser - your files never leave your device. We don't store any uploaded files on our servers.
+- Q: Can I reorder PDF pages before merging?
+  A: Absolutely! You can drag and drop to reorder your PDF files before merging. This lets you control the exact sequence of pages in your final combined document.
+- Q: Does it work on mobile phones?
+  A: Yes! Convertify works perfectly on all devices including iPhones, Android phones, tablets, and desktop computers. No app installation required.
 
-  // Week 3: Image Conversions
-  { day: 11, topic: "Convert Multiple JPG to One PDF - Step by Step", tool: "/jpg-to-pdf", priority: "high" },
-  { day: 12, topic: "How to Convert Screenshot to PDF on Any Device", tool: "/jpg-to-pdf", priority: "medium" },
-  { day: 13, topic: "Turn iPhone Photos into PDF Document", tool: "/jpg-to-pdf", priority: "high" },
-  { day: 14, topic: "Convert PNG with Transparency to PDF", tool: "/png-to-pdf", priority: "medium" },
-  { day: 15, topic: "How to Convert PDF to High Quality JPG Images", tool: "/pdf-to-jpg", priority: "high" },
+### Tool: split-pdf
+**Title:** Split PDF Online Free - Extract Pages from PDF | Convertify
+**Description:** Split PDF files by page range or extract specific pages. Free online PDF splitter with no watermarks. Separate one PDF into multiple files instantly.
+**H1:** Split PDF - Extract Pages Online Free
+**Keywords:** split pdf, extract pdf pages, separate pdf pages, pdf splitter online free, split pdf by page number, extract pages from pdf, pdf page separator
+**FAQs:**
+- Q: How do I split a PDF into separate pages?
+  A: Upload your PDF to Convertify, then select which pages you want to extract. You can choose specific page numbers, page ranges, or split every page into a separate file.
+- Q: Can I extract just a few pages from a large PDF?
+  A: Yes! Simply specify the page numbers you need (e.g., 1, 3, 5-10) and Convertify will extract only those pages into a new PDF file.
+- Q: Is there a page limit for splitting PDFs?
+  A: No, there's no page limit. You can split PDFs with hundreds of pages. The processing happens in your browser for maximum speed.
+- Q: Will splitting a PDF reduce the quality?
+  A: No, splitting a PDF preserves the original quality of each page. We don't compress or modify your content in any way.
 
-  // Week 4: Split & Extract
-  { day: 16, topic: "How to Split PDF by Page Number Online Free", tool: "/split-pdf", priority: "high" },
-  { day: 17, topic: "Extract Specific Pages from PDF Document", tool: "/split-pdf", priority: "high" },
-  { day: 18, topic: "Separate PDF into Individual Pages", tool: "/split-pdf", priority: "medium" },
-  { day: 19, topic: "Remove Pages from PDF Without Software", tool: "/split-pdf", priority: "medium" },
-  { day: 20, topic: "Extract Text from Scanned PDF Document", tool: "/pdf-to-text", priority: "high" },
+### Tool: compress-pdf
+**Title:** Compress PDF to 100KB, 200KB, 500KB Online Free | Convertify
+**Description:** Reduce PDF file size by up to 90% without losing quality. Compress PDF to 100KB or any size for email attachments. Free online PDF compressor, no watermarks.
+**H1:** Compress PDF - Reduce File Size Online
+**Keywords:** compress pdf, reduce pdf size, compress pdf to 100kb, shrink pdf file, pdf compressor online free, reduce pdf for email, compress pdf without quality loss
+**FAQs:**
+- Q: How much can I reduce my PDF file size?
+  A: Convertify can reduce your PDF size by up to 90% depending on the content. Images and graphics compress the most, while text-heavy documents may see less reduction.
+- Q: Will compressing lose document quality?
+  A: Our smart compression algorithm optimizes images while keeping text sharp. For most documents, the quality difference is imperceptible while file size is significantly reduced.
+- Q: Can I compress a PDF to a specific size like 100KB?
+  A: Yes! You can choose from preset compression levels or specify a target size. We'll optimize your PDF to get as close to your target as possible while maintaining quality.
+- Q: Is PDF compression free?
+  A: Yes, Convertify's PDF compressor is 100% free with no watermarks, no file limits, and no registration required.
 
-  // Week 5: Office Conversions
-  { day: 21, topic: "Convert Word to PDF Without Losing Formatting", tool: "/word-to-pdf", priority: "high" },
-  { day: 22, topic: "How to Save Word Document as PDF on Mac", tool: "/word-to-pdf", priority: "medium" },
-  { day: 23, topic: "Convert Excel Spreadsheet to PDF Free", tool: "/excel-to-pdf", priority: "medium" },
-  { day: 24, topic: "PowerPoint to PDF - Keep Slide Formatting", tool: "/powerpoint-to-pdf", priority: "medium" },
-  { day: 25, topic: "Convert Google Docs to PDF Easily", tool: "/word-to-pdf", priority: "medium" },
+### Tool: jpg-to-pdf
+**Title:** Convert JPG to PDF Online Free - Multiple Images to One PDF | Convertify
+**Description:** Convert JPG, JPEG, PNG images to PDF instantly. Combine multiple photos into one PDF document. Free online image to PDF converter with no watermarks.
+**H1:** JPG to PDF - Convert Images to PDF Free
+**Keywords:** jpg to pdf, convert jpg to pdf, image to pdf, multiple jpg to one pdf, jpeg to pdf converter, photos to pdf online free, combine images to pdf
+**FAQs:**
+- Q: Can I convert multiple JPG images to one PDF?
+  A: Yes! Upload multiple JPG or JPEG images and Convertify will combine them all into a single PDF document. You can reorder the images before converting.
+- Q: What image formats are supported?
+  A: We support JPG, JPEG, PNG, GIF, BMP, and WebP images. All common image formats can be converted to PDF.
+- Q: Is the image quality preserved in PDF?
+  A: Yes, we maintain the original resolution and quality of your images when converting to PDF. No compression is applied unless you choose to.
+- Q: Can I adjust page size for my images?
+  A: Yes, you can choose standard page sizes (A4, Letter, etc.) or let the PDF automatically fit to your image dimensions.
 
-  // Week 6: Comparisons & Tips
-  { day: 26, topic: "Free PDF Tools vs Adobe Acrobat - Comparison", tool: "/all-tools", priority: "high" },
-  { day: 27, topic: "Best Free Online PDF Editors in 2025", tool: "/all-tools", priority: "high" },
-  { day: 28, topic: "PDF Tools That Work Offline on Mobile", tool: "/all-tools", priority: "medium" },
-  { day: 29, topic: "How to Password Protect a PDF File", tool: "/all-tools", priority: "medium" },
-  { day: 30, topic: "Top 10 PDF Tips Every Student Should Know", tool: "/all-tools", priority: "high" },
-]
+### Tool: pdf-to-jpg
+**Title:** Convert PDF to JPG Online Free - PDF Pages to Images | Convertify
+**Description:** Convert PDF pages to high-quality JPG images. Extract all pages or select specific pages. Free PDF to image converter with no watermarks.
+**H1:** PDF to JPG - Convert PDF to Images Free
+**Keywords:** pdf to jpg, convert pdf to jpg, pdf to image, save pdf as jpg, pdf to jpeg converter, extract images from pdf, pdf page to jpg
+**FAQs:**
+- Q: How do I convert a PDF to JPG images?
+  A: Simply upload your PDF to Convertify, and we'll convert each page into a separate high-quality JPG image. Download all images in a ZIP file.
+- Q: Can I choose which pages to convert?
+  A: Yes! You can convert all pages or select specific page numbers. This is useful for extracting only the pages you need as images.
+- Q: What image quality/resolution is used?
+  A: We convert at high resolution (300 DPI) by default, ensuring your images are sharp and clear for any use including printing.
+- Q: Is there a page limit?
+  A: No page limit! Whether your PDF has 5 pages or 500 pages, we'll convert them all to JPG images for free.
 
-// ===========================================
-// PUBLISHED BLOG POSTS (10 SEO-Optimized)
-// ===========================================
-export const blogPosts: BlogPost[] = [
-  // ===== POST 1 =====
-  {
-    slug: "how-to-merge-pdf-files-free",
-    title: "How to Combine PDF Files: Merge Multiple PDFs for Free",
-    excerpt: "Learn the easiest way to combine PDF documents using Convertify. No software installation required, works on all devices.",
-    date: "2026-01-07",
-    category: "tutorial",
-    relatedTool: "/merge-pdf",
-    readingTime: 4,
-    keywords: ["merge pdf", "combine pdf", "pdf merger free", "join pdf files", "combine pdf files online"],
-    content: `
+### Tool: png-to-pdf
+**Title:** Convert PNG to PDF Online Free - Transparent Images to PDF | Convertify
+**Description:** Convert PNG images with transparency to PDF. Combine multiple PNG files into one PDF document. Free online PNG to PDF converter.
+**H1:** PNG to PDF - Convert PNG Images to PDF
+**Keywords:** png to pdf, convert png to pdf, transparent png to pdf, multiple png to pdf, png image to pdf converter
+**FAQs:**
+- Q: Does PNG to PDF preserve transparency?
+  A: Yes, PNG transparency is preserved when converting to PDF. Your transparent backgrounds will appear correctly in the PDF document.
+- Q: Can I combine multiple PNG files?
+  A: Absolutely! Upload multiple PNG images and we'll combine them into a single PDF with each image on its own page.
+
+### Tool: pdf-to-png
+**Title:** Convert PDF to PNG Online Free - High Quality Images | Convertify
+**Description:** Convert PDF pages to PNG images with transparency support. Extract high-resolution images from your PDF documents. Free PDF to PNG converter.
+**H1:** PDF to PNG - Convert PDF Pages to PNG Images
+**Keywords:** pdf to png, convert pdf to png, pdf to transparent png, pdf to high quality image, extract png from pdf
+**FAQs:**
+- Q: Why choose PNG over JPG?
+  A: PNG supports transparency and provides lossless compression, making it ideal for graphics, logos, and images that need a transparent background.
+- Q: What resolution are the PNG images?
+  A: We export at 300 DPI for high-quality images suitable for printing and professional use.
+
+### Tool: word-to-pdf
+**Title:** Convert Word to PDF Online Free - DOC DOCX to PDF | Convertify
+**Description:** Convert Microsoft Word documents (DOC, DOCX) to PDF instantly. Preserve formatting and fonts. Free Word to PDF converter online.
+**H1:** Word to PDF - Convert DOC/DOCX to PDF
+**Keywords:** word to pdf, convert word to pdf, doc to pdf, docx to pdf converter, microsoft word to pdf free
+**FAQs:**
+- Q: Does formatting stay the same?
+  A: Yes, Convertify preserves your Word document's fonts, images, tables, and formatting when converting to PDF.
+- Q: Which Word formats are supported?
+  A: We support both DOC (older Word) and DOCX (modern Word) file formats.
+
+### Tool: pdf-to-text
+**Title:** Extract Text from PDF Online Free - PDF to TXT Converter | Convertify
+**Description:** Extract all text content from PDF documents. Convert PDF to plain text file. Free online PDF text extractor, works with scanned PDFs.
+**H1:** PDF to Text - Extract Text from PDF
+**Keywords:** pdf to text, extract text from pdf, pdf to txt, copy text from pdf, pdf text extractor online
+**FAQs:**
+- Q: Can I extract text from scanned PDFs?
+  A: For scanned PDFs or image-based PDFs, you may need OCR (Optical Character Recognition). Our basic text extraction works best with text-based PDFs.
+- Q: Is formatting preserved?
+  A: Plain text extraction removes formatting. You'll get clean text content that's easy to copy, edit, and use anywhere.
+
+### Tool: text-to-pdf
+**Title:** Convert Text to PDF Online Free - TXT to PDF | Convertify
+**Description:** Convert plain text files to PDF documents. Customize fonts and formatting. Free online text to PDF converter.
+**H1:** Text to PDF - Convert TXT Files to PDF
+**Keywords:** text to pdf, txt to pdf, convert text to pdf, plain text to pdf, notepad to pdf
+**FAQs:**
+- Q: Can I paste text directly?
+  A: Yes! You can either upload a TXT file or paste your text directly into our editor to convert to PDF.
+- Q: Can I customize the font?
+  A: Yes, you can choose from several professional fonts and adjust the size for your PDF output.
+
+### Tool: excel-to-pdf
+**Title:** Convert Excel to PDF Online Free - XLS XLSX to PDF | Convertify
+**Description:** Convert Excel spreadsheets to PDF documents. Preserve tables, charts, and formatting. Free Excel to PDF converter online.
+**H1:** Excel to PDF - Convert Spreadsheets to PDF
+**Keywords:** excel to pdf, convert excel to pdf, xls to pdf, xlsx to pdf, spreadsheet to pdf
+**FAQs:**
+- Q: Are charts and formatting preserved?
+  A: Yes, Convertify maintains your Excel charts, tables, cell formatting, and formulas display when converting to PDF.
+- Q: Which Excel formats are supported?
+  A: We support XLS (older Excel) and XLSX (modern Excel) file formats.
+
+### Tool: powerpoint-to-pdf
+**Title:** Convert PowerPoint to PDF Online Free - PPT PPTX to PDF | Convertify
+**Description:** Convert PowerPoint presentations to PDF. Preserve slides, animations, and formatting. Free PPT to PDF converter online.
+**H1:** PowerPoint to PDF - Convert Presentations to PDF
+**Keywords:** powerpoint to pdf, convert ppt to pdf, pptx to pdf, presentation to pdf, slides to pdf
+**FAQs:**
+- Q: Are slide designs preserved?
+  A: Yes, your slide layouts, images, fonts, and designs are maintained in the PDF output.
+- Q: What about animations?
+  A: PDF is a static format, so animations won't play. But all visual elements are captured as they appear on each slide.
+
+### Tool: add-page-numbers
+**Title:** Add Page Numbers to PDF Online Free | Convertify
+**Description:** Insert page numbers into your PDF document. customizable position and style. Free online tool.
+**H1:** Add Page Numbers - Number PDF Pages
+**Keywords:** add page numbers to pdf, page numbering pdf, number pdf pages
+**FAQs:**
+- Q: Can I choose where page numbers appear?
+  A: Yes, you can position page numbers at the top or bottom, left, center, or right.
+- Q: Is it free?
+  A: Yes, completely free.
+
+### Tool: compare-pdf
+**Title:** Compare PDF Files Online Free | Convertify
+**Description:** Compare two PDF files side by side to find differences. Free online PDF comparison tool.
+**H1:** Compare PDF - Find Differences
+**Keywords:** compare pdf, pdf diff, compare two pdfs
+**FAQs:**
+- Q: How does it work?
+  A: Upload two PDFs and we highlight the text and visual differences.
+
+### Tool: crop-pdf
+**Title:** Crop PDF Online Free | Convertify
+**Description:** Crop PDF pages to remove margins or unwanted areas. Free online PDF cropper.
+**H1:** Crop PDF - Trim PDF Pages
+**Keywords:** crop pdf, trim pdf, cut pdf pages
+**FAQs:**
+- Q: Does it crop all pages?
+  A: You can apply the crop area to all pages or specific ones.
+
+### Tool: edit-pdf
+**Title:** Edit PDF Online Free - Add Text & Images | Convertify
+**Description:** Edit PDF documents online. Add text, images, shapes, and annotations. Free PDF editor.
+**H1:** Edit PDF - Free Online PDF Editor
+**Keywords:** edit pdf, pdf editor online, add text to pdf, annotate pdf
+**FAQs:**
+- Q: Can I edit existing text?
+  A: Our current tool allows adding new content. Full text editing is coming soon.
+
+### Tool: ocr-pdf
+**Title:** OCR PDF Online Free - Recognize Text | Convertify
+**Description:** Convert scanned PDFs to searchable and editable text using OCR. Free online OCR tool.
+**H1:** OCR PDF - Make PDF Searchable
+**Keywords:** ocr pdf, pdf to text ocr, scanned pdf to text
+**FAQs:**
+- Q: What languages are supported?
+  A: We support English and major world languages.
+
+### Tool: organize-pdf
+**Title:** Organize PDF Pages Online Free | Convertify
+**Description:** Rearrange, rotate, and delete PDF pages. Organize your PDF document structure. Free online tool.
+**H1:** Organize PDF - Rearrange Pages
+**Keywords:** organize pdf, reorder pdf pages, delete pdf pages
+**FAQs:**
+- Q: Can I delete pages?
+  A: Yes, simply select and remove unwanted pages.
+
+### Tool: pdf-to-excel
+**Title:** Convert PDF to Excel Online Free | Convertify
+**Description:** Convert PDF tables to Excel spreadsheets (XLSX). Extract data from PDF to Excel.
+**H1:** PDF to Excel - Convert Tables
+**Keywords:** pdf to excel, pdf to xlsx, convert pdf to spreadsheet
+**FAQs:**
+- Q: Are tables preserved?
+  A: Yes, we detect tables and export them to Excel cells.
+
+### Tool: pdf-to-pdfa
+**Title:** Convert PDF to PDF/A Online Free | Convertify
+**Description:** Convert PDF to PDF/A format for long-term archiving. ISO-compliant archiving tool.
+**H1:** PDF to PDF/A - Archive PDF
+**Keywords:** pdf to pdf/a, pdf archive format, convert to pdfa
+**FAQs:**
+- Q: What is PDF/A?
+  A: It is a standard version of PDF designed for long-term preservation.
+
+### Tool: pdf-to-powerpoint
+**Title:** Convert PDF to PowerPoint Online Free | Convertify
+**Description:** Convert PDF documents to PowerPoint presentation (PPTX). Turn PDF slides back into editable slides.
+**H1:** PDF to PowerPoint - Convert to PPTX
+**Keywords:** pdf to powerpoint, pdf to ppt, convert pdf to presentation
+**FAQs:**
+- Q: Can I edit the slides?
+  A: Yes, the converted PPTX file is editable in PowerPoint.
+
+### Tool: redact-pdf
+**Title:** Redact PDF Online Free - Hide Sensitive Info | Convertify
+**Description:** Permanently blackout sensitive text and information in your PDF. Free online redaction tool.
+**H1:** Redact PDF - Blackout Secure Info
+**Keywords:** redact pdf, blackout text pdf, hide pdf info
+**FAQs:**
+- Q: Is it permanent?
+  A: Yes, redacted content is permanently removed from the file.
+
+### Tool: repair-pdf
+**Title:** Repair PDF Online Free - Fix Corrupt Files | Convertify
+**Description:** Recover and repair corrupt or damaged PDF files. Restore PDF data online free.
+**H1:** Repair PDF - Fix Broken Files
+**Keywords:** repair pdf, fix corrupt pdf, recover pdf
+**FAQs:**
+- Q: Can all files be fixed?
+  A: We try our best to recover data, but severely damaged files may not be recoverable.
+
+### Tool: sign-pdf
+**Title:** Sign PDF Online Free - Add Digital Signature | Convertify
+**Description:** Add your signature to PDF documents. Draw, type, or upload signature. Free e-sign tool.
+**H1:** Sign PDF - Add Your Signature
+**Keywords:** sign pdf, e-sign pdf, digital signature
+**FAQs:**
+- Q: Is it legally binding?
+  A: Our e-signatures are valid for most general purposes, but check local laws for specific legal requirements.
+
+## 2. Blog Posts & Tutorials
+The following section contains full-text blog posts written for SEO purposes.
+
+### Blog Post: How to Merge Multiple PDF Files into One for Free
+**Slug:** how-to-merge-pdf-files-free
+**Target Keywords:** merge pdf, combine pdf, pdf merger free, join pdf files, combine pdf files online
+**Excerpt:** Learn the easiest way to combine PDF documents using Convertify. No software installation required, works on all devices.
+**Content:**
+
 ## Why Merge PDF Files?
 
 Managing multiple PDF files can be a hassle. Whether you are a student submitting an assignment, a professional combining reports, or organizing scanned documents, merging PDFs into a single file is a crucial skill that saves time and keeps you organized.
@@ -87,11 +289,19 @@ Managing multiple PDF files can be a hassle. Whether you are a student submittin
 * Creating a portfolio from separate files
 * Submitting multi-page forms as one file
 
+## The Problem with Traditional Software
+
+Most desktop software like Adobe Acrobat is expensive and heavy. Adobe Acrobat Pro costs $22.99/month - that's almost $276/year just to combine PDF files! You don't need to pay a subscription just to combine two documents.
+
+Other issues with traditional software:
+* Takes up storage space on your computer
+* Requires installation and updates
+* Often slow and resource-heavy
+* May not work on mobile devices
+
 ## The Free Solution: Convertify Merge PDF
 
-Need to combine PDF files into a single document instantly? You don't need to download software. Use our [Free PDF Merger Tool](/merge-pdf) to join files directly in your browser, or follow the step-by-step guide below to learn how to merge PDF files on any device.
-
-Here's why it's better:
+[Convertify's Merge PDF tool](/merge-pdf) offers a **free, secure, and instant** way to combine PDFs directly in your browser. Here's why it's better:
 
 ✅ **100% Free** - No hidden costs or watermarks
 ✅ **No Installation** - Works in your browser
@@ -115,17 +325,6 @@ Click the "Merge PDFs" button and wait a few seconds while your files are combin
 
 ### Step 5: Download
 Your merged PDF is ready! Click download to save it to your device.
-**Tip:** If the final file is too large to share, you can [Compress it](/compress-pdf) immediately after merging.
-
-## The Problem with Traditional Software
-
-Most desktop software like Adobe Acrobat is expensive and heavy. Adobe Acrobat Pro costs $22.99/month - that's almost $276/year just to combine PDF files! You don't need to pay a subscription just to combine two documents.
-
-Other issues with traditional software:
-* Takes up storage space on your computer
-* Requires installation and updates
-* Often slow and resource-heavy
-* May not work on mobile devices
 
 ## Tips for Best Results
 
@@ -147,25 +346,23 @@ Yes. All processing happens in your browser. Your files never leave your device.
 ## Try It Now
 
 Ready to combine your PDF files? [Open the Merge PDF tool](/merge-pdf) and get started in seconds!
-`,
-    faqs: [
-      { question: "How many PDFs can I merge at once?", answer: "You can merge unlimited PDF files at once with no restrictions." },
-      { question: "Is Convertify merge PDF really free?", answer: "Yes, 100% free with no watermarks, no sign-up, and no hidden costs." },
-      { question: "Does merging PDFs reduce quality?", answer: "No, the original quality of all pages is preserved when merging." },
-    ]
-  },
 
-  // ===== POST 2 =====
-  {
-    slug: "convert-jpg-to-pdf-online",
-    title: "How to Convert Multiple JPG Images to One PDF - Complete Guide",
-    excerpt: "Convert JPG photos to PDF in seconds. Learn how to combine multiple images into a single PDF document on any device.",
-    date: "2026-01-06",
-    category: "tutorial",
-    relatedTool: "/jpg-to-pdf",
-    readingTime: 5,
-    keywords: ["jpg to pdf", "convert jpg to pdf", "image to pdf", "photos to pdf", "multiple images to one pdf"],
-    content: `
+**Post FAQs:**
+- Q: How many PDFs can I merge at once?
+  A: You can merge unlimited PDF files at once with no restrictions.
+- Q: Is Convertify merge PDF really free?
+  A: Yes, 100% free with no watermarks, no sign-up, and no hidden costs.
+- Q: Does merging PDFs reduce quality?
+  A: No, the original quality of all pages is preserved when merging.
+
+---
+
+### Blog Post: How to Convert Multiple JPG Images to One PDF - Complete Guide
+**Slug:** convert-jpg-to-pdf-online
+**Target Keywords:** jpg to pdf, convert jpg to pdf, image to pdf, photos to pdf, multiple images to one pdf
+**Excerpt:** Convert JPG photos to PDF in seconds. Learn how to combine multiple images into a single PDF document on any device.
+**Content:**
+
 ## Why Convert JPG to PDF?
 
 Images in JPG format are great for viewing and sharing, but when you need to submit documents, create portfolios, or archive files, PDF is the industry standard.
@@ -231,7 +428,6 @@ Our [JPG to PDF converter](/jpg-to-pdf) is the fastest and easiest way to conver
 1. **Organize before converting** - Name your files in order (01.jpg, 02.jpg) so they're easy to arrange
 2. **Check image orientation** - Rotate images before converting if needed
 3. **Use consistent sizes** - Same-sized images create more uniform PDFs
-4. **Organize First** - If you need to rotate or reorder your images specifically, you can use our [PDF Organizer](/organize-pdf) after conversion.
 
 ## Frequently Asked Questions
 
@@ -247,24 +443,21 @@ JPG, JPEG, PNG, GIF, BMP, and WebP are all supported.
 ## Start Converting Now
 
 Ready to turn your images into a PDF? [Open the JPG to PDF tool](/jpg-to-pdf) and convert in seconds!
-`,
-    faqs: [
-      { question: "Can I convert PNG images too?", answer: "Yes! Our tool supports JPG, PNG, GIF, BMP, and WebP formats." },
-      { question: "Is there a limit on image file size?", answer: "No, there's no file size limit for individual images or total upload." },
-    ]
-  },
 
-  // ===== POST 3 =====
-  {
-    slug: "compress-pdf-reduce-file-size",
-    title: "How to Compress PDF to Under 100KB for Email - Step by Step",
-    excerpt: "Reduce PDF file size by up to 90% without losing quality. Perfect for email attachments and file uploads.",
-    date: "2026-01-05",
-    category: "tutorial",
-    relatedTool: "/compress-pdf",
-    readingTime: 5,
-    keywords: ["compress pdf", "reduce pdf size", "shrink pdf", "compress pdf to 100kb", "make pdf smaller"],
-    content: `
+**Post FAQs:**
+- Q: Can I convert PNG images too?
+  A: Yes! Our tool supports JPG, PNG, GIF, BMP, and WebP formats.
+- Q: Is there a limit on image file size?
+  A: No, there's no file size limit for individual images or total upload.
+
+---
+
+### Blog Post: How to Compress PDF to Under 100KB for Email - Step by Step
+**Slug:** compress-pdf-reduce-file-size
+**Target Keywords:** compress pdf, reduce pdf size, shrink pdf, compress pdf to 100kb, make pdf smaller
+**Excerpt:** Reduce PDF file size by up to 90% without losing quality. Perfect for email attachments and file uploads.
+**Content:**
+
 ## The Email Attachment Problem
 
 You've just created the perfect PDF report, but when you try to email it, you see that dreaded message: "Attachment too large." Gmail limits attachments to 25MB, Outlook to 20MB, and many job application portals cap at just 2MB or even 500KB!
@@ -324,8 +517,6 @@ Your compressed PDF is ready! Check the file size - you'll be amazed.
 2. **Use High compression** for image-heavy documents
 3. **Keep Medium** for documents with text you need to read clearly
 
-**Pro Tip:** If your PDF contains unnecessary pages, use our [Split PDF tool](/split-pdf) to remove them before compressing for even smaller files.
-
 ## Quality vs Size Trade-off
 
 * **Text documents**: Almost no visible quality loss at any compression
@@ -346,24 +537,21 @@ Unlimited! Compress as many files as you need, completely free.
 ## Compress Your PDF Now
 
 Stop struggling with file size limits. [Compress your PDF now](/compress-pdf) and send it anywhere!
-`,
-    faqs: [
-      { question: "Does compressing reduce text quality?", answer: "No, text remains perfectly sharp. Only images may show slight quality reduction at high compression." },
-      { question: "What's the maximum compression possible?", answer: "You can typically reduce file size by 70-90% depending on the content." },
-    ]
-  },
 
-  // ===== POST 4 =====
-  {
-    slug: "split-pdf-extract-pages-free",
-    title: "How to Split PDF by Page Number - Extract Specific Pages Free",
-    excerpt: "Learn how to extract specific pages from a PDF or split one PDF into multiple files. Works online without any software.",
-    date: "2026-01-04",
-    category: "tutorial",
-    relatedTool: "/split-pdf",
-    readingTime: 4,
-    keywords: ["split pdf", "extract pdf pages", "split pdf by page", "remove pages from pdf", "separate pdf pages"],
-    content: `
+**Post FAQs:**
+- Q: Does compressing reduce text quality?
+  A: No, text remains perfectly sharp. Only images may show slight quality reduction at high compression.
+- Q: What's the maximum compression possible?
+  A: You can typically reduce file size by 70-90% depending on the content.
+
+---
+
+### Blog Post: How to Split PDF by Page Number - Extract Specific Pages Free
+**Slug:** split-pdf-extract-pages-free
+**Target Keywords:** split pdf, extract pdf pages, split pdf by page, remove pages from pdf, separate pdf pages
+**Excerpt:** Learn how to extract specific pages from a PDF or split one PDF into multiple files. Works online without any software.
+**Content:**
+
 ## Why Split PDF Files?
 
 Sometimes you don't need an entire PDF document - you just need a few specific pages. Whether you're extracting a chapter from an eBook, removing unwanted pages, or breaking a large document into sections, splitting PDFs is a common need.
@@ -435,8 +623,6 @@ When you split a PDF with Convertify:
 * Separate exhibits from main documents
 * Extract specific clauses
 
-**Tip:** Once you've extracted the pages you need, you can [merge them back](/merge-pdf) into a new document order if required.
-
 ## Frequently Asked Questions
 
 **Q: Can I split a password-protected PDF?**
@@ -451,24 +637,21 @@ No. Pages are extracted at their original quality.
 ## Start Splitting Now
 
 Need specific pages from a PDF? [Open the Split PDF tool](/split-pdf) and extract them in seconds!
-`,
-    faqs: [
-      { question: "Can I extract non-consecutive pages?", answer: "Yes! You can select any combination of pages like 1, 5, 10-15, 20." },
-      { question: "Does splitting a PDF reduce quality?", answer: "No, extracted pages maintain their original quality." },
-    ]
-  },
 
-  // ===== POST 5 =====
-  {
-    slug: "pdf-to-jpg-convert-pages-images",
-    title: "How to Convert PDF to High Quality JPG Images - Free Online",
-    excerpt: "Convert PDF pages to JPG images instantly. Extract all pages or select specific ones. Download as high-resolution images.",
-    date: "2026-01-03",
-    category: "tutorial",
-    relatedTool: "/pdf-to-jpg",
-    readingTime: 4,
-    keywords: ["pdf to jpg", "convert pdf to image", "pdf to jpeg", "pdf pages to images", "save pdf as jpg"],
-    content: `
+**Post FAQs:**
+- Q: Can I extract non-consecutive pages?
+  A: Yes! You can select any combination of pages like 1, 5, 10-15, 20.
+- Q: Does splitting a PDF reduce quality?
+  A: No, extracted pages maintain their original quality.
+
+---
+
+### Blog Post: How to Convert PDF to High Quality JPG Images - Free Online
+**Slug:** pdf-to-jpg-convert-pages-images
+**Target Keywords:** pdf to jpg, convert pdf to image, pdf to jpeg, pdf pages to images, save pdf as jpg
+**Excerpt:** Convert PDF pages to JPG images instantly. Extract all pages or select specific ones. Download as high-resolution images.
+**Content:**
+
 ## Why Convert PDF to JPG?
 
 While PDF is great for documents, sometimes you need your content as images. Converting PDF pages to JPG opens up many possibilities:
@@ -539,24 +722,21 @@ Never. All images are clean without any watermarks.
 ## Convert Your PDF Now
 
 Ready to turn your PDF into images? [Open the PDF to JPG tool](/pdf-to-jpg) and convert in seconds!
-`,
-    faqs: [
-      { question: "What's the image resolution?", answer: "We offer 150 DPI for web use and 300 DPI for printing quality." },
-      { question: "Can I convert specific pages only?", answer: "Yes, you can select exactly which pages to convert." },
-    ]
-  },
 
-  // ===== POST 6 =====
-  {
-    slug: "merge-pdf-without-adobe-acrobat",
-    title: "How to Merge PDF Files Without Adobe Acrobat - Free Alternatives",
-    excerpt: "Don't have Adobe Acrobat? Learn the best free ways to combine PDF files online without expensive software.",
-    date: "2026-01-02",
-    category: "comparison",
-    relatedTool: "/merge-pdf",
-    readingTime: 5,
-    keywords: ["merge pdf without adobe", "combine pdf free", "adobe alternative", "free pdf merger", "pdf without acrobat"],
-    content: `
+**Post FAQs:**
+- Q: What's the image resolution?
+  A: We offer 150 DPI for web use and 300 DPI for printing quality.
+- Q: Can I convert specific pages only?
+  A: Yes, you can select exactly which pages to convert.
+
+---
+
+### Blog Post: How to Merge PDF Files Without Adobe Acrobat - Free Alternatives
+**Slug:** merge-pdf-without-adobe-acrobat
+**Target Keywords:** merge pdf without adobe, combine pdf free, adobe alternative, free pdf merger, pdf without acrobat
+**Excerpt:** Don't have Adobe Acrobat? Learn the best free ways to combine PDF files online without expensive software.
+**Content:**
+
 ## You Don't Need Adobe Acrobat to Merge PDFs
 
 Adobe Acrobat Pro costs $22.99/month - that's almost $276 per year! For most people who just need to combine a few PDF files occasionally, this is massive overkill.
@@ -637,24 +817,21 @@ For 90% of people who just need to combine PDF files:
 ## Merge Your PDFs Free Now
 
 Stop paying for software you don't need. [Merge your PDFs for free](/merge-pdf) with Convertify!
-`,
-    faqs: [
-      { question: "Is Convertify as good as Adobe for merging?", answer: "For merging PDFs, yes! Convertify produces identical results without the cost." },
-      { question: "Will I miss any features?", answer: "Not for merging. If you need advanced editing, forms, or OCR, you might need paid software." },
-    ]
-  },
 
-  // ===== POST 7 =====
-  {
-    slug: "compress-pdf-for-email-attachment",
-    title: "How to Compress PDF for Email - Beat the 25MB Gmail Limit",
-    excerpt: "PDF too large for email? Learn how to reduce PDF size to fit Gmail, Outlook, and other email services.",
-    date: "2026-01-01",
-    category: "how-to",
-    relatedTool: "/compress-pdf",
-    readingTime: 4,
-    keywords: ["compress pdf for email", "pdf too large for email", "gmail attachment limit", "reduce pdf for email", "email pdf size limit"],
-    content: `
+**Post FAQs:**
+- Q: Is Convertify as good as Adobe for merging?
+  A: For merging PDFs, yes! Convertify produces identical results without the cost.
+- Q: Will I miss any features?
+  A: Not for merging. If you need advanced editing, forms, or OCR, you might need paid software.
+
+---
+
+### Blog Post: How to Compress PDF for Email - Beat the 25MB Gmail Limit
+**Slug:** compress-pdf-for-email-attachment
+**Target Keywords:** compress pdf for email, pdf too large for email, gmail attachment limit, reduce pdf for email, email pdf size limit
+**Excerpt:** PDF too large for email? Learn how to reduce PDF size to fit Gmail, Outlook, and other email services.
+**Content:**
+
 ## Email PDF Size Limits Explained
 
 Every email service has attachment size limits. If your PDF is too large, you won't be able to send it:
@@ -727,24 +904,21 @@ Try our Split PDF tool to send in parts, or use cloud sharing links.
 ## Compress Your PDF Now
 
 Don't let file size limits stop you. [Compress your PDF for free](/compress-pdf) and send it anywhere!
-`,
-    faqs: [
-      { question: "What's the Gmail attachment size limit?", answer: "Gmail allows attachments up to 25MB per email." },
-      { question: "How much can compression reduce file size?", answer: "Typically 70-90%, depending on the content type." },
-    ]
-  },
 
-  // ===== POST 8 =====
-  {
-    slug: "convert-iphone-photos-to-pdf",
-    title: "How to Convert iPhone Photos to PDF - Easy Step-by-Step Guide",
-    excerpt: "Turn your iPhone photos into a PDF document. Perfect for scanning documents, creating photo albums, or submitting forms.",
-    date: "2025-12-31",
-    category: "tutorial",
-    relatedTool: "/jpg-to-pdf",
-    readingTime: 5,
-    keywords: ["iphone photos to pdf", "convert iphone pictures to pdf", "iphone to pdf", "photo to pdf ios", "save iphone photo as pdf"],
-    content: `
+**Post FAQs:**
+- Q: What's the Gmail attachment size limit?
+  A: Gmail allows attachments up to 25MB per email.
+- Q: How much can compression reduce file size?
+  A: Typically 70-90%, depending on the content type.
+
+---
+
+### Blog Post: How to Convert iPhone Photos to PDF - Easy Step-by-Step Guide
+**Slug:** convert-iphone-photos-to-pdf
+**Target Keywords:** iphone photos to pdf, convert iphone pictures to pdf, iphone to pdf, photo to pdf ios, save iphone photo as pdf
+**Excerpt:** Turn your iPhone photos into a PDF document. Perfect for scanning documents, creating photo albums, or submitting forms.
+**Content:**
+
 ## Why Convert iPhone Photos to PDF?
 
 Your iPhone camera is essentially a portable scanner. Whether you're capturing receipts, documents, ID cards, or creating photo albums, converting these images to PDF makes them:
@@ -772,8 +946,6 @@ The easiest way to convert iPhone photos to PDF:
 * Combine multiple photos into one PDF
 * Works with any number of images
 * Free, no watermarks
-
-**Done Converting?** If you need to add a signature to your new PDF, use our [ESign PDF Tool](/sign-pdf) to finish the job legally.
 
 ## Method 2: Built-in iPhone Method
 
@@ -836,24 +1008,21 @@ Yes, select photos from your library and they'll be uploaded for conversion.
 ## Convert Your iPhone Photos Now
 
 Ready to turn your photos into a PDF? [Open the JPG to PDF tool](/jpg-to-pdf) on your iPhone and start converting!
-`,
-    faqs: [
-      { question: "Do I need to download an app?", answer: "No! Convertify works directly in your browser without any app installation." },
-      { question: "Can I convert photos from my iCloud library?", answer: "Yes, select any photos from your Photos library for conversion." },
-    ]
-  },
 
-  // ===== POST 9 =====
-  {
-    slug: "best-free-pdf-tools-2025",
-    title: "10 Best Free Online PDF Tools in 2025 - Complete Guide",
-    excerpt: "Discover the best free PDF tools for merging, compressing, converting, and editing. No software needed, works in your browser.",
-    date: "2025-12-30",
-    category: "comparison",
-    relatedTool: "/all-tools",
-    readingTime: 6,
-    keywords: ["best free pdf tools", "free pdf editor online", "pdf converter free", "online pdf tools 2025", "free pdf software"],
-    content: `
+**Post FAQs:**
+- Q: Do I need to download an app?
+  A: No! Convertify works directly in your browser without any app installation.
+- Q: Can I convert photos from my iCloud library?
+  A: Yes, select any photos from your Photos library for conversion.
+
+---
+
+### Blog Post: 10 Best Free Online PDF Tools in 2025 - Complete Guide
+**Slug:** best-free-pdf-tools-2025
+**Target Keywords:** best free pdf tools, free pdf editor online, pdf converter free, online pdf tools 2025, free pdf software
+**Excerpt:** Discover the best free PDF tools for merging, compressing, converting, and editing. No software needed, works in your browser.
+**Content:**
+
 ## The Best Free PDF Tools Available Online
 
 In 2025, you don't need expensive software like Adobe Acrobat to work with PDFs. Free online tools can handle everything from merging to converting to compressing - right in your browser.
@@ -976,24 +1145,21 @@ You no longer need paid software for 95% of PDF tasks. These free online tools c
 ## Get Started Now
 
 Visit [Convertify.work](/all-tools) and explore all our free PDF tools. No sign-up required!
-`,
-    faqs: [
-      { question: "Are these tools really free?", answer: "Yes! All tools listed are 100% free with no hidden costs or watermarks." },
-      { question: "Do I need to create an account?", answer: "No. All tools work instantly without any registration." },
-    ]
-  },
 
-  // ===== POST 10 =====
-  {
-    slug: "pdf-tips-for-students",
-    title: "10 PDF Tips Every Student Should Know - Save Time & Get Better Grades",
-    excerpt: "Master PDFs for school assignments, thesis submissions, and research. Essential tips for students using PDF documents.",
-    date: "2025-12-29",
-    category: "tips",
-    relatedTool: "/all-tools",
-    readingTime: 6,
-    keywords: ["pdf tips for students", "student pdf tools", "pdf for school", "thesis pdf", "assignment pdf tips"],
-    content: `
+**Post FAQs:**
+- Q: Are these tools really free?
+  A: Yes! All tools listed are 100% free with no hidden costs or watermarks.
+- Q: Do I need to create an account?
+  A: No. All tools work instantly without any registration.
+
+---
+
+### Blog Post: 10 PDF Tips Every Student Should Know - Save Time & Get Better Grades
+**Slug:** pdf-tips-for-students
+**Target Keywords:** pdf tips for students, student pdf tools, pdf for school, thesis pdf, assignment pdf tips
+**Excerpt:** Master PDFs for school assignments, thesis submissions, and research. Essential tips for students using PDF documents.
+**Content:**
+
 ## Why PDF Skills Matter for Students
 
 Whether you're submitting assignments, reading research papers, or creating your thesis, PDF is the standard format in education. Mastering PDF tools will save you hours and help you present better work.
@@ -1089,24 +1255,21 @@ These skills will help you:
 * ✅ Organize research efficiently
 
 Start practicing these tips now and you'll thank yourself during finals!
-`,
-    faqs: [
-      { question: "What file size do most schools accept?", answer: "Most portals accept 5-10MB. Some limit to 2MB. Always check requirements and compress if needed." },
-      { question: "Should I submit Word or PDF?", answer: "PDF is almost always preferred as it preserves your formatting across all devices." },
-    ]
-  },
 
-  // ===== POST 11 =====
-  {
-    slug: "merge-pdf-windows-10-without-software",
-    title: "How to Merge PDF Files on Windows 10 Without Installing Software",
-    excerpt: "Combine multiple PDF files on Windows 10 using free online tools. No downloads, no Adobe Acrobat needed - works right in your browser.",
-    date: "2026-01-09",
-    category: "tutorial",
-    relatedTool: "/merge-pdf",
-    readingTime: 5,
-    keywords: ["merge pdf windows 10", "combine pdf windows", "merge pdf without software", "free pdf merger windows", "join pdf files windows 10"],
-    content: `
+**Post FAQs:**
+- Q: What file size do most schools accept?
+  A: Most portals accept 5-10MB. Some limit to 2MB. Always check requirements and compress if needed.
+- Q: Should I submit Word or PDF?
+  A: PDF is almost always preferred as it preserves your formatting across all devices.
+
+---
+
+### Blog Post: How to Merge PDF Files on Windows 10 Without Installing Software
+**Slug:** merge-pdf-windows-10-without-software
+**Target Keywords:** merge pdf windows 10, combine pdf windows, merge pdf without software, free pdf merger windows, join pdf files windows 10
+**Excerpt:** Combine multiple PDF files on Windows 10 using free online tools. No downloads, no Adobe Acrobat needed - works right in your browser.
+**Content:**
+
 ## Why Windows Users Need PDF Merge Tools
 
 Windows 10 and Windows 11 don't include a built-in PDF merger. While Microsoft Edge can view PDFs, it can't combine them. Most users turn to expensive software like Adobe Acrobat ($22.99/month) - but there's a better way.
@@ -1147,8 +1310,6 @@ Navigate to [convertify.work/merge-pdf](/merge-pdf)
 ### Step 3: Upload Your PDFs
 * Click "Select Files" or drag and drop PDFs from File Explorer
 * You can select multiple files at once (Ctrl+Click)
-
-**Mistake?** If you accidentally merged the wrong files, don't worry. You can simply [Split the PDF](/split-pdf) back apart and try again.
 
 ### Step 4: Arrange the Order
 * Drag and drop thumbnails to reorder your PDFs
@@ -1219,25 +1380,23 @@ There's no file size limit. Large files may take a few seconds longer to process
 ## Start Merging Now
 
 Ready to combine your PDF files? [Open the Merge PDF tool](/merge-pdf) and merge unlimited files for free!
-`,
-    faqs: [
-      { question: "Does this work on Windows 11?", answer: "Yes! The tool works perfectly on Windows 10, Windows 11, and all modern browsers." },
-      { question: "Do I need to install anything?", answer: "No installation needed. It works directly in your web browser." },
-      { question: "Is there a file limit?", answer: "No! Merge as many PDFs as you want, with no file size restrictions." },
-    ]
-  },
 
-  // ===== POST 12 =====
-  {
-    slug: "compress-pdf-for-whatsapp",
-    title: "How to Compress PDF for WhatsApp - Send Large Documents Easily",
-    excerpt: "WhatsApp has a 16MB file limit. Learn how to compress your PDFs to share documents on WhatsApp without losing quality.",
-    date: "2026-01-08",
-    category: "how-to",
-    relatedTool: "/compress-pdf",
-    readingTime: 4,
-    keywords: ["compress pdf for whatsapp", "pdf too big for whatsapp", "whatsapp pdf size limit", "reduce pdf size whatsapp", "send pdf on whatsapp"],
-    content: `
+**Post FAQs:**
+- Q: Does this work on Windows 11?
+  A: Yes! The tool works perfectly on Windows 10, Windows 11, and all modern browsers.
+- Q: Do I need to install anything?
+  A: No installation needed. It works directly in your web browser.
+- Q: Is there a file limit?
+  A: No! Merge as many PDFs as you want, with no file size restrictions.
+
+---
+
+### Blog Post: How to Compress PDF for WhatsApp - Send Large Documents Easily
+**Slug:** compress-pdf-for-whatsapp
+**Target Keywords:** compress pdf for whatsapp, pdf too big for whatsapp, whatsapp pdf size limit, reduce pdf size whatsapp, send pdf on whatsapp
+**Excerpt:** WhatsApp has a 16MB file limit. Learn how to compress your PDFs to share documents on WhatsApp without losing quality.
+**Content:**
+
 ## WhatsApp PDF Size Limit Explained
 
 WhatsApp allows you to send documents up to **16MB** in size. If your PDF is larger, you'll see an error message and won't be able to send it.
@@ -1351,25 +1510,20 @@ No. WhatsApp sends documents at original size, which is why you need to compress
 
 Ready to share on WhatsApp? [Compress your PDF now](/compress-pdf) and send it instantly!
 
-**Note:** If compression alone isn't enough for valid reasons (like a 100MB+ file), try [Splitting the PDF](/split-pdf) into two 16MB chunks instead.
-`,
-    faqs: [
-      { question: "What is WhatsApp's file size limit?", answer: "WhatsApp allows documents up to 16MB. Use compression to fit larger files within this limit." },
-      { question: "Will my PDF look blurry after compression?", answer: "Text remains perfectly sharp. Image-heavy PDFs may have slight quality reduction at maximum compression." },
-    ]
-  },
+**Post FAQs:**
+- Q: What is WhatsApp's file size limit?
+  A: WhatsApp allows documents up to 16MB. Use compression to fit larger files within this limit.
+- Q: Will my PDF look blurry after compression?
+  A: Text remains perfectly sharp. Image-heavy PDFs may have slight quality reduction at maximum compression.
 
-  // ===== POST 13 =====
-  {
-    slug: "split-pdf-into-separate-pages",
-    title: "How to Split PDF into Separate Pages - Free Online Tool",
-    excerpt: "Extract individual pages from PDF documents. Split one PDF into multiple files or download specific pages only.",
-    date: "2026-01-07",
-    category: "tutorial",
-    relatedTool: "/split-pdf",
-    readingTime: 5,
-    keywords: ["split pdf into pages", "extract pdf pages", "separate pdf pages", "pdf splitter online", "split pdf free"],
-    content: `
+---
+
+### Blog Post: How to Split PDF into Separate Pages - Free Online Tool
+**Slug:** split-pdf-into-separate-pages
+**Target Keywords:** split pdf into pages, extract pdf pages, separate pdf pages, pdf splitter online, split pdf free
+**Excerpt:** Extract individual pages from PDF documents. Split one PDF into multiple files or download specific pages only.
+**Content:**
+
 ## Why Split PDF Files?
 
 Large PDF documents aren't always convenient. Sometimes you need just a few pages, or you want to break a document into separate files. Splitting PDFs is essential for:
@@ -1499,25 +1653,23 @@ Yes! Split first, then use [Merge PDF](/merge-pdf) to combine pages from differe
 ## Start Splitting Now
 
 Ready to extract pages from your PDF? [Open the Split PDF tool](/split-pdf) and get exactly the pages you need!
-`,
-    faqs: [
-      { question: "Does splitting reduce PDF quality?", answer: "No! Extracted pages maintain their original resolution and quality." },
-      { question: "Can I extract non-consecutive pages?", answer: "Yes! Select any combination like pages 1, 5, 10-15, 20." },
-      { question: "Is there a page limit for splitting?", answer: "No limit - split PDFs with any number of pages." },
-    ]
-  },
 
-  // ===== POST 14 =====
-  {
-    slug: "convert-word-to-pdf-keep-formatting",
-    title: "How to Convert Word to PDF Without Losing Formatting",
-    excerpt: "Convert Word documents to PDF while preserving fonts, images, and layout. Works with DOC and DOCX files on any device.",
-    date: "2026-01-06",
-    category: "tutorial",
-    relatedTool: "/word-to-pdf",
-    readingTime: 5,
-    keywords: ["word to pdf", "convert word to pdf", "docx to pdf", "word to pdf without losing formatting", "doc to pdf online"],
-    content: `
+**Post FAQs:**
+- Q: Does splitting reduce PDF quality?
+  A: No! Extracted pages maintain their original resolution and quality.
+- Q: Can I extract non-consecutive pages?
+  A: Yes! Select any combination like pages 1, 5, 10-15, 20.
+- Q: Is there a page limit for splitting?
+  A: No limit - split PDFs with any number of pages.
+
+---
+
+### Blog Post: How to Convert Word to PDF Without Losing Formatting
+**Slug:** convert-word-to-pdf-keep-formatting
+**Target Keywords:** word to pdf, convert word to pdf, docx to pdf, word to pdf without losing formatting, doc to pdf online
+**Excerpt:** Convert Word documents to PDF while preserving fonts, images, and layout. Works with DOC and DOCX files on any device.
+**Content:**
+
 ## Why Convert Word to PDF?
 
 PDF (Portable Document Format) is the universal standard for sharing documents. Unlike Word files, PDFs:
@@ -1622,8 +1774,6 @@ Need to convert many Word files?
 2. Use [Merge PDF](/merge-pdf) to combine them into one document
 3. Or keep them separate for organization
 
-**Tip:** It's usually faster to convert all your files first, then [merge them](/merge-pdf) into a single report.
-
 ## Converting on Mobile
 
 ### On iPhone:
@@ -1669,25 +1819,23 @@ No! Convert Word documents of any length.
 ## Convert Your Document Now
 
 Ready to convert your Word file? [Open the Word to PDF tool](/word-to-pdf) and get a perfect PDF in seconds!
-`,
-    faqs: [
-      { question: "Will my fonts be preserved?", answer: "Yes! All fonts, images, and formatting are preserved in the PDF." },
-      { question: "Can I convert multiple Word files at once?", answer: "Convert individually, then use Merge PDF to combine them." },
-      { question: "Does it work with older .doc files?", answer: "Yes! Both .doc and .docx formats are fully supported." },
-    ]
-  },
 
-  // ===== POST 15 =====
-  {
-    slug: "free-pdf-tools-vs-adobe-acrobat",
-    title: "Free PDF Tools vs Adobe Acrobat Pro - Is Paid Software Worth It?",
-    excerpt: "Compare free online PDF tools with Adobe Acrobat Pro. Find out when free tools are enough and when you might need paid software.",
-    date: "2026-01-05",
-    category: "comparison",
-    relatedTool: "/all-tools",
-    readingTime: 7,
-    keywords: ["free pdf tools vs adobe", "adobe acrobat alternative", "free pdf editor", "adobe acrobat pro review", "best free pdf software"],
-    content: `
+**Post FAQs:**
+- Q: Will my fonts be preserved?
+  A: Yes! All fonts, images, and formatting are preserved in the PDF.
+- Q: Can I convert multiple Word files at once?
+  A: Convert individually, then use Merge PDF to combine them.
+- Q: Does it work with older .doc files?
+  A: Yes! Both .doc and .docx formats are fully supported.
+
+---
+
+### Blog Post: Free PDF Tools vs Adobe Acrobat Pro - Is Paid Software Worth It?
+**Slug:** free-pdf-tools-vs-adobe-acrobat
+**Target Keywords:** free pdf tools vs adobe, adobe acrobat alternative, free pdf editor, adobe acrobat pro review, best free pdf software
+**Excerpt:** Compare free online PDF tools with Adobe Acrobat Pro. Find out when free tools are enough and when you might need paid software.
+**Content:**
+
 ## The Great PDF Debate: Free vs Paid
 
 Adobe Acrobat Pro is the industry standard for PDF editing, but at $22.99/month ($275/year), is it worth the cost? Let's break down when free tools are enough and when paid software makes sense.
@@ -1852,24 +2000,21 @@ Not everything, but the most common tasks (merge, split, compress, convert) work
 
 **Q: Should I use the free Adobe Reader?**
 Adobe Reader only views PDFs - it can't edit or convert. For those tasks, use Convertify.
-`,
-    faqs: [
-      { question: "What can't free PDF tools do?", answer: "Free tools typically can't edit text within PDFs, run OCR, or create certified digital signatures." },
-      { question: "Is Adobe Acrobat worth $275/year?", answer: "Only if you edit PDFs daily, create forms, or need legal signatures. Most people don't need these features." },
-    ]
-  },
 
-  // ===== POST 16 =====
-  {
-    slug: "scan-documents-iphone-to-pdf",
-    title: "How to Scan Documents on iPhone and Convert to PDF (2026 Guide)",
-    excerpt: "Turn your iPhone into a document scanner. Learn how to scan receipts, contracts, and documents directly to PDF format.",
-    date: "2026-01-04",
-    category: "tutorial",
-    relatedTool: "/jpg-to-pdf",
-    readingTime: 5,
-    keywords: ["scan document iphone", "iphone scanner to pdf", "scan to pdf iphone", "iphone document scanner", "photo to pdf iphone"],
-    content: `
+**Post FAQs:**
+- Q: What can't free PDF tools do?
+  A: Free tools typically can't edit text within PDFs, run OCR, or create certified digital signatures.
+- Q: Is Adobe Acrobat worth $275/year?
+  A: Only if you edit PDFs daily, create forms, or need legal signatures. Most people don't need these features.
+
+---
+
+### Blog Post: How to Scan Documents on iPhone and Convert to PDF (2026 Guide)
+**Slug:** scan-documents-iphone-to-pdf
+**Target Keywords:** scan document iphone, iphone scanner to pdf, scan to pdf iphone, iphone document scanner, photo to pdf iphone
+**Excerpt:** Turn your iPhone into a document scanner. Learn how to scan receipts, contracts, and documents directly to PDF format.
+**Content:**
+
 ## Your iPhone is a Powerful Document Scanner
 
 You don't need a flatbed scanner anymore. Your iPhone camera can capture documents in high quality, and with the right workflow, you can convert them to professional PDF format.
@@ -2034,25 +2179,23 @@ Not directly. For text editing, you'd need OCR software. For simple tasks, the s
 ## Start Scanning Now
 
 Ready to digitize your documents? Take photos with your iPhone camera and use [Convertify JPG to PDF](/jpg-to-pdf) to create perfect PDF documents!
-`,
-    faqs: [
-      { question: "What's the best way to scan on iPhone?", answer: "For basic scans, use the Notes app. For better control and multi-page documents, use Camera + Convertify JPG to PDF." },
-      { question: "How can I reduce scanned PDF file size?", answer: "Use Convertify's Compress PDF tool to reduce file size by up to 90%." },
-      { question: "Can I combine multiple scanned pages?", answer: "Yes! Upload all photos to Convertify's JPG to PDF tool and arrange them in order." },
-    ]
-  },
 
-  // ===== POST 17 =====
-  {
-    slug: "merge-pdf-android-phone-free",
-    title: "How to Merge PDF Files on Android Phone Free - Complete Guide",
-    excerpt: "Combine multiple PDF files into one document on your Android phone. No app installation required - works directly in your browser for free.",
-    date: "2026-01-11",
-    category: "tutorial",
-    relatedTool: "/merge-pdf",
-    readingTime: 5,
-    keywords: ["merge pdf android", "combine pdf phone", "pdf merger android", "join pdf android", "merge pdf mobile free", "android pdf combiner"],
-    content: `
+**Post FAQs:**
+- Q: What's the best way to scan on iPhone?
+  A: For basic scans, use the Notes app. For better control and multi-page documents, use Camera + Convertify JPG to PDF.
+- Q: How can I reduce scanned PDF file size?
+  A: Use Convertify's Compress PDF tool to reduce file size by up to 90%.
+- Q: Can I combine multiple scanned pages?
+  A: Yes! Upload all photos to Convertify's JPG to PDF tool and arrange them in order.
+
+---
+
+### Blog Post: How to Merge PDF Files on Android Phone Free - Complete Guide
+**Slug:** merge-pdf-android-phone-free
+**Target Keywords:** merge pdf android, combine pdf phone, pdf merger android, join pdf android, merge pdf mobile free, android pdf combiner
+**Excerpt:** Combine multiple PDF files into one document on your Android phone. No app installation required - works directly in your browser for free.
+**Content:**
+
 ## Why Merge PDFs on Your Android Phone?
 
 Your Android smartphone is a powerful tool for productivity. Whether you're on the go, in a meeting, or away from your computer, you may need to combine PDF files quickly. Common situations include:
@@ -2214,25 +2357,23 @@ Yes! Drag and drop to reorder files before merging.
 ## Start Merging on Your Android Now
 
 Ready to combine your PDF files? [Open the Merge PDF tool](/merge-pdf) on your Android phone and merge unlimited files for free - no app required!
-`,
-    faqs: [
-      { question: "Do I need to install an Android app?", answer: "No! Convertify works directly in your phone's browser without any app installation." },
-      { question: "Is there a file limit on Android?", answer: "No limits! Merge as many PDFs as you want, regardless of file size." },
-      { question: "Which Android browser works best?", answer: "Chrome offers the best experience, but Samsung Internet, Firefox, and others work perfectly too." },
-    ]
-  },
 
-  // ===== POST 18 =====
-  {
-    slug: "combine-scanned-documents-into-one-pdf",
-    title: "How to Combine Scanned Documents into One PDF - Complete Guide",
-    excerpt: "Learn how to merge multiple scanned pages into a single PDF document. Perfect for organizing receipts, contracts, and multi-page documents.",
-    date: "2026-01-13",
-    category: "tutorial",
-    relatedTool: "/merge-pdf",
-    readingTime: 6,
-    keywords: ["combine scanned documents pdf", "merge scanned pages", "scan to pdf", "combine scans into one pdf", "merge scanned files", "scanned document merger"],
-    content: `
+**Post FAQs:**
+- Q: Do I need to install an Android app?
+  A: No! Convertify works directly in your phone's browser without any app installation.
+- Q: Is there a file limit on Android?
+  A: No limits! Merge as many PDFs as you want, regardless of file size.
+- Q: Which Android browser works best?
+  A: Chrome offers the best experience, but Samsung Internet, Firefox, and others work perfectly too.
+
+---
+
+### Blog Post: How to Combine Scanned Documents into One PDF - Complete Guide
+**Slug:** combine-scanned-documents-into-one-pdf
+**Target Keywords:** combine scanned documents pdf, merge scanned pages, scan to pdf, combine scans into one pdf, merge scanned files, scanned document merger
+**Excerpt:** Learn how to merge multiple scanned pages into a single PDF document. Perfect for organizing receipts, contracts, and multi-page documents.
+**Content:**
+
 ## Why Combine Scanned Documents?
 
 Scanning documents is essential in today's digital world, but dealing with multiple separate files can be frustrating. Whether you're scanning receipts, contracts, invoices, or multi-page forms, combining them into a single PDF makes organization and sharing much easier.
@@ -2529,26 +2670,25 @@ Ready to organize your scanned documents into one professional PDF?
 3. **Need to reduce size?** Use [Compress PDF](/compress-pdf) after merging
 
 All tools are free, unlimited, and work on any device. No software installation required!
-`,
-    faqs: [
-      { question: "What's the best way to scan multiple pages?", answer: "Use a document feeder scanner for speed, or a phone scanning app like Notes (iPhone) or Google Drive (Android) for convenience. Then combine all scans using Convertify." },
-      { question: "Can I combine scans from my phone and scanner?", answer: "Yes! Convertify merges PDFs from any source - phone scans, flatbed scanners, or document feeders all work together." },
-      { question: "How do I reduce the file size of scanned PDFs?", answer: "After combining, use Convertify's Compress PDF tool to reduce file size by 70-90% while maintaining readability." },
-      { question: "Will the quality decrease when combining scanned documents?", answer: "No! Merging PDFs preserves the original scan quality. Each page maintains its resolution and clarity." },
-    ]
-  },
 
-  // ===== POST 14 =====
-  {
-    slug: "compress-pdf-for-whatsapp-sharing",
-    title: "How to Compress PDF for WhatsApp Sharing - Quick Guide",
-    excerpt: "WhatsApp won't send your PDF? Learn how to compress PDF files to under 16MB for easy WhatsApp sharing on iPhone and Android.",
-    date: "2026-01-14",
-    category: "how-to",
-    relatedTool: "/compress-pdf",
-    readingTime: 5,
-    keywords: ["compress pdf whatsapp", "reduce pdf size whatsapp", "pdf too large whatsapp", "whatsapp pdf size limit", "send pdf on whatsapp"],
-    content: `
+**Post FAQs:**
+- Q: What's the best way to scan multiple pages?
+  A: Use a document feeder scanner for speed, or a phone scanning app like Notes (iPhone) or Google Drive (Android) for convenience. Then combine all scans using Convertify.
+- Q: Can I combine scans from my phone and scanner?
+  A: Yes! Convertify merges PDFs from any source - phone scans, flatbed scanners, or document feeders all work together.
+- Q: How do I reduce the file size of scanned PDFs?
+  A: After combining, use Convertify's Compress PDF tool to reduce file size by 70-90% while maintaining readability.
+- Q: Will the quality decrease when combining scanned documents?
+  A: No! Merging PDFs preserves the original scan quality. Each page maintains its resolution and clarity.
+
+---
+
+### Blog Post: How to Compress PDF for WhatsApp Sharing - Quick Guide
+**Slug:** compress-pdf-for-whatsapp-sharing
+**Target Keywords:** compress pdf whatsapp, reduce pdf size whatsapp, pdf too large whatsapp, whatsapp pdf size limit, send pdf on whatsapp
+**Excerpt:** WhatsApp won't send your PDF? Learn how to compress PDF files to under 16MB for easy WhatsApp sharing on iPhone and Android.
+**Content:**
+
 ## WhatsApp PDF Size Limit Problem
 
 You've got an important PDF to share on WhatsApp, but when you try to send it, you get an error: "File too large." This is frustrating, especially when you need to share documents quickly with colleagues, clients, or family.
@@ -2746,27 +2886,27 @@ Don't let file size limits stop you from sharing important documents. [Compress 
 4. Download and share on WhatsApp
 
 It's that simple. No software, no sign-up, completely free!
-`,
-    faqs: [
-      { question: "What is the WhatsApp PDF size limit?", answer: "WhatsApp allows document files up to 16 MB. For faster sending and better compatibility, we recommend keeping PDFs under 10 MB." },
-      { question: "How much can I compress a PDF for WhatsApp?", answer: "Convertify can reduce PDF file size by 70-90% depending on content type. Image-heavy documents compress the most." },
-      { question: "Will compressing affect PDF quality?", answer: "Text remains perfectly sharp. Images may show slight quality reduction at high compression, but it's barely noticeable on phone screens." },
-      { question: "Can I compress PDFs on my phone for WhatsApp?", answer: "Yes! Convertify works on all devices including iPhone and Android. Just open your browser and visit convertify.work/compress-pdf." },
-      { question: "Is there a limit to how many PDFs I can compress?", answer: "No limits! Compress unlimited PDFs for free with no watermarks or sign-up required." },
-    ]
-  },
 
-  // ===== POST 15 =====
-  {
-    slug: "reduce-pdf-size-without-losing-quality",
-    title: "How to Reduce PDF Size Without Losing Quality - Ultimate Guide",
-    excerpt: "Learn how to reduce PDF file size while maintaining quality. Compress PDF files losslessly with our free online tool. No quality loss, 100% free compression.",
-    date: "2026-01-15",
-    category: "how-to",
-    relatedTool: "/compress-pdf",
-    readingTime: 6,
-    keywords: ["reduce pdf size quality", "compress pdf lossless", "shrink pdf no quality loss", "reduce pdf file size", "compress pdf without losing quality", "lossless pdf compression"],
-    content: `
+**Post FAQs:**
+- Q: What is the WhatsApp PDF size limit?
+  A: WhatsApp allows document files up to 16 MB. For faster sending and better compatibility, we recommend keeping PDFs under 10 MB.
+- Q: How much can I compress a PDF for WhatsApp?
+  A: Convertify can reduce PDF file size by 70-90% depending on content type. Image-heavy documents compress the most.
+- Q: Will compressing affect PDF quality?
+  A: Text remains perfectly sharp. Images may show slight quality reduction at high compression, but it's barely noticeable on phone screens.
+- Q: Can I compress PDFs on my phone for WhatsApp?
+  A: Yes! Convertify works on all devices including iPhone and Android. Just open your browser and visit convertify.work/compress-pdf.
+- Q: Is there a limit to how many PDFs I can compress?
+  A: No limits! Compress unlimited PDFs for free with no watermarks or sign-up required.
+
+---
+
+### Blog Post: How to Reduce PDF Size Without Losing Quality - Ultimate Guide
+**Slug:** reduce-pdf-size-without-losing-quality
+**Target Keywords:** reduce pdf size quality, compress pdf lossless, shrink pdf no quality loss, reduce pdf file size, compress pdf without losing quality, lossless pdf compression
+**Excerpt:** Learn how to reduce PDF file size while maintaining quality. Compress PDF files losslessly with our free online tool. No quality loss, 100% free compression.
+**Content:**
+
 ## How to Reduce PDF Size Without Losing Quality - Ultimate Guide
 
 Need to **reduce PDF size without losing quality**? Whether you're sending files via email, uploading documents for work, or backing up important files, large PDF sizes can be frustrating. The good news? You can **compress PDF losslessly** and shrink files without sacrificing image sharpness or text clarity.
@@ -3030,26 +3170,27 @@ Whether you need **lossless PDF compression** for professional documents or **ba
 ---
 
 **Still have questions?** Check out our complete guide on [How to Compress PDF to Under 100KB](/compress-pdf-reduce-file-size) or learn about [compressing PDFs for specific platforms](/compress-pdf-for-whatsapp-sharing).
-`,
-    faqs: [
-      { question: "Is it really possible to compress PDF without losing quality?", answer: "Yes! True lossless compression reduces file size by 20-40% by optimizing PDF structure without altering content. Our 'High Quality' mode achieves near-lossless results (minimal perceptible quality loss) with 30-50% reduction." },
-      { question: "What's the difference between lossless and lossy PDF compression?", answer: "Lossless compression removes duplicate data without changing content (20-40% reduction). Lossy compression recompresses images and can achieve 70-90% reduction but may slightly reduce image quality. Text always stays sharp." },
-      { question: "Will compressing affect PDF text quality?", answer: "No! Text remains perfectly sharp at all compression levels. Only embedded images may show slight quality reduction at high compression settings." },
-      { question: "How much can I reduce PDF size without quality loss?", answer: "True lossless: 20-40% reduction. Near-lossless (imperceptible quality loss): 30-50%. Minimal quality loss: 50-70%. Results vary based on original PDF optimization and content type." },
-      { question: "Should I compress PDFs for printing?", answer: "Use 'High Quality' or 'Balanced' modes for documents you'll print. These maintain excellent print quality. Avoid 'Maximum' compression for printed materials." },
-    ]
-  },
-  // ===== POST 15 (ADDED TO FIX 404) =====
-  {
-    slug: "merge-pdf-android-phone-free",
-    title: "How to Merge PDF Files on Android Phone for Free",
-    excerpt: "Combine PDF files directly on your Android device without installing any apps. Free, fast, and secure online merger.",
-    date: "2026-01-20",
-    category: "tutorial",
-    relatedTool: "/merge-pdf",
-    readingTime: 4,
-    keywords: ["merge pdf android", "combine pdf android", "pdf merger android free", "android pdf joiner"],
-    content: `
+
+**Post FAQs:**
+- Q: Is it really possible to compress PDF without losing quality?
+  A: Yes! True lossless compression reduces file size by 20-40% by optimizing PDF structure without altering content. Our 'High Quality' mode achieves near-lossless results (minimal perceptible quality loss) with 30-50% reduction.
+- Q: What's the difference between lossless and lossy PDF compression?
+  A: Lossless compression removes duplicate data without changing content (20-40% reduction). Lossy compression recompresses images and can achieve 70-90% reduction but may slightly reduce image quality. Text always stays sharp.
+- Q: Will compressing affect PDF text quality?
+  A: No! Text remains perfectly sharp at all compression levels. Only embedded images may show slight quality reduction at high compression settings.
+- Q: How much can I reduce PDF size without quality loss?
+  A: True lossless: 20-40% reduction. Near-lossless (imperceptible quality loss): 30-50%. Minimal quality loss: 50-70%. Results vary based on original PDF optimization and content type.
+- Q: Should I compress PDFs for printing?
+  A: Use 'High Quality' or 'Balanced' modes for documents you'll print. These maintain excellent print quality. Avoid 'Maximum' compression for printed materials.
+
+---
+
+### Blog Post: How to Merge PDF Files on Android Phone for Free
+**Slug:** merge-pdf-android-phone-free
+**Target Keywords:** merge pdf android, combine pdf android, pdf merger android free, android pdf joiner
+**Excerpt:** Combine PDF files directly on your Android device without installing any apps. Free, fast, and secure online merger.
+**Content:**
+
 ## Merging PDFs on Android
 Android phones are powerful, but they don't have a built-in PDF merger. You don't need to download an app that takes up space.
 
@@ -3058,278 +3199,53 @@ Android phones are powerful, but they don't have a built-in PDF merger. You don'
 2. Go to [convertify.work/merge-pdf](/merge-pdf)
 3. Tap Upload and select files
 4. Tap Merge and Download
-`,
-  },
-  {
-    slug: "combine-scanned-documents-into-one-pdf",
-    title: "How to Combine Scanned Documents into One PDF",
-    excerpt: "Scanned multiple pages as separate files? Learn how to combine them into a single professional PDF document.",
-    date: "2026-01-21",
-    category: "how-to",
-    relatedTool: "/merge-pdf",
-    readingTime: 4,
-    keywords: ["combine scanned pdfs", "merge scanned documents", "scan to single pdf"],
-    content: `
+
+
+---
+
+### Blog Post: How to Combine Scanned Documents into One PDF
+**Slug:** combine-scanned-documents-into-one-pdf
+**Target Keywords:** combine scanned pdfs, merge scanned documents, scan to single pdf
+**Excerpt:** Scanned multiple pages as separate files? Learn how to combine them into a single professional PDF document.
+**Content:**
+
 ## Scanning Workflow
 Often scanners save each page as a separate PDF or JPG. nere is how to fix it.
 
 ## Solution
 Use [Convertify Merge PDF](/merge-pdf) to combine all your mockups or scans into one file.
-`,
-  },
-  {
-    slug: "compress-pdf-for-whatsapp-sharing",
-    title: "Compress PDF for WhatsApp Sharing - Easy Guide",
-    excerpt: "Detailed guide on compressing PDFs specifically for WhatsApp's 16MB limit.",
-    date: "2026-01-22",
-    category: "how-to",
-    relatedTool: "/compress-pdf",
-    readingTime: 3,
-    keywords: ["whatsapp pdf limit", "compress pdf whatsapp", "send large pdf whatsapp"],
-    content: `
+
+
+---
+
+### Blog Post: Compress PDF for WhatsApp Sharing - Easy Guide
+**Slug:** compress-pdf-for-whatsapp-sharing
+**Target Keywords:** whatsapp pdf limit, compress pdf whatsapp, send large pdf whatsapp
+**Excerpt:** Detailed guide on compressing PDFs specifically for WhatsApp's 16MB limit.
+**Content:**
+
 ## WhatsApp Limits
 WhatsApp has a 16MB limit.
 
 ## Compress Now
 Use [Convertify](/compress-pdf) to shrink your file.
-`,
-  },
-  {
-    slug: "reduce-pdf-size-without-losing-quality",
-    title: "Reduce PDF Size Without Losing Quality - Best Practices",
-    excerpt: "How to balance file size and quality when compressing PDF documents.",
-    date: "2026-01-22",
-    category: "tips",
-    relatedTool: "/compress-pdf",
-    readingTime: 5,
-    keywords: ["reduce pdf size", "compress pdf quality", "lossless compression"],
-    content: `
+
+
+---
+
+### Blog Post: Reduce PDF Size Without Losing Quality - Best Practices
+**Slug:** reduce-pdf-size-without-losing-quality
+**Target Keywords:** reduce pdf size, compress pdf quality, lossless compression
+**Excerpt:** How to balance file size and quality when compressing PDF documents.
+**Content:**
+
 ## Quality vs Size
 It is a tradeoff, but our smart algorithms minimize quality loss.
 
 ## Tips
 - Use Medium compression for most docs.
 - Use High compression for huge files.
-`,
-  },
-  {
-    slug: "how-to-electronically-sign-pdf-free",
-    title: "How to Electronically Sign a PDF for Free (No Installation)",
-    excerpt: "Sign PDF documents legally and securely without a printer. Use our free e-signature tool to sign contracts, forms, and agreements instantly.",
-    date: "2026-01-24",
-    category: "tutorial",
-    relatedTool: "/sign-pdf",
-    readingTime: 4,
-    keywords: ["sign pdf free", "electronic signature pdf", "esign pdf online", "sign document online free"],
-    content: `
-## The End of "Print, Sign, Scan"
 
-Remember the old days? You receive a contract, you have to print it, sign it with a pen, scan it back to your computer, and email it. What a waste of paper and time.
 
-With electronic signatures (e-signatures), you can sign documents in seconds, legally and securely.
+---
 
-## How to Sign a PDF Online Free
-
-Using [Convertify's Sign PDF tool](/sign-pdf), you can add your signature instantly:
-
-1. **Upload your PDF** to [convertify.work/sign-pdf](/sign-pdf)
-2. **Create your signature**:
-   - **Draw**: Use your mouse or trackpad (or finger on mobile)
-   - **Type**: Type your name and choose a handwriting font
-   - **Upload**: Upload a photo of your real signature
-3. **Place the signature** exactly where you need it on the page
-4. **Resize and position** until it looks perfect
-5. **Download** your signed document
-
-## Is it Legally Binding?
-
-Yes, in most countries (including the US via the ESIGN Act and the EU via eIDAS), simple electronic signatures are legally binding for most business transactions, contracts, and agreements.
-
-**Why use Convertify Sign?**
-* ✅ 100% Free
-* ✅ No account needed
-* ✅ Works on iPhone/Android
-* ✅ Secure (files deleted after processing)
-
-## Tips for a Professional E-Signature
-* Use the **Draw** feature on a tablet or phone for the most realistic look.
-* If clicking and dragging with a mouse, try the **Type** option for a cleaner aesthetic.
-* Use [Blue Ink] color if available to distinguish the signature from the printed text.
-
-[Sign Your PDF Now](/sign-pdf)
-`
-  },
-  {
-    slug: "how-to-make-scanned-pdf-searchable-ocr",
-    title: "How to Make a Scanned PDF Searchable to Copy Text (OCR Guide)",
-    excerpt: "Turn scanned images and non-selectable text into searchable, editable data using free OCR technology. Copy text from any PDF instantly.",
-    date: "2026-01-24",
-    category: "tutorial",
-    relatedTool: "/ocr-pdf",
-    readingTime: 5,
-    keywords: ["ocr pdf online", "make pdf searchable", "copy text from scanned pdf", "extract text from image pdf"],
-    content: `
-## The "Image-Only" PDF Problem
-
-We've all been there: You open a PDF, try to select a sentence to copy it, and... you can't. The cursor selects the entire page like a photo. This happens when a document is scanned as an image rather than text.
-
-To fix this, you need **OCR** (Optical Character Recognition).
-
-## How to use Free OCR on Convertify
-
-Our **[OCR PDF Tool](/ocr-pdf)** automatically recognizes text in your scanned documents.
-
-### Step-by-Step Guide:
-1. Go to [Convertify OCR](/ocr-pdf).
-2. Upload your scanned PDF.
-3. Select the language of the document (default is English).
-4. Click **Apply OCR**.
-5. Download your new "Searchable PDF".
-
-### What Changed?
-Your new PDF looks exactly the same, but now there is an invisible text layer over the image. You can:
-* **Ctrl+F / Cmd+F** to find specific keywords.
-* **Select and Copy** text into Word or Email.
-* **Read Aloud** using screen readers.
-
-### When to use OCR?
-* **Student Notes**: Search through hundreds of pages of scanned handouts.
-* **Legal Discovery**: Find specific names in scanned court documents.
-* **Archives**: Digitize old paper records.
-
-[Make Your PDF Searchable Now](/ocr-pdf)
-`
-  },
-  {
-    slug: "what-is-pdf-a-archiving-guide",
-    title: "What is PDF/A? The Complete Guide to Long-Term Archiving",
-    excerpt: "Why do governments and courts require PDF/A? Learn what it is, why you need it, and how to convert your files to PDF/A for free.",
-    date: "2026-01-24",
-    category: "tips",
-    relatedTool: "/pdf-to-pdfa",
-    readingTime: 4,
-    keywords: ["pdf/a format", "convert pdf to pdf/a", "pdf archiving", "pdfa online"],
-    content: `
-## What is PDF/A?
-
-If you've ever submitted a document to a court, a government agency, or a library archive, you might have been asked for a **PDF/A** file.
-
-**PDF/A** (Portable Document Format Archive) is an ISO-standard version of PDF specialized for long-term preservation.
-
-### How is it different from a normal PDF?
-A normal PDF can reference fonts installed on your computer or link to external images. If you open that PDF 20 years from now on a new computer, those fonts or links might be missing, making the document unreadable.
-
-**PDF/A forbids these.** It requires:
-* **Embedded Fonts**: All text info must be inside the file.
-* **No Encryption**: Passwords can be lost over time.
-* **No External Links**: All content must be self-contained.
-* **Color Standards**: Usage of device-independent color spaces.
-
-## How to Create a PDF/A File
-
-You don't need expensive software to ensure compliance.
-
-1. Open [Convertify PDF to PDF/A](/pdf-to-pdfa).
-2. Upload your standard PDF.
-3. Our tool automatically embeds fonts and removes non-compliant elements.
-4. Download your ISO-compliant PDF/A file.
-
-## Who needs PDF/A?
-* **Lawyers**: For court filings (e.g., PACER uses PDF/A).
-* **Universities**: For thesis and dissertation submissions.
-* **Governments**: For digital record keeping.
-
-[Convert to PDF/A for Free](/pdf-to-pdfa)
-`
-  },
-  {
-    slug: "how-to-edit-pdf-text-workaround",
-    title: "How to Edit PDF Text (Best Free Workarounds)",
-    excerpt: "Need to change text in a PDF but don't want to pay for Adobe Acrobat? Learn the best free workarounds to edit your PDF content.",
-    date: "2026-01-24",
-    category: "tutorial",
-    relatedTool: "/edit-pdf",
-    readingTime: 5,
-    keywords: ["edit pdf text free", "modify pdf text", "change text in pdf online"],
-    content: `
-## Can You Edit Text in a PDF?
-
-PDFs were designed to be **read-only**—like a digital printed page. That's why editing them is so hard. While our [PDF Editor](/edit-pdf) lets you add *new* text and annotations, changing *existing* paragraphs usually requires expensive Pro software.
-
-**However, there is a clever workaround.**
-
-## The "Convert-Edit-Convert" Method
-
-Instead of fighting the PDF format, switch to a format meant for editing: PRO Word.
-
-### Step 1: Convert to Word
-Use our high-accuracy **[PDF to Word Tool](/pdf-to-word)**. This extracts your text, layouts, and tables into a Microsoft Word doc.
-
-### Step 2: Edit in Word
-Open the DOCX file in Word (or Google Docs). Now you have full freedom to:
-* Delete paragraphs
-* Fix typos
-* Change formatting
-* Update dates and names
-
-### Step 3: Save Back to PDF
-Once you're happy with the changes, just:
-1. File > Save As > PDF in Word, OR
-2. Use our **[Word to PDF Tool](/word-to-pdf)** to convert it back.
-
-## Result
-You have a perfectly edited PDF without paying $15/month for a subscription.
-
-## Advantages of this Method
-* **Spell Check**: Word has better spell checking than any PDF editor.
-* **Formatting**: Easier to adjust margins and fonts.
-* **Free**: Uses tools you already have.
-
-[Start by Converting to Word](/pdf-to-word)
-`
-  },
-  {
-    slug: "resume-guide-word-to-pdf",
-    title: "Professional Resume Guide: Why You Must Convert Word to PDF",
-    excerpt: "Sending a Word doc resume? Stop immediately. Learn why converting your CV to PDF helps you pass ATS systems and look more professional.",
-    date: "2026-01-24",
-    category: "tips",
-    relatedTool: "/word-to-pdf",
-    readingTime: 4,
-    keywords: ["resume pdf or word", "convert resume to pdf", "cv word to pdf", "job application pdf"],
-    content: `
-## The Golden Rule of Job Applications
-
-You've spent hours perfecting your resume in Microsoft Word. You've adjusted the margins, picked a nice font, and aligned your bullet points perfectly.
-
-Then you email the Word doc to a recruiter.
-
-**Disaster strikes.**
-The recruiter opens it on a phone or an older version of Word. Your tracking is off. Your photo moved to the bottom. Your 1-page resume is now 1.5 pages.
-
-## Why Always Send a PDF?
-
-1. **Format Lock**: PDF stands for "Portable Document Format." It freezes your layout. What you see is exactly what the hiring manager sees.
-2. **Virus Safety**: Recruiters are wary of Word docs because they can contain macros/viruses. PDFs are safer.
-3. **Professionalism**: A PDF looks like a finished product. A Word doc looks like a draft.
-
-## Will ATS (Applicant Tracking Systems) Read It?
-
-**Yes.** Modern ATS can read text-based PDFs perfectly.
-* **Do:** Create your resume in Word, then convert to PDF.
-* **Don't:** Scan a paper resume to an image PDF (ATS can't read images).
-
-## How to Convert Quickly
-
-Don't rely on "Print to PDF" which sometimes messes up links.
-
-1. Go to [Convertify Word to PDF](/word-to-pdf).
-2. Upload your Resume.docx.
-3. Get a polished Resume.pdf instantly.
-
-**Pro Tip:** Always name your file "Firstname_Lastname_Resume.pdf" so it's easy to find!
-
-[Convert Your Resume Now](/word-to-pdf)
-`
-  }
-];

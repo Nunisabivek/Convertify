@@ -3,8 +3,8 @@
 
 export const toolSeoData = {
     "merge-pdf": {
-        title: "Merge PDF Files Online Free - No Watermark, Unlimited | Convertify",
-        description: "Combine multiple PDF files into one document instantly. Free online PDF merger with no watermarks, no file size limits, no sign up required. Works on all devices.",
+        title: "Merge PDF Files - Combine Multiple PDFs Online Free",
+        description: "Combine multiple PDFs into one document instantly. Drag and drop to reorder pages. Secure, free, and no file size limits or installation required.",
         keywords: ["merge pdf", "combine pdf files", "pdf joiner online free", "merge pdf files without watermark", "combine multiple pdfs into one", "pdf merger no limit", "join pdf files free"],
         h1: "Merge PDF Files Online - Fast & Free",
         faqs: [
@@ -65,8 +65,8 @@ export const toolSeoData = {
         ]
     },
     "compress-pdf": {
-        title: "Compress PDF to 100KB, 200KB, 500KB Online Free | Convertify",
-        description: "Reduce PDF file size by up to 90% without losing quality. Compress PDF to 100KB or any size for email attachments. Free online PDF compressor, no watermarks.",
+        title: "Compress PDF Online - Reduce File Size to 100KB Free",
+        description: "Shrink PDF file size by up to 90% for email. Compress to 100KB, 200KB, or custom sizes instantly without quality loss. No watermarks or file limits.",
         keywords: ["compress pdf", "reduce pdf size", "compress pdf to 100kb", "shrink pdf file", "pdf compressor online free", "reduce pdf for email", "compress pdf without quality loss"],
         h1: "Compress PDF - Reduce File Size Online",
         faqs: [
@@ -299,8 +299,8 @@ export const toolSeoData = {
         ]
     },
     "add-page-numbers": {
-        title: "Add Page Numbers to PDF Online Free | Convertify",
-        description: "Insert page numbers into your PDF document. customizable position and style. Free online tool.",
+        title: "Add Page Numbers - Number PDF Pages Instantly",
+        description: "Insert page numbers into your PDF document professionally. Customize position, font style, and starting number. Organize your files online for free.",
         keywords: ["add page numbers to pdf", "page numbering pdf", "number pdf pages"],
         h1: "Add Page Numbers - Number PDF Pages",
         faqs: [
@@ -314,8 +314,8 @@ export const toolSeoData = {
         ]
     },
     "compare-pdf": {
-        title: "Compare PDF Files Online Free | Convertify",
-        description: "Compare two PDF files side by side to find differences. Free online PDF comparison tool.",
+        title: "Compare PDF Files - Highlight Differences Side-by-Side",
+        description: "Automatically detect changes between two PDF versions. Visually highlight text and layout differences side-by-side to track revisions instantly.",
         keywords: ["compare pdf", "pdf diff", "compare two pdfs"],
         h1: "Compare PDF - Find Differences",
         faqs: [
@@ -383,8 +383,8 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-excel": {
-        title: "Convert PDF to Excel Online Free | Convertify",
-        description: "Convert PDF tables to Excel spreadsheets (XLSX). Extract data from PDF to Excel.",
+        title: "Convert PDF to Excel - Extract Editable Tables to XLSX",
+        description: "Turn PDF data into editable Excel spreadsheets instantly. Extract tables, rows, and columns accurately without retyping. Preserves original formatting.",
         keywords: ["pdf to excel", "pdf to xlsx", "convert pdf to spreadsheet"],
         h1: "PDF to Excel - Convert Tables",
         faqs: [
@@ -394,6 +394,20 @@ export const toolSeoData = {
             { name: "Upload PDF", text: "Select your PDF with tables." },
             { name: "Convert", text: "We extract the data to Excel." },
             { name: "Download", text: "Get your XLSX file." }
+        ]
+    },
+    "pdf-to-word": {
+        title: "Convert PDF to Word Online - Editable DOCX | Convertify",
+        description: "Convert PDF documents to editable Microsoft Word files (DOCX). Perfect accuracy for text, layouts, and tables.",
+        keywords: ["pdf to word", "convert pdf to docx", "edit pdf in word"],
+        h1: "PDF to Word - Convert to DOCX",
+        faqs: [
+            { question: "Is the Word file editable?", answer: "Yes, the converted DOCX file is fully editable in Microsoft Word." }
+        ],
+        howToSteps: [
+            { name: "Upload PDF", text: "Select the PDF to convert." },
+            { name: "Convert", text: "We process the document to Word format." },
+            { name: "Download", text: "Get your editable DOCX file." }
         ]
     },
     "pdf-to-pdfa": {
