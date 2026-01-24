@@ -18,13 +18,13 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Free Online PDF Tools - 35+ Tools | Merge, Edit, Convert PDF | Convertify",
+    default: "Free PDF Tools - Merge, Edit, Convert PDF | Convertify",
     template: "%s | Convertify",
   },
-  description: "Free online PDF tools to merge PDF files, compress PDF to smaller size, convert JPG to PDF, and more. No watermarks, no sign up, works on all devices. 100% secure.",
+  description: "Free online PDF tools to merge, compress, and convert PDF files. No watermarks, no sign up required. 100% secure.",
   applicationName: "Convertify",
   authors: [{ name: "Convertify Team" }],
-  keywords: ["free pdf tools online", "merge pdf files free", "compress pdf to 100kb", "jpg to pdf converter", "pdf to jpg online", "split pdf pages", "combine pdf files no watermark", "reduce pdf size for email", "convert image to pdf free"],
+  keywords: ["free pdf tools", "merge pdf", "compress pdf", "jpg to pdf", "pdf to word", "split pdf", "combine pdf", "convert pdf"],
   icons: {
     icon: [
       { url: '/icon.png', sizes: '512x512', type: 'image/png' },

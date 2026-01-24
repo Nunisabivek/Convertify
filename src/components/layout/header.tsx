@@ -23,7 +23,6 @@ export function Header() {
                     <Link href="/all-tools" className="text-sm font-medium text-muted-foreground hover:text-indigo-600 transition-colors">
                         All Tools
                     </Link>
-                    <Button>Get Started</Button>
                 </nav>
             </div>
         </header>
