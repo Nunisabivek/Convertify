@@ -20,6 +20,16 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/tools/pdf-to-jpg',
+        destination: '/pdf-to-jpg',
+        permanent: true,
+      },
+      {
+        source: '/tools/rotate-pdf',
+        destination: '/rotate-pdf',
+        permanent: true,
+      },
+      {
         source: '/tools/:slug',
         destination: '/:slug', // Redirects /tools/any-tool to /any-tool
         permanent: true,
