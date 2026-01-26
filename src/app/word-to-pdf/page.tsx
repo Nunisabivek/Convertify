@@ -1,5 +1,5 @@
-
 import { Metadata } from "next"
+import { ToolSwapper } from "@/components/tools/tool-swapper"
 import WordToPdfClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
@@ -41,6 +41,7 @@ export default function Page() {
                         Convert Microsoft Word documents to PDF while preserving formatting.
                     </p>
                 </div>
+                <ToolSwapper />
                 <WordToPdfClient />
             </section>
 

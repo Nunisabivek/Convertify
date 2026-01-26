@@ -1,5 +1,5 @@
-
 import { Metadata } from "next"
+import { ToolSwapper } from "@/components/tools/tool-swapper"
 import PngToPdfClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
@@ -35,6 +35,7 @@ export default function Page() {
                         Convert PNG images with transparency to PDF. Combine multiple PNG files into one document.
                     </p>
                 </div>
+                <ToolSwapper />
                 <PngToPdfClient />
             </section>
 

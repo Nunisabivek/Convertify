@@ -127,7 +127,12 @@ export default function JpgToPdfPage() {
             </div>
 
             {files.length === 0 ? (
-                <FileUploader onFilesSelected={handleFilesSelected} accept={{ "image/*": [".jpg", ".jpeg", ".png"] }} />
+                <FileUploader
+                    onFilesSelected={handleFilesSelected}
+                    accept={{ "image/*": [".jpg", ".jpeg", ".png"] }}
+                    fileTypeLabel="images (JPG, PNG)"
+                    iconType="image"
+                />
             ) : (
                 <div className="space-y-8">
                     <div className="bg-white rounded-2xl shadow-sm border p-6 space-y-4">
@@ -174,7 +179,12 @@ export default function JpgToPdfPage() {
                     <AdBanner variant="rectangle" />
 
                     <div className="text-center mt-4">
-                        <FileUploader onFilesSelected={handleFilesSelected} accept={{ "image/*": [".jpg", ".jpeg", ".png"] }} />
+                        <FileUploader
+                            onFilesSelected={handleFilesSelected}
+                            accept={{ "image/*": [".jpg", ".jpeg", ".png"] }}
+                            fileTypeLabel="more images"
+                            iconType="image"
+                        />
                     </div>
                 </div>
             )}

@@ -1,5 +1,5 @@
-
 import { Metadata } from "next"
+import { ToolSwapper } from "@/components/tools/tool-swapper"
 import TextToPdfClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
@@ -35,6 +35,7 @@ export default function Page() {
                         Convert plain text files to PDF documents with customizable formatting.
                     </p>
                 </div>
+                <ToolSwapper />
                 <TextToPdfClient />
             </section>
 

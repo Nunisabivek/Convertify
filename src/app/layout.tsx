@@ -18,13 +18,13 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Free PDF Tools - Merge, Edit, Convert PDF | Convertify",
+    default: "File Converter - Free Online PDF Tools & Document Converter | Convertify",
     template: "%s | Convertify",
   },
-  description: "Free online PDF tools to merge, compress, and convert PDF files. No watermarks, no sign up required. 100% secure.",
+  description: "Free online file converter and PDF tools. Convert documents, images, and merged PDFs easily. No software to install, 100% free and secure document converter.",
   applicationName: "Convertify",
   authors: [{ name: "Convertify Team" }],
-  keywords: ["free pdf tools", "merge pdf", "compress pdf", "jpg to pdf", "pdf to word", "split pdf", "combine pdf", "convert pdf"],
+  keywords: ["file converter", "document converter", "online converter", "convertify", "convertifyy", "convertify free", "free pdf tools", "merge pdf", "compress pdf", "jpg to pdf", "pdf to word", "split pdf", "combine pdf", "convert pdf"],
   icons: {
     icon: [
       { url: '/icon.png', sizes: '512x512', type: 'image/png' },
@@ -39,8 +39,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://convertify.work",
     siteName: "Convertify",
-    title: "Convertify - Free Online PDF Tools",
-    description: "Free online PDF tools - merge PDF files, compress PDF size, convert images to PDF. No watermarks, no sign up required. Works on mobile and desktop.",
+    title: "Convertify - Free Online File Converter & PDF Tools",
+    description: "Free online file converter - merge PDF files, compress PDF size, convert images to PDF. No watermarks, no sign up required. Works on mobile and desktop.",
     images: [
       {
         url: "https://convertify.work/images/og-banner.png",
@@ -52,8 +52,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Convertify - Free Online PDF Tools",
-    description: "Manage your PDF documents easily with our free online tools.",
+    title: "Convertify - Free Online File Converter & PDF Tools",
+    description: "Manage your PDF documents easily with our free online file converter tools.",
     images: ["https://convertify.work/images/og-banner.png"],
     creator: "@convertify",
   },

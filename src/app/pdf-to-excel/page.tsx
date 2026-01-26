@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import { ToolSwapper } from "@/components/tools/tool-swapper"
 import { ComingSoonTool } from "@/components/tools/coming-soon-tool"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
@@ -43,10 +44,11 @@ export default function Page() {
                         {seoData.description}
                     </p>
                 </div>
+                <ToolSwapper />
                 <ComingSoonTool />
             </section>
 
-             <HowToSchema
+            <HowToSchema
                 toolName={seoData.title}
                 description={seoData.description}
                 steps={seoData.howToSteps}

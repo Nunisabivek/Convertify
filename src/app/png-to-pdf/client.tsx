@@ -74,7 +74,12 @@ export default function PngToPdfPage() {
                 <p className="text-slate-500 text-lg">Convert PNG images to PDF documents.</p>
             </div>
             {files.length === 0 ? (
-                <FileUploader onFilesSelected={handleFilesSelected} accept={{ "image/png": [".png"] }} />
+                <FileUploader
+                    onFilesSelected={handleFilesSelected}
+                    accept={{ "image/png": [".png"] }}
+                    fileTypeLabel="PNG images"
+                    iconType="image"
+                />
             ) : (
                 <div className="space-y-8">
                     <div className="bg-white p-6 rounded-xl border text-center">

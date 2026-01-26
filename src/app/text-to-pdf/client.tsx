@@ -85,7 +85,13 @@ export default function TextToPdfPage() {
                 <p className="text-slate-500 text-lg">Convert plain text files (.txt) to PDF.</p>
             </div>
             {!file ? (
-                <FileUploader onFilesSelected={(f) => setFile(f[0])} multiple={false} accept={{ "text/plain": [".txt"] }} />
+                <FileUploader
+                    onFilesSelected={(f) => setFile(f[0])}
+                    multiple={false}
+                    accept={{ "text/plain": [".txt"] }}
+                    fileTypeLabel="Text files (.txt)"
+                    iconType="text"
+                />
             ) : (
                 <div className="space-y-8">
                     <div className="bg-white p-6 rounded-xl border text-center">

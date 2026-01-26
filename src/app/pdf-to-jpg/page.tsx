@@ -1,5 +1,5 @@
-
 import { Metadata } from "next"
+import { ToolSwapper } from "@/components/tools/tool-swapper"
 import PdfToJpgClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
@@ -42,6 +42,7 @@ export default function Page() {
                         Convert every page of your PDF to high-quality JPG images. Download as a ZIP file.
                     </p>
                 </div>
+                <ToolSwapper />
                 <PdfToJpgClient />
             </section>
 

@@ -102,7 +102,13 @@ export default function WordToPdfPage() {
             </div>
 
             {!file ? (
-                <FileUploader onFilesSelected={handleFilesSelected} multiple={false} accept={{ "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [".docx"] }} />
+                <FileUploader
+                    onFilesSelected={handleFilesSelected}
+                    multiple={false}
+                    accept={{ "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [".docx"] }}
+                    fileTypeLabel="Word documents (.docx)"
+                    iconType="word"
+                />
             ) : (
                 <div className="space-y-8">
                     <div className="bg-white rounded-2xl shadow-sm border p-8 flex flex-col items-center gap-6">

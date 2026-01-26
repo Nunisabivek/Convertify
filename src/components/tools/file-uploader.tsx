@@ -2,19 +2,34 @@
 
 import { useCallback } from "react"
 import { useDropzone } from "react-dropzone"
-import { Upload, File } from "lucide-react"
+import { Upload, FileText, Image, FileSpreadsheet, Presentation, FileType } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface FileUploaderProps {
     onFilesSelected: (files: File[]) => void
     accept?: Record<string, string[]>
     multiple?: boolean
+    /** Custom label for the file type, e.g., "Word documents", "JPG images" */
+    fileTypeLabel?: string
+    /** Custom icon to show. Options: "pdf", "image", "word", "excel", "powerpoint", "text" */
+    iconType?: "pdf" | "image" | "word" | "excel" | "powerpoint" | "text"
+}
+
+const ICON_MAP = {
+    pdf: FileText,
+    image: Image,
+    word: FileText,
+    excel: FileSpreadsheet,
+    powerpoint: Presentation,
+    text: FileType,
 }
 
 export function FileUploader({
     onFilesSelected,
     accept = { "application/pdf": [".pdf"] },
-    multiple = true
+    multiple = true,
+    fileTypeLabel = "PDF files",
+    iconType = "pdf"
 }: FileUploaderProps) {
     const onDrop = useCallback((acceptedFiles: File[]) => {
         const MAX_SIZE = 200 * 1024 * 1024; // 200MB
@@ -37,6 +52,8 @@ export function FileUploader({
         multiple,
     })
 
+    const IconComponent = ICON_MAP[iconType] || FileText
+
     return (
         <div
             {...getRootProps()}
@@ -48,18 +65,18 @@ export function FileUploader({
         >
             <input {...getInputProps()} />
             <div className={`p-6 rounded-full ${isDragActive ? "bg-indigo-100 text-indigo-600" : "bg-white text-slate-400 shadow-sm"}`}>
-                <Upload className="w-12 h-12" />
+                <IconComponent className="w-12 h-12" />
             </div>
             <div className="space-y-2">
                 <h3 className="text-2xl font-bold text-slate-700">
-                    {isDragActive ? "Drop files here" : "Select PDF files"}
+                    {isDragActive ? "Drop files here" : `Drop your ${fileTypeLabel} here`}
                 </h3>
                 <p className="text-slate-500 text-lg">
-                    or drag and drop them here
+                    or click to browse
                 </p>
             </div>
             <Button size="xl" className="text-lg px-8 py-6 h-auto mt-4 rounded-xl">
-                Select Files
+                Select {fileTypeLabel}
             </Button>
         </div>
     )

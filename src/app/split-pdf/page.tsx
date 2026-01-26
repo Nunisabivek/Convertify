@@ -45,7 +45,7 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Extract specific pages from your PDF or split it into multiple files. Fast, free, and secure.
+                        Extract specific pages from your PDF or split it into multiple files. Select individual pages, enter a range, or split all pages. Fast, free, and secure.
                     </p>
                 </div>
                 <SplitPdfClient />

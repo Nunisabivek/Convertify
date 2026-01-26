@@ -25,7 +25,8 @@ import {
   FileOutput,
   FileInput,
   WandSparkles,
-  ScanLine
+  ScanLine,
+  CheckCircle2
 } from "lucide-react";
 import { AdBanner } from "@/components/ads/banner";
 import { blogPosts } from "@/lib/blog-data";
@@ -296,7 +297,7 @@ export default function Home() {
       <section className="w-full pt-20 pb-12 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-100/50 via-slate-50 to-white text-center px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 drop-shadow-sm">
-          Every PDF Tool <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">You Need</span>
+          Every File Converter <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">& PDF Tool</span>
         </h1>
         <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-8 leading-relaxed">
           Simple, fast, and secure tools to manage your documents. <br className="hidden md:inline" />
@@ -426,6 +427,53 @@ export default function Home() {
               <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-xl font-bold border-2 border-indigo-600 mb-4 shadow-sm">3</div>
               <h4 className="text-xl font-semibold mb-2">Download</h4>
               <p className="text-slate-500">Get your processed file instantly.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Convertify / Pricing FAQ Section */}
+      <section className="w-full bg-white py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Why Choose Convertify?</h2>
+            <p className="text-lg text-slate-600">The best things in life are free, and so are our tools.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-16">
+            <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100">
+              <h3 className="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">
+                <Lock className="w-5 h-5 text-indigo-600" /> Secure & Private
+              </h3>
+              <p className="text-slate-600">
+                Your files are processed securely. We don't store your documents—they are automatically deleted from our servers after processing.
+              </p>
+            </div>
+            <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100">
+              <h3 className="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-indigo-600" /> 100% Free Forever
+              </h3>
+              <p className="text-slate-600">
+                No hidden fees, no subscriptions, and no credit card required. Use all our premium features completely free of charge.
+              </p>
+            </div>
+          </div>
+
+          <div className="border-t border-slate-200 pt-12">
+            <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-semibold text-lg text-slate-800 mb-2">Is Convertify really free?</h4>
+                <p className="text-slate-600">Yes! Convertify is completely free to use. You can merge, split, compress, and convert as many files as you want without paying a dime.</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-lg text-slate-800 mb-2">Do I need to sign up?</h4>
+                <p className="text-slate-600">No account is needed. You can start using our tools instantly without any registration or login.</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-lg text-slate-800 mb-2">Is there a file size limit?</h4>
+                <p className="text-slate-600">We support large files, but for optimal performance, we recommend keeping individual files under reasonable limits (e.g., 100MB) depending on your internet connection.</p>
+              </div>
             </div>
           </div>
         </div>

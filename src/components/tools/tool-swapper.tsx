@@ -1,35 +1,117 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRightLeft } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { ArrowLeftRight, Sparkles } from "lucide-react"
 import { usePathname } from "next/navigation"
 
-const SWAP_PAIRS: Record<string, { target: string, label: string }> = {
-    // PDF <-> Image
-    "pdf-to-jpg": { target: "jpg-to-pdf", label: "Swap to JPG to PDF" },
-    "jpg-to-pdf": { target: "pdf-to-jpg", label: "Swap to PDF to JPG" },
+interface SwapPair {
+    target: string
+    fromFormat: string
+    toFormat: string
+    fromColor: string
+    toColor: string
+}
+
+const SWAP_PAIRS: Record<string, SwapPair> = {
+    // PDF <-> Image (JPG)
+    "pdf-to-jpg": {
+        target: "jpg-to-pdf",
+        fromFormat: "JPG",
+        toFormat: "PDF",
+        fromColor: "from-amber-500 to-orange-500",
+        toColor: "from-red-500 to-rose-500"
+    },
+    "jpg-to-pdf": {
+        target: "pdf-to-jpg",
+        fromFormat: "PDF",
+        toFormat: "JPG",
+        fromColor: "from-red-500 to-rose-500",
+        toColor: "from-amber-500 to-orange-500"
+    },
+
+    // PDF <-> Image (PNG)
+    "pdf-to-png": {
+        target: "png-to-pdf",
+        fromFormat: "PNG",
+        toFormat: "PDF",
+        fromColor: "from-emerald-500 to-teal-500",
+        toColor: "from-red-500 to-rose-500"
+    },
+    "png-to-pdf": {
+        target: "pdf-to-png",
+        fromFormat: "PDF",
+        toFormat: "PNG",
+        fromColor: "from-red-500 to-rose-500",
+        toColor: "from-emerald-500 to-teal-500"
+    },
 
     // PDF <-> Word
-    "pdf-to-word": { target: "word-to-pdf", label: "Swap to Word to PDF" },
-    "word-to-pdf": { target: "pdf-to-word", label: "Swap to PDF to Word" },
+    "pdf-to-word": {
+        target: "word-to-pdf",
+        fromFormat: "Word",
+        toFormat: "PDF",
+        fromColor: "from-blue-500 to-indigo-500",
+        toColor: "from-red-500 to-rose-500"
+    },
+    "word-to-pdf": {
+        target: "pdf-to-word",
+        fromFormat: "PDF",
+        toFormat: "Word",
+        fromColor: "from-red-500 to-rose-500",
+        toColor: "from-blue-500 to-indigo-500"
+    },
 
     // PDF <-> Excel
-    "pdf-to-excel": { target: "excel-to-pdf", label: "Swap to Excel to PDF" },
-    "excel-to-pdf": { target: "pdf-to-excel", label: "Swap to PDF to Excel" },
+    "pdf-to-excel": {
+        target: "excel-to-pdf",
+        fromFormat: "Excel",
+        toFormat: "PDF",
+        fromColor: "from-green-500 to-emerald-500",
+        toColor: "from-red-500 to-rose-500"
+    },
+    "excel-to-pdf": {
+        target: "pdf-to-excel",
+        fromFormat: "PDF",
+        toFormat: "Excel",
+        fromColor: "from-red-500 to-rose-500",
+        toColor: "from-green-500 to-emerald-500"
+    },
 
     // PDF <-> PowerPoint
-    "pdf-to-powerpoint": { target: "powerpoint-to-pdf", label: "Swap to PPT to PDF" },
-    "powerpoint-to-pdf": { target: "pdf-to-powerpoint", label: "Swap to PDF to PPT" },
+    "pdf-to-powerpoint": {
+        target: "powerpoint-to-pdf",
+        fromFormat: "PPT",
+        toFormat: "PDF",
+        fromColor: "from-orange-500 to-red-500",
+        toColor: "from-red-500 to-rose-500"
+    },
+    "powerpoint-to-pdf": {
+        target: "pdf-to-powerpoint",
+        fromFormat: "PDF",
+        toFormat: "PPT",
+        fromColor: "from-red-500 to-rose-500",
+        toColor: "from-orange-500 to-red-500"
+    },
 
     // PDF <-> Text
-    "pdf-to-text": { target: "text-to-pdf", label: "Swap to Text to PDF" },
-    "text-to-pdf": { target: "pdf-to-text", label: "Swap to PDF to Text" },
+    "pdf-to-text": {
+        target: "text-to-pdf",
+        fromFormat: "Text",
+        toFormat: "PDF",
+        fromColor: "from-slate-500 to-gray-600",
+        toColor: "from-red-500 to-rose-500"
+    },
+    "text-to-pdf": {
+        target: "pdf-to-text",
+        fromFormat: "PDF",
+        toFormat: "Text",
+        fromColor: "from-red-500 to-rose-500",
+        toColor: "from-slate-500 to-gray-600"
+    },
 }
 
 export function ToolSwapper() {
     const pathname = usePathname()
-    // Current tool slug is usually the pathname minus the leading slash
     const currentTool = pathname?.replace(/^\//, "")
 
     const swapInfo = currentTool ? SWAP_PAIRS[currentTool] : null
@@ -38,17 +120,47 @@ export function ToolSwapper() {
 
     return (
         <div className="flex justify-center mb-8">
-            <Button
-                variant="outline"
-                size="lg"
-                className="group rounded-full border-2 border-indigo-100 hover:border-indigo-500 hover:bg-indigo-50 text-slate-600 hover:text-indigo-600 transition-all font-medium"
-                asChild
+            <Link
+                href={`/${swapInfo.target}`}
+                className="group relative overflow-hidden"
             >
-                <Link href={`/${swapInfo.target}`}>
-                    <ArrowRightLeft className="w-5 h-5 mr-2 group-hover:rotate-180 transition-transform duration-500" />
-                    {swapInfo.label}
-                </Link>
-            </Button>
+                {/* Main Button Container */}
+                <div className="relative flex items-center gap-1 px-6 py-4 bg-white border-2 border-slate-200 rounded-2xl shadow-lg hover:shadow-xl hover:border-indigo-300 transition-all duration-300">
+
+                    {/* Sparkle decoration */}
+                    <Sparkles className="w-4 h-4 text-amber-400 absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity" />
+
+                    {/* Current format badge */}
+                    <div className={`px-4 py-2 rounded-xl bg-gradient-to-r ${swapInfo.fromColor} text-white font-bold text-sm shadow-md`}>
+                        {swapInfo.fromFormat}
+                    </div>
+
+                    {/* Swap icon with animation */}
+                    <div className="relative mx-2 p-2 rounded-full bg-indigo-100 group-hover:bg-indigo-200 transition-colors">
+                        <ArrowLeftRight className="w-5 h-5 text-indigo-600 group-hover:scale-110 group-hover:rotate-180 transition-all duration-500" />
+                    </div>
+
+                    {/* Target format badge */}
+                    <div className={`px-4 py-2 rounded-xl bg-gradient-to-r ${swapInfo.toColor} text-white font-bold text-sm shadow-md`}>
+                        {swapInfo.toFormat}
+                    </div>
+
+                    {/* Divider */}
+                    <div className="w-px h-8 bg-slate-200 mx-3"></div>
+
+                    {/* Call to action */}
+                    <div className="text-sm">
+                        <span className="text-slate-500">Wrong direction?</span>
+                        <span className="ml-1 font-bold text-indigo-600 group-hover:text-indigo-700">Swap →</span>
+                    </div>
+                </div>
+
+                {/* Hover glow effect */}
+                <div className="absolute inset-0 -z-10 bg-gradient-to-r from-indigo-500/20 to-violet-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            </Link>
         </div>
     )
 }
+
+// Export the pairs for use in other components/SEO
+export { SWAP_PAIRS }

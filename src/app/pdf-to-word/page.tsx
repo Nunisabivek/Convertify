@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import { ToolSwapper } from "@/components/tools/tool-swapper"
 import PdfToWordClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
@@ -64,6 +65,7 @@ export default function Page() {
                         Convert your PDF documents to editable Word files (DOCX) for free. Perfect for editing contracts, reports, and documents.
                     </p>
                 </div>
+                <ToolSwapper />
                 <PdfToWordClient />
             </section>
 

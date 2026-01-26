@@ -3,9 +3,9 @@
 
 export const toolSeoData = {
     "merge-pdf": {
-        title: "Merge PDF Files - Combine Multiple PDFs Online Free",
-        description: "Combine multiple PDFs into one document instantly. Drag and drop to reorder pages. Secure, free, and no file size limits or installation required.",
-        keywords: ["merge pdf", "combine pdf files", "pdf joiner online free", "merge pdf files without watermark", "combine multiple pdfs into one", "pdf merger no limit", "join pdf files free"],
+        title: "Merge PDF Files - Combine Multiple PDFs Online (Free & Fast)",
+        description: "Combine multiple PDF files into one document instantly (100% Free). Drag and drop to reorder pages. No watermarks, no file limits, and no installation required.",
+        keywords: ["merge pdf", "combine pdf files", "pdf joiner online free", "merge pdf files without watermark", "combine multiple pdfs into one", "pdf merger no limit", "join pdf files free", "combine pdfs", "merge documents"],
         h1: "Merge PDF Files Online - Fast & Free",
         faqs: [
             {
@@ -36,9 +36,9 @@ export const toolSeoData = {
         ]
     },
     "split-pdf": {
-        title: "Split PDF Online Free - Extract Pages from PDF | Convertify",
-        description: "Split PDF files by page range or extract specific pages. Free online PDF splitter with no watermarks. Separate one PDF into multiple files instantly.",
-        keywords: ["split pdf", "extract pdf pages", "separate pdf pages", "pdf splitter online free", "split pdf by page number", "extract pages from pdf", "pdf page separator"],
+        title: "Split PDF Online - Extract Pages & Separate Files Free",
+        description: "Split PDF files by page range or extract specific pages instantly. Free online PDF splitter/separator with no watermarks. Separate one PDF into multiple files.",
+        keywords: ["split pdf", "extract pdf pages", "separate pdf pages", "pdf splitter online free", "split pdf by page number", "extract pages from pdf", "pdf page separator", "save one page of pdf", "cut pdf pages", "remove pages from pdf"],
         h1: "Split PDF - Extract Pages Online Free",
         faqs: [
             {
@@ -65,9 +65,9 @@ export const toolSeoData = {
         ]
     },
     "compress-pdf": {
-        title: "Compress PDF Online - Reduce File Size to 100KB Free",
-        description: "Shrink PDF file size by up to 90% for email. Compress to 100KB, 200KB, or custom sizes instantly without quality loss. No watermarks or file limits.",
-        keywords: ["compress pdf", "reduce pdf size", "compress pdf to 100kb", "shrink pdf file", "pdf compressor online free", "reduce pdf for email", "compress pdf without quality loss"],
+        title: "Compress PDF Online - Reduce File Size to 100KB (Free)",
+        description: "Shrink PDF file size by up to 90% online. Compress to 100KB, 200KB, 500KB or custom sizes for email attachments. Fast, free, and no quality loss.",
+        keywords: ["compress pdf", "reduce pdf size", "compress pdf to 100kb", "shrink pdf file", "pdf compressor online free", "reduce pdf for email", "compress pdf without quality loss", "resize pdf", "make pdf smaller", "pdf size reducer"],
         h1: "Compress PDF - Reduce File Size Online",
         faqs: [
             {
@@ -94,9 +94,9 @@ export const toolSeoData = {
         ]
     },
     "jpg-to-pdf": {
-        title: "Convert JPG to PDF Online Free - Multiple Images to One PDF | Convertify",
-        description: "Convert JPG, JPEG, PNG images to PDF instantly. Combine multiple photos into one PDF document. Free online image to PDF converter with no watermarks.",
-        keywords: ["jpg to pdf", "convert jpg to pdf", "image to pdf", "multiple jpg to one pdf", "jpeg to pdf converter", "photos to pdf online free", "combine images to pdf"],
+        title: "Convert JPG to PDF Online - Photos to PDF (Free)",
+        description: "Convert JPG, JPEG, PNG photos to PDF instantly. Combine multiple images into one PDF document. Free image to PDF converter with no watermarks.",
+        keywords: ["jpg to pdf", "convert jpg to pdf", "image to pdf", "multiple jpg to one pdf", "jpeg to pdf converter", "photos to pdf online free", "combine images to pdf", "picture to pdf", "convert photo to pdf"],
         h1: "JPG to PDF - Convert Images to PDF Free",
         faqs: [
             {
@@ -371,7 +371,7 @@ export const toolSeoData = {
     "organize-pdf": {
         title: "Organize PDF Pages Online Free | Convertify",
         description: "Rearrange, rotate, and delete PDF pages. Organize your PDF document structure. Free online tool.",
-        keywords: ["organize pdf", "reorder pdf pages", "delete pdf pages"],
+        keywords: ["organize pdf", "reorder pdf pages", "delete pdf pages", "move pdf pages", "remove pages from pdf"],
         h1: "Organize PDF - Rearrange Pages",
         faqs: [
             { question: "Can I delete pages?", answer: "Yes, simply select and remove unwanted pages." }
@@ -397,9 +397,9 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-word": {
-        title: "Convert PDF to Word Online - Editable DOCX | Convertify",
-        description: "Convert PDF documents to editable Microsoft Word files (DOCX). Perfect accuracy for text, layouts, and tables.",
-        keywords: ["pdf to word", "convert pdf to docx", "edit pdf in word"],
+        title: "Convert PDF to Word Online - Editable DOCX (Best Quality)",
+        description: "Convert PDF documents to editable Microsoft Word files (DOCX) efficiently. Best accuracy for retaining text, layouts, and tables. 100% Free.",
+        keywords: ["pdf to word", "convert pdf to docx", "edit pdf in word", "pdf to doc converter", "convert pdf to word editable", "pdf converter word"],
         h1: "PDF to Word - Convert to DOCX",
         faqs: [
             { question: "Is the Word file editable?", answer: "Yes, the converted DOCX file is fully editable in Microsoft Word." }

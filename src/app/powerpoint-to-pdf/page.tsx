@@ -1,5 +1,5 @@
-
 import { Metadata } from "next"
+import { ToolSwapper } from "@/components/tools/tool-swapper"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -36,6 +36,8 @@ export default function Page() {
                         Convert PowerPoint presentations to PDF for easy sharing and printing.
                     </p>
                 </div>
+
+                <ToolSwapper />
 
                 {/* Placeholder Tool Area */}
                 <div className="max-w-4xl mx-auto px-4">

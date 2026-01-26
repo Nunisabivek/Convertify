@@ -89,7 +89,7 @@ Managing multiple PDF files can be a hassle. Whether you are a student submittin
 
 ## The Free Solution: Convertify Merge PDF
 
-Need to combine PDF files into a single document instantly? You don't need to download software. Use our [Free PDF Merger Tool](/merge-pdf) to join files directly in your browser, or follow the step-by-step guide below to learn how to merge PDF files on any device.
+Need to combine PDF files into a single document instantly? You don't need to download software. As a leading **free file converter**, Convertify allows you to use our [Free PDF Merger Tool](/merge-pdf) to join files directly in your browser. Whether you need a simple **online document converter** or a powerful PDF tool, follow the step-by-step guide below to learn how to merge PDF files on any device.
 
 Here's why it's better:
 
@@ -191,7 +191,7 @@ Images in JPG format are great for viewing and sharing, but when you need to sub
 
 ### Method 1: Using Convertify (Recommended)
 
-Our [JPG to PDF converter](/jpg-to-pdf) is the fastest and easiest way to convert images:
+Our [JPG to PDF converter](/jpg-to-pdf) is the fastest and easiest way to convert images. As a premier **online file converter**, we ensure your documents are processed securely:
 
 1. **Visit** [convertify.work/jpg-to-pdf](/jpg-to-pdf)
 2. **Upload** your JPG, JPEG, or PNG images (select multiple!)
@@ -205,6 +205,8 @@ Our [JPG to PDF converter](/jpg-to-pdf) is the fastest and easiest way to conver
 * ✅ No file size limits
 * ✅ Works on all devices including phones
 * ✅ No watermarks ever
+
+**💡 Pro Tip:** Need to convert the other way? Use the **Swap** button on the tool page to quickly switch to [PDF to JPG](/pdf-to-jpg) conversion!
 
 ## Converting on Different Devices
 
@@ -289,14 +291,18 @@ Go to [convertify.work/compress-pdf](/compress-pdf)
 ### Step 2: Upload Your PDF
 Click upload or drag your PDF into the upload area.
 
-### Step 3: Choose Compression Level
-Select your preferred compression:
-* **High Compression** - Smallest file size
-* **Medium Compression** - Balanced (recommended)
-* **Low Compression** - Best quality retention
+### Step 3: Choose Your Target Size
+**NEW!** Our tool now features one-click preset buttons for common sizes:
+* **50 KB** - Perfect for very strict limits
+* **100 KB** - Ideal for government forms and applications
+* **200 KB** - Great for email attachments
+* **500 KB** - Balanced quality and size
+* **1 MB, 2 MB, 5 MB, 10 MB** - For larger documents
+
+You can also enter a **custom size** and toggle between **KB or MB** units!
 
 ### Step 4: Download
-Your compressed PDF is ready! Check the file size - you'll be amazed.
+Your compressed PDF is ready! The tool shows you exactly how much you saved.
 
 ## Compression Results Examples
 
@@ -379,13 +385,23 @@ Sometimes you don't need an entire PDF document - you just need a few specific p
 
 ### Using Convertify Split PDF Tool
 
-Our [PDF Splitter](/split-pdf) makes it easy to extract exactly the pages you need:
+Our [PDF Splitter](/split-pdf) makes it easy to extract exactly the pages you need with three powerful modes:
 
+**Mode 1: Extract Pages (Visual Selector)**
+Click on individual page numbers to select exactly which pages you want. Perfect for picking specific pages from a document.
+
+**Mode 2: Page Range**
+Enter page ranges like "1-5, 8, 10-15" for quick selection. Great when you know exactly which pages you need.
+
+**Mode 3: Split All**
+Automatically split every page into its own separate PDF file. Ideal for breaking down entire documents.
+
+### Step-by-Step:
 1. **Visit** [convertify.work/split-pdf](/split-pdf)
 2. **Upload** your PDF file
-3. **Select pages** you want to extract
-4. **Click Split** to separate
-5. **Download** your extracted pages
+3. **Choose your mode** (Extract, Range, or Split All)
+4. **Select pages** or enter page range
+5. **Download** your extracted PDF
 
 ### Extracting Specific Pages
 
@@ -524,6 +540,8 @@ Need PNG instead of JPG? We also offer [PDF to PNG conversion](/pdf-to-png) for:
 * Images with transparency
 * Higher quality graphics
 * Lossless compression
+
+**💡 Pro Tip:** Need to convert images TO PDF instead? Use the **Swap** button on the tool page to quickly switch to [JPG to PDF](/jpg-to-pdf) conversion!
 
 ## Frequently Asked Questions
 
@@ -833,6 +851,8 @@ No! Convertify works directly in Safari, no app required.
 **Q: Will it work with Photos from iCloud?**
 Yes, select photos from your library and they'll be uploaded for conversion.
 
+**💡 Pro Tip:** Need to turn PDF pages back into images? Use the **Swap** button on the tool page to instantly switch to the [PDF to JPG converter](/pdf-to-jpg)!
+
 ## Convert Your iPhone Photos Now
 
 Ready to turn your photos into a PDF? [Open the JPG to PDF tool](/jpg-to-pdf) on your iPhone and start converting!
@@ -896,6 +916,8 @@ In 2025, you don't need expensive software like Adobe Acrobat to work with PDFs.
 * Supports all image formats
 * Maintains image quality
 
+**💡 Pro Tip:** Need to go the other way? Use the **Swap** button to quickly switch to [PDF to JPG](/pdf-to-jpg)!
+
 ## 5. PDF to JPG - Page to Image
 
 **What it does:** Converts PDF pages to image files.
@@ -904,6 +926,8 @@ In 2025, you don't need expensive software like Adobe Acrobat to work with PDFs.
 * High-resolution output
 * Batch conversion
 * ZIP download
+
+**💡 Pro Tip:** Need to convert images back to PDF? Use the **Swap** button to assist you to switch to [JPG to PDF](/jpg-to-pdf)!
 
 ## 6. Word to PDF
 
@@ -914,6 +938,8 @@ In 2025, you don't need expensive software like Adobe Acrobat to work with PDFs.
 * Supports DOC and DOCX
 * Instant conversion
 
+**💡 Pro Tip:** Need to edit a PDF? Use the **Swap** button to switch to [PDF to Word](/pdf-to-word) and make it editable!
+
 ## 7. PDF to Text
 
 **What it does:** Extracts text content from PDFs.
@@ -922,6 +948,8 @@ In 2025, you don't need expensive software like Adobe Acrobat to work with PDFs.
 * Clean text extraction
 * Preserves paragraphs
 * Easy copy/paste
+
+**💡 Pro Tip:** Have text file you want to protect? Use the **Swap** button to switch to [Text to PDF](/text-to-pdf)!
 
 ## 8. PNG to PDF
 
@@ -932,6 +960,8 @@ In 2025, you don't need expensive software like Adobe Acrobat to work with PDFs.
 * Multiple images
 * High quality
 
+**💡 Pro Tip:** Need to extract PNGs from a PDF? Use the **Swap** button to switch to [PDF to PNG](/pdf-to-png)!
+
 ## 9. PDF to PNG
 
 **What it does:** Converts PDF pages to high-quality PNG images.
@@ -941,6 +971,8 @@ In 2025, you don't need expensive software like Adobe Acrobat to work with PDFs.
 * 300 DPI resolution
 * Per-page extraction
 
+**💡 Pro Tip:** Need to turn PNGs back into a PDF? Use the **Swap** button to switch to [PNG to PDF](/png-to-pdf)!
+
 ## 10. Text to PDF
 
 **What it does:** Converts plain text files to PDF documents.
@@ -949,6 +981,8 @@ In 2025, you don't need expensive software like Adobe Acrobat to work with PDFs.
 * Simple text conversion
 * Basic formatting
 * Instant output
+
+**💡 Pro Tip:** Need to extract text from a PDF? Use the **Swap** button to switch to [PDF to Text](/pdf-to-text)!
 
 ## Why Use Online Tools vs Desktop Software?
 
@@ -1527,6 +1561,8 @@ PDF (Portable Document Format) is the universal standard for sharing documents. 
 * Work without Microsoft Word installed
 * Preserve fonts, images, and layout perfectly
 * Are required for most official submissions
+
+**💡 Pro Tip:** Need to edit a PDF back in Word? Use the **Swap** button on the tool page to quickly switch to our [PDF to Word converter](/pdf-to-word)!
 
 ## The Formatting Problem
 

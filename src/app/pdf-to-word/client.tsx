@@ -88,8 +88,8 @@ export default function PdfToWordClient() {
             <div
                 {...getRootProps()}
                 className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all ${isDragActive
-                        ? "border-blue-500 bg-blue-50"
-                        : "border-slate-300 hover:border-blue-400 hover:bg-slate-50"
+                    ? "border-blue-500 bg-blue-50"
+                    : "border-slate-300 hover:border-blue-400 hover:bg-slate-50"
                     }`}
             >
                 <input {...getInputProps()} />
@@ -102,9 +102,9 @@ export default function PdfToWordClient() {
                 ) : (
                     <div>
                         <p className="text-lg font-semibold text-slate-900 mb-2">
-                            Drop your PDF here or click to browse
+                            Drop your PDF file here or click to browse
                         </p>
-                        <p className="text-sm text-slate-500">Supports PDF files</p>
+                        <p className="text-sm text-slate-500">Supports PDF files only</p>
                     </div>
                 )}
             </div>
