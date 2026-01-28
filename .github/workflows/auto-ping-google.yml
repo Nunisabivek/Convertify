@@ -1,0 +1,93 @@
+name: Auto-Ping Google on Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  ping-google:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Ping Google with Sitemap
+        run: node scripts/ping-google.js
+
+      - name: Ping Bing with IndexNow
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+        run: |
+          echo "Pinging Bing IndexNow API..."
+          curl -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "host": "convertify.work",
+              "key": "'"${INDEXNOW_KEY:-4f8b7c9d1e2a3b5c6d7e8f9a0b1c2d3e}"'",
+              "keyLocation": "https://convertify.work/indexnow-key.txt",
+              "urlList": [
+                "https://convertify.work/",
+                "https://convertify.work/all-tools",
+                "https://convertify.work/blog",
+                "https://convertify.work/merge-pdf",
+                "https://convertify.work/split-pdf",
+                "https://convertify.work/compress-pdf",
+                "https://convertify.work/jpg-to-pdf",
+                "https://convertify.work/pdf-to-jpg",
+                "https://convertify.work/word-to-pdf",
+                "https://convertify.work/pdf-to-word",
+                "https://convertify.work/excel-to-pdf",
+                "https://convertify.work/pdf-to-excel",
+                "https://convertify.work/powerpoint-to-pdf",
+                "https://convertify.work/pdf-to-powerpoint",
+                "https://convertify.work/png-to-pdf",
+                "https://convertify.work/pdf-to-png",
+                "https://convertify.work/text-to-pdf",
+                "https://convertify.work/pdf-to-text",
+                "https://convertify.work/html-to-pdf",
+                "https://convertify.work/edit-pdf",
+                "https://convertify.work/sign-pdf",
+                "https://convertify.work/watermark-pdf",
+                "https://convertify.work/add-page-numbers",
+                "https://convertify.work/crop-pdf",
+                "https://convertify.work/rotate-pdf",
+                "https://convertify.work/organize-pdf",
+                "https://convertify.work/protect-pdf",
+                "https://convertify.work/unlock-pdf",
+                "https://convertify.work/redact-pdf",
+                "https://convertify.work/repair-pdf",
+                "https://convertify.work/ocr-pdf",
+                "https://convertify.work/compare-pdf",
+                "https://convertify.work/pdf-to-pdfa"
+              ]
+            }'
+          echo "✅ IndexNow ping complete"
+
+  generate-sitemap-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify Sitemap Accessibility
+        run: |
+          echo "Checking sitemap.xml accessibility..."
+          curl -s -o /dev/null -w "%{http_code}" https://convertify.work/sitemap.xml
+          echo ""
+          echo "✅ Sitemap verification complete"
+
+      - name: Log Deployment
+        run: |
+          echo "=== Deployment Summary ==="
+          echo "Time: $(date)"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "=========================="

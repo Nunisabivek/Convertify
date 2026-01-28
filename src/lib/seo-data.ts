@@ -479,5 +479,90 @@ export const toolSeoData = {
             { name: "Create Signature", text: "Draw, type, or upload your signature." },
             { name: "Place & Save", text: "Place it on the page and download." }
         ]
+    },
+    "rotate-pdf": {
+        title: "Rotate PDF Pages Online Free - Turn PDF 90°, 180° | Convertify",
+        description: "Rotate PDF pages 90°, 180°, or 270° clockwise or counterclockwise. Fix upside-down or sideways scanned documents. Free PDF rotation tool with no watermarks.",
+        keywords: ["rotate pdf", "turn pdf pages", "rotate pdf 90 degrees", "flip pdf", "rotate scanned document", "pdf page orientation", "rotate pdf online free"],
+        h1: "Rotate PDF - Fix Page Orientation Free",
+        faqs: [
+            { question: "Can I rotate specific pages only?", answer: "Yes! You can select individual pages to rotate, or rotate all pages at once. Perfect for fixing scanned documents where some pages are sideways." },
+            { question: "What rotation angles are supported?", answer: "You can rotate pages 90° clockwise, 90° counterclockwise, or 180° to flip them upside down. Multiple rotations can be applied to get any orientation." },
+            { question: "Will rotating affect the PDF quality?", answer: "No, rotation is a lossless operation. Your text, images, and formatting remain exactly the same, just oriented differently." },
+            { question: "Can I rotate a scanned document?", answer: "Absolutely! Scanned documents often come out sideways. Our tool fixes this instantly without any quality loss." }
+        ],
+        howToSteps: [
+            { name: "Upload Your PDF", text: "Select or drag and drop the PDF file you need to rotate. Works with any PDF, including scanned documents." },
+            { name: "Select Pages & Rotation", text: "Choose which pages to rotate and select the rotation angle: 90° left, 90° right, or 180° flip." },
+            { name: "Download Rotated PDF", text: "Click 'Rotate' and download your correctly oriented PDF instantly. No watermarks!" }
+        ]
+    },
+    "protect-pdf": {
+        title: "Password Protect PDF Online Free - Encrypt & Secure PDF | Convertify",
+        description: "Add password protection to your PDF files. Encrypt sensitive documents with strong security. Prevent unauthorized access, copying, and printing. Free PDF encryption tool.",
+        keywords: ["password protect pdf", "encrypt pdf", "secure pdf", "lock pdf", "pdf password", "protect pdf online free", "add password to pdf", "pdf encryption"],
+        h1: "Protect PDF - Add Password Security Free",
+        faqs: [
+            { question: "How secure is the password protection?", answer: "We use AES-256 encryption, the same standard used by banks and governments. Your PDF cannot be opened without the correct password." },
+            { question: "Can I set different permissions?", answer: "Yes! You can allow or restrict printing, copying text, editing, and form filling. Control exactly what recipients can do with your document." },
+            { question: "What if I forget the password?", answer: "For security reasons, there's no way to recover a forgotten password. We recommend keeping your passwords in a secure password manager." },
+            { question: "Can I remove the password later?", answer: "Yes, use our Unlock PDF tool if you know the password and want to remove protection from your document." }
+        ],
+        howToSteps: [
+            { name: "Upload Your PDF", text: "Select the PDF document you want to protect. Your file stays private and secure." },
+            { name: "Set Password & Permissions", text: "Enter a strong password and choose what actions to allow: printing, copying, editing." },
+            { name: "Download Protected PDF", text: "Get your encrypted PDF that can only be opened with your password." }
+        ]
+    },
+    "unlock-pdf": {
+        title: "Unlock PDF Online Free - Remove Password Protection | Convertify",
+        description: "Remove password from PDF files. Unlock protected PDFs to edit, copy, and print freely. Free PDF password remover tool (requires knowing the password).",
+        keywords: ["unlock pdf", "remove pdf password", "pdf password remover", "unprotect pdf", "decrypt pdf", "unlock pdf online free", "remove pdf security"],
+        h1: "Unlock PDF - Remove Password Protection Free",
+        faqs: [
+            { question: "Do I need to know the password?", answer: "Yes, you must know the correct password to unlock the PDF. We cannot bypass security without authorization - this protects document owners' rights." },
+            { question: "What restrictions can be removed?", answer: "Once unlocked, all restrictions are removed: you can print, copy text, edit, and fill forms freely." },
+            { question: "Is unlocking PDFs legal?", answer: "Yes, as long as you have the right to access the document. Unlocking your own protected files or files you have permission to use is completely legal." },
+            { question: "What if I forgot my password?", answer: "Unfortunately, without the password, encrypted PDFs cannot be unlocked. Try password recovery tools or contact the document creator." }
+        ],
+        howToSteps: [
+            { name: "Upload Protected PDF", text: "Select the password-protected PDF you want to unlock." },
+            { name: "Enter Password", text: "Type the correct password to authorize unlocking." },
+            { name: "Download Unlocked PDF", text: "Get your PDF with all restrictions removed, ready to edit and share freely." }
+        ]
+    },
+    "watermark-pdf": {
+        title: "Add Watermark to PDF Online Free - Text & Image Watermarks | Convertify",
+        description: "Add text or image watermarks to PDF documents. Protect your content with DRAFT, CONFIDENTIAL, or custom branding. Position and style watermarks easily. Free PDF watermark tool.",
+        keywords: ["watermark pdf", "add watermark to pdf", "pdf watermark online", "stamp pdf", "pdf branding", "confidential stamp pdf", "draft watermark pdf"],
+        h1: "Watermark PDF - Add Text & Image Stamps Free",
+        faqs: [
+            { question: "What types of watermarks can I add?", answer: "You can add text watermarks (like DRAFT, CONFIDENTIAL, or custom text) or image watermarks (like your logo or signature). Fully customizable!" },
+            { question: "Can I control watermark appearance?", answer: "Yes! Adjust font size, color, opacity, rotation angle, and position. Make it subtle or prominent based on your needs." },
+            { question: "Will watermarks appear on all pages?", answer: "By default, yes. But you can choose to watermark only specific pages if needed." },
+            { question: "Can the watermark be removed later?", answer: "Watermarks are embedded into the PDF permanently. For draft versions, you might keep the original unwatermarked copy." }
+        ],
+        howToSteps: [
+            { name: "Upload Your PDF", text: "Select the PDF document you want to watermark." },
+            { name: "Design Your Watermark", text: "Choose text or image, set position, size, opacity, and color." },
+            { name: "Download Watermarked PDF", text: "Apply the watermark and download your protected document instantly." }
+        ]
+    },
+    "html-to-pdf": {
+        title: "Convert HTML to PDF Online Free - Web Page to PDF | Convertify",
+        description: "Convert HTML files and web pages to PDF documents. Preserve styles, images, and layout. Perfect for saving web content, articles, and documentation. Free HTML to PDF converter.",
+        keywords: ["html to pdf", "convert html to pdf", "web page to pdf", "save webpage as pdf", "webpage to pdf converter", "convert website to pdf", "html to pdf online free"],
+        h1: "HTML to PDF - Convert Web Pages to PDF Free",
+        faqs: [
+            { question: "What HTML content is supported?", answer: "We support HTML files with CSS styling, images, and common web fonts. Your page will look the same in PDF as it does in a browser." },
+            { question: "Can I convert a live website?", answer: "You can paste HTML code or upload HTML files. For live websites, save the page as HTML first, then convert." },
+            { question: "Are images and CSS preserved?", answer: "Yes! Images are embedded and CSS styles are applied, so your PDF looks exactly like the original web page." },
+            { question: "What page size is used?", answer: "By default, we use A4 size, but content is automatically formatted to fit. Long pages become multi-page PDFs." }
+        ],
+        howToSteps: [
+            { name: "Add HTML Content", text: "Upload an HTML file or paste your HTML code directly into the editor." },
+            { name: "Preview & Adjust", text: "See how your HTML will look as a PDF and make any needed adjustments." },
+            { name: "Download PDF", text: "Convert and download your HTML content as a professional PDF document." }
+        ]
     }
 }

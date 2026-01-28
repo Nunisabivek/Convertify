@@ -28,6 +28,7 @@ import {
   ScanLine,
   CheckCircle2
 } from "lucide-react";
+import { InternalLinkMap } from "@/components/seo/internal-link-map";
 import { AdBanner } from "@/components/ads/banner";
 import { blogPosts } from "@/lib/blog-data";
 
@@ -431,6 +432,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Internal Linking Map - All Tools 1-Click Away (SEO Critical) */}
+      <InternalLinkMap title="All PDF Tools • Quick Access" />
 
       {/* Why Convertify / Pricing FAQ Section */}
       <section className="w-full bg-white py-16 px-4">
