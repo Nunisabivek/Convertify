@@ -123,8 +123,8 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-jpg": {
-        title: "Convert PDF to JPG Online Free - PDF Pages to Images | Convertify",
-        description: "Convert PDF pages to high-quality JPG images. Extract all pages or select specific pages. Free PDF to image converter with no watermarks.",
+        title: "PDF to JPG Converter Free Online | Convertify",
+        description: "Convert PDF to JPG images online free. Extract all pages or select specific pages as high-quality JPG. No watermarks, no limits.",
         keywords: ["pdf to jpg", "convert pdf to jpg", "pdf to image", "save pdf as jpg", "pdf to jpeg converter", "extract images from pdf", "pdf page to jpg"],
         h1: "PDF to JPG - Convert PDF to Images Free",
         faqs: [
@@ -152,8 +152,8 @@ export const toolSeoData = {
         ]
     },
     "png-to-pdf": {
-        title: "Convert PNG to PDF Online Free - Transparent Images to PDF | Convertify",
-        description: "Convert PNG images with transparency to PDF. Combine multiple PNG files into one PDF document. Free online PNG to PDF converter.",
+        title: "PNG to PDF Converter Free Online | Convertify",
+        description: "Convert PNG to PDF online free. Combine multiple PNG images into one PDF with transparency preserved. No watermarks.",
         keywords: ["png to pdf", "convert png to pdf", "transparent png to pdf", "multiple png to pdf", "png image to pdf converter"],
         h1: "PNG to PDF - Convert PNG Images to PDF",
         faqs: [
@@ -173,8 +173,8 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-png": {
-        title: "Convert PDF to PNG Online Free - High Quality Images | Convertify",
-        description: "Convert PDF pages to PNG images with transparency support. Extract high-resolution images from your PDF documents. Free PDF to PNG converter.",
+        title: "PDF to PNG Converter Free Online | Convertify",
+        description: "Convert PDF to PNG images with transparency support. Extract high-resolution PNG from your PDF documents. Free, no watermarks.",
         keywords: ["pdf to png", "convert pdf to png", "pdf to transparent png", "pdf to high quality image", "extract png from pdf"],
         h1: "PDF to PNG - Convert PDF Pages to PNG Images",
         faqs: [
@@ -194,8 +194,8 @@ export const toolSeoData = {
         ]
     },
     "word-to-pdf": {
-        title: "Convert Word to PDF Online Free - DOC DOCX to PDF | Convertify",
-        description: "Convert Microsoft Word documents (DOC, DOCX) to PDF instantly. Preserve formatting and fonts. Free Word to PDF converter online.",
+        title: "Word to PDF Converter Free Online | Convertify",
+        description: "Convert Word to PDF online free. DOC and DOCX to PDF with formatting preserved. No watermarks, no signup required.",
         keywords: ["word to pdf", "convert word to pdf", "doc to pdf", "docx to pdf converter", "microsoft word to pdf free"],
         h1: "Word to PDF - Convert DOC/DOCX to PDF",
         faqs: [
@@ -215,8 +215,8 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-text": {
-        title: "Extract Text from PDF Online Free - PDF to TXT Converter | Convertify",
-        description: "Extract all text content from PDF documents. Convert PDF to plain text file. Free online PDF text extractor, works with scanned PDFs.",
+        title: "PDF to Text Converter Free Online | Convertify",
+        description: "Extract text from PDF online free. Convert PDF to plain text (TXT). Works with scanned PDFs using OCR.",
         keywords: ["pdf to text", "extract text from pdf", "pdf to txt", "copy text from pdf", "pdf text extractor online"],
         h1: "PDF to Text - Extract Text from PDF",
         faqs: [
@@ -236,8 +236,8 @@ export const toolSeoData = {
         ]
     },
     "text-to-pdf": {
-        title: "Convert Text to PDF Online Free - TXT to PDF | Convertify",
-        description: "Convert plain text files to PDF documents. Customize fonts and formatting. Free online text to PDF converter.",
+        title: "Text to PDF Converter Free Online | Convertify",
+        description: "Convert text to PDF online free. TXT files to PDF with custom fonts. No watermarks, no signup.",
         keywords: ["text to pdf", "txt to pdf", "convert text to pdf", "plain text to pdf", "notepad to pdf"],
         h1: "Text to PDF - Convert TXT Files to PDF",
         faqs: [
@@ -257,8 +257,8 @@ export const toolSeoData = {
         ]
     },
     "excel-to-pdf": {
-        title: "Convert Excel to PDF Online Free - XLS XLSX to PDF | Convertify",
-        description: "Convert Excel spreadsheets to PDF documents. Preserve tables, charts, and formatting. Free Excel to PDF converter online.",
+        title: "Excel to PDF Converter Free Online | Convertify",
+        description: "Convert Excel to PDF online free. XLS and XLSX spreadsheets to PDF with charts and formatting preserved. No watermarks.",
         keywords: ["excel to pdf", "convert excel to pdf", "xls to pdf", "xlsx to pdf", "spreadsheet to pdf"],
         h1: "Excel to PDF - Convert Spreadsheets to PDF",
         faqs: [
@@ -278,8 +278,8 @@ export const toolSeoData = {
         ]
     },
     "powerpoint-to-pdf": {
-        title: "Convert PowerPoint to PDF Online Free - PPT PPTX to PDF | Convertify",
-        description: "Convert PowerPoint presentations to PDF. Preserve slides, animations, and formatting. Free PPT to PDF converter online.",
+        title: "PowerPoint to PDF Converter Free | Convertify",
+        description: "Convert PowerPoint to PDF online free. PPT and PPTX to PDF with slides preserved. No watermarks, no signup.",
         keywords: ["powerpoint to pdf", "convert ppt to pdf", "pptx to pdf", "presentation to pdf", "slides to pdf"],
         h1: "PowerPoint to PDF - Convert Presentations to PDF",
         faqs: [
@@ -299,8 +299,8 @@ export const toolSeoData = {
         ]
     },
     "add-page-numbers": {
-        title: "Add Page Numbers - Number PDF Pages Instantly",
-        description: "Insert page numbers into your PDF document professionally. Customize position, font style, and starting number. Organize your files online for free.",
+        title: "Add Page Numbers to PDF Free Online | Convertify",
+        description: "Add page numbers to PDF documents online free. Customize position, font, and starting number. No watermarks.",
         keywords: ["add page numbers to pdf", "page numbering pdf", "number pdf pages"],
         h1: "Add Page Numbers - Number PDF Pages",
         faqs: [
@@ -314,8 +314,8 @@ export const toolSeoData = {
         ]
     },
     "compare-pdf": {
-        title: "Compare PDF Files - Highlight Differences Side-by-Side",
-        description: "Automatically detect changes between two PDF versions. Visually highlight text and layout differences side-by-side to track revisions instantly.",
+        title: "Compare PDF Files Online Free | Convertify",
+        description: "Compare two PDF files side-by-side. Highlight text and layout differences automatically. Free PDF diff tool.",
         keywords: ["compare pdf", "pdf diff", "compare two pdfs"],
         h1: "Compare PDF - Find Differences",
         faqs: [
@@ -383,8 +383,8 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-excel": {
-        title: "Convert PDF to Excel - Extract Editable Tables to XLSX",
-        description: "Turn PDF data into editable Excel spreadsheets instantly. Extract tables, rows, and columns accurately without retyping. Preserves original formatting.",
+        title: "PDF to Excel Converter Free Online | Convertify",
+        description: "Convert PDF to Excel online free. Extract tables and data from PDF to editable XLSX spreadsheets. No watermarks.",
         keywords: ["pdf to excel", "pdf to xlsx", "convert pdf to spreadsheet"],
         h1: "PDF to Excel - Convert Tables",
         faqs: [
@@ -397,8 +397,8 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-word": {
-        title: "Convert PDF to Word Online - Editable DOCX (Best Quality)",
-        description: "Convert PDF documents to editable Microsoft Word files (DOCX) efficiently. Best accuracy for retaining text, layouts, and tables. 100% Free.",
+        title: "PDF to Word Converter Free Online | Convertify",
+        description: "Convert PDF to Word online free. Editable DOCX with text, layouts, and tables preserved. Best quality, no watermarks.",
         keywords: ["pdf to word", "convert pdf to docx", "edit pdf in word", "pdf to doc converter", "convert pdf to word editable", "pdf converter word"],
         h1: "PDF to Word - Convert to DOCX",
         faqs: [
@@ -411,8 +411,8 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-pdfa": {
-        title: "Convert PDF to PDF/A Online Free | Convertify",
-        description: "Convert PDF to PDF/A format for long-term archiving. ISO-compliant archiving tool.",
+        title: "PDF to PDF/A Converter Free Online | Convertify",
+        description: "Convert PDF to PDF/A format for long-term archiving. ISO-compliant, free, no watermarks.",
         keywords: ["pdf to pdf/a", "pdf archive format", "convert to pdfa"],
         h1: "PDF to PDF/A - Archive PDF",
         faqs: [
@@ -425,8 +425,8 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-powerpoint": {
-        title: "Convert PDF to PowerPoint Online Free | Convertify",
-        description: "Convert PDF documents to PowerPoint presentation (PPTX). Turn PDF slides back into editable slides.",
+        title: "PDF to PowerPoint Converter Free | Convertify",
+        description: "Convert PDF to PowerPoint online free. Turn PDF pages into editable PPTX slides. No watermarks.",
         keywords: ["pdf to powerpoint", "pdf to ppt", "convert pdf to presentation"],
         h1: "PDF to PowerPoint - Convert to PPTX",
         faqs: [
@@ -439,8 +439,8 @@ export const toolSeoData = {
         ]
     },
     "redact-pdf": {
-        title: "Redact PDF Online Free - Hide Sensitive Info | Convertify",
-        description: "Permanently blackout sensitive text and information in your PDF. Free online redaction tool.",
+        title: "Redact PDF Online Free | Convertify",
+        description: "Redact PDF to permanently blackout sensitive text and information. Free secure redaction tool.",
         keywords: ["redact pdf", "blackout text pdf", "hide pdf info"],
         h1: "Redact PDF - Blackout Secure Info",
         faqs: [
@@ -453,8 +453,8 @@ export const toolSeoData = {
         ]
     },
     "repair-pdf": {
-        title: "Repair PDF Online Free - Fix Corrupt Files | Convertify",
-        description: "Recover and repair corrupt or damaged PDF files. Restore PDF data online free.",
+        title: "Repair PDF Online Free | Convertify",
+        description: "Repair corrupt or damaged PDF files online free. Recover and restore PDF data instantly.",
         keywords: ["repair pdf", "fix corrupt pdf", "recover pdf"],
         h1: "Repair PDF - Fix Broken Files",
         faqs: [
@@ -467,8 +467,8 @@ export const toolSeoData = {
         ]
     },
     "sign-pdf": {
-        title: "Sign PDF Online Free - Add Digital Signature | Convertify",
-        description: "Add your signature to PDF documents. Draw, type, or upload signature. Free e-sign tool.",
+        title: "Sign PDF Online Free | Convertify",
+        description: "Sign PDF documents online free. Draw, type, or upload your signature. Easy e-signature tool.",
         keywords: ["sign pdf", "e-sign pdf", "digital signature"],
         h1: "Sign PDF - Add Your Signature",
         faqs: [
@@ -481,8 +481,8 @@ export const toolSeoData = {
         ]
     },
     "rotate-pdf": {
-        title: "Rotate PDF Pages Online Free - Turn PDF 90°, 180° | Convertify",
-        description: "Rotate PDF pages 90°, 180°, or 270° clockwise or counterclockwise. Fix upside-down or sideways scanned documents. Free PDF rotation tool with no watermarks.",
+        title: "Rotate PDF Online Free | Convertify",
+        description: "Rotate PDF pages 90°, 180°, or 270°. Fix sideways or upside-down scanned documents instantly. Free, no watermarks.",
         keywords: ["rotate pdf", "turn pdf pages", "rotate pdf 90 degrees", "flip pdf", "rotate scanned document", "pdf page orientation", "rotate pdf online free"],
         h1: "Rotate PDF - Fix Page Orientation Free",
         faqs: [
@@ -498,8 +498,8 @@ export const toolSeoData = {
         ]
     },
     "protect-pdf": {
-        title: "Password Protect PDF Online Free - Encrypt & Secure PDF | Convertify",
-        description: "Add password protection to your PDF files. Encrypt sensitive documents with strong security. Prevent unauthorized access, copying, and printing. Free PDF encryption tool.",
+        title: "Protect PDF with Password Free | Convertify",
+        description: "Password protect PDF files online free. Encrypt documents with AES-256 security. Prevent copying and printing.",
         keywords: ["password protect pdf", "encrypt pdf", "secure pdf", "lock pdf", "pdf password", "protect pdf online free", "add password to pdf", "pdf encryption"],
         h1: "Protect PDF - Add Password Security Free",
         faqs: [
@@ -515,8 +515,8 @@ export const toolSeoData = {
         ]
     },
     "unlock-pdf": {
-        title: "Unlock PDF Online Free - Remove Password Protection | Convertify",
-        description: "Remove password from PDF files. Unlock protected PDFs to edit, copy, and print freely. Free PDF password remover tool (requires knowing the password).",
+        title: "Unlock PDF Online Free | Convertify",
+        description: "Unlock PDF to remove password protection. Edit, copy, and print freely after unlocking. Free PDF unlocker.",
         keywords: ["unlock pdf", "remove pdf password", "pdf password remover", "unprotect pdf", "decrypt pdf", "unlock pdf online free", "remove pdf security"],
         h1: "Unlock PDF - Remove Password Protection Free",
         faqs: [
@@ -532,8 +532,8 @@ export const toolSeoData = {
         ]
     },
     "watermark-pdf": {
-        title: "Add Watermark to PDF Online Free - Text & Image Watermarks | Convertify",
-        description: "Add text or image watermarks to PDF documents. Protect your content with DRAFT, CONFIDENTIAL, or custom branding. Position and style watermarks easily. Free PDF watermark tool.",
+        title: "Add Watermark to PDF Free Online | Convertify",
+        description: "Add text or image watermarks to PDF documents. DRAFT, CONFIDENTIAL, or custom branding. Free PDF watermark tool.",
         keywords: ["watermark pdf", "add watermark to pdf", "pdf watermark online", "stamp pdf", "pdf branding", "confidential stamp pdf", "draft watermark pdf"],
         h1: "Watermark PDF - Add Text & Image Stamps Free",
         faqs: [
@@ -549,8 +549,8 @@ export const toolSeoData = {
         ]
     },
     "html-to-pdf": {
-        title: "Convert HTML to PDF Online Free - Web Page to PDF | Convertify",
-        description: "Convert HTML files and web pages to PDF documents. Preserve styles, images, and layout. Perfect for saving web content, articles, and documentation. Free HTML to PDF converter.",
+        title: "HTML to PDF Converter Free Online | Convertify",
+        description: "Convert HTML to PDF online free. Web pages and HTML files to PDF with styles preserved. No watermarks.",
         keywords: ["html to pdf", "convert html to pdf", "web page to pdf", "save webpage as pdf", "webpage to pdf converter", "convert website to pdf", "html to pdf online free"],
         h1: "HTML to PDF - Convert Web Pages to PDF Free",
         faqs: [
