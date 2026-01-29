@@ -3,8 +3,8 @@
 
 export const toolSeoData = {
     "merge-pdf": {
-        title: "Merge PDF Files - Combine Multiple PDFs Online (Free & Fast)",
-        description: "Combine multiple PDF files into one document instantly (100% Free). Drag and drop to reorder pages. No watermarks, no file limits, and no installation required.",
+        title: "Merge PDF Online Free - Combine PDFs Fast | Convertify",
+        description: "Merge PDF files into one document free online. Combine multiple PDFs with drag-and-drop reordering. No watermarks, no limits, no installation required.",
         keywords: ["merge pdf", "combine pdf files", "pdf joiner online free", "merge pdf files without watermark", "combine multiple pdfs into one", "pdf merger no limit", "join pdf files free", "combine pdfs", "merge documents"],
         h1: "Merge PDF Files Online - Fast & Free",
         faqs: [
@@ -36,8 +36,8 @@ export const toolSeoData = {
         ]
     },
     "split-pdf": {
-        title: "Split PDF Online - Extract Pages & Separate Files Free",
-        description: "Split PDF files by page range or extract specific pages instantly. Free online PDF splitter/separator with no watermarks. Separate one PDF into multiple files.",
+        title: "Split PDF Online Free - Extract Pages | Convertify",
+        description: "Split PDF files by page range or extract specific pages instantly. Free online PDF splitter with no watermarks. Separate one PDF into multiple files.",
         keywords: ["split pdf", "extract pdf pages", "separate pdf pages", "pdf splitter online free", "split pdf by page number", "extract pages from pdf", "pdf page separator", "save one page of pdf", "cut pdf pages", "remove pages from pdf"],
         h1: "Split PDF - Extract Pages Online Free",
         faqs: [
@@ -65,8 +65,8 @@ export const toolSeoData = {
         ]
     },
     "compress-pdf": {
-        title: "Compress PDF Online - Reduce File Size to 100KB (Free)",
-        description: "Shrink PDF file size by up to 90% online. Compress to 100KB, 200KB, 500KB or custom sizes for email attachments. Fast, free, and no quality loss.",
+        title: "Compress PDF Online Free - Reduce Size | Convertify",
+        description: "Compress PDF files by up to 90% without losing quality. Reduce PDF size to under 100KB for email attachments. Fast, free, no watermarks.",
         keywords: ["compress pdf", "reduce pdf size", "compress pdf to 100kb", "shrink pdf file", "pdf compressor online free", "reduce pdf for email", "compress pdf without quality loss", "resize pdf", "make pdf smaller", "pdf size reducer"],
         h1: "Compress PDF - Reduce File Size Online",
         faqs: [
@@ -94,8 +94,8 @@ export const toolSeoData = {
         ]
     },
     "jpg-to-pdf": {
-        title: "Convert JPG to PDF Online - Photos to PDF (Free)",
-        description: "Convert JPG, JPEG, PNG photos to PDF instantly. Combine multiple images into one PDF document. Free image to PDF converter with no watermarks.",
+        title: "JPG to PDF Converter Free Online | Convertify",
+        description: "Convert JPG to PDF online free. Combine multiple images into one PDF document. No watermarks, works on all devices.",
         keywords: ["jpg to pdf", "convert jpg to pdf", "image to pdf", "multiple jpg to one pdf", "jpeg to pdf converter", "photos to pdf online free", "combine images to pdf", "picture to pdf", "convert photo to pdf"],
         h1: "JPG to PDF - Convert Images to PDF Free",
         faqs: [
