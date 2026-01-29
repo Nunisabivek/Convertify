@@ -4,8 +4,8 @@
 export const toolSeoData = {
     "merge-pdf": {
         title: "Merge PDF Online Free - Combine PDFs Fast | Convertify",
-        description: "Merge PDF files into one document free online. Combine multiple PDFs with drag-and-drop reordering. No watermarks, no limits, no installation required.",
-        keywords: ["merge pdf", "combine pdf files", "pdf joiner online free", "merge pdf files without watermark", "combine multiple pdfs into one", "pdf merger no limit", "join pdf files free", "combine pdfs", "merge documents"],
+        description: "Merge PDF files into one document free online. No sign up, no limits, no watermarks. Combine unlimited PDFs instantly - the best free iLovePDF alternative.",
+        keywords: ["merge pdf", "combine pdf files", "pdf joiner online free", "merge pdf files without watermark", "unlimited pdf merger online free no daily limit", "merge pdf online no sign up required", "combine pdf files without account limit", "pdf merger no limit", "Smallpdf free alternative no daily limit", "better free alternative to ilovepdf", "merge pdf files online free unlimited files"],
         h1: "Merge PDF Files Online - Fast & Free",
         faqs: [
             {
@@ -37,8 +37,8 @@ export const toolSeoData = {
     },
     "split-pdf": {
         title: "Split PDF Online Free - Extract Pages | Convertify",
-        description: "Split PDF files by page range or extract specific pages instantly. Free online PDF splitter with no watermarks. Separate one PDF into multiple files.",
-        keywords: ["split pdf", "extract pdf pages", "separate pdf pages", "pdf splitter online free", "split pdf by page number", "extract pages from pdf", "pdf page separator", "save one page of pdf", "cut pdf pages", "remove pages from pdf"],
+        description: "Split PDF files by page range or extract specific pages free. No account needed, no watermarks. Better than Smallpdf - truly unlimited PDF splitting.",
+        keywords: ["split pdf", "extract pdf pages", "separate pdf pages", "pdf splitter online free", "split pdf into multiple files free no limit", "extract specific pages from pdf online free", "split pdf pages free without account", "pdf page separator", "save one page of pdf", "cut pdf pages", "remove pages from pdf"],
         h1: "Split PDF - Extract Pages Online Free",
         faqs: [
             {
@@ -66,8 +66,8 @@ export const toolSeoData = {
     },
     "compress-pdf": {
         title: "Compress PDF Online Free - Reduce Size | Convertify",
-        description: "Compress PDF files by up to 90% without losing quality. Reduce PDF size to under 100KB for email attachments. Fast, free, no watermarks.",
-        keywords: ["compress pdf", "reduce pdf size", "compress pdf to 100kb", "shrink pdf file", "pdf compressor online free", "reduce pdf for email", "compress pdf without quality loss", "resize pdf", "make pdf smaller", "pdf size reducer"],
+        description: "Compress PDF to 100KB online free. Reduce PDF file size for email without losing quality. No daily limits, no sign up - better than iLovePDF.",
+        keywords: ["compress pdf", "reduce pdf size", "compress pdf to 100kb online free", "reduce pdf file size under 1mb for email", "compress pdf file size free no credit card", "shrink pdf file", "pdf compressor online free", "reduce pdf size without losing quality free", "compress large pdf files for free online", "batch compress pdf files online free", "make pdf file smaller for upload free"],
         h1: "Compress PDF - Reduce File Size Online",
         faqs: [
             {
@@ -95,8 +95,8 @@ export const toolSeoData = {
     },
     "jpg-to-pdf": {
         title: "JPG to PDF Converter Free Online | Convertify",
-        description: "Convert JPG to PDF online free. Combine multiple images into one PDF document. No watermarks, works on all devices.",
-        keywords: ["jpg to pdf", "convert jpg to pdf", "image to pdf", "multiple jpg to one pdf", "jpeg to pdf converter", "photos to pdf online free", "combine images to pdf", "picture to pdf", "convert photo to pdf"],
+        description: "Convert multiple JPG images to one PDF file free. No sign up, no limits, no watermarks. Best free alternative to online PDF tools.",
+        keywords: ["jpg to pdf", "convert jpg to pdf", "image to pdf", "convert multiple jpg images to one pdf file", "multiple jpg to one pdf", "jpeg to pdf converter", "photos to pdf online free", "combine images to pdf", "picture to pdf", "turn png images into pdf document online"],
         h1: "JPG to PDF - Convert Images to PDF Free",
         faqs: [
             {
@@ -195,8 +195,8 @@ export const toolSeoData = {
     },
     "word-to-pdf": {
         title: "Word to PDF Converter Free Online | Convertify",
-        description: "Convert Word to PDF online free. DOC and DOCX to PDF with formatting preserved. No watermarks, no signup required.",
-        keywords: ["word to pdf", "convert word to pdf", "doc to pdf", "docx to pdf converter", "microsoft word to pdf free"],
+        description: "Convert Word to PDF online free. No email, no sign up, no daily limits. DOC/DOCX to PDF with perfect formatting - better than Smallpdf.",
+        keywords: ["word to pdf", "convert word to pdf", "doc to pdf", "docx to pdf converter", "convert pdf to word free online no subscription", "microsoft word to pdf free", "convert word to pdf no email"],
         h1: "Word to PDF - Convert DOC/DOCX to PDF",
         faqs: [
             {
@@ -398,8 +398,8 @@ export const toolSeoData = {
     },
     "pdf-to-word": {
         title: "PDF to Word Converter Free Online | Convertify",
-        description: "Convert PDF to Word online free. Editable DOCX with text, layouts, and tables preserved. Best quality, no watermarks.",
-        keywords: ["pdf to word", "convert pdf to docx", "edit pdf in word", "pdf to doc converter", "convert pdf to word editable", "pdf converter word"],
+        description: "Convert PDF to Word online free. Editable DOCX with text, layouts, and tables preserved. No sign up, no subscription - best quality.",
+        keywords: ["pdf to word", "convert pdf to docx", "edit pdf in word", "pdf to doc converter", "convert pdf to word free online no subscription", "convert pdf to word editable", "pdf converter word"],
         h1: "PDF to Word - Convert to DOCX",
         faqs: [
             { question: "Is the Word file editable?", answer: "Yes, the converted DOCX file is fully editable in Microsoft Word." }
@@ -499,8 +499,8 @@ export const toolSeoData = {
     },
     "protect-pdf": {
         title: "Protect PDF with Password Free | Convertify",
-        description: "Password protect PDF files online free. Encrypt documents with AES-256 security. Prevent copying and printing.",
-        keywords: ["password protect pdf", "encrypt pdf", "secure pdf", "lock pdf", "pdf password", "protect pdf online free", "add password to pdf", "pdf encryption"],
+        description: "Password protect PDF files online free. AES-256 encryption, no account needed. Prevent copying, printing, and editing securely.",
+        keywords: ["password protect pdf", "encrypt pdf", "secure pdf", "lock pdf", "pdf password", "protect pdf online free", "add password to pdf", "pdf encryption", "secure pdf conversion delete after processing"],
         h1: "Protect PDF - Add Password Security Free",
         faqs: [
             { question: "How secure is the password protection?", answer: "We use AES-256 encryption, the same standard used by banks and governments. Your PDF cannot be opened without the correct password." },
@@ -516,8 +516,8 @@ export const toolSeoData = {
     },
     "unlock-pdf": {
         title: "Unlock PDF Online Free | Convertify",
-        description: "Unlock PDF to remove password protection. Edit, copy, and print freely after unlocking. Free PDF unlocker.",
-        keywords: ["unlock pdf", "remove pdf password", "pdf password remover", "unprotect pdf", "decrypt pdf", "unlock pdf online free", "remove pdf security"],
+        description: "Unlock PDF to remove password protection free. No Adobe Acrobat needed. Remove restrictions to edit, copy, and print freely.",
+        keywords: ["unlock pdf", "remove pdf password", "pdf password remover", "unprotect pdf", "remove password from pdf without acrobat", "unlock secured pdf for printing online", "decrypt pdf", "unlock pdf online free", "remove pdf security"],
         h1: "Unlock PDF - Remove Password Protection Free",
         faqs: [
             { question: "Do I need to know the password?", answer: "Yes, you must know the correct password to unlock the PDF. We cannot bypass security without authorization - this protects document owners' rights." },
