@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 
 interface AdBannerProps {
-    variant?: "footer" | "rectangle" | "native" | "skyscraper" | "responsive"
+    variant?: "footer" | "rectangle" | "native" | "skyscraper" | "responsive" | "mobile-banner"
 }
 
 export function AdBanner({ variant = "footer" }: AdBannerProps) {
@@ -41,14 +41,22 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
                 width: 300,
                 url: "//entertainenslave.com/616f9cf69cb04c34acb730e9239646e0/invoke.js",
             }
+        } else if (variant === "mobile-banner") {
+            // Mobile banner: 320x50 - standard mobile banner size
+            conf = {
+                key: "d84ed579e24fb0e02224fedd00bed35b",
+                height: 50,
+                width: 320,
+                url: "//entertainenslave.com/d84ed579e24fb0e02224fedd00bed35b/invoke.js",
+            }
         } else if (variant === "footer") {
             if (isMobile) {
-                // Mobile footer: 300x250 instead of 728x90
+                // Mobile footer: smaller 320x50 mobile banner - less intrusive
                 conf = {
-                    key: "616f9cf69cb04c34acb730e9239646e0",
-                    height: 250,
-                    width: 300,
-                    url: "//entertainenslave.com/616f9cf69cb04c34acb730e9239646e0/invoke.js",
+                    key: "d84ed579e24fb0e02224fedd00bed35b",
+                    height: 50,
+                    width: 320,
+                    url: "//entertainenslave.com/d84ed579e24fb0e02224fedd00bed35b/invoke.js",
                 }
             } else {
                 // Desktop footer: 728x90
@@ -124,6 +132,23 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
         )
     }
 
+    // Mobile Banner Ad - Small and non-intrusive
+    if (variant === "mobile-banner") {
+        return (
+            <div className="w-full flex items-center justify-center py-2">
+                <div
+                    ref={containerRef}
+                    className="flex items-center justify-center overflow-hidden rounded-lg"
+                    style={{
+                        width: 320,
+                        height: 50,
+                        maxWidth: "100%"
+                    }}
+                />
+            </div>
+        )
+    }
+
     // Skyscraper Ad - Hidden on mobile
     if (variant === "skyscraper") {
         return (
@@ -137,24 +162,19 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
         )
     }
 
-    // Footer Ad - Responsive with different sizes
+    // Footer Ad - Responsive with different sizes - IMPROVED MOBILE
+    // Uses isMobile state to render the correct size (only one ref attached)
     return (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 border-t backdrop-blur supports-[backdrop-filter]:bg-white/60 p-2 shadow-lg flex justify-center overflow-hidden">
-            {/* Mobile: Show rectangle ad */}
-            <div className="md:hidden">
-                <div
-                    ref={containerRef}
-                    className="flex items-center justify-center overflow-hidden"
-                    style={{ width: 300, height: 250 }}
-                />
-            </div>
-            {/* Desktop: Show banner ad with scaling */}
-            <div className="hidden md:block">
-                <div className="transform md:scale-[0.8] lg:scale-100 origin-bottom transition-transform duration-300 ease-out">
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 border-t backdrop-blur supports-[backdrop-filter]:bg-white/60 shadow-lg flex justify-center overflow-hidden">
+            <div className={isMobile ? "py-1" : "py-2"}>
+                <div className={isMobile ? "" : "transform md:scale-[0.8] lg:scale-100 origin-bottom transition-transform"}>
                     <div
                         ref={containerRef}
                         className="flex items-center justify-center overflow-hidden"
-                        style={{ width: 728, height: 90 }}
+                        style={isMobile
+                            ? { width: 320, height: 50 }
+                            : { width: 728, height: 90 }
+                        }
                     />
                 </div>
             </div>
@@ -167,11 +187,41 @@ export function BlogAd() {
     return (
         <div className="w-full my-8">
             {/* Desktop: Centered rectangle */}
-            <div className="flex justify-center">
+            <div className="hidden md:flex justify-center">
                 <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
                     <AdBanner variant="rectangle" />
                 </div>
             </div>
+            {/* Mobile: Full-width mobile banner */}
+            <div className="md:hidden flex justify-center">
+                <AdBanner variant="mobile-banner" />
+            </div>
         </div>
     )
 }
+
+// Mobile-optimized inline ad for tool pages - shows in the visible area
+export function MobileInlineAd() {
+    return (
+        <div className="w-full my-4 flex justify-center">
+            {/* Mobile: Show mobile banner above the fold */}
+            <div className="md:hidden w-full flex justify-center bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg py-3">
+                <AdBanner variant="mobile-banner" />
+            </div>
+            {/* Desktop: Show rectangle ad */}
+            <div className="hidden md:flex justify-center">
+                <AdBanner variant="rectangle" />
+            </div>
+        </div>
+    )
+}
+
+// Compact ad for between sections
+export function CompactAd() {
+    return (
+        <div className="w-full py-4 flex justify-center bg-slate-50/50">
+            <AdBanner variant="rectangle" />
+        </div>
+    )
+}
+

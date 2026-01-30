@@ -59,7 +59,7 @@ const ALL_URLS = [
     "https://convertify.work/terms",
 ];
 
-// Blog posts
+// Blog posts - All 30 SEO-optimized posts
 const BLOG_URLS = [
     "https://convertify.work/blog/how-to-merge-pdf-files-free",
     "https://convertify.work/blog/convert-jpg-to-pdf-online",
@@ -76,7 +76,23 @@ const BLOG_URLS = [
     "https://convertify.work/blog/combine-scanned-documents-into-one-pdf",
     "https://convertify.work/blog/compress-pdf-for-whatsapp-sharing",
     "https://convertify.work/blog/reduce-pdf-size-without-losing-quality",
+    "https://convertify.work/blog/make-pdf-smaller-for-email",
+    "https://convertify.work/blog/convert-screenshot-to-pdf",
+    "https://convertify.work/blog/png-with-transparency-to-pdf",
+    "https://convertify.work/blog/split-pdf-by-page-number",
+    "https://convertify.work/blog/extract-pages-from-pdf-free",
+    "https://convertify.work/blog/separate-pdf-pages",
+    "https://convertify.work/blog/remove-pages-from-pdf",
+    "https://convertify.work/blog/extract-text-from-scanned-pdf",
+    "https://convertify.work/blog/word-to-pdf-keep-formatting",
+    "https://convertify.work/blog/save-word-as-pdf-mac",
+    "https://convertify.work/blog/excel-to-pdf-converter",
+    "https://convertify.work/blog/powerpoint-to-pdf-formatting",
+    "https://convertify.work/blog/google-docs-to-pdf",
+    "https://convertify.work/blog/pdf-vs-adobe-comparison",
+    "https://convertify.work/blog/password-protect-pdf-free",
 ];
+
 
 async function pingGoogle() {
     return new Promise((resolve) => {
