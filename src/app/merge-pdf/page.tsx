@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description: seoData.description,
     keywords: seoData.keywords,
     alternates: {
-        canonical: "/merge-pdf",
+        canonical: "https://convertify.work/merge-pdf",
     },
     openGraph: {
         title: seoData.title,

@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description: "Browse our complete collection of 30+ free PDF tools. Merge, split, compress, convert, and edit PDFs online with privacy-first client-side processing.",
     keywords: ["pdf tools list", "all pdf converters", "free pdf tools", "online pdf editor", "convertify tools"],
     alternates: {
-        canonical: "/all-tools",
+        canonical: "https://convertify.work/all-tools",
     },
 }
 
@@ -154,6 +154,37 @@ export default function AllToolsPage() {
                     </div>
                 ))}
             </div>
+
+            {/* SEO Content Section - Combat thin content */}
+            <section className="mt-16 bg-gradient-to-br from-slate-50 to-indigo-50 rounded-2xl p-8 md:p-12">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6">Why Choose Convertify PDF Tools?</h2>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-slate-700">
+                    <div className="space-y-2">
+                        <h3 className="font-semibold text-slate-900">🔒 100% Private & Secure</h3>
+                        <p className="text-sm leading-relaxed">All PDF processing happens directly in your browser using WebAssembly technology. Your files never leave your device - no uploads, no tracking, complete privacy.</p>
+                    </div>
+                    <div className="space-y-2">
+                        <h3 className="font-semibold text-slate-900">📱 Works on Any Device</h3>
+                        <p className="text-sm leading-relaxed">Use our tools on desktop, tablet, or mobile. No app installation required - just open your browser and start working with PDFs instantly.</p>
+                    </div>
+                    <div className="space-y-2">
+                        <h3 className="font-semibold text-slate-900">💯 Completely Free</h3>
+                        <p className="text-sm leading-relaxed">No hidden fees, no subscriptions, no sign-up required. All {totalTools}+ tools are available completely free with no watermarks on your documents.</p>
+                    </div>
+                    <div className="space-y-2">
+                        <h3 className="font-semibold text-slate-900">⚡ Fast Processing</h3>
+                        <p className="text-sm leading-relaxed">Since everything runs locally in your browser, processing is lightning-fast. Merge, split, or compress PDFs in seconds without waiting for server uploads.</p>
+                    </div>
+                    <div className="space-y-2">
+                        <h3 className="font-semibold text-slate-900">🌐 Works Offline</h3>
+                        <p className="text-sm leading-relaxed">Once loaded, many of our tools work without an internet connection. Perfect for working with sensitive documents on the go.</p>
+                    </div>
+                    <div className="space-y-2">
+                        <h3 className="font-semibold text-slate-900">🎯 Professional Quality</h3>
+                        <p className="text-sm leading-relaxed">Get professional-grade results without expensive software. Our tools maintain document quality while giving you full control over output settings.</p>
+                    </div>
+                </div>
+            </section>
         </div>
     )
 }

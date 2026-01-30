@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: "Add text or image watermarks to your PDF files for free. Protect your documents with custom watermarks. No registration needed.",
     keywords: ["pdf watermark", "add watermark to pdf", "watermark pdf", "pdf stamp", "protect pdf"],
     alternates: {
-        canonical: "/watermark-pdf",
+        canonical: "https://convertify.work/watermark-pdf",
     },
 }
 

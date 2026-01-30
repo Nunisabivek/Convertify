@@ -306,8 +306,8 @@ export default function Home() {
         </p>
       </section>
 
-      {/* Ad Section (High Visibility) */}
-      <div className="w-full flex justify-center py-4 bg-white">
+      {/* Ad Section - Hidden on mobile for better LCP, shown after first category */}
+      <div className="hidden md:flex w-full justify-center py-4 bg-white">
         <AdBanner variant="rectangle" />
       </div>
 
@@ -345,6 +345,13 @@ export default function Home() {
                 </Link>
               ))}
             </div>
+
+            {/* Mobile Ad - Only after first category for better LCP */}
+            {idx === 0 && (
+              <div className="md:hidden w-full flex justify-center mt-8">
+                <AdBanner variant="mobile-banner" />
+              </div>
+            )}
           </div>
         ))}
 

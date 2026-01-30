@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: "Learn how to merge, compress, convert, and manage PDF files. Free tutorials, step-by-step guides, and tips for working with PDFs.",
     keywords: ["pdf tutorials", "pdf tips", "how to merge pdf", "compress pdf guide", "pdf converter help"],
     alternates: {
-        canonical: "/blog",
+        canonical: "https://convertify.work/blog",
     },
     openGraph: {
         title: "PDF Tips, Tutorials & Guides | Convertify Blog",

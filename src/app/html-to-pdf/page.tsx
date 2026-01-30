@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: "Convert HTML to PDF online for free. Turn web pages, HTML code into PDF documents instantly. No registration required.",
     keywords: ["html to pdf", "webpage to pdf", "convert html to pdf", "url to pdf", "website to pdf"],
     alternates: {
-        canonical: "/html-to-pdf",
+        canonical: "https://convertify.work/html-to-pdf",
     },
 }
 

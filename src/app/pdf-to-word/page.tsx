@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: "Convert PDF to Word (DOCX) online for free. Edit your PDFs easily by converting them to fully editable Word documents. No registration required.",
     keywords: ["pdf to word", "pdf to docx", "convert pdf to word", "pdf converter", "pdf to word converter free"],
     alternates: {
-        canonical: "/pdf-to-word",
+        canonical: "https://convertify.work/pdf-to-word",
     },
     openGraph: {
         title: "PDF to Word Converter - Free Online PDF to DOCX | Convertify",

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: "Add password protection to your PDF files for free. Secure your documents with encryption. Easy, fast, and safe.",
     keywords: ["protect pdf", "password protect pdf", "secure pdf", "encrypt pdf", "add password to pdf"],
     alternates: {
-        canonical: "/protect-pdf",
+        canonical: "https://convertify.work/protect-pdf",
     },
 }
 

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     description: seoData.description,
     keywords: seoData.keywords,
     alternates: {
-        canonical: "/excel-to-pdf",
+        canonical: "https://convertify.work/excel-to-pdf",
     },
     openGraph: {
         title: seoData.title,

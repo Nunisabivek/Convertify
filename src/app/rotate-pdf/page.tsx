@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: "Rotate PDF pages online for free. Turn your PDF pages 90°, 180°, 270°. Rotate all pages or select specific ones. No watermarks.",
     keywords: ["rotate pdf", "rotate pdf pages", "turn pdf", "flip pdf", "pdf rotation"],
     alternates: {
-        canonical: "/rotate-pdf",
+        canonical: "https://convertify.work/rotate-pdf",
     },
 }
 

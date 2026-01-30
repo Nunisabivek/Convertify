@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     description: seoData.description,
     keywords: seoData.keywords,
     alternates: {
-        canonical: "/pdf-to-text",
+        canonical: "https://convertify.work/pdf-to-text",
     },
     openGraph: {
         title: seoData.title,

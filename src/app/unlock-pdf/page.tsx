@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: "Remove password protection from PDF files for free. Unlock your PDFs instantly with the correct password. Fast and secure.",
     keywords: ["unlock pdf", "remove pdf password", "decrypt pdf", "pdf password remover", "unlock pdf online"],
     alternates: {
-        canonical: "/unlock-pdf",
+        canonical: "https://convertify.work/unlock-pdf",
     },
 }
 

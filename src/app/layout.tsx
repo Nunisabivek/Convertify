@@ -22,10 +22,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Convertify - Free PDF Tools & File Converter Online",
-    template: "%s | Convertify",
+    default: "Free PDF Tools Online - Merge, Convert, Compress",
+    template: "%s | Convertify - Free PDF Tools",
   },
-  description: "Free online file converter and PDF tools. Convert documents, images, and merged PDFs easily. No software to install, 100% free and secure document converter.",
+  description: "Free PDF tools with no signup required. Merge, compress, convert PDFs online. 100% secure with client-side processing. Works on mobile & desktop.",
   applicationName: "Convertify",
   authors: [{ name: "Convertify Team" }],
   keywords: ["file converter", "document converter", "online converter", "convertify", "convertifyy", "convertify free", "free pdf tools", "merge pdf", "compress pdf", "jpg to pdf", "pdf to word", "split pdf", "combine pdf", "convert pdf"],
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     creator: "@convertify",
   },
   alternates: {
-    canonical: './',
+    canonical: 'https://convertify.work',
   },
   verification: {
     google: "ghwXtP5nTeKojcTtLh5jNBXQOHfhcwBGfwiLLO0_4Yc",
