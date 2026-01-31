@@ -300,10 +300,25 @@ export default function WebHomePage() {
                 <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 drop-shadow-sm">
                     Every File Converter <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">& PDF Tool</span>
                 </h1>
-                <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-8 leading-relaxed">
+                <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-6 leading-relaxed">
                     Simple, fast, and secure tools to manage your documents. <br className="hidden md:inline" />
                     Perfect for everyone, from students to professionals.
                 </p>
+                {/* Trust Badges - Addresses "convertify pricing" queries */}
+                <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 mb-4">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100/80 text-green-700 rounded-full text-sm font-semibold border border-green-200">
+                        <CheckCircle2 className="w-4 h-4" />
+                        100% Free Forever
+                    </div>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-100/80 text-indigo-700 rounded-full text-sm font-semibold border border-indigo-200">
+                        <Lock className="w-4 h-4" />
+                        No Sign-Up Required
+                    </div>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100/80 text-purple-700 rounded-full text-sm font-semibold border border-purple-200">
+                        <FileStack className="w-4 h-4" />
+                        No Watermarks
+                    </div>
+                </div>
             </section>
 
             {/* Ad Section - Hidden on mobile for better LCP, shown after first category */}
