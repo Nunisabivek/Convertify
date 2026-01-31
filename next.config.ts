@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // output: 'export',
-  trailingSlash: false,
+  output: 'export',  // Enable static export for Capacitor
+  trailingSlash: true,  // Better for mobile routing
   images: {
     unoptimized: true,
   },

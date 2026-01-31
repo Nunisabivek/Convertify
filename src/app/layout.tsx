@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import { AdBanner } from "@/components/ads/banner";
-import { JsonLd } from "@/components/seo/json-ld";
+import ClientLayout from "@/components/layout/ClientLayout";
 
 // Google Analytics Measurement ID
 const GA_MEASUREMENT_ID = "G-57C0PG4LK6";
@@ -93,28 +90,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-slate-50`}
       >
-        <Header />
-
-        <div className="flex justify-center w-full max-w-[1920px] mx-auto">
-          {/* Left Ad Sidebar */}
-          <aside className="hidden xl:flex w-[180px] shrink-0 flex-col items-center pt-8 sticky top-0 h-screen">
-            <AdBanner variant="skyscraper" />
-          </aside>
-
-          {/* Main Content */}
-          <main className="flex-1 min-w-0">
-            {children}
-          </main>
-
-          {/* Right Ad Sidebar */}
-          <aside className="hidden xl:flex w-[180px] shrink-0 flex-col items-center pt-8 sticky top-0 h-screen">
-            <AdBanner variant="skyscraper" />
-          </aside>
-        </div>
-
-        <AdBanner />
-        <Footer />
-        <JsonLd />
+        <ClientLayout>
+          {children}
+        </ClientLayout>
       </body>
     </html>
   );

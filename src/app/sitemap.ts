@@ -1,54 +1,26 @@
 import { MetadataRoute } from 'next'
 import { blogPosts } from '@/lib/blog-data'
+import { getAllTools } from '@/lib/tools-registry'
 
 export const dynamic = 'force-static'
 
-// Complete list of all tools - 29 total
-const allTools = [
-    // Organize PDF (4)
-    'merge-pdf',
-    'split-pdf',
+// Dynamically get all tools from the centralized registry
+// This ensures sitemap stays in sync when new tools are added
+const allTools = getAllTools().map(tool => tool.href)
+
+// Additional tools/pages that may not be in registry but have pages
+const additionalToolPages = [
     'organize-pdf',
-    'rotate-pdf',
-
-    // Optimize PDF (3)
-    'compress-pdf',
     'repair-pdf',
-    'ocr-pdf',
-
-    // Convert from PDF (6)
-    'pdf-to-word',
-    'pdf-to-excel',
-    'pdf-to-powerpoint',
-    'pdf-to-jpg',
-    'pdf-to-png',
-    'pdf-to-text',
-
-    // Convert to PDF (7)
-    'word-to-pdf',
-    'excel-to-pdf',
-    'powerpoint-to-pdf',
-    'jpg-to-pdf',
-    'png-to-pdf',
-    'text-to-pdf',
-    'html-to-pdf',
-
-    // Edit PDF (5)
-    'edit-pdf',
-    'sign-pdf',
-    'watermark-pdf',
-    'add-page-numbers',
     'crop-pdf',
-
-    // Security (3)
-    'protect-pdf',
-    'unlock-pdf',
-    'redact-pdf',
-
-    // Advanced Tools (2)
-    'compare-pdf',
-    'pdf-to-pdfa',
+    'ppt-to-pdf',
+    'powerpoint-to-pdf',
+    'pdf-to-powerpoint',
+    'text-to-pdf',
 ]
+
+// Combine and deduplicate
+const allToolSlugs = [...new Set([...allTools, ...additionalToolPages])]
 
 // Static pages
 const staticPages = [
@@ -64,8 +36,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://convertify.work'
     const currentDate = new Date()
 
-    // Tool pages - High priority (29 pages)
-    const toolUrls = allTools.map((tool) => ({
+    // Tool pages - High priority (all tools from registry + additionals)
+    const toolUrls = allToolSlugs.map((tool) => ({
         url: `${baseUrl}/${tool}`,
         lastModified: currentDate,
         changeFrequency: 'weekly' as const,
