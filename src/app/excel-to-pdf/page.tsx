@@ -3,11 +3,14 @@ import { ToolSwapper } from "@/components/tools/tool-swapper"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
-import { Sheet, Loader2, Upload } from "lucide-react"
+import { Sheet } from "lucide-react"
 import Link from "next/link"
 
 const seoData = toolSeoData["excel-to-pdf"]
+const contentData = toolContentData["excel-to-pdf"]
 
 export const metadata: Metadata = {
     title: seoData.title,
@@ -50,7 +53,7 @@ export default function Page() {
                             This feature converts Excel files (XLS, XLSX) to PDF format. Upload your spreadsheet to get started.
                         </p>
                         <div className="bg-amber-50 border border-amber-200 text-amber-800 p-4 rounded-lg text-sm max-w-md mx-auto">
-                            <strong>Note:</strong> For best results with Excel files, we recommend using Microsoft Excel or Google Sheets' built-in "Save as PDF" feature, as browser-based conversion may not preserve all formatting.
+                            <strong>Note:</strong> For best results with Excel files, we recommend using Microsoft Excel or Google Sheets&apos; built-in &quot;Save as PDF&quot; feature, as browser-based conversion may not preserve all formatting.
                         </div>
                         <div className="mt-8">
                             <Link href="/all-tools" className="text-indigo-600 hover:text-indigo-700 font-medium">
@@ -60,6 +63,16 @@ export default function Page() {
                     </div>
                 </div>
             </section>
+
+            {/* SEO Content Section */}
+            <ToolSeoContent
+                toolName="Excel to PDF Converter"
+                toolSlug="excel-to-pdf"
+                description={contentData.description}
+                features={contentData.features}
+                useCases={contentData.useCases}
+                keywords={contentData.keywords}
+            />
 
             <HowToSchema
                 toolName="Convert Excel to PDF"

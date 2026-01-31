@@ -4,9 +4,12 @@ import PngToPdfClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 
 const seoData = toolSeoData["png-to-pdf"]
+const contentData = toolContentData["png-to-pdf"]
 
 export const metadata: Metadata = {
     title: seoData.title,
@@ -38,6 +41,16 @@ export default function Page() {
                 <ToolSwapper />
                 <PngToPdfClient />
             </section>
+
+            {/* SEO Content Section */}
+            <ToolSeoContent
+                toolName="PNG to PDF Converter"
+                toolSlug="png-to-pdf"
+                description={contentData.description}
+                features={contentData.features}
+                useCases={contentData.useCases}
+                keywords={contentData.keywords}
+            />
 
             <HowToSchema
                 toolName="Convert PNG to PDF"

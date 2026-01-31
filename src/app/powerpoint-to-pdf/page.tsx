@@ -3,11 +3,14 @@ import { ToolSwapper } from "@/components/tools/tool-swapper"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 import { Presentation } from "lucide-react"
 import Link from "next/link"
 
 const seoData = toolSeoData["powerpoint-to-pdf"]
+const contentData = toolContentData["powerpoint-to-pdf"]
 
 export const metadata: Metadata = {
     title: seoData.title,
@@ -50,7 +53,7 @@ export default function Page() {
                             Convert your PPT and PPTX presentations to PDF format for easy sharing.
                         </p>
                         <div className="bg-amber-50 border border-amber-200 text-amber-800 p-4 rounded-lg text-sm max-w-md mx-auto">
-                            <strong>Note:</strong> For best results with PowerPoint files, we recommend using Microsoft PowerPoint or Google Slides' built-in "Export as PDF" feature to preserve animations and transitions as static slides.
+                            <strong>Note:</strong> For best results with PowerPoint files, we recommend using Microsoft PowerPoint or Google Slides&apos; built-in &quot;Export as PDF&quot; feature to preserve animations and transitions as static slides.
                         </div>
                         <div className="mt-8">
                             <Link href="/all-tools" className="text-indigo-600 hover:text-indigo-700 font-medium">
@@ -60,6 +63,16 @@ export default function Page() {
                     </div>
                 </div>
             </section>
+
+            {/* SEO Content Section */}
+            <ToolSeoContent
+                toolName="PowerPoint to PDF Converter"
+                toolSlug="powerpoint-to-pdf"
+                description={contentData.description}
+                features={contentData.features}
+                useCases={contentData.useCases}
+                keywords={contentData.keywords}
+            />
 
             <HowToSchema
                 toolName="Convert PowerPoint to PDF"

@@ -4,9 +4,12 @@ import PdfToJpgClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 
 const seoData = toolSeoData["pdf-to-jpg"]
+const contentData = toolContentData["pdf-to-jpg"]
 
 export const metadata: Metadata = {
     title: seoData.title,
@@ -45,6 +48,16 @@ export default function Page() {
                 <ToolSwapper />
                 <PdfToJpgClient />
             </section>
+
+            {/* SEO Content Section */}
+            <ToolSeoContent
+                toolName="PDF to JPG Converter"
+                toolSlug="pdf-to-jpg"
+                description={contentData.description}
+                features={contentData.features}
+                useCases={contentData.useCases}
+                keywords={contentData.keywords}
+            />
 
             <HowToSchema
                 toolName="Convert PDF to JPG"

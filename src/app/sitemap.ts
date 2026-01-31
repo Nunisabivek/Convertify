@@ -13,9 +13,6 @@ const additionalToolPages = [
     'organize-pdf',
     'repair-pdf',
     'crop-pdf',
-    'ppt-to-pdf',
-    'powerpoint-to-pdf',
-    'pdf-to-powerpoint',
     'text-to-pdf',
     'extract-pdf', // Captures "extract pdf" queries, redirects to split-pdf
 ]

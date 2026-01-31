@@ -3,18 +3,20 @@ import OrganizePdfClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 
 const toolName = "organize-pdf"
-// @ts-ignore
 const seoData = toolSeoData[toolName]
+const contentData = toolContentData[toolName]
 
 export const metadata: Metadata = {
     title: seoData.title,
     description: seoData.description,
     keywords: seoData.keywords,
     alternates: {
-        canonical: `/${toolName}`,
+        canonical: `https://convertify.work/${toolName}`,
     },
     openGraph: {
         title: seoData.title,
@@ -45,6 +47,16 @@ export default function Page() {
                 </div>
                 <OrganizePdfClient />
             </section>
+
+            {/* SEO Content Section */}
+            <ToolSeoContent
+                toolName="PDF Organizer"
+                toolSlug={toolName}
+                description={contentData.description}
+                features={contentData.features}
+                useCases={contentData.useCases}
+                keywords={contentData.keywords}
+            />
 
             <HowToSchema
                 toolName={seoData.title}

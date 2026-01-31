@@ -3,18 +3,20 @@ import { ComingSoonTool } from "@/components/tools/coming-soon-tool"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 
 const toolName = "edit-pdf"
-// @ts-ignore
 const seoData = toolSeoData[toolName]
+const contentData = toolContentData[toolName]
 
 export const metadata: Metadata = {
     title: seoData.title,
     description: seoData.description,
     keywords: seoData.keywords,
     alternates: {
-        canonical: `/${toolName}`,
+        canonical: `https://convertify.work/${toolName}`,
     },
     openGraph: {
         title: seoData.title,
@@ -46,7 +48,17 @@ export default function Page() {
                 <ComingSoonTool />
             </section>
 
-             <HowToSchema
+            {/* SEO Content Section */}
+            <ToolSeoContent
+                toolName="PDF Editor"
+                toolSlug={toolName}
+                description={contentData.description}
+                features={contentData.features}
+                useCases={contentData.useCases}
+                keywords={contentData.keywords}
+            />
+
+            <HowToSchema
                 toolName={seoData.title}
                 description={seoData.description}
                 steps={seoData.howToSteps}

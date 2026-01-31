@@ -5,11 +5,14 @@ import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
 import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
+import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 import { blogPosts } from "@/lib/blog-data"
 import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
 
 const seoData = toolSeoData["word-to-pdf"]
+const contentData = toolContentData["word-to-pdf"]
 
 export const metadata: Metadata = {
     title: seoData.title,
@@ -44,6 +47,16 @@ export default function Page() {
                 <ToolSwapper />
                 <WordToPdfClient />
             </section>
+
+            {/* SEO Content Section */}
+            <ToolSeoContent
+                toolName="Word to PDF Converter"
+                toolSlug="word-to-pdf"
+                description={contentData.description}
+                features={contentData.features}
+                useCases={contentData.useCases}
+                keywords={contentData.keywords}
+            />
 
             <HowToSchema
                 toolName="Convert Word to PDF"

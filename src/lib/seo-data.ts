@@ -601,5 +601,36 @@ export const toolSeoData = {
             { name: "Preview & Adjust", text: "See how your HTML will look as a PDF and make any needed adjustments." },
             { name: "Download PDF", text: "Convert and download your HTML content as a professional PDF document." }
         ]
+    },
+    "delete-pdf-pages": {
+        title: "Delete PDF Pages Online Free - Remove Pages | Convertify",
+        description: "Delete pages from PDF online free. Remove unwanted pages, blank pages, or specific sections from your PDF documents. No watermarks, secure processing.",
+        keywords: ["delete pdf pages", "remove pdf pages", "delete pages from pdf", "remove pages from pdf online free", "pdf page remover", "cut pdf pages", "delete specific pages from pdf"],
+        h1: "Delete PDF Pages - Remove Unwanted Pages Free",
+        faqs: [
+            { question: "How do I delete pages from a PDF?", answer: "Upload your PDF, click the trash icon on the pages you want to remove, and download your new PDF." },
+            { question: "Can I delete multiple pages at once?", answer: "Yes, you can select and remove as many pages as you need in one go." },
+            { question: "Is it free?", answer: "Yes, 100% free with no limits." }
+        ],
+        howToSteps: [
+            { name: "Upload PDF", text: "Select the PDF file." },
+            { name: "Delete Pages", text: "Click the delete button on pages you want to remove." },
+            { name: "Download", text: "Get your smaller, cleaner PDF." }
+        ]
+    },
+    "reorder-pdf": {
+        title: "Reorder PDF Pages Online Free - Rearrange PDF | Convertify",
+        description: "Reorder PDF pages online free. Drag and drop to rearrange pages, sort documents, and fix page order. No sign-up, works in browser.",
+        keywords: ["reorder pdf", "rearrange pdf pages", "change pdf page order", "organize pdf pages", "sort pdf pages", "move pdf pages"],
+        h1: "Reorder PDF Pages - Rearrange Documents Free",
+        faqs: [
+            { question: "How to reorder pages?", answer: "Simply drag and drop the page thumbnails to your desired position." },
+            { question: "Does it save automatically?", answer: "Once you click download, your new page order is saved permanently to the file." }
+        ],
+        howToSteps: [
+            { name: "Upload PDF", text: "Open your PDF file." },
+            { name: "Rearrange", text: "Drag and drop pages to the correct order." },
+            { name: "Download", text: "Save your reordered PDF." }
+        ]
     }
 }
