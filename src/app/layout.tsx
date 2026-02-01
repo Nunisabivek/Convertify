@@ -22,10 +22,15 @@ export const metadata: Metadata = {
     default: "Free PDF Tools Online - Merge, Convert, Compress",
     template: "%s | Convertify - Free PDF Tools",
   },
-  description: "Free PDF tools with no signup required. Merge, compress, convert PDFs online. 100% secure with client-side processing. Works on mobile & desktop.",
+  description: "Convertify is the best free iLovePDF alternative. Merge, convert, and compress PDFs with client-side security. No file limits, no sign-up, no uploads required.",
   applicationName: "Convertify",
   authors: [{ name: "Convertify Team" }],
-  keywords: ["file converter", "document converter", "online converter", "convertify", "convertifyy", "convertify free", "free pdf tools", "merge pdf", "compress pdf", "jpg to pdf", "pdf to word", "split pdf", "combine pdf", "convert pdf"],
+  keywords: [
+    "free pdf converter", "secure pdf tools", "client-side pdf merger", "no sign up pdf converter",
+    "unlimited pdf tools", "fast pdf converter", "convertify", "ilovepdf alternative",
+    "privacy first pdf", "offline pdf tools", "merge pdf secure", "compress pdf no limit",
+    "jpg to pdf free", "pdf to word", "split pdf client side"
+  ],
   icons: {
     icon: [
       { url: '/icon.png', sizes: '512x512', type: 'image/png' },

@@ -298,11 +298,10 @@ export default function WebHomePage() {
             <section className="w-full pt-20 pb-12 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-100/50 via-slate-50 to-white text-center px-4 relative overflow-hidden">
                 <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
                 <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 drop-shadow-sm">
-                    Best Free PDF Converter <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">& File Tools</span>
+                    Free PDF Converter: <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">Secure & No Use Limits</span>
                 </h1>
                 <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-6 leading-relaxed">
-                    Simple, fast, and secure tools to manage your documents. <br className="hidden md:inline" />
-                    Perfect for everyone, from students to professionals.
+                    Convertify is the best iLovePDF alternative—100% free online PDF tools with client-side processing for ultimate privacy. Merge, convert, compress, or edit PDFs instantly without sign-ups, limits, or uploads.
                 </p>
                 {/* Trust Badges - Addresses "convertify pricing" queries */}
                 <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 mb-4">
@@ -489,16 +488,20 @@ export default function WebHomePage() {
                         <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h3>
                         <div className="space-y-6">
                             <div>
-                                <h4 className="font-semibold text-lg text-slate-800 mb-2">Is Convertify really free?</h4>
-                                <p className="text-slate-600">Yes! Convertify is completely free to use. You can merge, split, compress, and convert as many files as you want without paying a dime.</p>
+                                <h4 className="font-semibold text-lg text-slate-800 mb-2">Are online PDF tools safe for confidential documents?</h4>
+                                <p className="text-slate-600">Yes, Convertify is designed with privacy first. We use client-side processing, meaning your files never leave your device and are never uploaded to our servers, ensuring 100% confidentiality.</p>
                             </div>
                             <div>
-                                <h4 className="font-semibold text-lg text-slate-800 mb-2">Do I need to sign up?</h4>
-                                <p className="text-slate-600">No account is needed. You can start using our tools instantly without any registration or login.</p>
+                                <h4 className="font-semibold text-lg text-slate-800 mb-2">Do free PDF converters have file size limits?</h4>
+                                <p className="text-slate-600">Unlike many competitors, Convertify operates with no artificial file size limits. Because we process files locally on your browser, you are only limited by your own device's memory.</p>
                             </div>
                             <div>
-                                <h4 className="font-semibold text-lg text-slate-800 mb-2">Is there a file size limit?</h4>
-                                <p className="text-slate-600">We support large files, but for optimal performance, we recommend keeping individual files under reasonable limits (e.g., 100MB) depending on your internet connection.</p>
+                                <h4 className="font-semibold text-lg text-slate-800 mb-2">Can I use PDF tools without creating an account?</h4>
+                                <p className="text-slate-600">Absolutely. There is no sign-up, no registration, and no email required. You can use all our tools instantly and indefinitely without ever creating an account.</p>
+                            </div>
+                            <div>
+                                <h4 className="font-semibold text-lg text-slate-800 mb-2">How do I merge PDFs without uploading to servers?</h4>
+                                <p className="text-slate-600">Simply use our "Merge PDF" tool. Since our technology runs in your browser, your files are combined locally on your machine, making it the safest way to merge sensitive documents.</p>
                             </div>
                         </div>
                     </div>

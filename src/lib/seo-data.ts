@@ -86,10 +86,10 @@ export const toolSeoData = {
         description: "Compress PDF files online for free. Reduce file size by up to 90% without losing quality. Optimize documents for email attachments (100KB, 200KB, 1MB).",
         keywords: [
             "compress pdf", "pdf compressor", "shrink pdf online", "reduce pdf size", "resize pdf",
-            "pdf optimizer", "online pdf compressor", "compress pdf to 100kb", "lossless pdf compression",
-            "fast online pdf compressor", "secure pdf size reducer", "high-quality pdf shrinker",
+            "pdf optimizer", "online pdf compressor", "compress pdf to 100kb", "compress pdf to 200kb", "compress pdf to 300kb",
+            "reduce pdf size below 100kb", "shrink pdf file size for email", "pdf compress 1mb to 100kb",
+            "lossless pdf compression", "fast online pdf compressor", "secure pdf size reducer",
             "instant pdf optimizer", "best pdf compressor free", "reduce pdf without quality loss",
-            "safe pdf file compressor", "quick compress pdf online", "maintain quality pdf reducer",
             "privacy-focused pdf shrink", "email-ready pdf optimizer"
         ],
         h1: "PDF Compressor - Reduce File Size Online",
