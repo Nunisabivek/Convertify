@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import { ToolSwapper } from "@/components/tools/tool-swapper"
 import UnlockPdfClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
@@ -31,6 +32,7 @@ export default function Page() {
                         Remove password protection from your PDF files. Fast, free, and secure.
                     </p>
                 </div>
+                <ToolSwapper />
                 <UnlockPdfClient />
             </section>
 

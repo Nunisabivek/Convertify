@@ -46,20 +46,20 @@ export const toolContentData: Record<string, {
         keywords: ["split pdf into individual pages free", "extract pages from pdf no account", "divide large pdf into smaller files", "pdf splitter online free"]
     },
     "compress-pdf": {
-        description: "Reduce PDF file size without losing quality. Our smart compression algorithm shrinks your PDFs for easier email attachments and faster uploads. Perfect for documents, scanned files, and image-heavy PDFs - all processed locally in your browser.",
+        description: "Reduce document file size significantly without compromising quality. Our smart compression algorithm shrinks your files for easier email attachments and faster uploads. Perfect for reports, scanned forms, and image-heavy documents - all processed locally in your browser.",
         features: [
             "Multiple compression levels (light, medium, maximum)",
-            "Maintains text quality and readability",
-            "Optimizes scanned documents and images",
-            "No file size limits - compress large PDFs",
+            "Maintains text clarity and readability",
+            "Optimizes scanned items and images",
+            "No file size limits - compress large documents",
             "Preview before and after file sizes",
             "Batch compress multiple files at once"
         ],
         useCases: [
-            "Shrinking PDFs for email attachment limits",
+            "Shrinking files for email attachment limits",
             "Optimizing documents for web upload",
-            "Reducing storage space for archived files",
-            "Making scanned documents smaller for sharing",
+            "Reducing storage space for archived records",
+            "Making scanned forms smaller for sharing",
             "Compressing portfolios for job applications"
         ],
         keywords: ["compress pdf to 100kb online free", "reduce pdf file size for email", "shrink pdf without losing quality", "pdf compressor no limit"]

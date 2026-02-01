@@ -5,14 +5,14 @@ import { PDFDocument } from "pdf-lib"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
-import { Minimize2, Download, Loader2, FileText, ArrowRight, Settings2, Target, AlertCircle } from "lucide-react"
+import { Minimize2, Download, Loader2, FileText, ArrowRight, Settings2, Target, AlertCircle, Image as ImageIcon } from "lucide-react"
 
 type SizeUnit = "KB" | "MB"
 
 export default function CompressPdfPage() {
     const [file, setFile] = useState<File | null>(null)
     const [isProcessing, setIsProcessing] = useState(false)
-    const [processedPdfUrl, setProcessedPdfUrl] = useState<string | null>(null)
+    const [processedFileUrl, setProcessedFileUrl] = useState<string | null>(null)
     const [compressionStats, setCompressionStats] = useState<{ original: number, compressed: number } | null>(null)
     const [progress, setProgress] = useState(0)
 
@@ -22,6 +22,16 @@ export default function CompressPdfPage() {
     const [targetSize, setTargetSize] = useState<string>("")
     const [sizeUnit, setSizeUnit] = useState<SizeUnit>("KB")
     const [showAdvanced, setShowAdvanced] = useState(false)
+
+    const isPdf = file?.type === "application/pdf"
+
+    // Accept PDF and common image formats
+    const ACCEPTED_TYPES = {
+        "application/pdf": [".pdf"],
+        "image/jpeg": [".jpg", ".jpeg"],
+        "image/png": [".png"],
+        "image/webp": [".webp"]
+    }
 
     // Convert target to bytes for calculations
     const getTargetBytes = (): number => {
@@ -44,6 +54,8 @@ export default function CompressPdfPage() {
             setResolutionScale(1.5)
             setTargetSize("")
             setSizeUnit("KB")
+            setProcessedFileUrl(null)
+            setCompressionStats(null)
         }
     }
 
@@ -82,71 +94,131 @@ export default function CompressPdfPage() {
         setSizeUnit(unit)
     }
 
+    const compressImage = async (file: File): Promise<{ blob: Blob, url: string }> => {
+        return new Promise((resolve, reject) => {
+            const img = new Image()
+            img.src = URL.createObjectURL(file)
+            img.onload = () => {
+                const canvas = document.createElement("canvas")
+                // Use resolutionScale to resize existing dimensions
+                // For PDF we used scale directly on viewport. For image, we scale relative to original.
+                // NOTE: existing resolutionScale (0.6 to 1.5) is okay, but strictly > 1 scales UP which might not be desired for compression.
+                // However, for consistency with PDF logic (where 1.5 was "high quality"), let's adapt.
+                // If the user wants compression, usually scale <= 1.
+                // Let's cap scale at 1.0 for images when compressing, unless user explicitly set it up?
+                // Actually, let's just use the scalefactor. If it's small, image shrinks.
+
+                const scale = resolutionScale > 1.0 ? 1.0 : resolutionScale // Cap max size at 100% of original for images
+
+                canvas.width = img.width * scale
+                canvas.height = img.height * scale
+
+                const ctx = canvas.getContext("2d")
+                if (!ctx) {
+                    reject(new Error("Canvas context failed"))
+                    return
+                }
+
+                // Draw white background for transparency handling (convert png to jpg)
+                ctx.fillStyle = "#FFFFFF"
+                ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+
+                // Always compress to JPEG for size reduction
+                canvas.toBlob(
+                    (blob) => {
+                        if (blob) {
+                            resolve({ blob, url: URL.createObjectURL(blob) })
+                        } else {
+                            reject(new Error("Compression failed"))
+                        }
+                    },
+                    "image/jpeg",
+                    quality
+                )
+            }
+            img.onerror = reject
+        })
+    }
+
     const handleCompress = async () => {
         if (!file) return
         setIsProcessing(true)
         setProgress(0)
 
         try {
-            const pdfjsLib = await import("pdfjs-dist")
-            pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`
+            if (isPdf) {
+                // PDF Compression Logic
+                const pdfjsLib = await import("pdfjs-dist")
+                pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`
 
-            const arrayBuffer = await file.arrayBuffer()
-            const srcPdf = await pdfjsLib.getDocument(arrayBuffer).promise
-            const numPages = srcPdf.numPages
+                const arrayBuffer = await file.arrayBuffer()
+                const srcPdf = await pdfjsLib.getDocument(arrayBuffer).promise
+                const numPages = srcPdf.numPages
 
-            const newPdf = await PDFDocument.create()
+                const newPdf = await PDFDocument.create()
 
-            for (let i = 1; i <= numPages; i++) {
-                const page = await srcPdf.getPage(i)
-                const viewport = page.getViewport({ scale: resolutionScale })
+                for (let i = 1; i <= numPages; i++) {
+                    const page = await srcPdf.getPage(i)
+                    const viewport = page.getViewport({ scale: resolutionScale })
 
-                const canvas = document.createElement("canvas")
-                const context = canvas.getContext("2d")
-                canvas.width = viewport.width
-                canvas.height = viewport.height
+                    const canvas = document.createElement("canvas")
+                    const context = canvas.getContext("2d")
+                    canvas.width = viewport.width
+                    canvas.height = viewport.height
 
-                if (context) {
-                    await page.render({
-                        canvasContext: context,
-                        viewport: viewport,
-                    } as any).promise
+                    if (context) {
+                        await page.render({
+                            canvasContext: context,
+                            viewport: viewport,
+                        } as any).promise
 
-                    const imgData = canvas.toDataURL("image/jpeg", quality)
-                    const imgBytes = await fetch(imgData).then(res => res.arrayBuffer())
+                        const imgData = canvas.toDataURL("image/jpeg", quality)
+                        const imgBytes = await fetch(imgData).then(res => res.arrayBuffer())
 
-                    const jpgImage = await newPdf.embedJpg(imgBytes)
-                    const newPage = newPdf.addPage([jpgImage.width, jpgImage.height])
-                    newPage.drawImage(jpgImage, {
-                        x: 0,
-                        y: 0,
-                        width: jpgImage.width,
-                        height: jpgImage.height,
-                    })
+                        const jpgImage = await newPdf.embedJpg(imgBytes)
+                        const newPage = newPdf.addPage([jpgImage.width, jpgImage.height])
+                        newPage.drawImage(jpgImage, {
+                            x: 0,
+                            y: 0,
+                            width: jpgImage.width,
+                            height: jpgImage.height,
+                        })
+                    }
+                    setProgress(Math.round((i / numPages) * 100))
                 }
-                setProgress(Math.round((i / numPages) * 100))
+
+                const pdfBytes = await newPdf.save()
+                const blob = new Blob([pdfBytes as any], { type: 'application/pdf' })
+                const url = URL.createObjectURL(blob)
+
+                setProcessedFileUrl(url)
+                setCompressionStats({
+                    original: file.size,
+                    compressed: blob.size
+                })
+            } else {
+                // Image Compression Logic
+                const { blob, url } = await compressImage(file)
+                setProcessedFileUrl(url)
+                setCompressionStats({
+                    original: file.size,
+                    compressed: blob.size
+                })
+                setProgress(100)
             }
-
-            const pdfBytes = await newPdf.save()
-            const blob = new Blob([pdfBytes as any], { type: 'application/pdf' })
-            const url = URL.createObjectURL(blob)
-
-            setProcessedPdfUrl(url)
-            setCompressionStats({
-                original: file.size,
-                compressed: blob.size
-            })
 
         } catch (error) {
             console.error("Compression error:", error)
-            alert("Failed to compress PDF. Please try again.")
+            alert("Failed to compress file. Please try again.")
         } finally {
             setIsProcessing(false)
         }
     }
 
     // Result screen
-    if (processedPdfUrl && compressionStats) {
+    if (processedFileUrl && compressionStats) {
         const savings = Math.round(((compressionStats.original - compressionStats.compressed) / compressionStats.original) * 100)
         const isSmaller = compressionStats.compressed < compressionStats.original
         const targetBytes = getTargetBytes()
@@ -181,7 +253,7 @@ export default function CompressPdfPage() {
                                 <p className="font-medium">
                                     Target was {targetSize} {sizeUnit}. Result is {formatFileSize(compressionStats.compressed)}.
                                     <br />
-                                    <span className="text-sm">Try lowering quality or resolution settings further.</span>
+                                    <span className="text-sm">Try using lower quality settings manually.</span>
                                 </p>
                             )}
                         </div>
@@ -190,26 +262,26 @@ export default function CompressPdfPage() {
                     {!isSmaller && (
                         <div className="mt-2 text-sm text-orange-600 bg-orange-100 p-2 rounded">
                             <p className="font-bold">File size increased.</p>
-                            <p>This happens when the document is already optimized or text-based. Try lowering the settings.</p>
+                            <p>This happens when the file is already optimized. Try lowering the settings.</p>
                         </div>
                     )}
                 </div>
 
                 <div className="flex flex-col gap-4">
                     <Button size="xl" asChild className="w-full bg-green-600 hover:bg-green-700">
-                        <a href={processedPdfUrl} download={`compressed-${file!.name}`}>
+                        <a href={processedFileUrl} download={`compressed-${file!.name.split('.')[0]}.${isPdf ? 'pdf' : 'jpg'}`}>
                             <Download className="mr-2 w-5 h-5" />
-                            Download Compressed PDF
+                            Download Compressed {isPdf ? 'PDF' : 'Image'}
                         </a>
                     </Button>
                     <AdBanner variant="rectangle" />
                     <Button variant="outline" size="xl" onClick={() => {
                         setFile(null)
-                        setProcessedPdfUrl(null)
+                        setProcessedFileUrl(null)
                         setCompressionStats(null)
                         setTargetSize("")
                     }}>
-                        Compress Another PDF
+                        Compress Another File
                     </Button>
                 </div>
             </div>
@@ -219,18 +291,24 @@ export default function CompressPdfPage() {
     return (
         <div className="container mx-auto py-12 max-w-4xl px-4">
             <div className="text-center mb-10">
-                <h1 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">Compress PDF</h1>
-                <p className="text-slate-500 text-lg">Reduce file size to your exact target. Choose KB or MB.</p>
+                <h1 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">Compress PDF & Images</h1>
+                <p className="text-slate-500 text-lg">Reduce file size of PDFs, JPGs, PNGs to your exact target (KB/MB).</p>
             </div>
 
             {!file ? (
-                <FileUploader onFilesSelected={handleFilesSelected} multiple={false} />
+                <FileUploader
+                    onFilesSelected={handleFilesSelected}
+                    multiple={false}
+                    accept={ACCEPTED_TYPES}
+                    fileTypeLabel="PDF or Images"
+                    iconType="pdf"
+                />
             ) : (
                 <div className="space-y-8">
                     <div className="bg-white rounded-2xl shadow-sm border p-6 space-y-6">
                         {/* File Info */}
                         <div className="flex items-center gap-4 p-4 bg-orange-50 rounded-xl">
-                            <FileText className="w-10 h-10 text-orange-500" />
+                            {isPdf ? <FileText className="w-10 h-10 text-orange-500" /> : <ImageIcon className="w-10 h-10 text-orange-500" />}
                             <div className="flex-1">
                                 <h3 className="font-bold text-slate-800 truncate">{file.name}</h3>
                                 <p className="text-sm text-slate-500">Current size: <strong>{formatFileSize(file.size)}</strong></p>
@@ -268,8 +346,8 @@ export default function CompressPdfPage() {
                                                 type="button"
                                                 onClick={() => handlePreset(preset.value, preset.unit)}
                                                 className={`px-4 py-2 rounded-lg border text-sm font-medium transition-all ${isSelected
-                                                        ? "bg-orange-600 text-white border-orange-600 shadow-md"
-                                                        : "bg-white text-slate-700 border-slate-200 hover:border-orange-400 hover:bg-orange-50"
+                                                    ? "bg-orange-600 text-white border-orange-600 shadow-md"
+                                                    : "bg-white text-slate-700 border-slate-200 hover:border-orange-400 hover:bg-orange-50"
                                                     }`}
                                             >
                                                 {preset.label}
@@ -297,8 +375,8 @@ export default function CompressPdfPage() {
                                             type="button"
                                             onClick={() => setSizeUnit("KB")}
                                             className={`px-4 py-2 text-sm font-bold transition-all ${sizeUnit === "KB"
-                                                    ? "bg-orange-600 text-white"
-                                                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                                                ? "bg-orange-600 text-white"
+                                                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                                                 }`}
                                         >
                                             KB
@@ -307,8 +385,8 @@ export default function CompressPdfPage() {
                                             type="button"
                                             onClick={() => setSizeUnit("MB")}
                                             className={`px-4 py-2 text-sm font-bold transition-all ${sizeUnit === "MB"
-                                                    ? "bg-orange-600 text-white"
-                                                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                                                ? "bg-orange-600 text-white"
+                                                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                                                 }`}
                                         >
                                             MB
@@ -319,8 +397,8 @@ export default function CompressPdfPage() {
                                 {/* Size Comparison */}
                                 {targetSize && getTargetBytes() > 0 && (
                                     <div className={`text-sm p-3 rounded-lg flex items-center gap-2 ${getTargetBytes() < file.size
-                                            ? "bg-green-50 text-green-700"
-                                            : "bg-amber-50 text-amber-700"
+                                        ? "bg-green-50 text-green-700"
+                                        : "bg-amber-50 text-amber-700"
                                         }`}>
                                         <AlertCircle className="w-4 h-4" />
                                         {getTargetBytes() < file.size ? (
@@ -354,7 +432,7 @@ export default function CompressPdfPage() {
                                 <div className="mt-4 space-y-4 p-4 bg-slate-50 rounded-lg">
                                     <div className="space-y-2">
                                         <div className="flex justify-between">
-                                            <label className="text-sm font-medium text-slate-700">Image Quality</label>
+                                            <label className="text-sm font-medium text-slate-700">{isPdf ? 'Image Quality' : 'Compression Level'}</label>
                                             <span className="text-xs font-mono bg-white px-2 py-1 rounded border">{Math.round(quality * 100)}%</span>
                                         </div>
                                         <input
@@ -369,7 +447,7 @@ export default function CompressPdfPage() {
 
                                     <div className="space-y-2">
                                         <div className="flex justify-between">
-                                            <label className="text-sm font-medium text-slate-700">Page Resolution</label>
+                                            <label className="text-sm font-medium text-slate-700">{isPdf ? 'Page Resolution' : 'Image Scale'}</label>
                                             <span className="text-xs font-mono bg-white px-2 py-1 rounded border">{resolutionScale}x</span>
                                         </div>
                                         <input
@@ -379,7 +457,7 @@ export default function CompressPdfPage() {
                                             onChange={(e) => setResolutionScale(parseFloat(e.target.value))}
                                             className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-orange-500"
                                         />
-                                        <p className="text-xs text-slate-400">Lower resolution = Smaller file size (may reduce clarity)</p>
+                                        <p className="text-xs text-slate-400">Lower resolution/scale = Smaller file size (may reduce clarity)</p>
                                     </div>
                                 </div>
                             )}
@@ -395,12 +473,12 @@ export default function CompressPdfPage() {
                             {isProcessing ? (
                                 <>
                                     <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                                    Compressing {progress}%...
+                                    Compressing {isPdf ? `${progress}%` : ''}...
                                 </>
                             ) : (
                                 <>
                                     <Minimize2 className="mr-2 h-5 w-5" />
-                                    {targetSize ? `Compress to ${targetSize} ${sizeUnit}` : "Compress PDF"}
+                                    {targetSize ? `Compress to ${targetSize} ${sizeUnit}` : `Compress ${isPdf ? 'PDF' : 'File'}`}
                                 </>
                             )}
                         </Button>

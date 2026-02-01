@@ -1,5 +1,6 @@
 
 import { Metadata } from "next"
+import { ToolSwapper } from "@/components/tools/tool-swapper"
 import SplitPdfClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
@@ -51,6 +52,7 @@ export default function Page() {
                         Extract specific pages from your PDF or split it into multiple files. Select individual pages, enter a range, or split all pages. Fast, free, and secure.
                     </p>
                 </div>
+                <ToolSwapper />
                 <SplitPdfClient />
             </section>
 

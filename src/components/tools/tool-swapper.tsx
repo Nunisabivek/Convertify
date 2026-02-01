@@ -108,6 +108,37 @@ const SWAP_PAIRS: Record<string, SwapPair> = {
         fromColor: "from-red-500 to-rose-500",
         toColor: "from-slate-500 to-gray-600"
     },
+    // Protect <-> Unlock
+    "protect-pdf": {
+        target: "unlock-pdf",
+        fromFormat: "Protected",
+        toFormat: "Unlocked",
+        fromColor: "from-slate-600 to-gray-700",
+        toColor: "from-lime-500 to-green-500"
+    },
+    "unlock-pdf": {
+        target: "protect-pdf",
+        fromFormat: "Unlocked",
+        toFormat: "Protected",
+        fromColor: "from-lime-500 to-green-500",
+        toColor: "from-slate-600 to-gray-700"
+    },
+
+    // Merge <-> Split
+    "merge-pdf": {
+        target: "split-pdf",
+        fromFormat: "Merged",
+        toFormat: "Split",
+        fromColor: "from-red-500 to-rose-500",
+        toColor: "from-orange-500 to-amber-500"
+    },
+    "split-pdf": {
+        target: "merge-pdf",
+        fromFormat: "Split",
+        toFormat: "Merged",
+        fromColor: "from-orange-500 to-amber-500",
+        toColor: "from-red-500 to-rose-500"
+    },
 }
 
 export function ToolSwapper() {

@@ -48,7 +48,7 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Reduce PDF file size by up to 90% without losing quality. Perfect for email attachments.
+                        Reduce PDF file size by up to 90% or compress to a specific size (100KB, 200KB, 500KB, 1MB). Perfect for email attachments.
                     </p>
                 </div>
                 <CompressPdfClient />

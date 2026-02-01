@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import { ToolSwapper } from "@/components/tools/tool-swapper"
 import ProtectPdfClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
@@ -31,6 +32,7 @@ export default function Page() {
                         Secure your sensitive documents with password protection. Easy to use, completely free.
                     </p>
                 </div>
+                <ToolSwapper />
                 <ProtectPdfClient />
             </section>
 

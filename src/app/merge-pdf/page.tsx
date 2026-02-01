@@ -1,5 +1,6 @@
 
 import { Metadata } from "next"
+import { ToolSwapper } from "@/components/tools/tool-swapper"
 import MergePdfClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
@@ -52,6 +53,7 @@ export default function Page() {
                         Combine multiple PDF files into one document. No watermarks, no file limits, works on all devices.
                     </p>
                 </div>
+                <ToolSwapper />
                 <MergePdfClient />
             </section>
 

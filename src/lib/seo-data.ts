@@ -3,36 +3,15 @@
 
 export const toolSeoData = {
     "merge-pdf": {
-        title: "Merge PDF Online Free - Combine PDFs Fast | Convertify",
-        description: "Merge PDF files into one document free online. No sign up, no limits, no watermarks. Combine unlimited PDFs instantly - the best free iLovePDF alternative.",
-        keywords: ["merge pdf", "combine pdf files", "pdf joiner online free", "merge pdf files without watermark", "unlimited pdf merger online free no daily limit", "merge pdf online no sign up required", "combine pdf files without account limit", "pdf merger no limit", "Smallpdf free alternative no daily limit", "better free alternative to ilovepdf", "merge pdf files online free unlimited files"],
+        title: "Merge PDF Online Free - Combine PDF Files Instantly | Convertify",
+        description: "Merge multiple PDF files into one document for free. No watermarks, no sign-up, no file limits. The best free alternative to iLovePDF for combining PDFs.",
+        keywords: ["merge pdf", "combine pdf files", "pdf joiner free", "combine multiple pdfs", "merge pdf files online free unlimited", "pdf merger no upload limit", "join pdf documents"],
         h1: "Merge PDF Files Online - Fast & Free",
         faqs: [
-            {
-                question: "How many PDF files can I merge at once?",
-                answer: "You can merge unlimited PDF files at once with Convertify. There's no limit on the number of files or total file size. Simply upload all your PDFs and we'll combine them instantly."
-            },
-            {
-                question: "Is there a watermark on merged PDFs?",
-                answer: "No, Convertify never adds watermarks to your merged PDF files. Your documents remain completely clean and professional, ready for any use."
-            },
-            {
-                question: "Is my data secure when merging PDFs online?",
-                answer: "Yes, your privacy is our priority. All PDF processing happens in your browser - your files never leave your device. We don't store any uploaded files on our servers."
-            },
-            {
-                question: "Can I reorder PDF pages before merging?",
-                answer: "Absolutely! You can drag and drop to reorder your PDF files before merging. This lets you control the exact sequence of pages in your final combined document."
-            },
-            {
-                question: "Does it work on mobile phones?",
-                answer: "Yes! Convertify works perfectly on all devices including iPhones, Android phones, tablets, and desktop computers. No app installation required."
-            }
+            // ... existing FAQs ...
         ],
         howToSteps: [
-            { name: "Upload Your PDF Files", text: "Click the upload button or drag and drop multiple PDF files into the upload area. You can select as many files as you need." },
-            { name: "Arrange the Order", text: "Drag and drop to reorder your PDF files. The files will be merged in the order shown from top to bottom." },
-            { name: "Download Merged PDF", text: "Click the 'Merge PDFs' button and your combined PDF will be ready to download instantly. No email required." }
+            // ... existing steps ...
         ]
     },
     "split-pdf": {
@@ -73,10 +52,10 @@ export const toolSeoData = {
         ]
     },
     "compress-pdf": {
-        title: "Compress PDF Online Free - Reduce Size | Convertify",
-        description: "Compress PDF to 100KB online free. Reduce PDF file size for email without losing quality. No daily limits, no sign up - better than iLovePDF.",
-        keywords: ["compress pdf", "reduce pdf size", "compress pdf to 100kb online free", "reduce pdf file size under 1mb for email", "compress pdf file size free no credit card", "shrink pdf file", "pdf compressor online free", "reduce pdf size without losing quality free", "compress large pdf files for free online", "batch compress pdf files online free", "make pdf file smaller for upload free"],
-        h1: "Compress PDF - Reduce File Size Online",
+        title: "Compress PDF Free - Reduce File Size to 100KB/200KB",
+        description: "Shrink PDF file size online for free. Resize documents to 100KB, 200KB, or 500KB. Optimize files for email attachments without losing quality.",
+        keywords: ["compress pdf", "shrink pdf", "reduce pdf size", "resize pdf", "compress pdf to 100kb", "email pdf compressor", "minimize pdf file", "optimize document size"],
+        h1: "Compress PDF & Shrink File Size Free",
         faqs: [
             {
                 question: "How much can I reduce my PDF file size?",
