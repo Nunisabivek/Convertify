@@ -298,7 +298,7 @@ export default function WebHomePage() {
             <section className="w-full pt-20 pb-12 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-100/50 via-slate-50 to-white text-center px-4 relative overflow-hidden">
                 <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
                 <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 drop-shadow-sm">
-                    Free PDF Converter: <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">Secure & No Use Limits</span>
+                    Convertify: <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">Free PDF Tools & Converter</span>
                 </h1>
                 <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-6 leading-relaxed">
                     Convertify is the best iLovePDF alternative—100% free online PDF tools with client-side processing for ultimate privacy. Merge, convert, compress, or edit PDFs instantly without sign-ups, limits, or uploads.

@@ -533,7 +533,7 @@ export const toolSeoData = {
             "faithful xls table export to pdf", "encrypted financial converter", "maintain pivot tables in pdf",
             "lossless excel chart to pdf", "batch xlsx secure conversion", "verified data integrity tool"
         ],
-        h1: "Excel to PDF - Convert Tables & Charts Free",
+        h1: "Convert Excel to PDF - Free Online Converter",
         faqs: [
             {
                 question: "Will large Excel files with multiple sheets convert properly?",

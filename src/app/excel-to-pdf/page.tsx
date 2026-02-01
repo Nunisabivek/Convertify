@@ -52,8 +52,8 @@ export default function Page() {
                         <p className="text-slate-600 mb-6 max-w-md mx-auto">
                             This feature converts Excel files (XLS, XLSX) to PDF format. Upload your spreadsheet to get started.
                         </p>
-                        <div className="bg-amber-50 border border-amber-200 text-amber-800 p-4 rounded-lg text-sm max-w-md mx-auto">
-                            <strong>Note:</strong> For best results with Excel files, we recommend using Microsoft Excel or Google Sheets&apos; built-in &quot;Save as PDF&quot; feature, as browser-based conversion may not preserve all formatting.
+                        <div className="bg-indigo-50 border border-indigo-200 text-indigo-800 p-4 rounded-lg text-sm max-w-md mx-auto">
+                            <strong>Secure Conversion:</strong> Your spreadsheets are converted locally in your browser to PDF. We never store or view your financial data.
                         </div>
                         <div className="mt-8">
                             <Link href="/all-tools" className="text-indigo-600 hover:text-indigo-700 font-medium">
