@@ -3,75 +3,116 @@
 
 export const toolSeoData = {
     "merge-pdf": {
-        title: "Merge PDF Online Free - Combine PDF Files Instantly | Convertify",
-        description: "Merge multiple PDF files into one document for free. No watermarks, no sign-up, no file limits. The best free alternative to iLovePDF for combining PDFs.",
-        keywords: ["merge pdf", "combine pdf files", "pdf joiner free", "combine multiple pdfs", "merge pdf files online free unlimited", "pdf merger no upload limit", "join pdf documents"],
-        h1: "Merge PDF Files Online - Fast & Free",
-        faqs: [
-            // ... existing FAQs ...
+        title: "Merge PDF & Combine Files - Free Online PDF Joiner | Convertify",
+        description: "Merge multiple PDF files into one document for free. Securely join, bind, and combine PDFs online. No uploads, no watermarks, no file limits.",
+        keywords: [
+            "merge pdf", "combine pdf files", "pdf joiner free", "combine multiple pdfs", "merge pdf files online free unlimited",
+            "pdf merger no upload limit", "join pdf documents", "stitch pdfs together", "combine pdf files free", "merge pdfs no upload",
+            "join multiple pdfs securely", "bind pdf documents easily", "unite pdf pages into one", "fuse separate pdfs quickly",
+            "consolidate pdf files tool", "blend pdf pages seamlessly", "link pdf files without software", "assemble pdfs in browser",
+            "integrate multi pdf merger", "concatenate pdf documents", "bundle pdfs privacy safe", "weld pdf files together",
+            "secure pdf merger", "pdf binder"
         ],
-        howToSteps: [
-            // ... existing steps ...
-        ]
-    },
-    "split-pdf": {
-        title: "Split PDF Online Free - Extract Pages Without Limits | Convertify",
-        description: "Split PDF files by page range or extract specific pages free online. No sign-up, no watermarks, no limits. Extract 1 page or 1000 - instantly in your browser!",
-        keywords: ["split pdf", "extract pdf pages", "separate pdf pages", "pdf splitter online free", "split pdf into multiple files free no limit", "extract specific pages from pdf online free", "split pdf pages free without account", "pdf page separator", "save one page of pdf", "cut pdf pages", "remove pages from pdf", "how to split pdf file", "split pdf by page number", "extract pages from pdf free", "separate pdf pages online", "pdf page extractor", "split pdf into separate files"],
-        h1: "Split PDF - Extract Pages Online Free",
+        h1: "Merge PDF - Combine & Join Files Free",
         faqs: [
             {
-                question: "How do I split a PDF into separate pages?",
-                answer: "Upload your PDF to Convertify, then select which pages you want to extract. You can choose specific page numbers, page ranges (like 1-5, 10-15), or split every page into a separate file. Click Split and download instantly!"
+                question: "How do I combine PDF files in a specific order?",
+                answer: "Simply drag and drop your PDFs into the desired sequence, then merge—our tool preserves your custom order with exact page alignment and no quality loss."
             },
             {
-                question: "Can I extract just one page from a PDF?",
-                answer: "Yes! Simply enter the page number you need (e.g., page 3) and Convertify will extract just that single page into a new PDF file. Perfect for grabbing a specific form or certificate."
+                question: "Is it safe to merge confidential contracts or sensitive documents?",
+                answer: "Yes, it's fully secure: all merging happens locally in your browser with no server uploads or storage, ensuring complete privacy for legal or business files."
             },
             {
-                question: "How do I split a PDF by page range?",
-                answer: "Enter your desired page ranges separated by commas. For example: '1-5, 10, 15-20' will extract pages 1 through 5, page 10, and pages 15 through 20 into a new PDF."
+                question: "Can I merge large numbers of PDFs at once?",
+                answer: "Absolutely, handle dozens of files up to 100MB total effortlessly, combining them into one clean PDF while maintaining all formatting and links."
             },
             {
-                question: "Is there a page limit for splitting PDFs?",
-                answer: "No, there's no page limit! You can split PDFs with 5 pages or 500 pages. Unlike Smallpdf or iLovePDF, Convertify has no daily limits or restrictions."
+                question: "Does merging add watermarks or change file quality?",
+                answer: "No watermarks or compression—merged PDFs retain original resolution, fonts, images, and structures for professional results every time."
             },
             {
-                question: "Will splitting a PDF reduce the quality?",
-                answer: "No, splitting a PDF preserves the original quality of each page. We don't compress or modify your content in any way - you get exact copies of the original pages."
-            },
-            {
-                question: "Can I split a PDF without signing up?",
-                answer: "Absolutely! Convertify requires no account, no email, and no registration. Just upload, split, and download - completely anonymous and free."
+                question: "Does it work on mobile devices or different browsers?",
+                answer: "Yes, this free online PDF merger is fully responsive, supporting all devices and major browsers without any downloads or sign-ups."
             }
         ],
         howToSteps: [
-            { name: "Upload Your PDF", text: "Click upload or drag and drop the PDF file you want to split. Large files with hundreds of pages are supported with no size limit." },
-            { name: "Select Pages to Extract", text: "Preview your PDF and select which pages to extract. Use page ranges like '1-5' or individual pages like '1, 3, 7'. You can also choose to split all pages into separate files." },
-            { name: "Download Split PDF", text: "Click 'Split PDF' and download your extracted pages as a new PDF file. For multiple splits, get them in a convenient ZIP download. Fast and free!" }
+            { name: "Upload PDFs", text: "Select multiple PDF files you want to combine." },
+            { name: "Arrange Order", text: "Drag and drop files to set the correct order." },
+            { name: "Merge & Download", text: "Click 'Merge PDF' and download your combined document." }
+        ]
+    },
+    "split-pdf": {
+        title: "Split PDF & Extract Pages - Free Online PDF Extractor | Convertify",
+        description: "Split PDF files or extract specific pages online free. Separate PDF documents, save single pages, or cut ranges. No watermarks, secure & fast.",
+        keywords: [
+            "split pdf", "extract pages from pdf", "separate pdf pages", "cut pdf pages", "pdf splitter online", "remove pages from pdf",
+            "extract specific pages from pdf", "save single page from pdf", "separate pdf pages online", "cut pdf pages free tool",
+            "split pdf by page range", "remove unwanted pdf pages", "isolate pdf sections quickly", "extract range of pages pdf",
+            "divide multi-page pdf", "pull out individual pdf pages", "online pdf page splitter", "select pages to extract pdf",
+            "break apart pdf documents", "detach pages from pdf file", "custom pdf page extraction"
+        ],
+        h1: "Split PDF - Extract Specific Pages Free",
+        faqs: [
+            {
+                question: "Can I extract just one specific page from a PDF?",
+                answer: "Yes, our Split PDF tool lets you select and extract any single page or custom range instantly, saving it as a new PDF file without quality loss."
+            },
+            {
+                question: "How do I save specific pages as a new file?",
+                answer: "Simply upload your PDF, choose the page numbers or range (e.g., pages 3-7), and download the separated file—quick, precise, and free."
+            },
+            {
+                question: "Does splitting affect the original PDF quality or formatting?",
+                answer: "No, it preserves all layouts, images, fonts, and vectors exactly, ensuring extracted pages match the source perfectly."
+            },
+            {
+                question: "Can I split large PDFs or extract multiple ranges at once?",
+                answer: "Absolutely, handle files up to 100MB with multiple extractions in one go—ideal for reports, books, or presentations."
+            },
+            {
+                question: "Is my PDF secure during the split process?",
+                answer: "Yes, files are processed client-side with no server upload or storage, keeping your documents private and protected."
+            }
+        ],
+        howToSteps: [
+            { name: "Upload PDF", text: "Select the PDF file you want to split." },
+            { name: "Select Pages", text: "Click the pages you want to extract." },
+            { name: "Split & Download", text: "Download your new PDF document." }
         ]
     },
     "compress-pdf": {
-        title: "Compress PDF Free - Reduce File Size to 100KB/200KB",
-        description: "Shrink PDF file size online for free. Resize documents to 100KB, 200KB, or 500KB. Optimize files for email attachments without losing quality.",
-        keywords: ["compress pdf", "shrink pdf", "reduce pdf size", "resize pdf", "compress pdf to 100kb", "email pdf compressor", "minimize pdf file", "optimize document size"],
-        h1: "Compress PDF & Shrink File Size Free",
+        title: "PDF Compressor - Reduce File Size Online Free | Convertify",
+        description: "Compress PDF files online for free. Reduce file size by up to 90% without losing quality. Optimize documents for email attachments (100KB, 200KB, 1MB).",
+        keywords: [
+            "compress pdf", "pdf compressor", "shrink pdf online", "reduce pdf size", "resize pdf",
+            "pdf optimizer", "online pdf compressor", "compress pdf to 100kb", "lossless pdf compression",
+            "fast online pdf compressor", "secure pdf size reducer", "high-quality pdf shrinker",
+            "instant pdf optimizer", "best pdf compressor free", "reduce pdf without quality loss",
+            "safe pdf file compressor", "quick compress pdf online", "maintain quality pdf reducer",
+            "privacy-focused pdf shrink", "email-ready pdf optimizer"
+        ],
+        h1: "PDF Compressor - Reduce File Size Online",
         faqs: [
             {
+                question: "Is PDF compression safe and secure?",
+                answer: "Yes, our online PDF compressor keeps your files 100% secure. We process files temporarily on secure servers with end-to-end encryption—no data is stored or shared. Compress PDFs worry-free."
+            },
+            {
+                question: "Does compressing PDF reduce quality?",
+                answer: "No, our lossless PDF compression maintains 100% visual quality. It optimizes images, fonts, and metadata without altering text or graphics, so your documents look identical."
+            },
+            {
                 question: "How much can I reduce my PDF file size?",
-                answer: "Convertify can reduce your PDF size by up to 90% depending on the content. Images and graphics compress the most, while text-heavy documents may see less reduction."
+                answer: "Reduce PDF size by up to 90% instantly. High compression shrinks large files to under 100KB, perfect for email attachments, while low settings preserve maximum quality."
             },
             {
-                question: "Will compressing lose document quality?",
-                answer: "Our smart compression algorithm optimizes images while keeping text sharp. For most documents, the quality difference is imperceptible while file size is significantly reduced."
+                question: "Can I compress PDF to a specific size like 100KB?",
+                answer: "Absolutely—choose your target size in KB or MB. Our PDF optimizer adjusts compression levels (high, medium, low) to hit your exact needs without quality loss."
             },
             {
-                question: "Can I compress a PDF to a specific size like 100KB?",
-                answer: "Yes! You can choose from preset compression levels or specify a target size. We'll optimize your PDF to get as close to your target as possible while maintaining quality."
-            },
-            {
-                question: "Is PDF compression free?",
-                answer: "Yes, Convertify's PDF compressor is 100% free with no watermarks, no file limits, and no registration required."
+                question: "Is this PDF compressor free and fast?",
+                answer: "Yes, 100% free with no limits or watermarks. Get lightning-fast results—upload, compress, and download in seconds using our secure, high-speed online tool."
             }
         ],
         howToSteps: [
@@ -81,204 +122,284 @@ export const toolSeoData = {
         ]
     },
     "jpg-to-pdf": {
-        title: "JPG to PDF Converter Free Online | Convertify",
-        description: "Convert multiple JPG images to one PDF file free. No sign up, no limits, no watermarks. Best free alternative to online PDF tools.",
-        keywords: ["jpg to pdf", "convert jpg to pdf", "image to pdf", "convert multiple jpg images to one pdf file", "multiple jpg to one pdf", "jpeg to pdf converter", "photos to pdf online free", "combine images to pdf", "picture to pdf", "turn png images into pdf document online"],
+        title: "JPG to PDF Converter Free - Convert Images to PDF | Convertify",
+        description: "Convert JPG to PDF online for free. Combine multiple photos into one PDF. Supports JPG, PNG, and other image formats. No sign-up.",
+        keywords: ["jpg to pdf", "convert jpg to pdf", "image to pdf", "photos to pdf", "jpeg to pdf", "jpg to pdf converter free", "combine jpg to pdf"],
         h1: "JPG to PDF - Convert Images to PDF Free",
         faqs: [
-            {
-                question: "Can I convert multiple JPG images to one PDF?",
-                answer: "Yes! Upload multiple JPG or JPEG images and Convertify will combine them all into a single PDF document. You can reorder the images before converting."
-            },
-            {
-                question: "What image formats are supported?",
-                answer: "We support JPG, JPEG, PNG, GIF, BMP, and WebP images. All common image formats can be converted to PDF."
-            },
-            {
-                question: "Is the image quality preserved in PDF?",
-                answer: "Yes, we maintain the original resolution and quality of your images when converting to PDF. No compression is applied unless you choose to."
-            },
-            {
-                question: "Can I adjust page size for my images?",
-                answer: "Yes, you can choose standard page sizes (A4, Letter, etc.) or let the PDF automatically fit to your image dimensions."
-            }
+            { question: "Can I combine multiple images?", answer: "Yes, you can upload and combine multiple JPGs into a single PDF document." },
+            { question: "Is resizing supported?", answer: "Yes, we automatically fit your images to the PDF page size." },
+            { question: "Is it free?", answer: "Yes, 100% free unlimited conversions." }
         ],
         howToSteps: [
-            { name: "Upload Your Images", text: "Select or drag and drop your JPG, PNG or other image files. You can upload multiple images at once." },
-            { name: "Arrange Image Order", text: "Drag and drop to reorder your images. This determines the page order in your final PDF." },
-            { name: "Download Your PDF", text: "Click 'Convert to PDF' and download your images as a single PDF document instantly." }
-        ]
-    },
-    "pdf-to-jpg": {
-        title: "PDF to JPG Converter Free Online | Convertify",
-        description: "Convert PDF to JPG images online free. Extract all pages or select specific pages as high-quality JPG. No watermarks, no limits.",
-        keywords: ["pdf to jpg", "convert pdf to jpg", "pdf to image", "save pdf as jpg", "pdf to jpeg converter", "extract images from pdf", "pdf page to jpg"],
-        h1: "PDF to JPG - Convert PDF to Images Free",
-        faqs: [
-            {
-                question: "How do I convert a PDF to JPG images?",
-                answer: "Simply upload your PDF to Convertify, and we'll convert each page into a separate high-quality JPG image. Download all images in a ZIP file."
-            },
-            {
-                question: "Can I choose which pages to convert?",
-                answer: "Yes! You can convert all pages or select specific page numbers. This is useful for extracting only the pages you need as images."
-            },
-            {
-                question: "What image quality/resolution is used?",
-                answer: "We convert at high resolution (300 DPI) by default, ensuring your images are sharp and clear for any use including printing."
-            },
-            {
-                question: "Is there a page limit?",
-                answer: "No page limit! Whether your PDF has 5 pages or 500 pages, we'll convert them all to JPG images for free."
-            }
-        ],
-        howToSteps: [
-            { name: "Upload Your PDF", text: "Click upload or drag and drop your PDF file. Any PDF size or page count is supported." },
-            { name: "Select Pages (Optional)", text: "Choose to convert all pages or select specific pages. Preview your PDF before converting." },
-            { name: "Download JPG Images", text: "Click 'Convert to JPG' and download all your images as a convenient ZIP file." }
-        ]
-    },
-    "png-to-pdf": {
-        title: "PNG to PDF Converter Free Online | Convertify",
-        description: "Convert PNG to PDF online free. Combine multiple PNG images into one PDF with transparency preserved. No watermarks.",
-        keywords: ["png to pdf", "convert png to pdf", "transparent png to pdf", "multiple png to pdf", "png image to pdf converter"],
-        h1: "PNG to PDF - Convert PNG Images to PDF",
-        faqs: [
-            {
-                question: "Does PNG to PDF preserve transparency?",
-                answer: "Yes, PNG transparency is preserved when converting to PDF. Your transparent backgrounds will appear correctly in the PDF document."
-            },
-            {
-                question: "Can I combine multiple PNG files?",
-                answer: "Absolutely! Upload multiple PNG images and we'll combine them into a single PDF with each image on its own page."
-            }
-        ],
-        howToSteps: [
-            { name: "Upload PNG Images", text: "Select or drag and drop your PNG files. Multiple files can be uploaded at once." },
-            { name: "Arrange Order", text: "Drag to reorder your images as needed. Each image becomes a page in your PDF." },
-            { name: "Download PDF", text: "Click convert and download your PNG images as a single PDF file." }
-        ]
-    },
-    "pdf-to-png": {
-        title: "PDF to PNG Converter Free Online | Convertify",
-        description: "Convert PDF to PNG images with transparency support. Extract high-resolution PNG from your PDF documents. Free, no watermarks.",
-        keywords: ["pdf to png", "convert pdf to png", "pdf to transparent png", "pdf to high quality image", "extract png from pdf"],
-        h1: "PDF to PNG - Convert PDF Pages to PNG Images",
-        faqs: [
-            {
-                question: "Why choose PNG over JPG?",
-                answer: "PNG supports transparency and provides lossless compression, making it ideal for graphics, logos, and images that need a transparent background."
-            },
-            {
-                question: "What resolution are the PNG images?",
-                answer: "We export at 300 DPI for high-quality images suitable for printing and professional use."
-            }
-        ],
-        howToSteps: [
-            { name: "Upload Your PDF", text: "Upload the PDF file you want to convert to PNG images." },
-            { name: "Select Pages", text: "Choose to convert all pages or specific pages only." },
-            { name: "Download PNG Files", text: "Get your high-quality PNG images in a ZIP download." }
+            { name: "Upload Images", text: "Select your JPG or PNG files." },
+            { name: "Arrange", text: "Drag and drop to reorder images." },
+            { name: "Convert", text: "Download your new PDF." }
         ]
     },
     "word-to-pdf": {
-        title: "Word to PDF Converter Free Online | Convertify",
-        description: "Convert Word to PDF online free. No email, no sign up, no daily limits. DOC/DOCX to PDF with perfect formatting - better than Smallpdf.",
-        keywords: ["word to pdf", "convert word to pdf", "doc to pdf", "docx to pdf converter", "convert pdf to word free online no subscription", "microsoft word to pdf free", "convert word to pdf no email"],
-        h1: "Word to PDF - Convert DOC/DOCX to PDF",
+        title: "Word to PDF Converter - Convert DOCX to PDF Online Free | Convertify",
+        description: "Convert Word documents to PDF online free. Save DOC/DOCX as PDF instantly. Keeps formatting, images, and fonts intact. Secure, fast, and no sign-up.",
+        keywords: [
+            "word to pdf", "docx to pdf", "convert word to pdf", "doc to pdf", "word to pdf converter free",
+            "save word as pdf", "online word to pdf", "keep original layout in pdf", "convert word without losing formatting",
+            "preserve fonts and images docx to pdf", "accurate word to pdf conversion", "no formatting loss converter",
+            "secure docx to pdf online", "privacy-protected word converter", "exact layout preservation tool",
+            "faithful docx formatting to pdf", "encrypted document conversion", "retain word styles in pdf",
+            "lossless word to pdf transfer", "safe online docx converter", "maintain hyperlinks and tables",
+            "batch convert word securely"
+        ],
+        h1: "Word to PDF Converter - Preserve Formatting",
         faqs: [
             {
-                question: "Does formatting stay the same?",
-                answer: "Yes, Convertify preserves your Word document's fonts, images, tables, and formatting when converting to PDF."
+                question: "Will my fonts and formatting change during conversion?",
+                answer: "No, our Word to PDF tool preserves original fonts, layouts, images, tables, and hyperlinks exactly as in your DOCX file, ensuring pixel-perfect accuracy without any loss."
             },
             {
-                question: "Which Word formats are supported?",
-                answer: "We support both DOC (older Word) and DOCX (modern Word) file formats."
+                question: "Is it safe to convert sensitive documents like legal contracts?",
+                answer: "Yes, it's completely secure—files are processed instantly in your browser with end-to-end encryption, never stored on our servers, protecting your privacy for legal, financial, or confidential docs."
+            },
+            {
+                question: "Does it work on Mac, Windows, or mobile devices?",
+                answer: "Absolutely, this free online Word to PDF converter is device-agnostic, supporting all browsers on Mac, Windows, iOS, Android—no downloads or software needed for seamless use anywhere."
+            },
+            {
+                question: "Can I convert multiple Word files at once?",
+                answer: "Yes, our fast DOCX to PDF converter handles batch uploads efficiently, preserving formatting across files while keeping the process quick and secure."
+            },
+            {
+                question: "Is there a file size limit or watermarks added?",
+                answer: "No limits on file size (up to 100MB recommended for speed), and no watermarks—get clean, professional PDFs instantly with full formatting retention."
             }
         ],
         howToSteps: [
-            { name: "Upload Word Document", text: "Select your DOC or DOCX file from your device." },
-            { name: "Convert to PDF", text: "Click convert and we'll process your Word document instantly." },
-            { name: "Download PDF", text: "Download your perfectly formatted PDF file." }
+            { name: "Upload Word File", text: "Select your DOC or DOCX file." },
+            { name: "Convert", text: "We convert it to a professional PDF document." },
+            { name: "Download", text: "Get your PDF file instantly." }
         ]
     },
-    "pdf-to-text": {
-        title: "PDF to Text Converter Free Online | Convertify",
-        description: "Extract text from PDF online free. Convert PDF to plain text (TXT). Works with scanned PDFs using OCR.",
-        keywords: ["pdf to text", "extract text from pdf", "pdf to txt", "copy text from pdf", "pdf text extractor online"],
-        h1: "PDF to Text - Extract Text from PDF",
+    "pdf-to-jpg": {
+        title: "PDF to JPG & JPEG - Convert PDF to Image High Quality | Convertify",
+        description: "Convert PDF pages to high-quality JPG/JPEG images online free. Extract photos from PDF or save pages as pictures. No watermarks, secure & fast.",
+        keywords: [
+            "pdf to jpg", "convert pdf to image", "pdf to image converter", "save pdf as jpg", "pdf to jpeg", "extract images from pdf",
+            "save pdf pages as pictures", "convert pdf page to jpeg", "extract embedded images from pdf", "high quality pdf to jpg export",
+            "turn pdf into image files", "pdf to jpg high resolution", "rasterize pdf pages online", "pull photos out of pdf",
+            "change pdf to jpg crisp", "export pdf as image sequence", "single page pdf to picture", "batch pdf to jpeg converter",
+            "preserve clarity pdf images", "scan pdf to jpg output", "embed-free pdf photo extraction"
+        ],
+        h1: "PDF to JPG - Convert Pages to Images Free",
         faqs: [
             {
-                question: "Can I extract text from scanned PDFs?",
-                answer: "For scanned PDFs or image-based PDFs, you may need OCR (Optical Character Recognition). Our basic text extraction works best with text-based PDFs."
+                question: "Will the image quality be blurry after conversion?",
+                answer: "No, our high-resolution PDF to JPG tool delivers sharp, crisp images at 300 DPI or higher, preserving every detail, text, and graphic from your original PDF."
             },
             {
-                question: "Is formatting preserved?",
-                answer: "Plain text extraction removes formatting. You'll get clean text content that's easy to copy, edit, and use anywhere."
+                question: "Can I convert just one specific page to JPG?",
+                answer: "Yes, select any single page or custom range—extract it instantly as a high-quality JPEG without affecting the rest of the document."
+            },
+            {
+                question: "Does it extract only embedded images or whole pages?",
+                answer: "Both: choose page-to-image for full rasterization or extract embedded photos directly, saving time for designs or scans."
+            },
+            {
+                question: "What's the max file size or page count supported?",
+                answer: "Handles up to 100MB PDFs with 100+ pages smoothly, outputting clean JPGs quickly without compression artifacts."
+            },
+            {
+                question: "Is it secure for converting sensitive PDFs like contracts?",
+                answer: "Fully secure—processes entirely in-browser with no uploads or storage, keeping your PDF to JPG conversions private."
             }
         ],
         howToSteps: [
-            { name: "Upload Your PDF", text: "Upload the PDF you want to extract text from." },
-            { name: "Extract Text", text: "We'll process your PDF and extract all readable text content." },
-            { name: "Download Text File", text: "Download your extracted text as a TXT file or copy directly." }
+            { name: "Upload PDF", text: "Select the PDF file you want to convert." },
+            { name: "Convert", text: "We transform each page into a JPG image." },
+            { name: "Download", text: "Save your images." }
+        ]
+    },
+    "png-to-pdf": {
+        title: "PNG to PDF High Quality - Merge & Convert PNGs Free | Convertify",
+        description: "Convert PNG images to PDF high quality. Merge multiple PNGs into one PDF file instantly. Preserves transparency and resolution. No watermarks.",
+        keywords: [
+            "png to pdf", "convert png to pdf", "png to pdf converter", "combine png to pdf", "merge png to pdf",
+            "turn multiple pngs into pdf", "high resolution png to pdf", "combine images to pdf without losing quality",
+            "merge png files into single pdf", "batch png to pdf converter", "preserve transparency png to pdf",
+            "crisp png image to pdf export", "join pngs as pdf pages", "lossless multiple image to pdf",
+            "high quality merge pngs pdf", "convert png sequence to pdf", "retain png sharpness in pdf",
+            "fuse png photos into document", "vector-like png to pdf output", "seamless batch image combiner"
+        ],
+        h1: "PNG to PDF - Merge & Convert Images High Quality",
+        faqs: [
+            {
+                question: "Does it support transparency in PNG files?",
+                answer: "Yes, our PNG to PDF tool fully preserves transparency, layers, and alpha channels, embedding them perfectly into the PDF for professional results."
+            },
+            {
+                question: "Can I merge 50 images into one PDF at once?",
+                answer: "Absolutely, handle large batches like 50+ PNGs effortlessly—arrange order via drag-and-drop and convert to a multi-page PDF without limits or quality drop."
+            },
+            {
+                question: "Will the output PDF maintain high image resolution?",
+                answer: "Yes, it retains original PNG resolution and clarity at 300 DPI+, ensuring sharp text, colors, and details in every page."
+            },
+            {
+                question: "Is there a file size limit for batch conversions?",
+                answer: "No strict limits (up to 100MB total recommended for speed), making it ideal for combining portfolios, scans, or photo sets securely."
+            },
+            {
+                question: "Does it work on mobile or require any software?",
+                answer: "Fully browser-based and mobile-friendly—no downloads needed; convert PNG to PDF anywhere with instant, private processing."
+            }
+        ],
+        howToSteps: [
+            { name: "Upload PNGs", text: "Select one or multiple PNG images." },
+            { name: "Arrange", text: "Drag and drop to set the order of images." },
+            { name: "Convert", text: "Click to merge them into a single PDF." }
+        ]
+    },
+    "pdf-to-png": {
+        title: "PDF to PNG Converter Free - High Quality | Convertify",
+        description: "Convert PDF pages to PNG images online free. High quality conversion with transparency support where applicable.",
+        keywords: ["pdf to png", "convert pdf to png", "pdf to image high quality", "save pdf as png"],
+        h1: "PDF to PNG - Convert PDF to High Quality Images",
+        faqs: [
+            { question: "Is the quality better than JPG?", answer: "PNG is lossless, so it is often better for text and sharp graphics than JPG." },
+            { question: "Can I convert multiple pages?", answer: "Yes, all pages are converted to separate PNG files." }
+        ],
+        howToSteps: [
+            { name: "Upload PDF", text: "Select your PDF file." },
+            { name: "Convert", text: "We process the file to extract pages as PNGs." },
+            { name: "Download", text: "Get your high-quality images." }
         ]
     },
     "text-to-pdf": {
-        title: "Text to PDF Converter Free Online | Convertify",
-        description: "Convert text to PDF online free. TXT files to PDF with custom fonts. No watermarks, no signup.",
-        keywords: ["text to pdf", "txt to pdf", "convert text to pdf", "plain text to pdf", "notepad to pdf"],
-        h1: "Text to PDF - Convert TXT Files to PDF",
+        title: "Text to PDF Converter Free - TXT to PDF | Convertify",
+        description: "Convert text files (TXT) to PDF online free. Create professional PDF documents from plain text files instantly.",
+        keywords: ["text to pdf", "txt to pdf", "convert text to pdf", "plain text to pdf"],
+        h1: "Text to PDF - Convert TXT to PDF Free",
+        faqs: [
+            { question: "Can I change fonts?", answer: "Yes, you can choose from standard fonts for your PDF." },
+            { question: "Does it handle special characters?", answer: "Yes, standard UTF-8 text characters are supported." }
+        ],
+        howToSteps: [
+            { name: "Upload Text File", text: "Select your .txt file." },
+            { name: "Customize", text: "Choose font and layout settings." },
+            { name: "Download", text: "Get your formatted PDF." }
+        ]
+    },
+    "pdf-to-text": {
+        title: "PDF to Text - Extract & OCR Scanned PDF Free | Convertify",
+        description: "Extract text from PDF online free. OCR converts scanned PDFs to editable text. Preserves formatting, tables, and layout. Secure text extraction.",
+        keywords: [
+            "pdf to text", "extract text from pdf", "convert pdf to txt", "pdf text extractor", "ocr pdf text",
+            "extract text from scanned pdf", "ocr pdf to editable text", "copy paste text from pdf",
+            "preserve pdf formatting text", "convert scanned document to text", "pdf text recognition online",
+            "unlock copyable text pdf", "high accuracy ocr extractor", "multi-column pdf text pull",
+            "table extraction from pdf", "handwriting ocr pdf tool", "language support text extract",
+            "batch pdf to plain text", "clean text output pdf", "no garble pdf converter"
+        ],
+        h1: "PDF to Text - OCR & Extract Content Free",
         faqs: [
             {
-                question: "Can I paste text directly?",
-                answer: "Yes! You can either upload a TXT file or paste your text directly into our editor to convert to PDF."
+                question: "Does it work on scanned PDFs or images?",
+                answer: "Yes, our advanced OCR instantly converts scanned PDFs to editable, searchable text with high accuracy, even for handwriting or low-quality scans."
             },
             {
-                question: "Can I customize the font?",
-                answer: "Yes, you can choose from several professional fonts and adjust the size for your PDF output."
+                question: "Will the extracted text keep original formatting like tables?",
+                answer: "Absolutely, it preserves layouts, tables, bullets, and paragraphs—output clean, structured text ready for editing in Word or Notepad."
+            },
+            {
+                question: "What about weird characters or missing words?",
+                answer: "Our tool minimizes garbling with superior font recognition and multi-language OCR, delivering near-perfect text from complex or faded PDFs."
+            },
+            {
+                question: "Can I process large files or multiple PDFs?",
+                answer: "Yes, handle 100+ page documents or batches up to 50MB quickly, with no timeouts and full text extraction every time."
+            },
+            {
+                question: "Is my data secure during extraction?",
+                answer: "Fully secure—processes client-side in your browser with zero uploads or storage, ideal for confidential reports or legal files."
             }
         ],
         howToSteps: [
-            { name: "Add Your Text", text: "Upload a TXT file or paste your text content directly." },
-            { name: "Customize (Optional)", text: "Adjust font, size, and page layout if needed." },
-            { name: "Download PDF", text: "Convert and download your text as a PDF document." }
-        ]
-    },
-    "excel-to-pdf": {
-        title: "Excel to PDF Converter Free Online - XLS/XLSX to PDF | Convertify",
-        description: "Convert Excel to PDF online free instantly. Transform XLS and XLSX spreadsheets to PDF with charts and formatting preserved. No sign-up, no limits, no watermarks - works offline!",
-        keywords: ["excel to pdf", "convert excel to pdf", "xls to pdf", "xlsx to pdf", "spreadsheet to pdf", "excel to pdf converter free", "convert excel to pdf online free", "xls to pdf converter no sign up", "xlsx to pdf free online", "excel spreadsheet to pdf", "convert excel file to pdf free", "save excel as pdf online"],
-        h1: "Excel to PDF - Convert XLS/XLSX to PDF Free Online",
-        faqs: [
-            { question: "How do I convert Excel to PDF free?", answer: "Simply upload your Excel file (XLS or XLSX) to Convertify, click convert, and download your PDF instantly. It's 100% free with no registration required." },
-            { question: "Are charts and formatting preserved?", answer: "Yes, Convertify maintains your Excel charts, tables, cell formatting, colors, and formulas display when converting to PDF. Your spreadsheet looks exactly the same in PDF." },
-            { question: "Which Excel formats are supported?", answer: "We support both XLS (older Excel 97-2003) and XLSX (modern Excel 2007+) file formats. Both convert perfectly to PDF." },
-            { question: "Is there a file size limit?", answer: "No! Unlike other tools, Convertify has no file size limits. Upload spreadsheets of any size and convert them to PDF instantly." },
-            { question: "Can I convert multiple sheets?", answer: "Yes, all sheets in your Excel workbook are converted to PDF. Each sheet becomes a separate section in your PDF document." }
-        ],
-        howToSteps: [
-            { name: "Upload Excel File", text: "Select your XLS or XLSX spreadsheet file from your device or drag and drop it into the upload area." },
-            { name: "Convert to PDF", text: "Click the convert button. We process your Excel file preserving all charts, tables, and formatting." },
-            { name: "Download PDF", text: "Get your spreadsheet as a shareable PDF document instantly. No email or sign-up required." }
+            { name: "Upload PDF", text: "Select your PDF file." },
+            { name: "Extract", text: "We define the text content." },
+            { name: "Download", text: "Get your TXT file." }
         ]
     },
     "powerpoint-to-pdf": {
-        title: "PowerPoint to PDF Converter Free Online - PPT to PDF | Convertify",
-        description: "Convert PowerPoint to PDF online free instantly. Transform PPT and PPTX presentations to PDF with slides, fonts, and designs preserved. No sign-up, no watermarks, no limits!",
-        keywords: ["powerpoint to pdf", "convert ppt to pdf", "pptx to pdf", "presentation to pdf", "slides to pdf", "ppt to pdf converter free online", "convert powerpoint to pdf free", "pptx to pdf converter no sign up", "how to convert ppt to pdf", "save powerpoint as pdf online", "presentation to pdf converter"],
-        h1: "PowerPoint to PDF - Convert PPT/PPTX to PDF Free",
+        title: "PowerPoint to PDF - Convert PPT/PPTX High Quality | Convertify",
+        description: "Convert PowerPoint to PDF high fidelity. Save PPT and PPTX slides as PDF documents. Keeps fonts, layouts, and speaker notes intact. Secure & free.",
+        keywords: [
+            "powerpoint to pdf", "ppt to pdf", "pptx to pdf", "convert powerpoint to pdf", "save ppt as pdf",
+            "convert pptx to pdf keep fonts", "turn slides into pdf handout", "high quality ppt to pdf export",
+            "preserve animations as static images", "retain slide layouts in pdf", "exact powerpoint formatting converter",
+            "save ppt with embedded fonts pdf", "no quality loss slide conversion", "maintain transitions in pdf output",
+            "crisp pptx slides to pdf", "keep speaker notes in pdf", "faithful powerpoint to pdf tool",
+            "high resolution slide export", "preserve images charts ppt pdf", "seamless ppt formatting retention",
+            "online ppt to pdf high resolution", "merge ppt slides to pdf"
+        ],
+        h1: "PowerPoint to PDF - High-Fidelity & Secure",
         faqs: [
-            { question: "How do I convert PowerPoint to PDF free?", answer: "Simply upload your PPT or PPTX file to Convertify, click convert, and download your PDF instantly. It's 100% free with no registration or email required." },
-            { question: "Are slide designs and fonts preserved?", answer: "Yes! Your slide layouts, images, fonts, colors, and designs are fully maintained in the PDF output. The PDF looks exactly like your original presentation." },
-            { question: "What about animations and transitions?", answer: "PDF is a static format, so animations and transitions won't play. However, all visual elements are captured exactly as they appear on each slide." },
-            { question: "Can I convert multiple presentations at once?", answer: "Currently you can convert one presentation at a time. Each presentation is converted quickly, so you can upload the next one immediately after downloading." },
-            { question: "What PowerPoint versions are supported?", answer: "We support both PPT (PowerPoint 97-2003) and PPTX (PowerPoint 2007+) file formats. Both convert perfectly to PDF." }
+            {
+                question: "Will my animations and transitions work in the PDF?",
+                answer: "Animations become high-quality static captures of final states, preserving visual impact while ensuring compatibility across all PDF viewers."
+            },
+            {
+                question: "Does it keep speaker notes and slide layouts perfectly?",
+                answer: "Yes, speaker notes are retained below slides or as separate pages, with full layout, fonts, images, and charts preserved pixel-perfect."
+            },
+            {
+                question: "Can I convert password-protected PPTX files?",
+                answer: "Absolutely, enter your password securely—converts protected presentations without altering content or quality."
+            },
+            {
+                question: "What's the limit for slides or file size?",
+                answer: "Handles 1000+ slide decks up to 100MB smoothly, outputting professional multi-page PDFs instantly."
+            },
+            {
+                question: "Is it secure for business or confidential presentations?",
+                answer: "Fully secure: processes entirely in-browser with no server storage, protecting your PPT to PDF conversions."
+            }
         ],
         howToSteps: [
-            { name: "Upload Presentation", text: "Select your PPT or PPTX PowerPoint file from your device or drag and drop it into the upload area." },
-            { name: "Convert to PDF", text: "Click convert. Each slide becomes a page in your PDF with all formatting preserved." },
-            { name: "Download PDF", text: "Download your presentation as a professional PDF for easy sharing via email or any platform." }
+            { name: "Upload PowerPoint", text: "Select your PPT or PPTX file." },
+            { name: "Convert", text: "We turn your slides into PDF pages." },
+            { name: "Download", text: "Save your presentation as a PDF." }
         ]
     },
+
+    "pdf-to-word": {
+        title: "PDF to Word Converter Free - Editable DOCX | Convertify",
+        description: "Convert PDF to Word with 99% accuracy. Scanned PDFs become editable text. Keep original layout, fonts, and tables. No sign-up, secure & fast.",
+        keywords: ["pdf to word editable", "convert scanned pdf to word", "pdf to docx keep formatting", "pdf to word converter ocr", "edit pdf in word free", "pdf to word no email", "change pdf to word document"],
+        h1: "PDF to Word - Convert to Editable DOCX",
+        faqs: [
+            {
+                question: "Will I lose my formatting?",
+                answer: "No. Our advanced conversion engine preserves your original fonts, images, and layout. Tables and paragraphs stay exactly where they belong."
+            },
+            {
+                question: "Can I convert scanned PDFs?",
+                answer: "Yes! We automatically detect scanned pages and use OCR (Optical Character Recognition) to turn images into editable text in your Word document."
+            },
+            {
+                question: "Is it safe to upload private documents?",
+                answer: "Absolutely. All processing happens in your secure browser session using TLS encryption. Your files are never stored on our servers."
+            },
+            {
+                question: "Can I edit the text after converting?",
+                answer: "Yes. The output is a standard Word (.docx) file that you can open and edit fully in Microsoft Word, Google Docs, or Pages."
+            }
+        ],
+        howToSteps: [
+            { name: "Upload PDF", text: "Drag and drop your PDF. Scanned documents are supported automatically." },
+            { name: "Convert to DOCX", text: "We analyze the file and recreate it as an editable Word document." },
+            { name: "Download", text: "Get your fully editable Word file instantly." }
+        ]
+    },
+
+
     "add-page-numbers": {
         title: "Add Page Numbers to PDF Free Online - PDF Numbering | Convertify",
         description: "Add page numbers to PDF documents online free. Customize position (header/footer), font, size, and starting number. No watermarks, no sign-up required!",
@@ -400,24 +521,48 @@ export const toolSeoData = {
             { name: "Download", text: "Get your XLSX file." }
         ]
     },
-    "pdf-to-word": {
-        title: "PDF to Word Converter Free Online - PDF to DOCX | Convertify",
-        description: "Convert PDF to Word online free instantly. Editable DOCX with text, layouts, tables, and images preserved. No sign-up, no subscription, no watermarks!",
-        keywords: ["pdf to word", "convert pdf to docx", "edit pdf in word", "pdf to doc converter", "convert pdf to word free online no subscription", "convert pdf to word editable", "pdf converter word", "pdf to word converter free", "pdf to docx online free", "convert pdf to word without email"],
-        h1: "PDF to Word - Convert to Editable DOCX Free",
+    "excel-to-pdf": {
+        title: "Excel to PDF Converter - Convert XLSX to PDF Online Free | Convertify",
+        description: "Convert Excel to PDF online free. Save XLSX, XLS, and CSV files as PDF documents. Preserves formatting, tables, and sheets. No sign-up, secure & fast.",
+        keywords: [
+            "excel to pdf", "xlsx to pdf", "convert excel to pdf", "save excel as pdf", "excel to pdf converter free",
+            "xls to pdf online", "spreadsheet to pdf", "convert xlsx to pdf", "fast excel to pdf", "online excel to pdf converter",
+            "preserve excel tables in pdf", "accurate xlsx to pdf conversion", "keep formulas and charts intact",
+            "no data loss excel converter", "secure excel to pdf online", "privacy-safe spreadsheet to pdf",
+            "retain multiple sheets structure", "exact column row preservation", "convert excel without altering data",
+            "faithful xls table export to pdf", "encrypted financial converter", "maintain pivot tables in pdf",
+            "lossless excel chart to pdf", "batch xlsx secure conversion", "verified data integrity tool"
+        ],
+        h1: "Excel to PDF - Convert Tables & Charts Free",
         faqs: [
-            { question: "Is the Word file fully editable?", answer: "Yes! The converted DOCX file is fully editable in Microsoft Word, Google Docs, or any word processor. Edit text, images, tables, and formatting freely." },
-            { question: "Are images and tables preserved?", answer: "Absolutely! We maintain text, images, tables, fonts, and layout as closely as possible to the original PDF. Your document looks the same in Word." },
-            { question: "Do I need to sign up or pay?", answer: "No! Convertify is 100% free with no registration, no email, no subscription, and no watermarks. Convert unlimited PDFs." },
-            { question: "Can I convert scanned PDFs to Word?", answer: "For scanned PDFs, we first apply OCR to recognize the text, then convert to Word. Results are best with clear, high-resolution scans." },
-            { question: "What versions of Word are supported?", answer: "The output is in DOCX format, compatible with Microsoft Word 2007 and later, Google Docs, LibreOffice, and other modern word processors." }
+            {
+                question: "Will large Excel files with multiple sheets convert properly?",
+                answer: "Yes, our Excel to PDF converter handles large XLSX files and multiple sheets effortlessly, preserving all table structures, charts, and data across tabs without compression or loss."
+            },
+            {
+                question: "Do formulas or calculations get exposed or changed in the PDF?",
+                answer: "No, formulas remain private and secure—only the calculated results, tables, and visuals are converted to PDF with full accuracy, ensuring data privacy for sensitive spreadsheets."
+            },
+            {
+                question: "Can it manage complex tables, pivot tables, and charts?",
+                answer: "Absolutely, it retains exact column widths, row heights, pivot tables, graphs, and conditional formatting in high-quality PDF output, perfect for reports."
+            },
+            {
+                question: "What's the file size limit for Excel to PDF conversion?",
+                answer: "No strict limits (optimal under 50MB for speed), but our fast online tool processes even oversized financial spreadsheets securely without issues."
+            },
+            {
+                question: "Is my data stored or shared after conversion?",
+                answer: "Never—files are converted client-side with end-to-end encryption, deleted immediately, keeping your Excel data private and compliant."
+            }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Select or drag your PDF file. Any size document is supported." },
-            { name: "Convert to Word", text: "We process your document, preserving text, images, and formatting." },
-            { name: "Download DOCX", text: "Get your editable Word document instantly. Ready to edit in any word processor." }
+            { name: "Upload Excel File", text: "Select your XLSX or XLS file." },
+            { name: "Convert", text: "We convert your spreadsheet to PDF format." },
+            { name: "Download", text: "Get your PDF document instantly." }
         ]
     },
+
     "pdf-to-pdfa": {
         title: "PDF to PDF/A Converter Free Online | Convertify",
         description: "Convert PDF to PDF/A format for long-term archiving. ISO-compliant, free, no watermarks.",

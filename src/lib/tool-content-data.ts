@@ -8,14 +8,14 @@ export const toolContentData: Record<string, {
     keywords: string[];
 }> = {
     "merge-pdf": {
-        description: "Combine multiple PDF files into a single document instantly. Our free online PDF merger allows you to join unlimited PDFs without any file size restrictions. Perfect for combining reports, contracts, or any documents - all processed securely in your browser.",
+        description: "Convertify's Secure Online PDF Combiner is your go-to for joining PDF files effortlessly—merge multiple PDFs, bind documents, or stitch pages together all locally in the browser for ultimate privacy. No uploads, no limits: combine invoices, reports, or contracts while preserving layouts, quality, and order perfectly. Fast, free, and device-friendly, it handles Combine Multiple PDFs or Secure PDF Merger needs instantly!",
         features: [
-            "Merge unlimited PDF files at once - no daily limits",
-            "Drag and drop to reorder pages before merging",
+            "Join and stitch multiple PDFs together instantly",
+            "Secure, browser-based processing (no uploads)",
+            "Drag and drop to rearrange file order",
             "Preserves original formatting and quality",
-            "No account or registration required",
-            "Works on Windows, Mac, Android, and iOS",
-            "Combines files in seconds, not minutes"
+            "Combine large files without size limits",
+            "Works on all devices (Mobile, Mac, Windows)"
         ],
         useCases: [
             "Combining monthly reports into a single annual document",
@@ -24,36 +24,36 @@ export const toolContentData: Record<string, {
             "Joining scanned document pages into one PDF",
             "Combining multiple invoices for accounting"
         ],
-        keywords: ["merge pdf files online free no limit", "combine multiple pdfs into one", "join pdf files free no sign up", "pdf combiner no watermark"]
+        keywords: ["merge pdf", "combine pdf files", "join pdfs", "pdf binder", "stitch pdfs", "secure pdf merger", "combine multiple pdfs"]
     },
     "split-pdf": {
-        description: "Extract specific pages or split your PDF into multiple files instantly. Our free PDF splitter lets you divide large documents into smaller files, extract individual pages, or create custom page ranges - all without uploading to any server.",
+        description: "Convertify's Free Online PDF Extractor and Split PDF tool makes separating PDF documents effortless—extract specific pages, remove unwanted sections, or save ranges as new files with perfect fidelity. Ideal for isolating invoices, chapters, or slides from multi-page PDFs. No watermarks, no limits, and fully secure browser-based processing works on any device. Split PDF or extract pages online today for fast, precise results!",
         features: [
-            "Split by page ranges (e.g., 1-5, 10-15)",
-            "Extract individual pages as separate PDFs",
-            "Split into single-page files automatically",
-            "Preview pages before splitting",
-            "No file size or page count limits",
-            "Download multiple files as ZIP"
+            "Extract specific pages or custom ranges instantly",
+            "Separate multi-page PDFs into individual files",
+            "Remove unwanted pages without affecting quality",
+            "Secure, browser-based processing (no uploads)",
+            "Preserves original layout, fonts, and images",
+            "No file size limits or watermarks"
         ],
         useCases: [
-            "Extracting specific chapters from e-books",
-            "Separating individual tax forms from large bundles",
-            "Pulling out specific pages for sharing",
-            "Dividing large manuals into sections",
-            "Extracting certificates or receipts from documents"
+            "Extracting specific chapters from ebooks",
+            "Separating invoices from a merged document",
+            "Removing cover pages or blank sheets",
+            "Saving individual slides from presentations",
+            "Creating smaller files for email sharing"
         ],
-        keywords: ["split pdf into individual pages free", "extract pages from pdf no account", "divide large pdf into smaller files", "pdf splitter online free"]
+        keywords: ["split pdf", "extract pdf pages", "separate pdf pages", "pdf extractor", "cut pdf online", "remove pages from pdf", "pdf page separator"]
     },
     "compress-pdf": {
-        description: "Reduce document file size significantly without compromising quality. Our smart compression algorithm shrinks your files for easier email attachments and faster uploads. Perfect for reports, scanned forms, and image-heavy documents - all processed locally in your browser.",
+        description: "Compress PDF files effortlessly with Convertify's free online PDF compressor—reduce size by up to 90% while maintaining 100% visual quality through lossless optimization. Shrink PDF online instantly for email attachments under Gmail's 25MB limit or WhatsApp's 16MB cap. Our secure PDF optimizer removes redundant data, compresses images, and streamlines fonts without altering text or layouts. Fast, safe, and no sign-up needed—perfect for professionals needing high-quality PDF reducers on the go.",
         features: [
-            "Multiple compression levels (light, medium, maximum)",
-            "Maintains text clarity and readability",
-            "Optimizes scanned items and images",
-            "No file size limits - compress large documents",
-            "Preview before and after file sizes",
-            "Batch compress multiple files at once"
+            "Lossless optimization - maintain 100% visual quality",
+            "Reduce file size by up to 90% instantly",
+            "Compress to specific sizes (100KB, 200KB, 500KB)",
+            "Secure, browser-based processing (no uploads)",
+            "Optimize for email attachments (Gmail, Outlook)",
+            "Batch compress unlimited files simultaneously"
         ],
         useCases: [
             "Shrinking files for email attachment limits",
@@ -62,7 +62,7 @@ export const toolContentData: Record<string, {
             "Making scanned forms smaller for sharing",
             "Compressing portfolios for job applications"
         ],
-        keywords: ["compress pdf to 100kb online free", "reduce pdf file size for email", "shrink pdf without losing quality", "pdf compressor no limit"]
+        keywords: ["compress pdf", "pdf compressor", "reduce pdf size", "shrink pdf online", "pdf optimizer", "lossless pdf compression", "compress pdf to 100kb"]
     },
     "jpg-to-pdf": {
         description: "Convert JPG images to PDF documents instantly. Combine multiple photos into a single PDF or convert individual images. Perfect for creating photo albums, document scans, or portfolios - all processed in your browser with no uploads required.",
@@ -84,14 +84,14 @@ export const toolContentData: Record<string, {
         keywords: ["convert multiple jpg to one pdf", "combine photos into pdf free", "jpg to pdf converter no limit", "images to pdf online free"]
     },
     "pdf-to-jpg": {
-        description: "Convert PDF pages to high-quality JPG images. Extract each page as a separate image or select specific pages. Perfect for sharing on social media, creating presentations, or extracting graphics - all processed securely in your browser.",
+        description: "Convertify's High-Resolution PDF to Image Converter transforms PDFs to JPG effortlessly and securely in your browser—no uploads needed. Extract images from PDF, save pages as pictures, or turn entire documents into crisp JPEGs while retaining perfect clarity and quality. Ideal for presentations, scans, or web use, this free PDF to JPG tool handles high-quality exports on any device. Convert PDF to JPEG today!",
         features: [
-            "Convert all pages or select specific ones",
-            "High-quality image output (up to 300 DPI)",
-            "Each page becomes a separate JPG file",
-            "Download all images as a ZIP file",
-            "No watermarks on converted images",
-            "Preserves colors and formatting"
+            "Convert full pages to high-quality JPG/JPEG",
+            "Extract embedded images directly from PDF",
+            "Batch process multiple pages instantly",
+            "Secure, browser-based conversion (private)",
+            "Download images individually or as ZIP",
+            "Preserves original resolution (300 DPI+)"
         ],
         useCases: [
             "Extracting images from PDF presentations",
@@ -100,17 +100,17 @@ export const toolContentData: Record<string, {
             "Sharing PDF content on platforms that don't support PDF",
             "Creating image thumbnails from documents"
         ],
-        keywords: ["convert pdf to high quality jpg free", "extract images from pdf online", "save pdf pages as jpg", "pdf to image no watermark"]
+        keywords: ["pdf to jpg", "pdf to jpeg", "convert pdf to image", "extract images from pdf", "save pdf as picture", "high quality pdf to jpg", "turn pdf into image"]
     },
     "word-to-pdf": {
-        description: "Convert Word documents to PDF format instantly. Preserve all formatting, fonts, images, and layouts perfectly. Ideal for sharing documents professionally, creating printable files, or ensuring compatibility across all devices.",
+        description: "Discover Convertify's Free Online Word to PDF Converter—the fastest, most secure DOCX to PDF tool that preserves original formatting, fonts, layouts, images, and hyperlinks with 100% accuracy. No software downloads needed; it works flawlessly on all devices, from mobiles to desktops. Protect your privacy with instant, browser-based processing and zero server storage—ideal for legal docs, resumes, or reports. Convert Word to PDF without losing formatting today!",
         features: [
-            "Supports DOC and DOCX formats",
-            "Preserves fonts, images, and layouts",
-            "Maintains hyperlinks and bookmarks",
-            "No Microsoft Office required",
-            "Convert large documents instantly",
-            "Perfect formatting every time"
+            "Preserve original formatting, fonts, and tables",
+            "Secure, browser-based processing (no uploads)",
+            "Batch convert multiple Word files simultaneously",
+            "Works on Mac, Windows, iOS, and Android",
+            "No file size limits or watermarks",
+            "Supports DOC and DOCX formats"
         ],
         useCases: [
             "Converting resumes for job applications",
@@ -119,7 +119,7 @@ export const toolContentData: Record<string, {
             "Archiving Word documents as PDFs",
             "Preparing documents for digital signatures"
         ],
-        keywords: ["convert word to pdf keep formatting", "docx to pdf free unlimited", "word to pdf no sign up", "doc to pdf converter online secure"]
+        keywords: ["word to pdf", "docx to pdf", "convert word to pdf", "doc to pdf", "word to pdf converter free", "convert docx without losing formatting", "secure docx to pdf"]
     },
     "pdf-to-word": {
         description: "Convert PDF to editable Word documents. Extract text and formatting from any PDF and edit it in Microsoft Word or Google Docs. Perfect for updating old documents, extracting content, or making PDFs editable again.",
@@ -217,42 +217,42 @@ export const toolContentData: Record<string, {
         keywords: ["pdf to excel converter free online", "extract tables from pdf to excel", "convert pdf to xlsx free", "pdf data to spreadsheet"]
     },
     "excel-to-pdf": {
-        description: "Convert Excel spreadsheets to PDF documents. Preserve all charts, formatting, and cell layouts perfectly. Create printable and shareable spreadsheet snapshots that look exactly as they do in Excel.",
+        description: "Unlock Convertify's Free Online Excel to PDF Converter—ideal for converting financial reports, invoices, and budgets while preserving complex table structures, charts, pivot tables, and data accuracy in pixel-perfect PDFs. This fast XLSX to PDF tool ensures no loss of columns, rows, or formulas' results, with top-tier privacy via browser-based processing. Works seamlessly on all devices—no installs needed. Securely transform Excel to PDF today!",
         features: [
-            "Supports XLS and XLSX formats",
-            "Preserves charts, colors, and formatting",
-            "Converts all sheets or select specific ones",
-            "Maintains column widths and row heights",
-            "No Microsoft Office required",
-            "Perfect for printing and sharing"
+            "Preserves complete Excel formatting & styles",
+            "Converts complex tables and chart visuals",
+            "Handles multiple sheets and tabs accurately",
+            "Secure, browser-based processing (financial safe)",
+            "Supports XLSX, XLS, CSV, and ODS formats",
+            "No file size or row limits"
         ],
         useCases: [
-            "Creating PDF reports from Excel data",
-            "Sharing spreadsheets as read-only documents",
-            "Printing formatted Excel worksheets",
-            "Archiving financial spreadsheets as PDFs",
-            "Preparing data for presentations"
+            "Fitting large spreadsheets onto single PDF pages",
+            "Preserving complex financial report formatting",
+            "Converting invoices without cutting off columns",
+            "Sharing read-only data with clients",
+            "Archiving monthly account statements"
         ],
-        keywords: ["excel to pdf converter free online", "convert xls to pdf keep formatting", "xlsx to pdf no sign up", "spreadsheet to pdf free"]
+        keywords: ["excel to pdf", "xlsx to pdf", "save excel as pdf", "convert excel to pdf", "excel to pdf converter online", "preserve excel formatting pdf"]
     },
     "png-to-pdf": {
-        description: "Convert PNG images to PDF documents. Combine multiple PNG files into a single PDF or convert individually. Perfect for transparent images, screenshots, and high-quality graphics that need to be shared as documents.",
+        description: "Convertify's High-Quality PNG to PDF Combiner turns images into polished PDFs securely in your browser—no uploads or installs required. Merge PNGs into one PDF, batch convert multiple files, or save single PNGs as PDFs while preserving full resolution, transparency, and sharpness. Perfect for reports, portfolios, or presentations, this free tool combines PNG to PDF high quality with privacy-focused processing on any device!",
         features: [
-            "Preserves PNG transparency as white or custom color",
-            "Combine multiple PNGs into one PDF",
-            "Maintains image quality and resolution",
-            "Customize page size and margins",
-            "Reorder images before conversion",
-            "Works with high-resolution images"
+            "Combine multiple PNGs into one high-quality PDF",
+            "Preserves image transparency and alpha channels",
+            "Batch process 50+ images instantly",
+            "Reorder pages with simple drag and drop",
+            "No file size limits or watermarks",
+            "Works securely in browser (Private)"
         ],
         useCases: [
-            "Converting screenshots to PDF documentation",
-            "Creating PDFs from design mockups",
-            "Combining logos and graphics into brand books",
-            "Making printable versions of PNG artwork",
-            "Creating PDF presentations from images"
+            "Creating portfolios from design mockups",
+            "Compiling screenshots into documentation",
+            "Converting scanned documents (PNG) to PDF",
+            "Sharing image collections as a single file",
+            "Preserving quality of transparent diagrams"
         ],
-        keywords: ["convert png to pdf free online", "combine multiple png to pdf", "png to pdf no watermark", "image to pdf converter free"]
+        keywords: ["png to pdf high quality", "merge png to pdf", "combine pngs into pdf", "batch png to pdf", "save png as pdf"]
     },
     "pdf-to-png": {
         description: "Convert PDF pages to high-quality PNG images with transparency support. Extract pages as crystal-clear PNG files for use in websites, presentations, or graphic design projects.",
@@ -502,14 +502,14 @@ export const toolContentData: Record<string, {
         keywords: ["html to pdf converter online free", "save web page as pdf", "convert website to pdf free", "url to pdf no watermark"]
     },
     "pdf-to-text": {
-        description: "Extract plain text content from PDF documents. Get just the text without formatting for use in other applications, text analysis, or simple content extraction. Works with both native PDFs and scanned documents (via OCR).",
+        description: "Convertify's Free Online PDF to Text Converter extracts text from any PDF—scanned or digital—with pinpoint OCR accuracy, preserving formatting, tables, and layouts for instant editing. Copy text from PDF effortlessly, unlock scanned documents, or batch convert without garbled characters or quality loss. Secure browser-based processing ensures privacy on all devices—no software needed. Transform PDF to editable text today!",
         features: [
-            "Extracts all text content",
-            "Handles multi-column layouts",
-            "OCR for scanned documents",
-            "Preserves paragraph structure",
-            "Copy-paste friendly output",
-            "Downloads as TXT file"
+            "Advanced OCR for scanned PDFs & images",
+            "Extracts text from multi-column layouts",
+            "Preserves tables and paragraphs",
+            "Supports 100+ languages",
+            "Clean output with no garbled text",
+            "Secure, private browser processing"
         ],
         useCases: [
             "Extracting text for data analysis",
@@ -518,7 +518,7 @@ export const toolContentData: Record<string, {
             "Importing content into other tools",
             "Making PDFs accessible via screen readers"
         ],
-        keywords: ["pdf to text converter free", "extract text from pdf online", "copy text from pdf free", "pdf to txt file converter"]
+        keywords: ["pdf to text converter free", "extract text from pdf online", "copy text from pdf free", "pdf to txt file converter", "ocr pdf to text"]
     },
     "text-to-pdf": {
         description: "Convert plain text files to PDF documents. Format your TXT files as professional PDF documents with customizable fonts, margins, and page sizes. Perfect for creating readable documents from raw text content.",
@@ -540,14 +540,14 @@ export const toolContentData: Record<string, {
         keywords: ["text to pdf converter free", "convert txt to pdf online", "make pdf from text file", "txt to pdf no watermark"]
     },
     "powerpoint-to-pdf": {
-        description: "Convert PowerPoint presentations to PDF format. Preserve all slides, images, fonts, and transitions as a static PDF document. Perfect for sharing presentations that look exactly as designed, on any device.",
+        description: "Convertify's High-Fidelity PPT to PDF Converter transforms PowerPoint presentations into flawless PDFs securely in your browser—no downloads needed. Convert PPTX to PDF without losing quality, preserving fonts, layouts, images, charts, speaker notes, and slide designs perfectly. Ideal for sharing reports, pitches, or handouts, this free online PPT to PDF tool ensures high-resolution output on any device. Save PowerPoint as PDF today!",
         features: [
-            "Supports PPT and PPTX formats",
-            "Preserves slide layouts and designs",
-            "Maintains embedded images and charts",
-            "Each slide becomes a PDF page",
-            "No Microsoft Office required",
-            "Perfect for email sharing"
+            "Converts to editable PPTX format",
+            "Each PDF page becomes a slide",
+            "Preserves text and images",
+            "Handles complex layouts",
+            "Compatible with PowerPoint and Google Slides",
+            "No software installation required"
         ],
         useCases: [
             "Sharing presentations with external clients",
@@ -556,7 +556,7 @@ export const toolContentData: Record<string, {
             "Submitting presentations for review",
             "Converting slides for web publishing"
         ],
-        keywords: ["powerpoint to pdf converter free", "convert ppt to pdf online", "pptx to pdf no sign up", "presentation to pdf free"]
+        keywords: ["powerpoint to pdf converter free", "convert ppt to pdf online", "pptx to pdf no sign up", "presentation to pdf free", "save powerpoint as pdf"]
     },
     "pdf-to-powerpoint": {
         description: "Convert PDF documents back to editable PowerPoint presentations. Turn PDF slides into PPTX format for editing, updating, or repurposing. Extract content from PDF presentations to create new slideshows.",

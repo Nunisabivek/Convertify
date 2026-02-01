@@ -36,7 +36,7 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Convert Excel spreadsheets to PDF while preserving tables and charts.
+                        Convert Excel spreadsheets to PDF while preserving formatting, columns, and tables.
                     </p>
                 </div>
 
