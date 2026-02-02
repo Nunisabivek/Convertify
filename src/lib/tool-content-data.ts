@@ -8,42 +8,42 @@ export const toolContentData: Record<string, {
     keywords: string[];
 }> = {
     "merge-pdf": {
-        description: "Convertify's Secure Online PDF Combiner is your go-to for joining PDF files effortlessly—merge multiple PDFs, bind documents, or stitch pages together all locally in the browser for ultimate privacy. No uploads, no limits: combine invoices, reports, or contracts while preserving layouts, quality, and order perfectly. Fast, free, and device-friendly, it handles Combine Multiple PDFs or Secure PDF Merger needs instantly!",
+        description: "Combine multiple PDF files into a single, polished document with Convertify's free PDF Merger. Perfect for consolidating business reports, assembling legal exhibits, or stitching design portfolios. Our drag-and-drop tool lets you rearrange pages easily and preserves all bookmarks, links, and formatting. Secure, private, and 100% free.",
         features: [
-            "Join and stitch multiple PDFs together instantly",
-            "Secure, browser-based processing (no uploads)",
-            "Drag and drop to rearrange file order",
-            "Preserves original formatting and quality",
-            "Combine large files without size limits",
-            "Works on all devices (Mobile, Mac, Windows)"
-        ],
-        useCases: [
-            "Combining monthly reports into a single annual document",
-            "Merging contract pages with signature pages",
-            "Creating portfolios from multiple design files",
-            "Joining scanned document pages into one PDF",
-            "Combining multiple invoices for accounting"
-        ],
-        keywords: ["merge pdf", "combine pdf files", "join pdfs", "pdf binder", "stitch pdfs", "secure pdf merger", "combine multiple pdfs"]
-    },
-    "split-pdf": {
-        description: "Convertify's Free Online PDF Extractor and Split PDF tool makes separating PDF documents effortless—extract specific pages, remove unwanted sections, or save ranges as new files with perfect fidelity. Ideal for isolating invoices, chapters, or slides from multi-page PDFs. No watermarks, no limits, and fully secure browser-based processing works on any device. Split PDF or extract pages online today for fast, precise results!",
-        features: [
-            "Extract specific pages or custom ranges instantly",
-            "Separate multi-page PDFs into individual files",
-            "Remove unwanted pages without affecting quality",
-            "Secure, browser-based processing (no uploads)",
-            "Preserves original layout, fonts, and images",
+            "Combine multiple PDFs into one file instantly",
+            "Drag-and-drop to reorder files precisely",
+            "Preserves bookmarks, hyperlinks, and form fields",
+            "Secure processing - files never leave your device",
+            "Works with password-protected PDFs (if unlocked)",
             "No file size limits or watermarks"
         ],
         useCases: [
-            "Extracting specific chapters from ebooks",
-            "Separating invoices from a merged document",
-            "Removing cover pages or blank sheets",
-            "Saving individual slides from presentations",
-            "Creating smaller files for email sharing"
+            "Consolidating monthly business reports",
+            "Assembling legal exhibits and affidavits",
+            "Stitching design portfolios into one file",
+            "Merging chapter PDFs into a full ebook",
+            "Combining invoices for tax submission"
         ],
-        keywords: ["split pdf", "extract pdf pages", "separate pdf pages", "pdf extractor", "cut pdf online", "remove pages from pdf", "pdf page separator"]
+        keywords: ["merge pdf", "combine pdf files", "join pdfs", "pdf binder", "stitch pdfs", "secure pdf merger", "combine multiple pdfs", "concatenate pdf"]
+    },
+    "split-pdf": {
+        description: "Extract exactly the pages you need with our free Split PDF tool. Whether you want to separate a single page, define specific ranges (e.g., 1-5, 10), or extract every page as a standalone file, Convertify offers precise control. Perfect for removing sensitive info, isolating report chapters, or saving receipts. Fully secure with encrypted browser-based processing.",
+        features: [
+            "Extract distinct pages or custom ID ranges (e.g., 2-5)",
+            "Split entire PDF into individual pages instantly",
+            "Remove unwanted or sensitive pages securely",
+            "Preview pages before extracting",
+            "Works on large files with no upload limits",
+            "100% private - files never leave your device"
+        ],
+        useCases: [
+            "Removing sensitive pages from legal documents",
+            "Extracting a single chapter or invoice",
+            "Separating merged scanned files",
+            "Saving specific slides from presentations",
+            "Isolating receipt pages from bank statements"
+        ],
+        keywords: ["split pdf", "extract pdf pages", "separate pdf pages", "pdf extractor", "cut pdf online", "remove pages from pdf", "pdf page separator", "split by range"]
     },
     "compress-pdf": {
         description: "Compress PDF files effortlessly with Convertify's free online PDF compressor—reduce size by up to 90% while maintaining 100% visual quality through lossless optimization. Shrink PDF online instantly for email attachments under Gmail's 25MB limit or WhatsApp's 16MB cap. Our secure PDF optimizer removes redundant data, compresses images, and streamlines fonts without altering text or layouts. Fast, safe, and no sign-up needed—perfect for professionals needing high-quality PDF reducers on the go.",
@@ -84,42 +84,42 @@ export const toolContentData: Record<string, {
         keywords: ["convert multiple jpg to one pdf", "combine photos into pdf free", "jpg to pdf converter no limit", "images to pdf online free"]
     },
     "pdf-to-jpg": {
-        description: "Convertify's High-Resolution PDF to Image Converter transforms PDFs to JPG effortlessly and securely in your browser—no uploads needed. Extract images from PDF, save pages as pictures, or turn entire documents into crisp JPEGs while retaining perfect clarity and quality. Ideal for presentations, scans, or web use, this free PDF to JPG tool handles high-quality exports on any device. Convert PDF to JPEG today!",
+        description: "Convert PDFs to high-resolution JPG images with Convertify. Whether you need to save an entire document as a picture or extract specific images from a PDF, our tool does it instantly. Enjoy 300 DPI quality, batch processing, and secure client-side handling. Perfect for creating social media assets, extracting slides, or archiving document pages.",
         features: [
-            "Convert full pages to high-quality JPG/JPEG",
-            "Extract embedded images directly from PDF",
-            "Batch process multiple pages instantly",
-            "Secure, browser-based conversion (private)",
-            "Download images individually or as ZIP",
-            "Preserves original resolution (300 DPI+)"
+            "Convert full pages to high-quality JPG (300 DPI)",
+            "Extract distinct images embedded in PDF",
+            "Batch process multiple files or 100+ pages",
+            "Adjustable quality settings (High, Medium, Web)",
+            "Download as individual images or a ZIP archive",
+            "100% private - no server uploads"
         ],
         useCases: [
-            "Extracting images from PDF presentations",
-            "Creating social media graphics from PDFs",
-            "Converting PDF slides to images for websites",
-            "Sharing PDF content on platforms that don't support PDF",
-            "Creating image thumbnails from documents"
+            "Converting presentation slides to images for sharing",
+            "Extracting photos from a PDF portfolio",
+            "Saving document pages as pictures for social media",
+            "Archiving invoices as lightweight JPGs",
+            "Turning design mockups into reviewable images"
         ],
-        keywords: ["pdf to jpg", "pdf to jpeg", "convert pdf to image", "extract images from pdf", "save pdf as picture", "high quality pdf to jpg", "turn pdf into image"]
+        keywords: ["pdf to jpg", "pdf to jpeg", "convert pdf to image", "extract images from pdf", "save pdf as picture", "high quality pdf to jpg", "turn pdf into image", "batch pdf to jpg"]
     },
     "word-to-pdf": {
-        description: "Discover Convertify's Free Online Word to PDF Converter—the fastest, most secure DOCX to PDF tool that preserves original formatting, fonts, layouts, images, and hyperlinks with 100% accuracy. No software downloads needed; it works flawlessly on all devices, from mobiles to desktops. Protect your privacy with instant, browser-based processing and zero server storage—ideal for legal docs, resumes, or reports. Convert Word to PDF without losing formatting today!",
+        description: "Convert Word documents to PDF online with 100% formatting fidelity. Our tool preserves your original fonts, images, layouts, tables, and hyperlinks, ensuring your converted PDF looks exactly like your Word document. Perfect for resumes, legal contracts, and academic papers where precision matters. Secure, free, and no watermark.",
         features: [
-            "Preserve original formatting, fonts, and tables",
-            "Secure, browser-based processing (no uploads)",
-            "Batch convert multiple Word files simultaneously",
-            "Works on Mac, Windows, iOS, and Android",
-            "No file size limits or watermarks",
-            "Supports DOC and DOCX formats"
+            "Preserves exact document layout and margins",
+            "Embeds custom fonts and styles",
+            "Keeps hyperlinks, bookmarks, and tables functional",
+            "Secure processing for sensitive documents (Resumes/Contracts)",
+            "Supports both .DOC and .DOCX formats",
+            "No watermarks or file size limits"
         ],
         useCases: [
-            "Converting resumes for job applications",
-            "Creating printable contracts and agreements",
-            "Sharing reports that look the same everywhere",
-            "Archiving Word documents as PDFs",
-            "Preparing documents for digital signatures"
+            "Converting professional resumes for ATS compatibility",
+            "Archiving legal contracts with exact formatting",
+            "Submitting academic thesis or research papers",
+            "Sharing business reports that look perfect on any device",
+            "Turning draft documents into final print-ready PDFs"
         ],
-        keywords: ["word to pdf", "docx to pdf", "convert word to pdf", "doc to pdf", "word to pdf converter free", "convert docx without losing formatting", "secure docx to pdf"]
+        keywords: ["word to pdf", "docx to pdf", "convert word to pdf", "doc to pdf", "resume to pdf", "keep formatting word to pdf", "legal document converter"]
     },
     "pdf-to-word": {
         description: "Convert PDF to editable Word documents. Extract text and formatting from any PDF and edit it in Microsoft Word or Google Docs. Perfect for updating old documents, extracting content, or making PDFs editable again.",
@@ -217,23 +217,23 @@ export const toolContentData: Record<string, {
         keywords: ["pdf to excel converter free online", "extract tables from pdf to excel", "convert pdf to xlsx free", "pdf data to spreadsheet"]
     },
     "excel-to-pdf": {
-        description: "Unlock Convertify's Free Online Excel to PDF Converter—ideal for converting financial reports, invoices, and budgets while preserving complex table structures, charts, pivot tables, and data accuracy in pixel-perfect PDFs. This fast XLSX to PDF tool ensures no loss of columns, rows, or formulas' results, with top-tier privacy via browser-based processing. Works seamlessly on all devices—no installs needed. Securely transform Excel to PDF today!",
+        description: "Convertify's Free Online Excel to PDF Converter is the most reliable way to turn spreadsheets into professional documents. Whether you have financial reports, invoices, or simple data lists, our tool preserves your original formatting, fonts, and table structures exactly. Support for both XLS and XLSX formats ensures you can handle legacy and modern files alike. Secure, browser-based processing means your sensitive financial data never leaves your device.",
         features: [
-            "Preserves complete Excel formatting & styles",
-            "Converts complex tables and chart visuals",
-            "Handles multiple sheets and tabs accurately",
-            "Secure, browser-based processing (financial safe)",
-            "Supports XLSX, XLS, CSV, and ODS formats",
-            "No file size or row limits"
+            "Preserves exact Excel formatting & layout",
+            "Supports both modern XLSX and legacy XLS formats",
+            "Converts entire workbooks with multiple sheets",
+            "Secure, browser-based processing (Financial Safe)",
+            "Automatic scaling to fit PDF pages",
+            "No software installation required"
         ],
         useCases: [
-            "Fitting large spreadsheets onto single PDF pages",
-            "Preserving complex financial report formatting",
-            "Converting invoices without cutting off columns",
-            "Sharing read-only data with clients",
-            "Archiving monthly account statements"
+            "Converting monthly financial reports for distribution",
+            "Turning Excel invoices into uneditable PDF bills",
+            "Sharing data snapshots with clients securely",
+            "Archiving annual budgets and spreadsheets",
+            "Presenting data tables in meetings"
         ],
-        keywords: ["excel to pdf", "xlsx to pdf", "save excel as pdf", "convert excel to pdf", "excel to pdf converter online", "preserve excel formatting pdf"]
+        keywords: ["excel to pdf", "xlsx to pdf", "xls to pdf", "spreadsheet to pdf", "save excel as pdf", "convert xlsx to pdf", "excel to pdf converter free"]
     },
     "png-to-pdf": {
         description: "Convertify's High-Quality PNG to PDF Combiner turns images into polished PDFs securely in your browser—no uploads or installs required. Merge PNGs into one PDF, batch convert multiple files, or save single PNGs as PDFs while preserving full resolution, transparency, and sharpness. Perfect for reports, portfolios, or presentations, this free tool combines PNG to PDF high quality with privacy-focused processing on any device!",

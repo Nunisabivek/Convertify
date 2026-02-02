@@ -3,122 +3,117 @@
 
 export const toolSeoData = {
     "merge-pdf": {
-        title: "Merge PDF & Combine Files - Free Online PDF Joiner | Convertify",
-        description: "Merge multiple PDF files into one document for free. Securely join, bind, and combine PDFs online. No uploads, no watermarks, no file limits.",
+        title: "Merge PDF - Combine PDF Files Online Free | Convertify",
+        description: "Merge PDF files into one document instantly. Combine multiple PDFs, stitch pages, and join files securely in your browser. Free, fast & no watermarks.",
         keywords: [
-            "merge pdf", "combine pdf files", "pdf joiner free", "combine multiple pdfs", "merge pdf files online free unlimited",
-            "pdf merger no upload limit", "join pdf documents", "stitch pdfs together", "combine pdf files free", "merge pdfs no upload",
-            "join multiple pdfs securely", "bind pdf documents easily", "unite pdf pages into one", "fuse separate pdfs quickly",
-            "consolidate pdf files tool", "blend pdf pages seamlessly", "link pdf files without software", "assemble pdfs in browser",
-            "integrate multi pdf merger", "concatenate pdf documents", "bundle pdfs privacy safe", "weld pdf files together",
-            "secure pdf merger", "pdf binder"
+            "merge pdf", "combine pdf files", "join pdf files online", "stitch pdf pages", "pdf binder free",
+            "concatenate pdfs", "unite pdf sections", "fuse pdf together", "append pdf files", "bundle pdfs single file",
+            "merge multiple pdfs", "combine pdf documents", "pdf joiner no upload", "secure pdf merger",
+            "compile pdf report", "legal document merger", "combine portfolio pdf", "batch pdf merge free"
         ],
-        h1: "Merge PDF - Combine & Join Files Free",
+        h1: "Merge PDF - Combine Files Online Free",
         faqs: [
             {
-                question: "How do I combine PDF files in a specific order?",
-                answer: "Simply drag and drop your PDFs into the desired sequence, then merge—our tool preserves your custom order with exact page alignment and no quality loss."
+                question: "Can I reorder pages before merging PDFs?",
+                answer: "Yes, our drag-and-drop interface lets you easily rearrange entire files or specific pages to ensure your merged document is in the exact order you need."
             },
             {
-                question: "Is it safe to merge confidential contracts or sensitive documents?",
-                answer: "Yes, it's fully secure: all merging happens locally in your browser with no server uploads or storage, ensuring complete privacy for legal or business files."
+                question: "Does merging preserve bookmarks and hyperlinks?",
+                answer: "Absolutely. Our tool maintains all internal links, bookmarks, and formatting from your original documents, ensuring the merged PDF works perfectly."
             },
             {
-                question: "Can I merge large numbers of PDFs at once?",
-                answer: "Absolutely, handle dozens of files up to 100MB total effortlessly, combining them into one clean PDF while maintaining all formatting and links."
+                question: "Is merging secure for confidential documents?",
+                answer: "Yes. We use client-side processing, meaning your files are merged locally on your device and never uploaded to any server, guaranteeing 100% privacy."
             },
             {
-                question: "Does merging add watermarks or change file quality?",
-                answer: "No watermarks or compression—merged PDFs retain original resolution, fonts, images, and structures for professional results every time."
+                question: "Can I merge password-protected PDFs?",
+                answer: "You can merge protected files if you have the password. Simply unlock them during the process, and they will be combined into the final document."
             },
             {
-                question: "Does it work on mobile devices or different browsers?",
-                answer: "Yes, this free online PDF merger is fully responsive, supporting all devices and major browsers without any downloads or sign-ups."
+                question: "What if files are in the wrong order?",
+                answer: "No problem. You can preview the order and drag-and-drop files to rearrange them as many times as needed before clicking 'Merge'."
             }
         ],
         howToSteps: [
-            { name: "Upload PDFs", text: "Select multiple PDF files you want to combine." },
-            { name: "Arrange Order", text: "Drag and drop files to set the correct order." },
-            { name: "Merge & Download", text: "Click 'Merge PDF' and download your combined document." }
+            { name: "Upload PDFs", text: "Select the PDF files you want to combine." },
+            { name: "Arrange", text: "Drag and drop to set the perfect order." },
+            { name: "Merge", text: "Click to download your single combined PDF." }
         ]
     },
     "split-pdf": {
-        title: "Split PDF & Extract Pages - Free Online PDF Extractor | Convertify",
-        description: "Split PDF files or extract specific pages online free. Separate PDF documents, save single pages, or cut ranges. No watermarks, secure & fast.",
+        title: "Split PDF - Extract Pages & Separate Files Free | Convertify",
+        description: "Split PDF files and extract specific pages online. Separate one or multiple pages instantly. Secure, free, and no installation required.",
         keywords: [
-            "split pdf", "extract pages from pdf", "separate pdf pages", "cut pdf pages", "pdf splitter online", "remove pages from pdf",
-            "extract specific pages from pdf", "save single page from pdf", "separate pdf pages online", "cut pdf pages free tool",
-            "split pdf by page range", "remove unwanted pdf pages", "isolate pdf sections quickly", "extract range of pages pdf",
-            "divide multi-page pdf", "pull out individual pdf pages", "online pdf page splitter", "select pages to extract pdf",
-            "break apart pdf documents", "detach pages from pdf file", "custom pdf page extraction"
+            "split pdf", "extract pages from pdf", "separate pdf pages", "cut pdf pages", "pdf splitter online",
+            "select pages extract", "remove pdf pages", "separate pdf files", "split by page range", "isolate pdf sections",
+            "cut out pdf pages", "divide pdf chapters", "pull single pages", "break pdf into parts", "delete pdf pages online",
+            "save specific pdf pages", "extract pdf range", "split large pdf free"
         ],
-        h1: "Split PDF - Extract Specific Pages Free",
+        h1: "Split PDF & Extract Pages",
         faqs: [
             {
-                question: "Can I extract just one specific page from a PDF?",
-                answer: "Yes, our Split PDF tool lets you select and extract any single page or custom range instantly, saving it as a new PDF file without quality loss."
+                question: "Can I extract just pages 1-3 from a PDF?",
+                answer: "Yes, easily select specific pages or enter a custom range (e.g., 1-3) to extract exactly what you need into a new PDF file."
             },
             {
-                question: "How do I save specific pages as a new file?",
-                answer: "Simply upload your PDF, choose the page numbers or range (e.g., pages 3-7), and download the separated file—quick, precise, and free."
+                question: "What splitting modes are available?",
+                answer: "You can extract all pages as separate files, select specific pages to extract, or split by custom page ranges."
             },
             {
-                question: "Does splitting affect the original PDF quality or formatting?",
-                answer: "No, it preserves all layouts, images, fonts, and vectors exactly, ensuring extracted pages match the source perfectly."
+                question: "Is splitting secure for confidential files?",
+                answer: "Absolutely. We use TLS encryption and process files locally in your browser. All data is deleted automatically after 2 hours."
             },
             {
-                question: "Can I split large PDFs or extract multiple ranges at once?",
-                answer: "Absolutely, handle files up to 100MB with multiple extractions in one go—ideal for reports, books, or presentations."
+                question: "Does it work on password-protected PDFs?",
+                answer: "Yes, you can split protected files by entering the password first to unlock editing permissions."
             },
             {
-                question: "Is my PDF secure during the split process?",
-                answer: "Yes, files are processed client-side with no server upload or storage, keeping your documents private and protected."
+                question: "Can I split large PDFs without limits?",
+                answer: "Yes, manage large documents efficiently. Our tool supports batch processing and splitting of large files without size restrictions."
             }
         ],
         howToSteps: [
             { name: "Upload PDF", text: "Select the PDF file you want to split." },
-            { name: "Select Pages", text: "Click the pages you want to extract." },
-            { name: "Split & Download", text: "Download your new PDF document." }
+            { name: "Select Pages", text: "Click the pages you want to extract or set a range." },
+            { name: "Split", text: "Download your extracted pages as a new PDF." }
         ]
     },
     "compress-pdf": {
-        title: "PDF Compressor - Reduce File Size Online Free | Convertify",
-        description: "Compress PDF files online for free. Reduce file size by up to 90% without losing quality. Optimize documents for email attachments (100KB, 200KB, 1MB).",
+        title: "Compress PDF Online - Reduce PDF File Size for Free | Convertify",
+        description: "Compress PDF files online for free. Reduce PDF size to 100KB, 200KB, or 1MB without losing quality. Perfect for email attachments and web uploads.",
         keywords: [
-            "compress pdf", "pdf compressor", "shrink pdf online", "reduce pdf size", "resize pdf",
-            "pdf optimizer", "online pdf compressor", "compress pdf to 100kb", "compress pdf to 200kb", "compress pdf to 300kb",
-            "reduce pdf size below 100kb", "shrink pdf file size for email", "pdf compress 1mb to 100kb",
-            "lossless pdf compression", "fast online pdf compressor", "secure pdf size reducer",
-            "instant pdf optimizer", "best pdf compressor free", "reduce pdf without quality loss",
-            "privacy-focused pdf shrink", "email-ready pdf optimizer"
+            "compress pdf", "reduce pdf size", "shrink pdf online", "pdf compressor free", "compress pdf to 100kb",
+            "compress pdf to 200kb", "reduce pdf file size for email", "compress pdf to 1mb", "optimize pdf online",
+            "make pdf smaller", "reduce pdf size without losing quality", "shrink pdf for whatsapp", "compress large pdf files",
+            "pdf size reducer online", "best free pdf compressor", "batch compress pdf", "compress pdf under 500kb"
         ],
-        h1: "PDF Compressor - Reduce File Size Online",
+        h1: "Compress PDF - Reduce File Size Online",
         faqs: [
             {
-                question: "Is PDF compression safe and secure?",
-                answer: "Yes, our online PDF compressor keeps your files 100% secure. We process files temporarily on secure servers with end-to-end encryption—no data is stored or shared. Compress PDFs worry-free."
+                question: "How to compress PDF without losing quality?",
+                answer: "Our intelligent compression algorithm optimizes file size by removing redundant data and compressing images efficiently, so your text stays crisp and images remain clear."
             },
             {
-                question: "Does compressing PDF reduce quality?",
-                answer: "No, our lossless PDF compression maintains 100% visual quality. It optimizes images, fonts, and metadata without altering text or graphics, so your documents look identical."
+                question: "Can I compress a PDF to a specific size like 100KB or 200KB?",
+                answer: "Yes, our tool aims for maximum reduction. While exact byte capabilities vary by file content, our 'High Compression' mode is designed to shrink files to the smallest possible size, often under 100KB."
             },
             {
-                question: "How much can I reduce my PDF file size?",
-                answer: "Reduce PDF size by up to 90% instantly. High compression shrinks large files to under 100KB, perfect for email attachments, while low settings preserve maximum quality."
+                question: "Is it safe to compress confidential documents?",
+                answer: "Absolutely. We use end-to-end encryption and process files securely. Your documents are deleted from our servers automatically after a short period, ensuring your data remains private."
             },
             {
-                question: "Can I compress PDF to a specific size like 100KB?",
-                answer: "Absolutely—choose your target size in KB or MB. Our PDF optimizer adjusts compression levels (high, medium, low) to hit your exact needs without quality loss."
+                question: "What is the file size limit for free compression?",
+                answer: "Convertify offers generous limits for free users, allowing you to compress large PDF files (up to 100MB+) that other tools might reject."
             },
             {
-                question: "Is this PDF compressor free and fast?",
-                answer: "Yes, 100% free with no limits or watermarks. Get lightning-fast results—upload, compress, and download in seconds using our secure, high-speed online tool."
+                question: "Can I compress multiple PDF files at once?",
+                answer: "Yes! You can upload and compress multiple files simultaneously in a batch, saving you time when working with many documents."
             }
         ],
         howToSteps: [
-            { name: "Upload Your PDF", text: "Select or drag and drop the PDF file you want to compress. Any PDF size is supported." },
-            { name: "Choose Compression Level", text: "Select your preferred compression: High (smallest size), Medium (balanced), or Low (best quality)." },
-            { name: "Download Compressed PDF", text: "Click 'Compress' and download your smaller PDF file instantly. Perfect for email attachments!" }
+            { name: "Upload PDF", text: "Select your PDF file (even large files supported)." },
+            { name: "Compress", text: "Our tool automatically reduces the file size while maintaining quality." },
+            { name: "Download", text: "Save your smaller, optimized PDF document." }
         ]
     },
     "jpg-to-pdf": {
@@ -138,83 +133,80 @@ export const toolSeoData = {
         ]
     },
     "word-to-pdf": {
-        title: "Word to PDF Converter - Convert DOCX to PDF Online Free | Convertify",
-        description: "Convert Word documents to PDF online free. Save DOC/DOCX as PDF instantly. Keeps formatting, images, and fonts intact. Secure, fast, and no sign-up.",
+        title: "Word to PDF Converter - Convert DOCX to PDF Free | Convertify",
+        description: "Convert Word documents to PDF online while preserving formatting. Keep original fonts, images, and layout intact. Secure, free, and no watermark.",
         keywords: [
             "word to pdf", "docx to pdf", "convert word to pdf", "doc to pdf", "word to pdf converter free",
-            "save word as pdf", "online word to pdf", "keep original layout in pdf", "convert word without losing formatting",
-            "preserve fonts and images docx to pdf", "accurate word to pdf conversion", "no formatting loss converter",
-            "secure docx to pdf online", "privacy-protected word converter", "exact layout preservation tool",
-            "faithful docx formatting to pdf", "encrypted document conversion", "retain word styles in pdf",
-            "lossless word to pdf transfer", "safe online docx converter", "maintain hyperlinks and tables",
-            "batch convert word securely"
+            "preserve word fonts", "maintain document layout", "keep word hyperlinks", "retain tables formatting",
+            "exact margins pdf", "headers footers intact", "resume to pdf converter", "legal contract to pdf",
+            "secure docx to pdf", "print ready pdf conversion", "turn word doc to pdf", "change doc to pdf online",
+            "word to pdf no watermark", "convert docx to pdf format"
         ],
         h1: "Word to PDF Converter - Preserve Formatting",
         faqs: [
             {
-                question: "Will my fonts and formatting change during conversion?",
-                answer: "No, our Word to PDF tool preserves original fonts, layouts, images, tables, and hyperlinks exactly as in your DOCX file, ensuring pixel-perfect accuracy without any loss."
+                question: "Will my custom fonts and layout be preserved?",
+                answer: "Yes, our converter embeds fonts and maintains exact margins, spacing, and page breaks, ensuring your PDF looks identical to your original Word document."
             },
             {
-                question: "Is it safe to convert sensitive documents like legal contracts?",
-                answer: "Yes, it's completely secure—files are processed instantly in your browser with end-to-end encryption, never stored on our servers, protecting your privacy for legal, financial, or confidential docs."
+                question: "Do hyperlinks and tables stay functional?",
+                answer: "Absolutely. Clickable links, bookmarks, and complex table structures are fully retained in the converted PDF file."
             },
             {
-                question: "Does it work on Mac, Windows, or mobile devices?",
-                answer: "Absolutely, this free online Word to PDF converter is device-agnostic, supporting all browsers on Mac, Windows, iOS, Android—no downloads or software needed for seamless use anywhere."
+                question: "Is it safe to convert resumes or legal contracts?",
+                answer: "Yes, security is our priority. Files are processed via encrypted connections and deleted automatically after 2 hours. Your sensitive data is never stored."
             },
             {
-                question: "Can I convert multiple Word files at once?",
-                answer: "Yes, our fast DOCX to PDF converter handles batch uploads efficiently, preserving formatting across files while keeping the process quick and secure."
+                question: "Can I convert DOC files as well as DOCX?",
+                answer: "Yes, we support both the modern .DOCX format and the legacy .DOC format from older Word versions."
             },
             {
-                question: "Is there a file size limit or watermarks added?",
-                answer: "No limits on file size (up to 100MB recommended for speed), and no watermarks—get clean, professional PDFs instantly with full formatting retention."
+                question: "Is the output PDF print-ready?",
+                answer: "Yes, images are processed at 300 DPI and vector elements are preserved, ensuring sharp, professional-quality prints."
             }
         ],
         howToSteps: [
-            { name: "Upload Word File", text: "Select your DOC or DOCX file." },
-            { name: "Convert", text: "We convert it to a professional PDF document." },
-            { name: "Download", text: "Get your PDF file instantly." }
+            { name: "Upload Word Doc", text: "Select or drag and drop your DOC or DOCX file." },
+            { name: "Convert", text: "Our tool converts it to PDF while keeping your formatting intact." },
+            { name: "Download", text: "Save your professional, print-ready PDF document." }
         ]
     },
     "pdf-to-jpg": {
-        title: "PDF to JPG & JPEG - Convert PDF to Image High Quality | Convertify",
-        description: "Convert PDF pages to high-quality JPG/JPEG images online free. Extract photos from PDF or save pages as pictures. No watermarks, secure & fast.",
+        title: "PDF to JPG - Convert PDF to Images Online Free | Convertify",
+        description: "Convert PDF to JPG online in high quality. Extract images from PDF or save pages as pictures. Set DPI level, batch convert files, and download instantly.",
         keywords: [
-            "pdf to jpg", "convert pdf to image", "pdf to image converter", "save pdf as jpg", "pdf to jpeg", "extract images from pdf",
-            "save pdf pages as pictures", "convert pdf page to jpeg", "extract embedded images from pdf", "high quality pdf to jpg export",
-            "turn pdf into image files", "pdf to jpg high resolution", "rasterize pdf pages online", "pull photos out of pdf",
-            "change pdf to jpg crisp", "export pdf as image sequence", "single page pdf to picture", "batch pdf to jpeg converter",
-            "preserve clarity pdf images", "scan pdf to jpg output", "embed-free pdf photo extraction"
+            "pdf to jpg", "convert pdf to image", "pdf to jpeg", "extract images from pdf", "save pdf as picture",
+            "high quality jpg export", "turn pdf into image", "convert pages to images", "pdf scan to jpg",
+            "crisp image conversion", "dpi selectable export", "multi-page jpg output", "vector to raster jpg",
+            "batch pdf to jpg", "pdf to image converter free", "change pdf to picture"
         ],
         h1: "PDF to JPG - Convert Pages to Images Free",
         faqs: [
             {
-                question: "Will the image quality be blurry after conversion?",
-                answer: "No, our high-resolution PDF to JPG tool delivers sharp, crisp images at 300 DPI or higher, preserving every detail, text, and graphic from your original PDF."
+                question: "Is the PDF to JPG output high resolution?",
+                answer: "Yes, our tool preserves 300 DPI high resolution, ensuring crisp, professional-quality images for printing or social media without pixelation."
             },
             {
-                question: "Can I convert just one specific page to JPG?",
-                answer: "Yes, select any single page or custom range—extract it instantly as a high-quality JPEG without affecting the rest of the document."
+                question: "Does batch processing support multiple PDFs?",
+                answer: "Absolutely. You can convert multiple PDF files or single pages at once, and we'll zip them for a fast, organized download."
             },
             {
-                question: "Does it extract only embedded images or whole pages?",
-                answer: "Both: choose page-to-image for full rasterization or extract embedded photos directly, saving time for designs or scans."
+                question: "Will image quality degrade on text-heavy PDFs?",
+                answer: "No. Our converter uses high-fidelity rendering to keep text sharp and readable, converting vectors to raster JPGs with minimal loss."
             },
             {
-                question: "What's the max file size or page count supported?",
-                answer: "Handles up to 100MB PDFs with 100+ pages smoothly, outputting clean JPGs quickly without compression artifacts."
+                question: "Is batch conversion secure for sensitive scans?",
+                answer: "Yes. All processing happens locally in your browser (client-side). Your files are never uploaded to a server, guaranteeing 100% privacy."
             },
             {
-                question: "Is it secure for converting sensitive PDFs like contracts?",
-                answer: "Fully secure—processes entirely in-browser with no uploads or storage, keeping your PDF to JPG conversions private."
+                question: "Can I extract specific images instead of full pages?",
+                answer: "Yes, you can choose to convert entire pages to JPG or extract just the embedded images from your document."
             }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Select the PDF file you want to convert." },
-            { name: "Convert", text: "We transform each page into a JPG image." },
-            { name: "Download", text: "Save your images." }
+            { name: "Upload PDF", text: "Select the PDF file(s) you want to convert." },
+            { name: "Settings", text: "Choose 'Convert Pages' or 'Extract Images'." },
+            { name: "Download", text: "Save your high-quality JPGs instantly." }
         ]
     },
     "png-to-pdf": {
@@ -522,44 +514,41 @@ export const toolSeoData = {
         ]
     },
     "excel-to-pdf": {
-        title: "Excel to PDF Converter - Convert XLSX to PDF Online Free | Convertify",
-        description: "Convert Excel to PDF online free. Save XLSX, XLS, and CSV files as PDF documents. Preserves formatting, tables, and sheets. No sign-up, secure & fast.",
+        title: "Excel to PDF Converter - Free Online XLSX to PDF | Convertify",
+        description: "Convert Excel to PDF online for free. Save XLSX and XLS spreadsheets as PDF documents while preserving formatting, tables, and formulas. Secure & fast.",
         keywords: [
             "excel to pdf", "xlsx to pdf", "convert excel to pdf", "save excel as pdf", "excel to pdf converter free",
-            "xls to pdf online", "spreadsheet to pdf", "convert xlsx to pdf", "fast excel to pdf", "online excel to pdf converter",
-            "preserve excel tables in pdf", "accurate xlsx to pdf conversion", "keep formulas and charts intact",
-            "no data loss excel converter", "secure excel to pdf online", "privacy-safe spreadsheet to pdf",
-            "retain multiple sheets structure", "exact column row preservation", "convert excel without altering data",
-            "faithful xls table export to pdf", "encrypted financial converter", "maintain pivot tables in pdf",
-            "lossless excel chart to pdf", "batch xlsx secure conversion", "verified data integrity tool"
+            "xls to pdf online", "spreadsheet to pdf", "convert workbook to pdf", "change excel to pdf", "turn spreadsheet into pdf",
+            "preserve excel formatting pdf", "batch excel conversion", "secure excel to pdf", "excel to pdf no sign up",
+            "microsoft excel to pdf converter", "financial report to pdf", "convert xlsx without losing formatting"
         ],
-        h1: "Convert Excel to PDF - Free Online Converter",
+        h1: "Excel to PDF Converter - Preserve Formatting",
         faqs: [
             {
-                question: "Will large Excel files with multiple sheets convert properly?",
-                answer: "Yes, our Excel to PDF converter handles large XLSX files and multiple sheets effortlessly, preserving all table structures, charts, and data across tabs without compression or loss."
+                question: "How can I convert Excel to PDF without losing formatting?",
+                answer: "Our tool uses advanced rendering to preserve your original layout, including fonts, cell borders, column widths, and table structures, ensuring your PDF looks exactly like your spreadsheet."
             },
             {
-                question: "Do formulas or calculations get exposed or changed in the PDF?",
-                answer: "No, formulas remain private and secure—only the calculated results, tables, and visuals are converted to PDF with full accuracy, ensuring data privacy for sensitive spreadsheets."
+                question: "What is the difference between XLS and XLSX conversion?",
+                answer: "XLS is the older Excel format (pre-2007) and XLSX is the newer standard. Our converter handles both formats seamlessly, so you don't need to worry about compatibility."
             },
             {
-                question: "Can it manage complex tables, pivot tables, and charts?",
-                answer: "Absolutely, it retains exact column widths, row heights, pivot tables, graphs, and conditional formatting in high-quality PDF output, perfect for reports."
+                question: "Is it safe to upload financial or sensitive Excel files?",
+                answer: "Yes, absolutely. We process your files locally in your browser using secure client-side technology. Your financial data is never stored on our servers or seen by anyone."
             },
             {
-                question: "What's the file size limit for Excel to PDF conversion?",
-                answer: "No strict limits (optimal under 50MB for speed), but our fast online tool processes even oversized financial spreadsheets securely without issues."
+                question: "Can I convert multiple Excel sheets into one PDF?",
+                answer: "Yes, our converter automatically detects all active sheets in your workbook and combines them into valid, sequential pages in the final PDF document."
             },
             {
-                question: "Is my data stored or shared after conversion?",
-                answer: "Never—files are converted client-side with end-to-end encryption, deleted immediately, keeping your Excel data private and compliant."
+                question: "Do I need Microsoft Excel installed to use this?",
+                answer: "No, you don't need any software installed. Convertify works entirely in your web browser, allowing you to convert Excel files from any device, anywhere."
             }
         ],
         howToSteps: [
-            { name: "Upload Excel File", text: "Select your XLSX or XLS file." },
-            { name: "Convert", text: "We convert your spreadsheet to PDF format." },
-            { name: "Download", text: "Get your PDF document instantly." }
+            { name: "Upload Excel Sheet", text: "Select or drag and drop your XLS or XLSX file." },
+            { name: "Convert to PDF", text: "We process the spreadsheet, preserving your layout and tables." },
+            { name: "Download", text: "Save your new, professional PDF document instantly." }
         ]
     },
 

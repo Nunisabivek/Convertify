@@ -40,9 +40,30 @@ export default function Page() {
                     <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
                         {seoData.h1}
                     </h1>
-                    <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                    <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-6">
                         Convert Microsoft Word documents to PDF while preserving formatting.
                     </p>
+
+                    {/* Preview/Trust Image */}
+                    <div className="relative w-full max-w-2xl mx-auto h-48 md:h-64 rounded-xl overflow-hidden shadow-lg border border-slate-200 bg-white mb-8 group">
+                        <div className="absolute inset-0 flex items-center justify-center bg-slate-50">
+                            {/* Placeholder for tool preview - using text for now, but in structure for an image substitute */}
+                            <div className="flex items-center space-x-8 text-slate-400">
+                                <span className="flex flex-col items-center">
+                                    <span className="text-4xl mb-2">📄</span>
+                                    <span className="text-sm font-medium">Word Doc</span>
+                                </span>
+                                <span className="text-2xl">→</span>
+                                <span className="flex flex-col items-center">
+                                    <span className="text-4xl mb-2 text-red-500">📄</span>
+                                    <span className="text-sm font-medium text-slate-700">Perfect PDF</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="absolute bottom-0 inset-x-0 bg-black/50 text-white text-xs py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            Preserves Fonts, Tables & Layouts 100%
+                        </div>
+                    </div>
                 </div>
                 <ToolSwapper />
                 <WordToPdfClient />

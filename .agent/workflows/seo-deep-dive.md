@@ -11,10 +11,11 @@ This workflow automates the analysis of underperforming pages using Google Searc
    - Navigate to "Performance" -> "Pages".
    - Sort by **Impressions** to find high-visibility/low-CTR pages.
    - Select the top candidate page.
-[ ] **Analyze Queries**
+[ ] **Analyze Queries ('Right' vs 'Wrong')**
    - Switch to the "Queries" tab for that specific page.
-   - Identify "Missing Keywords" (high impressions but not in the page title/content).
-   - *Output*: List of opportunity keywords.
+   - **Identify 'What is Wrong'**: Find keywords with **High Impressions but Low CTR/Position** (>10). These are your primary opportunities.
+   - **Identify 'What is Right'**: Note keywords with **High Impressions AND High Position** (<5). Ensure these are preserved and used as semantic anchors.
+   - *Output*: List of Opportunity Keywords (Wrong) and Anchor Keywords (Right).
 
 ## 2. Technical Audit (Agent)
 [ ] **Run PageAudit**
