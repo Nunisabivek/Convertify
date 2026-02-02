@@ -41,7 +41,7 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-6">
-                        Convert Microsoft Word documents to PDF while preserving formatting.
+                        Convert Word documents to PDF with <b>100% layout accuracy</b>. Perfect for Resumes, Legal Contracts, and Thesis papers.
                     </p>
 
                     {/* Preview/Trust Image */}

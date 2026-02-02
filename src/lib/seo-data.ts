@@ -133,16 +133,15 @@ export const toolSeoData = {
         ]
     },
     "word-to-pdf": {
-        title: "Word to PDF Converter - Convert DOCX to PDF Free | Convertify",
-        description: "Convert Word documents to PDF online while preserving formatting. Keep original fonts, images, and layout intact. Secure, free, and no watermark.",
+        title: "Word to PDF - Convert DOCX to PDF (Keep Formatting) | Convertify",
+        description: "Convert Word to PDF with 100% layout accuracy. Preserve fonts, images, and formatting exactly as they appear in DOCX. Free, secure, and no sign-up.",
         keywords: [
             "word to pdf", "docx to pdf", "convert word to pdf", "doc to pdf", "word to pdf converter free",
-            "preserve word fonts", "maintain document layout", "keep word hyperlinks", "retain tables formatting",
-            "exact margins pdf", "headers footers intact", "resume to pdf converter", "legal contract to pdf",
-            "secure docx to pdf", "print ready pdf conversion", "turn word doc to pdf", "change doc to pdf online",
-            "word to pdf no watermark", "convert docx to pdf format"
+            "keep word formatting", "preserve document layout", "word to pdf exact match", "resume to pdf", "cv to pdf",
+            "maintain fonts word to pdf", "secure docx conversion", "legal contract to pdf", "print ready pdf",
+            "convert doc to pdf no watermark", "change word to pdf online"
         ],
-        h1: "Word to PDF Converter - Preserve Formatting",
+        h1: "Word to PDF Converter - Preserve Exact Layout",
         faqs: [
             {
                 question: "Will my custom fonts and layout be preserved?",
