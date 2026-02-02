@@ -79,15 +79,15 @@ export const toolSeoData = {
         ]
     },
     "compress-pdf": {
-        title: "Compress PDF Online - Reduce PDF File Size for Free | Convertify",
-        description: "Compress PDF files online for free. Reduce PDF size to 100KB, 200KB, or 1MB without losing quality. Perfect for email attachments and web uploads.",
+        title: "Compress PDF - Reduce PDF Size Online (Up to 90% Free) | Convertify",
+        description: "Compress PDF file size online for free. Reduce PDF size to under 100KB, 200KB, or 1MB while maintaining high quality. Fast, secure, and no sign-up.",
         keywords: [
-            "compress pdf", "reduce pdf size", "shrink pdf online", "pdf compressor free", "compress pdf to 100kb",
-            "compress pdf to 200kb", "reduce pdf file size for email", "compress pdf to 1mb", "optimize pdf online",
-            "make pdf smaller", "reduce pdf size without losing quality", "shrink pdf for whatsapp", "compress large pdf files",
-            "pdf size reducer online", "best free pdf compressor", "batch compress pdf", "compress pdf under 500kb"
+            "compress pdf", "reduce pdf size", "shrink pdf", "compress pdf 100kb", "compress pdf 200kb",
+            "reduce pdf file size free", "optimize pdf online", "pdf size reducer", "compress pdf for email",
+            "make pdf smaller", "smaller pdf file", "compress adobe pdf free", "compress pdf 500kb",
+            "reduce pdf size without losing quality", "batch compress pdf", "shrink large pdf"
         ],
-        h1: "Compress PDF - Reduce File Size Online",
+        h1: "Compress PDF - Smart File Reducer Online",
         faqs: [
             {
                 question: "How to compress PDF without losing quality?",
