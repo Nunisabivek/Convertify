@@ -298,7 +298,7 @@ export default function WebHomePage() {
             <section className="w-full pt-20 pb-12 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-100/50 via-slate-50 to-white text-center px-4 relative overflow-hidden">
                 <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
                 <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 drop-shadow-sm">
-                    Convertify: <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">Free PDF Tools & Converter</span>
+                    Convertify: <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">Free Online PDF Tools</span>
                 </h1>
                 <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-6 leading-relaxed">
                     Convertify is the best iLovePDF alternative—100% free online PDF tools with client-side processing for ultimate privacy. Merge, convert, compress, or edit PDFs instantly without sign-ups, limits, or uploads.
@@ -489,19 +489,45 @@ export default function WebHomePage() {
                         <div className="space-y-6">
                             <div>
                                 <h4 className="font-semibold text-lg text-slate-800 mb-2">Are online PDF tools safe for confidential documents?</h4>
-                                <p className="text-slate-600">Yes, Convertify is designed with privacy first. We use client-side processing, meaning your files never leave your device and are never uploaded to our servers, ensuring 100% confidentiality.</p>
+                                <p className="text-slate-600">Yes, Convertify is designed with privacy first. We use client-side processing, meaning your files are processed locally on your machine and never uploaded to our servers. This ensures 100% confidentiality for legal, financial, and personal documents.</p>
                             </div>
                             <div>
                                 <h4 className="font-semibold text-lg text-slate-800 mb-2">Do free PDF converters have file size limits?</h4>
-                                <p className="text-slate-600">Unlike many competitors, Convertify operates with no artificial file size limits. Because we process files locally on your browser, you are only limited by your own device's memory.</p>
+                                <p className="text-slate-600">Unlike many competitors that cap file sizes at 10MB or 50MB, Convertify operates with no artificial file size limits. Because we use your browser&apos;s power for client-side conversion, you can compress or merge large PDF files as long as your device has the memory to handle them.</p>
                             </div>
                             <div>
                                 <h4 className="font-semibold text-lg text-slate-800 mb-2">Can I use PDF tools without creating an account?</h4>
-                                <p className="text-slate-600">Absolutely. There is no sign-up, no registration, and no email required. You can use all our tools instantly and indefinitely without ever creating an account.</p>
+                                <p className="text-slate-600">Absolutely. Convertify is a "no sign-up" platform. There is no registration, no email requirement, and no subscription fees. You can use all our premium-grade features instantly and indefinitely without ever sharing your personal information.</p>
                             </div>
                             <div>
                                 <h4 className="font-semibold text-lg text-slate-800 mb-2">How do I merge PDFs without uploading to servers?</h4>
-                                <p className="text-slate-600">Simply use our "Merge PDF" tool. Since our technology runs in your browser, your files are combined locally on your machine, making it the safest way to merge sensitive documents.</p>
+                                <p className="text-slate-600">Simply use our "Merge PDF" tool. Our advanced technology runs logic directly in your web browser (WebAssembly/Javascript), so your files are combined locally. This is the safest way to merge sensitive documents without risk of data breaches from server-side storage.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Detailed SEO Content Section */}
+                    <div className="mt-20 prose prose-slate max-w-none border-t pt-12">
+                        <h2 className="text-3xl font-bold text-slate-900 mb-6">The Best iLovePDF Alternative for Privacy-Conscious Users</h2>
+                        <div className="grid md:grid-cols-2 gap-10 text-slate-600 leading-relaxed">
+                            <div>
+                                <p className="mb-4">
+                                    Convertify was built to solve the biggest problem with online file converters: <strong>privacy</strong>. Most "free" tools require you to upload your sensitive files to their servers, where they may be stored, analyzed, or leaked. Convertify changes the game by bringing the processing power to <em>you</em>.
+                                </p>
+                                <p>
+                                    Our suite of tools—including the popular <strong>Compress PDF to 100KB</strong>, <strong>Excel to PDF converter</strong>, and <strong>Word to PDF tool</strong>—runs entirely in your browser. Whether you are on Windows, macOS, or mobile, you get high-speed, secure results without a single byte ever being uploaded to our cloud.
+                                </p>
+                            </div>
+                            <div>
+                                <p className="mb-4">
+                                    Beyond privacy, we focus on <strong>accuracy</strong>. Our Word to PDF and Excel to PDF converters are optimized to preserve fonts, margins, and complex table layouts perfectly. No more broken spreadsheets or shifted text in your professional documents.
+                                </p>
+                                <ul className="list-disc pl-5 space-y-2">
+                                    <li><strong>Merge PDF:</strong> Combine unlimited files with zero watermarks.</li>
+                                    <li><strong>Compress PDF:</strong> Shrink large files for email without losing readability.</li>
+                                    <li><strong>PDF to Word:</strong> Turn scans into editable DOCX files in seconds.</li>
+                                    <li><strong>Secure PDF:</strong> Add AES-256 encryption to your files locally.</li>
+                                </ul>
                             </div>
                         </div>
                     </div>

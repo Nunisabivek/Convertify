@@ -19,10 +19,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Free PDF Tools Online - Merge, Convert, Compress",
-    template: "%s | Convertify - Free PDF Tools",
+    default: "Free PDF Tools - No Sign-Up | Convertify",
+    template: "%s | Convertify",
   },
-  description: "Convertify is the best free iLovePDF alternative. Merge, convert, and compress PDFs with client-side security. No file limits, no sign-up, no uploads required.",
+  description: "Convertify is the ultimate free PDF tool suite. Merge, convert, compress, and edit PDFs securely in your browser. No sign-up, no limits, no uploads required.",
   applicationName: "Convertify",
   authors: [{ name: "Convertify Team" }],
   keywords: [

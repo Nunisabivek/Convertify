@@ -1,49 +1,54 @@
 ---
-description: Deep-dive SEO improvement loop combining GSC, PageAudit, Perplexity, and NotebookLM.
+description: Deep-dive SEO improvement loop combining GSC, PageAudit, Perplexity Deep Research, and NotebookLM Synthesis Workspace.
 ---
 
-# SEO Deep Dive & Optimization Workflow
+# SEO Deep Dive & Optimization Workflow (Perplexity + NotebookLM Edition)
 
-This workflow automates the analysis of underperforming pages using Google Search Console and PageAudit, leverages User-assisted Perplexity search for keywords, and synthesizes a strategy via NotebookLM to implement code fixes.
+This workflow automates the cycle of finding low-performing pages, researching competitor patterns via Perplexity Deep Research, and synthesizing high-converting content strategies using NotebookLM.
 
-## 1. GSC Analysis (Agent)
-[ ] **Open Google Search Console**
-   - Navigate to "Performance" -> "Pages".
-   - Sort by **Impressions** to find high-visibility/low-CTR pages.
-   - Select the top candidate page.
-[ ] **Analyze Queries ('Right' vs 'Wrong')**
-   - Switch to the "Queries" tab for that specific page.
-   - **Identify 'What is Wrong'**: Find keywords with **High Impressions but Low CTR/Position** (>10). These are your primary opportunities.
-   - **Identify 'What is Right'**: Note keywords with **High Impressions AND High Position** (<5). Ensure these are preserved and used as semantic anchors.
-   - *Output*: List of Opportunity Keywords (Wrong) and Anchor Keywords (Right).
+## 🌀 Phase 1: Identification & Batch Selection (Agent)
+1. **GSC Performance Scrape**:
+   - Open Google Search Console.
+   - Filter "Performance" -> "Pages" for the last 28 days.
+   - Export or list the top 10 pages with **High Impressions (>1000)** but **Low CTR (<2%)**.
+   - For each page, identify "Anchor Keywords" (ranking #1-3) and "Missed Opportunities" (ranking #10-50).
+2. **Current State Baseline**:
+   - Run a `PageAudit.com` technical check for each selected URL.
+   - Record baseline Title, Description, and word count.
 
-## 2. Technical Audit (Agent)
-[ ] **Run PageAudit**
-   - Navigate to `pageaudit.com`.
-   - Audit the specific URL identifying in Step 1.
-   - Capture "Critical Errors" (Title length, H1, missing alt tags).
-   - *Output*: List of technical fixes needed.
+## 🔍 Phase 2: Perplexity Deep Research (agent)
+For each page in the batch, the Agent will generate a **Deep Research Prompt**:
+1. **User Action**: 
+   - Go to Perplexity.ai and toggle **"Deep Research" / "Pro"** on.
+   - Paste the prompt provided by the Agent (example below).
+   - **Crucial**: Verify citations and only keep accurate competitor URLs.
+   - Copy the final Perplexity report or URLs.
 
-## 3. Semantic Search (User Action Required)
-[ ] **Agent Generates Prompt**: The agent will create a specific query for Perplexity based on Step 1 & 2 (e.g., "LSI keywords for [Topic]...").
-[ ] **User Action**:
-   - Go to Perplexity.ai.
-   - Paste the agent's prompt.
-   - Copy the results.
-   - Paste the results back into the chat.
+> **Agent-Generated Prompt Format**:
+> *"Analyze the top 5 competitors for [URL]. What specific semantic keywords, content structures, and user 'pain point' questions are driving their conversions? Focus on [Specific Niche, e.g., '100KB compression']."*
 
-## 4. Strategy Synthesis (NotebookLM)
-[ ] **Agent Prepares Data**: The agent will compile:
-   - GSC Query Data
-   - PageAudit Errors
-   - Perplexity Keywords (from User)
-[ ] **User/Agent Action**:
-   - If NotebookLM is open/accessible: The user (or agent) pastes this compiled data into NotebookLM to generate a "Content Optimization Plan".
-   - *Alternative*: The Agent uses its own LLM to synthesize this data into a specific coding plan.
+## 🧠 Phase 3: NotebookLM Synthesis Workspace (Agent)
+Instead of just copying keywords, we use NotebookLM to create a finished product.
+1. **Importing Sources**:
+   - Upload the Perplexity report text or URLs into a new NotebookLM Notebook.
+   - Upload the GSC "Opportunity Queries" as a text source.
+2. **NotebookLM Instructions**:
+   - Use the NotebookLM chat to ask:
+     - *"Review these sources and identify patterns in the top-performing competitor content."*
+     - *"Generate a step-by-step 'High-Conversion Content Plan' for my page [Page Title] based strictly on these patterns."*
+   - Paste the resulting "Content Plan" back into the chat for the Agent to implement.
 
-## 5. Code Implementation (Agent)
-[ ] **Update Codebase**:
-   - `src/lib/seo-data.ts`: Update Title, Description, Keywords.
-   - `src/app/[tool]/page.tsx`: Update H1 or content structure.
-   - `src/lib/tool-content-data.ts`: Enhance descriptions/features with LSI keywords.
-[ ] **Verify**: Run `npm run build` to ensure no errors.
+## 🛠️ Phase 4: Automated Code Implementation (Agent)
+Once the "Content Plan" is provided, the Agent performs a surgical update:
+1. **Metadata Optimization**:
+   - Update `src/lib/seo-data.ts`: Shorten titles (<60 chars), use high-intent keywords in descriptions.
+2. **Semantic Content Injection**:
+   - Update `src/lib/tool-content-data.ts`: Add specific FAQ questions and benefit bullets identified by NotebookLM.
+3. **Template Fixes**:
+   - Ensure a single H1 tag exists.
+   - Add the "How it Works" or "Security" sections if missing.
+
+## 🔄 Phase 5: Batch Loop (Repeat for All Pages)
+1. **Check Build**: Run `npm run build` to verify all updates.
+2. **Select Next Page**: Move to the next page in the identification list and repeat Phase 2-4.
+3. **Index Request**: After pushing code, go to GSC and manually request a recrawl for the top 5 most important pages.

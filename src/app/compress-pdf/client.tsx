@@ -291,7 +291,7 @@ export default function CompressPdfPage() {
     return (
         <div className="container mx-auto py-12 max-w-4xl px-4">
             <div className="text-center mb-10">
-                <h1 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">Compress PDF & Images</h1>
+                <h2 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">Compress PDF & Images</h2>
                 <p className="text-slate-500 text-lg">Reduce file size of PDFs, JPGs, PNGs to your exact target (KB/MB).</p>
             </div>
 

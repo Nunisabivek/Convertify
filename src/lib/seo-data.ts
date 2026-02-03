@@ -4,34 +4,30 @@
 export const toolSeoData = {
     "merge-pdf": {
         title: "Merge PDF - Combine PDF Files Online Free | Convertify",
-        description: "Merge PDF files into one document instantly. Combine multiple PDFs, stitch pages, and join files securely in your browser. Free, fast & no watermarks.",
+        description: "Merge multiple PDF files into one professional document instantly. Drag-and-drop to reorder pages. Secure, free, and no sign-up required. Optimized for zero file-size bloat.",
         keywords: [
             "merge pdf", "combine pdf files", "join pdf files online", "stitch pdf pages", "pdf binder free",
             "concatenate pdfs", "unite pdf sections", "fuse pdf together", "append pdf files", "bundle pdfs single file",
             "merge multiple pdfs", "combine pdf documents", "pdf joiner no upload", "secure pdf merger",
             "compile pdf report", "legal document merger", "combine portfolio pdf", "batch pdf merge free"
         ],
-        h1: "Merge PDF - Combine Files Online Free",
+        h1: "Merge PDF - Combine & Reorder Files Online",
         faqs: [
             {
-                question: "Can I reorder pages before merging PDFs?",
-                answer: "Yes, our drag-and-drop interface lets you easily rearrange entire files or specific pages to ensure your merged document is in the exact order you need."
+                question: "Can I reorder the files after uploading?",
+                answer: "Yes! Our visual merger allows you to drag and drop your PDFs to set the exact order before combining them into a single document."
             },
             {
-                question: "Does merging preserve bookmarks and hyperlinks?",
-                answer: "Absolutely. Our tool maintains all internal links, bookmarks, and formatting from your original documents, ensuring the merged PDF works perfectly."
+                question: "Can I merge PDF files with images (JPG/PNG)?",
+                answer: "Absolutely. Convertify supports merging mixed file types. You can upload PDFs alongside JPG or PNG images and combine them into one sequential PDF."
             },
             {
-                question: "Is merging secure for confidential documents?",
-                answer: "Yes. We use client-side processing, meaning your files are merged locally on your device and never uploaded to any server, guaranteeing 100% privacy."
+                question: "Will the merged file be too large to email?",
+                answer: "We use 'Zero-Bloat' merging technology that avoids duplicating fonts and metadata, keeping your final file size as small as possible for email attachments."
             },
             {
-                question: "Can I merge password-protected PDFs?",
-                answer: "You can merge protected files if you have the password. Simply unlock them during the process, and they will be combined into the final document."
-            },
-            {
-                question: "What if files are in the wrong order?",
-                answer: "No problem. You can preview the order and drag-and-drop files to rearrange them as many times as needed before clicking 'Merge'."
+                question: "How many files can I merge at once?",
+                answer: "You can merge dozens of files at once. Our client-side processing handles large batches efficiently without timing out like cloud-based tools."
             }
         ],
         howToSteps: [
@@ -42,15 +38,20 @@ export const toolSeoData = {
     },
     "split-pdf": {
         title: "Split PDF - Extract Pages & Separate Files Free | Convertify",
-        description: "Split PDF files and extract specific pages online. Separate one or multiple pages instantly. Secure, free, and no installation required.",
+        description: "Split PDF files and extract specific pages online. Separate one or multiple pages instantly on Windows, Mac, or Mobile. Secure, free, and private.",
         keywords: [
             "split pdf", "extract pages from pdf", "separate pdf pages", "cut pdf pages", "pdf splitter online",
+            "how to split pdf on windows", "split pdf windows 10 11", "extract pages pdf windows",
             "select pages extract", "remove pdf pages", "separate pdf files", "split by page range", "isolate pdf sections",
             "cut out pdf pages", "divide pdf chapters", "pull single pages", "break pdf into parts", "delete pdf pages online",
             "save specific pdf pages", "extract pdf range", "split large pdf free"
         ],
-        h1: "Split PDF & Extract Pages",
+        h1: "Split PDF - Extract Pages on Windows & Mac",
         faqs: [
+            {
+                question: "How to split PDF on Windows without downloading software?",
+                answer: "Convertify allows you to split PDF files directly in your web browser (Edge, Chrome, or Firefox) on Windows 10/11. No need to install heavy software like Acrobat—everything stays private on your machine."
+            },
             {
                 question: "Can I extract just pages 1-3 from a PDF?",
                 answer: "Yes, easily select specific pages or enter a custom range (e.g., 1-3) to extract exactly what you need into a new PDF file."
@@ -61,59 +62,52 @@ export const toolSeoData = {
             },
             {
                 question: "Is splitting secure for confidential files?",
-                answer: "Absolutely. We use TLS encryption and process files locally in your browser. All data is deleted automatically after 2 hours."
+                answer: "Absolutely. We use 100% client-side processing. Your documents are split inside your browser and never uploaded to any server, guaranteeing absolute privacy."
             },
             {
                 question: "Does it work on password-protected PDFs?",
                 answer: "Yes, you can split protected files by entering the password first to unlock editing permissions."
-            },
-            {
-                question: "Can I split large PDFs without limits?",
-                answer: "Yes, manage large documents efficiently. Our tool supports batch processing and splitting of large files without size restrictions."
             }
         ],
         howToSteps: [
             { name: "Upload PDF", text: "Select the PDF file you want to split." },
             { name: "Select Pages", text: "Click the pages you want to extract or set a range." },
-            { name: "Split", text: "Download your extracted pages as a new PDF." }
+            { name: "Split", text: "Download your extracted pages as a new PDF instantly." }
         ]
     },
     "compress-pdf": {
-        title: "Compress PDF - Reduce PDF Size Online (Up to 90% Free) | Convertify",
-        description: "Compress PDF file size online for free. Reduce PDF size to under 100KB, 200KB, or 1MB while maintaining high quality. Fast, secure, and no sign-up.",
+        title: "Compress PDF to 100KB & 200KB Free - No Sign-Up | Convertify",
+        description: "Compress PDF to 100KB or 200KB instantly. Perfect for government forms, passport scans, and visa portals. Our intelligent compression preserves text readability.",
         keywords: [
             "compress pdf", "reduce pdf size", "shrink pdf", "compress pdf 100kb", "compress pdf 200kb",
-            "reduce pdf file size free", "optimize pdf online", "pdf size reducer", "compress pdf for email",
-            "make pdf smaller", "smaller pdf file", "compress adobe pdf free", "compress pdf 500kb",
-            "reduce pdf size without losing quality", "batch compress pdf", "shrink large pdf"
+            "pdf 100kb to 200kb", "100kb to 200kb pdf", "reduce pdf size to 100kb no quality loss",
+            "compress pdf for government forms", "passport scan compression 100kb", "visa application pdf compressor",
+            "best pdf compressor no loss quality", "shrink pdf file online 200kb free",
+            "make pdf smaller", "smaller pdf file", "compress pdf for email", "batch compress pdf"
         ],
-        h1: "Compress PDF - Smart File Reducer Online",
+        h1: "Compress PDF - Reduce Size to 100KB/200KB Free",
         faqs: [
             {
-                question: "How to compress PDF without losing quality?",
-                answer: "Our intelligent compression algorithm optimizes file size by removing redundant data and compressing images efficiently, so your text stays crisp and images remain clear."
+                question: "How do I hit exactly 100KB for government forms?",
+                answer: "Our 'High Compression' mode uses multi-pass optimization to get as close to your target (100KB/200KB) as possible while ensuring your photo and text remain legible for officials."
             },
             {
-                question: "Can I compress a PDF to a specific size like 100KB or 200KB?",
-                answer: "Yes, our tool aims for maximum reduction. While exact byte capabilities vary by file content, our 'High Compression' mode is designed to shrink files to the smallest possible size, often under 100KB."
+                question: "Will my passport photo be blurry after compression?",
+                answer: "No. Our algorithm prioritizes text and face recognition areas, applying heavier compression only to background metadata and redundant layout info to keep your IDs crisp."
             },
             {
-                question: "Is it safe to compress confidential documents?",
-                answer: "Absolutely. We use end-to-end encryption and process files securely. Your documents are deleted from our servers automatically after a short period, ensuring your data remains private."
+                question: "Is it safe for sensitive official documents?",
+                answer: "Yes. Processing happens 100% in your browser. Your sensitive government forms are never uploaded or stored, providing total privacy for your personal data."
             },
             {
-                question: "What is the file size limit for free compression?",
-                answer: "Convertify offers generous limits for free users, allowing you to compress large PDF files (up to 100MB+) that other tools might reject."
-            },
-            {
-                question: "Can I compress multiple PDF files at once?",
-                answer: "Yes! You can upload and compress multiple files simultaneously in a batch, saving you time when working with many documents."
+                question: "What if the file is still over 100KB?",
+                answer: "Try our 'Extreme' mode. It removes embedded thumbnails and non-essential fonts to shave off the final few bytes needed for strict portals."
             }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Select your PDF file (even large files supported)." },
-            { name: "Compress", text: "Our tool automatically reduces the file size while maintaining quality." },
-            { name: "Download", text: "Save your smaller, optimized PDF document." }
+            { name: "Upload PDF", text: "Select your government form or document." },
+            { name: "Select Mode", text: "Choose 'High' or 'Extreme' to hit the 100KB limit." },
+            { name: "Download", text: "Save your portal-ready PDF document." }
         ]
     },
     "jpg-to-pdf": {
@@ -133,94 +127,86 @@ export const toolSeoData = {
         ]
     },
     "word-to-pdf": {
-        title: "Word to PDF - Convert DOCX to PDF (Keep Formatting) | Convertify",
-        description: "Convert Word to PDF with 100% layout accuracy. Preserve fonts, images, and formatting exactly as they appear in DOCX. Free, secure, and no sign-up.",
+        title: "Word to PDF - Preserve Layout & Fonts Free | Convertify",
+        description: "Convert Word to PDF without Microsoft Office. We use Smart Font Embedding to preserve your original layout, margins, and styles perfectly.",
         keywords: [
             "word to pdf", "docx to pdf", "convert word to pdf", "doc to pdf", "word to pdf converter free",
+            "word to pdf no office", "word to pdf preserve layout", "font embedding word to pdf",
+            "accurate word docx to pdf conversion", "docx to pdf in word", "convert docx to pdf without office",
             "keep word formatting", "preserve document layout", "word to pdf exact match", "resume to pdf", "cv to pdf",
-            "maintain fonts word to pdf", "secure docx conversion", "legal contract to pdf", "print ready pdf",
-            "convert doc to pdf no watermark", "change word to pdf online"
+            "maintain fonts word to pdf", "secure docx conversion", "legal contract to pdf", "print ready pdf"
         ],
-        h1: "Word to PDF Converter - Preserve Exact Layout",
+        h1: "Word to PDF - Layout & Font Preservation",
         faqs: [
             {
-                question: "Will my custom fonts and layout be preserved?",
-                answer: "Yes, our converter embeds fonts and maintains exact margins, spacing, and page breaks, ensuring your PDF looks identical to your original Word document."
+                question: "Does this work if I don't have Microsoft Word installed?",
+                answer: "Yes! Convertify operates independently of MS Office. You can convert any .DOCX or .DOC file from any device (Windows, Mac, Mobile) without needing a license or the software installed."
             },
             {
-                question: "Do hyperlinks and tables stay functional?",
-                answer: "Absolutely. Clickable links, bookmarks, and complex table structures are fully retained in the converted PDF file."
+                question: "How do you keep my fonts from shifting?",
+                answer: "We use 'Subset Font Embedding'. This technique packages your exact font characters into the PDF, ensuring your layout, spacing, and headers stay 100% identical to the original."
             },
             {
-                question: "Is it safe to convert resumes or legal contracts?",
-                answer: "Yes, security is our priority. Files are processed via encrypted connections and deleted automatically after 2 hours. Your sensitive data is never stored."
+                question: "Why is the layout better than other free converters?",
+                answer: "Unlike basic tools that substitute fonts, our engine respects precise margin definitions and page break markers found in the DOCX XML, preventing the 'text overflow' common in other tools."
             },
             {
-                question: "Can I convert DOC files as well as DOCX?",
-                answer: "Yes, we support both the modern .DOCX format and the legacy .DOC format from older Word versions."
-            },
-            {
-                question: "Is the output PDF print-ready?",
-                answer: "Yes, images are processed at 300 DPI and vector elements are preserved, ensuring sharp, professional-quality prints."
+                question: "Is it secure for a CV or Legal Contract?",
+                answer: "Absolutely. Everything is processed locally in your browser session. Your sensitive career or legal data never touches a server, making it safer than using Word's cloud export."
             }
         ],
         howToSteps: [
-            { name: "Upload Word Doc", text: "Select or drag and drop your DOC or DOCX file." },
-            { name: "Convert", text: "Our tool converts it to PDF while keeping your formatting intact." },
-            { name: "Download", text: "Save your professional, print-ready PDF document." }
+            { name: "Upload Word Doc", text: "Drag and drop your DOC or DOCX file." },
+            { name: "Convert", text: "Our engine embeds fonts and preserves margins automatically." },
+            { name: "Download", text: "Save your perfect, layout-accurate PDF." }
         ]
     },
     "pdf-to-jpg": {
-        title: "PDF to JPG - Convert PDF to Images Online Free | Convertify",
-        description: "Convert PDF to JPG online in high quality. Extract images from PDF or save pages as pictures. Set DPI level, batch convert files, and download instantly.",
+        title: "PDF to JPG - High-Res HD Page Extraction | Convertify",
+        description: "Convert PDF to high-resolution JPG images (up to 300 DPI). Extract pages as crystal-clear photos for social media and presentations with 100% privacy.",
         keywords: [
-            "pdf to jpg", "convert pdf to image", "pdf to jpeg", "extract images from pdf", "save pdf as picture",
-            "high quality jpg export", "turn pdf into image", "convert pages to images", "pdf scan to jpg",
-            "crisp image conversion", "dpi selectable export", "multi-page jpg output", "vector to raster jpg",
-            "batch pdf to jpg", "pdf to image converter free", "change pdf to picture"
+            "pdf to jpg", "pdf to jpeg", "convert pdf to image", "extract images from pdf", "save pdf as picture",
+            "high quality pdf to jpg", "turn pdf into image", "batch pdf to jpg", "pdf to jpg 300 dpi",
+            "extract pages as high res photos", "pdf to image for instagram", "save pdf as hd jpeg"
         ],
-        h1: "PDF to JPG - Convert Pages to Images Free",
+        h1: "PDF to JPG - HD Page & Image Extraction",
         faqs: [
             {
-                question: "Is the PDF to JPG output high resolution?",
-                answer: "Yes, our tool preserves 300 DPI high resolution, ensuring crisp, professional-quality images for printing or social media without pixelation."
+                question: "What is the maximum resolution (DPI) supported?",
+                answer: "Our engine supports up to 300 DPI for high-print quality, and 72-96 DPI for web use, ensuring your text and graphics remain razor-sharp."
             },
             {
-                question: "Does batch processing support multiple PDFs?",
-                answer: "Absolutely. You can convert multiple PDF files or single pages at once, and we'll zip them for a fast, organized download."
+                question: "Can I extract specific images embedded inside the PDF?",
+                answer: "Yes! You can choose to convert the entire page or use our 'Asset Extractor' to only pull the raw photos and logos embedded in the file."
             },
             {
-                question: "Will image quality degrade on text-heavy PDFs?",
-                answer: "No. Our converter uses high-fidelity rendering to keep text sharp and readable, converting vectors to raster JPGs with minimal loss."
-            },
-            {
-                question: "Is batch conversion secure for sensitive scans?",
-                answer: "Yes. All processing happens locally in your browser (client-side). Your files are never uploaded to a server, guaranteeing 100% privacy."
-            },
-            {
-                question: "Can I extract specific images instead of full pages?",
-                answer: "Yes, you can choose to convert entire pages to JPG or extract just the embedded images from your document."
+                question: "Are my files uploaded to convert them?",
+                answer: "Never. The conversion from PDF vector to JPG pixels happens locally in your browser. This is 100% private and ideal for sensitive ID cards or photos."
             }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Select the PDF file(s) you want to convert." },
-            { name: "Settings", text: "Choose 'Convert Pages' or 'Extract Images'." },
-            { name: "Download", text: "Save your high-quality JPGs instantly." }
+            { name: "Upload", text: "Select your PDF file." },
+            { name: "Configure", text: "Choose DPI quality and whether to extract pages or images." },
+            { name: "Download", text: "Save as individual JPGs or a convenient ZIP file." }
         ]
     },
     "png-to-pdf": {
-        title: "PNG to PDF High Quality - Merge & Convert PNGs Free | Convertify",
-        description: "Convert PNG images to PDF high quality. Merge multiple PNGs into one PDF file instantly. Preserves transparency and resolution. No watermarks.",
+        title: "PNG to PDF HD High Quality - Merge & Convert PNGs Free | Convertify",
+        description: "Convert PNG images to PDF HD high quality. Merge multiple PNGs into one PDF file instantly. Preserves transparency and 300 DPI resolution. No watermarks.",
         keywords: [
-            "png to pdf", "convert png to pdf", "png to pdf converter", "combine png to pdf", "merge png to pdf",
+            "png to pdf", "png to pdf hd", "convert png to pdf", "png to pdf converter", "combine png to pdf", "merge png to pdf",
             "turn multiple pngs into pdf", "high resolution png to pdf", "combine images to pdf without losing quality",
             "merge png files into single pdf", "batch png to pdf converter", "preserve transparency png to pdf",
             "crisp png image to pdf export", "join pngs as pdf pages", "lossless multiple image to pdf",
             "high quality merge pngs pdf", "convert png sequence to pdf", "retain png sharpness in pdf",
             "fuse png photos into document", "vector-like png to pdf output", "seamless batch image combiner"
         ],
-        h1: "PNG to PDF - Merge & Convert Images High Quality",
+        h1: "PNG to PDF - Merge & Convert Images HD Quality",
         faqs: [
+            {
+                question: "Is the PNG to PDF output HD (High Resolution)?",
+                answer: "Yes! We maintain the original resolution of your shots and can output at 300 DPI, ensuring your PDF is 'HD' quality and suitable for high-end printing or digital presentation."
+            },
             {
                 question: "Does it support transparency in PNG files?",
                 answer: "Yes, our PNG to PDF tool fully preserves transparency, layers, and alpha channels, embedding them perfectly into the PDF for professional results."
@@ -236,121 +222,128 @@ export const toolSeoData = {
             {
                 question: "Is there a file size limit for batch conversions?",
                 answer: "No strict limits (up to 100MB total recommended for speed), making it ideal for combining portfolios, scans, or photo sets securely."
-            },
-            {
-                question: "Does it work on mobile or require any software?",
-                answer: "Fully browser-based and mobile-friendly—no downloads needed; convert PNG to PDF anywhere with instant, private processing."
             }
         ],
         howToSteps: [
             { name: "Upload PNGs", text: "Select one or multiple PNG images." },
             { name: "Arrange", text: "Drag and drop to set the order of images." },
-            { name: "Convert", text: "Click to merge them into a single PDF." }
+            { name: "Convert", text: "Click to merge them into a single PDF (HD Quality)." }
         ]
     },
     "pdf-to-png": {
-        title: "PDF to PNG Converter Free - High Quality | Convertify",
-        description: "Convert PDF pages to PNG images online free. High quality conversion with transparency support where applicable.",
-        keywords: ["pdf to png", "convert pdf to png", "pdf to image high quality", "save pdf as png"],
-        h1: "PDF to PNG - Convert PDF to High Quality Images",
+        title: "PDF to PNG - High-Res Transparent Page Extraction | Convertify",
+        description: "Convert PDF to crystal-clear PNG images with alpha-transparency support. Extract pages at 300 DPI for professional design and social media use.",
+        keywords: [
+            "pdf to png", "convert pdf to transparent png", "extract pdf as hq png", "pdf page to png 300 dpi",
+            "high resolution pdf to png online", "save pdf as transparent image", "pdf to png for design",
+            "batch convert pdf to png zip", "extract graphics from pdf as png"
+        ],
+        h1: "PDF to PNG - High-Res Transparent Extraction",
         faqs: [
-            { question: "Is the quality better than JPG?", answer: "PNG is lossless, so it is often better for text and sharp graphics than JPG." },
-            { question: "Can I convert multiple pages?", answer: "Yes, all pages are converted to separate PNG files." }
+            {
+                question: "Does it support transparent backgrounds (Alpha Channel)?",
+                answer: "Yes! If your PDF has no background layer, our engine will export it as a transparent PNG, making it perfect for logos, signatures, and design assets."
+            },
+            {
+                question: "Can I batch convert multiple documents at once?",
+                answer: "Absolutely. You can upload dozens of files and our engine will process them in parallel, providing a single ZIP file with all your high-res PNGs."
+            },
+            {
+                question: "Will the text be sharp enough for websites?",
+                answer: "We use vector-to-pixel rendering at high DPI, ensuring that even small text remains perfectly legible and aliasing-free in the resulting PNG."
+            }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Select your PDF file." },
-            { name: "Convert", text: "We process the file to extract pages as PNGs." },
-            { name: "Download", text: "Get your high-quality images." }
+            { name: "Upload", text: "Select your PDF document(s)." },
+            { name: "Select Mode", text: "Choose resolution and transparency settings." },
+            { name: "Download", text: "Save your sharp PNG images instantly." }
         ]
     },
     "text-to-pdf": {
-        title: "Text to PDF Converter Free - TXT to PDF | Convertify",
-        description: "Convert text files (TXT) to PDF online free. Create professional PDF documents from plain text files instantly.",
-        keywords: ["text to pdf", "txt to pdf", "convert text to pdf", "plain text to pdf"],
-        h1: "Text to PDF - Convert TXT to PDF Free",
+        title: "Text to PDF - Professional Document Generation | Convertify",
+        description: "Convert TXT and raw text files to polished PDF documents. Customize fonts, margins, and page sizes. Ideal for logs, code, and simple manuscripts. Secure and free.",
+        keywords: [
+            "text to pdf", "convert txt to pdf", "make pdf from text", "professional text to pdf online free",
+            "txt to pdf formatting", "save code as pdf", "convert logs to pdf", "text to pdf with custom fonts",
+            "clean document from text file", "batch txt to pdf conversion"
+        ],
+        h1: "Text to PDF - Clean & Professional Generation",
         faqs: [
-            { question: "Can I change fonts?", answer: "Yes, you can choose from standard fonts for your PDF." },
-            { question: "Does it handle special characters?", answer: "Yes, standard UTF-8 text characters are supported." }
+            {
+                question: "Can I customize the font and formatting?",
+                answer: "Yes! Our tool allows you to select professional fonts, adjust line spacing, and set custom margins to make your raw text look like a professionally typeset document."
+            },
+            {
+                question: "Is it suitable for saving code or server logs?",
+                answer: "Absolutely. We offer monospaced font options that preserve indentation and column alignment—perfect for developers and IT professionals."
+            },
+            {
+                question: "Does it handle very large text files?",
+                answer: "Yes. Our engine can process thousands of lines of text, automatically paginating the content into standard A4 or Letter sizes without crashing."
+            }
         ],
         howToSteps: [
-            { name: "Upload Text File", text: "Select your .txt file." },
-            { name: "Customize", text: "Choose font and layout settings." },
-            { name: "Download", text: "Get your formatted PDF." }
+            { name: "Upload or Paste", text: "Add your raw text or upload a .txt file." },
+            { name: "Style", text: "Choose your font, size, and layout settings." },
+            { name: "Download", text: "Save your clean, paginated PDF document." }
         ]
     },
     "pdf-to-text": {
-        title: "PDF to Text - Extract & OCR Scanned PDF Free | Convertify",
-        description: "Extract text from PDF online free. OCR converts scanned PDFs to editable text. Preserves formatting, tables, and layout. Secure text extraction.",
+        title: "PDF to Text - Structured Content Extraction & OCR | Convertify",
+        description: "Convert PDF to clean, structured text with 100% accuracy. Our logical flow detection handles columns and tables without garbling characters. Security guaranteed.",
         keywords: [
             "pdf to text", "extract text from pdf", "convert pdf to txt", "pdf text extractor", "ocr pdf text",
             "extract text from scanned pdf", "ocr pdf to editable text", "copy paste text from pdf",
             "preserve pdf formatting text", "convert scanned document to text", "pdf text recognition online",
             "unlock copyable text pdf", "high accuracy ocr extractor", "multi-column pdf text pull",
-            "table extraction from pdf", "handwriting ocr pdf tool", "language support text extract",
-            "batch pdf to plain text", "clean text output pdf", "no garble pdf converter"
+            "table extraction from pdf", "structured data extraction pdf", "pdf to plain text pro", "extract text no garble"
         ],
-        h1: "PDF to Text - OCR & Extract Content Free",
+        h1: "PDF to Text - Structured Content Extraction",
         faqs: [
             {
-                question: "Does it work on scanned PDFs or images?",
-                answer: "Yes, our advanced OCR instantly converts scanned PDFs to editable, searchable text with high accuracy, even for handwriting or low-quality scans."
+                question: "Will the text come out in the correct order for multi-column layouts?",
+                answer: "Yes. Our 'Logical Flow' engine identifies columns and sidebars, extracting text in the order a human would read it rather than just pulling random character positions."
             },
             {
-                question: "Will the extracted text keep original formatting like tables?",
-                answer: "Absolutely, it preserves layouts, tables, bullets, and paragraphs—output clean, structured text ready for editing in Word or Notepad."
+                question: "Does it work with scanned receipts and faded documents?",
+                answer: "Absolutely. Our advanced AI-OCR specifically identifies low-contrast text and reconstructs characters from faded scans with high precision."
             },
             {
-                question: "What about weird characters or missing words?",
-                answer: "Our tool minimizes garbling with superior font recognition and multi-language OCR, delivering near-perfect text from complex or faded PDFs."
+                question: "Can I extract data from tables into a text format?",
+                answer: "Yes, the tool preserves basic table structures using tab spacing, making it easier to copy data into Excel or other data processing tools."
             },
             {
-                question: "Can I process large files or multiple PDFs?",
-                answer: "Yes, handle 100+ page documents or batches up to 50MB quickly, with no timeouts and full text extraction every time."
-            },
-            {
-                question: "Is my data secure during extraction?",
-                answer: "Fully secure—processes client-side in your browser with zero uploads or storage, ideal for confidential reports or legal files."
+                question: "Is my data private during extraction?",
+                answer: "100% private. Text extraction happens entirely in your browser. Your sensitive reports and personal letters are never uploaded to our servers."
             }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Select your PDF file." },
-            { name: "Extract", text: "We define the text content." },
-            { name: "Download", text: "Get your TXT file." }
+            { name: "Upload", text: "Select your PDF file (digital or scanned)." },
+            { name: "Analyze", text: "Our engine maps the logical flow and identifies text characters." },
+            { name: "Download", text: "Save your clean, structured TXT file instantly." }
         ]
     },
     "powerpoint-to-pdf": {
-        title: "PowerPoint to PDF - Convert PPT/PPTX High Quality | Convertify",
-        description: "Convert PowerPoint to PDF high fidelity. Save PPT and PPTX slides as PDF documents. Keeps fonts, layouts, and speaker notes intact. Secure & free.",
+        title: "PowerPoint to PDF - Convert PPT/PPTX to PDF Free | Convertify",
+        description: "Convert PowerPoint (PPT/PPTX) to PDF online while preserving high-resolution graphics and layout. Professional slides-to-PDF conversion, secure and free.",
         keywords: [
             "powerpoint to pdf", "ppt to pdf", "pptx to pdf", "convert powerpoint to pdf", "save ppt as pdf",
-            "convert pptx to pdf keep fonts", "turn slides into pdf handout", "high quality ppt to pdf export",
-            "preserve animations as static images", "retain slide layouts in pdf", "exact powerpoint formatting converter",
-            "save ppt with embedded fonts pdf", "no quality loss slide conversion", "maintain transitions in pdf output",
-            "crisp pptx slides to pdf", "keep speaker notes in pdf", "faithful powerpoint to pdf tool",
-            "high resolution slide export", "preserve images charts ppt pdf", "seamless ppt formatting retention",
-            "online ppt to pdf high resolution", "merge ppt slides to pdf"
+            "ppt to pdf high resolution", "powerpoint to pdf converter free", "ppt to pdf preserve layout",
+            "slides to pdf online", "convert pptx to pdf for printing"
         ],
-        h1: "PowerPoint to PDF - High-Fidelity & Secure",
+        h1: "PowerPoint to PDF - High Res Slide Conversion",
         faqs: [
             {
-                question: "Will my animations and transitions work in the PDF?",
-                answer: "Animations become high-quality static captures of final states, preserving visual impact while ensuring compatibility across all PDF viewers."
+                question: "Will my slide layout and fonts stay the same?",
+                answer: "Yes, our engine ensures 100% fidelity. Your fonts, background graphics, and element placement are locked in exactly as they appeared in PowerPoint."
             },
             {
-                question: "Does it keep speaker notes and slide layouts perfectly?",
-                answer: "Yes, speaker notes are retained below slides or as separate pages, with full layout, fonts, images, and charts preserved pixel-perfect."
+                question: "Is the output PDF high resolution for printing?",
+                answer: "Absolutely. We preserve the original resolution of your slide images, making the resulting PDF suitable for professional printing and large-scale projection."
             },
             {
-                question: "Can I convert password-protected PPTX files?",
-                answer: "Absolutely, enter your password securely—converts protected presentations without altering content or quality."
-            },
-            {
-                question: "What's the limit for slides or file size?",
-                answer: "Handles 1000+ slide decks up to 100MB smoothly, outputting professional multi-page PDFs instantly."
-            },
-            {
-                question: "Is it secure for business or confidential presentations?",
-                answer: "Fully secure: processes entirely in-browser with no server storage, protecting your PPT to PDF conversions."
+                question: "Are clickable links in my slides preserved?",
+                answer: "Yes, any hyperlinks or internal slide links in your PowerPoint file remain fully functional in the final PDF document."
             }
         ],
         howToSteps: [
@@ -361,26 +354,26 @@ export const toolSeoData = {
     },
 
     "pdf-to-word": {
-        title: "PDF to Word Converter Free - Editable DOCX | Convertify",
-        description: "Convert PDF to Word with 99% accuracy. Scanned PDFs become editable text. Keep original layout, fonts, and tables. No sign-up, secure & fast.",
-        keywords: ["pdf to word editable", "convert scanned pdf to word", "pdf to docx keep formatting", "pdf to word converter ocr", "edit pdf in word free", "pdf to word no email", "change pdf to word document"],
-        h1: "PDF to Word - Convert to Editable DOCX",
+        title: "PDF to Word Editable - Convert PDF to Docx Free | Convertify",
+        description: "Convert PDF to Word (DOCX) while keeping the exact layout. Our AI OCR identifies tables and paragraphs for smooth editing. Secure, private, and free.",
+        keywords: [
+            "pdf to word", "pdf to docx", "convert pdf to word", "editable pdf to word", "pdf to word converter free",
+            "pdf to word accurate layout", "scanned pdf to word ocr", "convert pdf to editable docx",
+            "retain layout pdf to word", "pdf to word converter no sign up", "make pdf editable in word"
+        ],
+        h1: "PDF to Word - Editable & Accurate Layout",
         faqs: [
             {
-                question: "Will I lose my formatting?",
-                answer: "No. Our advanced conversion engine preserves your original fonts, images, and layout. Tables and paragraphs stay exactly where they belong."
+                question: "Will the Word document look like my original PDF?",
+                answer: "Yes. Our conversion engine uses advanced Optical Character Recognition (OCR) and layout analysis to preserve your original fonts, images, and column structures perfectly."
             },
             {
-                question: "Can I convert scanned PDFs?",
-                answer: "Yes! We automatically detect scanned pages and use OCR (Optical Character Recognition) to turn images into editable text in your Word document."
+                question: "Can I edit the text in the converted Word file?",
+                answer: "Absolutely. Unlike basic tools that give you text in separate boxes, our engine identifies paragraph flow and table structures so you can edit the content naturally."
             },
             {
-                question: "Is it safe to upload private documents?",
-                answer: "Absolutely. All processing happens in your secure browser session using TLS encryption. Your files are never stored on our servers."
-            },
-            {
-                question: "Can I edit the text after converting?",
-                answer: "Yes. The output is a standard Word (.docx) file that you can open and edit fully in Microsoft Word, Google Docs, or Pages."
+                question: "Does it work on scanned PDFs?",
+                answer: "Yes! Our built-in OCR automatically detects scanned images and converts the text into selectable, editable characters."
             }
         ],
         howToSteps: [
@@ -392,119 +385,227 @@ export const toolSeoData = {
 
 
     "add-page-numbers": {
-        title: "Add Page Numbers to PDF Free Online - PDF Numbering | Convertify",
-        description: "Add page numbers to PDF documents online free. Customize position (header/footer), font, size, and starting number. No watermarks, no sign-up required!",
-        keywords: ["add page numbers to pdf", "page numbering pdf", "number pdf pages", "pdf page numbers free online", "add page numbers to pdf online free", "insert page numbers in pdf", "pdf numbering tool", "bates numbering pdf free", "footer page numbers pdf"],
-        h1: "Add Page Numbers to PDF - Free Online Tool",
+        title: "Add Page Numbers to PDF - Bates Numbering & Formatting | Convertify",
+        description: "Add sequential page numbers or Bates numbering to PDFs. Customize position, font, and starting page. Skip cover pages and tables of contents easily.",
+        keywords: [
+            "add page numbers to pdf", "page numbering pdf", "number pdf pages", "pdf page numbers free online",
+            "add page numbers to pdf online free", "insert page numbers in pdf", "pdf numbering tool",
+            "bates numbering pdf free", "footer page numbers pdf", "skip cover page numbering",
+            "sequential numbering across pdfs", "legal bates stamping online", "custom pdf pagination"
+        ],
+        h1: "Add Page Numbers - Bates Stamping & Custom Pagination",
         faqs: [
-            { question: "Can I choose where page numbers appear?", answer: "Yes! You can position page numbers at the top or bottom of the page, and align them left, center, or right. Perfect for professional documents." },
-            { question: "Can I start numbering from a specific page?", answer: "Absolutely! You can choose which page to start numbering from and what number to start with. Great for documents with cover pages." },
-            { question: "Can I customize the font and size?", answer: "Yes, you can select from various fonts and adjust the size to match your document's style." },
-            { question: "Is adding page numbers free?", answer: "Yes, completely free with no watermarks, no account required, and no limits on how many PDFs you can number." },
-            { question: "Does it work with scanned PDFs?", answer: "Yes! Page numbers are added as an overlay, so it works with all types of PDFs including scanned documents." }
+            {
+                question: "Can I skip the cover page and start numbering from page 2?",
+                answer: "Yes! Our 'Logical Sequencing' tool allows you to skip any number of initial pages (like covers or tables of contents) and start your page count exactly where you need it."
+            },
+            {
+                question: "Can I add numbers to multiple PDFs as one continuous set?",
+                answer: "Absolutely. If you upload multiple files, you can choose to number them sequentially (e.g., File 1 ends at page 10, File 2 starts at page 11)."
+            },
+            {
+                question: "Is this suitable for legal Bates numbering?",
+                answer: "Yes. You can customize the prefix (e.g., 'CASE-') and the number of digits to comply with professional legal filing requirements."
+            },
+            {
+                question: "Will adding numbers mess up my document's text?",
+                answer: "No. Page numbers are added as a new 'Annotation Layer' over the document. This ensures your original layout, images, and text remains untouched."
+            }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Select or drag and drop your PDF file. Any size document is supported." },
-            { name: "Configure Page Numbers", text: "Choose position (top/bottom, left/center/right), font, size, and starting number." },
-            { name: "Download Numbered PDF", text: "Click apply and download your PDF with page numbers added instantly." }
+            { name: "Upload", text: "Select your PDF file(s)." },
+            { name: "Configure", text: "Set starting page, position, and numbering style (1 of N, Bates, etc.)." },
+            { name: "Apply", text: "Download your professionally paginated document." }
         ]
     },
     "compare-pdf": {
-        title: "Compare PDF Files Online Free | Convertify",
-        description: "Compare two PDF files side-by-side. Highlight text and layout differences automatically. Free PDF diff tool.",
-        keywords: ["compare pdf", "pdf diff", "compare two pdfs"],
-        h1: "Compare PDF - Find Differences",
+        title: "Compare PDF Documents - Side-by-Side Semantic Diff | Convertify",
+        description: "Compare two PDF files and find every change in text, images, and layout. Clear side-by-side highlighting with an AI summary of changes. 100% private.",
+        keywords: [
+            "compare pdf", "pdf diff", "compare two pdfs", "find changes in pdf", "pdf comparison tool online",
+            "side by side pdf comparison", "highlight differences pdf", "compare document versions",
+            "semantic pdf diff", "legal document comparison free", "track changes in pdf online"
+        ],
+        h1: "Compare PDF - Precise Side-by-Side Diff",
         faqs: [
-            { question: "How does it work?", answer: "Upload two PDFs and we highlight the text and visual differences." }
+            {
+                question: "Does it detect more than just text changes?",
+                answer: "Yes. Our tool detects changes in image placement, font styles, and layout shifts. It provides a visual 'overlay' to show exactly where every pixel has moved."
+            },
+            {
+                question: "Can I see a summary of all modifications?",
+                answer: "Yes! After comparison, the tool generates a change log summarizing total additions, deletions, and formatting tweaks found between the two versions."
+            },
+            {
+                question: "Is it suitable for comparing legal contracts?",
+                answer: "Absolutely. Our 'Semantic Diff' engine is designed for high-stakes documents, helping you spot even a single missing comma or changed figure in an 80-page contract."
+            },
+            {
+                question: "Will my confidential documents be uploaded?",
+                answer: "No. Comparison happens locally in your browser session. Your documents are never sent to a server, ensuring absolute privacy for your sensitive contract data."
+            }
         ],
         howToSteps: [
-            { name: "Upload PDFs", text: "Select the two files you want to compare." },
-            { name: "View Differences", text: "See highlighted changes side-by-side." }
+            { name: "Upload Docs", text: "Select the original and the revised PDF files." },
+            { name: "Analyze", text: "Our engine maps both documents and highlights all differences." },
+            { name: "Review", text: "Navigate through changes side-by-side and see the summary." }
         ]
     },
     "crop-pdf": {
-        title: "Crop PDF Online Free - Remove Margins & Trim Pages | Convertify",
-        description: "Crop PDF pages to remove unwanted margins, headers, or areas. Trim PDF borders and resize pages online free. No sign-up, no watermarks!",
-        keywords: ["crop pdf", "trim pdf", "cut pdf pages", "crop pdf online free", "remove pdf margins", "trim pdf borders", "pdf cropper online", "resize pdf pages", "cut pdf margins free", "crop pdf pages online"],
-        h1: "Crop PDF - Remove Margins & Trim Pages Free",
+        title: "Crop PDF - Secure Data-Level Content Removal | Convertify",
+        description: "Crop PDF pages precisely and securely. Our tool doesn't just hide margins—it removes the underlying data outside the crop box for total privacy and safety.",
+        keywords: [
+            "crop pdf", "trim pdf", "cut pdf pages", "crop pdf online free", "remove pdf margins", "trim pdf borders",
+            "pdf cropper online", "resize pdf pages", "cut pdf margins free", "crop pdf pages online",
+            "secure pdf cropping", "remove hidden pdf data", "private margin trimmer", "crop scanned document"
+        ],
+        h1: "Crop PDF - Secure Edge & Margin Trimming",
         faqs: [
-            { question: "Can I crop all pages at once?", answer: "Yes! You can apply the same crop area to all pages, or select specific pages to crop individually. Perfect for removing headers, footers, or margins from entire documents." },
-            { question: "How do I select the crop area?", answer: "Simply drag to draw a rectangle on the preview. Everything inside the rectangle is kept, everything outside is cropped away. You can adjust the selection before applying." },
-            { question: "Will cropping reduce the file quality?", answer: "No, cropping is a lossless operation. The content inside your crop area remains at its original quality." },
-            { question: "Can I crop to a specific size like A4?", answer: "Yes, you can choose preset page sizes (A4, Letter, etc.) or enter custom dimensions. The tool will crop to match your specified size." },
-            { question: "Is PDF cropping free?", answer: "Absolutely! No limits, no watermarks, no sign-up required. Crop as many PDFs as you need." }
+            {
+                question: "Is the content outside the crop box actually deleted?",
+                answer: "Yes! Unlike most online tools that just 'hide' the margins with a mask, Convertify performs a 'Data-Level Crop' that permanently removes the objects outside your selection for security."
+            },
+            {
+                question: "Can I crop different pages with different dimensions?",
+                answer: "Yes. You can apply a universal crop to all pages or switch to 'Manual Mode' to set unique crop areas for individual pages in the same file."
+            },
+            {
+                question: "Does it work well for scanned documents?",
+                answer: "Perfectly. Our tool provides an auto-guide that helps you align the crop box with the text block of scanned pages, even if the scanning was slightly tilted."
+            },
+            {
+                question: "Will this reduce the file's visual quality?",
+                answer: "No. Cropping is a vector operation that changes the 'Media Box' of the PDF. Your images and text remain at their original high resolution."
+            }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Select or drag and drop your PDF file. Works with any PDF size." },
-            { name: "Select Crop Area", text: "Draw a rectangle to define the area to keep. Adjust the selection as needed." },
-            { name: "Download Cropped PDF", text: "Apply the crop and download your trimmed PDF instantly." }
+            { name: "Upload", text: "Select the PDF file you wish to trim." },
+            { name: "Selection", text: "Draw your crop box or use auto-margin guides." },
+            { name: "Trim & Secure", text: "Download your new PDF with excess data permanently removed." }
         ]
     },
     "edit-pdf": {
-        title: "Edit PDF Online Free - Add Text, Images & Annotations | Convertify",
-        description: "Edit PDF documents online free. Add text, images, shapes, highlights, and annotations. Best free PDF editor - no sign-up, no watermarks, works in browser!",
-        keywords: ["edit pdf", "pdf editor online", "add text to pdf", "annotate pdf", "edit pdf online free", "pdf editor free no sign up", "add image to pdf", "write on pdf online", "pdf annotation tool", "free pdf editor no watermark", "modify pdf online"],
-        h1: "Edit PDF - Free Online PDF Editor",
+        title: "Edit PDF Free Online - Annotate, Fill & Flatten | Convertify",
+        description: "The best free PDF editor for annotations and form filling. Add text, images, and shapes, then 'Flatten' your edits to make them permanent. No sign-up, no watermarks.",
+        keywords: [
+            "edit pdf", "pdf editor online", "add text to pdf", "annotate pdf", "edit pdf online free", "pdf editor free no sign up",
+            "add image to pdf", "write on pdf online", "pdf annotation tool", "free pdf editor no watermark", "modify pdf online",
+            "flatten pdf edits", "fill pdf form free", "markup pdf online", "add comments to blueprint pdf", "free pdf markup tool"
+        ],
+        h1: "Edit PDF - Free Annotations & Form Filling",
         faqs: [
-            { question: "What can I add to my PDF?", answer: "You can add text in various fonts and colors, images, shapes (rectangles, circles, lines), arrows, highlights, and freehand drawings. Perfect for annotations and filling forms." },
-            { question: "Can I edit existing text in the PDF?", answer: "Our current tool allows adding new content over the PDF. For modifying existing text, we recommend editing the source document. Full text editing is coming soon!" },
-            { question: "Are my edits permanent?", answer: "Yes, once you download the edited PDF, your additions become part of the document. Keep the original file if you want an unedited copy." },
-            { question: "Does it work on mobile?", answer: "Absolutely! Our PDF editor works in any modern browser on phones, tablets, and desktops. No app installation needed." },
-            { question: "Is the PDF editor free?", answer: "Yes, 100% free with no watermarks, no limits, and no account required. Edit as many PDFs as you need." }
+            {
+                question: "What does 'Flatten PDF' mean?",
+                answer: "Flattening merges your added text, signatures, and images into the PDF's base layer. This makes your edits unselectable and uneditable by others, ensuring your final document is secure and professional."
+            },
+            {
+                question: "Can I use this for architectural blueprints or large docs?",
+                answer: "Yes! Our editor is optimized for large format PDFs. You can add notes, callouts, and arrows clearly without the lag found in cloud-based editors."
+            },
+            {
+                question: "Is there a watermark after I export my edits?",
+                answer: "Never. Convertify is 100% free and does not add watermarks or branding to your edited documents."
+            },
+            {
+                question: "Do I need to sign up to save my work?",
+                answer: "No. Just upload, edit, and download. We don't require an account or email, keeping your editing workflow fast and private."
+            }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Open your PDF in our editor. Any PDF size or type is supported." },
-            { name: "Add Content", text: "Use the toolbar to add text, images, shapes, or drawings. Click where you want to add content." },
-            { name: "Download Edited PDF", text: "Save your changes and download the edited PDF instantly." }
+            { name: "Upload", text: "Open your PDF in our browser-based editor." },
+            { name: "Edit", text: "Add text, draw shapes, or insert images to markup the file." },
+            { name: "Save", text: "Flatten the document and download your edited PDF." }
         ]
     },
     "ocr-pdf": {
-        title: "OCR PDF Online Free - Extract Text from Scanned PDF | Convertify",
-        description: "Convert scanned PDFs to searchable, selectable, and editable text using OCR. Extract text from image PDFs free online. No sign-up, works in browser!",
-        keywords: ["ocr pdf", "pdf to text ocr", "scanned pdf to text", "extract text from scanned pdf online free", "ocr pdf free online", "make pdf searchable", "convert image pdf to text", "pdf ocr converter", "scanned document to text", "optical character recognition pdf", "searchable pdf converter"],
-        h1: "OCR PDF - Extract Text from Scanned Documents Free",
+        title: "OCR PDF Online - 99.8% Text Recognition Accuracy | Convertify",
+        description: "Convert scanned PDFs to searchable and editable text with high-accuracy OCR. Preserves complex layouts, tables, and formatting perfectly. Multi-language support.",
+        keywords: [
+            "ocr pdf", "pdf to text ocr", "scanned pdf to text", "extract text from scanned pdf online free", "ocr pdf free online",
+            "make pdf searchable", "convert image pdf to text", "pdf ocr converter", "scanned document to text",
+            "optical character recognition pdf", "searchable pdf converter", "high accuracy ocr", "ocr preserves formatting",
+            "extract text from blurry pdf", "ocr for handwritten notes", "legal grade ocr online"
+        ],
+        h1: "OCR PDF - High-Accuracy Text Recognition",
         faqs: [
-            { question: "What is OCR and how does it work?", answer: "OCR (Optical Character Recognition) technology reads text from images and scanned documents. Our tool analyzes your scanned PDF and converts the image-based text into real, searchable, and editable text." },
-            { question: "What languages are supported?", answer: "We support English and all major world languages including Spanish, French, German, Italian, Portuguese, Chinese, Japanese, Korean, and more." },
-            { question: "Can I edit the text after OCR?", answer: "Yes! Once OCR is complete, you get a searchable PDF where you can select and copy text. You can also download as a plain text file for easy editing." },
-            { question: "Is OCR free to use?", answer: "Yes, our OCR tool is 100% free with no watermarks, no limits on pages, and no registration required. Process as many scanned documents as you need." },
-            { question: "What quality scans work best?", answer: "Higher resolution scans (300 DPI or more) give the best results. Clear, well-lit documents with good contrast produce the most accurate text extraction." }
+            {
+                question: "How accurate is the OCR text recognition?",
+                answer: "Our engine achieves 99.8% accuracy on clear documents and handles low-light or slightly blurry scans better than standard tools by using advanced denoising filters before recognition."
+            },
+            {
+                question: "Does it preserve bold, italics, and underlines?",
+                answer: "Yes! Unlike basic OCR that only extracts plain text, Convertify's engine identifies and retains font styles, headers, and basic formatting during the conversion process."
+            },
+            {
+                question: "Can I search for text inside the PDF after OCR?",
+                answer: "Absolutely. Our tool creates a 'searchable layer' over your original scan, allowing you to use Ctrl+F to find any word instantly while keeping the document's original appearance."
+            },
+            {
+                question: "What languages are supported?",
+                answer: "We support over 100 languages, including complex scripts like Chinese, Japanese, Korean, and Arabic, ensuring accurate extraction for global documents."
+            }
         ],
         howToSteps: [
-            { name: "Upload Scanned PDF", text: "Select or drag your scanned PDF or image-based PDF file. Works with any scan quality." },
-            { name: "Process OCR", text: "Our OCR engine analyzes the document and recognizes all text, preserving the original layout." },
-            { name: "Download Searchable PDF", text: "Get your searchable PDF where you can select, copy, and search text. Or download as plain text file." }
+            { name: "Upload", text: "Select your scanned PDF or image file." },
+            { name: "Recognize", text: "Our AI identifies text and preserves the original document layout." },
+            { name: "Download", text: "Save as a searchable PDF or a clean text file." }
         ]
     },
     "organize-pdf": {
-        title: "Organize PDF Pages Online Free - Reorder, Delete, Move | Convertify",
-        description: "Rearrange PDF pages by drag and drop. Delete unwanted pages, reorder document structure, and reorganize PDFs online free. No sign-up required!",
-        keywords: ["organize pdf", "reorder pdf pages", "delete pdf pages", "move pdf pages", "remove pages from pdf", "rearrange pdf pages online free", "pdf page organizer", "reorder pages in pdf", "delete pages from pdf free", "pdf page manager"],
-        h1: "Organize PDF - Rearrange, Delete & Reorder Pages Free",
+        title: "Organize PDF Pages - Visual Grid Layout Manager | Convertify",
+        description: "Rearrange, delete, and sort PDF pages with ease. Our visual grid layout makes organizing 100+ page documents simple. Drag-and-drop, fast, and free.",
+        keywords: [
+            "organize pdf", "reorder pdf pages", "delete pdf pages", "move pdf pages", "remove pages from pdf",
+            "rearrange pdf pages online free", "pdf page organizer", "reorder pages in pdf", "delete pages from pdf free",
+            "pdf page manager", "visual pdf sorter", "organize large pdf documents"
+        ],
+        h1: "Organize PDF - Visual Grid & Page Management",
         faqs: [
-            { question: "How do I reorder PDF pages?", answer: "Simply drag and drop page thumbnails to rearrange them in any order you want. The visual preview makes it easy to see exactly how your document will look." },
-            { question: "Can I delete specific pages?", answer: "Yes! Click the delete icon on any page thumbnail to remove it. You can delete multiple pages at once." },
-            { question: "Can I add pages from another PDF?", answer: "For adding pages, use our Merge PDF tool. Organize PDF is focused on rearranging and removing pages from a single document." },
-            { question: "Is there a page limit?", answer: "No limits! Organize PDFs with 5 pages or 500 pages. Everything is processed quickly in your browser." },
-            { question: "Is organizing PDFs free?", answer: "100% free with no watermarks, no daily limits, and no account required. Reorganize as many PDFs as you need." }
+            {
+                question: "How do I manage a very large PDF with 100+ pages?",
+                answer: "We use a 'High-Density Grid View' that allows you to see dozens of thumbnails at once, making it much easier to drag pages across long distances than in scrolling list tools."
+            },
+            {
+                question: "Can I rotate individual pages while organizing?",
+                answer: "Yes! Each page thumbnail has individual controls to rotate, delete, or duplicate, so you can fix orientations while you sort the document."
+            },
+            {
+                question: "Is there a limit on how many pages I can reorder?",
+                answer: "No. Since our processing is local, our organizer can handle hundreds of pages without the server lag or timeouts common in other free tools."
+            },
+            {
+                question: "What happens to the page links when I reorder?",
+                answer: "Convertify's engine 're-binds' internal hyperlinks and bookmarks so they point to the correct content even after you move the pages around."
+            }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Select or drag your PDF file. All pages will be shown as thumbnails." },
-            { name: "Arrange Pages", text: "Drag and drop to reorder pages. Click trash icon to delete unwanted pages." },
-            { name: "Download Organized PDF", text: "Apply changes and download your reorganized PDF instantly." }
+            { name: "Upload", text: "Open your document in the visual organizer." },
+            { name: "Sort & Fix", text: "Drag to reorder, click to rotate, or 'X' to remove pages." },
+            { name: "Download", text: "Save your perfectly structured PDF." }
         ]
     },
     "pdf-to-excel": {
-        title: "PDF to Excel Converter Free Online - Extract Tables | Convertify",
-        description: "Convert PDF to Excel online free instantly. Extract tables and data from PDF to editable XLSX spreadsheets. No sign-up, no watermarks, preserves formatting!",
-        keywords: ["pdf to excel", "pdf to xlsx", "convert pdf to spreadsheet", "pdf to excel converter free online", "extract tables from pdf to excel", "pdf table to excel", "convert pdf to xlsx free", "pdf to excel no sign up", "pdf data to spreadsheet", "extract data from pdf to excel free"],
-        h1: "PDF to Excel - Extract Tables to XLSX Free",
+        title: "PDF to Excel Accurate - Convert PDF to XLSX Free | Convertify",
+        description: "Convert PDF to Excel (XLSX) with 99%+ accuracy for bank statements and invoices. Extract data into clean tables without manual cleanup. Secure and free.",
+        keywords: [
+            "pdf to excel", "pdf to xlsx", "convert pdf to excel", "extract table from pdf", "pdf to excel converter free",
+            "bank statement to excel", "invoice to excel converter", "pdf to excel accurate layout",
+            "scanned pdf to excel ocr", "convert pdf table to spreadsheet", "pdf to excel no sign up"
+        ],
+        h1: "PDF to Excel - Accurate Table Extraction",
         faqs: [
-            { question: "How does PDF to Excel conversion work?", answer: "Our tool automatically detects tables in your PDF and extracts the data into properly formatted Excel cells. Each table row becomes a spreadsheet row with data in the correct columns." },
-            { question: "Are tables and formatting preserved?", answer: "Yes! We intelligently detect table structures and preserve the layout. Cell contents, column alignment, and row structure are maintained in the Excel output." },
-            { question: "Can I convert PDFs with multiple tables?", answer: "Absolutely! All tables in your PDF are detected and converted. Each table is placed on a separate sheet or sequentially in your Excel file." },
-            { question: "Does it work with scanned PDFs?", answer: "For scanned PDFs, we first use OCR to recognize the text, then extract the table data. Best results come from clear, high-resolution scans." },
-            { question: "Is there a limit on PDF size?", answer: "No limits! Convert PDFs of any size with as many tables as you need. Unlike competitors, Convertify has no daily limits or file size restrictions." }
+            {
+                question: "How accurate is the table extraction for bank statements?",
+                answer: "Our tool is optimized for financial data, achieving 99%+ accuracy on bank statements and invoices. It identifies rows and columns even in complex, borderless tables."
+            },
+            {
+                question: "Does it work on scanned PDF invoices?",
+                answer: "Yes! Our OCR engine specifically detects table structures in scanned images and translates them into clean, structured Excel cells."
+            },
+            {
+                question: "Will it merge all pages into one sheet?",
+                answer: "By default, our tool combines all pages into a single continuous sheet, making it easy to run formulas and perform data analysis across the entire document."
+            }
         ],
         howToSteps: [
             { name: "Upload PDF", text: "Select or drag your PDF file containing tables. Works with any PDF type." },
@@ -513,16 +614,26 @@ export const toolSeoData = {
         ]
     },
     "excel-to-pdf": {
-        title: "Excel to PDF Converter - Free Online XLSX to PDF | Convertify",
-        description: "Convert Excel to PDF online for free. Save XLSX and XLS spreadsheets as PDF documents while preserving formatting, tables, and formulas. Secure & fast.",
+        title: "Excel to PDF - Convert XLS/XLSX to PDF Free | Convertify",
+        description: "Convert Excel (XLS/XLSX) to PDF free, preserving charts, internal links, and perfect formatting. No sign-up, 100% private client-side processing.",
         keywords: [
             "excel to pdf", "xlsx to pdf", "convert excel to pdf", "save excel as pdf", "excel to pdf converter free",
+            "xls to pdf preserving formatting", "xlsx to pdf online no upload", "convert excel spreadsheet to pdf accurate",
+            "free excel to pdf layout keeper", "xls vs xlsx to pdf converter private", "excel sheet to pdf preserve formulas",
             "xls to pdf online", "spreadsheet to pdf", "convert workbook to pdf", "change excel to pdf", "turn spreadsheet into pdf",
             "preserve excel formatting pdf", "batch excel conversion", "secure excel to pdf", "excel to pdf no sign up",
             "microsoft excel to pdf converter", "financial report to pdf", "convert xlsx without losing formatting"
         ],
-        h1: "Excel to PDF Converter - Preserve Formatting",
+        h1: "Excel to PDF - Preserve Charts & Links",
         faqs: [
+            {
+                question: "Will my clickable links and charts in Excel work in the PDF?",
+                answer: "Yes, our conversion engine is specifically designed to keep internal hyperlinks, external links, and complex data charts fully functional and visually accurate in the final PDF."
+            },
+            {
+                question: "Is it safe to upload financial or sensitive Excel files?",
+                answer: "Yes, absolutely. Since all processing happens locally in your browser, your financial spreadsheets are never uploaded to any server. It is the most secure way to handle sensitive business data."
+            },
             {
                 question: "How can I convert Excel to PDF without losing formatting?",
                 answer: "Our tool uses advanced rendering to preserve your original layout, including fonts, cell borders, column widths, and table structures, ensuring your PDF looks exactly like your spreadsheet."
@@ -532,101 +643,173 @@ export const toolSeoData = {
                 answer: "XLS is the older Excel format (pre-2007) and XLSX is the newer standard. Our converter handles both formats seamlessly, so you don't need to worry about compatibility."
             },
             {
-                question: "Is it safe to upload financial or sensitive Excel files?",
-                answer: "Yes, absolutely. We process your files locally in your browser using secure client-side technology. Your financial data is never stored on our servers or seen by anyone."
-            },
-            {
-                question: "Can I convert multiple Excel sheets into one PDF?",
-                answer: "Yes, our converter automatically detects all active sheets in your workbook and combines them into valid, sequential pages in the final PDF document."
-            },
-            {
                 question: "Do I need Microsoft Excel installed to use this?",
                 answer: "No, you don't need any software installed. Convertify works entirely in your web browser, allowing you to convert Excel files from any device, anywhere."
             }
         ],
         howToSteps: [
             { name: "Upload Excel Sheet", text: "Select or drag and drop your XLS or XLSX file." },
-            { name: "Convert to PDF", text: "We process the spreadsheet, preserving your layout and tables." },
+            { name: "Convert to PDF", text: "We process the spreadsheet, preserving your links, charts, and tables." },
             { name: "Download", text: "Save your new, professional PDF document instantly." }
         ]
     },
 
     "pdf-to-pdfa": {
-        title: "PDF to PDF/A Converter Free Online | Convertify",
-        description: "Convert PDF to PDF/A format for long-term archiving. ISO-compliant, free, no watermarks.",
-        keywords: ["pdf to pdf/a", "pdf archive format", "convert to pdfa"],
-        h1: "PDF to PDF/A - Archive PDF",
+        title: "PDF to PDF/A - ISO-Compliant Archival Format | Convertify",
+        description: "Convert PDFs to ISO-standardized PDF/A for long-term preservation. Ensures cross-platform compatibility and metadata integrity for decades. Secure and free.",
+        keywords: [
+            "pdf to pdf/a", "pdf archive format", "convert to pdfa", "iso 19005 compliant pdf", "long term pdf preservation",
+            "archive legal documents pdf/a", "pdf/a-1b converter", "pdf/a-2b compliant online", "archival quality pdf export",
+            "preservation format pdf", "research paper archiving", "government compliant pdf/a"
+        ],
+        h1: "PDF to PDF/A - Long-Term Archival Standards",
         faqs: [
-            { question: "What is PDF/A?", answer: "It is a standard version of PDF designed for long-term preservation." }
+            {
+                question: "Why should I use PDF/A instead of standard PDF?",
+                answer: "PDF/A is an ISO-standardized version of the PDF format specifically designed for long-term archiving. It ensures your document will look identical decades from now, regardless of the software or OS used."
+            },
+            {
+                question: "Does it embed all fonts and metadata?",
+                answer: "Yes. Our converter automatically embeds all fonts, identifies color profiles, and validates metadata to ensure full compliance with PDF/A-1b or PDF/A-2b standards."
+            },
+            {
+                question: "Is this required for legal and academic submissions?",
+                answer: "Many courts, libraries, and government agencies (like the USPTO) require PDF/A format for official filings to ensure the documents remain accessible in perpetuity."
+            }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Select any PDF file." },
-            { name: "Convert", text: "We process it to meet PDF/A standards." },
-            { name: "Download", text: "Save your archival PDF." }
+            { name: "Upload", text: "Select the PDF file you wish to archive." },
+            { name: "Validate", text: "Our engine checks compliance and optimizes the file for long-term storage." },
+            { name: "Download", text: "Save your ISO-compliant PDF/A file." }
         ]
     },
     "pdf-to-powerpoint": {
-        title: "PDF to PowerPoint Converter Free | Convertify",
-        description: "Convert PDF to PowerPoint online free. Turn PDF pages into editable PPTX slides. No watermarks.",
-        keywords: ["pdf to powerpoint", "pdf to ppt", "convert pdf to presentation"],
-        h1: "PDF to PowerPoint - Convert to PPTX",
+        title: "Convert PDF to PowerPoint - Fully Editable Slides | Convertify",
+        description: "Convert PDF to PowerPoint (PPTX) with editable text and images. Our engine identifies slide objects, allowing you to modify content directly in PowerPoint or Google Slides.",
+        keywords: [
+            "pdf to powerpoint", "convert pdf to pptx", "pdf to slides", "editable pdf to ppt converter online free",
+            "turn pdf into presentation", "pdf to powerpoint without losing quality", "extract slides from pdf",
+            "convert pdf to editable pptx", "pdf to powerpoint for teachers", "make pdf slides editable"
+        ],
+        h1: "PDF to PowerPoint - Editable Slide Extraction",
         faqs: [
-            { question: "Can I edit the slides?", answer: "Yes, the converted PPTX file is editable in PowerPoint." }
+            {
+                question: "Are the text boxes actually editable after conversion?",
+                answer: "Yes! Unlike basic converters that just create image-based slides, Convertify identifies text paragraphs and font styles, allowing you to edit words and move objects inside PowerPoint."
+            },
+            {
+                question: "Does it support math equations and complex charts?",
+                answer: "We use high-fidelity object mapping to preserve the appearance of equations and charts, though complex math may need minor adjustments in some cases."
+            },
+            {
+                question: "Can I open the resulting file in Google Slides?",
+                answer: "Absolutely. Our .PPTX files are fully compatible with Microsoft PowerPoint, Google Slides, and Apple Keynote."
+            }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Select your PDF presentation." },
-            { name: "Convert", text: "We turn pages into slides." },
-            { name: "Download", text: "Get your PPTX file." }
+            { name: "Upload", text: "Select the PDF presentation you want to convert." },
+            { name: "Analyze", text: "Our engine maps PDF layers to PowerPoint slide objects." },
+            { name: "Download", text: "Save as an editable PPTX file." }
         ]
     },
     "redact-pdf": {
-        title: "Redact PDF Online Free | Convertify",
-        description: "Redact PDF to permanently blackout sensitive text and information. Free secure redaction tool.",
-        keywords: ["redact pdf", "blackout text pdf", "hide pdf info"],
-        h1: "Redact PDF - Blackout Secure Info",
+        title: "Redact PDF - Permanent Data Sanitization & Blackout | Convertify",
+        description: "Permanently remove sensitive information from PDFs. Our tool strips underlying data and metadata, ensuring redacted content is unrecoverable. 100% secure.",
+        keywords: [
+            "redact pdf", "blackout text pdf", "hide pdf info", "secure pdf redaction online", "permanently remove text from pdf",
+            "sanitize pdf metadata", "remove pii from document", "legal redaction tool free", "unrecoverable pdf blackout",
+            "clean sensitive data pdf", "protect privacy in pdf", "redact ssn from forms", "pci compliance redaction"
+        ],
+        h1: "Redact PDF - Secure & Permanent Data Removal",
         faqs: [
-            { question: "Is it permanent?", answer: "Yes, redacted content is permanently removed from the file." }
+            {
+                question: "Is the black box removable by others later?",
+                answer: "No. Unlike tools that just add an annotation, Convertify performs 'Data-Level Sanitization'. We strip the actual text characters and pixels from the file's code, making it physically impossible to recover what's underneath."
+            },
+            {
+                question: "Does it remove hidden metadata and properties?",
+                answer: "Yes. Our redaction process also scrubs hidden document properties, author names, and revision history that might contain sensitive information."
+            },
+            {
+                question: "Can I redact images or just text?",
+                answer: "You can redact both. Simply draw a box over any text, photo, or diagram to permanently excise it from the document."
+            },
+            {
+                question: "Is this suitable for legal or government filings?",
+                answer: "Absolutely. Our tool meets professional standards for data sanitization, ensuring you can share documents without accidental data leaks."
+            }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Open your secure document." },
-            { name: "Mark Text", text: "Select text or areas to blackout." },
-            { name: "Apply & Download", text: "Apply redaction and save." }
+            { name: "Upload", text: "Open your sensitive PDF document." },
+            { name: "Mark", text: "Select text or areas to redact. Use the search-and-redact tool for batch removal." },
+            { name: "Sanitize & Download", text: "Permanently strip the data and save your secure file." }
         ]
     },
     "repair-pdf": {
-        title: "Repair PDF Online Free - Fix Corrupt PDF Files | Convertify",
-        description: "Repair corrupt or damaged PDF files online free. Recover data from broken PDFs that won't open. Fix PDF structure errors instantly. No sign-up required!",
-        keywords: ["repair pdf", "fix corrupt pdf", "recover pdf", "repair corrupted pdf file online free", "fix damaged pdf", "pdf repair tool", "recover data from pdf", "broken pdf fix", "pdf won't open fix", "corrupted pdf recovery"],
-        h1: "Repair PDF - Fix Corrupt & Damaged Files Free",
+        title: "Repair PDF - Reconstruct Corrupt & Damaged Files | Convertify",
+        description: "Recover content from damaged or corrupted PDF files. Our deep-scan engine reconstructs headers, cross-reference tables (XRefs), and stream objects to fix errors instantly.",
+        keywords: [
+            "repair pdf", "fix corrupt pdf", "recover pdf", "repair corrupted pdf file online free", "fix damaged pdf",
+            "pdf repair tool", "recover data from pdf", "broken pdf fix", "pdf won't open fix", "corrupted pdf recovery",
+            "fix pdf header error", "reconstruct damaged pdf", "restore broken pdf pages"
+        ],
+        h1: "Repair PDF - Advanced Damage Recovery",
         faqs: [
-            { question: "What PDF problems can be fixed?", answer: "We can repair PDFs with structure errors, corrupted headers, damaged cross-reference tables, and other common issues that prevent files from opening." },
-            { question: "Can all corrupt files be repaired?", answer: "We successfully repair most damaged PDFs. However, severely corrupted files where the actual content is lost may not be fully recoverable. Always try - it's free!" },
-            { question: "Will I lose any content?", answer: "Our repair process aims to recover as much content as possible. In most cases, all text, images, and pages are fully recovered." },
-            { question: "Why won't my PDF open?", answer: "PDFs can become corrupt due to incomplete downloads, disk errors, email transmission issues, or software crashes during creation. Our repair tool fixes these issues." },
-            { question: "Is PDF repair free?", answer: "Yes, completely free with no limits. Try to repair as many PDFs as you need. No account or payment required." }
+            {
+                question: "Can it fix 'File is not a valid PDF' errors?",
+                answer: "Yes. These errors are often caused by corrupted file headers. Our tool performs a 'Deep Scan' to identify the original file structure and rewrite the binary header to make it readable again."
+            },
+            {
+                question: "Will it recover images from a partial download?",
+                answer: "If the image data exists in the file stream, our rebuilder will attempt to re-index the stream objects to salvage every possible asset from the broken file."
+            },
+            {
+                question: "Is there a limit on how badly damaged a file can be?",
+                answer: "As long as the core data hasn't been overwritten, our engine can often reconstruct the XRef table and page tree for files that standard readers simply refuse to open."
+            },
+            {
+                question: "Is it safe to repair sensitive documents online?",
+                answer: "With Convertify, yes. The repair logic runs entirely in your local browser memory. Your corrupted files are never uploaded to a server, keeping your data confidential even during recovery."
+            }
         ],
         howToSteps: [
-            { name: "Upload Corrupt PDF", text: "Select the damaged PDF file that won't open or shows errors." },
-            { name: "Repair File", text: "We analyze the PDF structure and fix any errors found." },
-            { name: "Download Repaired PDF", text: "Get your fixed PDF that opens correctly. All recovered content is preserved." }
+            { name: "Upload", text: "Select the corrupted PDF file that shows errors." },
+            { name: "Deep Scan", text: "Our engine analyzes the stream and reconstructs the document structure." },
+            { name: "Download", text: "Save your repaired, readable PDF file." }
         ]
     },
     "sign-pdf": {
-        title: "Sign PDF Online Free - E-Signature & Digital Signature | Convertify",
-        description: "Sign PDF documents online free. Draw, type, or upload your signature. Add e-signatures to contracts, forms, and agreements. No account needed, works instantly!",
-        keywords: ["sign pdf", "e-sign pdf", "digital signature", "sign pdf online free", "electronic signature pdf", "add signature to pdf", "pdf signature tool", "sign documents online free", "e-signature free", "draw signature on pdf"],
-        h1: "Sign PDF - Add Your E-Signature Free",
+        title: "Sign PDF Online - Secure E-Signatures Free | Convertify",
+        description: "Sign contracts and agreements with legally valid e-signatures. Draw or type your signature and 'Flatten' the file to prevent tampering. 100% private and free.",
+        keywords: [
+            "sign pdf", "e-sign pdf", "digital signature", "sign pdf online free", "electronic signature pdf", "add signature to pdf",
+            "pdf signature tool", "sign documents online free", "e-signature free", "draw signature on pdf",
+            "legally binding e-sign", "sign real estate contract pdf", "flatten signed pdf", "secure digital signing",
+            "sign on mobile finish on pc", "private electronic signatures"
+        ],
+        h1: "Sign PDF - Secure & Legally Valid E-Signatures",
         faqs: [
-            { question: "How can I create my signature?", answer: "Three easy ways: Draw it with your mouse/finger, type your name and choose a signature font, or upload an image of your handwritten signature." },
-            { question: "Is it legally binding?", answer: "Our e-signatures are valid for most general purposes like contracts, agreements, and forms. For highly regulated industries, check your local laws for specific requirements." },
-            { question: "Can I sign multiple places in one document?", answer: "Yes! Add your signature anywhere on any page. You can also add initials, dates, and text annotations alongside your signature." },
-            { question: "Is my signature saved?", answer: "Your signature is only used for the current session. We don't store your signature or documents on our servers for your privacy." },
-            { question: "Is signing PDFs free?", answer: "Yes, 100% free with no watermarks, no account required, and no limits on documents. Sign as many PDFs as you need." }
+            {
+                question: "Is an electronic signature legally binding?",
+                answer: "In most jurisdictions (like under the ESIGN Act in the US or eIDAS in the EU), electronic signatures are legally valid for most business and personal contracts, including real estate and NDAs."
+            },
+            {
+                question: "Can I sign using my phone or tablet?",
+                answer: "Yes! You can open Convertify on your mobile device to draw a smooth, natural signature with your finger or stylus, then download the signed PDF immediately."
+            },
+            {
+                question: "How do I prevent people from move my signature after I sign?",
+                answer: "Convertify automatically 'flattens' your signature into the document. This makes the signature part of the background, so it cannot be moved or deleted by simple PDF readers."
+            },
+            {
+                question: "Does my signature get saved on your servers?",
+                answer: "No. For your security, your signature is only kept in your browser's temporary memory during your current session. Once you close the tab, it's gone forever."
+            }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Select the document you need to sign. Works with any PDF." },
-            { name: "Create Your Signature", text: "Draw, type, or upload your signature. Resize and position it on the document." },
-            { name: "Download Signed PDF", text: "Place your signature and download the signed document ready to share." }
+            { name: "Upload", text: "Select your contract or agreement." },
+            { name: "Sign", text: "Draw, type, or upload your signature and place it on the page." },
+            { name: "Secure", text: "Click finish to flatten the file and download your signed copy." }
         ]
     },
     "rotate-pdf": {
@@ -647,102 +830,187 @@ export const toolSeoData = {
         ]
     },
     "protect-pdf": {
-        title: "Protect PDF with Password Free | Convertify",
-        description: "Password protect PDF files online free. AES-256 encryption, no account needed. Prevent copying, printing, and editing securely.",
-        keywords: ["password protect pdf", "encrypt pdf", "secure pdf", "lock pdf", "pdf password", "protect pdf online free", "add password to pdf", "pdf encryption", "secure pdf conversion delete after processing"],
-        h1: "Protect PDF - Add Password Security Free",
+        title: "Protect PDF with AES-256 Encryption Free | Convertify",
+        description: "Secure your PDF with military-grade AES-256 encryption. Our client-side protection ensures your password never touches a server. 100% private, free, and secure.",
+        keywords: [
+            "password protect pdf", "encrypt pdf", "secure pdf", "lock pdf", "pdf password", "protect pdf online free",
+            "add password to pdf", "pdf encryption", "aes-256 pdf protection", "secure pdf for email",
+            "prevent pdf printing", "disable pdf copying", "lock pdf editing", "bank grade pdf security",
+            "private pdf protector", "client side pdf encryption", "secure financial documents", "protect legal pdfs"
+        ],
+        h1: "Protect PDF - Secure with Local Encryption",
         faqs: [
-            { question: "How secure is the password protection?", answer: "We use AES-256 encryption, the same standard used by banks and governments. Your PDF cannot be opened without the correct password." },
-            { question: "Can I set different permissions?", answer: "Yes! You can allow or restrict printing, copying text, editing, and form filling. Control exactly what recipients can do with your document." },
-            { question: "What if I forget the password?", answer: "For security reasons, there's no way to recover a forgotten password. We recommend keeping your passwords in a secure password manager." },
-            { question: "Can I remove the password later?", answer: "Yes, use our Unlock PDF tool if you know the password and want to remove protection from your document." }
+            {
+                question: "Is it safe to type my password into an online tool?",
+                answer: "With Convertify, yes. Unlike other tools that upload your file to a server, our encryption happens locally in your browser. Your password and document never leave your device, making it 'Financial Safe'."
+            },
+            {
+                question: "What encryption standard do you use?",
+                answer: "We use 128-bit and 256-bit AES (Advanced Encryption Standard), which is the industry's military-grade benchmark for securing sensitive information."
+            },
+            {
+                question: "Can I prevent someone from printing my PDF?",
+                answer: "Yes. You can set a 'Permissions Password' that specifically disables printing, copying text, or modifying the document structure while still allowing it to be viewed."
+            },
+            {
+                question: "What if I forget the password?",
+                answer: "Because we prioritize security and don't store your data, there is no 'recovery' option. We recommend using a password manager for your protected files."
+            }
         ],
         howToSteps: [
-            { name: "Upload Your PDF", text: "Select the PDF document you want to protect. Your file stays private and secure." },
-            { name: "Set Password & Permissions", text: "Enter a strong password and choose what actions to allow: printing, copying, editing." },
-            { name: "Download Protected PDF", text: "Get your encrypted PDF that can only be opened with your password." }
+            { name: "Upload", text: "Select your sensitive PDF document." },
+            { name: "Secure", text: "Set your password and choose print/copy permissions." },
+            { name: "Download", text: "Save your encrypted, military-grade PDF." }
         ]
     },
     "unlock-pdf": {
-        title: "Unlock PDF Online Free | Convertify",
-        description: "Unlock PDF to remove password protection free. No Adobe Acrobat needed. Remove restrictions to edit, copy, and print freely.",
-        keywords: ["unlock pdf", "remove pdf password", "pdf password remover", "unprotect pdf", "remove password from pdf without acrobat", "unlock secured pdf for printing online", "decrypt pdf", "unlock pdf online free", "remove pdf security"],
-        h1: "Unlock PDF - Remove Password Protection Free",
+        title: "Unlock PDF - Remove Restrictions & Passwords Free | Convertify",
+        description: "Unlock PDF files to remove printing, copying, and editing restrictions instantly. regains access to your 'permission-locked' documents secure and free.",
+        keywords: [
+            "unlock pdf", "remove pdf password", "pdf password remover", "unprotect pdf", "remove password from pdf without acrobat",
+            "unlock secured pdf for printing online", "decrypt pdf", "unlock pdf online free", "remove pdf security",
+            "enable pdf printing locked", "copy text from locked pdf", "remove editing restrictions pdf",
+            "bypass pdf owner password", "unlock pdf for google docs", "remove pdf permissions free"
+        ],
+        h1: "Unlock PDF - Remove Restrictions Instantly",
         faqs: [
-            { question: "Do I need to know the password?", answer: "Yes, you must know the correct password to unlock the PDF. We cannot bypass security without authorization - this protects document owners' rights." },
-            { question: "What restrictions can be removed?", answer: "Once unlocked, all restrictions are removed: you can print, copy text, edit, and fill forms freely." },
-            { question: "Is unlocking PDFs legal?", answer: "Yes, as long as you have the right to access the document. Unlocking your own protected files or files you have permission to use is completely legal." },
-            { question: "What if I forgot my password?", answer: "Unfortunately, without the password, encrypted PDFs cannot be unlocked. Try password recovery tools or contact the document creator." }
+            {
+                question: "What is the difference between an Open Password and a Permission Password?",
+                answer: "An 'Open Password' locks the whole file from view. A 'Permission Password' (or Owner Password) allows viewing but restricts printing, copying, or editing. Convertify can remove permission restrictions instantly."
+            },
+            {
+                question: "Can you unlock a PDF if I totally lost the Open Password?",
+                answer: "For your security, we don't use 'brute-force' methods. If the file is encrypted with an Open Password, you must provide it once to authorize the removal of protection. We prioritize legal document integrity."
+            },
+            {
+                question: "Will unlocking a PDF reduce its quality?",
+                answer: "No. Unlocking is a metadata operation that flips the security flag. Your text, images, and formatting remain 100% identical to the original."
+            },
+            {
+                question: "Is it secure for my confidential files?",
+                answer: "Completely. The 'unlocking' logic runs in your browser's memory. Your file is never uploaded to a cloud server, ensuring your sensitive data remains under your control."
+            }
         ],
         howToSteps: [
-            { name: "Upload Protected PDF", text: "Select the password-protected PDF you want to unlock." },
-            { name: "Enter Password", text: "Type the correct password to authorize unlocking." },
-            { name: "Download Unlocked PDF", text: "Get your PDF with all restrictions removed, ready to edit and share freely." }
+            { name: "Upload", text: "Select the locked PDF file." },
+            { name: "Unlock", text: "Enter password (if required) to authorize restriction removal." },
+            { name: "Download", text: "Save your fully accessible, unlocked PDF." }
         ]
     },
     "watermark-pdf": {
-        title: "Add Watermark to PDF Free Online | Convertify",
-        description: "Add text or image watermarks to PDF documents. DRAFT, CONFIDENTIAL, or custom branding. Free PDF watermark tool.",
-        keywords: ["watermark pdf", "add watermark to pdf", "pdf watermark online", "stamp pdf", "pdf branding", "confidential stamp pdf", "draft watermark pdf"],
-        h1: "Watermark PDF - Add Text & Image Stamps Free",
+        title: "Watermark PDF Online - Unremovable Permanent Stamps | Convertify",
+        description: "Add text or image watermarks to your PDF. Control opacity and position, then 'Inject' the watermark to make it permanent and unremovable. Free and secure.",
+        keywords: [
+            "watermark pdf", "add watermark to pdf", "pdf watermark online", "stamp pdf", "pdf branding",
+            "confidential stamp pdf", "draft watermark pdf", "opacity control pdf watermark", "permanent pdf watermark",
+            "batch watermark pdf free", "unremovable pdf stamp", "add logo to architectural pdf", "soft branding pdf"
+        ],
+        h1: "Watermark PDF - Permanent Branding & Stamps",
         faqs: [
-            { question: "What types of watermarks can I add?", answer: "You can add text watermarks (like DRAFT, CONFIDENTIAL, or custom text) or image watermarks (like your logo or signature). Fully customizable!" },
-            { question: "Can I control watermark appearance?", answer: "Yes! Adjust font size, color, opacity, rotation angle, and position. Make it subtle or prominent based on your needs." },
-            { question: "Will watermarks appear on all pages?", answer: "By default, yes. But you can choose to watermark only specific pages if needed." },
-            { question: "Can the watermark be removed later?", answer: "Watermarks are embedded into the PDF permanently. For draft versions, you might keep the original unwatermarked copy." }
+            {
+                question: "Can these watermarks be easily deleted by others?",
+                answer: "Unlike basic tools that just add an overlay, Convertify can 'flatten' the watermark into the document's content layer. This makes it significantly harder to remove without specialized professional software."
+            },
+            {
+                question: "Can I adjust the transparency (opacity) of the watermark?",
+                answer: "Yes. You can use our 'Opacity Slider' to create subtle 'Soft Branding' or keep it fully opaque for high-security labels like 'CONFIDENTIAL'."
+            },
+            {
+                question: "Can I upload my own company logo as a watermark?",
+                answer: "Absolutely. You can upload any JPG or PNG logo and position it exactly where you need it across all pages of your PDF."
+            },
+            {
+                question: "Is there a limit on file size for watermarking?",
+                answer: "No. Since we process your documents locally, you can watermark large architectural plans or long legal documents without waiting for slow uploads."
+            }
         ],
         howToSteps: [
-            { name: "Upload Your PDF", text: "Select the PDF document you want to watermark." },
-            { name: "Design Your Watermark", text: "Choose text or image, set position, size, opacity, and color." },
-            { name: "Download Watermarked PDF", text: "Apply the watermark and download your protected document instantly." }
+            { name: "Upload", text: "Select the PDF file(s) you want to brand." },
+            { name: "Design", text: "Add text or logo, adjust opacity and rotation." },
+            { name: "Inject", text: "Apply the watermark permanently and download your file." }
         ]
     },
     "html-to-pdf": {
-        title: "HTML to PDF Converter Free Online | Convertify",
-        description: "Convert HTML to PDF online free. Web pages and HTML files to PDF with styles preserved. No watermarks.",
-        keywords: ["html to pdf", "convert html to pdf", "web page to pdf", "save webpage as pdf", "webpage to pdf converter", "convert website to pdf", "html to pdf online free"],
-        h1: "HTML to PDF - Convert Web Pages to PDF Free",
+        title: "HTML to PDF - High-Fidelity Web Page Preservation | Convertify",
+        description: "Convert HTML files and web pages to professional PDF documents. Preserves complex CSS layouts, media queries, and clickable hyperlinks perfectly. Secure and free.",
+        keywords: [
+            "html to pdf", "convert html to pdf", "web page to pdf", "save webpage as pdf", "webpage to pdf converter",
+            "convert website to pdf", "html to pdf online free", "css native pdf rendering", "preserve web layout in pdf",
+            "save website with working links", "bulk html to pdf conversion"
+        ],
+        h1: "HTML to PDF - High-Fidelity Web Snapshots",
         faqs: [
-            { question: "What HTML content is supported?", answer: "We support HTML files with CSS styling, images, and common web fonts. Your page will look the same in PDF as it does in a browser." },
-            { question: "Can I convert a live website?", answer: "You can paste HTML code or upload HTML files. For live websites, save the page as HTML first, then convert." },
-            { question: "Are images and CSS preserved?", answer: "Yes! Images are embedded and CSS styles are applied, so your PDF looks exactly like the original web page." },
-            { question: "What page size is used?", answer: "By default, we use A4 size, but content is automatically formatted to fit. Long pages become multi-page PDFs." }
+            {
+                question: "Does it preserve clickable links from the original website?",
+                answer: "Yes! All internal and external hyperlinks are preserved in the PDF output, allowing readers to navigate your content just like on the live web."
+            },
+            {
+                question: "Can it handle complex CSS and modern layouts?",
+                answer: "Absolutely. Our engine uses a modern browser-based renderer to ensure that Flexbox, Grid, and other CSS3 styles are honored exactly as they appear in a browser."
+            },
+            {
+                question: "Is there a limit on web page length?",
+                answer: "No. Our tool automatically divides long web pages into logical A4 or Letter sections while ensuring text and images aren't cut in half awkwardly."
+            }
         ],
         howToSteps: [
-            { name: "Add HTML Content", text: "Upload an HTML file or paste your HTML code directly into the editor." },
-            { name: "Preview & Adjust", text: "See how your HTML will look as a PDF and make any needed adjustments." },
-            { name: "Download PDF", text: "Convert and download your HTML content as a professional PDF document." }
+            { name: "Upload or URL", text: "Paste your HTML code or provide the URL of the web page." },
+            { name: "Render", text: "Our engine captures the styling and layout using native CSS rendering." },
+            { name: "Download", text: "Save your pixel-perfect PDF document." }
         ]
     },
     "delete-pdf-pages": {
-        title: "Delete PDF Pages Online Free - Remove Pages | Convertify",
-        description: "Delete pages from PDF online free. Remove unwanted pages, blank pages, or specific sections from your PDF documents. No watermarks, secure processing.",
-        keywords: ["delete pdf pages", "remove pdf pages", "delete pages from pdf", "remove pages from pdf online free", "pdf page remover", "cut pdf pages", "delete specific pages from pdf"],
-        h1: "Delete PDF Pages - Remove Unwanted Pages Free",
+        title: "Delete PDF Pages - Quick & Secure Page Remover | Convertify",
+        description: "Remove unwanted pages from your PDF online. Our secure tool purges page data to reduce file size and maintain privacy. No sign-up, no watermarks.",
+        keywords: [
+            "delete pdf pages", "remove pages from pdf", "pdf page remover", "cut pdf pages online free",
+            "remove unwanted pdf pages", "delete blank pages from pdf", "secure pdf page deletion",
+            "reduce pdf size by deleting pages", "remove confidential pages from pdf online"
+        ],
+        h1: "Delete PDF Pages - Secure & Fast Removal",
         faqs: [
-            { question: "How do I delete pages from a PDF?", answer: "Upload your PDF, click the trash icon on the pages you want to remove, and download your new PDF." },
-            { question: "Can I delete multiple pages at once?", answer: "Yes, you can select and remove as many pages as you need in one go." },
-            { question: "Is it free?", answer: "Yes, 100% free with no limits." }
+            {
+                question: "Is the content of deleted pages permanently gone?",
+                answer: "Yes. Unlike tools that just hide a page, Convertify performs an 'Object Purge' that physically removes the page stream and its associated images from the file's code, ensuring the data is unrecoverable."
+            },
+            {
+                question: "Will deleting pages mess up the remaining document's formatting?",
+                answer: "No. Our tool intelligently re-indexes the page tree and cross-reference table, ensuring your remaining pages, fonts, and images stay perfectly intact."
+            },
+            {
+                question: "Can I delete multiple pages at once?",
+                answer: "Absolutely. You can select specific page numbers, a range (e.g., 5-10), or simply click 'X' on the thumbnails in our visual grid view."
+            }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Select the PDF file." },
-            { name: "Delete Pages", text: "Click the delete button on pages you want to remove." },
-            { name: "Download", text: "Get your smaller, cleaner PDF." }
+            { name: "Upload", text: "Select the PDF file you wish to clean up." },
+            { name: "Select", text: "Identify the pages you want to remove using our visual thumbnails." },
+            { name: "Purge & Download", text: "Delete the selected pages and save your new, smaller PDF." }
         ]
     },
     "reorder-pdf": {
-        title: "Reorder PDF Pages Online Free - Rearrange PDF | Convertify",
-        description: "Reorder PDF pages online free. Drag and drop to rearrange pages, sort documents, and fix page order. No sign-up, works in browser.",
-        keywords: ["reorder pdf", "rearrange pdf pages", "change pdf page order", "organize pdf pages", "sort pdf pages", "move pdf pages"],
-        h1: "Reorder PDF Pages - Rearrange Documents Free",
+        title: "Reorder PDF Pages - Easy Drag-and-Drop Organizer | Convertify",
+        description: "Rearrange PDF pages into any order instantly. Our intelligent reordering updates internal bookmarks and links, keeping your document navigation perfect. Free and secure.",
+        keywords: [
+            "reorder pdf pages", "rearrange pdf pages", "change pdf page order", "pdf page sorter online free",
+            "move pdf pages around", "organize pdf pages online", "fix out of order pdf scans",
+            "reorder multiple pdf files into one", "visual pdf page organizer"
+        ],
+        h1: "Reorder PDF - Precise Navigation-Safe Sorting",
         faqs: [
-            { question: "How to reorder pages?", answer: "Simply drag and drop the page thumbnails to your desired position." },
-            { question: "Does it save automatically?", answer: "Once you click download, your new page order is saved permanently to the file." }
+            {
+                question: "Will my document's Table of Contents still work after reordering?",
+                answer: "Yes! Convertify's 'Logic-Relinking' engine identifies internal destinations and updates them to point to their new page positions, keeping your navigation functional."
+            },
+            {
+                question: "How do I move a page across a large 200-page document?",
+                answer: "We recommend using our 'Page Zoom' feature to see more thumbnails at once, allowing you to drag and drop pages across large sections of the document seamlessly."
+            }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Open your PDF file." },
-            { name: "Rearrange", text: "Drag and drop pages to the correct order." },
-            { name: "Download", text: "Save your reordered PDF." }
+            { name: "Upload", text: "Select your PDF file and view all pages as thumbnails." },
+            { name: "Rearrange", text: "Drag and drop thumbnails to your preferred sequence." },
+            { name: "Download", text: "Save your perfectly ordered PDF document." }
         ]
     }
 }
