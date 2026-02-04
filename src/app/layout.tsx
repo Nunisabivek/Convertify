@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Free PDF Tools - No Sign-Up | Convertify",
+    default: "Convertify - Free Online PDF Tools - No Sign-Up, No Limits",
     template: "%s | Convertify",
   },
   description: "Convertify is the ultimate free PDF tool suite. Merge, convert, compress, and edit PDFs securely in your browser. No sign-up, no limits, no uploads required.",
