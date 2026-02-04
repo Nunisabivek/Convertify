@@ -10,7 +10,7 @@ const https = require('https');
 const http = require('http');
 
 const SITEMAP_URL = "https://convertify.work/sitemap.xml";
-const INDEXNOW_KEY = process.env.INDEXNOW_KEY || "4f8b7c9d1e2a3b5c6d7e8f9a0b1c2d3e";
+const INDEXNOW_KEY = process.env.INDEXNOW_KEY || "a29f8518-295e-44e3-a00c-469addc370ce2";
 
 // All page URLs for IndexNow (prioritized list)
 const ALL_URLS = [

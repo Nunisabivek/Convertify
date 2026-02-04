@@ -3,37 +3,42 @@
 
 export const toolSeoData = {
     "merge-pdf": {
-        title: "Merge PDF - Combine PDF Files Online Free | Convertify",
-        description: "Merge multiple PDF files into one professional document instantly. Drag-and-drop to reorder pages. Secure, free, and no sign-up required. Optimized for zero file-size bloat.",
+        title: "Merge PDF Free Online – No Limits, No Watermarks",
+        description: "Combine multiple PDF files into one instantly. Free PDF merger with no limits, no watermarks, no sign-up. Drag & drop to reorder pages. 100% private, works on any device.",
         keywords: [
-            "merge pdf", "combine pdf files", "join pdf files online", "stitch pdf pages", "pdf binder free",
-            "concatenate pdfs", "unite pdf sections", "fuse pdf together", "append pdf files", "bundle pdfs single file",
-            "merge multiple pdfs", "combine pdf documents", "pdf joiner no upload", "secure pdf merger",
-            "compile pdf report", "legal document merger", "combine portfolio pdf", "batch pdf merge free"
+            "merge pdf", "combine pdf files", "merge pdf free", "merge pdf online",
+            "combine pdf files online free", "pdf merger", "join pdf files", "merge pdf no watermark",
+            "combine pdf no limit", "merge multiple pdfs", "pdf combiner free online",
+            "merge pdf without sign up", "combine pdf documents", "stitch pdf pages",
+            "pdf binder free", "concatenate pdfs", "batch pdf merge", "merge pdf files together"
         ],
-        h1: "Merge PDF - Combine & Reorder Files Online",
+        h1: "Merge PDF Free – No Limits, No Watermarks",
         faqs: [
             {
+                question: "Is this PDF merger really free with no limits?",
+                answer: "Yes! Unlike other tools, Convertify lets you merge unlimited PDF files with no file size limits, no watermarks added, and no sign-up required. It's completely free."
+            },
+            {
                 question: "Can I reorder the files after uploading?",
-                answer: "Yes! Our visual merger allows you to drag and drop your PDFs to set the exact order before combining them into a single document."
+                answer: "Absolutely! Our visual merger lets you drag and drop your PDFs to set the exact order before combining them into a single document."
             },
             {
                 question: "Can I merge PDF files with images (JPG/PNG)?",
-                answer: "Absolutely. Convertify supports merging mixed file types. You can upload PDFs alongside JPG or PNG images and combine them into one sequential PDF."
+                answer: "Yes! Convertify supports merging mixed file types. Upload PDFs alongside JPG or PNG images and combine them into one sequential PDF."
             },
             {
                 question: "Will the merged file be too large to email?",
                 answer: "We use 'Zero-Bloat' merging technology that avoids duplicating fonts and metadata, keeping your final file size as small as possible for email attachments."
             },
             {
-                question: "How many files can I merge at once?",
-                answer: "You can merge dozens of files at once. Our client-side processing handles large batches efficiently without timing out like cloud-based tools."
+                question: "Is it safe for confidential documents?",
+                answer: "100% safe. All merging happens locally in your browser. Your files are never uploaded to any server, ensuring complete privacy."
             }
         ],
         howToSteps: [
-            { name: "Upload PDFs", text: "Select the PDF files you want to combine." },
-            { name: "Arrange", text: "Drag and drop to set the perfect order." },
-            { name: "Merge", text: "Click to download your single combined PDF." }
+            { name: "Upload PDFs", text: "Select or drag & drop the PDF files you want to combine." },
+            { name: "Arrange Order", text: "Drag and drop to set the perfect page order." },
+            { name: "Download Free", text: "Click merge and get your combined PDF instantly – no watermarks!" }
         ]
     },
     "split-pdf": {
@@ -76,38 +81,44 @@ export const toolSeoData = {
         ]
     },
     "compress-pdf": {
-        title: "Compress PDF to 100KB & 200KB Free - No Sign-Up | Convertify",
-        description: "Compress PDF to 100KB or 200KB instantly. Perfect for government forms, passport scans, and visa portals. Our intelligent compression preserves text readability.",
+        title: "Compress PDF to 100KB Free Online | No Sign-Up",
+        description: "Reduce PDF to 100KB or 200KB in seconds. Best free PDF compressor for government forms, visa applications & passport scans. No watermarks, no limits, 100% private.",
         keywords: [
-            "compress pdf", "reduce pdf size", "shrink pdf", "compress pdf 100kb", "compress pdf 200kb",
-            "pdf 100kb to 200kb", "100kb to 200kb pdf", "reduce pdf size to 100kb no quality loss",
+            "compress pdf", "compress pdf to 100kb", "compress pdf to 200kb", "reduce pdf size", "shrink pdf",
+            "pdf compressor 100kb", "pdf compressor 200kb", "compress pdf online free", "reduce pdf size online",
             "compress pdf for government forms", "passport scan compression 100kb", "visa application pdf compressor",
-            "best pdf compressor no loss quality", "shrink pdf file online 200kb free",
-            "make pdf smaller", "smaller pdf file", "compress pdf for email", "batch compress pdf"
+            "compress pdf to 100kb free online", "shrink pdf file online 200kb free", "pdf size reducer",
+            "make pdf smaller", "smaller pdf file", "compress pdf for email", "batch compress pdf",
+            "pdf compressor no watermark", "best pdf compressor free", "reduce pdf file size without losing quality",
+            "compress pdf without sign up", "free pdf compressor no limit", "online pdf size reducer"
         ],
-        h1: "Compress PDF - Reduce Size to 100KB/200KB Free",
+        h1: "Compress PDF to 100KB Free - No Watermarks",
         faqs: [
             {
-                question: "How do I hit exactly 100KB for government forms?",
-                answer: "Our 'High Compression' mode uses multi-pass optimization to get as close to your target (100KB/200KB) as possible while ensuring your photo and text remain legible for officials."
+                question: "How do I compress PDF to exactly 100KB for government forms?",
+                answer: "Our 'High Compression' mode uses multi-pass optimization to get as close to your target (100KB/200KB) as possible while ensuring your photo and text remain legible for officials. Perfect for visa applications and passport uploads."
             },
             {
                 question: "Will my passport photo be blurry after compression?",
-                answer: "No. Our algorithm prioritizes text and face recognition areas, applying heavier compression only to background metadata and redundant layout info to keep your IDs crisp."
+                answer: "No. Our algorithm prioritizes text and face recognition areas, applying heavier compression only to background metadata and redundant layout info to keep your IDs crisp and clear."
             },
             {
-                question: "Is it safe for sensitive official documents?",
-                answer: "Yes. Processing happens 100% in your browser. Your sensitive government forms are never uploaded or stored, providing total privacy for your personal data."
+                question: "Is this PDF compressor free with no limits?",
+                answer: "Yes! Compress unlimited PDFs for free. No sign-up required, no watermarks added, and no file size limits. Processing happens 100% in your browser for complete privacy."
             },
             {
-                question: "What if the file is still over 100KB?",
-                answer: "Try our 'Extreme' mode. It removes embedded thumbnails and non-essential fonts to shave off the final few bytes needed for strict portals."
+                question: "What if the file is still over 100KB after compression?",
+                answer: "Try our 'Extreme' mode. It removes embedded thumbnails and non-essential fonts to shave off the final few bytes needed for strict government portals."
+            },
+            {
+                question: "Is it safe to compress sensitive documents online?",
+                answer: "Absolutely. Unlike other tools, Convertify processes files 100% in your browser. Your sensitive government forms, passport scans, and visa documents are never uploaded to any server."
             }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Select your government form or document." },
-            { name: "Select Mode", text: "Choose 'High' or 'Extreme' to hit the 100KB limit." },
-            { name: "Download", text: "Save your portal-ready PDF document." }
+            { name: "Upload PDF", text: "Select your PDF file - works with government forms, IDs, and any document." },
+            { name: "Choose Compression", text: "Select 'High' for 100KB or 'Extreme' for maximum compression." },
+            { name: "Download Free", text: "Get your compressed PDF instantly - no watermarks, no sign-up." }
         ]
     },
     "jpg-to-pdf": {
@@ -127,38 +138,44 @@ export const toolSeoData = {
         ]
     },
     "word-to-pdf": {
-        title: "Word to PDF - Preserve Layout & Fonts Free | Convertify",
-        description: "Convert Word to PDF without Microsoft Office. We use Smart Font Embedding to preserve your original layout, margins, and styles perfectly.",
+        title: "Word to PDF Free Online - No Microsoft Office",
+        description: "Convert Word to PDF free without Microsoft Office. Preserves fonts, layout & formatting perfectly. Best for resumes, CVs & legal docs. No sign-up, 100% private.",
         keywords: [
-            "word to pdf", "docx to pdf", "convert word to pdf", "doc to pdf", "word to pdf converter free",
-            "word to pdf no office", "word to pdf preserve layout", "font embedding word to pdf",
-            "accurate word docx to pdf conversion", "docx to pdf in word", "convert docx to pdf without office",
-            "keep word formatting", "preserve document layout", "word to pdf exact match", "resume to pdf", "cv to pdf",
-            "maintain fonts word to pdf", "secure docx conversion", "legal contract to pdf", "print ready pdf"
+            "word to pdf", "docx to pdf", "convert word to pdf", "doc to pdf", "word to pdf converter",
+            "word to pdf free", "word to pdf online", "word to pdf converter free online",
+            "convert word to pdf free", "docx to pdf free", "doc to pdf converter",
+            "word to pdf without microsoft office", "word to pdf no office", "word to pdf preserve formatting",
+            "convert docx to pdf online free", "word to pdf keep fonts", "word to pdf exact layout",
+            "resume to pdf", "cv to pdf", "resume word to pdf", "convert resume to pdf free",
+            "legal document to pdf", "contract to pdf", "word to pdf no sign up", "word to pdf no watermark"
         ],
-        h1: "Word to PDF - Layout & Font Preservation",
+        h1: "Word to PDF Free - No Microsoft Office Required",
         faqs: [
             {
-                question: "Does this work if I don't have Microsoft Word installed?",
-                answer: "Yes! Convertify operates independently of MS Office. You can convert any .DOCX or .DOC file from any device (Windows, Mac, Mobile) without needing a license or the software installed."
+                question: "Can I convert Word to PDF without Microsoft Office?",
+                answer: "Yes! Convertify works 100% independently of Microsoft Office. Convert any DOC or DOCX file from Windows, Mac, or mobile without needing Word installed or any license."
             },
             {
-                question: "How do you keep my fonts from shifting?",
-                answer: "We use 'Subset Font Embedding'. This technique packages your exact font characters into the PDF, ensuring your layout, spacing, and headers stay 100% identical to the original."
+                question: "Will my resume formatting be preserved exactly?",
+                answer: "Absolutely. We use 'Subset Font Embedding' to package your exact fonts into the PDF. Your resume layout, spacing, headers, and margins stay 100% identical to the original Word document."
             },
             {
-                question: "Why is the layout better than other free converters?",
-                answer: "Unlike basic tools that substitute fonts, our engine respects precise margin definitions and page break markers found in the DOCX XML, preventing the 'text overflow' common in other tools."
+                question: "Is this Word to PDF converter really free?",
+                answer: "Yes! Convert unlimited Word documents to PDF completely free. No sign-up required, no watermarks added, and no hidden limits. Professional quality for everyone."
             },
             {
-                question: "Is it secure for a CV or Legal Contract?",
-                answer: "Absolutely. Everything is processed locally in your browser session. Your sensitive career or legal data never touches a server, making it safer than using Word's cloud export."
+                question: "Is it secure for CVs and legal contracts?",
+                answer: "Completely secure. Everything is processed locally in your browser. Your resume, CV, and legal documents never touch any server - safer than Word's own cloud export."
+            },
+            {
+                question: "Why is this better than other free converters?",
+                answer: "Unlike basic tools that substitute fonts, our engine respects precise margin definitions and page breaks from the DOCX format, preventing the 'text overflow' and layout shifts common in other tools."
             }
         ],
         howToSteps: [
-            { name: "Upload Word Doc", text: "Drag and drop your DOC or DOCX file." },
-            { name: "Convert", text: "Our engine embeds fonts and preserves margins automatically." },
-            { name: "Download", text: "Save your perfect, layout-accurate PDF." }
+            { name: "Upload Word File", text: "Drag & drop your DOC or DOCX - works without Microsoft Office." },
+            { name: "Auto Convert", text: "We embed fonts and preserve your exact layout automatically." },
+            { name: "Download Free", text: "Get your perfect PDF instantly - no sign-up, no watermarks." }
         ]
     },
     "pdf-to-jpg": {
@@ -614,43 +631,45 @@ export const toolSeoData = {
         ]
     },
     "excel-to-pdf": {
-        title: "Excel to PDF - Convert XLS/XLSX to PDF Free | Convertify",
-        description: "Convert Excel (XLS/XLSX) to PDF free, preserving charts, internal links, and perfect formatting. No sign-up, 100% private client-side processing.",
+        title: "XLS to PDF Free Online - Convert Excel to PDF",
+        description: "Convert XLS & XLSX to PDF free online. Preserves charts, formatting & links. No sign-up, no Excel required. Works on Windows, Mac & mobile. 100% private.",
         keywords: [
-            "excel to pdf", "xlsx to pdf", "convert excel to pdf", "save excel as pdf", "excel to pdf converter free",
-            "xls to pdf preserving formatting", "xlsx to pdf online no upload", "convert excel spreadsheet to pdf accurate",
-            "free excel to pdf layout keeper", "xls vs xlsx to pdf converter private", "excel sheet to pdf preserve formulas",
-            "xls to pdf online", "spreadsheet to pdf", "convert workbook to pdf", "change excel to pdf", "turn spreadsheet into pdf",
-            "preserve excel formatting pdf", "batch excel conversion", "secure excel to pdf", "excel to pdf no sign up",
-            "microsoft excel to pdf converter", "financial report to pdf", "convert xlsx without losing formatting"
+            "xls to pdf", "xlsx to pdf", "excel to pdf", "convert excel to pdf", "excel to pdf converter",
+            "xls to pdf converter", "xlsx to pdf converter", "xls to pdf online", "xlsx to pdf online",
+            "excel to pdf free", "xls to pdf free", "xlsx to pdf free", "convert xls to pdf online free",
+            "excel to pdf converter free online", "xls to pdf no sign up", "xlsx to pdf no registration",
+            "excel file convert to pdf", "xls convert to pdf", "convert excel spreadsheet to pdf",
+            "excel to pdf preserve formatting", "xls to pdf keep formatting", "xlsx to pdf charts",
+            "spreadsheet to pdf", "convert workbook to pdf", "excel to pdf without excel",
+            "excel to pdf no microsoft office", "financial report to pdf", "invoice excel to pdf"
         ],
-        h1: "Excel to PDF - Preserve Charts & Links",
+        h1: "XLS to PDF Free - Convert Excel Without Software",
         faqs: [
             {
-                question: "Will my clickable links and charts in Excel work in the PDF?",
-                answer: "Yes, our conversion engine is specifically designed to keep internal hyperlinks, external links, and complex data charts fully functional and visually accurate in the final PDF."
+                question: "How do I convert XLS to PDF online for free?",
+                answer: "Simply drag and drop your XLS or XLSX file into Convertify. We'll instantly convert it to PDF while preserving all your formatting, charts, and formulas. No sign-up required!"
             },
             {
-                question: "Is it safe to upload financial or sensitive Excel files?",
-                answer: "Yes, absolutely. Since all processing happens locally in your browser, your financial spreadsheets are never uploaded to any server. It is the most secure way to handle sensitive business data."
+                question: "Do I need Microsoft Excel installed to convert?",
+                answer: "No! Convertify works 100% in your browser. You can convert Excel files to PDF from any device - Windows, Mac, or mobile - without installing any software."
             },
             {
-                question: "How can I convert Excel to PDF without losing formatting?",
-                answer: "Our tool uses advanced rendering to preserve your original layout, including fonts, cell borders, column widths, and table structures, ensuring your PDF looks exactly like your spreadsheet."
+                question: "Will my charts and formatting be preserved?",
+                answer: "Yes! Our conversion engine is specifically designed to keep your charts, graphs, cell formatting, column widths, and even clickable links fully intact in the final PDF."
             },
             {
-                question: "What is the difference between XLS and XLSX conversion?",
-                answer: "XLS is the older Excel format (pre-2007) and XLSX is the newer standard. Our converter handles both formats seamlessly, so you don't need to worry about compatibility."
+                question: "What's the difference between XLS and XLSX?",
+                answer: "XLS is the older Excel format (pre-2007) and XLSX is the modern standard. Convertify handles both formats seamlessly with identical quality output."
             },
             {
-                question: "Do I need Microsoft Excel installed to use this?",
-                answer: "No, you don't need any software installed. Convertify works entirely in your web browser, allowing you to convert Excel files from any device, anywhere."
+                question: "Is it safe for financial spreadsheets?",
+                answer: "Absolutely. All processing happens locally in your browser. Your sensitive financial data, invoices, and reports are never uploaded to any server - 100% private."
             }
         ],
         howToSteps: [
-            { name: "Upload Excel Sheet", text: "Select or drag and drop your XLS or XLSX file." },
-            { name: "Convert to PDF", text: "We process the spreadsheet, preserving your links, charts, and tables." },
-            { name: "Download", text: "Save your new, professional PDF document instantly." }
+            { name: "Upload Excel File", text: "Drag & drop your XLS or XLSX file - no software needed." },
+            { name: "Instant Conversion", text: "We preserve all charts, formatting, and links automatically." },
+            { name: "Download PDF Free", text: "Get your professional PDF instantly - no sign-up required." }
         ]
     },
 

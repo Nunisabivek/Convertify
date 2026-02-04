@@ -8,14 +8,15 @@ export const toolContentData: Record<string, {
     keywords: string[];
 }> = {
     "merge-pdf": {
-        description: "Combine multiple PDF files into a single, polished document with Convertify's free PDF Merger. Perfect for consolidating business reports, assembling legal exhibits, or stitching design portfolios. Our drag-and-drop tool lets you rearrange pages easily and features 'Zero-Bloat' technology to prevent file size explosion. Mix and match PDFs with JPG/PNG images for a seamless workflow. Secure, private, and 100% free.",
+        description: "Merge PDF files online 100% free - no limits, no watermarks, no sign-up. Combine multiple PDFs into one document with drag-and-drop reordering. Our 'Zero-Bloat' technology keeps file sizes small. Mix PDFs with JPG/PNG images. 100% private - files never leave your browser.",
         features: [
-            "Combine multiple PDFs into one file instantly",
+            "Merge unlimited PDFs - no file size limits",
+            "No watermarks added to your documents",
+            "No sign-up or registration required",
+            "Drag-and-drop to reorder pages precisely",
             "Zero-Bloat technology prevents file size explosion",
-            "Mix and match PDFs with JPG/PNG image files",
-            "Drag-and-drop to reorder files and pages precisely",
-            "Preserves bookmarks, hyperlinks, and form fields",
-            "Secure processing - files never leave your device"
+            "Mix PDFs with JPG/PNG images seamlessly",
+            "100% private - files processed locally in browser"
         ],
         useCases: [
             "Consolidating monthly business reports into one file",
@@ -24,7 +25,7 @@ export const toolContentData: Record<string, {
             "Combining invoices and receipts for tax submission",
             "Stitching design portfolios and scans into one document"
         ],
-        keywords: ["merge pdf", "combine pdf files", "join pdfs", "pdf binder", "stitch pdfs", "secure pdf merger", "combine multiple pdfs", "concatenate pdf"]
+        keywords: ["merge pdf", "combine pdf files", "join pdfs", "pdf binder", "stitch pdfs", "secure pdf merger", "combine multiple pdfs", "concatenate pdf", "merge pdf online", "free pdf merger", "combine pdfs free"]
     },
     "split-pdf": {
         description: "Extract exactly the pages you need with our free Split PDF tool, optimized for Windows and Mac. Whether you're on Windows 10/11 or mobile, you can separate a single page, define specific ranges (e.g., 1-5, 10), or extract every page as a standalone file. Convertify offers precise control for removing sensitive info or isolating reports directly in your browser.",
@@ -46,23 +47,24 @@ export const toolContentData: Record<string, {
         keywords: ["split pdf", "extract pdf pages", "separate pdf pages", "how to split pdf on windows", "pdf splitter online", "pdf page separator"]
     },
     "compress-pdf": {
-        description: "Compress PDF files for government portals and email attachments effortlessly. Convertify's free online PDF compressor lets you target specific sizes like 100KB and 200KB while maintaining 100% visual quality for IDs and forms. Our secure PDF optimizer removes redundant data and streamlines fonts without uploading your private files. Ideal for official forms, passport scans, and visa applications.",
+        description: "The best free PDF compressor for government forms, visa applications, and passport scans. Compress PDF to exactly 100KB or 200KB with our intelligent multi-pass optimization. No watermarks, no limits, no sign-up required. Process sensitive documents 100% privately in your browser - files are never uploaded to any server.",
         features: [
-            "Target exact 100KB and 200KB sizes for official portals",
-            "Optimized for government and official application uploads",
-            "Intelligent text & photo preservation for IDs",
-            "100% private - sensitive forms stay on your device",
-            "Optimize for Gmail/WhatsApp attachment limits",
-            "Batch compress unlimited files simultaneously"
+            "Compress PDF to exactly 100KB or 200KB for government portals",
+            "Best for visa applications, passport scans & official forms",
+            "No watermarks, no limits, no sign-up required",
+            "100% private - documents never leave your device",
+            "Intelligent compression preserves text & photo clarity",
+            "Extreme mode for strict file size requirements",
+            "Batch compress multiple PDFs simultaneously"
         ],
         useCases: [
-            "Compressing PDFs to 100KB/200KB for government forms",
-            "Shrinking passport and visa scans for web portals",
-            "Optimizing files for email attachment limits",
-            "Reducing storage space for archived records",
-            "Making scanned forms smaller for sharing"
+            "Compressing PDFs to 100KB for government form uploads",
+            "Reducing passport scans to 200KB for visa portals",
+            "Shrinking PDFs for email attachment limits",
+            "Making official documents smaller without quality loss",
+            "Optimizing scanned IDs for online applications"
         ],
-        keywords: ["compress pdf", "pdf 100kb to 200kb", "100kb to 200kb pdf", "reduce pdf size", "shrink pdf online", "pdf optimizer", "compress pdf to 100kb"]
+        keywords: ["compress pdf to 100kb", "compress pdf to 200kb", "pdf compressor 100kb", "reduce pdf size", "shrink pdf online free", "compress pdf for government forms", "best pdf compressor free", "pdf size reducer no watermark"]
     },
     "jpg-to-pdf": {
         description: "Convert JPG images to PDF documents instantly. Combine multiple photos into a single PDF or convert individual images. Perfect for creating photo albums, document scans, or portfolios - all processed in your browser with no uploads required.",
@@ -103,23 +105,24 @@ export const toolContentData: Record<string, {
         keywords: ["pdf to jpg", "pdf to jpeg", "convert pdf to image", "extract images from pdf", "save pdf as picture", "high quality pdf to jpg", "turn pdf into image", "batch pdf to jpg"]
     },
     "word-to-pdf": {
-        description: "Convert Word documents to PDF online with 100% formatting fidelity—no Microsoft Office required. We use Smart Font Embedding to ensure your converted PDF looks exactly like your original Word file. Perfect for resumes, legal contracts, and academic papers where margin precision and font consistency are critical. Secure, free, and watermark-free.",
+        description: "Convert Word to PDF free without Microsoft Office. Our Smart Font Embedding ensures your PDF looks 100% identical to the original Word document - perfect for resumes, CVs, and legal contracts. No sign-up required, no watermarks, completely free. Process documents securely in your browser - files never leave your device.",
         features: [
-            "Works without Microsoft Word or Office installed",
-            "Smart Subset Font Embedding (prevents text shift)",
-            "Preserves exact document layout and margin definitions",
-            "Keeps hyperlinks, bookmarks, and tables functional",
-            "Secure processing for sensitive career/legal docs",
-            "Supports both modern .DOCX and legacy .DOC"
+            "Convert Word to PDF without Microsoft Office installed",
+            "Perfect for resumes, CVs, and job applications",
+            "Smart Font Embedding preserves exact layout & formatting",
+            "No sign-up required, no watermarks added",
+            "Secure for legal contracts and confidential documents",
+            "Supports both DOC and DOCX formats",
+            "Works on Windows, Mac, and mobile browsers"
         ],
         useCases: [
-            "Converting Word to PDF without a Microsoft license",
-            "Creating professional resumes for ATS compatibility",
-            "Archiving legal contracts with exact formatting",
-            "Submitting academic thesis or research papers",
-            "Sharing business reports that look perfect on any device"
+            "Converting resumes and CVs to PDF for job applications",
+            "Creating PDFs from Word without Microsoft Office",
+            "Archiving legal contracts with exact formatting preserved",
+            "Submitting academic papers and thesis documents",
+            "Sharing business reports that display perfectly everywhere"
         ],
-        keywords: ["word to pdf", "docx to pdf", "work to pdf convert", "docx to pdf in word", "convert word to pdf", "keep formatting word to pdf"]
+        keywords: ["word to pdf free", "word to pdf no office", "convert docx to pdf", "resume to pdf", "cv to pdf", "word to pdf preserve formatting", "docx to pdf online free"]
     },
     "pdf-to-word": {
         description: "Convert PDF to editable Word documents with industry-leading OCR accuracy. Our conversion engine identifies logical paragraph flow and table structures, making the resulting DOCX easy to edit. Perfect for updating old documents, extracting content, or making 'scanned-only' files editable again. Secure, private, and no sign-up required.",
@@ -217,23 +220,24 @@ export const toolContentData: Record<string, {
         keywords: ["pdf to excel converter free online", "extract tables from pdf to excel", "convert pdf to xlsx free", "pdf data to spreadsheet"]
     },
     "excel-to-pdf": {
-        description: "Convertify's Online Excel to PDF Converter is the most reliable way to turn spreadsheets into professional documents while preserving charts and internal links. Whether you have financial reports, invoices, or complex data lists, our tool maintains your columns and tables exactly. Supports XLSX and XLS formats with secure, browser-based processing so your sensitive data never leaves your device.",
+        description: "Convert XLS and XLSX to PDF free online - no Excel required. Our converter preserves all your charts, formatting, cell borders, and clickable links perfectly. Works on any device (Windows, Mac, mobile) without installing software. Secure browser-based processing means your financial spreadsheets never leave your device.",
         features: [
-            "Preserves clickable links, charts, and table structures",
-            "Supports modern XLSX and legacy XLS formats",
-            "Secure, browser-based processing (Financial Safe)",
-            "No software installation needed",
-            "Automatic scaling to fit PDF pages",
-            "Converts entire workbooks with multiple sheets"
+            "Convert XLS and XLSX to PDF without Microsoft Excel",
+            "Preserves charts, graphs, and data visualizations",
+            "Maintains cell formatting, borders, and column widths",
+            "Keeps clickable links functional in the PDF",
+            "No sign-up, no watermarks, completely free",
+            "Works on Windows, Mac, and mobile devices",
+            "Secure - files never uploaded to any server"
         ],
         useCases: [
-            "Converting financial reports while keeping links active",
-            "Turning Excel invoices into uneditable PDF bills",
-            "Sharing data snapshots with clients securely",
-            "Archiving annual budgets and spreadsheets",
-            "Presenting data tables in meetings"
+            "Converting XLS financial reports to PDF",
+            "Creating PDF invoices from Excel spreadsheets",
+            "Converting XLSX data tables for presentations",
+            "Archiving Excel budgets as uneditable PDFs",
+            "Sharing spreadsheet data securely with clients"
         ],
-        keywords: ["excel to pdf", "xlsx to pdf", "xls to pdf", "convert excel to pdf", "save excel as pdf", "excel to pdf charts links"]
+        keywords: ["xls to pdf", "xlsx to pdf", "excel to pdf free", "convert xls to pdf online", "excel to pdf no sign up", "xls to pdf converter", "excel to pdf without excel"]
     },
     "png-to-pdf": {
         description: "Convertify's HD PNG to PDF Combiner turns images into crystal-clear PDFs with 300 DPI resolution preserved. Merge multiple PNGs into one PDF, batch convert files, or save single images while maintaining transparency and sharpness. No uploads or installs required—perfect for high-end portfolios, presentations, and print-ready documentation.",
