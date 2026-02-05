@@ -17,6 +17,41 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// Website Schema
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Convertify",
+  url: "https://convertify.work",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: "https://convertify.work/all-tools?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+};
+
+// Organization Schema
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Convertify",
+  url: "https://convertify.work",
+  logo: {
+    "@type": "ImageObject",
+    url: "https://convertify.work/images/Convertify.png",
+    width: 512,
+    height: 512
+  },
+  sameAs: [
+    "https://twitter.com/convertify"
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer support",
+    email: "support@convertify.work"
+  }
+};
+
 export const metadata: Metadata = {
   title: {
     default: "Convertify - Free Online PDF Tools - No Sign-Up, No Limits",
@@ -29,7 +64,9 @@ export const metadata: Metadata = {
     "free pdf converter", "secure pdf tools", "client-side pdf merger", "no sign up pdf converter",
     "unlimited pdf tools", "fast pdf converter", "convertify", "ilovepdf alternative",
     "privacy first pdf", "offline pdf tools", "merge pdf secure", "compress pdf no limit",
-    "jpg to pdf free", "pdf to word", "split pdf client side"
+    "jpg to pdf free", "pdf to word", "split pdf client side", "best pdf converter 2025",
+    "pdf editor free online", "pdf compressor 100kb", "merge pdf no watermark",
+    "convert pdf to word free", "pdf to jpg converter", "word to pdf converter"
   ],
   icons: {
     icon: [
@@ -70,6 +107,19 @@ export const metadata: Metadata = {
     google: "ghwXtP5nTeKojcTtLh5jNBXQOHfhcwBGfwiLLO0_4Yc",
   },
   metadataBase: new URL("https://convertify.work"),
+  // Additional SEO metadata
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -79,6 +129,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Structured Data - Website */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        {/* Structured Data - Organization */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+      </head>
       {/* Google Analytics */}
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
@@ -89,7 +151,10 @@ export default function RootLayout({
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '${GA_MEASUREMENT_ID}');
+          gtag('config', '${GA_MEASUREMENT_ID}', {
+            'send_page_view': true,
+            'anonymize_ip': true
+          });
         `}
       </Script>
       <body

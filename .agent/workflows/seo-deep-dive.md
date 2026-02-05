@@ -16,14 +16,8 @@ This workflow automates the cycle of finding low-performing pages, researching c
    - Run a `PageAudit.com` technical check for each selected URL.
    - Record baseline Title, Description, and word count.
 
-## 🔍 Phase 2: Perplexity Deep Research (agent)
-For each page in the batch, the Agent will generate a **Deep Research Prompt**:
-1. **User Action**: 
-   - Go to Perplexity.ai and toggle **"Deep Research" / "Pro"** on.
-   - Paste the prompt provided by the Agent (example below).
-   - **Crucial**: Verify citations and only keep accurate competitor URLs.
-   - Copy the final Perplexity report or URLs.
 
+phase 2 use google gemini deep reasearch (Agent)
 > **Agent-Generated Prompt Format**:
 > *"Analyze the top 5 competitors for [URL]. What specific semantic keywords, content structures, and user 'pain point' questions are driving their conversions? Focus on [Specific Niche, e.g., '100KB compression']."*
 

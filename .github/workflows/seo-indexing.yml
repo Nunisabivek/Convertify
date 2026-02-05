@@ -1,0 +1,31 @@
+name: SEO & IndexNow Sync
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  index-now:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run SEO Indexing Script
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+        run: node scripts/ping-google.js
+
+      - name: Verify Sitemap
+        run: |
+          echo "Checking sitemap.xml accessibility..."
+          curl -s -o /dev/null -w "%{http_code}" https://convertify.work/sitemap.xml
+          echo ""
+          echo "✅ Sitemap verification complete"

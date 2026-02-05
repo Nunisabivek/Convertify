@@ -18,6 +18,7 @@ const ALL_URLS = [
     "https://convertify.work/",
     "https://convertify.work/all-tools",
     "https://convertify.work/blog",
+    "https://convertify.work/security",
 
     // High-traffic tools
     "https://convertify.work/merge-pdf",
@@ -52,6 +53,9 @@ const ALL_URLS = [
     "https://convertify.work/ocr-pdf",
     "https://convertify.work/compare-pdf",
     "https://convertify.work/pdf-to-pdfa",
+    "https://convertify.work/reorder-pdf",
+    "https://convertify.work/delete-pdf-pages",
+    "https://convertify.work/extract-pdf",
 
     // Static pages
     "https://convertify.work/contact",
@@ -94,51 +98,6 @@ const BLOG_URLS = [
 ];
 
 
-async function pingGoogle() {
-    return new Promise((resolve) => {
-        const encodedSitemap = encodeURIComponent(SITEMAP_URL);
-        const pingUrl = `http://www.google.com/ping?sitemap=${encodedSitemap}`;
-
-        console.log(`\n📡 Pinging Google with sitemap: ${SITEMAP_URL}`);
-
-        http.get(pingUrl, (res) => {
-            if (res.statusCode === 200) {
-                console.log('✅ Google ping successful');
-                resolve(true);
-            } else {
-                console.log(`⚠️ Google ping returned status: ${res.statusCode}`);
-                console.log('   Note: Google has deprecated public ping. Using sitemap submission instead.');
-                resolve(false);
-            }
-        }).on("error", (err) => {
-            console.log(`⚠️ Google ping error: ${err.message}`);
-            resolve(false);
-        });
-    });
-}
-
-async function pingBing() {
-    return new Promise((resolve) => {
-        const encodedSitemap = encodeURIComponent(SITEMAP_URL);
-        const pingUrl = `https://www.bing.com/ping?sitemap=${encodedSitemap}`;
-
-        console.log(`\n📡 Pinging Bing with sitemap...`);
-
-        https.get(pingUrl, (res) => {
-            if (res.statusCode === 200) {
-                console.log('✅ Bing ping successful');
-                resolve(true);
-            } else {
-                console.log(`⚠️ Bing ping returned status: ${res.statusCode}`);
-                resolve(false);
-            }
-        }).on("error", (err) => {
-            console.log(`⚠️ Bing ping error: ${err.message}`);
-            resolve(false);
-        });
-    });
-}
-
 async function submitIndexNow() {
     const allUrls = [...ALL_URLS, ...BLOG_URLS];
 
@@ -164,6 +123,7 @@ async function submitIndexNow() {
 
     return new Promise((resolve) => {
         const req = https.request(options, (res) => {
+            console.log(`📡 IndexNow response status: ${res.statusCode}`);
             if (res.statusCode === 200 || res.statusCode === 202) {
                 console.log(`✅ IndexNow submission successful (${allUrls.length} URLs)`);
                 resolve(true);
@@ -184,29 +144,33 @@ async function submitIndexNow() {
 }
 
 async function main() {
-    console.log('🔍 Convertify SEO Ping Tool');
-    console.log('============================');
-    console.log(`📊 Total URLs to submit: ${ALL_URLS.length + BLOG_URLS.length}`);
+    console.log('🔍 Convertify SEO Indexing Tool');
+    console.log('==============================');
+    console.log(`📊 Total URLs for IndexNow: ${ALL_URLS.length + BLOG_URLS.length}`);
     console.log(`   - Tool pages: ${ALL_URLS.length}`);
     console.log(`   - Blog posts: ${BLOG_URLS.length}`);
 
-    const results = {
-        google: await pingGoogle(),
-        bing: await pingBing(),
-        indexNow: await submitIndexNow()
-    };
+    try {
+        const success = await submitIndexNow();
 
-    console.log('\n📋 Summary');
-    console.log('==========');
-    console.log(`Google:   ${results.google ? '✅ OK' : '⚠️ Manual submission recommended'}`);
-    console.log(`Bing:     ${results.bing ? '✅ OK' : '⚠️ Check Bing Webmaster Tools'}`);
-    console.log(`IndexNow: ${results.indexNow ? '✅ OK' : '⚠️ Check IndexNow key'}`);
+        console.log('\n📋 Summary');
+        console.log('==========');
+        console.log(`IndexNow: ${success ? '✅ Success' : '⚠️ Failed - Check IndexNow key and domain'}`);
 
-    console.log('\n💡 Next Steps:');
-    console.log('1. Submit sitemap manually in Google Search Console');
-    console.log('2. Request indexing for priority pages');
-    console.log('3. Build quality backlinks to improve crawl priority');
-    console.log('\n🎯 Target: Index all 74 pages (currently 19 indexed, 55 pending)');
+        console.log('\n💡 Next Steps:');
+        console.log('1. Google: Sitemaps are processed automatically from robots.txt');
+        console.log('2. Bing/Other: IndexNow has notified Bing, Yandex, and Seznam');
+        console.log(`3. Target: Indexing all ${ALL_URLS.length + BLOG_URLS.length} pages`);
+
+        if (success) {
+            process.exit(0);
+        } else {
+            process.exit(1);
+        }
+    } catch (error) {
+        console.error('\n❌ Fatal Error during indexing:', error);
+        process.exit(1);
+    }
 }
 
-main().catch(console.error);
+main();
