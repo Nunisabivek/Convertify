@@ -67,23 +67,27 @@ export const toolContentData: Record<string, {
         keywords: ["compress pdf to 100kb", "compress pdf to 200kb", "pdf compressor 100kb", "reduce pdf size", "shrink pdf online free", "compress pdf for government forms", "best pdf compressor free", "pdf size reducer no watermark"]
     },
     "jpg-to-pdf": {
-        description: "Convert JPG images to PDF documents instantly. Combine multiple photos into a single PDF or convert individual images. Perfect for creating photo albums, document scans, or portfolios - all processed in your browser with no uploads required.",
+        description: "Convert JPG to PDF free online with no limits and no watermarks. Combine unlimited photos into one multi-page PDF, adjust page sizes (A4, Letter, Legal), and arrange images in any order. Works perfectly on iPhone, Android, Windows, and Mac. All conversion happens in your browser - your photos are never uploaded to any server, making it 100% private and secure.",
         features: [
-            "Convert single or multiple JPG images",
-            "Combine photos into one multi-page PDF",
-            "Customize page size (A4, Letter, etc.)",
-            "Maintain original image quality",
-            "Reorder images before conversion",
-            "Works with JPEG, JPG, and PNG formats"
+            "Combine unlimited JPG/PNG images into one PDF - no limits",
+            "Works on iPhone, Android, Windows, Mac & tablets",
+            "Choose page size: A4, Letter, Legal, or fit to image",
+            "Drag and drop to reorder photos before converting",
+            "High quality output - preserves original image resolution",
+            "Compression options for smaller file sizes",
+            "100% private - photos never leave your device",
+            "No sign-up, no watermarks, completely free"
         ],
         useCases: [
-            "Creating PDF photo albums from vacation pictures",
-            "Converting scanned receipts to organized PDFs",
-            "Making presentations from image slides",
-            "Combining product photos into catalogs",
-            "Creating PDF portfolios from design work"
+            "Converting phone camera photos to PDF for homework submissions",
+            "Scanning receipts and documents to PDF on iPhone/Android",
+            "Creating photo albums from vacation pictures",
+            "Combining product images into catalogs for ecommerce",
+            "Converting screenshots into PDF documentation",
+            "Creating portfolios from design work or artwork",
+            "Batch converting multiple images for official applications"
         ],
-        keywords: ["convert multiple jpg to one pdf", "combine photos into pdf free", "jpg to pdf converter no limit", "images to pdf online free"]
+        keywords: ["jpg to pdf", "convert jpg to pdf free", "combine photos to pdf", "multiple jpg to one pdf", "scan to pdf iphone", "scan to pdf android", "photo to pdf converter", "jpg to pdf no watermark", "image to pdf combiner", "jpg to pdf a4 size"]
     },
     "pdf-to-jpg": {
         description: "Convert PDFs to high-resolution JPG images with Convertify. Whether you need to save an entire document as a picture or extract specific images from a PDF, our HD rendering engine does it instantly at up to 300 DPI. Enjoy vector-to-pixel rendering for sharp text and vibrant graphics. Secure, browser-based processing ensures your files stay private.",

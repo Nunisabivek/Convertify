@@ -122,19 +122,48 @@ export const toolSeoData = {
         ]
     },
     "jpg-to-pdf": {
-        title: "JPG to PDF Converter Free - Convert Images to PDF | Convertify",
-        description: "Convert JPG to PDF online for free. Combine multiple photos into one PDF. Supports JPG, PNG, and other image formats. No sign-up.",
-        keywords: ["jpg to pdf", "convert jpg to pdf", "image to pdf", "photos to pdf", "jpeg to pdf", "jpg to pdf converter free", "combine jpg to pdf"],
-        h1: "JPG to PDF - Convert Images to PDF Free",
+        title: "JPG to PDF Free Online – Combine Multiple Photos to PDF",
+        description: "Convert JPG to PDF free online. Combine unlimited photos into one PDF, arrange order, adjust page size. No sign-up, no watermarks. Works on Windows, Mac & mobile.",
+        keywords: [
+            "jpg to pdf", "convert jpg to pdf", "image to pdf", "photos to pdf", "jpeg to pdf",
+            "jpg to pdf converter free", "combine jpg to pdf", "multiple jpg to one pdf",
+            "combine photos into pdf", "merge images to pdf", "convert multiple images to pdf",
+            "jpg to pdf no sign up", "jpg to pdf no watermark", "jpg to pdf online free",
+            "scan to pdf iphone", "scan to pdf android", "photo to pdf converter",
+            "batch jpg to pdf", "jpg to pdf a4 size", "compress jpg to pdf",
+            "high quality jpg to pdf", "jpg to pdf keep quality", "image to pdf combiner"
+        ],
+        h1: "JPG to PDF Free – Combine Multiple Photos to One PDF",
         faqs: [
-            { question: "Can I combine multiple images?", answer: "Yes, you can upload and combine multiple JPGs into a single PDF document." },
-            { question: "Is resizing supported?", answer: "Yes, we automatically fit your images to the PDF page size." },
-            { question: "Is it free?", answer: "Yes, 100% free unlimited conversions." }
+            {
+                question: "How do I combine multiple JPG images into one PDF?",
+                answer: "Simply drag and drop all your JPG images at once. Convertify lets you upload unlimited photos, rearrange their order by dragging, and combine them into a single multi-page PDF. No sign-up required!"
+            },
+            {
+                question: "Can I convert photos from my phone camera to PDF?",
+                answer: "Yes! Convertify works perfectly on iPhone, Android, and tablets. Just open our website in your mobile browser, select photos from your gallery, and convert them to PDF instantly – great for homework, receipts, and document scans."
+            },
+            {
+                question: "Will my photos lose quality when converted to PDF?",
+                answer: "No. We preserve your original image quality. You can also choose compression settings if you need a smaller file size for email attachments while maintaining excellent visual quality."
+            },
+            {
+                question: "Can I adjust the page size to A4, Letter, or custom?",
+                answer: "Yes! Choose from standard page sizes like A4, Letter, or Legal. You can also fit images to page, stretch to fill, or use original image dimensions for complete control."
+            },
+            {
+                question: "Is there a limit on how many images I can convert?",
+                answer: "No limits! Convert 1 image or 100 images – all free with no watermarks. Our browser-based processing handles large batches efficiently without slowing down."
+            },
+            {
+                question: "Is it safe to convert personal photos?",
+                answer: "100% safe and private. All conversion happens locally in your browser. Your photos are never uploaded to any server, making it secure for personal documents, IDs, and private photos."
+            }
         ],
         howToSteps: [
-            { name: "Upload Images", text: "Select your JPG or PNG files." },
-            { name: "Arrange", text: "Drag and drop to reorder images." },
-            { name: "Convert", text: "Download your new PDF." }
+            { name: "Upload Images", text: "Drag & drop your JPG, PNG, or other image files. Upload from computer, phone, or tablet." },
+            { name: "Arrange Order", text: "Drag to reorder images. Choose page size (A4, Letter) and orientation." },
+            { name: "Download PDF", text: "Click convert and download your combined PDF instantly – no watermarks!" }
         ]
     },
     "word-to-pdf": {
