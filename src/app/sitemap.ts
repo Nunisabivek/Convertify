@@ -30,6 +30,20 @@ const staticPages = [
     'security',
 ]
 
+// High-volume keyword landing pages (SEO-optimized guides)
+const landingPages = [
+    'how-to-merge-pdf-files-windows-10',
+    'how-to-compress-pdf-to-100kb',
+    'how-to-convert-jpg-to-pdf-iphone',
+    'how-to-split-pdf-by-page-number',
+    'how-to-convert-word-to-pdf-without-office',
+    'how-to-reduce-pdf-file-size-for-email',
+    'how-to-convert-pdf-to-word-editable',
+    'how-to-combine-multiple-pdfs-into-one',
+    'how-to-extract-pages-from-pdf',
+    'how-to-convert-excel-to-pdf-free',
+]
+
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://convertify.work'
     const currentDate = new Date()
@@ -58,7 +72,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: page === 'all-tools' || page === 'blog' ? 0.9 : 0.5,
     }))
 
-    // Total: 1 (homepage) + 29 (tools) + 30 (blogs) + 6 (static) = 66+ pages
+    // Landing pages - High priority SEO pages (10 pages)
+    const landingUrls = landingPages.map(page => ({
+        url: `${baseUrl}/${page}`,
+        lastModified: currentDate,
+        changeFrequency: 'weekly' as const,
+        priority: 0.9, // High priority for SEO
+    }))
+
+    // Total: 1 (homepage) + 6 (static) + 32 (tools) + 30 (blogs) + 10 (landing) = 79+ pages
     return [
         // Homepage - highest priority
         {
@@ -69,6 +91,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         // Static pages
         ...staticUrls,
+        // Landing pages (high-volume keywords)
+        ...landingUrls,
         // Tool pages
         ...toolUrls,
         // Blog posts
