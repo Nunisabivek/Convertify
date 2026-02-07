@@ -3,6 +3,8 @@ import { ToolSwapper } from "@/components/tools/tool-swapper"
 import PdfToTextClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
+import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
 import { toolContentData } from "@/lib/tool-content-data"
@@ -29,7 +31,22 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <div className="flex flex-col items-center">
-            <section className="w-full py-8 bg-gradient-to-b from-gray-50 to-white">
+            
+            {/* Structured Data Schemas */}
+            <BreadcrumbSchema 
+                items={[
+                    { name: "Home", url: "/" },
+                    { name: "All Tools", url: "/all-tools" },
+                    { name: "Pdf To Text", url: "/pdf-to-text" }
+                ]}
+            />
+            <SoftwareApplicationSchema
+                toolName="PDF to Text Converter"
+                toolSlug="pdf-to-text"
+                description={seoData.description}
+            />
+            
+<section className="w-full py-8 bg-gradient-to-b from-gray-50 to-white">
                 <div className="max-w-4xl mx-auto px-4 text-center mb-8">
                     <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
                         {seoData.h1}

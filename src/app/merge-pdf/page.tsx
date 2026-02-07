@@ -4,6 +4,8 @@ import { ToolSwapper } from "@/components/tools/tool-swapper"
 import MergePdfClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
+import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
 import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
@@ -43,6 +45,20 @@ export default function Page() {
 
     return (
         <div className="flex flex-col items-center">
+            {/* Structured Data Schemas */}
+            <BreadcrumbSchema
+                items={[
+                    { name: "Home", url: "/" },
+                    { name: "All Tools", url: "/all-tools" },
+                    { name: "Merge PDF", url: "/merge-pdf" }
+                ]}
+            />
+            <SoftwareApplicationSchema
+                toolName="PDF Merger"
+                toolSlug="merge-pdf"
+                description={seoData.description}
+            />
+
             {/* Main Tool Section */}
             <section className="w-full py-8 bg-gradient-to-b from-red-50 to-white">
                 <div className="max-w-4xl mx-auto px-4 text-center mb-8">

@@ -1,9 +1,7 @@
 {
-  "audit_date": "2026-02-05T16:03:56.125Z",
+  "audit_date": "2026-02-07T10:02:47.225Z",
   "site": "https://convertify.work",
   "critical_issues": [
-    "Homepage returns 307",
-    "WARNING: No canonical tag found",
     "WARNING: No sitemap reference found"
   ],
   "page_results": [
@@ -25,13 +23,13 @@
             "reason": "RATE_LIMIT_EXCEEDED",
             "domain": "googleapis.com",
             "metadata": {
-              "service": "pagespeedonline.googleapis.com",
-              "quota_limit_value": "0",
-              "consumer": "projects/583797351490",
               "quota_location": "global",
-              "quota_metric": "pagespeedonline.googleapis.com/default",
+              "quota_limit_value": "0",
               "quota_limit": "defaultPerDayPerProject",
-              "quota_unit": "1/d/{project}"
+              "quota_unit": "1/d/{project}",
+              "consumer": "projects/583797351490",
+              "quota_metric": "pagespeedonline.googleapis.com/default",
+              "service": "pagespeedonline.googleapis.com"
             }
           },
           {
@@ -64,51 +62,168 @@
             "reason": "RATE_LIMIT_EXCEEDED",
             "domain": "googleapis.com",
             "metadata": {
-              "quota_limit": "defaultPerDayPerProject",
               "consumer": "projects/583797351490",
-              "quota_metric": "pagespeedonline.googleapis.com/default",
-              "quota_limit_value": "0",
-              "service": "pagespeedonline.googleapis.com",
-              "quota_location": "global",
-              "quota_unit": "1/d/{project}"
-            }
-          },
-          {
-            "@type": "type.googleapis.com/google.rpc.Help",
-            "links": [
-              {
-                "description": "Request a higher quota limit.",
-                "url": "https://cloud.google.com/docs/quotas/help/request_increase"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "error": {
-        "code": 429,
-        "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for consumer 'project_number:583797351490'.",
-        "errors": [
-          {
-            "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for consumer 'project_number:583797351490'.",
-            "domain": "global",
-            "reason": "rateLimitExceeded"
-          }
-        ],
-        "status": "RESOURCE_EXHAUSTED",
-        "details": [
-          {
-            "@type": "type.googleapis.com/google.rpc.ErrorInfo",
-            "reason": "RATE_LIMIT_EXCEEDED",
-            "domain": "googleapis.com",
-            "metadata": {
               "quota_unit": "1/d/{project}",
               "quota_location": "global",
+              "quota_limit_value": "0",
+              "quota_limit": "defaultPerDayPerProject",
+              "service": "pagespeedonline.googleapis.com",
+              "quota_metric": "pagespeedonline.googleapis.com/default"
+            }
+          },
+          {
+            "@type": "type.googleapis.com/google.rpc.Help",
+            "links": [
+              {
+                "description": "Request a higher quota limit.",
+                "url": "https://cloud.google.com/docs/quotas/help/request_increase"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "error": {
+        "code": 429,
+        "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for consumer 'project_number:583797351490'.",
+        "errors": [
+          {
+            "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for consumer 'project_number:583797351490'.",
+            "domain": "global",
+            "reason": "rateLimitExceeded"
+          }
+        ],
+        "status": "RESOURCE_EXHAUSTED",
+        "details": [
+          {
+            "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+            "reason": "RATE_LIMIT_EXCEEDED",
+            "domain": "googleapis.com",
+            "metadata": {
+              "quota_metric": "pagespeedonline.googleapis.com/default",
+              "quota_location": "global",
+              "quota_limit_value": "0",
+              "service": "pagespeedonline.googleapis.com",
+              "quota_limit": "defaultPerDayPerProject",
               "consumer": "projects/583797351490",
+              "quota_unit": "1/d/{project}"
+            }
+          },
+          {
+            "@type": "type.googleapis.com/google.rpc.Help",
+            "links": [
+              {
+                "description": "Request a higher quota limit.",
+                "url": "https://cloud.google.com/docs/quotas/help/request_increase"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "error": {
+        "code": 429,
+        "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for consumer 'project_number:583797351490'.",
+        "errors": [
+          {
+            "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for consumer 'project_number:583797351490'.",
+            "domain": "global",
+            "reason": "rateLimitExceeded"
+          }
+        ],
+        "status": "RESOURCE_EXHAUSTED",
+        "details": [
+          {
+            "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+            "reason": "RATE_LIMIT_EXCEEDED",
+            "domain": "googleapis.com",
+            "metadata": {
+              "quota_limit": "defaultPerDayPerProject",
+              "service": "pagespeedonline.googleapis.com",
+              "quota_limit_value": "0",
+              "quota_unit": "1/d/{project}",
+              "consumer": "projects/583797351490",
+              "quota_metric": "pagespeedonline.googleapis.com/default",
+              "quota_location": "global"
+            }
+          },
+          {
+            "@type": "type.googleapis.com/google.rpc.Help",
+            "links": [
+              {
+                "description": "Request a higher quota limit.",
+                "url": "https://cloud.google.com/docs/quotas/help/request_increase"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "error": {
+        "code": 429,
+        "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for consumer 'project_number:583797351490'.",
+        "errors": [
+          {
+            "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for consumer 'project_number:583797351490'.",
+            "domain": "global",
+            "reason": "rateLimitExceeded"
+          }
+        ],
+        "status": "RESOURCE_EXHAUSTED",
+        "details": [
+          {
+            "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+            "reason": "RATE_LIMIT_EXCEEDED",
+            "domain": "googleapis.com",
+            "metadata": {
               "quota_limit": "defaultPerDayPerProject",
               "quota_metric": "pagespeedonline.googleapis.com/default",
+              "quota_location": "global",
               "quota_limit_value": "0",
+              "consumer": "projects/583797351490",
+              "quota_unit": "1/d/{project}",
+              "service": "pagespeedonline.googleapis.com"
+            }
+          },
+          {
+            "@type": "type.googleapis.com/google.rpc.Help",
+            "links": [
+              {
+                "description": "Request a higher quota limit.",
+                "url": "https://cloud.google.com/docs/quotas/help/request_increase"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "error": {
+        "code": 429,
+        "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for consumer 'project_number:583797351490'.",
+        "errors": [
+          {
+            "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for consumer 'project_number:583797351490'.",
+            "domain": "global",
+            "reason": "rateLimitExceeded"
+          }
+        ],
+        "status": "RESOURCE_EXHAUSTED",
+        "details": [
+          {
+            "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+            "reason": "RATE_LIMIT_EXCEEDED",
+            "domain": "googleapis.com",
+            "metadata": {
+              "quota_limit": "defaultPerDayPerProject",
+              "quota_metric": "pagespeedonline.googleapis.com/default",
+              "quota_location": "global",
+              "quota_limit_value": "0",
+              "consumer": "projects/583797351490",
+              "quota_unit": "1/d/{project}",
               "service": "pagespeedonline.googleapis.com"
             }
           },
@@ -143,50 +258,11 @@
             "domain": "googleapis.com",
             "metadata": {
               "quota_location": "global",
-              "quota_limit_value": "0",
-              "service": "pagespeedonline.googleapis.com",
-              "quota_limit": "defaultPerDayPerProject",
-              "quota_metric": "pagespeedonline.googleapis.com/default",
-              "quota_unit": "1/d/{project}",
-              "consumer": "projects/583797351490"
-            }
-          },
-          {
-            "@type": "type.googleapis.com/google.rpc.Help",
-            "links": [
-              {
-                "description": "Request a higher quota limit.",
-                "url": "https://cloud.google.com/docs/quotas/help/request_increase"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "error": {
-        "code": 429,
-        "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for consumer 'project_number:583797351490'.",
-        "errors": [
-          {
-            "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for consumer 'project_number:583797351490'.",
-            "domain": "global",
-            "reason": "rateLimitExceeded"
-          }
-        ],
-        "status": "RESOURCE_EXHAUSTED",
-        "details": [
-          {
-            "@type": "type.googleapis.com/google.rpc.ErrorInfo",
-            "reason": "RATE_LIMIT_EXCEEDED",
-            "domain": "googleapis.com",
-            "metadata": {
-              "service": "pagespeedonline.googleapis.com",
-              "quota_location": "global",
               "consumer": "projects/583797351490",
               "quota_limit_value": "0",
-              "quota_unit": "1/d/{project}",
               "quota_metric": "pagespeedonline.googleapis.com/default",
+              "service": "pagespeedonline.googleapis.com",
+              "quota_unit": "1/d/{project}",
               "quota_limit": "defaultPerDayPerProject"
             }
           },
@@ -220,90 +296,12 @@
             "reason": "RATE_LIMIT_EXCEEDED",
             "domain": "googleapis.com",
             "metadata": {
-              "quota_unit": "1/d/{project}",
               "service": "pagespeedonline.googleapis.com",
-              "consumer": "projects/583797351490",
               "quota_metric": "pagespeedonline.googleapis.com/default",
               "quota_limit": "defaultPerDayPerProject",
-              "quota_location": "global",
-              "quota_limit_value": "0"
-            }
-          },
-          {
-            "@type": "type.googleapis.com/google.rpc.Help",
-            "links": [
-              {
-                "description": "Request a higher quota limit.",
-                "url": "https://cloud.google.com/docs/quotas/help/request_increase"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "error": {
-        "code": 429,
-        "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for consumer 'project_number:583797351490'.",
-        "errors": [
-          {
-            "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for consumer 'project_number:583797351490'.",
-            "domain": "global",
-            "reason": "rateLimitExceeded"
-          }
-        ],
-        "status": "RESOURCE_EXHAUSTED",
-        "details": [
-          {
-            "@type": "type.googleapis.com/google.rpc.ErrorInfo",
-            "reason": "RATE_LIMIT_EXCEEDED",
-            "domain": "googleapis.com",
-            "metadata": {
-              "service": "pagespeedonline.googleapis.com",
               "quota_limit_value": "0",
-              "consumer": "projects/583797351490",
-              "quota_location": "global",
-              "quota_metric": "pagespeedonline.googleapis.com/default",
-              "quota_limit": "defaultPerDayPerProject",
-              "quota_unit": "1/d/{project}"
-            }
-          },
-          {
-            "@type": "type.googleapis.com/google.rpc.Help",
-            "links": [
-              {
-                "description": "Request a higher quota limit.",
-                "url": "https://cloud.google.com/docs/quotas/help/request_increase"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "error": {
-        "code": 429,
-        "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for consumer 'project_number:583797351490'.",
-        "errors": [
-          {
-            "message": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for consumer 'project_number:583797351490'.",
-            "domain": "global",
-            "reason": "rateLimitExceeded"
-          }
-        ],
-        "status": "RESOURCE_EXHAUSTED",
-        "details": [
-          {
-            "@type": "type.googleapis.com/google.rpc.ErrorInfo",
-            "reason": "RATE_LIMIT_EXCEEDED",
-            "domain": "googleapis.com",
-            "metadata": {
-              "quota_limit": "defaultPerDayPerProject",
               "quota_location": "global",
               "quota_unit": "1/d/{project}",
-              "quota_limit_value": "0",
-              "service": "pagespeedonline.googleapis.com",
-              "quota_metric": "pagespeedonline.googleapis.com/default",
               "consumer": "projects/583797351490"
             }
           },
@@ -337,13 +335,13 @@
             "reason": "RATE_LIMIT_EXCEEDED",
             "domain": "googleapis.com",
             "metadata": {
-              "quota_unit": "1/d/{project}",
-              "service": "pagespeedonline.googleapis.com",
-              "quota_limit": "defaultPerDayPerProject",
               "quota_location": "global",
               "quota_metric": "pagespeedonline.googleapis.com/default",
+              "quota_unit": "1/d/{project}",
+              "consumer": "projects/583797351490",
               "quota_limit_value": "0",
-              "consumer": "projects/583797351490"
+              "service": "pagespeedonline.googleapis.com",
+              "quota_limit": "defaultPerDayPerProject"
             }
           },
           {

@@ -45,3 +45,24 @@ next-env.d.ts
 .claude/skills
 .gemini/skills
 .cursor/skills
+
+# Android build artifacts
+android/build/
+android/.gradle/
+android/.kotlin/
+android/app/build/
+*.apk
+*.aab
+*.log
+build_log.txt
+
+# Temporary and test files
+test.pdf
+*.tmp
+*.temp
+
+# Documentation and planning (keep in separate docs repo if needed)
+CRITICAL_SEO_ISSUES_FOUND.md
+seo-audit-results.json
+/tasks/
+/marketing/

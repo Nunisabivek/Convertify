@@ -130,6 +130,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Sitemap Link for Search Engines */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
         {/* Structured Data - Website */}
         <script
           type="application/ld+json"
