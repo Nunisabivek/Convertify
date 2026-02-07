@@ -48,12 +48,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://convertify.work'
     const currentDate = new Date()
 
-    // Tool pages - High priority (all tools from registry + additionals)
+    // Top priority tools (most searched, currently unindexed)
+    const topPriorityTools = [
+        'merge-pdf', 'compress-pdf', 'jpg-to-pdf', 'word-to-pdf',
+        'pdf-to-word', 'split-pdf', 'pdf-to-jpg', 'excel-to-pdf',
+        'pdf-to-excel', 'edit-pdf'
+    ]
+
+    // Tool pages - Tiered priority based on importance
     const toolUrls = allToolSlugs.map((tool) => ({
         url: `${baseUrl}/${tool}`,
         lastModified: currentDate,
         changeFrequency: 'weekly' as const,
-        priority: 0.8,
+        priority: topPriorityTools.includes(tool) ? 0.95 : 0.85, // Higher priority for top tools
     }))
 
     // Blog posts (30 pages from blog-data.ts)
@@ -72,12 +79,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: page === 'all-tools' || page === 'blog' ? 0.9 : 0.5,
     }))
 
-    // Landing pages - High priority SEO pages (10 pages)
+    // Landing pages - Very high priority SEO pages (10 pages)
     const landingUrls = landingPages.map(page => ({
         url: `${baseUrl}/${page}`,
         lastModified: currentDate,
         changeFrequency: 'weekly' as const,
-        priority: 0.9, // High priority for SEO
+        priority: 0.92, // Very high priority - new content targeting high-volume keywords
     }))
 
     // Total: 1 (homepage) + 6 (static) + 32 (tools) + 30 (blogs) + 10 (landing) = 79+ pages
