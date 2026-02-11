@@ -3,16 +3,16 @@
 
 export const toolSeoData = {
     "merge-pdf": {
-        title: "Merge PDF Free Online – No Limits, No Watermarks",
-        description: "Combine multiple PDF files into one instantly. Free PDF merger with no limits, no watermarks, no sign-up. Drag & drop to reorder pages. 100% private, works on any device.",
+        title: "Convertify PDF Merger - Merge PDF Free Online No Limits",
+        description: "Looking for Convertifyy PDF merger? Combine multiple PDF files into one instantly. Free PDF merger with no limits, no watermarks, no sign-up. 100% private, works on any device.",
         keywords: [
-            "merge pdf", "combine pdf files", "merge pdf free", "merge pdf online",
+            "convertify pdf merger", "convertifyy pdf merger", "merge pdf", "combine pdf files", "merge pdf free", "merge pdf online",
             "combine pdf files online free", "pdf merger", "join pdf files", "merge pdf no watermark",
             "combine pdf no limit", "merge multiple pdfs", "pdf combiner free online",
             "merge pdf without sign up", "combine pdf documents", "stitch pdf pages",
             "pdf binder free", "concatenate pdfs", "batch pdf merge", "merge pdf files together"
         ],
-        h1: "Merge PDF Free – No Limits, No Watermarks",
+        h1: "Convertify PDF Merger - Merge PDF Free Online",
         faqs: [
             {
                 question: "Is this PDF merger really free with no limits?",
@@ -81,10 +81,10 @@ export const toolSeoData = {
         ]
     },
     "compress-pdf": {
-        title: "Compress PDF to 100KB Free Online | No Sign-Up",
-        description: "Reduce PDF to 100KB or 200KB in seconds. Best free PDF compressor for government forms, visa applications & passport scans. No watermarks, no limits, 100% private.",
+        title: "Convertify PDF Compressor - Compress PDF to 100KB Free",
+        description: "Official Convertifyy PDF compressor. Reduce PDF to 100KB or 200KB in seconds for government forms, visa applications & passport scans. No watermarks, no limits, 100% private.",
         keywords: [
-            "compress pdf", "compress pdf to 100kb", "compress pdf to 200kb", "reduce pdf size", "shrink pdf",
+            "convertify pdf compressor", "convertifyy pdf compressor", "compress pdf", "compress pdf to 100kb", "compress pdf to 200kb", "reduce pdf size", "shrink pdf",
             "pdf compressor 100kb", "pdf compressor 200kb", "compress pdf online free", "reduce pdf size online",
             "compress pdf for government forms", "passport scan compression 100kb", "visa application pdf compressor",
             "compress pdf to 100kb free online", "shrink pdf file online 200kb free", "pdf size reducer",
@@ -92,7 +92,7 @@ export const toolSeoData = {
             "pdf compressor no watermark", "best pdf compressor free", "reduce pdf file size without losing quality",
             "compress pdf without sign up", "free pdf compressor no limit", "online pdf size reducer"
         ],
-        h1: "Compress PDF to 100KB Free - No Watermarks",
+        h1: "Convertify PDF Compressor - Compress PDF to 100KB Free",
         faqs: [
             {
                 question: "How do I compress PDF to exactly 100KB for government forms?",
@@ -167,18 +167,19 @@ export const toolSeoData = {
         ]
     },
     "word-to-pdf": {
-        title: "Word to PDF Free Online - No Microsoft Office",
-        description: "Convert Word to PDF free without Microsoft Office. Preserves fonts, layout & formatting perfectly. Best for resumes, CVs & legal docs. No sign-up, 100% private.",
+        title: "Convertify Word to PDF Free Online — DOCX to PDF Without Watermark",
+        description: "Convertify Word to PDF converter — free, no Microsoft Office needed. Convert DOCX to PDF without watermark. Preserves fonts, layout & formatting perfectly. Best for resumes, CVs & legal docs. No sign-up, 100% private.",
         keywords: [
             "word to pdf", "docx to pdf", "convert word to pdf", "doc to pdf", "word to pdf converter",
             "word to pdf free", "word to pdf online", "word to pdf converter free online",
-            "convert word to pdf free", "docx to pdf free", "doc to pdf converter",
+            "convert word to pdf free", "docx to pdf free", "docx to pdf converter without watermark", "doc to pdf converter",
             "word to pdf without microsoft office", "word to pdf no office", "word to pdf preserve formatting",
             "convert docx to pdf online free", "word to pdf keep fonts", "word to pdf exact layout",
             "resume to pdf", "cv to pdf", "resume word to pdf", "convert resume to pdf free",
-            "legal document to pdf", "contract to pdf", "word to pdf no sign up", "word to pdf no watermark"
+            "legal document to pdf", "contract to pdf", "word to pdf no sign up", "word to pdf no watermark",
+            "convertify word to pdf", "convertifyy word to pdf"
         ],
-        h1: "Word to PDF Free - No Microsoft Office Required",
+        h1: "Word to PDF Free - No Microsoft Office | Convertify",
         faqs: [
             {
                 question: "Can I convert Word to PDF without Microsoft Office?",
@@ -237,17 +238,19 @@ export const toolSeoData = {
         ]
     },
     "png-to-pdf": {
-        title: "PNG to PDF HD High Quality - Merge & Convert PNGs Free | Convertify",
-        description: "Convert PNG images to PDF HD high quality. Merge multiple PNGs into one PDF file instantly. Preserves transparency and 300 DPI resolution. No watermarks.",
+        title: "Convertify PNG to PDF — Combine & Merge PNG Images to HD PDF Free",
+        description: "Convertify PNG to PDF converter — combine & merge multiple PNGs into one HD PDF free. Preserves transparency and 300 DPI resolution. Batch convert png to pdf online free. No watermarks, no limits.",
         keywords: [
             "png to pdf", "png to pdf hd", "convert png to pdf", "png to pdf converter", "combine png to pdf", "merge png to pdf",
+            "combine pngs into pdf", "combine png into one pdf", "multiple png to pdf", "png merge to pdf",
             "turn multiple pngs into pdf", "high resolution png to pdf", "combine images to pdf without losing quality",
             "merge png files into single pdf", "batch png to pdf converter", "preserve transparency png to pdf",
             "crisp png image to pdf export", "join pngs as pdf pages", "lossless multiple image to pdf",
             "high quality merge pngs pdf", "convert png sequence to pdf", "retain png sharpness in pdf",
-            "fuse png photos into document", "vector-like png to pdf output", "seamless batch image combiner"
+            "fuse png photos into document", "vector-like png to pdf output", "seamless batch image combiner",
+            "convert png to pdf bulk", "convert png to pdf online free", "how to combine png files into one pdf"
         ],
-        h1: "PNG to PDF - Merge & Convert Images HD Quality",
+        h1: "Convertify PNG to PDF — Merge & Combine PNGs to HD PDF",
         faqs: [
             {
                 question: "Is the PNG to PDF output HD (High Resolution)?",
@@ -400,14 +403,14 @@ export const toolSeoData = {
     },
 
     "pdf-to-word": {
-        title: "PDF to Word Editable - Convert PDF to Docx Free | Convertify",
-        description: "Convert PDF to Word (DOCX) while keeping the exact layout. Our AI OCR identifies tables and paragraphs for smooth editing. Secure, private, and free.",
+        title: "Convertify PDF to Word - Editable DOCX Free Online",
+        description: "Official Convertifyy PDF to Word converter. Convert PDF to Word (DOCX) while keeping exact layout. Scanned PDF to Word OCR support. Secure, private, and free.",
         keywords: [
-            "pdf to word", "pdf to docx", "convert pdf to word", "editable pdf to word", "pdf to word converter free",
+            "convertify pdf to word", "convertifyy pdf to word", "pdf to word", "pdf to docx", "convert pdf to word", "editable pdf to word", "pdf to word converter free",
             "pdf to word accurate layout", "scanned pdf to word ocr", "convert pdf to editable docx",
             "retain layout pdf to word", "pdf to word converter no sign up", "make pdf editable in word"
         ],
-        h1: "PDF to Word - Editable & Accurate Layout",
+        h1: "Convertify PDF to Word - Editable & Accurate",
         faqs: [
             {
                 question: "Will the Word document look like my original PDF?",
@@ -660,8 +663,8 @@ export const toolSeoData = {
         ]
     },
     "excel-to-pdf": {
-        title: "XLS to PDF Free Online - Convert Excel to PDF",
-        description: "Convert XLS & XLSX to PDF free online. Preserves charts, formatting & links. No sign-up, no Excel required. Works on Windows, Mac & mobile. 100% private.",
+        title: "Convertify Excel to PDF Free — XLS to PDF Converter Online",
+        description: "Convert XLS & XLSX to PDF free online with Convertify — the best Excel to PDF converter. No Excel required. Preserves charts, formulas & formatting. Works on Windows, Mac & mobile. 100% private.",
         keywords: [
             "xls to pdf", "xlsx to pdf", "excel to pdf", "convert excel to pdf", "excel to pdf converter",
             "xls to pdf converter", "xlsx to pdf converter", "xls to pdf online", "xlsx to pdf online",
@@ -670,9 +673,11 @@ export const toolSeoData = {
             "excel file convert to pdf", "xls convert to pdf", "convert excel spreadsheet to pdf",
             "excel to pdf preserve formatting", "xls to pdf keep formatting", "xlsx to pdf charts",
             "spreadsheet to pdf", "convert workbook to pdf", "excel to pdf without excel",
-            "excel to pdf no microsoft office", "financial report to pdf", "invoice excel to pdf"
+            "excel to pdf no microsoft office", "financial report to pdf", "invoice excel to pdf",
+            "convert excel to pdf free", "convert excel to pdf online", "excel to pdf convert",
+            "excel to pdf convertor", "excel pdf converter"
         ],
-        h1: "XLS to PDF Free - Convert Excel Without Software",
+        h1: "Excel to PDF Free — XLS to PDF Converter (No Software)",
         faqs: [
             {
                 question: "How do I convert XLS to PDF online for free?",

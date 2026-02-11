@@ -301,7 +301,7 @@ export default function WebHomePage() {
                     Convertify: <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">Free Online PDF Tools</span>
                 </h1>
                 <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-6 leading-relaxed">
-                    Convertify is the best iLovePDF alternative—100% free online PDF tools with client-side processing for ultimate privacy. Merge, convert, compress, or edit PDFs instantly without sign-ups, limits, or uploads.
+                    Convertify (also known as ConvertifyTool) is the best free iLovePDF alternative—100% free online PDF tools with client-side processing for ultimate privacy. No download required, no pricing plans. Merge, convert, compress, or edit PDFs instantly without sign-ups or limits.
                 </p>
                 {/* Trust Badges - Addresses "convertify pricing" queries */}
                 <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 mb-4">
@@ -502,6 +502,14 @@ export default function WebHomePage() {
                             <div>
                                 <h4 className="font-semibold text-lg text-slate-800 mb-2">How do I merge PDFs without uploading to servers?</h4>
                                 <p className="text-slate-600">Simply use our "Merge PDF" tool. Our advanced technology runs logic directly in your web browser (WebAssembly/Javascript), so your files are combined locally. This is the safest way to merge sensitive documents without risk of data breaches from server-side storage.</p>
+                            </div>
+                            <div>
+                                <h4 className="font-semibold text-lg text-slate-800 mb-2">What is the pricing for Convertify?</h4>
+                                <p className="text-slate-600">There is no pricing — Convertify is 100% free forever. Unlike Adobe Acrobat, SmallPDF, or iLovePDF that require subscriptions, Convertify has zero pricing tiers. All tools (merge, compress, convert, edit, sign) are completely free with no hidden costs. Simply open convertify.work in your browser and start using any tool instantly.</p>
+                            </div>
+                            <div>
+                                <h4 className="font-semibold text-lg text-slate-800 mb-2">Do I need to download Convertify?</h4>
+                                <p className="text-slate-600">No download is needed. Convertify works entirely in your web browser — Chrome, Firefox, Safari, or Edge. No desktop app, no extensions, no plugins. Just visit convertify.work on any device (Windows, Mac, iPhone, Android) and use all PDF tools instantly. Your files are processed locally in your browser for maximum privacy.</p>
                             </div>
                         </div>
                     </div>

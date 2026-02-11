@@ -68,17 +68,17 @@ export const blogPosts: BlogPost[] = [
   // ===== POST 1 =====
   {
     slug: "how-to-merge-pdf-files-free",
-    title: "How to Combine PDF Files: Merge Multiple PDFs for Free",
+    title: "Convertify PDF Merger: How to Combine PDF Files Free Online",
     excerpt: "Learn the easiest way to combine PDF documents using Convertify. No software installation required, works on all devices.",
     date: "2026-01-07",
     category: "tutorial",
     relatedTool: "/merge-pdf",
     readingTime: 4,
-    keywords: ["merge pdf", "combine pdf", "pdf merger free", "join pdf files", "combine pdf files online"],
+    keywords: ["convertify pdf merger", "convertifyy pdf merger", "merge pdf", "combine pdf", "pdf merger free", "join pdf files", "combine pdf files online"],
     content: `
 ## Why Merge PDF Files?
 
-Managing multiple PDF files can be a hassle. Whether you are a student submitting an assignment, a professional combining reports, or organizing scanned documents, merging PDFs into a single file is a crucial skill that saves time and keeps you organized.
+Managing multiple PDF files can be a hassle. Whether you are a student submitting an assignment, a professional combining reports, or organizing scanned documents, using the **Convertify PDF Merger** to join PDFs into a single file is a crucial skill that saves time and keeps you organized.
 
 **Common scenarios where you need to merge PDFs:**
 * Combining multiple scanned pages into one document
@@ -89,9 +89,9 @@ Managing multiple PDF files can be a hassle. Whether you are a student submittin
 
 ## The Free Solution: Convertify Merge PDF
 
-Need to combine PDF files into a single document instantly? You don't need to download software. As a leading **free file converter**, Convertify allows you to use our [Free PDF Merger Tool](/merge-pdf) to join files directly in your browser. Whether you need a simple **online document converter** or a powerful PDF tool, follow the step-by-step guide below to learn how to merge PDF files on any device.
+Need to combine PDF files into a single document instantly? Looking for the **Convertifyy PDF merger**? You don't need to download software. As a leading **free file converter**, Convertify allows you to use our [Free PDF Merger Tool](/merge-pdf) to join files directly in your browser. Whether you need a simple **online document converter** or a powerful PDF tool, follow the step-by-step guide below to learn how to merge PDF files on any device.
 
-Here's why it's better:
+Here's why **Convertify** is better:
 
 ✅ **100% Free** - No hidden costs or watermarks
 ✅ **No Installation** - Works in your browser
@@ -158,17 +158,17 @@ Ready to combine your PDF files? [Open the Merge PDF tool](/merge-pdf) and get s
   // ===== POST 2 =====
   {
     slug: "convert-jpg-to-pdf-online",
-    title: "How to Convert Multiple JPG Images to One PDF - Complete Guide",
-    excerpt: "Convert JPG photos to PDF in seconds. Learn how to combine multiple images into a single PDF document on any device.",
+    title: "Convertify JPG to PDF: How to Convert Multiple Photos Free",
+    excerpt: "Convert JPG photos to PDF in seconds with Convertify. Learn how to combine multiple images into a single PDF document on any device.",
     date: "2026-01-06",
     category: "tutorial",
     relatedTool: "/jpg-to-pdf",
     readingTime: 5,
-    keywords: ["jpg to pdf", "convert jpg to pdf", "image to pdf", "photos to pdf", "multiple images to one pdf"],
+    keywords: ["convertify jpg to pdf", "convertifyy jpg to pdf", "jpg to pdf", "convert jpg to pdf", "image to pdf", "photos to pdf", "multiple images to one pdf"],
     content: `
 ## Why Convert JPG to PDF?
 
-Images in JPG format are great for viewing and sharing, but when you need to submit documents, create portfolios, or archive files, PDF is the industry standard.
+Images in JPG format are great for viewing and sharing, but when you need a professional result, the **Convertify JPG to PDF tool** is the industry standard for converting photos to documents.
 
 **Common uses for JPG to PDF conversion:**
 * Submitting scanned documents for applications
@@ -191,7 +191,7 @@ Images in JPG format are great for viewing and sharing, but when you need to sub
 
 ### Method 1: Using Convertify (Recommended)
 
-Our [JPG to PDF converter](/jpg-to-pdf) is the fastest and easiest way to convert images. As a premier **online file converter**, we ensure your documents are processed securely:
+Our **Convertify JPG to PDF converter** is the fastest and easiest way to convert images. Often searched as the **Convertifyy photo converter**, we ensure your documents are processed securely:
 
 1. **Visit** [convertify.work/jpg-to-pdf](/jpg-to-pdf)
 2. **Upload** your JPG, JPEG, or PNG images (select multiple!)
@@ -259,19 +259,19 @@ Ready to turn your images into a PDF? [Open the JPG to PDF tool](/jpg-to-pdf) an
   // ===== POST 3 =====
   {
     slug: "compress-pdf-reduce-file-size",
-    title: "How to Compress PDF to Under 100KB for Email - Step by Step",
-    excerpt: "Reduce PDF file size by up to 90% without losing quality. Perfect for email attachments and file uploads.",
+    title: "Convertify PDF Compressor: Shrink PDF to 100KB Free",
+    excerpt: "Reduce PDF file size by up to 90% without losing quality using the Convertify PDF compressor. Perfect for email attachments.",
     date: "2026-01-05",
     category: "tutorial",
     relatedTool: "/compress-pdf",
     readingTime: 5,
-    keywords: ["compress pdf", "reduce pdf size", "shrink pdf", "compress pdf to 100kb", "make pdf smaller"],
+    keywords: ["convertify pdf compressor", "convertifyy pdf compressor", "compress pdf", "reduce pdf size", "shrink pdf", "compress pdf to 100kb", "make pdf smaller"],
     content: `
 ## The Email Attachment Problem
 
-You've just created the perfect PDF report, but when you try to email it, you see that dreaded message: "Attachment too large." Gmail limits attachments to 25MB, Outlook to 20MB, and many job application portals cap at just 2MB or even 500KB!
+You've just created the perfect PDF report, but when you try to email it, you see that dreaded message: "Attachment too large." Whether you are searching for the **Convertifyy PDF compressor** or just a way to shrink your file, this guide is for you.
 
-**This guide will show you how to compress PDF files to any size you need.**
+**This guide will show you how to compress PDF files to any size you need with Convertify.**
 
 ## Why Are PDFs So Large?
 
@@ -283,7 +283,7 @@ PDFs become large due to:
 
 ## How to Compress PDF Online (Free)
 
-Using [Convertify's PDF Compressor](/compress-pdf), you can reduce file size by up to 90%:
+Using **Convertify's PDF Compressor** (/compress-pdf), you can reduce file size by up to 90%:
 
 ### Step 1: Open the Tool
 Go to [convertify.work/compress-pdf](/compress-pdf)
@@ -866,19 +866,19 @@ Ready to turn your photos into a PDF? [Open the JPG to PDF tool](/jpg-to-pdf) on
   // ===== POST 9 =====
   {
     slug: "best-free-pdf-tools-2025",
-    title: "10 Best Free Online PDF Tools in 2025 - Complete Guide",
-    excerpt: "Discover the best free PDF tools for merging, compressing, converting, and editing. No software needed, works in your browser.",
+    title: "Best Free PDF Tools 2025 — Convertify Free Online Tools (No Download, No Pricing)",
+    excerpt: "Discover the best free PDF tools with Convertify — merge, compress, convert, and edit PDFs online. No pricing, no download, no sign-up. The ultimate ConvertifyTool guide.",
     date: "2025-12-30",
     category: "comparison",
     relatedTool: "/all-tools",
     readingTime: 6,
-    keywords: ["best free pdf tools", "free pdf editor online", "pdf converter free", "online pdf tools 2025", "free pdf software"],
+    keywords: ["best free pdf tools", "free pdf editor online", "pdf converter free", "online pdf tools 2025", "free pdf software", "convertify free", "convertify pricing", "convertifytool", "convertify download", "convertifyy"],
     content: `
-## The Best Free PDF Tools Available Online
+## The Best Free PDF Tools Available Online — Convertify Free Guide
 
-In 2025, you don't need expensive software like Adobe Acrobat to work with PDFs. Free online tools can handle everything from merging to converting to compressing - right in your browser.
+In 2025, you don't need expensive software like Adobe Acrobat to work with PDFs. Convertify (also known as ConvertifyTool or Convertifyy) offers completely free online tools that handle everything from merging to converting to compressing — right in your browser. **No download, no pricing plans, and no sign-up required.**
 
-**This guide covers the 10 essential PDF tools everyone needs.**
+**This guide covers the 10 essential Convertify free PDF tools everyone needs.**
 
 ## 1. Merge PDF - Combine Multiple Files
 
@@ -994,9 +994,9 @@ In 2025, you don't need expensive software like Adobe Acrobat to work with PDFs.
 | Always updated | Manual updates |
 | Cross-platform | Limited OS support |
 
-## All Tools in One Place
+## Convertify Free — Is There Any Pricing?
 
-Convertify offers all these tools in one convenient location. [Browse all PDF tools](/all-tools) to find exactly what you need.
+**No!** Unlike tools like Adobe Acrobat, SmallPDF, or iLovePDF that lock features behind paywalls, Convertify is entirely free — no pricing tiers, no download required. All tools are available instantly in your browser. Search for "convertify pricing" or "convertify download" and the answer is always: **$0, no download needed.**
 
 ## The Bottom Line
 
@@ -1012,21 +1012,22 @@ You no longer need paid software for 95% of PDF tasks. These free online tools c
 Visit [Convertify.work](/all-tools) and explore all our free PDF tools. No sign-up required!
 `,
     faqs: [
-      { question: "Are these tools really free?", answer: "Yes! All tools listed are 100% free with no hidden costs or watermarks." },
-      { question: "Do I need to create an account?", answer: "No. All tools work instantly without any registration." },
+      { question: "Are these tools really free?", answer: "Yes! All Convertify tools are 100% free with no hidden costs, no pricing tiers, and no watermarks. There is no Convertify pricing page because everything is free." },
+      { question: "Do I need to create an account?", answer: "No. All ConvertifyTool features work instantly without any registration or download." },
+      { question: "Do I need to download any software?", answer: "No download is required. Convertify works entirely in your browser on any device — Windows, Mac, or mobile." },
     ]
   },
 
   // ===== POST 10 =====
   {
     slug: "pdf-tips-for-students",
-    title: "10 PDF Tips Every Student Should Know - Save Time & Get Better Grades",
-    excerpt: "Master PDFs for school assignments, thesis submissions, and research. Essential tips for students using PDF documents.",
+    title: "10 PDF Tips Every Student Should Know — Convertify Free Tools for Students",
+    excerpt: "Master PDFs for school assignments, thesis submissions, and research using Convertify free tools. No download needed, no pricing — essential tips for students.",
     date: "2025-12-29",
     category: "tips",
     relatedTool: "/all-tools",
     readingTime: 6,
-    keywords: ["pdf tips for students", "student pdf tools", "pdf for school", "thesis pdf", "assignment pdf tips"],
+    keywords: ["pdf tips for students", "student pdf tools", "pdf for school", "thesis pdf", "assignment pdf tips", "convertify free", "convertifytool", "free pdf tools for students"],
     content: `
 ## Why PDF Skills Matter for Students
 
@@ -1544,19 +1545,19 @@ Ready to extract pages from your PDF? [Open the Split PDF tool](/split-pdf) and 
   // ===== POST 14 =====
   {
     slug: "convert-word-to-pdf-keep-formatting",
-    title: "How to Convert Word to PDF Without Losing Formatting",
-    excerpt: "Convert Word documents to PDF while preserving fonts, images, and layout. Works with DOC and DOCX files on any device.",
+    title: "Convertify Word to PDF: How to Convert Docx Keeping Layout",
+    excerpt: "Convert Word documents to PDF while preserving fonts, images, and layout perfectly with Convertify. Works with DOC and DOCX files.",
     date: "2026-01-06",
     category: "tutorial",
     relatedTool: "/word-to-pdf",
     readingTime: 5,
-    keywords: ["word to pdf", "convert word to pdf", "docx to pdf", "word to pdf without losing formatting", "doc to pdf online"],
+    keywords: ["convertify word to pdf", "convertifyy word to pdf", "word to pdf", "convert word to pdf", "docx to pdf", "word to pdf without losing formatting", "doc to pdf online"],
     content: `
 ## Why Convert Word to PDF?
 
-PDF (Portable Document Format) is the universal standard for sharing documents. Unlike Word files, PDFs:
+PDF (Portable Document Format) is the universal standard for sharing documents. When you use the **Convertify Word to PDF converter**, you ensure your files:
 
-* Look identical on every device
+* Look identical on every device (no "Convertifyy" layout shifts!)
 * Can't be easily edited (good for official documents)
 * Work without Microsoft Word installed
 * Preserve fonts, images, and layout perfectly
@@ -1716,17 +1717,17 @@ Ready to convert your Word file? [Open the Word to PDF tool](/word-to-pdf) and g
   // ===== POST 15 =====
   {
     slug: "free-pdf-tools-vs-adobe-acrobat",
-    title: "Free PDF Tools vs Adobe Acrobat Pro - Is Paid Software Worth It?",
-    excerpt: "Compare free online PDF tools with Adobe Acrobat Pro. Find out when free tools are enough and when you might need paid software.",
+    title: "Convertify Free vs Adobe Acrobat Pro — Is Paid PDF Software Worth It? (No Pricing!)",
+    excerpt: "Convertify free tools vs Adobe Acrobat Pro. Why pay $275/year? No pricing, no download needed — compare features and find out when free ConvertifyTool is enough vs paid software.",
     date: "2026-01-05",
     category: "comparison",
     relatedTool: "/all-tools",
     readingTime: 7,
-    keywords: ["free pdf tools vs adobe", "adobe acrobat alternative", "free pdf editor", "adobe acrobat pro review", "best free pdf software"],
+    keywords: ["free pdf tools vs adobe", "adobe acrobat alternative", "free pdf editor", "adobe acrobat pro review", "best free pdf software", "convertify free", "convertify pricing", "convertifytool", "convertify vs adobe", "convertify download"],
     content: `
-## The Great PDF Debate: Free vs Paid
+## The Great PDF Debate: Convertify Free vs Adobe Acrobat Paid
 
-Adobe Acrobat Pro is the industry standard for PDF editing, but at $22.99/month ($275/year), is it worth the cost? Let's break down when free tools are enough and when paid software makes sense.
+Adobe Acrobat Pro is the industry standard for PDF editing, but at $22.99/month ($275/year), is it worth the cost? Convertify (also known as ConvertifyTool) offers a completely free alternative with no pricing plans and no download required. Let's break down when Convertify free tools are enough and when paid software makes sense.
 
 ## Adobe Acrobat Pro: What You Get
 
@@ -3280,26 +3281,26 @@ You don't need expensive software to ensure compliance.
   },
   {
     slug: "how-to-edit-pdf-text-workaround",
-    title: "How to Edit PDF Text (Best Free Workarounds)",
-    excerpt: "Need to change text in a PDF but don't want to pay for Adobe Acrobat? Learn the best free workarounds to edit your PDF content.",
+    title: "Convertify PDF to Word: How to Edit PDF Text Online Free",
+    excerpt: "Need to change text in a PDF? Learn how to use the Convertify PDF to Word converter to make any document editable for free.",
     date: "2026-01-24",
     category: "tutorial",
-    relatedTool: "/edit-pdf",
+    relatedTool: "/pdf-to-word",
     readingTime: 5,
-    keywords: ["edit pdf text free", "modify pdf text", "change text in pdf online"],
+    keywords: ["convertify pdf to word", "convertifyy pdf to word", "edit pdf text free", "modify pdf text", "change text in pdf online", "convert pdf to editable word"],
     content: `
 ## Can You Edit Text in a PDF?
 
-PDFs were designed to be **read-only**—like a digital printed page. That's why editing them is so hard. While our [PDF Editor](/edit-pdf) lets you add *new* text and annotations, changing *existing* paragraphs usually requires expensive Pro software.
+PDFs were designed to be **read-only**—like a digital printed page. That's why editing them is so hard. While our [PDF Editor](/edit-pdf) lets you add *new* text and annotations, changing *existing* paragraphs usually requires the **Convertify PDF to Word** converter.
 
-**However, there is a clever workaround.**
+**However, there is a clever workaround using Convertifyy technology.**
 
 ## The "Convert-Edit-Convert" Method
 
 Instead of fighting the PDF format, switch to a format meant for editing: PRO Word.
 
 ### Step 1: Convert to Word
-Use our high-accuracy **[PDF to Word Tool](/pdf-to-word)**. This extracts your text, layouts, and tables into a Microsoft Word doc.
+Use our high-accuracy **[Convertify PDF to Word Tool](/pdf-to-word)**. This extracts your text, layouts, and tables into a Microsoft Word doc.
 
 ### Step 2: Edit in Word
 Open the DOCX file in Word (or Google Docs). Now you have full freedom to:
@@ -3326,17 +3327,17 @@ You have a perfectly edited PDF without paying $15/month for a subscription.
   },
   {
     slug: "resume-guide-word-to-pdf",
-    title: "Professional Resume Guide: Why You Must Convert Word to PDF",
-    excerpt: "Sending a Word doc resume? Stop immediately. Learn why converting your CV to PDF helps you pass ATS systems and look more professional.",
+    title: "Convertify Resume Guide: Why You Must Convert CV to PDF",
+    excerpt: "Sending a Word doc resume? Stop immediately. Use the official Convertify Word to PDF tool to pass ATS systems and look professional.",
     date: "2026-01-24",
     category: "tips",
     relatedTool: "/word-to-pdf",
     readingTime: 4,
-    keywords: ["resume pdf or word", "convert resume to pdf", "cv word to pdf", "job application pdf"],
+    keywords: ["convertify resume", "convertifyy resume", "resume pdf or word", "convert resume to pdf", "cv word to pdf", "job application pdf"],
     content: `
 ## The Golden Rule of Job Applications
 
-You've spent hours perfecting your resume in Microsoft Word. You've adjusted the margins, picked a nice font, and aligned your bullet points perfectly.
+You've spent hours perfecting your resume in Microsoft Word. You've adjusted the margins, picked a nice font, and aligned your bullet points perfectly. Using the **Convertify Resume Converter** ensures your hard work isn't wasted.
 
 Then you email the Word doc to a recruiter.
 
