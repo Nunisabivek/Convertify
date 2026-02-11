@@ -130,6 +130,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Preconnect to critical domains for faster loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* Preload critical resources */}
+        <link rel="preload" href="/images/og-banner.png" as="image" type="image/png" />
+        <link rel="preload" href="/images/Convertify.png" as="image" type="image/png" />
+
         {/* Sitemap Link for Search Engines */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 

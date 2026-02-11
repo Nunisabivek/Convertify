@@ -17,6 +17,13 @@ const additionalToolPages = [
     'extract-pdf', // Captures "extract pdf" queries, redirects to split-pdf
 ]
 
+// New SEO-optimized blog articles (added Feb 2026)
+const newBlogPosts = [
+    'how-to-convert-pdf-to-word-without-software',
+    'best-free-pdf-compressor-online',
+    'pdf-tools-for-small-business',
+]
+
 // Combine and deduplicate
 const allToolSlugs = [...new Set([...allTools, ...additionalToolPages])]
 
@@ -63,12 +70,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: topPriorityTools.includes(tool) ? 0.95 : 0.85, // Higher priority for top tools
     }))
 
-    // Blog posts (30 pages from blog-data.ts)
+    // Blog posts (30 pages from blog-data.ts + new articles)
     const blogUrls = blogPosts.map(post => ({
         url: `${baseUrl}/blog/${post.slug}`,
         lastModified: new Date(post.date),
         changeFrequency: 'monthly' as const,
         priority: 0.7,
+    }))
+
+    // Add new SEO blog posts to sitemap
+    const newBlogUrls = newBlogPosts.map(slug => ({
+        url: `${baseUrl}/blog/${slug}`,
+        lastModified: currentDate,
+        changeFrequency: 'monthly' as const,
+        priority: 0.75, // Slightly higher priority for new content
     }))
 
     // Static pages (6 pages)
@@ -87,7 +102,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.92, // Very high priority - new content targeting high-volume keywords
     }))
 
-    // Total: 1 (homepage) + 6 (static) + 32 (tools) + 30 (blogs) + 10 (landing) = 79+ pages
+    // Total: 1 (homepage) + 6 (static) + 32 (tools) + 33 (blogs) + 10 (landing) = 82+ pages
     return [
         // Homepage - highest priority
         {
@@ -104,5 +119,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ...toolUrls,
         // Blog posts
         ...blogUrls,
+        // New SEO blog posts
+        ...newBlogUrls,
     ]
 }

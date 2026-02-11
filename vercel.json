@@ -2,76 +2,86 @@
     "redirects": [
         {
             "source": "/tools/pdf-to-jpg",
-            "destination": "/pdf-to-jpg/",
+            "destination": "/pdf-to-jpg",
             "permanent": true
         },
         {
             "source": "/tools/image-to-pdf",
-            "destination": "/jpg-to-pdf/",
+            "destination": "/jpg-to-pdf",
             "permanent": true
         },
         {
             "source": "/tools/rotate-pdf",
-            "destination": "/rotate-pdf/",
+            "destination": "/rotate-pdf",
             "permanent": true
         },
         {
             "source": "/tools/merge-pdf",
-            "destination": "/merge-pdf/",
+            "destination": "/merge-pdf",
             "permanent": true
         },
         {
             "source": "/tools/split-pdf",
-            "destination": "/split-pdf/",
+            "destination": "/split-pdf",
             "permanent": true
         },
         {
             "source": "/tools/compress-pdf",
-            "destination": "/compress-pdf/",
+            "destination": "/compress-pdf",
             "permanent": true
         },
         {
             "source": "/tools/word-to-pdf",
-            "destination": "/word-to-pdf/",
+            "destination": "/word-to-pdf",
             "permanent": true
         },
         {
             "source": "/tools/pdf-to-word",
-            "destination": "/pdf-to-word/",
+            "destination": "/pdf-to-word",
             "permanent": true
         },
         {
             "source": "/tools/excel-to-pdf",
-            "destination": "/excel-to-pdf/",
+            "destination": "/excel-to-pdf",
             "permanent": true
         },
         {
             "source": "/tools/pdf-to-excel",
-            "destination": "/pdf-to-excel/",
+            "destination": "/pdf-to-excel",
             "permanent": true
         },
         {
             "source": "/tools/png-to-pdf",
-            "destination": "/png-to-pdf/",
+            "destination": "/png-to-pdf",
             "permanent": true
         },
         {
             "source": "/tools/pdf-to-png",
-            "destination": "/pdf-to-png/",
+            "destination": "/pdf-to-png",
             "permanent": true
         },
         {
             "source": "/tools/:slug",
-            "destination": "/:slug/",
+            "destination": "/:slug",
             "permanent": true
         },
         {
             "source": "/image-to-pdf",
-            "destination": "/jpg-to-pdf/",
+            "destination": "/jpg-to-pdf",
             "permanent": true
         },
         {
             "source": "/index.html",
+            "destination": "/",
+            "permanent": true
+        },
+        {
+            "source": "/home",
+            "destination": "/",
+            "permanent": true
+        },
+        {
+            "source": "/index.php",
             "destination": "/",
             "permanent": true
         }
@@ -83,7 +93,45 @@
             "headers": [
                 {
                     "key": "Content-Type",
-                    "value": "application/xml"
+                    "value": "application/xml; charset=utf-8"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=3600"
+                }
+            ]
+        },
+        {
+            "source": "/robots.txt",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "text/plain; charset=utf-8"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=86400"
+                }
+            ]
+        },
+        {
+            "source": "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+                },
+                {
+                    "key": "Strict-Transport-Security",
+                    "value": "max-age=31536000; includeSubDomains; preload"
+                },
+                {
+                    "key": "X-Content-Type-Options",
+                    "value": "nosniff"
+                },
+                {
+                    "key": "Referrer-Policy",
+                    "value": "strict-origin-when-cross-origin"
                 }
             ]
         }

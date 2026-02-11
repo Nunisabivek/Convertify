@@ -1,5 +1,15 @@
 import Link from 'next/link'
+import { Metadata } from 'next'
 import { FileQuestion, Home, Search } from 'lucide-react'
+
+export const metadata: Metadata = {
+    title: 'Page Not Found - Convertify',
+    description: 'The page you are looking for could not be found. Browse our free PDF tools or return to the homepage.',
+    robots: {
+        index: false,
+        follow: true,
+    },
+}
 
 export default function NotFound() {
     return (
