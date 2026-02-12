@@ -209,14 +209,16 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-jpg": {
-        title: "PDF to JPG - High-Res HD Page Extraction | Convertify",
-        description: "Convert PDF to high-resolution JPG images (up to 300 DPI). Extract pages as crystal-clear photos for social media and presentations with 100% privacy.",
+        title: "PDF to Images Converter Online Free - PDF to JPG HD | Convertify",
+        description: "Free PDF to images converter online — convert PDF to high-resolution JPG images (up to 300 DPI). Extract pages as crystal-clear photos for social media and presentations. Convertify PDF to JPG, 100% private.",
         keywords: [
-            "pdf to jpg", "pdf to jpeg", "convert pdf to image", "extract images from pdf", "save pdf as picture",
+            "pdf to images converter online", "pdf to jpg", "pdf to jpeg", "convert pdf to image", "extract images from pdf", "save pdf as picture",
             "high quality pdf to jpg", "turn pdf into image", "batch pdf to jpg", "pdf to jpg 300 dpi",
-            "extract pages as high res photos", "pdf to image for instagram", "save pdf as hd jpeg"
+            "extract pages as high res photos", "pdf to image for instagram", "save pdf as hd jpeg",
+            "convertify pdf to jpg", "convertifyy pdf to jpg", "convertfy pdf to jpg",
+            "pdf to images free", "pdf to jpg converter online free", "convert pdf pages to images"
         ],
-        h1: "PDF to JPG - HD Page & Image Extraction",
+        h1: "PDF to Images Converter Online Free - HD JPG Extraction",
         faqs: [
             {
                 question: "What is the maximum resolution (DPI) supported?",
@@ -406,9 +408,10 @@ export const toolSeoData = {
         title: "Convertify PDF to Word - Editable DOCX Free Online",
         description: "Official Convertifyy PDF to Word converter. Convert PDF to Word (DOCX) while keeping exact layout. Scanned PDF to Word OCR support. Secure, private, and free.",
         keywords: [
-            "convertify pdf to word", "convertifyy pdf to word", "pdf to word", "pdf to docx", "convert pdf to word", "editable pdf to word", "pdf to word converter free",
+            "convertify pdf to word", "convertifyy pdf to word", "convertfy pdf to word", "pdf to word", "pdf to docx", "convert pdf to word", "editable pdf to word", "pdf to word converter free",
             "pdf to word accurate layout", "scanned pdf to word ocr", "convert pdf to editable docx",
-            "retain layout pdf to word", "pdf to word converter no sign up", "make pdf editable in word"
+            "retain layout pdf to word", "pdf to word converter no sign up", "make pdf editable in word",
+            "convertify free pdf to word", "pdf to word online free no download"
         ],
         h1: "Convertify PDF to Word - Editable & Accurate",
         faqs: [

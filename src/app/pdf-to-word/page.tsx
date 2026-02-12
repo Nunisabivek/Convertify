@@ -29,7 +29,7 @@ export const metadata: Metadata = {
                 url: "/images/og-banner.png",
                 width: 1200,
                 height: 630,
-                alt: "PDF to Word Converter - Convertify",
+                alt: "Convertify PDF to Word Converter - Free Online",
             },
         ],
     },
@@ -38,29 +38,29 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <div className="flex flex-col items-center">
-            
+
             {/* Structured Data Schemas */}
-            <BreadcrumbSchema 
+            <BreadcrumbSchema
                 items={[
                     { name: "Home", url: "/" },
                     { name: "All Tools", url: "/all-tools" },
-                    { name: "Pdf To Word", url: "/pdf-to-word" }
+                    { name: "PDF to Word", url: "/pdf-to-word" }
                 ]}
             />
             <SoftwareApplicationSchema
-                toolName="PDF to Word Converter"
+                toolName="Convertify PDF to Word Converter"
                 toolSlug="pdf-to-word"
                 description={seoData.description}
             />
-            
-{/* Main Tool Section */}
+
+            {/* Main Tool Section */}
             <section className="w-full py-8 bg-gradient-to-b from-blue-50 to-white">
                 <div className="max-w-4xl mx-auto px-4 text-center mb-8">
                     <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Convert your PDF documents to editable Word files (DOCX) for free. Perfect for editing contracts, reports, and documents.
+                        Use the Convertify PDF to Word converter to turn PDF documents into editable Word files (DOCX) for free. No download, no sign-up — perfect for editing contracts, reports, and documents.
                     </p>
                 </div>
                 <ToolSwapper />
@@ -69,7 +69,7 @@ export default function Page() {
 
             {/* SEO Content Section */}
             <ToolSeoContent
-                toolName="PDF to Word Converter"
+                toolName="Convertify PDF to Word Converter"
                 toolSlug="pdf-to-word"
                 description={contentData.description}
                 features={contentData.features}
@@ -80,13 +80,13 @@ export default function Page() {
             {/* How To Section with Schema */}
             <HowToSchema
                 toolName="Convert PDF to Word Online"
-                description="Learn how to convert PDF files to editable Word documents using Convertify's free online converter."
+                description="Learn how to convert PDF files to editable Word documents using Convertify's free online PDF to Word converter. No download required."
                 steps={seoData.howToSteps}
             />
 
             {/* FAQ Section with Schema */}
             <FAQSchema
-                toolName="PDF to Word Conversion"
+                toolName="Convertify PDF to Word Conversion"
                 faqs={seoData.faqs}
             />
 

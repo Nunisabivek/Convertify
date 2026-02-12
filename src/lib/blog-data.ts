@@ -477,13 +477,13 @@ Need specific pages from a PDF? [Open the Split PDF tool](/split-pdf) and extrac
   // ===== POST 5 =====
   {
     slug: "pdf-to-jpg-convert-pages-images",
-    title: "How to Convert PDF to High Quality JPG Images - Free Online",
+    title: "PDF to Images Converter Online Free - Convert PDF to High Quality JPG",
     excerpt: "Convert PDF pages to JPG images instantly. Extract all pages or select specific ones. Download as high-resolution images.",
     date: "2026-01-03",
     category: "tutorial",
     relatedTool: "/pdf-to-jpg",
     readingTime: 4,
-    keywords: ["pdf to jpg", "convert pdf to image", "pdf to jpeg", "pdf pages to images", "save pdf as jpg"],
+    keywords: ["pdf to images converter online", "pdf to jpg", "convert pdf to image", "pdf to jpeg", "pdf pages to images", "save pdf as jpg", "convertify pdf to jpg"],
     content: `
 ## Why Convert PDF to JPG?
 

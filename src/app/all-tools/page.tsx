@@ -32,9 +32,9 @@ import { AdBanner } from "@/components/ads/banner"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-    title: "All PDF Tools | Convertify",
-    description: "Browse our complete collection of 30+ free PDF tools. Merge, split, compress, convert, and edit PDFs online with privacy-first client-side processing.",
-    keywords: ["pdf tools list", "all pdf converters", "free pdf tools", "online pdf editor", "convertify tools"],
+    title: "All Free PDF Tools | Convertify - No Pricing, No Download, 100% Free",
+    description: "Browse 30+ free PDF tools from Convertify (Convertifyy / Convertfy). Merge, split, compress, convert PDF to Word and images online. No pricing, no download, no registration, and no file limits.",
+    keywords: ["convertify tools", "convertify free", "convertifyy", "convertfy", "convertifytool", "convertify pricing", "convertify download", "pdf tools list", "all pdf converters", "free pdf tools", "online pdf editor", "pdf to images converter online"],
     alternates: {
         canonical: "https://convertify.work/all-tools",
     },
@@ -116,7 +116,7 @@ export default function AllToolsPage() {
             <div className="text-center space-y-4">
                 <h1 className="text-4xl font-bold tracking-tight">All PDF Tools ({totalTools}+)</h1>
                 <p className="text-xl text-slate-500 max-w-2xl mx-auto">
-                    Every tool you need to work with PDFs in one place. All completely free.
+                    Every PDF tool you need in one place. Convertify is 100% free — no pricing tiers, no download required. Works directly in your browser.
                 </p>
                 <div className="pt-8 flex justify-center">
                     <AdBanner variant="rectangle" />
@@ -182,6 +182,29 @@ export default function AllToolsPage() {
                     <div className="space-y-2">
                         <h3 className="font-semibold text-slate-900">🎯 Professional Quality</h3>
                         <p className="text-sm leading-relaxed">Get professional-grade results without expensive software. Our tools maintain document quality while giving you full control over output settings.</p>
+                    </div>
+                </div>
+            </section>
+
+            {/* Address Common Queries: Pricing, Download, Free */}
+            <section className="mt-8 bg-white rounded-2xl border border-slate-200 p-8 md:p-12">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6">Frequently Asked About Convertify</h2>
+                <div className="grid md:grid-cols-2 gap-6 text-slate-700">
+                    <div className="space-y-2">
+                        <h3 className="font-semibold text-slate-900">💰 Is Convertify free? What about pricing?</h3>
+                        <p className="text-sm leading-relaxed">Convertify has <strong>no pricing plans</strong> and is <strong>completely free</strong>. There are no subscriptions, no hidden fees, and no premium tiers. All {totalTools}+ tools are available at no cost, forever.</p>
+                    </div>
+                    <div className="space-y-2">
+                        <h3 className="font-semibold text-slate-900">📥 Do I need to download Convertify?</h3>
+                        <p className="text-sm leading-relaxed"><strong>No download required.</strong> Convertify works entirely in your web browser. There is no desktop application to install — just visit convertify.work and start using any tool instantly on any device.</p>
+                    </div>
+                    <div className="space-y-2">
+                        <h3 className="font-semibold text-slate-900">🔤 What is Convertifyy / Convertfy / ConvertifyTool?</h3>
+                        <p className="text-sm leading-relaxed">Convertifyy, Convertfy, and ConvertifyTool are common alternative spellings for Convertify. They all refer to the same free online PDF tool suite at convertify.work.</p>
+                    </div>
+                    <div className="space-y-2">
+                        <h3 className="font-semibold text-slate-900">🖼️ Can Convertify convert PDF to images?</h3>
+                        <p className="text-sm leading-relaxed">Yes! Our <strong>PDF to images converter online</strong> tool lets you extract every page as high-quality JPG or PNG images at up to 300 DPI. Perfect for social media, presentations, and design work.</p>
                     </div>
                 </div>
             </section>

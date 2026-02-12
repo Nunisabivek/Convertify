@@ -29,7 +29,7 @@ export const metadata: Metadata = {
                 url: "/images/og-banner.png",
                 width: 1200,
                 height: 630,
-                alt: "PDF to JPG Converter - Convertify",
+                alt: "PDF to Images Converter Online - Convertify",
             },
         ],
     },
@@ -38,28 +38,28 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <div className="flex flex-col items-center">
-            
+
             {/* Structured Data Schemas */}
-            <BreadcrumbSchema 
+            <BreadcrumbSchema
                 items={[
                     { name: "Home", url: "/" },
                     { name: "All Tools", url: "/all-tools" },
-                    { name: "Pdf To Jpg", url: "/pdf-to-jpg" }
+                    { name: "PDF to JPG", url: "/pdf-to-jpg" }
                 ]}
             />
             <SoftwareApplicationSchema
-                toolName="PDF to JPG Converter"
+                toolName="PDF to Images Converter Online"
                 toolSlug="pdf-to-jpg"
                 description={seoData.description}
             />
-            
-<section className="w-full py-8 bg-gradient-to-b from-yellow-50 to-white">
+
+            <section className="w-full py-8 bg-gradient-to-b from-yellow-50 to-white">
                 <div className="max-w-4xl mx-auto px-4 text-center mb-8">
                     <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
-                        Convert every page of your PDF to high-quality JPG images. Download as a ZIP file.
+                        Free PDF to images converter online — extract every page of your PDF as high-quality JPG images. Download as a ZIP file with Convertify.
                     </p>
 
                     {/* Visual Preview / Trust Signal */}
@@ -89,7 +89,7 @@ export default function Page() {
 
             {/* SEO Content Section */}
             <ToolSeoContent
-                toolName="PDF to JPG Converter"
+                toolName="PDF to Images Converter Online"
                 toolSlug="pdf-to-jpg"
                 description={contentData.description}
                 features={contentData.features}
@@ -98,13 +98,13 @@ export default function Page() {
             />
 
             <HowToSchema
-                toolName="Convert PDF to JPG"
-                description="Learn how to convert PDF pages to JPG images using Convertify's free online PDF to image converter."
+                toolName="Convert PDF to JPG Images"
+                description="Learn how to convert PDF pages to JPG images using Convertify's free online PDF to images converter."
                 steps={seoData.howToSteps}
             />
 
             <FAQSchema
-                toolName="PDF to JPG Conversion"
+                toolName="PDF to Images Conversion"
                 faqs={seoData.faqs}
             />
 

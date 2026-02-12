@@ -32,7 +32,7 @@ export const metadata: Metadata = {
                 url: "/images/og-banner.png",
                 width: 1200,
                 height: 630,
-                alt: "Compress PDF Online Free - Convertify",
+                alt: "Convertify PDF Compressor - Compress PDF Free Online",
             },
         ],
     },
@@ -44,28 +44,28 @@ export default function Page() {
 
     return (
         <div className="flex flex-col items-center">
-            
+
             {/* Structured Data Schemas */}
-            <BreadcrumbSchema 
+            <BreadcrumbSchema
                 items={[
                     { name: "Home", url: "/" },
                     { name: "All Tools", url: "/all-tools" },
-                    { name: "Compress Pdf", url: "/compress-pdf" }
+                    { name: "Compress PDF", url: "/compress-pdf" }
                 ]}
             />
             <SoftwareApplicationSchema
-                toolName="PDF Compressor"
+                toolName="Convertify PDF Compressor"
                 toolSlug="compress-pdf"
                 description={seoData.description}
             />
-            
-<section className="w-full py-8 bg-gradient-to-b from-green-50 to-white">
+
+            <section className="w-full py-8 bg-gradient-to-b from-green-50 to-white">
                 <div className="max-w-4xl mx-auto px-4 text-center mb-8">
                     <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Reduce PDF file size by up to <b>90%</b>. Compress large files to under <b>100KB, 200KB or 1MB</b> for email attachments.
+                        The Convertify PDF compressor reduces file size by up to <b>90%</b>. Compress large files to under <b>100KB, 200KB or 1MB</b> for email attachments, government forms, and visa applications — free, no download needed.
                     </p>
                 </div>
                 <CompressPdfClient />
@@ -73,7 +73,7 @@ export default function Page() {
 
             {/* SEO Content Section */}
             <ToolSeoContent
-                toolName="PDF Compressor"
+                toolName="Convertify PDF Compressor"
                 toolSlug="compress-pdf"
                 description={contentData.description}
                 features={contentData.features}
@@ -82,13 +82,13 @@ export default function Page() {
             />
 
             <HowToSchema
-                toolName="Compress PDF Files"
-                description="Learn how to reduce PDF file size for email attachments using Convertify's free online PDF compressor."
+                toolName="Compress PDF Files with Convertify"
+                description="Learn how to reduce PDF file size for email attachments using Convertify's free online PDF compressor. No download or sign-up required."
                 steps={seoData.howToSteps}
             />
 
             <FAQSchema
-                toolName="Compressing PDFs"
+                toolName="Convertify PDF Compressor"
                 faqs={seoData.faqs}
             />
 

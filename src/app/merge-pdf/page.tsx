@@ -54,7 +54,7 @@ export default function Page() {
                 ]}
             />
             <SoftwareApplicationSchema
-                toolName="PDF Merger"
+                toolName="Convertify PDF Merger"
                 toolSlug="merge-pdf"
                 description={seoData.description}
             />
@@ -66,7 +66,7 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
-                        Combine multiple PDF files into one document. No watermarks, no file limits, works on all devices.
+                        Use the Convertify PDF Merger to combine multiple PDF files into one document. Free, no watermarks, no file limits — no download needed.
                     </p>
 
                     {/* Visual Preview / Trust Signal */}
@@ -99,7 +99,7 @@ export default function Page() {
 
             {/* SEO Content Section */}
             <ToolSeoContent
-                toolName="PDF Merger"
+                toolName="Convertify PDF Merger"
                 toolSlug="merge-pdf"
                 description={contentData.description}
                 features={contentData.features}
