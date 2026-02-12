@@ -45,9 +45,9 @@ export default function Page() {
 
     return (
         <div className="flex flex-col items-center">
-            
+
             {/* Structured Data Schemas */}
-            <BreadcrumbSchema 
+            <BreadcrumbSchema
                 items={[
                     { name: "Home", url: "/" },
                     { name: "All Tools", url: "/all-tools" },
@@ -55,18 +55,18 @@ export default function Page() {
                 ]}
             />
             <SoftwareApplicationSchema
-                toolName="JPG to PDF Converter"
+                toolName="Convertify JPG to PDF Converter"
                 toolSlug="jpg-to-pdf"
                 description={seoData.description}
             />
-            
-<section className="w-full py-8 bg-gradient-to-b from-purple-50 to-white">
+
+            <section className="w-full py-8 bg-gradient-to-b from-purple-50 to-white">
                 <div className="max-w-4xl mx-auto px-4 text-center mb-8">
                     <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Convert JPG, JPEG, PNG images to PDF instantly. Combine multiple photos into one document.
+                        Convertify JPG to PDF — convert images to PDF instantly. Combine multiple photos into one document. No download needed, no sign-up.
                     </p>
                 </div>
                 <ToolSwapper />
@@ -75,7 +75,7 @@ export default function Page() {
 
             {/* SEO Content Section */}
             <ToolSeoContent
-                toolName="JPG to PDF Converter"
+                toolName="Convertify JPG to PDF Converter"
                 toolSlug="jpg-to-pdf"
                 description={contentData.description}
                 features={contentData.features}
@@ -84,7 +84,7 @@ export default function Page() {
             />
 
             <HowToSchema
-                toolName="Convert JPG to PDF"
+                toolName="Convertify JPG to PDF Converter"
                 description="Learn how to convert JPG images to PDF documents using Convertify's free online image to PDF converter."
                 steps={seoData.howToSteps}
             />

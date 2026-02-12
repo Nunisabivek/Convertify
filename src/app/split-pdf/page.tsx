@@ -45,9 +45,9 @@ export default function Page() {
 
     return (
         <div className="flex flex-col items-center">
-            
+
             {/* Structured Data Schemas */}
-            <BreadcrumbSchema 
+            <BreadcrumbSchema
                 items={[
                     { name: "Home", url: "/" },
                     { name: "All Tools", url: "/all-tools" },
@@ -55,18 +55,18 @@ export default function Page() {
                 ]}
             />
             <SoftwareApplicationSchema
-                toolName="PDF Splitter"
+                toolName="Convertify PDF Splitter"
                 toolSlug="split-pdf"
                 description={seoData.description}
             />
-            
-<section className="w-full py-8 bg-gradient-to-b from-blue-50 to-white">
+
+            <section className="w-full py-8 bg-gradient-to-b from-blue-50 to-white">
                 <div className="max-w-4xl mx-auto px-4 text-center mb-8">
                     <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
-                        Extract specific pages from your PDF or split it into multiple files. Select individual pages, enter a range, or split all pages. Fast, free, and secure.
+                        Convertify PDF Splitter — extract specific pages or split into multiple files. No download needed, no sign-up. Fast, free, and 100% private.
                     </p>
 
                     {/* Visual Preview / Trust Signal */}
@@ -97,7 +97,7 @@ export default function Page() {
 
             {/* SEO Content Section */}
             <ToolSeoContent
-                toolName="PDF Splitter"
+                toolName="Convertify PDF Splitter"
                 toolSlug="split-pdf"
                 description={contentData.description}
                 features={contentData.features}
@@ -106,7 +106,7 @@ export default function Page() {
             />
 
             <HowToSchema
-                toolName="Split PDF Files Online"
+                toolName="Convertify Split PDF Files"
                 description="Learn how to extract pages or split PDF documents into multiple files using Convertify's free online PDF splitter."
                 steps={seoData.howToSteps}
             />

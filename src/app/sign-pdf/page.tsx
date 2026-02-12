@@ -38,9 +38,9 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <div className="flex flex-col items-center">
-            
+
             {/* Structured Data Schemas */}
-            <BreadcrumbSchema 
+            <BreadcrumbSchema
                 items={[
                     { name: "Home", url: "/" },
                     { name: "All Tools", url: "/all-tools" },
@@ -48,12 +48,12 @@ export default function Page() {
                 ]}
             />
             <SoftwareApplicationSchema
-                toolName="PDF Signature Tool"
+                toolName="Convertify PDF Signature Tool"
                 toolSlug="sign-pdf"
                 description={seoData.description}
             />
-            
-<section className="w-full py-8 bg-gradient-to-b from-slate-50 to-white">
+
+            <section className="w-full py-8 bg-gradient-to-b from-slate-50 to-white">
                 <div className="max-w-4xl mx-auto px-4 text-center mb-8">
                     <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
                         {seoData.h1}
@@ -67,7 +67,7 @@ export default function Page() {
 
             {/* SEO Content Section */}
             <ToolSeoContent
-                toolName="PDF Signature Tool"
+                toolName="Convertify PDF Signature Tool"
                 toolSlug={toolName}
                 description={contentData.description}
                 features={contentData.features}

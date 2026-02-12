@@ -37,9 +37,9 @@ export default function Page() {
 
     return (
         <div className="flex flex-col items-center">
-            
+
             {/* Structured Data Schemas */}
-            <BreadcrumbSchema 
+            <BreadcrumbSchema
                 items={[
                     { name: "Home", url: "/" },
                     { name: "All Tools", url: "/all-tools" },
@@ -47,18 +47,18 @@ export default function Page() {
                 ]}
             />
             <SoftwareApplicationSchema
-                toolName="Word to PDF Converter"
+                toolName="Convertify Word to PDF Converter"
                 toolSlug="word-to-pdf"
                 description={seoData.description}
             />
-            
-<section className="w-full py-8 bg-gradient-to-b from-indigo-50 to-white">
+
+            <section className="w-full py-8 bg-gradient-to-b from-indigo-50 to-white">
                 <div className="max-w-4xl mx-auto px-4 text-center mb-8">
                     <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-6">
-                        Convert Word documents to PDF with <b>100% layout accuracy</b>. Perfect for Resumes, Legal Contracts, and Thesis papers.
+                        Convertify Word to PDF — convert DOCX with <b>100% layout accuracy</b>. Perfect for Resumes, Legal Contracts, and Thesis papers. No download needed.
                     </p>
 
                     {/* Preview/Trust Image */}
@@ -88,7 +88,7 @@ export default function Page() {
 
             {/* SEO Content Section */}
             <ToolSeoContent
-                toolName="Word to PDF Converter"
+                toolName="Convertify Word to PDF Converter"
                 toolSlug="word-to-pdf"
                 description={contentData.description}
                 features={contentData.features}

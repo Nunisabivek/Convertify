@@ -32,9 +32,9 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <div className="flex flex-col items-center">
-            
+
             {/* Structured Data Schemas */}
-            <BreadcrumbSchema 
+            <BreadcrumbSchema
                 items={[
                     { name: "Home", url: "/" },
                     { name: "All Tools", url: "/all-tools" },
@@ -42,18 +42,18 @@ export default function Page() {
                 ]}
             />
             <SoftwareApplicationSchema
-                toolName="Excel to PDF Converter"
+                toolName="Convertify Excel to PDF Converter"
                 toolSlug="excel-to-pdf"
                 description={seoData.description}
             />
-            
-<section className="w-full py-8 bg-gradient-to-b from-green-50 to-white">
+
+            <section className="w-full py-8 bg-gradient-to-b from-green-50 to-white">
                 <div className="max-w-4xl mx-auto px-4 text-center mb-8">
                     <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Convert Excel spreadsheets to PDF while preserving formatting, columns, and tables.
+                        Convertify Excel to PDF — convert XLS & XLSX spreadsheets while preserving formatting, columns, and charts. No download needed, 100% free.
                     </p>
                 </div>
 
@@ -65,7 +65,7 @@ export default function Page() {
                         <div className="p-4 bg-green-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
                             <Sheet className="w-10 h-10 text-green-600" />
                         </div>
-                        <h2 className="text-2xl font-bold text-slate-800 mb-4">Excel to PDF Converter</h2>
+                        <h2 className="text-2xl font-bold text-slate-800 mb-4">Convertify Excel to PDF Converter</h2>
                         <p className="text-slate-600 mb-6 max-w-md mx-auto">
                             This feature converts Excel files (XLS, XLSX) to PDF format. Upload your spreadsheet to get started.
                         </p>
@@ -83,7 +83,7 @@ export default function Page() {
 
             {/* SEO Content Section */}
             <ToolSeoContent
-                toolName="Excel to PDF Converter"
+                toolName="Convertify Excel to PDF Converter"
                 toolSlug="excel-to-pdf"
                 description={contentData.description}
                 features={contentData.features}

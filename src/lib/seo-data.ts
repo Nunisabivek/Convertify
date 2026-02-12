@@ -42,16 +42,16 @@ export const toolSeoData = {
         ]
     },
     "split-pdf": {
-        title: "Split PDF - Extract Pages & Separate Files Free | Convertify",
-        description: "Split PDF files and extract specific pages online. Separate one or multiple pages instantly on Windows, Mac, or Mobile. Secure, free, and private.",
+        title: "Convertify PDF Splitter - Split PDF & Extract Pages Free Online",
+        description: "Convertify PDF Splitter — split PDF files and extract specific pages online. Separate one or multiple pages instantly on Windows, Mac, or Mobile. No download needed, 100% free and private.",
         keywords: [
-            "split pdf", "extract pages from pdf", "separate pdf pages", "cut pdf pages", "pdf splitter online",
+            "convertify pdf splitter", "convertifyy pdf splitter", "split pdf", "extract pages from pdf", "separate pdf pages", "cut pdf pages", "pdf splitter online",
             "how to split pdf on windows", "split pdf windows 10 11", "extract pages pdf windows",
             "select pages extract", "remove pdf pages", "separate pdf files", "split by page range", "isolate pdf sections",
             "cut out pdf pages", "divide pdf chapters", "pull single pages", "break pdf into parts", "delete pdf pages online",
-            "save specific pdf pages", "extract pdf range", "split large pdf free"
+            "save specific pdf pages", "extract pdf range", "split large pdf free", "convertify split pdf"
         ],
-        h1: "Split PDF - Extract Pages on Windows & Mac",
+        h1: "Convertify PDF Splitter - Extract Pages Free Online",
         faqs: [
             {
                 question: "How to split PDF on Windows without downloading software?",
@@ -122,10 +122,10 @@ export const toolSeoData = {
         ]
     },
     "jpg-to-pdf": {
-        title: "JPG to PDF Free Online – Combine Multiple Photos to PDF",
-        description: "Convert JPG to PDF free online. Combine unlimited photos into one PDF, arrange order, adjust page size. No sign-up, no watermarks. Works on Windows, Mac & mobile.",
+        title: "Convertify JPG to PDF Free Online – Combine Photos to PDF",
+        description: "Convertify JPG to PDF converter — combine unlimited photos into one PDF free online. Arrange order, adjust page size. No sign-up, no watermarks, no download needed. Works on Windows, Mac & mobile.",
         keywords: [
-            "jpg to pdf", "convert jpg to pdf", "image to pdf", "photos to pdf", "jpeg to pdf",
+            "convertify jpg to pdf", "convertifyy jpg to pdf", "jpg to pdf", "convert jpg to pdf", "image to pdf", "photos to pdf", "jpeg to pdf",
             "jpg to pdf converter free", "combine jpg to pdf", "multiple jpg to one pdf",
             "combine photos into pdf", "merge images to pdf", "convert multiple images to pdf",
             "jpg to pdf no sign up", "jpg to pdf no watermark", "jpg to pdf online free",
@@ -133,7 +133,7 @@ export const toolSeoData = {
             "batch jpg to pdf", "jpg to pdf a4 size", "compress jpg to pdf",
             "high quality jpg to pdf", "jpg to pdf keep quality", "image to pdf combiner"
         ],
-        h1: "JPG to PDF Free – Combine Multiple Photos to One PDF",
+        h1: "Convertify JPG to PDF Free – Combine Photos to PDF Online",
         faqs: [
             {
                 question: "How do I combine multiple JPG images into one PDF?",
@@ -537,14 +537,15 @@ export const toolSeoData = {
         ]
     },
     "edit-pdf": {
-        title: "Edit PDF Free Online - Annotate, Fill & Flatten | Convertify",
-        description: "The best free PDF editor for annotations and form filling. Add text, images, and shapes, then 'Flatten' your edits to make them permanent. No sign-up, no watermarks.",
+        title: "Convertify PDF Editor - Edit PDF Free Online, No Download",
+        description: "Convertify PDF Editor — the best free PDF editor for annotations and form filling. Add text, images, and shapes, then 'Flatten' your edits. No sign-up, no watermarks, no download needed.",
         keywords: [
-            "edit pdf", "pdf editor online", "add text to pdf", "annotate pdf", "edit pdf online free", "pdf editor free no sign up",
+            "convertify pdf editor", "convertifyy pdf editor", "edit pdf", "pdf editor online", "add text to pdf", "annotate pdf", "edit pdf online free", "pdf editor free no sign up",
             "add image to pdf", "write on pdf online", "pdf annotation tool", "free pdf editor no watermark", "modify pdf online",
-            "flatten pdf edits", "fill pdf form free", "markup pdf online", "add comments to blueprint pdf", "free pdf markup tool"
+            "flatten pdf edits", "fill pdf form free", "markup pdf online", "add comments to blueprint pdf", "free pdf markup tool",
+            "convertify edit pdf", "edit pdf free no download"
         ],
-        h1: "Edit PDF - Free Annotations & Form Filling",
+        h1: "Convertify PDF Editor - Edit PDF Free Online",
         faqs: [
             {
                 question: "What does 'Flatten PDF' mean?",
@@ -637,14 +638,15 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-excel": {
-        title: "PDF to Excel Accurate - Convert PDF to XLSX Free | Convertify",
-        description: "Convert PDF to Excel (XLSX) with 99%+ accuracy for bank statements and invoices. Extract data into clean tables without manual cleanup. Secure and free.",
+        title: "Convertify PDF to Excel - Convert PDF to XLSX Free Online",
+        description: "Convertify PDF to Excel converter — convert PDF to XLSX with 99%+ accuracy for bank statements and invoices. Extract data into clean tables. No download, no sign-up, 100% free.",
         keywords: [
-            "pdf to excel", "pdf to xlsx", "convert pdf to excel", "extract table from pdf", "pdf to excel converter free",
+            "convertify pdf to excel", "convertifyy pdf to excel", "pdf to excel", "pdf to xlsx", "convert pdf to excel", "extract table from pdf", "pdf to excel converter free",
             "bank statement to excel", "invoice to excel converter", "pdf to excel accurate layout",
-            "scanned pdf to excel ocr", "convert pdf table to spreadsheet", "pdf to excel no sign up"
+            "scanned pdf to excel ocr", "convert pdf table to spreadsheet", "pdf to excel no sign up",
+            "pdf to excel free online", "convert pdf to excel free"
         ],
-        h1: "PDF to Excel - Accurate Table Extraction",
+        h1: "Convertify PDF to Excel - Accurate Table Extraction Free",
         faqs: [
             {
                 question: "How accurate is the table extraction for bank statements?",
@@ -835,15 +837,15 @@ export const toolSeoData = {
         ]
     },
     "sign-pdf": {
-        title: "Sign PDF Online - Secure E-Signatures Free | Convertify",
-        description: "Sign contracts and agreements with legally valid e-signatures. Draw or type your signature and 'Flatten' the file to prevent tampering. 100% private and free.",
+        title: "Convertify Sign PDF - Free E-Signatures Online, No Download",
+        description: "Convertify Sign PDF — sign contracts and agreements with legally valid e-signatures. Draw or type your signature and 'Flatten' the file. No download needed, 100% private and free.",
         keywords: [
-            "sign pdf", "e-sign pdf", "digital signature", "sign pdf online free", "electronic signature pdf", "add signature to pdf",
+            "convertify sign pdf", "convertifyy sign pdf", "sign pdf", "e-sign pdf", "digital signature", "sign pdf online free", "electronic signature pdf", "add signature to pdf",
             "pdf signature tool", "sign documents online free", "e-signature free", "draw signature on pdf",
             "legally binding e-sign", "sign real estate contract pdf", "flatten signed pdf", "secure digital signing",
-            "sign on mobile finish on pc", "private electronic signatures"
+            "sign on mobile finish on pc", "private electronic signatures", "sign pdf free no download"
         ],
-        h1: "Sign PDF - Secure & Legally Valid E-Signatures",
+        h1: "Convertify Sign PDF - Free E-Signatures Online",
         faqs: [
             {
                 question: "Is an electronic signature legally binding?",
@@ -869,10 +871,10 @@ export const toolSeoData = {
         ]
     },
     "rotate-pdf": {
-        title: "Rotate PDF Online Free | Convertify",
-        description: "Rotate PDF pages 90°, 180°, or 270°. Fix sideways or upside-down scanned documents instantly. Free, no watermarks.",
-        keywords: ["rotate pdf", "turn pdf pages", "rotate pdf 90 degrees", "flip pdf", "rotate scanned document", "pdf page orientation", "rotate pdf online free"],
-        h1: "Rotate PDF - Fix Page Orientation Free",
+        title: "Convertify Rotate PDF - Fix Page Orientation Free Online",
+        description: "Convertify Rotate PDF — rotate PDF pages 90°, 180°, or 270°. Fix sideways or upside-down scanned documents instantly. Free, no watermarks, no download needed.",
+        keywords: ["convertify rotate pdf", "rotate pdf", "turn pdf pages", "rotate pdf 90 degrees", "flip pdf", "rotate scanned document", "pdf page orientation", "rotate pdf online free", "rotate pdf free no download"],
+        h1: "Convertify Rotate PDF - Fix Page Orientation Free",
         faqs: [
             { question: "Can I rotate specific pages only?", answer: "Yes! You can select individual pages to rotate, or rotate all pages at once. Perfect for fixing scanned documents where some pages are sideways." },
             { question: "What rotation angles are supported?", answer: "You can rotate pages 90° clockwise, 90° counterclockwise, or 180° to flip them upside down. Multiple rotations can be applied to get any orientation." },
@@ -886,15 +888,15 @@ export const toolSeoData = {
         ]
     },
     "protect-pdf": {
-        title: "Protect PDF with AES-256 Encryption Free | Convertify",
-        description: "Secure your PDF with military-grade AES-256 encryption. Our client-side protection ensures your password never touches a server. 100% private, free, and secure.",
+        title: "Convertify Protect PDF - AES-256 Encryption Free Online",
+        description: "Convertify Protect PDF — secure your PDF with military-grade AES-256 encryption. Client-side protection, your password never touches a server. No download needed, 100% private and free.",
         keywords: [
-            "password protect pdf", "encrypt pdf", "secure pdf", "lock pdf", "pdf password", "protect pdf online free",
+            "convertify protect pdf", "convertifyy protect pdf", "password protect pdf", "encrypt pdf", "secure pdf", "lock pdf", "pdf password", "protect pdf online free",
             "add password to pdf", "pdf encryption", "aes-256 pdf protection", "secure pdf for email",
             "prevent pdf printing", "disable pdf copying", "lock pdf editing", "bank grade pdf security",
             "private pdf protector", "client side pdf encryption", "secure financial documents", "protect legal pdfs"
         ],
-        h1: "Protect PDF - Secure with Local Encryption",
+        h1: "Convertify Protect PDF - AES-256 Encryption Free",
         faqs: [
             {
                 question: "Is it safe to type my password into an online tool?",
@@ -920,15 +922,15 @@ export const toolSeoData = {
         ]
     },
     "unlock-pdf": {
-        title: "Unlock PDF - Remove Restrictions & Passwords Free | Convertify",
-        description: "Unlock PDF files to remove printing, copying, and editing restrictions instantly. regains access to your 'permission-locked' documents secure and free.",
+        title: "Convertify Unlock PDF - Remove Restrictions & Passwords Free",
+        description: "Convertify Unlock PDF — remove printing, copying, and editing restrictions instantly. Regain access to permission-locked documents. No download needed, 100% secure and free.",
         keywords: [
-            "unlock pdf", "remove pdf password", "pdf password remover", "unprotect pdf", "remove password from pdf without acrobat",
+            "convertify unlock pdf", "convertifyy unlock pdf", "unlock pdf", "remove pdf password", "pdf password remover", "unprotect pdf", "remove password from pdf without acrobat",
             "unlock secured pdf for printing online", "decrypt pdf", "unlock pdf online free", "remove pdf security",
             "enable pdf printing locked", "copy text from locked pdf", "remove editing restrictions pdf",
-            "bypass pdf owner password", "unlock pdf for google docs", "remove pdf permissions free"
+            "bypass pdf owner password", "unlock pdf for google docs", "remove pdf permissions free", "unlock pdf free no download"
         ],
-        h1: "Unlock PDF - Remove Restrictions Instantly",
+        h1: "Convertify Unlock PDF - Remove Restrictions Free",
         faqs: [
             {
                 question: "What is the difference between an Open Password and a Permission Password?",

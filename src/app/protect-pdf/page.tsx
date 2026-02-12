@@ -25,9 +25,9 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <div className="flex flex-col items-center">
-            
+
             {/* Structured Data Schemas */}
-            <BreadcrumbSchema 
+            <BreadcrumbSchema
                 items={[
                     { name: "Home", url: "/" },
                     { name: "All Tools", url: "/all-tools" },
@@ -35,18 +35,18 @@ export default function Page() {
                 ]}
             />
             <SoftwareApplicationSchema
-                toolName="PDF Password Protector"
+                toolName="Convertify PDF Password Protector"
                 toolSlug="protect-pdf"
                 description={seoData.description}
             />
-            
-<section className="w-full py-8 bg-gradient-to-b from-red-50 to-white">
+
+            <section className="w-full py-8 bg-gradient-to-b from-red-50 to-white">
                 <div className="max-w-4xl mx-auto px-4 text-center mb-8">
                     <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Secure your sensitive documents with password protection. Easy to use, completely free.
+                        Convertify Protect PDF — secure your documents with AES-256 encryption. No download needed, completely free.
                     </p>
                 </div>
                 <ToolSwapper />
@@ -55,7 +55,7 @@ export default function Page() {
 
             {/* SEO Content Section */}
             <ToolSeoContent
-                toolName="PDF Password Protection"
+                toolName="Convertify PDF Password Protection"
                 toolSlug="protect-pdf"
                 description={contentData.description}
                 features={contentData.features}
@@ -64,7 +64,7 @@ export default function Page() {
             />
 
             <HowToSchema
-                toolName="Password Protect PDF"
+                toolName="Convertify Password Protect PDF"
                 description="Learn how to add password protection to your PDF documents using Convertify."
                 steps={seoData.howToSteps}
             />

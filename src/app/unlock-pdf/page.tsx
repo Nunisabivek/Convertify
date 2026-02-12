@@ -25,9 +25,9 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <div className="flex flex-col items-center">
-            
+
             {/* Structured Data Schemas */}
-            <BreadcrumbSchema 
+            <BreadcrumbSchema
                 items={[
                     { name: "Home", url: "/" },
                     { name: "All Tools", url: "/all-tools" },
@@ -35,18 +35,18 @@ export default function Page() {
                 ]}
             />
             <SoftwareApplicationSchema
-                toolName="PDF Unlocker"
+                toolName="Convertify PDF Unlocker"
                 toolSlug="unlock-pdf"
                 description={seoData.description}
             />
-            
-<section className="w-full py-8 bg-gradient-to-b from-green-50 to-white">
+
+            <section className="w-full py-8 bg-gradient-to-b from-green-50 to-white">
                 <div className="max-w-4xl mx-auto px-4 text-center mb-8">
                     <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Remove password protection from your PDF files. Fast, free, and secure.
+                        Convertify Unlock PDF — remove restrictions and passwords instantly. No download needed, 100% secure and free.
                     </p>
                 </div>
                 <ToolSwapper />
@@ -55,7 +55,7 @@ export default function Page() {
 
             {/* SEO Content Section */}
             <ToolSeoContent
-                toolName="PDF Unlocker"
+                toolName="Convertify PDF Unlocker"
                 toolSlug="unlock-pdf"
                 description={contentData.description}
                 features={contentData.features}
@@ -64,7 +64,7 @@ export default function Page() {
             />
 
             <HowToSchema
-                toolName="Unlock Password-Protected PDF"
+                toolName="Convertify Unlock PDF"
                 description="Learn how to remove password protection from PDF documents using Convertify."
                 steps={seoData.howToSteps}
             />
