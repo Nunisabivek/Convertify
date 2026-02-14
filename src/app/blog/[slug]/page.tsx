@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         description: post.excerpt,
         keywords: post.keywords,
         alternates: {
-            canonical: `/blog/${slug}`,
+            canonical: `https://convertify.work/blog/${slug}`,
         },
         openGraph: {
             type: "article",
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             tags: post.keywords,
             images: [
                 {
-                    url: "/images/og-banner.png",
+                    url: "https://convertify.work/images/og-banner.png",
                     width: 1200,
                     height: 630,
                     alt: post.title,
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             card: "summary_large_image",
             title: post.title,
             description: post.excerpt,
-            images: ["/images/og-banner.png"],
+            images: ["https://convertify.work/images/og-banner.png"],
         },
     }
 }
