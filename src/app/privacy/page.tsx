@@ -58,7 +58,22 @@ export default function PrivacyPage() {
                 </section>
 
                 <section className="mb-8">
-                    <h2 className="text-2xl font-semibold mb-4">5. Contact Us</h2>
+                    <h2 className="text-2xl font-semibold mb-4">5. Chrome Extension Privacy</h2>
+                    <p>
+                        Our Chrome Extension ("Convertify") is designed with privacy in mind.
+                        It processes files locally within your browser whenever possible.
+                        For tools requiring server-side processing, files are transmitted securely via HTTPS
+                        and are deleted immediately after processing.
+                    </p>
+                    <ul className="list-disc pl-6 mb-4 space-y-2 mt-2">
+                        <li><strong>Permissions:</strong> We use "activeTab" to convert current pages to PDF, "contextMenus" for quick actions, and "storage" to save your preferences and license key.</li>
+                        <li><strong>Data Collection:</strong> We do not track your browsing history. We only collect anonymous usage statistics (e.g., number of conversions) to improve the tool and verify Pro license keys.</li>
+                        <li><strong>License Keys:</strong> If you upgrade to Pro, your license key is verified securely with our payment provider (LemonSqueezy) and stored locally on your device.</li>
+                    </ul>
+                </section>
+
+                <section className="mb-8">
+                    <h2 className="text-2xl font-semibold mb-4">6. Contact Us</h2>
                     <p>
                         If you have any questions about this Privacy Policy, please contact us at support@convertify.work.
                     </p>
