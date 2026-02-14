@@ -25,6 +25,7 @@ async function initUsageDisplay() {
     const badge = document.getElementById('usageBadge');
     const usageText = document.getElementById('usageText');
     const upgradeBanner = document.getElementById('upgradeBanner');
+    const proBanner = document.getElementById('proBanner');
 
     try {
         const data = await getUsageData();
@@ -32,10 +33,21 @@ async function initUsageDisplay() {
         if (data.isPro) {
             usageText.textContent = '👑 Pro';
             badge.className = 'usage-badge pro';
+
             upgradeBanner.classList.add('hidden');
+            proBanner.classList.remove('hidden');
+
+            if (data.licenseKey) {
+                // Show last 4 chars of license
+                const last4 = data.licenseKey.slice(-4);
+                document.getElementById('licenseKeyDisplay').textContent = `License: ••••-${last4}`;
+            }
         } else {
             const remaining = Math.max(0, FREE_DAILY_LIMIT - data.usage);
             usageText.textContent = `${remaining}/${FREE_DAILY_LIMIT} left`;
+
+            upgradeBanner.classList.remove('hidden');
+            proBanner.classList.add('hidden');
 
             if (remaining === 0) {
                 badge.className = 'usage-badge expired';
@@ -55,11 +67,11 @@ function getUsageData() {
     return new Promise((resolve) => {
         if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.sendMessage) {
             chrome.runtime.sendMessage({ type: 'CHECK_USAGE' }, (response) => {
-                resolve(response || { usage: 0, limit: FREE_DAILY_LIMIT, isPro: false, canUse: true });
+                resolve(response || { usage: 0, limit: FREE_DAILY_LIMIT, isPro: false, licenseKey: null, canUse: true });
             });
         } else {
             // Fallback for testing
-            resolve({ usage: 0, limit: FREE_DAILY_LIMIT, isPro: false, canUse: true });
+            resolve({ usage: 0, limit: FREE_DAILY_LIMIT, isPro: false, licenseKey: null, canUse: true });
         }
     });
 }
@@ -209,24 +221,50 @@ function removeNoResults() {
 // UPGRADE / MONETIZATION
 // ============================================================================
 
+const CHECKOUT_URL = 'https://convertifiy.lemonsqueezy.com/checkout/buy/dfca0e79-4d34-4d1a-951c-6d677143ad3e';
+const ACTIVATE_URL = 'https://api.lemonsqueezy.com/v1/licenses/activate';
+
 function initUpgradeButtons() {
-    // Bottom banner upgrade
+    // Open checkout
     const upgradeBtn = document.getElementById('upgradeBtn');
-    if (upgradeBtn) {
-        upgradeBtn.addEventListener('click', openUpgradePage);
-    }
-
-    // Modal upgrade button
     const modalUpgradeBtn = document.getElementById('modalUpgradeBtn');
-    if (modalUpgradeBtn) {
-        modalUpgradeBtn.addEventListener('click', openUpgradePage);
-    }
 
-    // Modal close
-    const modalCloseBtn = document.getElementById('modalCloseBtn');
-    if (modalCloseBtn) {
-        modalCloseBtn.addEventListener('click', hideLimitModal);
-    }
+    [upgradeBtn, modalUpgradeBtn].forEach(btn => {
+        if (btn) btn.addEventListener('click', openCheckout);
+    });
+
+    // Open License Modal
+    const enterLicenseBtn = document.getElementById('enterLicenseBtn');
+    const modalEnterLicenseBtn = document.getElementById('modalEnterLicenseBtn');
+
+    [enterLicenseBtn, modalEnterLicenseBtn].forEach(btn => {
+        if (btn) btn.addEventListener('click', showLicenseModal);
+    });
+
+    // Close License Modal
+    document.getElementById('licenseCloseBtn').addEventListener('click', hideLicenseModal);
+
+    // Activate Button
+    document.getElementById('activateBtn').addEventListener('click', activateLicense);
+
+    // Lost Key
+    document.getElementById('lostKeyBtn').addEventListener('click', openCustomerPortal);
+
+    // Manage Subscription
+    document.getElementById('manageSubBtn').addEventListener('click', openCustomerPortal);
+
+    // Handle Enter key in input
+    document.getElementById('licenseInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') activateLicense();
+    });
+}
+
+function openCheckout() {
+    chrome.tabs.create({ url: CHECKOUT_URL });
+}
+
+function openCustomerPortal() {
+    chrome.tabs.create({ url: 'https://convertifiy.lemonsqueezy.com/billing' });
 }
 
 function showLimitModal() {
@@ -239,14 +277,74 @@ function hideLimitModal() {
     modal.style.display = 'none';
 }
 
-function openUpgradePage() {
-    const url = `${TOOLS_URL}/pricing?from=extension&upgrade=true`;
+function showLicenseModal() {
+    hideLimitModal(); // Close potential other modal
+    document.getElementById('licenseModal').style.display = 'flex';
+    document.getElementById('licenseInput').focus();
+}
 
-    if (typeof chrome !== 'undefined' && chrome.tabs) {
-        chrome.tabs.create({ url });
-    } else {
-        window.open(url, '_blank');
+function hideLicenseModal() {
+    document.getElementById('licenseModal').style.display = 'none';
+    document.getElementById('licenseError').style.display = 'none';
+}
+
+async function activateLicense() {
+    const input = document.getElementById('licenseInput');
+    const btn = document.getElementById('activateBtn');
+    const errorMsg = document.getElementById('licenseError');
+    const key = input.value.trim();
+
+    if (!key) return;
+
+    // UI Loading State
+    btn.textContent = 'Verifying...';
+    btn.classList.add('loading');
+    errorMsg.style.display = 'none';
+    input.disabled = true;
+
+    try {
+        const formData = new FormData();
+        formData.append('license_key', key);
+        formData.append('instance_name', 'Convertify Extension');
+
+        const response = await fetch(ACTIVATE_URL, {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.activated) {
+            // Success!
+            await setProStatus(true, key);
+            hideLicenseModal();
+            initUsageDisplay(); // Refresh UI
+            alert('Success! Pro features unlocked. 🚀');
+        } else {
+            throw new Error(data.error || 'Invalid license key');
+        }
+    } catch (err) {
+        errorMsg.textContent = err.message || 'Validation failed';
+        errorMsg.style.display = 'block';
+
+        // Reset UI
+        btn.textContent = 'Activate License';
+        btn.classList.remove('loading');
+        input.disabled = false;
     }
+}
+
+function setProStatus(isPro, key) {
+    return new Promise((resolve) => {
+        chrome.storage.local.set({
+            isPro: isPro,
+            licenseKey: key
+        }, () => {
+            // Also notify background script
+            chrome.runtime.sendMessage({ type: 'SET_PRO', key: key });
+            resolve();
+        });
+    });
 }
 
 // ============================================================================

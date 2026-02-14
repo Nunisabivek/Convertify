@@ -628,3 +628,159 @@ body {
     outline: 2px solid var(--accent-blue);
     outline-offset: 2px;
 }
+
+/* ============================================================================
+   LICENSE & PRO DASHBOARD (NEW)
+   ============================================================================ */
+
+/* License input related */
+.text-link {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 10px;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 4px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.text-link:hover {
+    color: var(--accent-blue);
+}
+
+.text-link-large {
+    background: none;
+    border: none;
+    color: var(--accent-blue);
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: 8px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
+}
+
+.text-link-large:hover {
+    text-decoration: underline;
+}
+
+/* Pro Banner */
+.pro-banner {
+    position: sticky;
+    bottom: 0;
+    padding: 0 12px 8px;
+    background: linear-gradient(to top, var(--bg-primary) 80%, transparent);
+    z-index: 50;
+}
+
+.pro-banner.hidden {
+    display: none;
+}
+
+.pro-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(135deg, rgba(79, 143, 255, 0.12), rgba(139, 92, 246, 0.12));
+    border: 1px solid rgba(79, 143, 255, 0.2);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(8px);
+}
+
+.pro-icon {
+    font-size: 22px;
+}
+
+.pro-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.pro-text strong {
+    font-size: 13px;
+    color: var(--accent-blue);
+}
+
+.pro-text span {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-family: monospace;
+}
+
+.manage-btn {
+    padding: 6px 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.manage-btn:hover {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+}
+
+/* Inputs */
+.input-group {
+    margin: 16px 0;
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 14px;
+    outline: none;
+    font-family: monospace;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.input-group input:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(79, 143, 255, 0.1);
+}
+
+.error-msg {
+    color: #ef4444;
+    font-size: 12px;
+    margin-top: 6px;
+    font-weight: 500;
+}
+
+.help-text {
+    margin-top: 12px;
+}
+
+.help-text a {
+    color: var(--text-muted);
+    font-size: 11px;
+    text-decoration: none;
+}
+
+.help-text a:hover {
+    text-decoration: underline;
+}
+
+/* Loading state */
+.upgrade-btn-large.loading {
+    opacity: 0.7;
+    cursor: wait;
+    position: relative;
+}

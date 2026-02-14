@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Convertify</title>
   <link rel="stylesheet" href="popup.css">
 </head>
+
 <body>
   <!-- Header -->
   <header class="header">
@@ -25,7 +27,8 @@
     <!-- Search -->
     <div class="search-box">
       <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.3-4.3" />
       </svg>
       <input type="text" id="searchInput" placeholder="Search tools... (merge, compress, convert)" autocomplete="off">
     </div>
@@ -261,6 +264,21 @@
       </div>
       <button class="upgrade-btn" id="upgradeBtn">Upgrade</button>
     </div>
+    <div class="license-link-container">
+      <button class="text-link" id="enterLicenseBtn">Have a license key?</button>
+    </div>
+  </div>
+
+  <!-- Pro Dashboard (shown for Pro users) -->
+  <div class="pro-banner hidden" id="proBanner">
+    <div class="pro-content">
+      <span class="pro-icon">💎</span>
+      <div class="pro-text">
+        <strong>Pro Active</strong>
+        <span id="licenseKeyDisplay">License: ••••-••••</span>
+      </div>
+      <button class="manage-btn" id="manageSubBtn">Manage</button>
+    </div>
   </div>
 
   <!-- Usage Limit Modal -->
@@ -280,11 +298,32 @@
           <li>✅ Batch processing (multiple files)</li>
           <li>✅ All 30+ tools unlocked</li>
           <li>✅ No watermarks</li>
-          <li>✅ Priority support</li>
         </ul>
       </div>
       <button class="upgrade-btn-large" id="modalUpgradeBtn">👑 Upgrade to Pro</button>
+      <button class="text-link-large" id="modalEnterLicenseBtn">I have a license key</button>
       <button class="close-btn" id="modalCloseBtn">Maybe later</button>
+    </div>
+  </div>
+
+  <!-- License Activation Modal -->
+  <div class="modal-overlay" id="licenseModal" style="display: none;">
+    <div class="modal">
+      <div class="modal-icon">🔑</div>
+      <h2>Activate Pro</h2>
+      <p>Enter the license key sent to your email after purchase.</p>
+
+      <div class="input-group">
+        <input type="text" id="licenseInput" placeholder="Enter key (e.g. 1A2B-3C4D...)" autocomplete="off">
+        <div id="licenseError" class="error-msg" style="display: none;">Invalid license key</div>
+      </div>
+
+      <button class="upgrade-btn-large" id="activateBtn">Activate License</button>
+      <button class="close-btn" id="licenseCloseBtn">Cancel</button>
+
+      <div class="help-text">
+        <a href="#" id="lostKeyBtn">Lost your key?</a>
+      </div>
     </div>
   </div>
 
@@ -303,4 +342,5 @@
 
   <script src="popup.js"></script>
 </body>
+
 </html>

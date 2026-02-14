@@ -107,7 +107,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.type === 'CHECK_USAGE') {
-        chrome.storage.local.get(['dailyUsage', 'lastResetDate', 'isPro'], (data) => {
+        chrome.storage.local.get(['dailyUsage', 'lastResetDate', 'isPro', 'licenseKey'], (data) => {
             const today = new Date().toDateString();
             let usage = data.dailyUsage || 0;
 
@@ -121,6 +121,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                 usage: usage,
                 limit: FREE_DAILY_LIMIT,
                 isPro: data.isPro || false,
+                licenseKey: data.licenseKey || null,
                 canUse: (data.isPro || false) || usage < FREE_DAILY_LIMIT
             });
         });
@@ -144,7 +145,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
 
     if (message.type === 'SET_PRO') {
-        chrome.storage.local.set({ isPro: true });
+        chrome.storage.local.set({
+            isPro: true,
+            licenseKey: message.key
+        });
         sendResponse({ success: true });
         return true;
     }
