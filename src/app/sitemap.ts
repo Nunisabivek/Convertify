@@ -9,6 +9,8 @@ export const dynamic = 'force-static'
 const allTools = getAllTools().map(tool => tool.href)
 
 // Additional tools/pages that may not be in registry but have pages
+import { useCases } from '@/lib/use-cases-data'
+
 const additionalToolPages = [
     'organize-pdf',
     'repair-pdf',
@@ -35,6 +37,7 @@ const staticPages = [
     'privacy',
     'terms',
     'security',
+    'pricing',
 ]
 
 // High-volume keyword landing pages (SEO-optimized guides)
@@ -102,6 +105,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.92, // Very high priority - new content targeting high-volume keywords
     }))
 
+    // Use Case pages (Programmatic SEO)
+    const useCaseUrls = useCases.map(uc => ({
+        url: `${baseUrl}/use-cases/${uc.slug}`,
+        lastModified: currentDate,
+        changeFrequency: 'weekly' as const,
+        priority: 0.85,
+    }))
+
     // Total: 1 (homepage) + 6 (static) + 32 (tools) + 33 (blogs) + 10 (landing) = 82+ pages
     return [
         // Homepage - highest priority
@@ -115,6 +126,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ...staticUrls,
         // Landing pages (high-volume keywords)
         ...landingUrls,
+        // Use Case pages
+        ...useCaseUrls,
         // Tool pages
         ...toolUrls,
         // Blog posts

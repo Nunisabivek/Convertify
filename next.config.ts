@@ -5,26 +5,23 @@ const nextConfig: NextConfig = {
   // Static export causes / to redirect to /index.html with 307 status
   // This kills SEO rankings!
 
-  trailingSlash: false,  // Consistent with Vercel config
+  trailingSlash: false,
+  compress: true, // Enable Gzip compression for smaller file sizes
+  poweredByHeader: false, // Remove X-Powered-By header for security
   images: {
     unoptimized: true,
   },
   async redirects() {
     return [
-      // Fix 404s from old structure - no trailing slashes to match Vercel
-      {
-        source: '/tools/image-to-pdf',
-        destination: '/jpg-to-pdf',
-        permanent: true,
-      },
-      {
-        source: '/image-to-pdf',
-        destination: '/jpg-to-pdf',
-        permanent: true,
-      },
+      // Fix 404s from GSC report
       {
         source: '/tools/pdf-to-jpg',
         destination: '/pdf-to-jpg',
+        permanent: true,
+      },
+      {
+        source: '/tools/image-to-pdf',
+        destination: '/jpg-to-pdf',
         permanent: true,
       },
       {
@@ -32,25 +29,26 @@ const nextConfig: NextConfig = {
         destination: '/rotate-pdf',
         permanent: true,
       },
+      // Fix Blog redirect loop/error
+      {
+        source: '/blog/',
+        destination: '/blog',
+        permanent: true,
+      },
+      // Catch-all for any other /tools/ links
       {
         source: '/tools/:slug',
-        destination: '/:slug', // Redirects /tools/any-tool to /any-tool
+        destination: '/:slug',
         permanent: true,
       },
-      // CRITICAL: Redirect index.html to / to fix 307 redirect issue
-      {
-        source: '/index.html',
-        destination: '/',
-        permanent: true,
-      },
-      // Additional common variations
-      {
-        source: '/home',
-        destination: '/',
-        permanent: true,
-      },
+      // Fix 307 Temporary Redirects causing indexing issues
       {
         source: '/index.php',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/home',
         destination: '/',
         permanent: true,
       },
@@ -68,7 +66,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Cache-Control',
-            value: 'public, max-age=3600',
+            value: 'public, max-age=3600, stale-while-revalidate=59',
           },
         ],
       },

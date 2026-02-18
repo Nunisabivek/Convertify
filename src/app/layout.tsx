@@ -54,10 +54,10 @@ const organizationSchema = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Convertify - Free Online PDF Tools - No Sign-Up, No Limits",
+    default: "Convertify - Secure Online PDF Tools (No Upload Required)",
     template: "%s | Convertify",
   },
-  description: "Convertify is the ultimate free PDF tool suite. Merge, convert, compress, and edit PDFs securely in your browser. No sign-up, no limits, no uploads required.",
+  description: "Merge, compress, and convert PDFs 100% securely in your browser. Files never leave your device. No sign-up, no limits, no servers involved.",
   applicationName: "Convertify",
   authors: [{ name: "Convertify Team" }],
   keywords: [
@@ -82,8 +82,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://convertify.work",
     siteName: "Convertify",
-    title: "Convertify - Free PDF Tools & File Converter",
-    description: "Free online PDF tools - merge, compress, convert PDFs. No watermarks, no sign up. Works on mobile and desktop.",
+    title: "Convertify - Secure PDF Tools (Files Stay on Device)",
+    description: "100% Private PDF tools. Merge, compress, and convert without uploading files. No servers, no tracking, no limits.",
     images: [
       {
         url: "https://convertify.work/images/og-banner.png",
@@ -95,13 +95,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Convertify - Free PDF Tools & File Converter",
-    description: "Free online PDF tools - merge, compress, split, and convert PDFs easily.",
+    title: "Convertify - Secure PDF Tools (No Uploads)",
+    description: "Merge, compress, and convert PDFs locally in your browser. 100% Private & Free.",
     images: ["https://convertify.work/images/og-banner.png"],
     creator: "@convertify",
   },
   alternates: {
-    canonical: 'https://convertify.work',
+    canonical: './',
   },
   verification: {
     google: "ghwXtP5nTeKojcTtLh5jNBXQOHfhcwBGfwiLLO0_4Yc",
