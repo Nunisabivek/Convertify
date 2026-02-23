@@ -26,7 +26,10 @@ import {
     Code,
     WandSparkles,
     ScanLine,
-    CheckCircle2
+    CheckCircle2,
+    Smartphone,
+    Globe,
+    Scaling
 } from "lucide-react";
 import { InternalLinkMap } from "@/components/seo/internal-link-map";
 import { AdBanner } from "@/components/ads/banner";
@@ -195,6 +198,54 @@ const toolCategories = [
                 icon: Code,
                 color: "bg-rose-100 text-rose-600",
                 href: "/html-to-pdf",
+            },
+        ],
+    },
+    {
+        category: "Image Tools",
+        description: "Convert and optimize images",
+        tools: [
+            {
+                title: "HEIC to JPG",
+                description: "Convert iPhone HEIC photos to JPG.",
+                icon: Smartphone,
+                color: "bg-blue-100 text-blue-600",
+                href: "/heic-to-jpg",
+            },
+            {
+                title: "JPG to PNG",
+                description: "Convert JPG images to PNG format.",
+                icon: ImageIcon,
+                color: "bg-purple-100 text-purple-600",
+                href: "/jpg-to-png",
+            },
+            {
+                title: "PNG to JPG",
+                description: "Convert PNG images to JPG format.",
+                icon: ImageIcon,
+                color: "bg-yellow-100 text-yellow-600",
+                href: "/png-to-jpg",
+            },
+            {
+                title: "Image Compressor",
+                description: "Compress images without losing quality.",
+                icon: Minimize2,
+                color: "bg-green-100 text-green-600",
+                href: "/image-compressor",
+            },
+            {
+                title: "Resize Image",
+                description: "Resize images to any dimension.",
+                icon: Scaling,
+                color: "bg-orange-100 text-orange-600",
+                href: "/resize-image",
+            },
+            {
+                title: "WebP Converter",
+                description: "Convert images to and from WebP.",
+                icon: Globe,
+                color: "bg-teal-100 text-teal-600",
+                href: "/webp-converter",
             },
         ],
     },
