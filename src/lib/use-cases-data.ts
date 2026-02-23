@@ -244,5 +244,483 @@ export const useCases: UseCase[] = [
                 answer: 'We can remove "Owner" passwords (permissions). If the file requires a password to OPEN (User password), you must know it to unlock it.'
             }
         ]
+    },
+    // ============ EXPANDED USE CASES FOR PROGRAMMATIC SEO ============
+    {
+        slug: 'merge-pdf-windows-10',
+        title: 'Merge PDF Files on Windows 10 Free',
+        description: 'Combine multiple PDF files on Windows 10. Free, fast, no software download needed.',
+        toolHref: '/merge-pdf',
+        toolName: 'Merge PDF',
+        keywords: ['merge pdf windows 10', 'combine pdf windows', 'join pdf files windows 10'],
+        faqs: []
+    },
+    {
+        slug: 'merge-pdf-mac-preview',
+        title: 'Merge PDF Files on Mac Using Preview',
+        description: 'Combine PDFs on Mac without additional software. Use built-in Preview app.',
+        toolHref: '/merge-pdf',
+        toolName: 'Merge PDF',
+        keywords: ['merge pdf mac', 'combine pdf mac preview', 'join pdf mac free'],
+        faqs: []
+    },
+    {
+        slug: 'merge-pdf-online-free-no-limit',
+        title: 'Merge PDF Online Free No File Limit',
+        description: 'Merge unlimited PDF files online. No file size limit, no registration.',
+        toolHref: '/merge-pdf',
+        toolName: 'Merge PDF',
+        keywords: ['merge pdf online free no limit', 'combine pdf no limit', 'unlimited pdf merger'],
+        faqs: []
+    },
+    {
+        slug: 'merge-pdf-iphone',
+        title: 'Merge PDF Files on iPhone',
+        description: 'Combine PDF files directly on your iPhone. Works in Safari browser.',
+        toolHref: '/merge-pdf',
+        toolName: 'Merge PDF',
+        keywords: ['merge pdf iphone', 'combine pdf iphone', 'merge pdf on phone'],
+        faqs: []
+    },
+    {
+        slug: 'merge-pdf-android',
+        title: 'Merge PDF Files on Android Phone',
+        description: 'Combine PDF files on Android. No app needed, works in Chrome.',
+        toolHref: '/merge-pdf',
+        toolName: 'Merge PDF',
+        keywords: ['merge pdf android', 'combine pdf android', 'merge pdf mobile'],
+        faqs: []
+    },
+    {
+        slug: 'compress-pdf-gmail',
+        title: 'Compress PDF for Gmail Attachment',
+        description: 'Reduce PDF size to send via Gmail. Get under 25MB instantly.',
+        toolHref: '/compress-pdf',
+        toolName: 'Compress PDF',
+        keywords: ['compress pdf for gmail', 'reduce pdf size gmail', 'pdf too large for email'],
+        faqs: []
+    },
+    {
+        slug: 'compress-pdf-outlook',
+        title: 'Compress PDF for Outlook',
+        description: 'Shrink PDF file size for Outlook attachments. Send large files easily.',
+        toolHref: '/compress-pdf',
+        toolName: 'Compress PDF',
+        keywords: ['compress pdf outlook', 'reduce pdf size outlook', 'shrink pdf email attachment'],
+        faqs: []
+    },
+    {
+        slug: 'compress-pdf-whatsapp',
+        title: 'Compress PDF for WhatsApp',
+        description: 'Reduce PDF to send on WhatsApp. Maximum 16MB for free sharing.',
+        toolHref: '/compress-pdf',
+        toolName: 'Compress PDF',
+        keywords: ['compress pdf whatsapp', 'reduce pdf for whatsapp', 'small pdf for sharing'],
+        faqs: []
+    },
+    {
+        slug: 'compress-pdf-500kb',
+        title: 'Compress PDF to 500KB Online',
+        description: 'Get your PDF under 500KB. Perfect for form submissions.',
+        toolHref: '/compress-pdf',
+        toolName: 'Compress PDF',
+        keywords: ['compress pdf to 500kb', 'reduce pdf to 500kb', 'pdf under 500kb'],
+        faqs: []
+    },
+    {
+        slug: 'compress-pdf-1mb',
+        title: 'Compress PDF to 1MB Online',
+        description: 'Shrink PDF to under 1MB. Fast and free compression.',
+        toolHref: '/compress-pdf',
+        toolName: 'Compress PDF',
+        keywords: ['compress pdf to 1mb', 'reduce pdf to 1mb', 'pdf under 1mb'],
+        faqs: []
+    },
+    {
+        slug: 'split-pdf-every-page',
+        title: 'Split PDF into Separate Pages',
+        description: 'Extract every page as individual PDF files. Batch split instantly.',
+        toolHref: '/split-pdf',
+        toolName: 'Split PDF',
+        keywords: ['split pdf every page', 'extract all pages pdf', 'pdf to individual pages'],
+        faqs: []
+    },
+    {
+        slug: 'split-pdf-range',
+        title: 'Split PDF by Page Range',
+        description: 'Extract specific page ranges from PDF. Enter 1-5, 10-15 etc.',
+        toolHref: '/split-pdf',
+        toolName: 'Split PDF',
+        keywords: ['split pdf by range', 'extract page range pdf', 'split pdf pages 1-5'],
+        faqs: []
+    },
+    {
+        slug: 'pdf-to-word-resume',
+        title: 'Convert PDF Resume to Word',
+        description: 'Edit PDF resume in Word. Make changes and update easily.',
+        toolHref: '/pdf-to-word',
+        toolName: 'PDF to Word',
+        keywords: ['pdf to word resume', 'convert resume pdf to word', 'edit resume pdf'],
+        faqs: []
+    },
+    {
+        slug: 'pdf-to-word-contract',
+        title: 'Convert PDF Contract to Editable Word',
+        description: 'Turn PDF contracts into editable Word documents. Modify agreements.',
+        toolHref: '/pdf-to-word',
+        toolName: 'PDF to Word',
+        keywords: ['pdf to word contract', 'convert legal pdf to word', 'edit contract pdf'],
+        faqs: []
+    },
+    {
+        slug: 'jpg-to-pdf-merge',
+        title: 'Combine Multiple JPG to One PDF',
+        description: 'Merge several JPG images into a single PDF document.',
+        toolHref: '/jpg-to-pdf',
+        toolName: 'JPG to PDF',
+        keywords: ['combine jpg to pdf', 'merge multiple jpg to pdf', 'join images to pdf'],
+        faqs: []
+    },
+    {
+        slug: 'jpg-to-pdf-a4',
+        title: 'Convert JPG to PDF A4 Size',
+        description: 'Create A4 sized PDF from JPG. Standard document size.',
+        toolHref: '/jpg-to-pdf',
+        toolName: 'JPG to PDF',
+        keywords: ['jpg to pdf a4', 'convert image to a4 pdf', 'a4 pdf from jpg'],
+        faqs: []
+    },
+    {
+        slug: 'png-to-pdf-transparent',
+        title: 'PNG to PDF Transparent Background',
+        description: 'Convert PNG with transparency to PDF. Keep alpha channel.',
+        toolHref: '/png-to-pdf',
+        toolName: 'PNG to PDF',
+        keywords: ['png to pdf transparent', 'convert png transparency to pdf', 'png with alpha to pdf'],
+        faqs: []
+    },
+    {
+        slug: 'word-to-pdf-resume',
+        title: 'Convert Word Resume to PDF',
+        description: 'Turn Word resume into PDF. Professional output for job applications.',
+        toolHref: '/word-to-pdf',
+        toolName: 'Word to PDF',
+        keywords: ['word to pdf resume', 'convert resume to pdf', 'docx to pdf resume'],
+        faqs: []
+    },
+    {
+        slug: 'excel-to-pdf-one-sheet',
+        title: 'Convert Excel to PDF One Page Per Sheet',
+        description: 'Export each Excel sheet as separate PDF page.',
+        toolHref: '/excel-to-pdf',
+        toolName: 'Excel to PDF',
+        keywords: ['excel to pdf one page per sheet', 'convert each sheet to pdf', 'excel sheet to pdf'],
+        faqs: []
+    },
+    {
+        slug: 'rotate-pdf-90-degrees',
+        title: 'Rotate PDF 90 Degrees Clockwise',
+        description: 'Fix orientation by rotating PDF pages 90 degrees.',
+        toolHref: '/rotate-pdf',
+        toolName: 'Rotate PDF',
+        keywords: ['rotate pdf 90 degrees', 'rotate pdf clockwise', 'fix pdf orientation'],
+        faqs: []
+    },
+    {
+        slug: 'protect-pdf-password',
+        title: 'Protect PDF with Password',
+        description: 'Add password protection to PDF. Encrypt with AES-256.',
+        toolHref: '/protect-pdf',
+        toolName: 'Protect PDF',
+        keywords: ['protect pdf with password', 'encrypt pdf', 'password protect pdf'],
+        faqs: []
+    },
+    {
+        slug: 'unlock-pdf-printing',
+        title: 'Unlock PDF to Enable Printing',
+        description: 'Remove PDF printing restrictions. Print locked files.',
+        toolHref: '/unlock-pdf',
+        toolName: 'Unlock PDF',
+        keywords: ['unlock pdf printing', 'enable pdf printing', 'remove pdf print restriction'],
+        faqs: []
+    },
+    {
+        slug: 'edit-pdf-text',
+        title: 'Edit Text in PDF Online',
+        description: 'Modify text in PDF documents. Change content easily.',
+        toolHref: '/edit-pdf',
+        toolName: 'Edit PDF',
+        keywords: ['edit pdf text', 'modify pdf text', 'change text in pdf'],
+        faqs: []
+    },
+    {
+        slug: 'sign-pdf-digital',
+        title: 'Sign PDF with Digital Signature',
+        description: 'Add legally binding digital signature to PDF documents.',
+        toolHref: '/sign-pdf',
+        toolName: 'Sign PDF',
+        keywords: ['sign pdf digital signature', 'add signature to pdf', 'e-sign pdf'],
+        faqs: []
+    },
+    {
+        slug: 'watermark-pdf-remove',
+        title: 'Add Watermark to PDF',
+        description: 'Add text or image watermark to PDF. Batch watermark.',
+        toolHref: '/watermark-pdf',
+        toolName: 'Watermark PDF',
+        keywords: ['watermark pdf', 'add watermark to pdf', 'batch watermark pdf'],
+        faqs: []
+    },
+    {
+        slug: 'pdf-to-jpg-high-resolution',
+        title: 'Convert PDF to High Resolution JPG',
+        description: 'Extract PDF pages as high quality 300 DPI images.',
+        toolHref: '/pdf-to-jpg',
+        toolName: 'PDF to JPG',
+        keywords: ['pdf to jpg high resolution', 'pdf to 300dpi jpg', 'extract hd images from pdf'],
+        faqs: []
+    },
+    {
+        slug: 'pdf-to-png-transparent',
+        title: 'Convert PDF to PNG with Transparency',
+        description: 'Extract PDF as transparent PNG images.',
+        toolHref: '/pdf-to-png',
+        toolName: 'PDF to PNG',
+        keywords: ['pdf to png transparent', 'extract png from pdf', 'pdf to alpha png'],
+        faqs: []
+    },
+    {
+        slug: 'reorder-pdf-pages',
+        title: 'Reorder PDF Pages Online',
+        description: 'Drag and drop to rearrange PDF page order.',
+        toolHref: '/reorder-pdf',
+        toolName: 'Reorder PDF',
+        keywords: ['reorder pdf pages', 'arrange pdf pages', 'change pdf page order'],
+        faqs: []
+    },
+    {
+        slug: 'delete-pdf-pages',
+        title: 'Delete Pages from PDF',
+        description: 'Remove unwanted pages from PDF. Extract clean document.',
+        toolHref: '/delete-pdf-pages',
+        toolName: 'Delete Pages',
+        keywords: ['delete pages from pdf', 'remove pdf pages', 'delete pages pdf'],
+        faqs: []
+    },
+    {
+        slug: 'add-page-numbers-pdf',
+        title: 'Add Page Numbers to PDF',
+        description: 'Insert page numbers into PDF. Custom placement.',
+        toolHref: '/add-page-numbers',
+        toolName: 'Add Page Numbers',
+        keywords: ['add page numbers to pdf', 'number pdf pages', 'insert page numbers'],
+        faqs: []
+    },
+    {
+        slug: 'ocr-pdf-searchable',
+        title: 'Make PDF Searchable with OCR',
+        description: 'Convert scanned PDF to searchable text. Extract content.',
+        toolHref: '/ocr-pdf',
+        toolName: 'OCR PDF',
+        keywords: ['ocr pdf searchable', 'make pdf searchable', 'extract text from scanned pdf'],
+        faqs: []
+    },
+    {
+        slug: 'repair-pdf-corrupted',
+        title: 'Repair Corrupted PDF File',
+        description: 'Fix damaged PDF files. Recover unreadable documents.',
+        toolHref: '/repair-pdf',
+        toolName: 'Repair PDF',
+        keywords: ['repair corrupted pdf', 'fix damaged pdf', 'recover pdf file'],
+        faqs: []
+    },
+    {
+        slug: 'compare-pdf-differences',
+        title: 'Compare Two PDF Files',
+        description: 'Find differences between two PDF documents.',
+        toolHref: '/compare-pdf',
+        toolName: 'Compare PDF',
+        keywords: ['compare pdf files', 'diff pdf', 'find pdf differences'],
+        faqs: []
+    },
+    {
+        slug: 'pdf-to-word-free-online',
+        title: 'PDF to Word Free Online No Download',
+        description: 'Convert PDF to Word without software. 100% free.',
+        toolHref: '/pdf-to-word',
+        toolName: 'PDF to Word',
+        keywords: ['pdf to word free online', 'convert pdf to docx free', 'pdf to word no download'],
+        faqs: []
+    },
+    {
+        slug: 'pdf-to-excel-extract',
+        title: 'Extract PDF Tables to Excel',
+        description: 'Pull table data from PDF into Excel spreadsheets.',
+        toolHref: '/pdf-to-excel',
+        toolName: 'PDF to Excel',
+        keywords: ['pdf to excel extract', 'pull tables from pdf', 'convert pdf table to excel'],
+        faqs: []
+    },
+    {
+        slug: 'heic-to-pdf-iphone',
+        title: 'Convert HEIC iPhone Photo to PDF',
+        description: 'Turn iPhone HEIC photos into PDF documents.',
+        toolHref: '/heic-to-jpg',
+        toolName: 'HEIC to JPG',
+        keywords: ['heic to pdf iphone', 'convert iphone photo to pdf', 'heic to pdf'],
+        faqs: []
+    },
+    {
+        slug: 'compress-pdf-mac',
+        title: 'Compress PDF on Mac',
+        description: 'Reduce PDF file size on Mac. Works in Safari browser.',
+        toolHref: '/compress-pdf',
+        toolName: 'Compress PDF',
+        keywords: ['compress pdf mac', 'reduce pdf size mac', 'shrink pdf mac'],
+        faqs: []
+    },
+    {
+        slug: 'compress-pdf-iphone',
+        title: 'Compress PDF on iPhone',
+        description: 'Shrink PDF file size on iPhone. Send smaller files.',
+        toolHref: '/compress-pdf',
+        toolName: 'Compress PDF',
+        keywords: ['compress pdf iphone', 'reduce pdf size iphone', 'shrink pdf mobile'],
+        faqs: []
+    },
+    {
+        slug: 'merge-pdf-two-files',
+        title: 'Merge Two PDF Files',
+        description: 'Combine exactly 2 PDF files into one.',
+        toolHref: '/merge-pdf',
+        toolName: 'Merge PDF',
+        keywords: ['merge two pdf files', 'combine 2 pdfs', 'join two pdf'],
+        faqs: []
+    },
+    {
+        slug: 'split-pdf-single-page',
+        title: 'Extract Single Page from PDF',
+        description: 'Get one specific page from PDF as separate file.',
+        toolHref: '/split-pdf',
+        toolName: 'Split PDF',
+        keywords: ['extract single page pdf', 'get one page from pdf', 'pull page from pdf'],
+        faqs: []
+    },
+    {
+        slug: 'pdf-to-text-extract',
+        title: 'Extract Text from PDF',
+        description: 'Pull all text content from PDF document.',
+        toolHref: '/pdf-to-text',
+        toolName: 'PDF to Text',
+        keywords: ['extract text from pdf', 'pdf to text converter', 'copy pdf text'],
+        faqs: []
+    },
+    {
+        slug: 'powerpoint-to-pdf',
+        title: 'Convert PowerPoint PPTX to PDF',
+        description: 'Turn PowerPoint presentations into PDF format.',
+        toolHref: '/powerpoint-to-pdf',
+        toolName: 'PowerPoint to PDF',
+        keywords: ['powerpoint to pdf', 'convert pptx to pdf', 'ppt to pdf'],
+        faqs: []
+    },
+    {
+        slug: 'html-to-pdf-online',
+        title: 'Convert HTML to PDF Online',
+        description: 'Save web pages as PDF documents.',
+        toolHref: '/html-to-pdf',
+        toolName: 'HTML to PDF',
+        keywords: ['html to pdf', 'webpage to pdf', 'save web page as pdf'],
+        faqs: []
+    },
+    {
+        slug: 'text-to-pdf-txt',
+        title: 'Convert Text File to PDF',
+        description: 'Turn TXT files into PDF documents.',
+        toolHref: '/text-to-pdf',
+        toolName: 'Text to PDF',
+        keywords: ['text to pdf', 'txt to pdf', 'convert text file to pdf'],
+        faqs: []
+    },
+    {
+        slug: 'crop-pdf-page',
+        title: 'Crop PDF Page Margins',
+        description: 'Trim whitespace from PDF pages. Clean output.',
+        toolHref: '/crop-pdf',
+        toolName: 'Crop PDF',
+        keywords: ['crop pdf', 'trim pdf margins', 'remove pdf whitespace'],
+        faqs: []
+    },
+    {
+        slug: 'redact-pdf-sensitive',
+        title: 'Redact Sensitive Info from PDF',
+        description: 'Permanently remove confidential data from PDF.',
+        toolHref: '/redact-pdf',
+        toolName: 'Redact PDF',
+        keywords: ['redact pdf', 'remove sensitive information', 'censor pdf'],
+        faqs: []
+    },
+    {
+        slug: 'pdf-to-powerpoint-slides',
+        title: 'Convert PDF to PowerPoint Slides',
+        description: 'Turn PDF into editable PowerPoint presentations.',
+        toolHref: '/pdf-to-powerpoint',
+        toolName: 'PDF to PowerPoint',
+        keywords: ['pdf to powerpoint', 'convert pdf to ppt', 'pdf to pptx'],
+        faqs: []
+    },
+    {
+        slug: 'pdf-to-pdfa-archive',
+        title: 'Convert PDF to PDF/A for Archive',
+        description: 'Create archival PDF/A for long-term storage.',
+        toolHref: '/pdf-to-pdfa',
+        toolName: 'PDF to PDF/A',
+        keywords: ['pdf to pdfa', 'convert to pdf/a', 'archival pdf'],
+        faqs: []
+    },
+    {
+        slug: 'jpg-to-pdf-multiple',
+        title: 'Merge Multiple JPG to One PDF',
+        description: 'Combine many JPG images into single PDF.',
+        toolHref: '/jpg-to-pdf',
+        toolName: 'JPG to PDF',
+        keywords: ['multiple jpg to pdf', 'combine jpg images to pdf', 'merge photos to pdf'],
+        faqs: []
+    },
+    {
+        slug: 'image-compressor-whatsapp',
+        title: 'Compress Images for WhatsApp',
+        description: 'Reduce image size for WhatsApp sharing. Stay under 16MB.',
+        toolHref: '/image-compressor',
+        toolName: 'Image Compressor',
+        keywords: ['compress image for whatsapp', 'reduce image size whatsapp', 'small image for sharing'],
+        faqs: []
+    },
+    {
+        slug: 'resize-image-instagram',
+        title: 'Resize Image for Instagram',
+        description: 'Crop and resize images for Instagram. Perfect dimensions.',
+        toolHref: '/resize-image',
+        toolName: 'Resize Image',
+        keywords: ['resize image instagram', 'instagram image size', 'crop for instagram'],
+        faqs: []
+    },
+    {
+        slug: 'webp-to-jpg',
+        title: 'Convert WebP to JPG',
+        description: 'Turn WebP images to standard JPEG format.',
+        toolHref: '/webp-converter',
+        toolName: 'WebP Converter',
+        keywords: ['webp to jpg', 'convert webp to jpeg', 'webp to jpg converter'],
+        faqs: []
+    },
+    {
+        slug: 'jpg-to-webp',
+        title: 'Convert JPG to WebP',
+        description: 'Compress JPG to WebP for smaller file size.',
+        toolHref: '/webp-converter',
+        toolName: 'WebP Converter',
+        keywords: ['jpg to webp', 'convert jpg to webp', 'compress to webp'],
+        faqs: []
     }
 ];
