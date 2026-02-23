@@ -16,7 +16,8 @@ const additionalToolPages = [
     'repair-pdf',
     'crop-pdf',
     'text-to-pdf',
-    'extract-pdf', // Captures "extract pdf" queries, redirects to split-pdf
+    'extract-pdf',
+    'heic-to-jpg',
 ]
 
 // New SEO-optimized blog articles (added Feb 2026)
@@ -85,14 +86,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: page === 'all-tools' || page === 'blog' ? 0.9 : 0.5,
     }))
 
-    // Landing pages - Very high priority SEO pages (10 pages)
-    const landingUrls = landingPages.map(page => ({
-        url: `${baseUrl}/${page}`,
-        lastModified: currentDate,
-        changeFrequency: 'weekly' as const,
-        priority: 0.92, // Very high priority - new content targeting high-volume keywords
-    }))
-
     // Use Case pages (Programmatic SEO)
     const useCaseUrls = useCases.map(uc => ({
         url: `${baseUrl}/use-cases/${uc.slug}`,
@@ -112,8 +105,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         // Static pages
         ...staticUrls,
-        // Landing pages (high-volume keywords)
-        ...landingUrls,
         // Use Case pages
         ...useCaseUrls,
         // Tool pages

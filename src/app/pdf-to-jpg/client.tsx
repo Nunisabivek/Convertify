@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState } from "react"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { FileImage, Download, Loader2 } from "lucide-react"
@@ -11,8 +11,9 @@ export default function PdfToJpgPage() {
     const [file, setFile] = useState<File | null>(null)
     const [isProcessing, setIsProcessing] = useState(false)
     const [isDone, setIsDone] = useState(false)
-
-    // To keep track of progress
+    const [downloadUrl, setDownloadUrl] = useState<string | null>(null)
+    const [downloadName, setDownloadName] = useState("")
+    const [isZip, setIsZip] = useState(false)
     const [progress, setProgress] = useState(0)
     const [total, setTotal] = useState(0)
 
@@ -27,7 +28,6 @@ export default function PdfToJpgPage() {
         setProgress(0)
 
         try {
-            // Dynamic import to avoid SSR 'DOMMatrix is not defined' error
             const pdfjsLib = await import("pdfjs-dist")
             pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`
 
@@ -36,11 +36,9 @@ export default function PdfToJpgPage() {
             const numPages = pdf.numPages
             setTotal(numPages)
 
-            const zip = new JSZip()
-
-            for (let i = 1; i <= numPages; i++) {
-                const page = await pdf.getPage(i)
-                const viewport = page.getViewport({ scale: 2.0 }) // High resolution
+            if (numPages === 1) {
+                const page = await pdf.getPage(1)
+                const viewport = page.getViewport({ scale: 2.0 })
 
                 const canvas = document.createElement("canvas")
                 const context = canvas.getContext("2d")
@@ -53,20 +51,49 @@ export default function PdfToJpgPage() {
                         viewport: viewport,
                     } as any).promise
 
-                    const imgData = canvas.toDataURL("image/jpeg", 0.8)
-                    // Remove "data:image/jpeg;base64,"
-                    const data = imgData.split(',')[1]
+                    canvas.toBlob((blob) => {
+                        if (blob) {
+                            const url = URL.createObjectURL(blob)
+                            setDownloadUrl(url)
+                            setDownloadName(`${file.name.replace('.pdf', '')}.jpg`)
+                            setIsZip(false)
+                            setIsDone(true)
+                        }
+                    }, "image/jpeg", 0.9)
+                }
+                setProgress(1)
+            } else {
+                const zip = new JSZip()
 
-                    zip.file(`page-${i.toString().padStart(3, '0')}.jpg`, data, { base64: true })
+                for (let i = 1; i <= numPages; i++) {
+                    const page = await pdf.getPage(i)
+                    const viewport = page.getViewport({ scale: 2.0 })
+
+                    const canvas = document.createElement("canvas")
+                    const context = canvas.getContext("2d")
+                    canvas.height = viewport.height
+                    canvas.width = viewport.width
+
+                    if (context) {
+                        await page.render({
+                            canvasContext: context,
+                            viewport: viewport,
+                        } as any).promise
+
+                        const imgData = canvas.toDataURL("image/jpeg", 0.8)
+                        const data = imgData.split(',')[1]
+                        zip.file(`page-${i.toString().padStart(3, '0')}.jpg`, data, { base64: true })
+                    }
+                    setProgress(i)
                 }
 
-                setProgress(i)
+                const content = await zip.generateAsync({ type: "blob" })
+                const url = URL.createObjectURL(content)
+                setDownloadUrl(url)
+                setDownloadName(`${file.name.replace('.pdf', '')}-images.zip`)
+                setIsZip(true)
+                setIsDone(true)
             }
-
-            const content = await zip.generateAsync({ type: "blob" })
-            saveAs(content, `${file.name.replace('.pdf', '')}-images.zip`)
-            setIsDone(true)
-
         } catch (error) {
             console.error("Conversion error:", error)
             alert("Failed to convert PDF to JPG. Please try again.")
@@ -75,18 +102,27 @@ export default function PdfToJpgPage() {
         }
     }
 
-    if (isDone) {
+    if (isDone && downloadUrl) {
         return (
             <div className="container py-20 max-w-2xl text-center space-y-8">
                 <div className="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mx-auto text-yellow-600">
                     <Download className="w-12 h-12" />
                 </div>
-                <h1 className="text-4xl font-bold">Images Ready!</h1>
-                <p className="text-slate-500">Your ZIP file download started automatically.</p>
+                <h1 className="text-4xl font-bold">{isZip ? 'Images Ready!' : 'Image Ready!'}</h1>
+                <p className="text-slate-500">
+                    {isZip ? 'Your images are ready to download.' : 'Your image is ready to download.'}
+                </p>
+                <Button size="xl" asChild className="bg-yellow-600 hover:bg-yellow-700">
+                    <a href={downloadUrl} download={downloadName}>
+                        <Download className="mr-2 w-5 h-5" />
+                        Download {isZip ? 'ZIP' : 'JPG'}
+                    </a>
+                </Button>
                 <div className="flex flex-col gap-4">
                     <Button variant="outline" size="xl" onClick={() => {
                         setFile(null)
                         setIsDone(false)
+                        setDownloadUrl(null)
                     }}>
                         Convert Another PDF
                     </Button>
