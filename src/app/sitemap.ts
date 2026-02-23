@@ -40,19 +40,7 @@ const staticPages = [
     'pricing',
 ]
 
-// High-volume keyword landing pages (SEO-optimized guides)
-const landingPages = [
-    'how-to-merge-pdf-files-windows-10',
-    'how-to-compress-pdf-to-100kb',
-    'how-to-convert-jpg-to-pdf-iphone',
-    'how-to-split-pdf-by-page-number',
-    'how-to-convert-word-to-pdf-without-office',
-    'how-to-reduce-pdf-file-size-for-email',
-    'how-to-convert-pdf-to-word-editable',
-    'how-to-combine-multiple-pdfs-into-one',
-    'how-to-extract-pages-from-pdf',
-    'how-to-convert-excel-to-pdf-free',
-]
+// High-volume keyword landing pages removed - replaced with quality blog content
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://convertify.work'
