@@ -2,8 +2,8 @@
     "manifest_version": 3,
     "name": "Convertify - All-in-One PDF & File Converter",
     "short_name": "Convertify",
-    "version": "1.0.0",
-    "description": "All-in-one PDF toolkit. Merge, split, compress, and convert PDF, Word, JPG & more. Private, fast, and free to use.",
+    "version": "1.0.1",
+    "description": "Free PDF tools: merge, split, compress, convert PDF to Word/JPG/Excel. Also: HEIC to JPG, image compressor, resize. 30+ tools.",
     "icons": {
         "16": "icons/icon16.png",
         "32": "icons/icon32.png",

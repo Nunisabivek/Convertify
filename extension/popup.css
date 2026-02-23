@@ -784,3 +784,74 @@ body {
     cursor: wait;
     position: relative;
 }
+
+/* ============================================================================
+   SHARE SECTION - KEY FOR SEO TRAFFIC
+   ============================================================================ */
+.share-section {
+    background: linear-gradient(135deg, rgba(79, 143, 255, 0.1), rgba(139, 92, 246, 0.1));
+    border-top: 1px solid var(--border-subtle);
+    padding: 12px 16px;
+    text-align: center;
+}
+
+.share-title {
+    color: var(--text-secondary);
+    font-size: 11px;
+    margin-bottom: 8px;
+}
+
+.share-buttons {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transition);
+    cursor: pointer;
+}
+
+.share-btn.twitter {
+    background: #000;
+    color: #fff;
+    border: 1px solid #333;
+}
+
+.share-btn.twitter:hover {
+    background: #1a1a1a;
+    border-color: #555;
+}
+
+.share-btn.producthunt {
+    background: #da552f;
+    color: #fff;
+}
+
+.share-btn.producthunt:hover {
+    background: #f46035;
+}
+
+.share-btn.review {
+    background: #f59e0b;
+    color: #000;
+}
+
+.share-btn.review:hover {
+    background: #fbbf24;
+}
+
+.share-tagline {
+    color: var(--text-muted);
+    font-size: 9px;
+    margin-top: 8px;
+}
