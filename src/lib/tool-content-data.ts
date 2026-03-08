@@ -623,5 +623,219 @@ export const toolContentData: Record<string, {
             "Fixing flipped or reversed scanned document sets"
         ],
         keywords: ["reorder pdf pages free", "rearrange pdf online", "organize pdf pages", "change pdf page order"]
+    },
+    "svg-to-png": {
+        description: "Convert SVG vector graphics to high-resolution PNG images with Convertify. Our rendering engine preserves gradients, filters, and transparency while outputting crisp raster images at custom resolutions up to 4x scale. Perfect for designers who need pixel-perfect exports for web, social media, or print without installing desktop software.",
+        features: [
+            "High-Resolution Export: Render SVGs at 1x, 2x, 3x, or 4x scale",
+            "Transparency Preserved: Maintains alpha channels in PNG output",
+            "Gradient & Filter Support: Accurately renders complex SVG effects",
+            "Custom Dimensions: Set exact width and height in pixels",
+            "Batch Conversion: Process multiple SVG files simultaneously",
+            "Background Options: Export with transparent or custom color backgrounds",
+            "100% Private: All rendering happens locally in your browser"
+        ],
+        useCases: [
+            "Exporting logo designs as high-res PNGs for social media profiles",
+            "Converting SVG icons to PNG for platforms that lack SVG support",
+            "Creating retina-ready images from vector illustrations",
+            "Generating favicon and app icon sizes from a single SVG source",
+            "Preparing vector artwork for print by converting to high-DPI PNG"
+        ],
+        keywords: ["svg to png", "convert svg to png", "svg to png converter", "svg to png high quality", "svg to png online free", "vector to raster", "svg to image", "svg to png transparent", "svg to png high resolution", "svg to bitmap"]
+    },
+    "bmp-to-jpg": {
+        description: "Convert large BMP bitmap files to compact JPG images with Convertify. Reduce file sizes by up to 95% while maintaining excellent visual quality through adjustable compression settings. Ideal for modernizing legacy image archives and preparing bitmap screenshots for web or email sharing.",
+        features: [
+            "Massive Size Reduction: Compress BMP files by up to 95%",
+            "Adjustable Quality: Fine-tune JPG compression from 1-100%",
+            "Batch Processing: Convert hundreds of BMP files at once",
+            "Color Fidelity: Preserves accurate color reproduction",
+            "EXIF Data Handling: Option to strip or preserve metadata",
+            "Instant Preview: Compare before and after quality visually",
+            "Browser-Based: No software installation required"
+        ],
+        useCases: [
+            "Converting legacy Windows BMP screenshots to shareable JPGs",
+            "Reducing bitmap scan file sizes for email attachments",
+            "Modernizing old image archives stored in BMP format",
+            "Preparing bitmap graphics for website or blog uploads",
+            "Converting medical or industrial BMP captures for reports",
+            "Shrinking large BMP photos for cloud storage savings"
+        ],
+        keywords: ["bmp to jpg", "convert bmp to jpg", "bmp to jpeg", "bitmap to jpg converter", "bmp to jpg online free", "bmp to jpeg converter", "convert bitmap to jpeg", "bmp file converter", "bmp to jpg no watermark", "compress bmp to jpg"]
+    },
+    "gif-to-png": {
+        description: "Convert GIF images to high-quality PNG format with Convertify. Upgrade your graphics from the limited 256-color GIF palette to full 24-bit PNG color depth with alpha transparency support. Perfect for extracting individual frames from animated GIFs or converting static GIF logos and icons to a modern lossless format.",
+        features: [
+            "Lossless Conversion: Zero quality degradation during format change",
+            "Full Color Depth: Upgrade from 256 colors to 16.7 million colors",
+            "Alpha Transparency: Convert GIF transparency to proper PNG alpha",
+            "Frame Extraction: Pull individual frames from animated GIFs",
+            "Batch Mode: Convert multiple GIF files to PNG simultaneously",
+            "File Size Optimization: Smart compression for smaller PNG output"
+        ],
+        useCases: [
+            "Upgrading legacy GIF logos to high-quality PNG for branding",
+            "Extracting specific frames from animated GIFs as still images",
+            "Converting GIF icons to PNG for modern web applications",
+            "Improving image quality for GIF graphics used in presentations",
+            "Replacing GIF website assets with optimized PNG versions"
+        ],
+        keywords: ["gif to png", "convert gif to png", "gif to png converter", "gif to png online free", "animated gif to png", "gif frame extractor", "gif to png transparent", "gif to png high quality", "convert gif to png free", "gif image converter"]
+    },
+    "tiff-to-pdf": {
+        description: "Convert TIFF and multi-page TIFF files to professional PDF documents with Convertify. Our converter handles single and multi-page TIFF images seamlessly, preserving high resolution and color accuracy throughout the process. Ideal for digitizing scanned documents, architectural plans, and medical imaging files into universally accessible PDF format.",
+        features: [
+            "Multi-Page Support: Convert multi-page TIFF stacks into one PDF",
+            "High Resolution: Preserves original DPI and image clarity",
+            "Color Accuracy: Maintains CMYK, RGB, and grayscale color spaces",
+            "Compression Options: Choose between quality and file size balance",
+            "Page Size Control: Fit to A4, Letter, or original image dimensions",
+            "Batch Conversion: Process multiple TIFF files into separate PDFs",
+            "100% Private: Files are processed locally in your browser"
+        ],
+        useCases: [
+            "Converting scanned multi-page TIFF documents to shareable PDFs",
+            "Archiving high-resolution architectural blueprints as PDFs",
+            "Preparing medical imaging TIFF files for digital patient records",
+            "Converting fax TIFF files into readable PDF documents",
+            "Digitizing legacy document archives stored in TIFF format",
+            "Creating PDF submissions from TIFF scans for government portals"
+        ],
+        keywords: ["tiff to pdf", "convert tiff to pdf", "tiff to pdf converter", "multi page tiff to pdf", "tif to pdf", "tiff to pdf online free", "convert tif to pdf", "tiff to pdf free", "batch tiff to pdf", "multipage tiff to pdf", "tiff to pdf no watermark"]
+    },
+    "csv-to-json": {
+        description: "Transform CSV spreadsheet data into structured JSON format with Convertify. Our intelligent parser handles complex CSV files with quoted fields, nested commas, and various delimiters while producing clean, properly formatted JSON output. Essential for developers and data analysts who need to convert tabular data into API-ready JSON structures.",
+        features: [
+            "Smart Parsing: Handles quoted fields, escaped characters, and edge cases",
+            "Custom Delimiters: Support for commas, tabs, semicolons, and pipes",
+            "Header Detection: Automatically uses first row as JSON keys",
+            "Nested Output: Option to generate nested or flat JSON structures",
+            "Array or Object: Choose between JSON array or keyed object output",
+            "Pretty Print: Formatted JSON output with proper indentation",
+            "Large File Support: Process CSV files with thousands of rows efficiently",
+            "100% Private: Data conversion happens entirely in your browser"
+        ],
+        useCases: [
+            "Converting exported spreadsheet data for REST API consumption",
+            "Preparing CSV datasets for NoSQL database imports like MongoDB",
+            "Transforming analytics CSV exports into JSON for dashboards",
+            "Converting product catalog CSVs to JSON for ecommerce platforms",
+            "Migrating legacy CSV data stores to modern JSON-based systems",
+            "Creating JSON configuration files from CSV parameter sheets"
+        ],
+        keywords: ["csv to json", "convert csv to json", "csv to json converter", "csv to json online", "csv to json free", "csv to json parser", "spreadsheet to json", "tabular data to json", "csv to json array", "csv to json online free", "csv file to json"]
+    },
+    "json-to-csv": {
+        description: "Convert JSON data into clean CSV spreadsheet format with Convertify. Our converter intelligently flattens nested JSON objects and arrays into organized rows and columns, making complex API responses and database exports easy to analyze in Excel or Google Sheets. Handles large JSON files efficiently with smart column mapping.",
+        features: [
+            "Auto-Flattening: Converts nested JSON objects into flat CSV columns",
+            "Array Handling: Intelligently expands JSON arrays into separate rows",
+            "Column Mapping: Automatically detects and organizes all JSON keys",
+            "Custom Delimiters: Output as CSV, TSV, or custom-separated values",
+            "Header Generation: Creates clean column headers from JSON paths",
+            "Large File Support: Efficiently processes JSON files with thousands of records",
+            "Excel Compatible: Output opens perfectly in Excel and Google Sheets"
+        ],
+        useCases: [
+            "Exporting API response data to spreadsheets for business analysis",
+            "Converting MongoDB or Firebase exports to CSV for reporting",
+            "Creating Excel reports from JSON log files and analytics data",
+            "Preparing JSON datasets for import into SQL databases",
+            "Converting JSON product feeds to CSV for bulk editing",
+            "Transforming JSON survey results into spreadsheet format for review",
+            "Flattening complex nested data for non-technical stakeholders"
+        ],
+        keywords: ["json to csv", "convert json to csv", "json to csv converter", "json to csv online", "json to csv free", "json to spreadsheet", "json to excel", "flatten json to csv", "json to csv online free", "json array to csv", "json to csv converter free"]
+    },
+    "xml-to-json": {
+        description: "Convert XML documents to clean JSON format with Convertify. Our parser handles complex XML structures including attributes, namespaces, CDATA sections, and deeply nested elements while producing readable, well-structured JSON output. Perfect for developers modernizing legacy XML APIs or migrating configuration files to JSON format.",
+        features: [
+            "Full XML Support: Handles attributes, namespaces, and CDATA sections",
+            "Smart Attribute Mapping: Converts XML attributes to JSON properties",
+            "Namespace Handling: Preserves or strips XML namespace prefixes",
+            "Array Detection: Identifies repeating elements as JSON arrays",
+            "Pretty Formatting: Outputs clean, indented JSON for readability",
+            "Validation: Checks XML well-formedness before conversion",
+            "Large File Support: Processes complex XML documents efficiently",
+            "100% Browser-Based: Your data never leaves your device"
+        ],
+        useCases: [
+            "Migrating legacy SOAP API responses to modern JSON format",
+            "Converting XML configuration files to JSON for Node.js projects",
+            "Transforming XML data feeds into JSON for frontend applications",
+            "Parsing XML sitemaps into JSON for SEO analysis tools",
+            "Converting XML-based RSS feeds to JSON for web dashboards",
+            "Modernizing enterprise XML data stores to JSON databases"
+        ],
+        keywords: ["xml to json", "convert xml to json", "xml to json converter", "xml to json online", "xml to json free", "xml parser to json", "xml to json online free", "xml to json converter free", "xml data to json", "parse xml to json", "xml to json transformer"]
+    },
+    "markdown-to-pdf": {
+        description: "Convert Markdown files to beautifully formatted PDF documents with Convertify. Our renderer supports full GitHub Flavored Markdown including tables, code blocks with syntax highlighting, task lists, and embedded images. Generate professional documentation, reports, and manuscripts from plain text Markdown with customizable styling and page layout options.",
+        features: [
+            "GitHub Flavored Markdown: Full GFM support including tables and task lists",
+            "Syntax Highlighting: Beautiful code block rendering for 50+ languages",
+            "Custom Styling: Choose fonts, margins, and page sizes for your PDF",
+            "Table of Contents: Auto-generate TOC from Markdown headings",
+            "Image Support: Embeds linked and inline images into the PDF",
+            "Math Rendering: Supports LaTeX math equations and formulas",
+            "Page Headers/Footers: Add custom headers, footers, and page numbers",
+            "100% Private: Conversion happens entirely in your browser"
+        ],
+        useCases: [
+            "Generating professional PDF documentation from README files",
+            "Creating printable reports from Markdown project notes",
+            "Converting technical blog posts to downloadable PDF articles",
+            "Producing academic papers and manuscripts from Markdown source",
+            "Building PDF user manuals from Markdown documentation repos",
+            "Creating polished resumes and CVs written in Markdown"
+        ],
+        keywords: ["markdown to pdf", "convert markdown to pdf", "md to pdf", "markdown to pdf converter", "markdown to pdf online", "markdown to pdf free", "md to pdf converter", "github markdown to pdf", "markdown to pdf online free", "convert md to pdf free", "markdown pdf generator"]
+    },
+    "base64": {
+        description: "Encode and decode Base64 strings instantly with Convertify. Convert text, files, and images to and from Base64 encoding for embedding data in HTML, CSS, JSON, and API payloads. Our tool supports standard Base64 and URL-safe Base64 variants, handling large inputs efficiently with real-time encoding and decoding preview.",
+        features: [
+            "Bidirectional: Encode to Base64 and decode from Base64 instantly",
+            "File Support: Encode images, documents, and binary files to Base64",
+            "URL-Safe Mode: Generate URL-safe Base64 strings for web applications",
+            "Real-Time Preview: See encoded or decoded output as you type",
+            "Large Input Handling: Process large files and strings efficiently",
+            "Copy to Clipboard: One-click copy of encoded or decoded results",
+            "Data URI Generation: Create ready-to-use data URIs for HTML and CSS"
+        ],
+        useCases: [
+            "Embedding images as Base64 data URIs in HTML and CSS files",
+            "Encoding API authentication tokens and credentials",
+            "Decoding Base64 strings from API responses for debugging",
+            "Converting binary file content for JSON payload transmission",
+            "Generating Base64 encoded email attachments for MIME messages",
+            "Encoding configuration data for environment variables",
+            "Debugging encoded strings in JWT tokens and cookies"
+        ],
+        keywords: ["base64 encoder", "base64 decoder", "base64 encode", "base64 decode", "base64 converter", "base64 to text", "text to base64", "base64 online", "base64 encode online", "base64 decode online", "image to base64", "base64 to image"]
+    },
+    "qr-code-generator": {
+        description: "Generate custom QR codes instantly with Convertify. Create scannable QR codes for URLs, text, WiFi credentials, vCards, and more with full customization of colors, size, and error correction levels. Download in PNG or SVG format for both digital and print use. All generation happens locally in your browser for complete privacy.",
+        features: [
+            "Multiple Data Types: URLs, text, WiFi, vCard, email, and SMS",
+            "Custom Colors: Set foreground and background colors to match branding",
+            "Size Control: Generate QR codes from 128px to 2048px resolution",
+            "Error Correction: Choose from L, M, Q, or H correction levels",
+            "SVG Export: Download vector QR codes for perfect print quality",
+            "Logo Embedding: Add a custom logo or icon to the center of QR codes",
+            "Batch Generation: Create multiple QR codes from a list of inputs",
+            "100% Private: QR codes are generated entirely in your browser"
+        ],
+        useCases: [
+            "Creating QR codes for business cards and marketing materials",
+            "Generating WiFi login QR codes for offices and restaurants",
+            "Adding QR codes to product packaging for quick URL access",
+            "Creating event check-in QR codes for tickets and badges",
+            "Generating vCard QR codes for easy contact sharing",
+            "Adding scannable links to printed flyers and posters",
+            "Creating QR codes for payment links and digital menus"
+        ],
+        keywords: ["qr code generator", "create qr code", "qr code maker", "generate qr code free", "qr code generator online", "custom qr code", "qr code with logo", "wifi qr code generator", "qr code creator free", "qr code png", "qr code svg", "free qr code generator"]
     }
 };

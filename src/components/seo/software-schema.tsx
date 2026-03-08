@@ -1,12 +1,8 @@
-import React from 'react'
-
 interface SoftwareApplicationSchemaProps {
     toolName: string
     toolSlug: string
     description: string
     category?: string
-    ratingValue?: string
-    ratingCount?: string
 }
 
 export function SoftwareApplicationSchema({
@@ -14,12 +10,10 @@ export function SoftwareApplicationSchema({
     toolSlug,
     description,
     category = "UtilitiesApplication",
-    ratingValue = "4.8",
-    ratingCount = "1250"
 }: SoftwareApplicationSchemaProps) {
     const softwareSchema = {
         "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
+        "@type": ["SoftwareApplication", "WebApplication"],
         "name": `Convertify ${toolName}`,
         "applicationCategory": category,
         "applicationSubCategory": "PDF Tools",
@@ -34,16 +28,9 @@ export function SoftwareApplicationSchema({
             "availability": "https://schema.org/InStock",
             "priceValidUntil": "2030-12-31"
         },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": ratingValue,
-            "ratingCount": ratingCount,
-            "bestRating": "5",
-            "worstRating": "1"
-        },
         "softwareVersion": "2.0",
         "datePublished": "2024-01-01",
-        "dateModified": new Date().toISOString().split('T')[0],
+        "dateModified": "2026-03-01",
         "author": {
             "@type": "Organization",
             "name": "Convertify",
@@ -66,7 +53,7 @@ export function SoftwareApplicationSchema({
             "No watermarks added",
             "100% client-side processing",
             "Works on all devices",
-            "Secure and private"
+            "Secure and private - files never leave your browser"
         ],
         "browserRequirements": "Requires JavaScript. Works with Chrome, Firefox, Safari, Edge",
         "softwareRequirements": "Modern web browser with JavaScript enabled",

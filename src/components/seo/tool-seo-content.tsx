@@ -8,7 +8,7 @@ interface ToolContentProps {
     description: string;
     features: string[];
     useCases: string[];
-    keywords: string[];
+    keywords?: string[];
 }
 
 // Generic feature icons based on common PDF tool benefits
@@ -85,12 +85,11 @@ export function ToolSeoContent({
                     </div>
                 </div>
 
-                {/* Keyword-Rich Footer */}
-                <div className="text-sm text-slate-500 leading-relaxed">
+                {/* Trust Signal */}
+                <div className="text-sm text-slate-500 leading-relaxed border-t border-slate-100 pt-6">
                     <p>
-                        Looking for a free {toolName.toLowerCase()} tool? Convertify offers the best online solution for {keywords.slice(0, 3).join(', ')}.
-                        Our tool is completely free with no registration required, no watermarks, and no daily limits.
-                        Unlike paid alternatives, you can {keywords[0]} without creating an account.
+                        Convertify processes all files directly in your browser — nothing is uploaded to any server.
+                        Your documents stay private and secure on your device at all times.
                     </p>
                 </div>
             </div>

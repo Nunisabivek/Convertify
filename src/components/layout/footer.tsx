@@ -86,7 +86,7 @@ export function Footer() {
                             <span className="text-sm text-slate-500">Free PDF Tools</span>
                         </div>
                         <p className="text-center text-sm text-slate-500">
-                            © 2025 Convertify. All rights reserved. Made with ❤️ for everyone.
+                            © 2026 Convertify. All rights reserved. Made with ❤️ for everyone.
                         </p>
                         <div className="flex items-center gap-4 text-sm text-slate-500">
                             <span>29 Tools</span>

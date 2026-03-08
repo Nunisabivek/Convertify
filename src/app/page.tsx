@@ -5,15 +5,15 @@ import { MobileHomePage } from '@/components/mobile';
 
 // Generate metadata for homepage
 export const metadata: Metadata = {
-  title: 'Convertify: All-in-One File Converter | Free Online PDF Tools - No Download, No Pricing',
-  description: 'Convertify (Convertifyy / Convertfy) is the #1 free online file converter and PDF tool suite. Merge, compress, convert PDF to Word, PDF to images — no sign-up, no pricing, no download required. Use ConvertifyTool from any device.',
-  keywords: ['convertify', 'convertifyy', 'convertfy', 'convertify free', 'convertifytool', 'convertify download', 'convertify pricing', 'convertify: all-in-one file converter', 'free pdf tools', 'online pdf converter', 'merge pdf free', 'compress pdf online', 'pdf to images converter online', 'convertify pdf to word', 'convertifyy pdf'],
+  title: 'Convertify - Free Online PDF Tools | Merge, Compress, Convert',
+  description: 'Free online PDF tool suite — merge, compress, convert PDF to Word, images and more. No sign-up, no watermarks, no file limits. Works entirely in your browser.',
+  keywords: ['convertify', 'convertifyy', 'convertfy', 'convertifytool', 'free pdf tools', 'online pdf converter', 'merge pdf free', 'compress pdf online', 'pdf to word converter', 'pdf to jpg', 'word to pdf', 'compress pdf 100kb', 'split pdf online', 'pdf editor free'],
   alternates: {
     canonical: 'https://convertify.work',
   },
   openGraph: {
-    title: 'Convertify (Convertifyy) - All-in-One Free File Converter & PDF Tools (No Download)',
-    description: 'Convertify (Convertifyy / Convertfy) is the free online PDF tool suite — merge, compress, convert PDFs to Word & images. No watermarks, no pricing, no sign-up. Official ConvertifyTool for mobile and desktop.',
+    title: 'Convertify - Free Online PDF & File Converter Tools',
+    description: 'Merge, compress, convert PDFs to Word & images — free, no watermarks, no sign-up. Works entirely in your browser with no file uploads to servers.',
     url: 'https://convertify.work',
     siteName: 'Convertify',
     images: [
@@ -41,12 +41,7 @@ const softwareSchema = {
     price: '0',
     priceCurrency: 'USD',
   },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.8',
-    ratingCount: '15420',
-  },
-  description: 'Convertify (also known as Convertifyy, Convertfy, or ConvertifyTool) offers free online PDF tools — merge, convert, compress, split, and edit PDFs. PDF to images converter online, PDF to Word, and 30+ tools with no download required. No pricing or hidden fees. Works entirely in your browser.',
+  description: 'Convertify offers free online PDF tools — merge, convert, compress, split, and edit PDFs. Convert PDF to images, PDF to Word, and 30+ tools. No download required, no hidden fees. Works entirely in your browser.',
   url: 'https://convertify.work',
   image: 'https://convertify.work/images/og-banner.png',
   featureList: [

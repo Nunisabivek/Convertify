@@ -1070,5 +1070,342 @@ export const toolSeoData = {
             { name: "Rearrange", text: "Drag and drop thumbnails to your preferred sequence." },
             { name: "Download", text: "Save your perfectly ordered PDF document." }
         ]
+    },
+    "svg-to-png": {
+        title: "Convertify SVG to PNG Converter - High Quality Free Online",
+        description: "Convert SVG vector files to PNG images with custom resolution. Preserve transparency, set exact dimensions, and export crisp raster images. Free, private, no upload needed.",
+        keywords: [
+            "svg to png", "convert svg to png", "svg to png converter", "svg to png online free",
+            "svg to png high resolution", "svg to png transparent background", "convert svg to png 1080p",
+            "vector to raster converter", "svg to png with transparency", "batch svg to png",
+            "svg to png custom size", "convert svg file to png image", "svg to png no upload",
+            "svg export png quality", "scalable vector to png converter"
+        ],
+        h1: "SVG to PNG Converter - High Resolution Export Free Online",
+        faqs: [
+            {
+                question: "Can I set a custom resolution when converting SVG to PNG?",
+                answer: "Yes! You can specify exact pixel dimensions (width and height) or choose a scale multiplier (2x, 3x, 4x) to produce high-resolution PNG exports perfect for retina displays or print."
+            },
+            {
+                question: "Will my SVG transparency be preserved in the PNG?",
+                answer: "Absolutely. Convertify preserves full alpha-channel transparency from your SVG, so you get a clean PNG with a transparent background ready for use in designs or presentations."
+            },
+            {
+                question: "Is there a file size or complexity limit for SVGs?",
+                answer: "No. Since conversion happens entirely in your browser, there are no server-imposed limits. Even complex SVGs with gradients, filters, and embedded fonts convert smoothly."
+            }
+        ],
+        howToSteps: [
+            { name: "Upload SVG", text: "Select or drag and drop your SVG file into the converter." },
+            { name: "Set Options", text: "Choose your desired resolution, scale, and transparency settings." },
+            { name: "Download PNG", text: "Click convert and save your high-quality PNG image instantly." }
+        ]
+    },
+    "bmp-to-jpg": {
+        title: "Convertify BMP to JPG Converter - Reduce Size Free Online",
+        description: "Convert BMP bitmap files to compressed JPG images instantly. Reduce file size by up to 95% with adjustable quality. Free, no sign-up, works in your browser.",
+        keywords: [
+            "bmp to jpg", "convert bmp to jpg", "bmp to jpeg converter", "bmp to jpg online free",
+            "bitmap to jpeg", "bmp to jpg reduce file size", "convert bitmap to jpg online",
+            "bmp to jpg quality settings", "batch bmp to jpg converter", "bmp to jpeg compression",
+            "large bmp to small jpg", "windows bitmap to jpeg", "bmp file to jpg free",
+            "convert bmp screenshot to jpg", "bmp to jpg no watermark"
+        ],
+        h1: "BMP to JPG Converter - Shrink Bitmaps Free Online",
+        faqs: [
+            {
+                question: "How much smaller will my JPG be compared to the original BMP?",
+                answer: "BMP files are uncompressed, so converting to JPG typically reduces file size by 90-95%. A 10 MB BMP often becomes a 300-500 KB JPG with minimal visible quality loss."
+            },
+            {
+                question: "Can I control the JPG compression quality?",
+                answer: "Yes. Use the quality slider to balance file size and image clarity. Higher quality (80-100%) keeps more detail, while lower quality (40-60%) produces much smaller files."
+            },
+            {
+                question: "Will the image dimensions change during conversion?",
+                answer: "No. The pixel dimensions stay exactly the same — only the file format and compression change. Your image will look the same at the same resolution."
+            },
+            {
+                question: "Can I convert multiple BMP files at once?",
+                answer: "Yes, Convertify supports batch conversion. Drop all your BMP files at once and download them individually or as a ZIP archive."
+            }
+        ],
+        howToSteps: [
+            { name: "Upload BMP", text: "Select your BMP bitmap file or drag it into the converter." },
+            { name: "Adjust Quality", text: "Set your preferred JPG compression level using the quality slider." },
+            { name: "Download JPG", text: "Click convert and save your compressed JPG image." }
+        ]
+    },
+    "gif-to-png": {
+        title: "Convertify GIF to PNG Converter - Extract Frames Free Online",
+        description: "Convert GIF images to PNG format or extract individual frames from animated GIFs. Preserve transparency and get lossless quality. Free, private, no upload required.",
+        keywords: [
+            "gif to png", "convert gif to png", "gif to png converter online", "gif to png free",
+            "extract gif frames to png", "animated gif to png frames", "gif to png transparent",
+            "gif frame extractor", "gif to png lossless", "convert gif to png high quality",
+            "gif to png no background", "save gif as png", "gif to png batch converter",
+            "extract single frame from gif", "gif to png keep transparency"
+        ],
+        h1: "GIF to PNG Converter - Extract Frames Free Online",
+        faqs: [
+            {
+                question: "Can I extract individual frames from an animated GIF?",
+                answer: "Yes! Upload your animated GIF and Convertify will display all frames as a filmstrip. Select specific frames or extract all of them as separate PNG files."
+            },
+            {
+                question: "Is the PNG output lossless compared to the GIF?",
+                answer: "Yes. PNG is a lossless format, so converting from GIF preserves every pixel exactly. You may even get better quality since PNG supports millions of colors versus GIF's 256-color limit."
+            },
+            {
+                question: "Will transparency be preserved when converting GIF to PNG?",
+                answer: "Absolutely. GIF transparency is fully carried over to the PNG alpha channel. Unlike GIF, PNG supports partial transparency (semi-transparent pixels), giving you even more flexibility."
+            }
+        ],
+        howToSteps: [
+            { name: "Upload GIF", text: "Select your GIF file — static or animated." },
+            { name: "Choose Frames", text: "Pick individual frames to extract or convert the entire image." },
+            { name: "Download PNG", text: "Save your lossless PNG files instantly." }
+        ]
+    },
+    "tiff-to-pdf": {
+        title: "Convertify TIFF to PDF Converter - Multi-Page Free Online",
+        description: "Convert single or multi-page TIFF files to PDF documents. Preserve original quality, combine multiple TIFFs into one PDF. Free, private, no software installation needed.",
+        keywords: [
+            "tiff to pdf", "convert tiff to pdf", "tiff to pdf converter", "tiff to pdf online free",
+            "multi page tiff to pdf", "tif to pdf converter", "tiff to pdf merge",
+            "convert tiff scan to pdf", "tiff to pdf high quality", "batch tiff to pdf",
+            "combine tiff files into pdf", "tiff to pdf no watermark", "multipage tiff to pdf online",
+            "scanned tiff to pdf free", "tiff to pdf preserve quality"
+        ],
+        h1: "TIFF to PDF Converter - Multi-Page Support Free Online",
+        faqs: [
+            {
+                question: "Can I convert a multi-page TIFF into a single PDF?",
+                answer: "Yes! Convertify automatically detects all pages in a multi-page TIFF file and places each one on its own PDF page, preserving the original order and quality."
+            },
+            {
+                question: "Can I combine multiple separate TIFF files into one PDF?",
+                answer: "Absolutely. Upload several TIFF files, arrange them in your preferred order, and export them all as a single, multi-page PDF document."
+            },
+            {
+                question: "Will the image quality be reduced during conversion?",
+                answer: "No. Convertify embeds your TIFF images into the PDF at their original resolution and quality. There is no recompression or downsampling applied by default."
+            },
+            {
+                question: "Is this suitable for converting scanned documents?",
+                answer: "Yes, this tool is ideal for scanned documents stored as TIFF. It preserves the scan quality and produces a standard PDF that's easy to share, email, or archive."
+            }
+        ],
+        howToSteps: [
+            { name: "Upload TIFF", text: "Select one or more TIFF files from your device." },
+            { name: "Arrange Pages", text: "Reorder pages or files if needed using drag and drop." },
+            { name: "Download PDF", text: "Click convert and save your multi-page PDF document." }
+        ]
+    },
+    "csv-to-json": {
+        title: "Convertify CSV to JSON Converter - Instant Free Online",
+        description: "Convert CSV spreadsheet data to clean JSON format instantly. Auto-detects headers, supports nested structures, and handles large files. Free, private, no upload required.",
+        keywords: [
+            "csv to json", "convert csv to json", "csv to json converter", "csv to json online free",
+            "csv to json array", "csv to json with headers", "csv file to json format",
+            "spreadsheet to json", "csv to json api ready", "bulk csv to json converter",
+            "csv to nested json", "csv to json no upload", "convert csv data to json object",
+            "csv to json formatter", "csv export to json free"
+        ],
+        h1: "CSV to JSON Converter - Clean Data Transformation Free Online",
+        faqs: [
+            {
+                question: "How are CSV headers handled in the JSON output?",
+                answer: "Convertify uses the first row of your CSV as JSON property names by default. Each subsequent row becomes a JSON object with those keys, producing a clean array of objects ready for APIs or databases."
+            },
+            {
+                question: "Can I convert CSV without headers?",
+                answer: "Yes. Toggle off the 'First row is headers' option and Convertify will use numeric indices (field_0, field_1, etc.) or let you define custom property names for each column."
+            },
+            {
+                question: "Does it handle special characters and commas inside fields?",
+                answer: "Absolutely. The parser correctly handles quoted fields containing commas, newlines, and special characters according to the RFC 4180 CSV standard, so your data converts accurately."
+            },
+            {
+                question: "Is there a row or file size limit?",
+                answer: "No hard limits. Since processing happens in your browser, you can convert large CSV files with hundreds of thousands of rows. Performance depends on your device's memory."
+            }
+        ],
+        howToSteps: [
+            { name: "Upload CSV", text: "Paste your CSV data or upload a .csv file." },
+            { name: "Configure", text: "Set header options, delimiter type, and output format preferences." },
+            { name: "Download JSON", text: "Copy the JSON output or download it as a .json file." }
+        ]
+    },
+    "json-to-csv": {
+        title: "Convertify JSON to CSV Converter - Export Data Free Online",
+        description: "Convert JSON data to CSV spreadsheet format instantly. Flatten nested objects, auto-detect arrays, and export clean tabular data. Free, private, no sign-up needed.",
+        keywords: [
+            "json to csv", "convert json to csv", "json to csv converter", "json to csv online free",
+            "json to csv export", "json array to csv", "json to spreadsheet",
+            "flatten json to csv", "nested json to csv converter", "json to csv download",
+            "api json to csv", "json to csv no upload", "json data to csv table",
+            "convert json file to csv free", "json to csv formatter online"
+        ],
+        h1: "JSON to CSV Converter - Export Clean Spreadsheets Free Online",
+        faqs: [
+            {
+                question: "How does Convertify handle nested JSON objects?",
+                answer: "Nested objects are flattened using dot notation (e.g., address.city becomes a column header). This gives you a clean, flat CSV that's easy to work with in Excel or Google Sheets."
+            },
+            {
+                question: "What JSON structures are supported?",
+                answer: "Convertify handles arrays of objects (most common), single objects, and deeply nested structures. It auto-detects the data shape and produces the most logical tabular layout."
+            },
+            {
+                question: "Can I choose which fields to include in the CSV?",
+                answer: "Yes. After uploading your JSON, you can select or deselect specific fields to include in the output. This is useful for large JSON files where you only need certain columns."
+            }
+        ],
+        howToSteps: [
+            { name: "Upload JSON", text: "Paste your JSON data or upload a .json file." },
+            { name: "Select Fields", text: "Choose which fields to include and set flattening options." },
+            { name: "Download CSV", text: "Export your clean CSV file for use in any spreadsheet app." }
+        ]
+    },
+    "xml-to-json": {
+        title: "Convertify XML to JSON Converter - Accurate Free Online",
+        description: "Convert XML documents to clean JSON format with accurate structure preservation. Handles attributes, namespaces, and nested elements. Free, private, browser-based.",
+        keywords: [
+            "xml to json", "convert xml to json", "xml to json converter", "xml to json online free",
+            "xml to json parser", "xml to json with attributes", "xml file to json format",
+            "xml to json transformer", "xml to json preserve structure", "bulk xml to json",
+            "xml to json namespace support", "xml to json no upload", "convert xml data to json object",
+            "xml to json api", "xml to json free converter online"
+        ],
+        h1: "XML to JSON Converter - Accurate Structure Mapping Free Online",
+        faqs: [
+            {
+                question: "How are XML attributes represented in the JSON output?",
+                answer: "XML attributes are converted to JSON properties prefixed with '@' by default (e.g., @id, @class). You can customize this prefix or flatten attributes alongside child elements."
+            },
+            {
+                question: "Does it handle XML namespaces correctly?",
+                answer: "Yes. Namespace prefixes are preserved in property names by default. You can also choose to strip namespaces for cleaner output if your use case doesn't require them."
+            },
+            {
+                question: "Can I convert large XML files?",
+                answer: "Yes. All processing happens in your browser with no server upload. The converter handles large XML documents efficiently, though very large files (100MB+) may depend on your device's available memory."
+            },
+            {
+                question: "How are repeated XML elements handled?",
+                answer: "Repeated sibling elements with the same tag name are automatically grouped into JSON arrays, which is the natural and expected behavior for most XML-to-JSON use cases."
+            }
+        ],
+        howToSteps: [
+            { name: "Upload XML", text: "Paste your XML content or upload an .xml file." },
+            { name: "Configure", text: "Set options for attribute handling, namespaces, and formatting." },
+            { name: "Download JSON", text: "Copy or download the converted JSON output." }
+        ]
+    },
+    "markdown-to-pdf": {
+        title: "Convertify Markdown to PDF - Beautiful Export Free Online",
+        description: "Convert Markdown files to professionally styled PDF documents. Supports GitHub-flavored Markdown, code highlighting, tables, and custom themes. Free and private.",
+        keywords: [
+            "markdown to pdf", "convert markdown to pdf", "markdown to pdf converter", "md to pdf online free",
+            "markdown to pdf styled", "github markdown to pdf", "markdown to pdf with code highlighting",
+            "md to pdf converter online", "markdown to pdf free", "markdown to pdf custom theme",
+            "convert md file to pdf", "markdown to pdf tables", "markdown export pdf",
+            "markdown to pdf no install", "markdown to pdf syntax highlighting"
+        ],
+        h1: "Markdown to PDF Converter - Beautiful Documents Free Online",
+        faqs: [
+            {
+                question: "Does it support GitHub-Flavored Markdown (GFM)?",
+                answer: "Yes! Convertify fully supports GFM including task lists, tables, strikethrough, autolinks, and fenced code blocks with syntax highlighting for over 100 programming languages."
+            },
+            {
+                question: "Can I customize the PDF styling?",
+                answer: "Absolutely. Choose from several built-in themes (light, dark, academic, minimal) or adjust fonts, margins, and page size. You can also add custom CSS for full control over the output."
+            },
+            {
+                question: "Are images and diagrams included in the PDF?",
+                answer: "Yes. Inline images, linked images, and even Mermaid diagrams (if supported in your Markdown) are rendered and embedded directly into the PDF output."
+            },
+            {
+                question: "Can I add a table of contents to the PDF?",
+                answer: "Yes. Enable the Table of Contents option and Convertify will automatically generate one based on your heading structure (H1, H2, H3, etc.) with clickable page links."
+            }
+        ],
+        howToSteps: [
+            { name: "Upload Markdown", text: "Paste your Markdown text or upload a .md file." },
+            { name: "Choose Theme", text: "Select a visual theme and adjust page layout settings." },
+            { name: "Download PDF", text: "Export your beautifully formatted PDF document." }
+        ]
+    },
+    "base64": {
+        title: "Convertify Base64 Encoder Decoder - Instant Free Online",
+        description: "Encode text or files to Base64, or decode Base64 strings back to original content. Supports text, images, and binary files. Free, instant, fully private.",
+        keywords: [
+            "base64 encoder", "base64 decoder", "base64 encode online", "base64 decode online",
+            "base64 converter", "encode to base64", "decode base64 string", "base64 image encoder",
+            "base64 file encoder", "text to base64", "base64 to text", "base64 encode decode free",
+            "base64 online tool", "base64 encode file free", "base64 string converter"
+        ],
+        h1: "Base64 Encoder & Decoder - Instant Conversion Free Online",
+        faqs: [
+            {
+                question: "What is Base64 encoding used for?",
+                answer: "Base64 converts binary data into ASCII text, making it safe to embed in JSON, HTML, CSS, emails, and URLs. It's commonly used for embedding small images in web pages or transmitting binary data through text-only channels."
+            },
+            {
+                question: "Can I encode files like images or PDFs to Base64?",
+                answer: "Yes! Drop any file into the encoder and get its Base64 representation. This is useful for embedding images as data URIs in HTML/CSS or sending files through text-based APIs."
+            },
+            {
+                question: "Does Base64 encoding increase file size?",
+                answer: "Yes, Base64 encoding increases the data size by approximately 33%. This is a trade-off for the ability to represent binary data as safe ASCII text."
+            },
+            {
+                question: "Is my data sent to a server?",
+                answer: "No. All encoding and decoding happens entirely in your browser using JavaScript. Your data never leaves your device, making it safe for sensitive content."
+            }
+        ],
+        howToSteps: [
+            { name: "Input Data", text: "Paste text or upload a file you want to encode or decode." },
+            { name: "Choose Mode", text: "Select Encode (to Base64) or Decode (from Base64)." },
+            { name: "Get Result", text: "Copy the output or download the decoded file instantly." }
+        ]
+    },
+    "qr-code-generator": {
+        title: "Convertify QR Code Generator - Custom Colors Free Online",
+        description: "Generate QR codes for URLs, text, Wi-Fi, vCards, and more. Customize colors, add logos, set error correction, and download as PNG or SVG. Free, no sign-up required.",
+        keywords: [
+            "qr code generator", "create qr code", "qr code maker free", "qr code generator online",
+            "custom qr code", "qr code with logo", "qr code generator free no sign up",
+            "wifi qr code generator", "url qr code", "vcard qr code generator",
+            "qr code png svg download", "qr code custom colors", "bulk qr code generator",
+            "qr code generator high resolution", "free qr code maker online"
+        ],
+        h1: "QR Code Generator - Custom Design Free Online",
+        faqs: [
+            {
+                question: "What types of data can I encode in a QR code?",
+                answer: "Convertify supports URLs, plain text, Wi-Fi credentials (auto-connect), vCards (contact info), email addresses, phone numbers, SMS messages, and geographic coordinates."
+            },
+            {
+                question: "Can I add my logo or brand colors to the QR code?",
+                answer: "Yes! Upload a logo to place at the center of the QR code, and customize foreground and background colors to match your brand. The error correction level adjusts automatically to keep the code scannable."
+            },
+            {
+                question: "What download formats are available?",
+                answer: "You can download your QR code as PNG (for web and print) or SVG (for scalable vector use in design tools). Both formats support transparent backgrounds."
+            },
+            {
+                question: "Do the generated QR codes expire?",
+                answer: "No. QR codes generated by Convertify are static and never expire. They encode the data directly, with no redirect service or tracking involved."
+            }
+        ],
+        howToSteps: [
+            { name: "Enter Data", text: "Type a URL, text, Wi-Fi details, or other data to encode." },
+            { name: "Customize Design", text: "Set colors, add a logo, and choose error correction level." },
+            { name: "Download QR Code", text: "Save your QR code as PNG or SVG for immediate use." }
+        ]
     }
 }

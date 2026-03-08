@@ -722,5 +722,147 @@ export const useCases: UseCase[] = [
         toolName: 'WebP Converter',
         keywords: ['jpg to webp', 'convert jpg to webp', 'compress to webp'],
         faqs: []
+    },
+    // === New Tools Use Cases ===
+    {
+        slug: 'svg-to-png-for-social-media',
+        title: 'Convert SVG Logo to PNG for Social Media Upload',
+        description: 'Convert your SVG vector logo to PNG format for uploading to social media platforms that don\'t support SVG. Choose custom dimensions for each platform.',
+        toolHref: '/svg-to-png',
+        toolName: 'SVG to PNG',
+        keywords: ['svg to png social media', 'convert logo to png', 'svg for instagram', 'svg for facebook'],
+        faqs: [
+            { question: 'Why can\'t I upload SVG to social media?', answer: 'Most social media platforms (Instagram, Facebook, Twitter) don\'t support SVG format. Converting to PNG preserves quality while ensuring compatibility.' },
+            { question: 'What size should I use?', answer: 'For profile pictures use 512x512px. For post images, 1080x1080px for Instagram, 1200x630px for Facebook.' }
+        ]
+    },
+    {
+        slug: 'svg-to-png-for-email-signature',
+        title: 'Convert SVG to PNG for Email Signature',
+        description: 'Convert your SVG logo to PNG for use in email signatures. Email clients don\'t support SVG, so PNG is the best format for sharp logos in emails.',
+        toolHref: '/svg-to-png',
+        toolName: 'SVG to PNG',
+        keywords: ['svg to png email', 'email signature logo', 'convert svg for outlook', 'svg to png gmail'],
+        faqs: []
+    },
+    {
+        slug: 'csv-to-json-for-api-development',
+        title: 'Convert CSV Data to JSON for REST API Development',
+        description: 'Transform CSV datasets into JSON format for API endpoints, database seeding, and web application development. Auto-detects headers and data types.',
+        toolHref: '/csv-to-json',
+        toolName: 'CSV to JSON',
+        keywords: ['csv to json api', 'csv to json developer', 'convert spreadsheet to api', 'csv to json for database'],
+        faqs: [
+            { question: 'Can I convert large CSV files?', answer: 'Yes, since everything is processed in your browser, there are no file size limits. Large files may take a moment to parse.' },
+            { question: 'Are data types preserved?', answer: 'The converter detects numbers and booleans automatically, converting them from string format to proper JSON data types.' }
+        ]
+    },
+    {
+        slug: 'csv-to-json-for-data-migration',
+        title: 'Convert CSV to JSON for Database Migration',
+        description: 'Transform CSV exports from databases into JSON format for importing into MongoDB, Firebase, or other NoSQL databases.',
+        toolHref: '/csv-to-json',
+        toolName: 'CSV to JSON',
+        keywords: ['csv to json mongodb', 'csv to json firebase', 'data migration csv', 'database import json'],
+        faqs: []
+    },
+    {
+        slug: 'json-to-csv-for-excel-analysis',
+        title: 'Convert JSON API Data to CSV for Excel Analysis',
+        description: 'Export JSON data from APIs and convert to CSV format for analysis in Excel or Google Sheets. Flattens nested objects automatically.',
+        toolHref: '/json-to-csv',
+        toolName: 'JSON to CSV',
+        keywords: ['json to csv excel', 'api data to spreadsheet', 'json export to csv', 'json to google sheets'],
+        faqs: [
+            { question: 'How are nested JSON objects handled?', answer: 'Nested objects are flattened using dot notation. For example, {"address":{"city":"NYC"}} becomes a column named "address.city".' }
+        ]
+    },
+    {
+        slug: 'json-to-csv-for-reporting',
+        title: 'Convert JSON Data to CSV for Business Reports',
+        description: 'Transform JSON data exports into CSV format for creating business reports and dashboards in spreadsheet applications.',
+        toolHref: '/json-to-csv',
+        toolName: 'JSON to CSV',
+        keywords: ['json to csv report', 'json to spreadsheet report', 'data export csv', 'business data csv'],
+        faqs: []
+    },
+    {
+        slug: 'qr-code-for-business-card',
+        title: 'Generate QR Code for Business Card',
+        description: 'Create a QR code linking to your website, LinkedIn, or contact info to add to your business card design.',
+        toolHref: '/qr-code-generator',
+        toolName: 'QR Code Generator',
+        keywords: ['qr code business card', 'qr code contact info', 'business card qr', 'vcard qr code'],
+        faqs: [
+            { question: 'What should I put in a business card QR code?', answer: 'Common options include your website URL, LinkedIn profile, vCard contact data, or a landing page with all your contact information.' },
+            { question: 'What size QR code for business cards?', answer: 'A 256x256 pixel QR code works well for standard business cards. Make sure there is sufficient contrast and quiet zone (white space) around the code.' }
+        ]
+    },
+    {
+        slug: 'qr-code-for-restaurant-menu',
+        title: 'Generate QR Code for Restaurant Menu',
+        description: 'Create a QR code that links to your digital restaurant menu. Customers scan with their phone to view the menu without touching a physical copy.',
+        toolHref: '/qr-code-generator',
+        toolName: 'QR Code Generator',
+        keywords: ['restaurant menu qr code', 'digital menu qr', 'contactless menu', 'cafe qr code'],
+        faqs: []
+    },
+    {
+        slug: 'qr-code-for-wifi-sharing',
+        title: 'Generate QR Code for WiFi Network Sharing',
+        description: 'Create a QR code that guests can scan to automatically connect to your WiFi network. No need to share passwords manually.',
+        toolHref: '/qr-code-generator',
+        toolName: 'QR Code Generator',
+        keywords: ['wifi qr code', 'share wifi qr', 'wifi password qr code', 'guest wifi qr'],
+        faqs: []
+    },
+    {
+        slug: 'markdown-to-pdf-for-documentation',
+        title: 'Convert Markdown Documentation to PDF',
+        description: 'Convert README files, API docs, and technical documentation from Markdown to professional PDF format for sharing with clients or teams.',
+        toolHref: '/markdown-to-pdf',
+        toolName: 'Markdown to PDF',
+        keywords: ['markdown to pdf documentation', 'readme to pdf', 'github markdown pdf', 'technical docs pdf'],
+        faqs: [
+            { question: 'Does it support GitHub-flavored Markdown?', answer: 'Yes, the converter supports headings, bold, italic, links, lists, code blocks, blockquotes, and horizontal rules.' }
+        ]
+    },
+    {
+        slug: 'base64-encode-image-for-html',
+        title: 'Encode Image to Base64 for HTML Embedding',
+        description: 'Convert images to Base64 data URIs for embedding directly in HTML and CSS files without external image requests.',
+        toolHref: '/base64',
+        toolName: 'Base64 Encoder/Decoder',
+        keywords: ['base64 image html', 'encode image base64', 'data uri image', 'inline image base64'],
+        faqs: [
+            { question: 'Why embed images as Base64?', answer: 'Base64 embedding reduces HTTP requests, is useful for email templates (which can\'t load external images), and bundles small icons directly into CSS.' }
+        ]
+    },
+    {
+        slug: 'bmp-to-jpg-for-web-upload',
+        title: 'Convert BMP Images to JPG for Web Upload',
+        description: 'Convert large BMP bitmap files to compressed JPG format for web use. Dramatically reduce file size while maintaining quality.',
+        toolHref: '/bmp-to-jpg',
+        toolName: 'BMP to JPG',
+        keywords: ['bmp to jpg web', 'convert bitmap to jpeg', 'bmp to jpg compress', 'reduce bmp file size'],
+        faqs: []
+    },
+    {
+        slug: 'xml-to-json-for-api-migration',
+        title: 'Convert XML API Response to JSON Format',
+        description: 'Transform XML API responses into JSON for modern web applications and REST API migrations. Preserves data structure and attributes.',
+        toolHref: '/xml-to-json',
+        toolName: 'XML to JSON',
+        keywords: ['xml to json api', 'soap to rest conversion', 'xml response to json', 'migrate xml to json'],
+        faqs: []
+    },
+    {
+        slug: 'tiff-to-pdf-for-scanned-documents',
+        title: 'Convert Scanned TIFF Documents to PDF',
+        description: 'Convert TIFF scans from office scanners and copiers to universally compatible PDF format for sharing and archiving.',
+        toolHref: '/tiff-to-pdf',
+        toolName: 'TIFF to PDF',
+        keywords: ['tiff scan to pdf', 'scanner tiff to pdf', 'convert scanned tiff', 'tiff to pdf document'],
+        faqs: []
     }
 ];

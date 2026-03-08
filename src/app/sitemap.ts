@@ -34,6 +34,7 @@ const allToolSlugs = [...new Set([...allTools, ...additionalToolPages])]
 const staticPages = [
     'all-tools',
     'blog',
+    'about',
     'contact',
     'privacy',
     'terms',

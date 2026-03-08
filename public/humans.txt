@@ -1,0 +1,19 @@
+/* TEAM */
+Name: Convertify Team
+Site: https://convertify.work
+Contact: support@convertify.work
+Location: Worldwide
+
+/* SITE */
+Last update: 2026-03-08
+Language: English
+Framework: Next.js (React)
+Standards: HTML5, CSS3, JavaScript ES2024
+Deployment: Vercel
+Processing: 100% client-side (browser-based)
+
+/* TECHNOLOGY */
+PDF Processing: pdf-lib, pdfjs-dist
+Image Processing: Canvas API, heic2any
+Spreadsheets: xlsx
+Mobile: Capacitor (Android)

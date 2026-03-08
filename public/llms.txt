@@ -1,0 +1,73 @@
+# Convertify
+
+> Convertify is a free, privacy-first online file converter and PDF tool suite at https://convertify.work. All file processing happens client-side in the browser — files never leave the user's device. No sign-up, no watermarks, no file size limits.
+
+Convertify provides 40+ tools for PDF manipulation, image conversion, and data format conversion. It is a free alternative to iLovePDF, Smallpdf, and Adobe Acrobat online tools. Every tool works on desktop and mobile browsers without installing software.
+
+## Core PDF Tools
+
+- [Merge PDF](https://convertify.work/merge-pdf): Combine multiple PDF files into one document
+- [Split PDF](https://convertify.work/split-pdf): Extract specific pages from a PDF into separate files
+- [Compress PDF](https://convertify.work/compress-pdf): Reduce PDF file size while maintaining quality
+- [Rotate PDF](https://convertify.work/rotate-pdf): Rotate PDF pages in any direction
+- [Edit PDF](https://convertify.work/edit-pdf): Add text, images, and annotations to PDF files
+- [Sign PDF](https://convertify.work/sign-pdf): Add digital signatures to PDF documents
+- [Protect PDF](https://convertify.work/protect-pdf): Add password protection to PDF files
+- [Unlock PDF](https://convertify.work/unlock-pdf): Remove password restrictions from PDF files
+- [OCR PDF](https://convertify.work/ocr-pdf): Extract text from scanned PDF documents
+- [Compare PDF](https://convertify.work/compare-pdf): Find differences between two PDF documents
+- [Watermark PDF](https://convertify.work/watermark-pdf): Add text or image watermarks to PDF
+- [Redact PDF](https://convertify.work/redact-pdf): Permanently remove sensitive information from PDF
+- [Add Page Numbers](https://convertify.work/add-page-numbers): Insert page numbers into PDF documents
+- [Reorder Pages](https://convertify.work/reorder-pdf): Rearrange page order in a PDF
+- [Delete Pages](https://convertify.work/delete-pdf-pages): Remove specific pages from a PDF
+
+## PDF Conversion Tools
+
+- [PDF to Word](https://convertify.work/pdf-to-word): Convert PDF documents to editable DOCX format
+- [PDF to JPG](https://convertify.work/pdf-to-jpg): Convert PDF pages to JPG images
+- [PDF to PNG](https://convertify.work/pdf-to-png): Convert PDF pages to PNG images
+- [PDF to Excel](https://convertify.work/pdf-to-excel): Convert PDF tables to Excel spreadsheets
+- [PDF to PowerPoint](https://convertify.work/pdf-to-powerpoint): Convert PDF to PowerPoint presentations
+- [PDF to Text](https://convertify.work/pdf-to-text): Extract plain text from PDF files
+- [PDF to PDF/A](https://convertify.work/pdf-to-pdfa): Convert PDF to archival PDF/A format
+- [Word to PDF](https://convertify.work/word-to-pdf): Convert DOCX documents to PDF
+- [JPG to PDF](https://convertify.work/jpg-to-pdf): Create PDF from JPG images
+- [PNG to PDF](https://convertify.work/png-to-pdf): Create PDF from PNG images
+- [Excel to PDF](https://convertify.work/excel-to-pdf): Convert Excel spreadsheets to PDF
+- [PowerPoint to PDF](https://convertify.work/powerpoint-to-pdf): Convert presentations to PDF
+- [HTML to PDF](https://convertify.work/html-to-pdf): Convert web pages and HTML to PDF
+
+## Image Tools
+
+- [HEIC to JPG](https://convertify.work/heic-to-jpg): Convert iPhone HEIC photos to JPG format
+- [JPG to PNG](https://convertify.work/jpg-to-png): Convert JPG images to PNG with transparency support
+- [PNG to JPG](https://convertify.work/png-to-jpg): Convert PNG images to compressed JPG format
+- [WebP Converter](https://convertify.work/webp-converter): Convert images to and from WebP format
+- [Image Compressor](https://convertify.work/image-compressor): Reduce image file size without visible quality loss
+- [Resize Image](https://convertify.work/resize-image): Resize images to specific dimensions
+- [SVG to PNG](https://convertify.work/svg-to-png): Convert vector SVG files to PNG images
+- [BMP to JPG](https://convertify.work/bmp-to-jpg): Convert BMP bitmap images to JPG
+- [GIF to PNG](https://convertify.work/gif-to-png): Convert GIF images to PNG format
+- [TIFF to PDF](https://convertify.work/tiff-to-pdf): Convert TIFF images to PDF documents
+
+## Developer & Data Tools
+
+- [CSV to JSON](https://convertify.work/csv-to-json): Convert CSV data to JSON format
+- [JSON to CSV](https://convertify.work/json-to-csv): Convert JSON data to CSV spreadsheet format
+- [Markdown to PDF](https://convertify.work/markdown-to-pdf): Convert Markdown documents to PDF
+- [XML to JSON](https://convertify.work/xml-to-json): Convert XML data to JSON format
+- [Base64 Encoder/Decoder](https://convertify.work/base64): Encode and decode Base64 strings and files
+- [QR Code Generator](https://convertify.work/qr-code-generator): Create QR codes from URLs, text, and data
+
+## Resources
+
+- [All Tools](https://convertify.work/all-tools): Complete directory of all Convertify tools
+- [Blog](https://convertify.work/blog): Guides and tutorials for PDF and file conversion
+- [About](https://convertify.work/about): About Convertify and our privacy-first approach
+
+## Optional
+
+- [Use Cases](https://convertify.work/use-cases): Real-world use cases for PDF tools by industry
+- [Privacy Policy](https://convertify.work/privacy): How Convertify handles data (spoiler: files never leave your browser)
+- [Contact](https://convertify.work/contact): Get in touch with the Convertify team

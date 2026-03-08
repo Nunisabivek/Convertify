@@ -71,6 +71,31 @@
             "permanent": true
         },
         {
+            "source": "/ilovepdf-alternative",
+            "destination": "/",
+            "permanent": true
+        },
+        {
+            "source": "/smallpdf-alternative",
+            "destination": "/",
+            "permanent": true
+        },
+        {
+            "source": "/adobe-acrobat-alternative",
+            "destination": "/",
+            "permanent": true
+        },
+        {
+            "source": "/free-pdf-tools",
+            "destination": "/all-tools",
+            "permanent": true
+        },
+        {
+            "source": "/pdf-tools-for-students",
+            "destination": "/all-tools",
+            "permanent": true
+        },
+        {
             "source": "/index.html",
             "destination": "/",
             "permanent": true
@@ -132,6 +157,40 @@
                 {
                     "key": "Referrer-Policy",
                     "value": "strict-origin-when-cross-origin"
+                },
+                {
+                    "key": "X-Frame-Options",
+                    "value": "DENY"
+                },
+                {
+                    "key": "Permissions-Policy",
+                    "value": "camera=(), microphone=(), geolocation=()"
+                }
+            ]
+        },
+        {
+            "source": "/llms.txt",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "text/plain; charset=utf-8"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=86400"
+                }
+            ]
+        },
+        {
+            "source": "/llms-full.txt",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "text/plain; charset=utf-8"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=86400"
                 }
             ]
         }

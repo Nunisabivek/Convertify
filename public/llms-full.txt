@@ -1,0 +1,191 @@
+# Convertify — Complete Reference
+
+> Convertify (https://convertify.work) is a free, privacy-first online file converter and PDF tool suite. All processing happens client-side in the browser — no files are ever uploaded to any server. No sign-up required, no watermarks, no file size limits, no daily usage caps.
+
+## What Makes Convertify Different
+
+Convertify processes every file directly in your web browser using JavaScript. Unlike most online PDF tools (iLovePDF, Smallpdf, Adobe Acrobat online), your documents are never uploaded to a remote server. This means:
+
+1. **Complete privacy** — sensitive documents like tax forms, contracts, medical records, and legal files stay on your device
+2. **No file size limits** — since there is no server upload, there are no restrictions on file size
+3. **No account required** — all tools work without sign-up or login
+4. **No watermarks** — output files are clean and professional
+5. **Works offline** — many tools function without an internet connection after initial page load
+6. **Cross-platform** — works on Windows, macOS, Linux, iOS, Android, and Chromebook via any modern browser
+
+## Tool Categories and Capabilities
+
+### PDF Organization Tools
+
+**Merge PDF** (https://convertify.work/merge-pdf)
+Combine 2 or more PDF files into a single document. Drag-and-drop to reorder files before merging. Supports unlimited file count and file size. Common use cases: combining bank statements, assembling legal document sets, merging scanned pages.
+
+**Split PDF** (https://convertify.work/split-pdf)
+Extract specific pages from a PDF into one or more separate files. Select individual pages or page ranges. Common use cases: extracting specific chapters, separating invoice pages, pulling individual forms from a packet.
+
+**Compress PDF** (https://convertify.work/compress-pdf)
+Reduce PDF file size for email attachments and uploads. Multiple compression levels available. Can compress PDFs to under 100KB, 200KB, 500KB, or 1MB depending on original content. Common use cases: email attachments under size limits, faster uploads to portals, reducing storage space.
+
+**Rotate PDF** (https://convertify.work/rotate-pdf)
+Rotate all or selected pages by 90, 180, or 270 degrees. Fix incorrectly scanned documents. Switch between portrait and landscape orientation.
+
+**Delete Pages** (https://convertify.work/delete-pdf-pages)
+Remove unwanted pages from a PDF document. Preview pages before deletion. Keep only the pages you need.
+
+**Reorder Pages** (https://convertify.work/reorder-pdf)
+Drag and drop to rearrange page order within a PDF. Visual thumbnail preview of each page for easy organization.
+
+**OCR PDF** (https://convertify.work/ocr-pdf)
+Optical character recognition to extract searchable text from scanned PDF documents. Makes scanned documents searchable and selectable.
+
+### PDF Conversion — From PDF
+
+**PDF to Word** (https://convertify.work/pdf-to-word)
+Convert PDF documents to editable Microsoft Word (.docx) format. Preserves formatting, tables, and images. Common use cases: editing contracts, updating resumes, modifying reports.
+
+**PDF to JPG** (https://convertify.work/pdf-to-jpg)
+Convert each page of a PDF to a high-quality JPG image. Adjustable quality settings. Common use cases: sharing pages on social media, embedding in presentations, creating thumbnails.
+
+**PDF to PNG** (https://convertify.work/pdf-to-png)
+Convert PDF pages to PNG images with transparency support. Higher quality than JPG for text-heavy documents.
+
+**PDF to Excel** (https://convertify.work/pdf-to-excel)
+Extract tables from PDF documents into Excel (.xlsx) spreadsheets. Detects table structures automatically. Common use cases: financial data extraction, converting printed tables to editable spreadsheets.
+
+**PDF to PowerPoint** (https://convertify.work/pdf-to-powerpoint)
+Convert PDF slides to editable PowerPoint (.pptx) presentations.
+
+**PDF to Text** (https://convertify.work/pdf-to-text)
+Extract all text content from a PDF as plain text (.txt). Useful for search indexing, text analysis, and content extraction.
+
+**PDF to PDF/A** (https://convertify.work/pdf-to-pdfa)
+Convert standard PDF to PDF/A archival format for long-term document preservation. Meets compliance requirements for legal and government document archiving.
+
+### PDF Conversion — To PDF
+
+**Word to PDF** (https://convertify.work/word-to-pdf)
+Convert Microsoft Word (.doc, .docx) documents to PDF format. Preserves formatting, fonts, and layout.
+
+**JPG to PDF** (https://convertify.work/jpg-to-pdf)
+Create a PDF document from one or more JPG images. Supports batch conversion and custom page sizes. Common use cases: creating photo albums, converting scanned documents, compiling image sets.
+
+**PNG to PDF** (https://convertify.work/png-to-pdf)
+Create PDF from PNG images with full transparency support.
+
+**Excel to PDF** (https://convertify.work/excel-to-pdf)
+Convert Excel spreadsheets (.xlsx, .xls) to PDF format. Preserves table formatting, formulas results, and charts.
+
+**PowerPoint to PDF** (https://convertify.work/powerpoint-to-pdf)
+Convert PowerPoint presentations (.ppt, .pptx) to PDF for easy sharing and printing.
+
+**HTML to PDF** (https://convertify.work/html-to-pdf)
+Convert web pages and HTML code to PDF documents. Capture full page layouts including CSS styling.
+
+### PDF Editing & Security
+
+**Edit PDF** (https://convertify.work/edit-pdf)
+Add text, images, shapes, and annotations directly to PDF documents in your browser.
+
+**Sign PDF** (https://convertify.work/sign-pdf)
+Draw, type, or upload your signature and place it on any PDF document. Free electronic signature tool.
+
+**Watermark PDF** (https://convertify.work/watermark-pdf)
+Add text or image watermarks to PDF pages. Customize position, opacity, size, and rotation. Common use cases: marking documents as draft, confidential, or adding company branding.
+
+**Protect PDF** (https://convertify.work/protect-pdf)
+Add password protection and encryption to PDF files. Set permissions for printing, copying, and editing.
+
+**Unlock PDF** (https://convertify.work/unlock-pdf)
+Remove password restrictions from PDF files (requires knowing the password).
+
+**Redact PDF** (https://convertify.work/redact-pdf)
+Permanently black out sensitive information in PDF documents. Redacted content cannot be recovered. Common use cases: removing personal information, redacting classified data, FOIA compliance.
+
+**Add Page Numbers** (https://convertify.work/add-page-numbers)
+Insert page numbers to PDF documents. Customize position (top/bottom, left/center/right), font, and starting number.
+
+### Image Conversion Tools
+
+**HEIC to JPG** (https://convertify.work/heic-to-jpg)
+Convert Apple iPhone HEIC/HEIF photos to universally compatible JPG format. Batch conversion supported. Essential for sharing iPhone photos on non-Apple devices and platforms.
+
+**JPG to PNG** (https://convertify.work/jpg-to-png)
+Convert JPG images to PNG format with transparency support. Useful when you need lossless image quality or transparent backgrounds.
+
+**PNG to JPG** (https://convertify.work/png-to-jpg)
+Convert PNG images to compressed JPG format. Reduces file size significantly for photos and web images.
+
+**WebP Converter** (https://convertify.work/webp-converter)
+Convert images to and from Google's WebP format. WebP offers superior compression for web images. Convert WebP to JPG/PNG for compatibility or JPG/PNG to WebP for faster websites.
+
+**Image Compressor** (https://convertify.work/image-compressor)
+Reduce image file sizes without visible quality loss. Supports JPG, PNG, and WebP. Adjustable compression levels. Common use cases: optimizing images for websites, reducing email attachment sizes.
+
+**Resize Image** (https://convertify.work/resize-image)
+Resize images to specific pixel dimensions or percentages. Maintain aspect ratio option. Supports batch resizing.
+
+**SVG to PNG** (https://convertify.work/svg-to-png)
+Convert scalable vector graphics (SVG) to rasterized PNG images at any resolution. Useful for using vector logos and icons in contexts that don't support SVG.
+
+**BMP to JPG** (https://convertify.work/bmp-to-jpg)
+Convert uncompressed BMP bitmap images to compressed JPG format. Dramatically reduces file size.
+
+**GIF to PNG** (https://convertify.work/gif-to-png)
+Convert GIF images to PNG format. Extracts the first frame of animated GIFs. PNG provides better quality for static images.
+
+**TIFF to PDF** (https://convertify.work/tiff-to-pdf)
+Convert TIFF images (including multi-page TIFF) to PDF documents. Common in scanning and document imaging workflows.
+
+### Developer & Data Tools
+
+**CSV to JSON** (https://convertify.work/csv-to-json)
+Convert CSV (comma-separated values) data files to JSON format. Auto-detects delimiters and headers. Useful for API development, data transformation, and importing data into web applications.
+
+**JSON to CSV** (https://convertify.work/json-to-csv)
+Convert JSON data to CSV spreadsheet format. Flattens nested objects. Useful for data analysis in Excel/Google Sheets and database imports.
+
+**Markdown to PDF** (https://convertify.work/markdown-to-pdf)
+Convert Markdown (.md) documents to professionally formatted PDF files. Supports GitHub-flavored Markdown including tables, code blocks, and task lists.
+
+**XML to JSON** (https://convertify.work/xml-to-json)
+Convert XML data to JSON format. Preserves element hierarchy and attributes. Useful for API migration, data transformation, and working with legacy systems.
+
+**Base64 Encoder/Decoder** (https://convertify.work/base64)
+Encode files and text to Base64 strings, or decode Base64 back to original format. Supports text and binary files. Common use cases: embedding images in HTML/CSS, API data transfer, email encoding.
+
+**QR Code Generator** (https://convertify.work/qr-code-generator)
+Generate QR codes from URLs, plain text, WiFi credentials, contact information, and more. Download as PNG or SVG. Customizable size and error correction level.
+
+### Advanced PDF Tools
+
+**Compare PDF** (https://convertify.work/compare-pdf)
+Find differences between two PDF documents. Highlights additions, deletions, and modifications. Useful for reviewing document revisions, legal contract changes, and version control.
+
+## Frequently Asked Questions
+
+**Is Convertify really free?**
+Yes. All tools are 100% free with no hidden fees, no premium tiers, and no usage limits.
+
+**Are my files safe?**
+Yes. All processing happens in your browser. Files are never uploaded to any server. Your documents remain on your device at all times.
+
+**Do I need to create an account?**
+No. All tools work without registration or sign-in.
+
+**What browsers are supported?**
+Convertify works on all modern browsers: Chrome, Firefox, Safari, Edge, Opera, and Brave on both desktop and mobile.
+
+**Is there a file size limit?**
+No. Since files are processed locally in your browser, there are no file size restrictions imposed by the server.
+
+**Can I use Convertify on my phone?**
+Yes. The website is fully responsive and works on iOS and Android browsers. There is also a native Android app available.
+
+## Technical Details
+
+- **Website**: https://convertify.work
+- **Framework**: Next.js (React)
+- **Processing**: 100% client-side JavaScript (pdf-lib, pdfjs-dist, xlsx, heic2any)
+- **Privacy model**: Zero-upload architecture — files never leave the browser
+- **Deployment**: Vercel edge network
+- **Mobile app**: Android (Capacitor)

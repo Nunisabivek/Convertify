@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     "free pdf converter", "secure pdf tools", "client-side pdf merger", "no sign up pdf converter",
     "unlimited pdf tools", "fast pdf converter", "convertify", "ilovepdf alternative",
     "privacy first pdf", "offline pdf tools", "merge pdf secure", "compress pdf no limit",
-    "jpg to pdf free", "pdf to word", "split pdf client side", "best pdf converter 2025",
+    "jpg to pdf free", "pdf to word", "split pdf client side", "best pdf converter 2026",
     "pdf editor free online", "pdf compressor 100kb", "merge pdf no watermark",
     "convert pdf to word free", "pdf to jpg converter", "word to pdf converter"
   ],
@@ -134,9 +134,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
-        {/* Preload critical resources */}
-        <link rel="preload" href="/images/og-banner.png" as="image" type="image/png" />
-        <link rel="preload" href="/images/Convertify.png" as="image" type="image/png" />
+        {/* Google Fonts loaded as link tags (non-render-blocking) instead of CSS @import */}
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
 
         {/* Sitemap Link for Search Engines */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
