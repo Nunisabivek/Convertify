@@ -12,17 +12,45 @@ type Props = {
     params: Promise<{ slug: string }>
 }
 
+// Only these high-quality posts should be indexed
+// Others are noindexed to concentrate crawl budget and avoid thin content signals
+const indexableBlogSlugs = new Set([
+    'how-to-merge-pdf-files-free',
+    'compress-pdf-reduce-file-size',
+    'convert-jpg-to-pdf-online',
+    'how-to-convert-pdf-to-word-without-software',
+    'split-pdf-extract-pages-free',
+    'convert-word-to-pdf-keep-formatting',
+    'best-free-pdf-tools-2025',
+    'how-to-electronically-sign-pdf-free',
+    'how-to-make-scanned-pdf-searchable-ocr',
+    'reduce-pdf-size-without-losing-quality',
+    'best-free-pdf-compressor-online',
+    'pdf-tools-for-small-business',
+    'free-pdf-tools-vs-adobe-acrobat',
+    'resume-guide-word-to-pdf',
+    'pdf-tips-for-students',
+])
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params
     const post = blogPosts.find((p) => p.slug === slug)
     if (!post) return {}
 
     const url = `https://convertify.work/blog/${slug}`
+    const shouldIndex = indexableBlogSlugs.has(slug)
 
     return {
         title: `${post.title} | Convertify Blog`,
         description: post.excerpt,
         keywords: post.keywords,
+        // Noindex weaker blog posts to improve overall site quality signals
+        ...(!shouldIndex && {
+            robots: {
+                index: false,
+                follow: true,
+            },
+        }),
         alternates: {
             canonical: `https://convertify.work/blog/${slug}`,
         },
@@ -83,7 +111,7 @@ function renderContent(content: string) {
         if (trimmed === '') return <div key={i} className="h-4" />
 
         // Checkmarks
-        if (trimmed.startsWith('✅') || trimmed.startsWith('❌')) {
+        if (trimmed.startsWith('\u2705') || trimmed.startsWith('\u274C')) {
             return <p key={i} className="mb-2 text-slate-700">{trimmed}</p>
         }
 
@@ -93,7 +121,6 @@ function renderContent(content: string) {
         }
 
         // Bold text handling
-        let processedText = trimmed
         if (trimmed.includes('**')) {
             const parts = trimmed.split(/\*\*(.*?)\*\*/g)
             return (
@@ -123,7 +150,7 @@ function renderContent(content: string) {
         }
 
         // Default paragraph
-        return <p key={i} className="mb-4 text-slate-700 leading-relaxed">{processedText}</p>
+        return <p key={i} className="mb-4 text-slate-700 leading-relaxed">{trimmed}</p>
     })
 }
 
@@ -238,11 +265,11 @@ export default async function BlogPostPage({ params }: Props) {
                 <section className="mt-12 p-8 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl text-white text-center">
                     <h2 className="text-2xl font-bold mb-4">Ready to Try This Tool?</h2>
                     <p className="text-indigo-100 mb-6 max-w-xl mx-auto">
-                        Put what you learned into action. Try Convertify's free PDF tools now - no sign up required!
+                        Put what you learned into action. Try Convertify&apos;s free PDF tools now - no sign up required!
                     </p>
                     <Button size="lg" variant="secondary" asChild className="bg-white text-indigo-600 hover:bg-indigo-50">
                         <Link href={post.relatedTool}>
-                            Try {post.relatedTool.replace('/', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())} Tool →
+                            Try {post.relatedTool.replace('/', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())} Tool &rarr;
                         </Link>
                     </Button>
                 </section>

@@ -21,6 +21,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: useCase.title,
         description: useCase.description,
         keywords: useCase.keywords,
+        // NOINDEX use-case pages until domain authority grows
+        // These are thin programmatic pages that hurt overall indexing
+        robots: {
+            index: false,
+            follow: true,
+        },
         alternates: {
             canonical: `https://convertify.work/use-cases/${useCase.slug}`,
         },
@@ -47,7 +53,6 @@ export default async function UseCasePage({ params }: Props) {
         notFound();
     }
 
-    // FAQ Schema
     const faqSchema = {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
@@ -95,7 +100,7 @@ export default async function UseCasePage({ params }: Props) {
                             Open {useCase.toolName} Tool
                         </Link>
                         <p className="mt-4 text-sm text-blue-600">
-                            No upload required • 100% Free • Secure
+                            No upload required &bull; 100% Free &bull; Secure
                         </p>
                     </div>
 
@@ -113,7 +118,7 @@ export default async function UseCasePage({ params }: Props) {
                             <div className="p-6 bg-slate-50 rounded-xl">
                                 <h3 className="font-semibold text-slate-900 mb-2">Lightning Fast</h3>
                                 <p className="text-slate-600 text-sm">
-                                    Since there's no upload or download time, conversions happen instantly.
+                                    Since there&apos;s no upload or download time, conversions happen instantly.
                                 </p>
                             </div>
                         </div>

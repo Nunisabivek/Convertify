@@ -1,16 +1,12 @@
 import { MetadataRoute } from 'next'
-import { blogPosts } from '@/lib/blog-data'
 import { getAllTools } from '@/lib/tools-registry'
 
 export const dynamic = 'force-static'
 
 // Dynamically get all tools from the centralized registry
-// This ensures sitemap stays in sync when new tools are added
 const allTools = getAllTools().map(tool => tool.href)
 
 // Additional tools/pages that may not be in registry but have pages
-import { useCases } from '@/lib/use-cases-data'
-
 const additionalToolPages = [
     'organize-pdf',
     'repair-pdf',
@@ -18,13 +14,6 @@ const additionalToolPages = [
     'text-to-pdf',
     'extract-pdf',
     'heic-to-jpg',
-]
-
-// New SEO-optimized blog articles (added Feb 2026)
-const newBlogPosts = [
-    'how-to-convert-pdf-to-word-without-software',
-    'best-free-pdf-compressor-online',
-    'pdf-tools-for-small-business',
 ]
 
 // Combine and deduplicate
@@ -42,44 +31,54 @@ const staticPages = [
     'pricing',
 ]
 
-// High-volume keyword landing pages removed - replaced with quality blog content
+// Only include the highest-quality, most-searched blog posts
+// These target real search queries with substantial unique content
+const topBlogPosts = [
+    'how-to-merge-pdf-files-free',
+    'compress-pdf-reduce-file-size',
+    'convert-jpg-to-pdf-online',
+    'how-to-convert-pdf-to-word-without-software',
+    'split-pdf-extract-pages-free',
+    'convert-word-to-pdf-keep-formatting',
+    'best-free-pdf-tools-2025',
+    'how-to-electronically-sign-pdf-free',
+    'how-to-make-scanned-pdf-searchable-ocr',
+    'reduce-pdf-size-without-losing-quality',
+    'best-free-pdf-compressor-online',
+    'pdf-tools-for-small-business',
+    'free-pdf-tools-vs-adobe-acrobat',
+    'resume-guide-word-to-pdf',
+    'pdf-tips-for-students',
+]
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://convertify.work'
     const currentDate = new Date()
 
-    // Top priority tools (most searched, currently unindexed)
+    // Top priority tools (most searched)
     const topPriorityTools = [
         'merge-pdf', 'compress-pdf', 'jpg-to-pdf', 'word-to-pdf',
         'pdf-to-word', 'split-pdf', 'pdf-to-jpg', 'excel-to-pdf',
         'pdf-to-excel', 'edit-pdf'
     ]
 
-    // Tool pages - Tiered priority based on importance
+    // Tool pages
     const toolUrls = allToolSlugs.map((tool) => ({
         url: `${baseUrl}/${tool}`,
         lastModified: currentDate,
         changeFrequency: 'weekly' as const,
-        priority: topPriorityTools.includes(tool) ? 0.95 : 0.85, // Higher priority for top tools
+        priority: topPriorityTools.includes(tool) ? 0.95 : 0.85,
     }))
 
-    // Blog posts (30 pages from blog-data.ts + new articles)
-    const blogUrls = blogPosts.map(post => ({
-        url: `${baseUrl}/blog/${post.slug}`,
-        lastModified: new Date(post.date),
+    // Only top blog posts
+    const blogUrls = topBlogPosts.map(slug => ({
+        url: `${baseUrl}/blog/${slug}`,
+        lastModified: currentDate,
         changeFrequency: 'monthly' as const,
         priority: 0.7,
     }))
 
-    // Add new SEO blog posts to sitemap
-    const newBlogUrls = newBlogPosts.map(slug => ({
-        url: `${baseUrl}/blog/${slug}`,
-        lastModified: currentDate,
-        changeFrequency: 'monthly' as const,
-        priority: 0.75, // Slightly higher priority for new content
-    }))
-
-    // Static pages (6 pages)
+    // Static pages
     const staticUrls = staticPages.map(page => ({
         url: `${baseUrl}/${page}`,
         lastModified: currentDate,
@@ -87,17 +86,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: page === 'all-tools' || page === 'blog' ? 0.9 : 0.5,
     }))
 
-    // Use Case pages (Programmatic SEO)
-    const useCaseUrls = useCases.map(uc => ({
-        url: `${baseUrl}/use-cases/${uc.slug}`,
-        lastModified: currentDate,
-        changeFrequency: 'weekly' as const,
-        priority: 0.85,
-    }))
+    // USE CASE PAGES REMOVED FROM SITEMAP
+    // 83 thin/programmatic use-case pages were hurting indexing.
+    // These pages still exist but are noindexed until domain authority grows.
+    // Re-add gradually once core pages are indexed and ranking.
 
-    // Total: 1 (homepage) + 6 (static) + 32 (tools) + 33 (blogs) + 10 (landing) = 82+ pages
     return [
-        // Homepage - highest priority
+        // Homepage
         {
             url: baseUrl,
             lastModified: currentDate,
@@ -106,13 +101,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         // Static pages
         ...staticUrls,
-        // Use Case pages
-        ...useCaseUrls,
         // Tool pages
         ...toolUrls,
-        // Blog posts
+        // Top blog posts only
         ...blogUrls,
-        // New SEO blog posts
-        ...newBlogUrls,
     ]
 }

@@ -7,21 +7,9 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  // Redirects are consolidated in vercel.json to avoid duplication
-  // Only keep headers here that aren't in vercel.json
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'X-Robots-Tag',
-            value: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-          },
-        ],
-      },
-    ];
-  },
+  // Redirects and headers are consolidated in vercel.json
+  // X-Robots-Tag removed from here - it was applying "index, follow" to 404 pages too,
+  // confusing Google. Vercel.json handles this for valid pages only.
 };
 
 export default nextConfig;
