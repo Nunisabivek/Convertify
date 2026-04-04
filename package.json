@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "seo:ping": "node scripts/ping-google.js",
-    "dev:mobile": "next dev -H 0.0.0.0"
+    "dev:mobile": "next dev -H 0.0.0.0",
+    "build:mobile": "NEXT_PUBLIC_MOBILE_BUILD=true next build",
+    "cap:sync": "npx cap sync android",
+    "mobile": "npm run build:mobile && npm run cap:sync"
   },
   "dependencies": {
     "@capacitor/android": "^8.0.0",

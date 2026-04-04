@@ -12,8 +12,8 @@ interface MobileLayoutProps {
 const navItems = [
     { href: '/', icon: 'home', label: 'Home' },
     { href: '/all-tools', icon: 'grid_view', label: 'Tools' },
-    { href: '/recent', icon: 'history', label: 'Recent' },
-    { href: '/settings', icon: 'settings', label: 'Settings' },
+    { href: '/blog', icon: 'menu_book', label: 'Guides' },
+    { href: '/about', icon: 'info', label: 'About' },
 ];
 
 export default function MobileLayout({ children }: MobileLayoutProps) {
@@ -66,12 +66,9 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
                 </div>
 
                 <div className="mobile-top-bar-actions">
-                    <button className="mobile-icon-btn" aria-label="Search">
+                    <Link href="/all-tools" className="mobile-icon-btn" aria-label="Search tools">
                         <span className="material-icons">search</span>
-                    </button>
-                    <button className="mobile-icon-btn" aria-label="Notifications">
-                        <span className="material-icons">notifications</span>
-                    </button>
+                    </Link>
                 </div>
             </header>
 
@@ -82,10 +79,10 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
 
             {/* Floating Action Button */}
             <div className="mobile-fab">
-                <button className="mobile-fab-button">
+                <Link href="/all-tools" className="mobile-fab-button">
                     <span className="material-icons mobile-fab-icon">add</span>
                     Quick Convert
-                </button>
+                </Link>
             </div>
 
             {/* Bottom Navigation */}

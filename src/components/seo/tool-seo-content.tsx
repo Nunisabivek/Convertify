@@ -1,5 +1,3 @@
-'use client';
-
 import { CheckCircle, Shield, Zap, Globe, FileCheck } from 'lucide-react';
 
 interface ToolContentProps {

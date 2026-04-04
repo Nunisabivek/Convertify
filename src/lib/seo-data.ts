@@ -4,9 +4,9 @@
 export const toolSeoData = {
     "merge-pdf": {
         title: "Convertify PDF Merger - Merge PDF Free Online No Limits",
-        description: "Looking for Convertifyy PDF merger? Combine multiple PDF files into one instantly. Free PDF merger with no limits, no watermarks, no sign-up. 100% private, works on any device.",
+        description: "Combine multiple PDF files into one document instantly. Free online PDF merger with no limits, no watermarks, no sign-up required. 100% private — files never leave your device.",
         keywords: [
-            "convertify pdf merger", "convertifyy pdf merger", "merge pdf", "combine pdf files", "merge pdf free", "merge pdf online",
+            "convertify pdf merger", "merge pdf", "combine pdf files", "merge pdf free", "merge pdf online",
             "combine pdf files online free", "pdf merger", "join pdf files", "merge pdf no watermark",
             "combine pdf no limit", "merge multiple pdfs", "pdf combiner free online",
             "merge pdf without sign up", "combine pdf documents", "stitch pdf pages",
@@ -45,7 +45,7 @@ export const toolSeoData = {
         title: "Convertify PDF Splitter - Split PDF & Extract Pages Free Online",
         description: "Convertify PDF Splitter — split PDF files and extract specific pages online. Separate one or multiple pages instantly on Windows, Mac, or Mobile. No download needed, 100% free and private.",
         keywords: [
-            "convertify pdf splitter", "convertifyy pdf splitter", "split pdf", "extract pages from pdf", "separate pdf pages", "cut pdf pages", "pdf splitter online",
+            "convertify pdf splitter", "split pdf", "extract pages from pdf", "separate pdf pages", "cut pdf pages", "pdf splitter online",
             "how to split pdf on windows", "split pdf windows 10 11", "extract pages pdf windows",
             "select pages extract", "remove pdf pages", "separate pdf files", "split by page range", "isolate pdf sections",
             "cut out pdf pages", "divide pdf chapters", "pull single pages", "break pdf into parts", "delete pdf pages online",
@@ -82,9 +82,9 @@ export const toolSeoData = {
     },
     "compress-pdf": {
         title: "Convertify PDF Compressor - Compress PDF to 100KB Free",
-        description: "Official Convertifyy PDF compressor. Reduce PDF to 100KB or 200KB in seconds for government forms, visa applications & passport scans. No watermarks, no limits, 100% private.",
+        description: "Official Convertify PDF compressor. Reduce PDF to 100KB or 200KB in seconds for government forms, visa applications & passport scans. No watermarks, no limits, 100% private.",
         keywords: [
-            "convertify pdf compressor", "convertifyy pdf compressor", "compress pdf", "compress pdf to 100kb", "compress pdf to 200kb", "reduce pdf size", "shrink pdf",
+            "convertify pdf compressor", "compress pdf", "compress pdf to 100kb", "compress pdf to 200kb", "reduce pdf size", "shrink pdf",
             "pdf compressor 100kb", "pdf compressor 200kb", "compress pdf online free", "reduce pdf size online",
             "compress pdf for government forms", "passport scan compression 100kb", "visa application pdf compressor",
             "compress pdf to 100kb free online", "shrink pdf file online 200kb free", "pdf size reducer",
@@ -125,7 +125,7 @@ export const toolSeoData = {
         title: "Convertify JPG to PDF Free Online – Combine Photos to PDF",
         description: "Convertify JPG to PDF converter — combine unlimited photos into one PDF free online. Arrange order, adjust page size. No sign-up, no watermarks, no download needed. Works on Windows, Mac & mobile.",
         keywords: [
-            "convertify jpg to pdf", "convertifyy jpg to pdf", "jpg to pdf", "convert jpg to pdf", "image to pdf", "photos to pdf", "jpeg to pdf",
+            "convertify jpg to pdf", "jpg to pdf", "convert jpg to pdf", "image to pdf", "photos to pdf", "jpeg to pdf",
             "jpg to pdf converter free", "combine jpg to pdf", "multiple jpg to one pdf",
             "combine photos into pdf", "merge images to pdf", "convert multiple images to pdf",
             "jpg to pdf no sign up", "jpg to pdf no watermark", "jpg to pdf online free",
@@ -177,7 +177,7 @@ export const toolSeoData = {
             "convert docx to pdf online free", "word to pdf keep fonts", "word to pdf exact layout",
             "resume to pdf", "cv to pdf", "resume word to pdf", "convert resume to pdf free",
             "legal document to pdf", "contract to pdf", "word to pdf no sign up", "word to pdf no watermark",
-            "convertify word to pdf", "convertifyy word to pdf"
+            "convertify word to pdf", 
         ],
         h1: "Word to PDF Free - No Microsoft Office | Convertify",
         faqs: [
@@ -215,7 +215,7 @@ export const toolSeoData = {
             "pdf to images converter online", "pdf to jpg", "pdf to jpeg", "convert pdf to image", "extract images from pdf", "save pdf as picture",
             "high quality pdf to jpg", "turn pdf into image", "batch pdf to jpg", "pdf to jpg 300 dpi",
             "extract pages as high res photos", "pdf to image for instagram", "save pdf as hd jpeg",
-            "convertify pdf to jpg", "convertifyy pdf to jpg", "convertfy pdf to jpg",
+            "convertify pdf to jpg",
             "pdf to images free", "pdf to jpg converter online free", "convert pdf pages to images"
         ],
         h1: "PDF to Images Converter Online Free - HD JPG Extraction",
@@ -406,9 +406,9 @@ export const toolSeoData = {
 
     "pdf-to-word": {
         title: "Convertify PDF to Word - Editable DOCX Free Online",
-        description: "Official Convertifyy PDF to Word converter. Convert PDF to Word (DOCX) while keeping exact layout. Scanned PDF to Word OCR support. Secure, private, and free.",
+        description: "Official Convertify PDF to Word converter. Convert PDF to Word (DOCX) while keeping exact layout. Scanned PDF to Word OCR support. Secure, private, and free.",
         keywords: [
-            "convertify pdf to word", "convertifyy pdf to word", "convertfy pdf to word", "pdf to word", "pdf to docx", "convert pdf to word", "editable pdf to word", "pdf to word converter free",
+            "convertify pdf to word", "pdf to word", "pdf to docx", "convert pdf to word", "editable pdf to word", "pdf to word converter free",
             "pdf to word accurate layout", "scanned pdf to word ocr", "convert pdf to editable docx",
             "retain layout pdf to word", "pdf to word converter no sign up", "make pdf editable in word",
             "convertify free pdf to word", "pdf to word online free no download"
@@ -540,7 +540,7 @@ export const toolSeoData = {
         title: "Convertify PDF Editor - Edit PDF Free Online, No Download",
         description: "Convertify PDF Editor — the best free PDF editor for annotations and form filling. Add text, images, and shapes, then 'Flatten' your edits. No sign-up, no watermarks, no download needed.",
         keywords: [
-            "convertify pdf editor", "convertifyy pdf editor", "edit pdf", "pdf editor online", "add text to pdf", "annotate pdf", "edit pdf online free", "pdf editor free no sign up",
+            "convertify pdf editor", "edit pdf", "pdf editor online", "add text to pdf", "annotate pdf", "edit pdf online free", "pdf editor free no sign up",
             "add image to pdf", "write on pdf online", "pdf annotation tool", "free pdf editor no watermark", "modify pdf online",
             "flatten pdf edits", "fill pdf form free", "markup pdf online", "add comments to blueprint pdf", "free pdf markup tool",
             "convertify edit pdf", "edit pdf free no download"
@@ -641,7 +641,7 @@ export const toolSeoData = {
         title: "Convertify PDF to Excel - Convert PDF to XLSX Free Online",
         description: "Convertify PDF to Excel converter — convert PDF to XLSX with 99%+ accuracy for bank statements and invoices. Extract data into clean tables. No download, no sign-up, 100% free.",
         keywords: [
-            "convertify pdf to excel", "convertifyy pdf to excel", "pdf to excel", "pdf to xlsx", "convert pdf to excel", "extract table from pdf", "pdf to excel converter free",
+            "convertify pdf to excel", "pdf to excel", "pdf to xlsx", "convert pdf to excel", "extract table from pdf", "pdf to excel converter free",
             "bank statement to excel", "invoice to excel converter", "pdf to excel accurate layout",
             "scanned pdf to excel ocr", "convert pdf table to spreadsheet", "pdf to excel no sign up",
             "pdf to excel free online", "convert pdf to excel free"
@@ -840,7 +840,7 @@ export const toolSeoData = {
         title: "Convertify Sign PDF - Free E-Signatures Online, No Download",
         description: "Convertify Sign PDF — sign contracts and agreements with legally valid e-signatures. Draw or type your signature and 'Flatten' the file. No download needed, 100% private and free.",
         keywords: [
-            "convertify sign pdf", "convertifyy sign pdf", "sign pdf", "e-sign pdf", "digital signature", "sign pdf online free", "electronic signature pdf", "add signature to pdf",
+            "convertify sign pdf", "sign pdf", "e-sign pdf", "digital signature", "sign pdf online free", "electronic signature pdf", "add signature to pdf",
             "pdf signature tool", "sign documents online free", "e-signature free", "draw signature on pdf",
             "legally binding e-sign", "sign real estate contract pdf", "flatten signed pdf", "secure digital signing",
             "sign on mobile finish on pc", "private electronic signatures", "sign pdf free no download"
@@ -891,7 +891,7 @@ export const toolSeoData = {
         title: "Convertify Protect PDF - AES-256 Encryption Free Online",
         description: "Convertify Protect PDF — secure your PDF with military-grade AES-256 encryption. Client-side protection, your password never touches a server. No download needed, 100% private and free.",
         keywords: [
-            "convertify protect pdf", "convertifyy protect pdf", "password protect pdf", "encrypt pdf", "secure pdf", "lock pdf", "pdf password", "protect pdf online free",
+            "convertify protect pdf", "password protect pdf", "encrypt pdf", "secure pdf", "lock pdf", "pdf password", "protect pdf online free",
             "add password to pdf", "pdf encryption", "aes-256 pdf protection", "secure pdf for email",
             "prevent pdf printing", "disable pdf copying", "lock pdf editing", "bank grade pdf security",
             "private pdf protector", "client side pdf encryption", "secure financial documents", "protect legal pdfs"
@@ -925,7 +925,7 @@ export const toolSeoData = {
         title: "Convertify Unlock PDF - Remove Restrictions & Passwords Free",
         description: "Convertify Unlock PDF — remove printing, copying, and editing restrictions instantly. Regain access to permission-locked documents. No download needed, 100% secure and free.",
         keywords: [
-            "convertify unlock pdf", "convertifyy unlock pdf", "unlock pdf", "remove pdf password", "pdf password remover", "unprotect pdf", "remove password from pdf without acrobat",
+            "convertify unlock pdf", "unlock pdf", "remove pdf password", "pdf password remover", "unprotect pdf", "remove password from pdf without acrobat",
             "unlock secured pdf for printing online", "decrypt pdf", "unlock pdf online free", "remove pdf security",
             "enable pdf printing locked", "copy text from locked pdf", "remove editing restrictions pdf",
             "bypass pdf owner password", "unlock pdf for google docs", "remove pdf permissions free", "unlock pdf free no download"

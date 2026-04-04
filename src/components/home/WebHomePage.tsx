@@ -352,7 +352,7 @@ export default function WebHomePage() {
                     Convertify: <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">Free Online PDF Tools</span>
                 </h1>
                 <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-6 leading-relaxed">
-                    Convertify (also known as ConvertifyTool) is the best free iLovePDF alternative—100% free online PDF tools with client-side processing for ultimate privacy. No download required, no pricing plans. Merge, convert, compress, or edit PDFs instantly without sign-ups or limits.
+                    Merge, convert, compress, and edit PDFs entirely in your browser. Your files never leave your device — 100% private, no sign-up required.
                 </p>
                 {/* Trust Badges - Addresses "convertify pricing" queries */}
                 <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 mb-4">
@@ -565,69 +565,6 @@ export default function WebHomePage() {
                         </div>
                     </div>
 
-                    {/* Detailed SEO Content Section */}
-                    <div className="mt-20 prose prose-slate max-w-none border-t pt-12">
-                        <h2 className="text-3xl font-bold text-slate-900 mb-6">The Best iLovePDF Alternative for Privacy-Conscious Users</h2>
-                        <div className="grid md:grid-cols-2 gap-10 text-slate-600 leading-relaxed mb-12">
-                            <div>
-                                <p className="mb-4">
-                                    Convertify was built to solve the biggest problem with online file converters: <strong>privacy</strong>. Most "free" tools require you to upload your sensitive files to their servers, where they may be stored, analyzed, or leaked. Convertify changes the game by bringing the processing power to <em>you</em>.
-                                </p>
-                                <p className="mb-4">
-                                    Our suite of tools—including the popular <strong>Compress PDF to 100KB</strong>, <strong>Excel to PDF converter</strong>, and <strong>Word to PDF tool</strong>—runs entirely in your browser. Whether you are on Windows, macOS, or mobile, you get high-speed, secure results without a single byte ever being uploaded to our cloud.
-                                </p>
-                                <p>
-                                    Why trust a cloud server with your legal contracts, medical records, or financial statements? With Convertify, your data stays in your RAM, processed by secure WebAssembly logic that ensures the output is as professional as it is private.
-                                </p>
-                            </div>
-                            <div>
-                                <p className="mb-4">
-                                    Beyond privacy, we focus on <strong>accuracy</strong>. Our Word to PDF and Excel to PDF converters are optimized to preserve fonts, margins, and complex table layouts perfectly. No more broken spreadsheets or shifted text in your professional documents.
-                                </p>
-                                <ul className="list-disc pl-5 space-y-2">
-                                    <li><strong>Merge PDF:</strong> Combine unlimited files with zero watermarks.</li>
-                                    <li><strong>Compress PDF:</strong> Shrink large files for email without losing readability.</li>
-                                    <li><strong>PDF to Word:</strong> Turn scans into editable DOCX files in seconds.</li>
-                                    <li><strong>Secure PDF:</strong> Add AES-256 encryption to your files locally.</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <h2 className="text-3xl font-bold text-slate-900 mb-6">Elevate Your PDF Productivity with No Limits</h2>
-                        <div className="space-y-6 text-slate-600 leading-relaxed">
-                            <p>
-                                In today's digital workflow, the ability to manipulate files quickly is essential. Convertify removes the friction of traditional PDF software. No more <strong>"daily limit reached"</strong> messages or <strong>"pay to unlock"</strong> prompts. We believe that basic document tools should be accessible to everyone, everywhere, for free.
-                            </p>
-                            <div className="grid md:grid-cols-3 gap-6 my-10">
-                                <div className="p-6 bg-slate-50 rounded-xl border border-slate-200">
-                                    <h4 className="font-bold text-slate-900 mb-2">No Software Needed</h4>
-                                    <p className="text-sm">Forget heavy installations. Convertify works directly in Chrome, Firefox, Safari, and Edge. Just bookmark and go.</p>
-                                </div>
-                                <div className="p-6 bg-slate-50 rounded-xl border border-slate-200">
-                                    <h4 className="font-bold text-slate-900 mb-2">Cross-Platform Support</h4>
-                                    <p className="text-sm">Seamlessly transition from your desktop to your smartphone. Our responsive design ensures a premium experience on any screen size.</p>
-                                </div>
-                                <div className="p-6 bg-slate-50 rounded-xl border border-slate-200">
-                                    <h4 className="font-bold text-slate-900 mb-2">High-Fidelity Output</h4>
-                                    <p className="text-sm">We use the latest rendering engines to ensure that your PDF conversions maintain 100% of their original quality and formatting.</p>
-                                </div>
-                            </div>
-                            <p>
-                                Whether you are a student needing to <strong>organize research papers</strong>, a business professional <strong>signing contracts</strong>, or a developer <strong>extracting text from scans</strong>, Convertify provides the tools you need to succeed. Our <strong>OCR PDF</strong> tool uses advanced optical character recognition to make scanned images searchable, while our <strong>PDF to PDF/A</strong> tool ensures your documents are ready for long-term archiving.
-                            </p>
-                            <p>
-                                Join thousands of users who have made the switch to a faster, safer, and more reliable PDF suite. At Convertify, we aren't just building tools; we're building a more open and secure web. Explore our full range of <strong>PDF editors, mergers, and converters</strong> today and experience the difference of client-side power.
-                            </p>
-
-                            <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">Complete List of PDF Capabilities</h3>
-                            <p>
-                                Our platform covers every aspect of document management. From <strong>adding page numbers</strong> for thesis submissions to <strong>redacting sensitive information</strong> for legal compliance, we have a specialized tool for every task. Need to <strong>rotate a scanned page</strong>? Our Rotate PDF tool makes it effortless. Want to <strong>repair a corrupted file</strong>? Our Repair PDF algorithm attempts to recover data from damaged headers and cross-reference tables.
-                            </p>
-                            <p>
-                                Every tool is designed with a "single-click" philosophy. We value your time as much as your privacy. That's why we've eliminated splash screens, advertisements (on processing pages), and complex configuration menus. Select your tool, pick your file, and get your result. It's that simple.
-                            </p>
-                        </div>
-                    </div>
                 </div>
             </section>
         </div>

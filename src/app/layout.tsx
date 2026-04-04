@@ -42,9 +42,7 @@ const organizationSchema = {
     width: 512,
     height: 512
   },
-  sameAs: [
-    "https://twitter.com/convertify"
-  ],
+  sameAs: [],
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer support",
@@ -60,14 +58,6 @@ export const metadata: Metadata = {
   description: "Merge, compress, and convert PDFs 100% securely in your browser. Files never leave your device. No sign-up, no limits, no servers involved.",
   applicationName: "Convertify",
   authors: [{ name: "Convertify Team" }],
-  keywords: [
-    "free pdf converter", "secure pdf tools", "client-side pdf merger", "no sign up pdf converter",
-    "unlimited pdf tools", "fast pdf converter", "convertify", "ilovepdf alternative",
-    "privacy first pdf", "offline pdf tools", "merge pdf secure", "compress pdf no limit",
-    "jpg to pdf free", "pdf to word", "split pdf client side", "best pdf converter 2026",
-    "pdf editor free online", "pdf compressor 100kb", "merge pdf no watermark",
-    "convert pdf to word free", "pdf to jpg converter", "word to pdf converter"
-  ],
   icons: {
     icon: [
       { url: '/icon.png', sizes: '512x512', type: 'image/png' },
@@ -101,7 +91,7 @@ export const metadata: Metadata = {
     creator: "@convertify",
   },
   alternates: {
-    canonical: './',
+    canonical: 'https://convertify.work',
   },
   verification: {
     google: "ghwXtP5nTeKojcTtLh5jNBXQOHfhcwBGfwiLLO0_4Yc",

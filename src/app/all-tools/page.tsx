@@ -33,8 +33,8 @@ import { Metadata } from "next"
 
 export const metadata: Metadata = {
     title: "All Free PDF Tools | Convertify - No Pricing, No Download, 100% Free",
-    description: "Browse 30+ free PDF tools from Convertify (Convertifyy / Convertfy). Merge, split, compress, convert PDF to Word and images online. No pricing, no download, no registration, and no file limits.",
-    keywords: ["convertify tools", "convertify free", "convertifyy", "convertfy", "convertifytool", "convertify pricing", "convertify download", "pdf tools list", "all pdf converters", "free pdf tools", "online pdf editor", "pdf to images converter online"],
+    description: "Browse 30+ free PDF tools from Convertify. Merge, split, compress, convert PDF to Word and images online. No download, no registration, and no file limits.",
+    keywords: ["convertify tools", "free pdf tools", "pdf tools list", "all pdf converters", "online pdf editor", "pdf to images converter online"],
     alternates: {
         canonical: "https://convertify.work/all-tools",
     },
@@ -199,8 +199,8 @@ export default function AllToolsPage() {
                         <p className="text-sm leading-relaxed"><strong>No download required.</strong> Convertify works entirely in your web browser. There is no desktop application to install — just visit convertify.work and start using any tool instantly on any device.</p>
                     </div>
                     <div className="space-y-2">
-                        <h3 className="font-semibold text-slate-900">🔤 What is Convertifyy / Convertfy / ConvertifyTool?</h3>
-                        <p className="text-sm leading-relaxed">Convertifyy, Convertfy, and ConvertifyTool are common alternative spellings for Convertify. They all refer to the same free online PDF tool suite at convertify.work.</p>
+                        <h3 className="font-semibold text-slate-900">🔒 Is Convertify safe for confidential documents?</h3>
+                        <p className="text-sm leading-relaxed">Yes. All processing happens locally in your browser using client-side technology. Your files are never uploaded to any server, making it safe for legal, financial, and personal documents.</p>
                     </div>
                     <div className="space-y-2">
                         <h3 className="font-semibold text-slate-900">🖼️ Can Convertify convert PDF to images?</h3>

@@ -36,6 +36,7 @@ export default function ClientLayout({
     // If we are on Native, we will switch after hydration.
 
     if (isNative) {
+        // Native app: MobileLayout handles navigation, no fixed footer ads
         return <MobileLayout>{children}</MobileLayout>;
     }
 

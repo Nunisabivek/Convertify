@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
+// Enable static export for Capacitor mobile builds via env variable:
+// NEXT_PUBLIC_MOBILE_BUILD=true npm run build
+const isMobileBuild = process.env.NEXT_PUBLIC_MOBILE_BUILD === 'true';
+
 const nextConfig: NextConfig = {
+  ...(isMobileBuild && { output: 'export' }),
   trailingSlash: false,
   compress: true,
   poweredByHeader: false,

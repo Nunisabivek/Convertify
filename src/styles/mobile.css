@@ -1,49 +1,49 @@
 /**
  * CONVERTIFY MOBILE STYLES
  * =======================
- * Material Design 3 inspired mobile-first styles
- * Based on Google Stitch design specifications
+ * Clean, modern light theme inspired by Material Design 3
+ * Designed for readability and a friendly, professional feel
  */
 
 /* ==========================================
-   CSS VARIABLES - MATERIAL DESIGN 3 DARK THEME
+   CSS VARIABLES - LIGHT THEME
    ========================================== */
 :root {
-  /* Primary Colors */
-  --md-primary: #00A3FF;
-  --md-primary-container: #004A77;
+  /* Primary Colors - Indigo brand */
+  --md-primary: #4F46E5;
+  --md-primary-container: #E0E7FF;
   --md-on-primary: #FFFFFF;
-  --md-on-primary-container: #C4E7FF;
-  
-  /* Surface Colors */
-  --md-surface: #0F1219;
-  --md-surface-dim: #0A0D12;
-  --md-surface-bright: #161B22;
-  --md-surface-container: #1A1F26;
-  --md-surface-container-high: #252A33;
-  --md-surface-container-highest: #30363D;
-  
+  --md-on-primary-container: #3730A3;
+
+  /* Surface Colors - Clean white/gray */
+  --md-surface: #FFFFFF;
+  --md-surface-dim: #F8FAFC;
+  --md-surface-bright: #FFFFFF;
+  --md-surface-container: #F1F5F9;
+  --md-surface-container-high: #E2E8F0;
+  --md-surface-container-highest: #CBD5E1;
+
   /* Text Colors */
-  --md-on-surface: #FFFFFF;
-  --md-on-surface-variant: #8B949E;
-  --md-outline: #3D4752;
-  --md-outline-variant: #2D333B;
-  
+  --md-on-surface: #0F172A;
+  --md-on-surface-variant: #64748B;
+  --md-outline: #CBD5E1;
+  --md-outline-variant: #E2E8F0;
+
   /* Secondary Colors */
   --md-secondary: #7C3AED;
-  --md-secondary-container: #4C1D95;
-  --md-tertiary: #10B981;
-  --md-tertiary-container: #065F46;
-  
+  --md-secondary-container: #EDE9FE;
+  --md-tertiary: #059669;
+  --md-tertiary-container: #D1FAE5;
+
   /* Error Colors */
-  --md-error: #F87171;
-  --md-error-container: #7F1D1D;
-  
-  /* Elevation Shadows */
-  --md-elevation-1: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
-  --md-elevation-2: 0 3px 6px rgba(0, 0, 0, 0.45), 0 3px 6px rgba(0, 0, 0, 0.3);
-  --md-elevation-3: 0 10px 20px rgba(0, 0, 0, 0.5), 0 6px 6px rgba(0, 0, 0, 0.35);
-  
+  --md-error: #DC2626;
+  --md-error-container: #FEE2E2;
+
+  /* Elevation Shadows - Softer for light theme */
+  --md-elevation-1: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --md-elevation-2: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --md-elevation-3: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+
   /* Spacing */
   --md-spacing-xs: 4px;
   --md-spacing-sm: 8px;
@@ -51,14 +51,14 @@
   --md-spacing-lg: 24px;
   --md-spacing-xl: 32px;
   --md-spacing-xxl: 48px;
-  
+
   /* Border Radius */
   --md-radius-sm: 8px;
   --md-radius-md: 12px;
   --md-radius-lg: 16px;
   --md-radius-xl: 24px;
   --md-radius-full: 9999px;
-  
+
   /* Typography */
   --md-font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
 }
@@ -71,7 +71,7 @@
   flex-direction: column;
   min-height: 100vh;
   min-height: 100dvh;
-  background: var(--md-surface);
+  background: var(--md-surface-dim);
   color: var(--md-on-surface);
   font-family: var(--md-font-family);
   -webkit-font-smoothing: antialiased;
@@ -109,6 +109,7 @@
   top: 0;
   z-index: 100;
   border-bottom: 1px solid var(--md-outline-variant);
+  box-shadow: var(--md-elevation-1);
 }
 
 .mobile-top-bar-title {
@@ -125,8 +126,9 @@
 
 .mobile-top-bar-text {
   font-size: 20px;
-  font-weight: 600;
-  color: var(--md-on-surface);
+  font-weight: 700;
+  color: var(--md-primary);
+  letter-spacing: -0.3px;
 }
 
 .mobile-top-bar-actions {
@@ -164,14 +166,17 @@
    ========================================== */
 .mobile-hero {
   padding: var(--md-spacing-lg) var(--md-spacing-md);
+  padding-top: var(--md-spacing-xl);
   text-align: center;
+  background: linear-gradient(135deg, #EEF2FF 0%, #F8FAFC 50%, #F0FDF4 100%);
+  border-bottom: 1px solid var(--md-outline-variant);
 }
 
 .mobile-hero-title {
   font-size: 24px;
   font-weight: 700;
   color: var(--md-on-surface);
-  margin-bottom: var(--md-spacing-xs);
+  margin-bottom: var(--md-spacing-sm);
   line-height: 1.3;
 }
 
@@ -197,12 +202,13 @@
   align-items: center;
   justify-content: center;
   gap: var(--md-spacing-sm);
-  background: var(--md-surface-container);
+  background: var(--md-surface);
+  border: 1px solid var(--md-outline-variant);
   border-radius: var(--md-radius-lg);
   padding: var(--md-spacing-lg) var(--md-spacing-md);
   text-decoration: none;
   color: var(--md-on-surface);
-  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
   min-height: 120px;
   position: relative;
   overflow: hidden;
@@ -226,9 +232,14 @@
   opacity: 1;
 }
 
+.mobile-tool-card:hover {
+  box-shadow: var(--md-elevation-2);
+  border-color: var(--md-outline);
+}
+
 .mobile-tool-card:active {
   transform: scale(0.98);
-  background: var(--md-surface-container-high);
+  background: var(--md-surface-container);
 }
 
 .mobile-tool-icon {
@@ -238,14 +249,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: color-mix(in srgb, var(--tool-color, var(--md-primary)) 20%, transparent);
+  background: color-mix(in srgb, var(--tool-color, var(--md-primary)) 12%, white);
   color: var(--tool-color, var(--md-primary));
   font-size: 24px;
 }
 
 .mobile-tool-name {
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
   color: var(--md-on-surface);
   line-height: 1.3;
@@ -269,15 +280,14 @@
   font-size: 16px;
   font-weight: 600;
   color: var(--md-on-surface);
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .mobile-section-action {
   font-size: 14px;
   color: var(--md-primary);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* ==========================================
@@ -294,16 +304,18 @@
   align-items: center;
   gap: var(--md-spacing-md);
   padding: var(--md-spacing-md);
-  background: var(--md-surface-container);
+  background: var(--md-surface);
+  border: 1px solid var(--md-outline-variant);
   border-radius: var(--md-radius-md);
   text-decoration: none;
   color: var(--md-on-surface);
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, box-shadow 0.2s;
 }
 
 .mobile-file-item:hover,
 .mobile-file-item:focus {
-  background: var(--md-surface-container-high);
+  background: var(--md-surface-container);
+  box-shadow: var(--md-elevation-1);
 }
 
 .mobile-file-icon {
@@ -360,8 +372,7 @@
   border-radius: var(--md-radius-lg);
   font-size: 14px;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   cursor: pointer;
   box-shadow: var(--md-elevation-3);
   transition: transform 0.2s, box-shadow 0.2s;
@@ -391,12 +402,13 @@
   right: 0;
   height: calc(64px + env(safe-area-inset-bottom));
   padding-bottom: env(safe-area-inset-bottom);
-  background: var(--md-surface-bright);
+  background: var(--md-surface);
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
   padding-top: var(--md-spacing-sm);
   border-top: 1px solid var(--md-outline-variant);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.06);
   z-index: 1000;
 }
 
@@ -437,7 +449,7 @@
   transform: translate(-50%, -50%);
   width: 56px;
   height: 32px;
-  background: color-mix(in srgb, var(--md-primary) 20%, transparent);
+  background: var(--md-primary-container);
   border-radius: 16px;
   z-index: -1;
 }
@@ -466,7 +478,7 @@
   width: 32px;
   height: 32px;
   border-radius: var(--md-radius-sm);
-  background: var(--md-surface-container);
+  background: var(--md-primary-container);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -493,16 +505,18 @@
   align-items: center;
   gap: var(--md-spacing-md);
   padding: var(--md-spacing-md);
-  background: var(--md-surface-container);
+  background: var(--md-surface);
+  border: 1px solid var(--md-outline-variant);
   border-radius: var(--md-radius-md);
   text-decoration: none;
   color: var(--md-on-surface);
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, box-shadow 0.2s;
 }
 
 .mobile-tool-list-item:hover,
 .mobile-tool-list-item:focus {
-  background: var(--md-surface-container-high);
+  background: var(--md-surface-container);
+  box-shadow: var(--md-elevation-1);
 }
 
 .mobile-tool-list-icon {
@@ -512,7 +526,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: color-mix(in srgb, var(--tool-color, var(--md-primary)) 20%, transparent);
+  background: color-mix(in srgb, var(--tool-color, var(--md-primary)) 12%, white);
   color: var(--tool-color, var(--md-primary));
   font-size: 20px;
   flex-shrink: 0;
@@ -676,7 +690,8 @@
 }
 
 .mobile-file-card {
-  background: var(--md-surface-container);
+  background: var(--md-surface);
+  border: 1px solid var(--md-outline-variant);
   border-radius: var(--md-radius-lg);
   padding: var(--md-spacing-md);
   width: 100%;
@@ -710,17 +725,18 @@
   align-items: center;
   gap: var(--md-spacing-xs);
   padding: var(--md-spacing-md);
-  background: var(--md-surface-container);
-  border: none;
+  background: var(--md-surface);
+  border: 1px solid var(--md-outline-variant);
   border-radius: var(--md-radius-md);
   color: var(--md-on-surface);
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, box-shadow 0.2s;
   min-width: 64px;
 }
 
 .mobile-action-btn:hover {
-  background: var(--md-surface-container-high);
+  background: var(--md-surface-container);
+  box-shadow: var(--md-elevation-1);
 }
 
 .mobile-action-btn-icon {
@@ -762,7 +778,7 @@
   width: 100%;
   padding: var(--md-spacing-md);
   padding-left: 48px;
-  background: var(--md-surface-container);
+  background: var(--md-surface);
   border: 1px solid var(--md-outline-variant);
   border-radius: var(--md-radius-full);
   color: var(--md-on-surface);
@@ -777,7 +793,7 @@
 
 .mobile-search-input:focus {
   border-color: var(--md-primary);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--md-primary) 25%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--md-primary) 15%, transparent);
 }
 
 .mobile-search-icon {
@@ -788,6 +804,25 @@
   color: var(--md-on-surface-variant);
   font-size: 20px;
   pointer-events: none;
+}
+
+/* ==========================================
+   MOBILE AD CONTAINER - Non-intrusive
+   ========================================== */
+.mobile-ad-container {
+  padding: var(--md-spacing-sm) var(--md-spacing-md);
+  display: flex;
+  justify-content: center;
+  background: var(--md-surface-dim);
+}
+
+.mobile-ad-label {
+  font-size: 10px;
+  color: var(--md-on-surface-variant);
+  text-align: center;
+  margin-bottom: var(--md-spacing-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* ==========================================

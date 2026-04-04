@@ -1,109 +1,105 @@
 import { MetadataRoute } from 'next'
-import { getAllTools } from '@/lib/tools-registry'
 
 export const dynamic = 'force-static'
 
-// Dynamically get all tools from the centralized registry
-const allTools = getAllTools().map(tool => tool.href)
-
-// Additional tools/pages that may not be in registry but have pages
-const additionalToolPages = [
-    'organize-pdf',
-    'repair-pdf',
-    'crop-pdf',
-    'text-to-pdf',
-    'extract-pdf',
-    'heic-to-jpg',
-]
-
-// Combine and deduplicate
-const allToolSlugs = [...new Set([...allTools, ...additionalToolPages])]
-
-// Static pages
-const staticPages = [
-    'all-tools',
-    'blog',
-    'about',
-    'contact',
-    'privacy',
-    'terms',
-    'security',
-    'pricing',
-]
-
-// Only include the highest-quality, most-searched blog posts
-// These target real search queries with substantial unique content
-const topBlogPosts = [
-    'how-to-merge-pdf-files-free',
-    'compress-pdf-reduce-file-size',
-    'convert-jpg-to-pdf-online',
-    'how-to-convert-pdf-to-word-without-software',
-    'split-pdf-extract-pages-free',
-    'convert-word-to-pdf-keep-formatting',
-    'best-free-pdf-tools-2025',
-    'how-to-electronically-sign-pdf-free',
-    'how-to-make-scanned-pdf-searchable-ocr',
-    'reduce-pdf-size-without-losing-quality',
-    'best-free-pdf-compressor-online',
-    'pdf-tools-for-small-business',
-    'free-pdf-tools-vs-adobe-acrobat',
-    'resume-guide-word-to-pdf',
-    'pdf-tips-for-students',
-]
-
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://convertify.work'
-    const currentDate = new Date()
 
-    // Top priority tools (most searched)
-    const topPriorityTools = [
-        'merge-pdf', 'compress-pdf', 'jpg-to-pdf', 'word-to-pdf',
-        'pdf-to-word', 'split-pdf', 'pdf-to-jpg', 'excel-to-pdf',
-        'pdf-to-excel', 'edit-pdf'
+    // STRATEGY: For a new domain (~3 months old), keep the sitemap lean.
+    // Only include pages that deserve to be indexed. Google trusts smaller,
+    // high-quality sitemaps over bloated ones. Add more pages gradually
+    // as domain authority grows and existing pages get indexed.
+
+    // Core tool pages (highest search volume PDF tools only)
+    const coreTools = [
+        'merge-pdf',
+        'compress-pdf',
+        'split-pdf',
+        'pdf-to-word',
+        'word-to-pdf',
+        'pdf-to-jpg',
+        'jpg-to-pdf',
+        'pdf-to-excel',
+        'excel-to-pdf',
+        'edit-pdf',
+        'pdf-to-png',
+        'png-to-pdf',
+        'rotate-pdf',
+        'sign-pdf',
+        'protect-pdf',
+        'unlock-pdf',
     ]
 
-    // Tool pages
-    const toolUrls = allToolSlugs.map((tool) => ({
-        url: `${baseUrl}/${tool}`,
-        lastModified: currentDate,
-        changeFrequency: 'weekly' as const,
-        priority: topPriorityTools.includes(tool) ? 0.95 : 0.85,
-    }))
+    // Secondary tools (add to sitemap once core pages are indexed)
+    const secondaryTools = [
+        'image-compressor',
+        'resize-image',
+        'heic-to-jpg',
+        'jpg-to-png',
+        'png-to-jpg',
+        'webp-converter',
+        'pdf-to-text',
+        'html-to-pdf',
+        'ocr-pdf',
+    ]
 
-    // Only top blog posts
-    const blogUrls = topBlogPosts.map(slug => ({
-        url: `${baseUrl}/blog/${slug}`,
-        lastModified: currentDate,
-        changeFrequency: 'monthly' as const,
-        priority: 0.7,
-    }))
+    // Static pages worth indexing
+    const staticPages = [
+        { path: 'all-tools', priority: 0.8 },
+        { path: 'blog', priority: 0.7 },
+        { path: 'about', priority: 0.4 },
+        { path: 'contact', priority: 0.3 },
+    ]
 
-    // Static pages
-    const staticUrls = staticPages.map(page => ({
-        url: `${baseUrl}/${page}`,
-        lastModified: currentDate,
-        changeFrequency: page === 'blog' ? 'daily' as const : 'monthly' as const,
-        priority: page === 'all-tools' || page === 'blog' ? 0.9 : 0.5,
-    }))
+    // Only blog posts that have dedicated page.tsx files with real content
+    // Dynamic [slug] posts from blog-data.ts are excluded until they have
+    // substantial unique content (1500+ words of genuine editorial)
+    const blogPosts = [
+        'how-to-convert-pdf-to-word-without-software',
+        'best-free-pdf-compressor-online',
+        'pdf-tools-for-small-business',
+    ]
 
-    // USE CASE PAGES REMOVED FROM SITEMAP
-    // 83 thin/programmatic use-case pages were hurting indexing.
-    // These pages still exist but are noindexed until domain authority grows.
-    // Re-add gradually once core pages are indexed and ranking.
+    // Use a fixed date instead of new Date() — Google distrusts sitemaps
+    // where every page claims to be freshly modified. Update this date
+    // only when you actually make meaningful content changes.
+    const lastUpdated = '2026-04-04'
 
     return [
         // Homepage
         {
             url: baseUrl,
-            lastModified: currentDate,
-            changeFrequency: 'daily',
+            lastModified: lastUpdated,
+            changeFrequency: 'weekly',
             priority: 1,
         },
         // Static pages
-        ...staticUrls,
-        // Tool pages
-        ...toolUrls,
-        // Top blog posts only
-        ...blogUrls,
+        ...staticPages.map(page => ({
+            url: `${baseUrl}/${page.path}`,
+            lastModified: lastUpdated,
+            changeFrequency: 'monthly' as const,
+            priority: page.priority,
+        })),
+        // Core tool pages
+        ...coreTools.map(tool => ({
+            url: `${baseUrl}/${tool}`,
+            lastModified: lastUpdated,
+            changeFrequency: 'weekly' as const,
+            priority: 0.9,
+        })),
+        // Secondary tools
+        ...secondaryTools.map(tool => ({
+            url: `${baseUrl}/${tool}`,
+            lastModified: lastUpdated,
+            changeFrequency: 'monthly' as const,
+            priority: 0.7,
+        })),
+        // Blog posts with real dedicated content
+        ...blogPosts.map(slug => ({
+            url: `${baseUrl}/blog/${slug}`,
+            lastModified: lastUpdated,
+            changeFrequency: 'monthly' as const,
+            priority: 0.6,
+        })),
     ]
 }

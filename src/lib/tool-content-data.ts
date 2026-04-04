@@ -8,9 +8,9 @@ export const toolContentData: Record<string, {
     keywords: string[];
 }> = {
     "merge-pdf": {
-        description: "Looking for Convertifyy PDF merger? Merge PDF files online 100% free with the official Convertify tool. No limits, no watermarks, no sign-up. Combine multiple PDFs into one document with drag-and-drop reordering. Our 'Zero-Bloat' technology keeps file sizes small. Mix PDFs with JPG/PNG images. 100% private - files never leave your browser.",
+        description: "Merge PDF files online for free. Combine multiple PDFs into one document with drag-and-drop reordering. No watermarks, no sign-up, no file size limits. Mix PDFs with JPG/PNG images. 100% private — files never leave your browser.",
         features: [
-            "Official Convertify PDF Merger - No file size limits",
+            "No file size limits on merged documents",
             "No watermarks added to your documents",
             "No sign-up or registration required",
             "Drag-and-drop to reorder pages precisely",
@@ -25,7 +25,7 @@ export const toolContentData: Record<string, {
             "Combining invoices and receipts for tax submission",
             "Stitching design portfolios and scans into one document"
         ],
-        keywords: ["convertify pdf merger", "convertifyy pdf merger", "merge pdf", "combine pdf files", "join pdfs", "pdf binder", "stitch pdfs", "secure pdf merger", "combine multiple pdfs", "concatenate pdf", "merge pdf online", "free pdf merger", "combine pdfs free"]
+        keywords: ["convertify pdf merger", "merge pdf", "combine pdf files", "join pdfs", "pdf binder", "stitch pdfs", "secure pdf merger", "combine multiple pdfs", "concatenate pdf", "merge pdf online", "free pdf merger", "combine pdfs free"]
     },
     "split-pdf": {
         description: "Extract exactly the pages you need with our free Split PDF tool, optimized for Windows and Mac. Whether you're on Windows 10/11 or mobile, you can separate a single page, define specific ranges (e.g., 1-5, 10), or extract every page as a standalone file. Convertify offers precise control for removing sensitive info or isolating reports directly in your browser.",
@@ -47,9 +47,9 @@ export const toolContentData: Record<string, {
         keywords: ["split pdf", "extract pdf pages", "separate pdf pages", "how to split pdf on windows", "pdf splitter online", "pdf page separator"]
     },
     "compress-pdf": {
-        description: "Official Convertifyy PDF compressor for government forms, visa applications, and passport scans. Compress PDF to exactly 100KB or 200KB with our intelligent multi-pass optimization. No watermarks, no limits, no sign-up required. Process sensitive documents 100% privately in your browser - files are never uploaded to any server.",
+        description: "Compress PDF to 100KB or 200KB with intelligent multi-pass optimization. Perfect for government forms, visa applications, and passport scans. No watermarks, no limits, no sign-up required. Files are processed privately in your browser.",
         features: [
-            "Official Convertify PDF Compressor - reliable & fast",
+            "Reliable and fast PDF compression",
             "Compress PDF to exactly 100KB or 200KB for government portals",
             "Best for visa applications, passport scans & official forms",
             "No watermarks, no limits, no sign-up required",
@@ -65,7 +65,7 @@ export const toolContentData: Record<string, {
             "Making official documents smaller without quality loss",
             "Optimizing scanned IDs for online applications"
         ],
-        keywords: ["convertify pdf compressor", "convertifyy pdf compressor", "compress pdf to 100kb", "compress pdf to 200kb", "pdf compressor 100kb", "reduce pdf size", "shrink pdf online free", "compress pdf for government forms", "best pdf compressor free", "pdf size reducer no watermark"]
+        keywords: ["convertify pdf compressor", "compress pdf to 100kb", "compress pdf to 200kb", "pdf compressor 100kb", "reduce pdf size", "shrink pdf online free", "compress pdf for government forms", "best pdf compressor free", "pdf size reducer no watermark"]
     },
     "jpg-to-pdf": {
         description: "Convert JPG to PDF free online with no limits and no watermarks. Combine unlimited photos into one multi-page PDF, adjust page sizes (A4, Letter, Legal), and arrange images in any order. Works perfectly on iPhone, Android, Windows, and Mac. All conversion happens in your browser - your photos are never uploaded to any server, making it 100% private and secure.",
@@ -127,12 +127,12 @@ export const toolContentData: Record<string, {
             "Submitting academic papers and thesis documents",
             "Sharing business reports that display perfectly everywhere"
         ],
-        keywords: ["convertify word to pdf", "convertifyy word to pdf", "word to pdf free", "word to pdf no office", "convert docx to pdf", "docx to pdf converter without watermark", "resume to pdf", "cv to pdf", "word to pdf preserve formatting", "docx to pdf online free"]
+        keywords: ["convertify word to pdf", "word to pdf free", "word to pdf no office", "convert docx to pdf", "docx to pdf converter without watermark", "resume to pdf", "cv to pdf", "word to pdf preserve formatting", "docx to pdf online free"]
     },
     "pdf-to-word": {
-        description: "Official Convertifyy PDF to Word converter with industry-leading OCR accuracy. Convert PDF to editable Word documents while keeping industry-perfect paragraph flow and table structures. Perfect for updating old documents, extracting content, or making 'scanned-only' files editable again. Secure, private, and no sign-up required.",
+        description: "Convert PDF to editable Word documents with OCR accuracy. Preserves paragraph flow and table structures perfectly. Great for updating old documents, extracting content, or making scanned PDFs editable. Secure, private, and no sign-up required.",
         features: [
-            "Official Convertify PDF to Word - Editable DOCX",
+            "Convert PDF to editable DOCX format",
             "Identifies logical paragraph flow (no text boxes)",
             "Advanced AI-OCR for scanned and image-only PDFs",
             "Preserves complex multi-column layouts and tables",
@@ -146,7 +146,7 @@ export const toolContentData: Record<string, {
             "Modifying forms and templates for new project needs",
             "Converting academic papers for easy citing and editing"
         ],
-        keywords: ["convertify pdf to word", "convertifyy pdf to word", "convert pdf to editable word free", "pdf to docx no email required", "pdf to word keep layout", "turn pdf into text document"]
+        keywords: ["convertify pdf to word", "convert pdf to editable word free", "pdf to docx no email required", "pdf to word keep layout", "turn pdf into text document"]
     },
     "rotate-pdf": {
         description: "Rotate PDF pages to the correct orientation. Fix sideways or upside-down scans, rotate specific pages, or change the entire document orientation. Save permanently without Adobe Acrobat or any software installation.",

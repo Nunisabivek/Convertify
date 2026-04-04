@@ -7,7 +7,7 @@ import { MobileHomePage } from '@/components/mobile';
 export const metadata: Metadata = {
   title: 'Convertify - Free Online PDF Tools | Merge, Compress, Convert',
   description: 'Free online PDF tool suite — merge, compress, convert PDF to Word, images and more. No sign-up, no watermarks, no file limits. Works entirely in your browser.',
-  keywords: ['convertify', 'convertifyy', 'convertfy', 'convertifytool', 'free pdf tools', 'online pdf converter', 'merge pdf free', 'compress pdf online', 'pdf to word converter', 'pdf to jpg', 'word to pdf', 'compress pdf 100kb', 'split pdf online', 'pdf editor free'],
+  keywords: ['free pdf tools', 'online pdf converter', 'merge pdf free', 'compress pdf online', 'pdf to word converter', 'pdf to jpg', 'word to pdf', 'split pdf online'],
   alternates: {
     canonical: 'https://convertify.work',
   },

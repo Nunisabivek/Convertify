@@ -12,24 +12,13 @@ type Props = {
     params: Promise<{ slug: string }>
 }
 
-// Only these high-quality posts should be indexed
-// Others are noindexed to concentrate crawl budget and avoid thin content signals
+// Only blog posts with dedicated page.tsx files and substantial unique content
+// should be indexed. All dynamic [slug] posts rendered from blog-data.ts are
+// noindexed until they have real editorial content (not just reformatted tool descriptions).
 const indexableBlogSlugs = new Set([
-    'how-to-merge-pdf-files-free',
-    'compress-pdf-reduce-file-size',
-    'convert-jpg-to-pdf-online',
     'how-to-convert-pdf-to-word-without-software',
-    'split-pdf-extract-pages-free',
-    'convert-word-to-pdf-keep-formatting',
-    'best-free-pdf-tools-2025',
-    'how-to-electronically-sign-pdf-free',
-    'how-to-make-scanned-pdf-searchable-ocr',
-    'reduce-pdf-size-without-losing-quality',
     'best-free-pdf-compressor-online',
     'pdf-tools-for-small-business',
-    'free-pdf-tools-vs-adobe-acrobat',
-    'resume-guide-word-to-pdf',
-    'pdf-tips-for-students',
 ])
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
