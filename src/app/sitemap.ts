@@ -58,6 +58,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         'how-to-convert-pdf-to-word-without-software',
         'best-free-pdf-compressor-online',
         'pdf-tools-for-small-business',
+        'compress-pdf-under-100kb-government-forms',
     ]
 
     // Use a fixed date instead of new Date() — Google distrusts sitemaps

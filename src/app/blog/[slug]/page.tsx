@@ -19,6 +19,7 @@ const indexableBlogSlugs = new Set([
     'how-to-convert-pdf-to-word-without-software',
     'best-free-pdf-compressor-online',
     'pdf-tools-for-small-business',
+    'compress-pdf-under-100kb-government-forms',
 ])
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
