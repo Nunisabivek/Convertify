@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     title: 'Pricing - Convertify is Free Forever',
     description: 'Convertify is completely free to use. No hidden fees, no credit card required, and no limits on file conversions.',
     alternates: {
-        canonical: '/pricing',
+        canonical: 'https://convertify.work/pricing',
     },
 }
 

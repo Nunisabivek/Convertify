@@ -1,6 +1,11 @@
 {
     "redirects": [
         {
+            "source": "/extract-pdf",
+            "destination": "/split-pdf",
+            "permanent": true
+        },
+        {
             "source": "/tools/pdf-to-jpg",
             "destination": "/pdf-to-jpg",
             "permanent": true

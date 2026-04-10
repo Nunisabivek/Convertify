@@ -6,43 +6,77 @@ import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { toolContentData } from "@/lib/tool-content-data"
+import { toolSeoData } from "@/lib/seo-data"
+
+const toolName = "gif-to-png"
+const seoData = toolSeoData[toolName]
+const contentData = toolContentData[toolName]
 
 export const metadata: Metadata = {
-    title: "GIF to PNG Converter - Convert GIF Images Free | Convertify",
-    description: "Convert GIF images to PNG format online for free. Extract high-quality static frames from animated GIFs. No upload, works in your browser.",
-    keywords: ["gif to png", "gif converter", "convert gif to png", "gif image converter", "free gif to png"],
-    alternates: { canonical: "https://convertify.work/gif-to-png" },
+    title: seoData.title,
+    description: seoData.description,
+    keywords: seoData.keywords,
+    alternates: { canonical: `https://convertify.work/${toolName}` },
     openGraph: {
-        title: "GIF to PNG Converter - Free Online | Convertify",
-        description: "Convert GIF images to high-quality PNG format. Free, fast, and private.",
-        url: "/gif-to-png",
+        title: seoData.title,
+        description: seoData.description,
+        url: `/${toolName}`,
+        images: [{ url: "/images/og-banner.png", width: 1200, height: 630, alt: seoData.title }],
     },
 }
 
 export default function Page() {
     return (
         <div className="flex flex-col items-center">
-            <BreadcrumbSchema items={[{ name: "Home", url: "/" }, { name: "All Tools", url: "/all-tools" }, { name: "GIF to PNG", url: "/gif-to-png" }]} />
-            <SoftwareApplicationSchema toolName="GIF to PNG Converter" toolSlug="gif-to-png" description="Convert GIF images to PNG format online for free." />
+            <BreadcrumbSchema
+                items={[
+                    { name: "Home", url: "/" },
+                    { name: "All Tools", url: "/all-tools" },
+                    { name: "GIF to PNG", url: "/gif-to-png" },
+                ]}
+            />
+            <SoftwareApplicationSchema
+                toolName="GIF to PNG Converter"
+                toolSlug={toolName}
+                description={seoData.description}
+            />
+
             <section className="w-full py-8 bg-gradient-to-b from-pink-50 to-white">
                 <div className="max-w-4xl mx-auto px-4 text-center mb-8">
-                    <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">GIF to PNG Converter</h1>
-                    <p className="text-lg text-slate-600 max-w-2xl mx-auto">Convert GIF images to high-quality PNG format. Get static frames from animated GIFs.</p>
+                    <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
+                        {seoData.h1}
+                    </h1>
+                    <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                        {seoData.description}
+                    </p>
                 </div>
                 <ToolSwapper />
                 <GifToPngClient />
             </section>
-            <HowToSchema toolName="Convert GIF to PNG" description="Convert GIF images to PNG format using Convertify." steps={[
-                { name: "Upload GIF", text: "Select or drag your GIF images to upload" },
-                { name: "Convert", text: "Click convert - images are processed in your browser" },
-                { name: "Download PNG", text: "Download your converted PNG images" }
-            ]} />
-            <FAQSchema toolName="GIF to PNG Conversion" faqs={[
-                { question: "Does this extract frames from animated GIFs?", answer: "Yes, the converter extracts the first frame of an animated GIF and converts it to a high-quality PNG image." },
-                { question: "Is PNG better than GIF?", answer: "PNG supports more colors (16 million vs 256), transparency with alpha channel, and better compression for static images. GIF is better only for simple animations." },
-                { question: "Is this converter free?", answer: "Yes, completely free with no file limits, no watermarks, and no sign-up required." },
-            ]} />
-            <RelatedTools currentTool="/gif-to-png" />
+
+            <ToolSeoContent
+                toolName="GIF to PNG Converter"
+                toolSlug={toolName}
+                description={contentData.description}
+                features={contentData.features}
+                useCases={contentData.useCases}
+                keywords={contentData.keywords}
+            />
+
+            <HowToSchema
+                toolName={seoData.title}
+                description={seoData.description}
+                steps={seoData.howToSteps}
+            />
+
+            <FAQSchema
+                toolName={seoData.h1}
+                faqs={seoData.faqs}
+            />
+
+            <RelatedTools currentTool={`/${toolName}`} />
         </div>
     )
 }

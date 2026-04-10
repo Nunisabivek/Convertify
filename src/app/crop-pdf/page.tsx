@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     title: seoData.title,
     description: seoData.description,
     keywords: seoData.keywords,
+    robots: { index: false, follow: false },
     alternates: {
         canonical: `https://convertify.work/${toolName}`,
     },

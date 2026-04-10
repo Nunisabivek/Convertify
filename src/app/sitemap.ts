@@ -19,18 +19,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
         'word-to-pdf',
         'pdf-to-jpg',
         'jpg-to-pdf',
-        'pdf-to-excel',
         'excel-to-pdf',
-        'edit-pdf',
         'pdf-to-png',
         'png-to-pdf',
         'rotate-pdf',
-        'sign-pdf',
         'protect-pdf',
         'unlock-pdf',
+        'add-page-numbers',
+        'delete-pdf-pages',
+        'watermark-pdf',
+        'reorder-pdf',
+        'organize-pdf',
     ]
 
-    // Secondary tools (add to sitemap once core pages are indexed)
+    // Secondary tools
     const secondaryTools = [
         'image-compressor',
         'resize-image',
@@ -40,7 +42,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
         'webp-converter',
         'pdf-to-text',
         'html-to-pdf',
-        'ocr-pdf',
+        'bmp-to-jpg',
+        'gif-to-png',
+        'svg-to-png',
+        'tiff-to-pdf',
+        'qr-code-generator',
+        'csv-to-json',
+        'json-to-csv',
+        'xml-to-json',
+        'base64',
+        'markdown-to-pdf',
+        'text-to-pdf',
     ]
 
     // Static pages worth indexing
@@ -49,6 +61,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: 'blog', priority: 0.7 },
         { path: 'about', priority: 0.4 },
         { path: 'contact', priority: 0.3 },
+        { path: 'security', priority: 0.3 },
+        { path: 'pricing', priority: 0.3 },
     ]
 
     // Only blog posts that have dedicated page.tsx files with real content
@@ -64,7 +78,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Use a fixed date instead of new Date() — Google distrusts sitemaps
     // where every page claims to be freshly modified. Update this date
     // only when you actually make meaningful content changes.
-    const lastUpdated = '2026-04-04'
+    const lastUpdated = '2026-04-10'
 
     return [
         // Homepage
