@@ -2,6 +2,10 @@
 
 import { useEffect, useRef, useState } from "react"
 
+// Build-time flag: true when building the Capacitor Android app (npm run build:mobile)
+// All ad components return null so zero ad code is bundled into the app.
+const IS_MOBILE_BUILD = process.env.NEXT_PUBLIC_MOBILE_BUILD === 'true'
+
 interface AdBannerProps {
     variant?: "footer" | "rectangle" | "native" | "skyscraper" | "responsive" | "mobile-banner"
 }
@@ -11,7 +15,7 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
     const [isMobile, setIsMobile] = useState(false)
 
     useEffect(() => {
-        // Check screen size
+        if (IS_MOBILE_BUILD) return
         const checkMobile = () => setIsMobile(window.innerWidth < 768)
         checkMobile()
         window.addEventListener("resize", checkMobile)
@@ -19,13 +23,15 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
     }, [])
 
     useEffect(() => {
+        if (IS_MOBILE_BUILD) return
         const container = containerRef.current
         if (!container) return
 
-        // Clear previous content
         container.innerHTML = ""
 
-        // Configuration based on variant and screen size
+        // ── AD NETWORK CONFIGURATION ──────────────────────────────────────────
+        // Currently: Tonic Governess  |  Swap keys/urls here to change networks
+        // ─────────────────────────────────────────────────────────────────────
         let conf = {
             key: "616f9cf69cb04c34acb730e9239646e0",
             height: 250,
@@ -34,7 +40,6 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
         }
 
         if (variant === "rectangle" || variant === "responsive") {
-            // 300x250 Rectangle - works well on all devices
             conf = {
                 key: "616f9cf69cb04c34acb730e9239646e0",
                 height: 250,
@@ -42,7 +47,6 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
                 url: "//tonicgoverness.com/616f9cf69cb04c34acb730e9239646e0/invoke.js",
             }
         } else if (variant === "mobile-banner") {
-            // Mobile banner: 320x50 - standard mobile banner size
             conf = {
                 key: "ee2936c122e5b6cd6be8ae3b8019a581",
                 height: 50,
@@ -51,7 +55,6 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
             }
         } else if (variant === "footer") {
             if (isMobile) {
-                // Mobile footer: smaller 320x50 mobile banner - less intrusive
                 conf = {
                     key: "ee2936c122e5b6cd6be8ae3b8019a581",
                     height: 50,
@@ -59,7 +62,6 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
                     url: "//tonicgoverness.com/ee2936c122e5b6cd6be8ae3b8019a581/invoke.js",
                 }
             } else {
-                // Desktop footer: 728x90
                 conf = {
                     key: "d84ed579e24fb0e02224fedd00bed35b",
                     height: 90,
@@ -68,7 +70,6 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
                 }
             }
         } else if (variant === "skyscraper") {
-            // Skyscraper: 160x600 (hidden on mobile via CSS)
             conf = {
                 key: "616f9cf69cb04c34acb730e9239646e0",
                 height: 600,
@@ -77,7 +78,6 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
             }
         }
 
-        // Create a friendly iframe to house the ad script
         const iframe = document.createElement("iframe")
         iframe.style.width = `${conf.width}px`
         iframe.style.height = `${conf.height}px`
@@ -115,41 +115,33 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
         }
     }, [variant, isMobile])
 
-    // Rectangle Ad - Responsive container
+    // Never render in the app build
+    if (IS_MOBILE_BUILD) return null
+
     if (variant === "rectangle" || variant === "responsive") {
         return (
             <div className="w-full flex items-center justify-center py-4">
                 <div
                     ref={containerRef}
                     className="flex items-center justify-center bg-slate-50 border border-slate-200 rounded-lg overflow-hidden shadow-sm"
-                    style={{
-                        width: 300,
-                        height: 250,
-                        maxWidth: "100%"
-                    }}
+                    style={{ width: 300, height: 250, maxWidth: "100%" }}
                 />
             </div>
         )
     }
 
-    // Mobile Banner Ad - Small and non-intrusive
     if (variant === "mobile-banner") {
         return (
             <div className="w-full flex items-center justify-center py-2">
                 <div
                     ref={containerRef}
                     className="flex items-center justify-center overflow-hidden rounded-lg"
-                    style={{
-                        width: 320,
-                        height: 50,
-                        maxWidth: "100%"
-                    }}
+                    style={{ width: 320, height: 50, maxWidth: "100%" }}
                 />
             </div>
         )
     }
 
-    // Skyscraper Ad - Hidden on mobile
     if (variant === "skyscraper") {
         return (
             <div className="hidden xl:flex items-center justify-center h-full">
@@ -162,8 +154,7 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
         )
     }
 
-    // Footer Ad - Responsive with different sizes - IMPROVED MOBILE
-    // Uses isMobile state to render the correct size (only one ref attached)
+    // Footer Ad
     return (
         <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 border-t backdrop-blur supports-[backdrop-filter]:bg-white/60 shadow-lg flex justify-center overflow-hidden">
             <div className={isMobile ? "py-1" : "py-2"}>
@@ -171,10 +162,7 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
                     <div
                         ref={containerRef}
                         className="flex items-center justify-center overflow-hidden"
-                        style={isMobile
-                            ? { width: 320, height: 50 }
-                            : { width: 728, height: 90 }
-                        }
+                        style={isMobile ? { width: 320, height: 50 } : { width: 728, height: 90 }}
                     />
                 </div>
             </div>
@@ -182,17 +170,16 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
     )
 }
 
-// In-content responsive ad specifically for blog posts
+// In-content responsive ad for blog posts
 export function BlogAd() {
+    if (IS_MOBILE_BUILD) return null
     return (
         <div className="w-full my-8">
-            {/* Desktop: Centered rectangle */}
             <div className="hidden md:flex justify-center">
                 <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
                     <AdBanner variant="rectangle" />
                 </div>
             </div>
-            {/* Mobile: Full-width mobile banner */}
             <div className="md:hidden flex justify-center">
                 <AdBanner variant="mobile-banner" />
             </div>
@@ -200,15 +187,14 @@ export function BlogAd() {
     )
 }
 
-// Mobile-optimized inline ad for tool pages - shows in the visible area
+// Mobile-optimized inline ad for tool pages
 export function MobileInlineAd() {
+    if (IS_MOBILE_BUILD) return null
     return (
         <div className="w-full my-4 flex justify-center">
-            {/* Mobile: Show mobile banner above the fold */}
             <div className="md:hidden w-full flex justify-center bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg py-3">
                 <AdBanner variant="mobile-banner" />
             </div>
-            {/* Desktop: Show rectangle ad */}
             <div className="hidden md:flex justify-center">
                 <AdBanner variant="rectangle" />
             </div>
@@ -218,6 +204,7 @@ export function MobileInlineAd() {
 
 // Compact ad for between sections
 export function CompactAd() {
+    if (IS_MOBILE_BUILD) return null
     return (
         <div className="w-full py-4 flex justify-center bg-slate-50/50">
             <AdBanner variant="rectangle" />
@@ -225,14 +212,17 @@ export function CompactAd() {
     )
 }
 
-// Tonic Native Banner — in-content native ad unit
+// ── NATIVE BANNER (in-content) ────────────────────────────────────────────────
+// Currently: Tonic Governess native unit
+// To switch to Adsterra: replace containerId + script src below
+// ─────────────────────────────────────────────────────────────────────────────
 export function TonicNativeBanner() {
+    if (IS_MOBILE_BUILD) return null
+
     const containerId = "container-601b8193a0d113517d9d00bae103c5f9"
 
     useEffect(() => {
-        // Avoid injecting the script more than once
         if (document.getElementById("tonic-native-script")) return
-
         const script = document.createElement("script")
         script.id = "tonic-native-script"
         script.src = "https://tonicgoverness.com/601b8193a0d113517d9d00bae103c5f9/invoke.js"
@@ -247,4 +237,3 @@ export function TonicNativeBanner() {
         </div>
     )
 }
-

@@ -131,8 +131,10 @@ export default function RootLayout({
         {/* Sitemap Link for Search Engines */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
-        {/* Popunder Ad */}
-        <script src="https://tonicgoverness.com/c9/10/84/c91084acdeea2a9474360f743f122509.js"></script>
+        {/* Popunder Ad — web only (suppressed in app build via NEXT_PUBLIC_MOBILE_BUILD) */}
+        {process.env.NEXT_PUBLIC_MOBILE_BUILD !== 'true' && (
+          <script src="https://tonicgoverness.com/c9/10/84/c91084acdeea2a9474360f743f122509.js"></script>
+        )}
 
         {/* Structured Data - Website */}
         <script
