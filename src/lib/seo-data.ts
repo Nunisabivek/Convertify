@@ -3,7 +3,7 @@
 
 export const toolSeoData = {
     "merge-pdf": {
-        title: "Convertify PDF Merger - Merge PDF Free Online No Limits",
+        title: "Merge PDF Free Online — Combine PDF Files No Limits | Convertify",
         description: "Combine multiple PDF files into one document instantly. Free online PDF merger with no limits, no watermarks, no sign-up required. 100% private — files never leave your device.",
         keywords: [
             "convertify pdf merger", "merge pdf", "combine pdf files", "merge pdf free", "merge pdf online",
@@ -81,7 +81,7 @@ export const toolSeoData = {
         ]
     },
     "compress-pdf": {
-        title: "Convertify PDF Compressor - Compress PDF to 100KB Free",
+        title: "Compress PDF Free Online — Reduce PDF to 100KB for Forms & Email | Convertify",
         description: "Official Convertify PDF compressor. Reduce PDF to 100KB or 200KB in seconds for government forms, visa applications & passport scans. No watermarks, no limits, 100% private.",
         keywords: [
             "convertify pdf compressor", "compress pdf", "compress pdf to 100kb", "compress pdf to 200kb", "reduce pdf size", "shrink pdf",
@@ -209,8 +209,8 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-jpg": {
-        title: "PDF to Images Converter Online Free - PDF to JPG HD | Convertify",
-        description: "Free PDF to images converter online — convert PDF to high-resolution JPG images (up to 300 DPI). Extract pages as crystal-clear photos for social media and presentations. Convertify PDF to JPG, 100% private.",
+        title: "PDF to JPG Converter Free Online — Extract Pages as HD Images | Convertify",
+        description: "Convert PDF to JPG free online — extract pages as high-resolution images (up to 300 DPI). Crystal-clear output for social media, presentations & archiving. 100% private, files never leave your browser.",
         keywords: [
             "pdf to images converter online", "pdf to jpg", "pdf to jpeg", "convert pdf to image", "extract images from pdf", "save pdf as picture",
             "high quality pdf to jpg", "turn pdf into image", "batch pdf to jpg", "pdf to jpg 300 dpi",
@@ -240,8 +240,8 @@ export const toolSeoData = {
         ]
     },
     "png-to-pdf": {
-        title: "Convertify PNG to PDF — Combine & Merge PNG Images to HD PDF Free",
-        description: "Convertify PNG to PDF converter — combine & merge multiple PNGs into one HD PDF free. Preserves transparency and 300 DPI resolution. Batch convert png to pdf online free. No watermarks, no limits.",
+        title: "Merge PNG to PDF Free — Combine PNG Images into One PDF Online | Convertify",
+        description: "Merge PNG to PDF free — combine multiple PNG images into one HD PDF instantly. No quality loss, 300 DPI, no watermarks, no sign-up. 100% private, files never leave your browser.",
         keywords: [
             "png to pdf", "png to pdf hd", "convert png to pdf", "png to pdf converter", "combine png to pdf", "merge png to pdf",
             "combine pngs into pdf", "combine png into one pdf", "multiple png to pdf", "png merge to pdf",
@@ -668,8 +668,8 @@ export const toolSeoData = {
         ]
     },
     "excel-to-pdf": {
-        title: "Convertify Excel to PDF Free — XLS to PDF Converter Online",
-        description: "Convert XLS & XLSX to PDF free online with Convertify — the best Excel to PDF converter. No Excel required. Preserves charts, formulas & formatting. Works on Windows, Mac & mobile. 100% private.",
+        title: "Excel to PDF Converter Free — XLS & XLSX to PDF Online | Convertify",
+        description: "Convert Excel to PDF free online — XLS and XLSX files supported. Preserves charts, formulas & formatting. No Excel required, works on Windows, Mac & mobile. 100% private.",
         keywords: [
             "xls to pdf", "xlsx to pdf", "excel to pdf", "convert excel to pdf", "excel to pdf converter",
             "xls to pdf converter", "xlsx to pdf converter", "xls to pdf online", "xlsx to pdf online",

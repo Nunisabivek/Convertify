@@ -1,4 +1,5 @@
 import { CheckCircle, Shield, Zap, Globe, FileCheck } from 'lucide-react';
+import { TonicNativeBanner } from '@/components/ads/banner';
 
 interface ToolContentProps {
     toolName: string;
@@ -82,6 +83,9 @@ export function ToolSeoContent({
                         </ul>
                     </div>
                 </div>
+
+                {/* Native Ad — between content and trust signal */}
+                <TonicNativeBanner />
 
                 {/* Trust Signal */}
                 <div className="text-sm text-slate-500 leading-relaxed border-t border-slate-100 pt-6">

@@ -225,3 +225,26 @@ export function CompactAd() {
     )
 }
 
+// Tonic Native Banner — in-content native ad unit
+export function TonicNativeBanner() {
+    const containerId = "container-601b8193a0d113517d9d00bae103c5f9"
+
+    useEffect(() => {
+        // Avoid injecting the script more than once
+        if (document.getElementById("tonic-native-script")) return
+
+        const script = document.createElement("script")
+        script.id = "tonic-native-script"
+        script.src = "https://tonicgoverness.com/601b8193a0d113517d9d00bae103c5f9/invoke.js"
+        script.async = true
+        script.setAttribute("data-cfasync", "false")
+        document.body.appendChild(script)
+    }, [])
+
+    return (
+        <div className="w-full my-6">
+            <div id={containerId} />
+        </div>
+    )
+}
+

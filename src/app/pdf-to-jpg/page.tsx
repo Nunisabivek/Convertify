@@ -23,10 +23,10 @@ export const metadata: Metadata = {
     openGraph: {
         title: seoData.title,
         description: seoData.description,
-        url: "/pdf-to-jpg",
+        url: "https://convertify.work/pdf-to-jpg",
         images: [
             {
-                url: "/images/og-banner.png",
+                url: "https://convertify.work/images/og-banner.png",
                 width: 1200,
                 height: 630,
                 alt: "PDF to Images Converter Online - Convertify",

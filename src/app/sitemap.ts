@@ -65,20 +65,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: 'pricing', priority: 0.3 },
     ]
 
-    // Only blog posts that have dedicated page.tsx files with real content
-    // Dynamic [slug] posts from blog-data.ts are excluded until they have
-    // substantial unique content (1500+ words of genuine editorial)
+    // Blog posts with substantial editorial content (500+ words)
     const blogPosts = [
         'how-to-convert-pdf-to-word-without-software',
         'best-free-pdf-compressor-online',
         'pdf-tools-for-small-business',
         'compress-pdf-under-100kb-government-forms',
+        // Additional high-quality posts targeting key search queries
+        'how-to-merge-pdf-files-free',
+        'compress-pdf-reduce-file-size',
+        'split-pdf-extract-pages-free',
+        'convert-jpg-to-pdf-online',
+        'merge-pdf-without-adobe-acrobat',
     ]
 
     // Use a fixed date instead of new Date() — Google distrusts sitemaps
     // where every page claims to be freshly modified. Update this date
     // only when you actually make meaningful content changes.
-    const lastUpdated = '2026-04-10'
+    const lastUpdated = '2026-04-19'
 
     return [
         // Homepage

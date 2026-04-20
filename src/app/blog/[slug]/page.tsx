@@ -20,6 +20,12 @@ const indexableBlogSlugs = new Set([
     'best-free-pdf-compressor-online',
     'pdf-tools-for-small-business',
     'compress-pdf-under-100kb-government-forms',
+    // Additional posts with substantial content targeting high-impression queries
+    'how-to-merge-pdf-files-free',
+    'compress-pdf-reduce-file-size',
+    'split-pdf-extract-pages-free',
+    'convert-jpg-to-pdf-online',
+    'merge-pdf-without-adobe-acrobat',
 ])
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
