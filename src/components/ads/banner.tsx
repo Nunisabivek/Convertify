@@ -30,7 +30,7 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
             key: "616f9cf69cb04c34acb730e9239646e0",
             height: 250,
             width: 300,
-            url: "//entertainenslave.com/616f9cf69cb04c34acb730e9239646e0/invoke.js",
+            url: "//tonicgoverness.com/616f9cf69cb04c34acb730e9239646e0/invoke.js",
         }
 
         if (variant === "rectangle" || variant === "responsive") {
@@ -39,24 +39,24 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
                 key: "616f9cf69cb04c34acb730e9239646e0",
                 height: 250,
                 width: 300,
-                url: "//entertainenslave.com/616f9cf69cb04c34acb730e9239646e0/invoke.js",
+                url: "//tonicgoverness.com/616f9cf69cb04c34acb730e9239646e0/invoke.js",
             }
         } else if (variant === "mobile-banner") {
             // Mobile banner: 320x50 - standard mobile banner size
             conf = {
-                key: "d84ed579e24fb0e02224fedd00bed35b",
+                key: "ee2936c122e5b6cd6be8ae3b8019a581",
                 height: 50,
                 width: 320,
-                url: "//entertainenslave.com/d84ed579e24fb0e02224fedd00bed35b/invoke.js",
+                url: "//tonicgoverness.com/ee2936c122e5b6cd6be8ae3b8019a581/invoke.js",
             }
         } else if (variant === "footer") {
             if (isMobile) {
                 // Mobile footer: smaller 320x50 mobile banner - less intrusive
                 conf = {
-                    key: "d84ed579e24fb0e02224fedd00bed35b",
+                    key: "ee2936c122e5b6cd6be8ae3b8019a581",
                     height: 50,
                     width: 320,
-                    url: "//entertainenslave.com/d84ed579e24fb0e02224fedd00bed35b/invoke.js",
+                    url: "//tonicgoverness.com/ee2936c122e5b6cd6be8ae3b8019a581/invoke.js",
                 }
             } else {
                 // Desktop footer: 728x90
@@ -64,7 +64,7 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
                     key: "d84ed579e24fb0e02224fedd00bed35b",
                     height: 90,
                     width: 728,
-                    url: "//entertainenslave.com/d84ed579e24fb0e02224fedd00bed35b/invoke.js",
+                    url: "//tonicgoverness.com/d84ed579e24fb0e02224fedd00bed35b/invoke.js",
                 }
             }
         } else if (variant === "skyscraper") {
@@ -73,7 +73,7 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
                 key: "616f9cf69cb04c34acb730e9239646e0",
                 height: 600,
                 width: 160,
-                url: "//entertainenslave.com/616f9cf69cb04c34acb730e9239646e0/invoke.js",
+                url: "//tonicgoverness.com/616f9cf69cb04c34acb730e9239646e0/invoke.js",
             }
         }
 
