@@ -7,6 +7,7 @@ import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { AnswerBlock } from "@/components/seo/answer-block"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 
@@ -46,6 +47,18 @@ export default function Page() {
             />
 
             <section className="w-full py-8 bg-gradient-to-b from-green-50 to-white">
+                <div className="max-w-4xl mx-auto px-4 text-center mb-8">
+                    <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
+                        {seoData.h1}
+                    </h1>
+                    <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                        Convert XLS, XLSX, and CSV spreadsheets to PDF in seconds. Charts, formulas, cell formatting, and clickable links are preserved. No Microsoft Excel needed, no watermark, no sign-up — and your spreadsheet never leaves your browser.
+                    </p>
+                </div>
+                <AnswerBlock
+                    question="How do I convert XLS or Excel to PDF for free?"
+                    answer="Open Convertify's Excel to PDF converter, drop your XLS or XLSX file, and click Convert. The PDF downloads in seconds with charts, formulas, cell borders, and links preserved — no Microsoft Excel install, no watermark, no sign-up. Files stay on your device."
+                />
                 <ToolSwapper />
                 <ExcelToPdfClient />
             </section>

@@ -245,23 +245,26 @@ export const toolContentData: Record<string, {
         keywords: ["xls to pdf", "xlsx to pdf", "excel to pdf free", "convert xls to pdf online", "excel to pdf no sign up", "xls to pdf converter", "excel to pdf without excel", "excel to pdf converter", "convert excel to pdf", "convert excel to pdf free", "excel pdf converter"]
     },
     "png-to-pdf": {
-        description: "Convertify's HD PNG to PDF Combiner — combine and merge multiple PNG images into one crystal-clear PDF with 300 DPI resolution preserved. Batch convert PNG to PDF, merge png to pdf online, or save single images while maintaining transparency and sharpness. No uploads or installs required—perfect for high-end portfolios, presentations, and print-ready documentation.",
+        description: "Combine PNG to PDF in seconds — Convertify’s HD PNG combiner merges multiple PNG images into one crystal-clear, multi-page PDF at up to 300 DPI. Drag-and-drop ordering, transparency preserved, batch up to 100+ images, and zero watermarks. Whether you’re combining screenshots, design mockups, scanned receipts, or product photos, the result is a single professional PDF — created entirely in your browser, so your images never touch a server.",
         features: [
-            "HD Quality output with 300 DPI resolution support",
-            "Preserves image transparency and alpha channels",
-            "Combine multiple PNGs into one professional PDF",
-            "Batch process 50+ images effortlessly",
-            "Secure, browser-based processing (no uploads)",
-            "No watermarks or file size limits"
+            "Combine multiple PNGs into one professional multi-page PDF",
+            "HD quality output up to 300 DPI — print-ready",
+            "Drag-and-drop to set the exact page order before converting",
+            "Preserves PNG transparency and alpha channels",
+            "Works on iPhone, Android, Windows & Mac browsers",
+            "Batch process 100+ images in a single PDF",
+            "100% private — files never uploaded to any server",
+            "No sign-up, no watermarks, no daily limits"
         ],
         useCases: [
-            "Creating HD portfolios from design mockups",
-            "Compiling screenshots into documentation",
-            "Converting scanned documents (PNG) to PDF",
-            "Sharing image collections as a single file",
-            "Preserving quality of transparent diagrams"
+            "Combine multiple screenshots into one PDF for documentation or bug reports",
+            "Merge design mockups (Figma exports, app screens) into a single client-ready PDF",
+            "Combine scanned receipts saved as PNG into one tax-ready PDF",
+            "Bundle product photos into a multi-page PDF catalog",
+            "Stitch chapter pages or comic panels into a single readable PDF",
+            "Combine assignment screenshots into one PDF for school upload portals"
         ],
-        keywords: ["png to pdf hd", "png to pdf high quality", "merge png to pdf", "combine pngs into pdf", "combine png to pdf", "save png as pdf", "convert png to pdf online free", "how to combine png files into one pdf", "multiple png to pdf"]
+        keywords: ["combine png to pdf", "merge png to pdf", "multiple png to pdf", "png to pdf hd", "png to pdf high quality", "combine pngs into pdf", "combine multiple png into one pdf", "save png as pdf", "convert png to pdf online free", "how to combine png files into one pdf"]
     },
     "pdf-to-png": {
         description: "Extract sharp, high-resolution PNG images from your PDF documents with Convertify. We support 'Alpha-Channel Preservation', allowing you to export pages with transparent backgrounds—perfect for logos, signatures, and design assets. Choose resolutions up to 300 DPI for professional social media and print-ready image extraction.",

@@ -6,7 +6,8 @@ import { AdBanner } from "@/components/ads/banner"
 import { Button } from "@/components/ui/button"
 import { BlogPostSchema } from "@/components/seo/blog-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
-import { ArrowLeft, Clock, Calendar, Tag } from "lucide-react"
+import { AuthorByline } from "@/components/seo/author-byline"
+import { ArrowLeft, Tag } from "lucide-react"
 
 type Props = {
     params: Promise<{ slug: string }>
@@ -206,24 +207,17 @@ export default async function BlogPostPage({ params }: Props) {
                         {post.excerpt}
                     </p>
 
-                    <div className="flex flex-wrap items-center gap-6 text-sm text-slate-500 border-b pb-6">
-                        <div className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4" />
-                            <time dateTime={post.date}>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <Clock className="w-4 h-4" />
-                            <span>{post.readingTime} min read</span>
-                        </div>
-                    </div>
                 </header>
 
-                {/* Top Ad */}
-                <div className="my-8 flex justify-center bg-slate-100 py-4 rounded-xl">
-                    <AdBanner variant="rectangle" />
-                </div>
+                <AuthorByline
+                    published={post.date}
+                    lastReviewed={post.date}
+                    readingTime={post.readingTime}
+                />
 
-                {/* Article Content */}
+                {/* Article Content — no ad above the fold (Google penalizes
+                    "ads above content"). First ad is in-article via the
+                    component below, which keeps revenue without hurting CWV. */}
                 <article className="prose prose-slate lg:prose-lg max-w-none">
                     {renderContent(post.content)}
                 </article>

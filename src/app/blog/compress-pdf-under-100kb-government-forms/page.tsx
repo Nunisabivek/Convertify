@@ -1,6 +1,8 @@
 import { Metadata } from "next"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
+import { AuthorByline } from "@/components/seo/author-byline"
+import { AnswerBlock } from "@/components/seo/answer-block"
 
 export const metadata: Metadata = {
     title: "How to Compress PDF to Under 100KB for Government Forms (2026)",
@@ -77,14 +79,18 @@ export default function BlogPost() {
                     <p className="text-xl text-slate-600 mb-6">
                         You filled out the entire application, scanned your documents, merged everything into a single PDF—and the upload portal says &quot;file exceeds maximum size.&quot; Here&apos;s how to fix that in under two minutes.
                     </p>
-                    <div className="flex items-center gap-4 text-sm text-slate-500">
-                        <span>Published: April 4, 2026</span>
-                        <span>•</span>
-                        <span>8 min read</span>
-                        <span>•</span>
-                        <span>PDF Tools</span>
-                    </div>
                 </header>
+
+                <AuthorByline
+                    published="2026-04-04"
+                    lastReviewed="2026-04-26"
+                    readingTime={8}
+                />
+
+                <AnswerBlock
+                    question="How do I compress a PDF to under 100KB for a government form?"
+                    answer="Open Convertify's PDF compressor, upload the PDF, choose 'High' compression, and download. A typical 1–2 page form PDF (500KB–2MB) drops to 60–120KB while keeping text readable. If you need even smaller, split the PDF first or convert color scans to grayscale."
+                />
 
                 {/* Table of Contents */}
                 <nav className="bg-white rounded-xl p-6 mb-10 shadow-sm border border-slate-200">
@@ -225,7 +231,32 @@ export default function BlogPost() {
                             </thead>
                             <tbody className="divide-y divide-slate-200">
                                 <tr>
-                                    <td className="px-4 py-3 text-sm text-slate-700">Government job applications</td>
+                                    <td className="px-4 py-3 text-sm text-slate-700">UPSC / SSC / state PSC application portals (India)</td>
+                                    <td className="px-4 py-3 text-sm text-slate-700">20KB – 200KB per file</td>
+                                    <td className="px-4 py-3 text-sm text-slate-700">High</td>
+                                </tr>
+                                <tr>
+                                    <td className="px-4 py-3 text-sm text-slate-700">EPFO / EPF KYC document upload</td>
+                                    <td className="px-4 py-3 text-sm text-slate-700">100KB – 500KB</td>
+                                    <td className="px-4 py-3 text-sm text-slate-700">High</td>
+                                </tr>
+                                <tr>
+                                    <td className="px-4 py-3 text-sm text-slate-700">Passport Seva (passportindia.gov.in) document upload</td>
+                                    <td className="px-4 py-3 text-sm text-slate-700">10KB – 1MB</td>
+                                    <td className="px-4 py-3 text-sm text-slate-700">High</td>
+                                </tr>
+                                <tr>
+                                    <td className="px-4 py-3 text-sm text-slate-700">Aadhaar / PAN-related uploads</td>
+                                    <td className="px-4 py-3 text-sm text-slate-700">100KB – 500KB</td>
+                                    <td className="px-4 py-3 text-sm text-slate-700">High</td>
+                                </tr>
+                                <tr>
+                                    <td className="px-4 py-3 text-sm text-slate-700">IRCTC e-ticket / forms attachments</td>
+                                    <td className="px-4 py-3 text-sm text-slate-700">100KB – 1MB</td>
+                                    <td className="px-4 py-3 text-sm text-slate-700">Medium to High</td>
+                                </tr>
+                                <tr>
+                                    <td className="px-4 py-3 text-sm text-slate-700">Government job applications (general)</td>
                                     <td className="px-4 py-3 text-sm text-slate-700">100KB – 200KB</td>
                                     <td className="px-4 py-3 text-sm text-slate-700">High</td>
                                 </tr>
@@ -240,7 +271,7 @@ export default function BlogPost() {
                                     <td className="px-4 py-3 text-sm text-slate-700">Medium to High</td>
                                 </tr>
                                 <tr>
-                                    <td className="px-4 py-3 text-sm text-slate-700">Tax filing portals</td>
+                                    <td className="px-4 py-3 text-sm text-slate-700">Tax filing portals (incometax.gov.in, IRS, etc.)</td>
                                     <td className="px-4 py-3 text-sm text-slate-700">1MB – 5MB</td>
                                     <td className="px-4 py-3 text-sm text-slate-700">Medium</td>
                                 </tr>

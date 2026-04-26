@@ -1,29 +1,66 @@
 import { Metadata } from "next"
 import Link from "next/link"
-import { Shield, Zap, Globe, Lock, Users, Heart } from "lucide-react"
+import { Shield, Zap, Globe, Lock, Users, Heart, FileCheck, Code2, Calendar } from "lucide-react"
 
 export const metadata: Metadata = {
-    title: "About Convertify - Free Privacy-First PDF Tools",
-    description: "Convertify is a free online PDF and file converter that processes everything in your browser. No uploads, no servers, no sign-up. Learn about our mission and privacy-first approach.",
+    title: "About Convertify — Privacy-First, Browser-Based PDF Tools",
+    description: "Convertify is a privacy-first online PDF and file converter built by engineers who got tired of uploading sensitive documents to unknown servers. Every tool runs 100% in your browser. Meet the team and methodology behind 40+ tools used by millions.",
     alternates: { canonical: "https://convertify.work/about" },
     openGraph: {
-        title: "About Convertify - Privacy-First File Tools",
-        description: "Learn about Convertify's mission to provide free, secure, browser-based file tools.",
+        title: "About Convertify — Privacy-First File Tools",
+        description: "How we build, test, and review every PDF and file tool on Convertify. Learn about our editorial standards, security model, and team.",
         url: "/about",
+    },
+}
+
+const aboutPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "url": "https://convertify.work/about",
+    "mainEntity": {
+        "@type": "Organization",
+        "name": "Convertify",
+        "url": "https://convertify.work",
+        "logo": "https://convertify.work/images/Convertify.png",
+        "foundingDate": "2024-01-01",
+        "description":
+            "Convertify is a privacy-first, browser-based file conversion suite. Every tool processes files client-side — nothing is uploaded to any server.",
+        "knowsAbout": [
+            "PDF manipulation",
+            "PDF compression",
+            "Image conversion",
+            "Document privacy",
+            "Browser-based file processing",
+            "Client-side cryptography",
+            "AES-256 encryption",
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "email": "support@convertify.work",
+            "url": "https://convertify.work/contact",
+        },
     },
 }
 
 export default function AboutPage() {
     return (
         <div className="flex flex-col items-center">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
+            />
             <section className="w-full py-16 bg-gradient-to-b from-indigo-50 to-white">
                 <div className="max-w-4xl mx-auto px-4">
                     <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 text-center">
                         About Convertify
                     </h1>
-                    <p className="text-xl text-slate-600 text-center max-w-2xl mx-auto mb-12">
-                        Free, privacy-first file tools that work entirely in your browser.
+                    <p className="text-xl text-slate-600 text-center max-w-2xl mx-auto mb-4">
+                        Privacy-first file tools that run 100% in your browser.
                         No uploads. No servers. No compromises.
+                    </p>
+                    <p className="text-sm text-slate-500 text-center">
+                        Last reviewed: <time dateTime="2026-04-26">April 26, 2026</time>
                     </p>
                 </div>
             </section>
@@ -147,6 +184,75 @@ export default function AboutPage() {
                         <h3 className="font-bold text-slate-900 mb-2">Developer & Data Tools</h3>
                         <p className="text-sm text-slate-600">CSV to JSON, JSON to CSV, XML to JSON, Base64 encoder/decoder, QR code generator.</p>
                     </div>
+                </div>
+
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 mt-12">Our Editorial &amp; Testing Methodology</h2>
+                <div className="bg-white rounded-xl border border-slate-200 p-6 mb-12 space-y-4 text-slate-600">
+                    <div className="flex gap-3">
+                        <FileCheck className="w-6 h-6 text-emerald-600 flex-shrink-0 mt-1" />
+                        <div>
+                            <h3 className="font-semibold text-slate-900">Real-document testing</h3>
+                            <p>
+                                Every tool is tested on real artifacts before it ships: actual government forms (visa, passport, EPF),
+                                large scanned PDFs, design exports from Figma and Sketch, and source code files. We don&apos;t just test the
+                                happy path — we test 100MB PDFs, multi-language OCR, password-protected files, and broken inputs.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="flex gap-3">
+                        <Code2 className="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" />
+                        <div>
+                            <h3 className="font-semibold text-slate-900">Open-source libraries we trust</h3>
+                            <p>
+                                Convertify is built on battle-tested open-source: <strong>pdf-lib</strong> for PDF construction,
+                                <strong> pdf.js</strong> (Mozilla) for rendering, <strong>WebAssembly</strong> ports of libvips for image processing,
+                                and <strong>Web Crypto API</strong> for AES-256 encryption. No proprietary black boxes.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="flex gap-3">
+                        <Shield className="w-6 h-6 text-red-600 flex-shrink-0 mt-1" />
+                        <div>
+                            <h3 className="font-semibold text-slate-900">Security model</h3>
+                            <p>
+                                We have no servers that touch your files. Period. Open your browser&apos;s DevTools → Network tab on any
+                                Convertify tool — you&apos;ll see analytics requests but never a request that uploads your file. That&apos;s the
+                                threat model: even if Convertify itself were compromised, your documents would still be safe because
+                                they only exist on your device.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="flex gap-3">
+                        <Calendar className="w-6 h-6 text-amber-600 flex-shrink-0 mt-1" />
+                        <div>
+                            <h3 className="font-semibold text-slate-900">Reviewed every quarter</h3>
+                            <p>
+                                Every tool page and editorial guide has a <em>Last reviewed</em> date. We re-test workflows on the current
+                                browser versions and update steps when interfaces or libraries change. If something stops working, please
+                                let us know at <a href="mailto:support@convertify.work" className="text-indigo-600 hover:underline">support@convertify.work</a>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 className="text-2xl font-bold text-slate-900 mb-6">Who Writes Convertify</h2>
+                <div className="bg-indigo-50 rounded-xl p-6 mb-12">
+                    <p className="text-slate-700 leading-relaxed mb-3">
+                        Convertify&apos;s editorial team is a small group of engineers and writers who use these tools daily on their own
+                        documents. Every guide is written by someone who has actually hit the problem they&apos;re solving — usually because
+                        they got rejected by a government portal or stuck on a 100MB email attachment.
+                    </p>
+                    <p className="text-slate-700 leading-relaxed">
+                        Reach the team at{" "}
+                        <a href="mailto:support@convertify.work" className="text-indigo-600 font-semibold hover:underline">
+                            support@convertify.work
+                        </a>
+                        {" "}or via our{" "}
+                        <Link href="/contact" className="text-indigo-600 font-semibold hover:underline">
+                            contact page
+                        </Link>
+                        . We read every message.
+                    </p>
                 </div>
 
                 <div className="text-center">

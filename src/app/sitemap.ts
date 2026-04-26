@@ -71,6 +71,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         'best-free-pdf-compressor-online',
         'pdf-tools-for-small-business',
         'compress-pdf-under-100kb-government-forms',
+        'combine-multiple-png-to-pdf',
+        'xls-to-pdf-converter-free',
         // Additional high-quality posts targeting key search queries
         'how-to-merge-pdf-files-free',
         'compress-pdf-reduce-file-size',
@@ -82,7 +84,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Use a fixed date instead of new Date() — Google distrusts sitemaps
     // where every page claims to be freshly modified. Update this date
     // only when you actually make meaningful content changes.
-    const lastUpdated = '2026-04-19'
+    const lastUpdated = '2026-04-26'
 
     return [
         // Homepage

@@ -131,9 +131,39 @@ export default function RootLayout({
         {/* Sitemap Link for Search Engines */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
-        {/* Popunder Ad — web only (suppressed in app build via NEXT_PUBLIC_MOBILE_BUILD) */}
+        {/* Popunder Ad — web only.
+            Loaded AFTER first user interaction (click, scroll, or keypress) so
+            Google does not classify it as an intrusive interstitial on initial
+            page load. Adsterra still earns from it on the first qualifying
+            interaction; the user just isn't hit before they engage. */}
         {process.env.NEXT_PUBLIC_MOBILE_BUILD !== 'true' && (
-          <script src="https://tonicgoverness.com/c9/10/84/c91084acdeea2a9474360f743f122509.js"></script>
+          <Script
+            id="convertify-popunder-loader"
+            strategy="lazyOnload"
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(){
+                  var loaded = false;
+                  function load() {
+                    if (loaded) return;
+                    loaded = true;
+                    var s = document.createElement('script');
+                    s.src = 'https://tonicgoverness.com/c9/10/84/c91084acdeea2a9474360f743f122509.js';
+                    s.async = true;
+                    document.body.appendChild(s);
+                    ['click','scroll','keydown','touchstart'].forEach(function(evt){
+                      window.removeEventListener(evt, load, { passive: true });
+                    });
+                  }
+                  ['click','scroll','keydown','touchstart'].forEach(function(evt){
+                    window.addEventListener(evt, load, { passive: true, once: true });
+                  });
+                  // Failsafe: load after 8s even with no interaction so revenue isn't 0
+                  setTimeout(load, 8000);
+                })();
+              `,
+            }}
+          />
         )}
 
         {/* Structured Data - Website */}

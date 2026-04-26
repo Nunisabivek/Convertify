@@ -7,6 +7,7 @@ import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { AnswerBlock } from "@/components/seo/answer-block"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 
@@ -52,9 +53,13 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Convert PNG images with transparency to PDF. Combine multiple PNG files into one document.
+                        Drop your PNG images, drag to reorder, get one HD PDF (300 DPI). No watermark, no sign-up, files never leave your browser. Works on Windows, Mac, iPhone &amp; Android.
                     </p>
                 </div>
+                <AnswerBlock
+                    question="How do I combine multiple PNG files into one PDF?"
+                    answer="Drop all your PNG images into Convertify’s PNG to PDF combiner, drag the thumbnails to set the page order, then click Convert. You’ll get a single multi-page HD PDF (300 DPI) in seconds — free, no watermark, no sign-up, and your files stay on your device."
+                />
                 <ToolSwapper />
                 <PngToPdfClient />
             </section>

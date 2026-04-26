@@ -240,45 +240,59 @@ export const toolSeoData = {
         ]
     },
     "png-to-pdf": {
-        title: "Merge PNG to PDF Free — Combine PNG Images into One PDF Online | Convertify",
-        description: "Merge PNG to PDF free — combine multiple PNG images into one HD PDF instantly. No quality loss, 300 DPI, no watermarks, no sign-up. 100% private, files never leave your browser.",
+        title: "Combine PNG to PDF Free — Merge Multiple PNG Images into One PDF (HD)",
+        description: "Combine PNG to PDF free — merge multiple PNG images into one HD PDF in seconds. Drag-and-drop reordering, 300 DPI quality, no watermarks, no sign-up. Works on Windows, Mac, iPhone & Android browsers.",
         keywords: [
-            "png to pdf", "png to pdf hd", "convert png to pdf", "png to pdf converter", "combine png to pdf", "merge png to pdf",
-            "combine pngs into pdf", "combine png into one pdf", "multiple png to pdf", "png merge to pdf",
-            "turn multiple pngs into pdf", "high resolution png to pdf", "combine images to pdf without losing quality",
+            "combine png to pdf", "merge png to pdf", "multiple png to pdf", "png to pdf hd",
+            "combine multiple png into one pdf", "combine pngs into pdf", "merge multiple png to pdf",
+            "png to pdf", "convert png to pdf", "png to pdf converter", "combine png into one pdf",
+            "png merge to pdf", "turn multiple pngs into pdf", "how to combine png files into one pdf",
+            "how to merge png to pdf", "combine images to pdf without losing quality",
             "merge png files into single pdf", "batch png to pdf converter", "preserve transparency png to pdf",
-            "crisp png image to pdf export", "join pngs as pdf pages", "lossless multiple image to pdf",
-            "high quality merge pngs pdf", "convert png sequence to pdf", "retain png sharpness in pdf",
-            "fuse png photos into document", "vector-like png to pdf output", "seamless batch image combiner",
-            "convert png to pdf bulk", "convert png to pdf online free", "how to combine png files into one pdf"
+            "join pngs as pdf pages", "lossless multiple image to pdf", "high quality merge pngs pdf",
+            "convert png sequence to pdf", "retain png sharpness in pdf",
+            "convert png to pdf bulk", "convert png to pdf online free", "png to pdf no watermark",
+            "png to pdf high resolution", "save png as pdf"
         ],
-        h1: "Convertify PNG to PDF — Merge & Combine PNGs to HD PDF",
+        h1: "Combine PNG to PDF — Merge Multiple PNGs into One HD PDF",
         faqs: [
             {
-                question: "Is the PNG to PDF output HD (High Resolution)?",
-                answer: "Yes! We maintain the original resolution of your shots and can output at 300 DPI, ensuring your PDF is 'HD' quality and suitable for high-end printing or digital presentation."
+                question: "How do I combine multiple PNG files into one PDF?",
+                answer: "Open Convertify’s PNG to PDF combiner, drop or select all of your PNG files at once, drag the thumbnails to set the page order, then click Convert. You’ll get a single multi-page PDF containing every PNG, in order, in under 10 seconds. No software install and no sign-up."
             },
             {
-                question: "Does it support transparency in PNG files?",
-                answer: "Yes, our PNG to PDF tool fully preserves transparency, layers, and alpha channels, embedding them perfectly into the PDF for professional results."
+                question: "How do I merge PNG to PDF for free without a watermark?",
+                answer: "Convertify is 100% free and never adds a watermark. Just upload your PNGs, arrange the order, and download the merged PDF. There are no daily limits, no “pro” features locked behind a paywall, and no email required."
             },
             {
-                question: "Can I merge 50 images into one PDF at once?",
-                answer: "Absolutely, handle large batches like 50+ PNGs effortlessly—arrange order via drag-and-drop and convert to a multi-page PDF without limits or quality drop."
+                question: "Is the merged PNG to PDF output HD (high resolution)?",
+                answer: "Yes. We keep the original PNG resolution and embed each image at up to 300 DPI — sharp enough for printing. Text, screenshots, and design mockups stay crisp in the final PDF."
             },
             {
-                question: "Will the output PDF maintain high image resolution?",
-                answer: "Yes, it retains original PNG resolution and clarity at 300 DPI+, ensuring sharp text, colors, and details in every page."
+                question: "Does it preserve PNG transparency in the PDF?",
+                answer: "Yes. Alpha channels (transparent backgrounds) are preserved when the page background is transparent, so logos, signatures, and design assets keep their look."
             },
             {
-                question: "Is there a file size limit for batch conversions?",
-                answer: "No strict limits (up to 100MB total recommended for speed), making it ideal for combining portfolios, scans, or photo sets securely."
+                question: "Can I combine 50 or 100 PNGs into a single PDF?",
+                answer: "Yes — there’s no hard file count limit. We’ve tested 100+ PNGs in one go. Because everything runs in your browser, performance depends on your device’s memory; for very large batches we recommend Chrome or Edge on a desktop."
+            },
+            {
+                question: "Does combining PNG to PDF work on iPhone and Android?",
+                answer: "Yes. The combiner runs entirely in the mobile browser — no app to install. On iPhone, open the page in Safari; on Android, use Chrome. Your photos never leave the phone."
+            },
+            {
+                question: "Will the combined PDF be small enough to email?",
+                answer: "Usually yes. We use efficient image embedding instead of duplicating each PNG’s data, so a typical 10-image batch lands well under email limits. If you need a smaller file, run the result through our PDF compressor."
+            },
+            {
+                question: "Is it safe to upload sensitive PNGs (IDs, scans, screenshots)?",
+                answer: "Your files never leave your device. Convertify processes everything client-side in your browser — nothing is uploaded to a server. That makes it safe for IDs, medical scans, financial screenshots, and confidential documents."
             }
         ],
         howToSteps: [
-            { name: "Upload PNGs", text: "Select one or multiple PNG images." },
-            { name: "Arrange", text: "Drag and drop to set the order of images." },
-            { name: "Convert", text: "Click to merge them into a single PDF (HD Quality)." }
+            { name: "Upload your PNG images", text: "Drag and drop, or tap to select, all the PNG files you want to combine. You can add more at any time before converting." },
+            { name: "Reorder the pages", text: "Drag the thumbnails to set the exact page order in the final PDF." },
+            { name: "Click Convert and download", text: "Hit Convert. Your single multi-page HD PDF downloads instantly — no watermark, no sign-up, no upload to any server." }
         ]
     },
     "pdf-to-png": {

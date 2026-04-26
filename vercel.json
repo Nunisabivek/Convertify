@@ -114,6 +114,16 @@
             "source": "/index.php",
             "destination": "/",
             "permanent": true
+        },
+        {
+            "source": "/sitemap",
+            "destination": "/sitemap.xml",
+            "permanent": true
+        },
+        {
+            "source": "/sitemap_index.xml",
+            "destination": "/sitemap.xml",
+            "permanent": true
         }
     ],
     "trailingSlash": false,
@@ -192,6 +202,24 @@
                 {
                     "key": "Cache-Control",
                     "value": "public, max-age=86400"
+                }
+            ]
+        },
+        {
+            "source": "/_next/static/(.*)",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex, nofollow"
+                }
+            ]
+        },
+        {
+            "source": "/(.*)\\.(woff|woff2|ttf|otf|eot)",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex, nofollow"
                 }
             ]
         }

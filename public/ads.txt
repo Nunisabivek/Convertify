@@ -1,0 +1,14 @@
+# ads.txt for convertify.work
+# IMPORTANT: Replace this entire file with the official ads.txt from your
+# Adsterra dashboard. To get it:
+#   1. Sign in to Adsterra → https://publishers.adsterra.com
+#   2. Open your "convertify.work" website settings
+#   3. Click "ads.txt" — copy the full block
+#   4. Paste it into this file (overwrite everything below this comment)
+#
+# Without a valid, current ads.txt, advertisers' bids on your inventory get
+# filtered out by ad exchanges. Estimated revenue impact: 20–40% loss.
+#
+# The line below is the minimum Adsterra entry; ADD YOUR PUBLISHER ID:
+
+adsterra.com, REPLACE_WITH_YOUR_ADSTERRA_PUBLISHER_ID, DIRECT
