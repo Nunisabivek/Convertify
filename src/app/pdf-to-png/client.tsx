@@ -116,11 +116,7 @@ export default function PdfToPngPage() {
     }
 
     return (
-        <div className="container mx-auto py-12 max-w-4xl px-4">
-            <div className="text-center mb-10">
-                <h1 className="text-3xl md:text-5xl font-bold mb-4">PDF to PNG</h1>
-                <p className="text-slate-500 text-lg">Extract PDF pages as high-quality PNGs with transparency.</p>
-            </div>
+        <div className="container mx-auto py-8 max-w-4xl px-4">
             {!file ? (
                 <FileUploader onFilesSelected={(f) => setFile(f[0])} multiple={false} accept={{ "application/pdf": [".pdf"] }} />
             ) : (

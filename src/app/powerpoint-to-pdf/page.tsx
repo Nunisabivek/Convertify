@@ -5,7 +5,9 @@ import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { RelatedUseCases } from "@/components/seo/related-use-cases"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 import { Presentation } from "lucide-react"
@@ -91,6 +93,8 @@ export default function Page() {
                 keywords={contentData.keywords}
             />
 
+            <ToolDeepGuide toolSlug="powerpoint-to-pdf" toolName="PowerPoint to PDF Converter" />
+
             <HowToSchema
                 toolName="Convert PowerPoint to PDF"
                 description="Learn how to convert PPT presentations to PDF using Convertify's free online slideshow to PDF converter."
@@ -101,6 +105,8 @@ export default function Page() {
                 toolName="PowerPoint to PDF Conversion"
                 faqs={seoData.faqs}
             />
+
+            <RelatedUseCases toolHref="/powerpoint-to-pdf" />
 
             <RelatedTools currentTool="/powerpoint-to-pdf" />
         </div>

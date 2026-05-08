@@ -6,7 +6,9 @@ import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { RelatedUseCases } from "@/components/seo/related-use-cases"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 
@@ -69,6 +71,8 @@ export default function Page() {
                 keywords={contentData.keywords}
             />
 
+            <ToolDeepGuide toolSlug="text-to-pdf" toolName="Text to PDF Converter" />
+
             <HowToSchema
                 toolName="Convert Text to PDF"
                 description="Learn how to convert TXT files to PDF documents using Convertify's free online text to PDF converter."
@@ -79,6 +83,8 @@ export default function Page() {
                 toolName="Text to PDF Conversion"
                 faqs={seoData.faqs}
             />
+
+            <RelatedUseCases toolHref="/text-to-pdf" />
 
             <RelatedTools currentTool="/text-to-pdf" />
         </div>

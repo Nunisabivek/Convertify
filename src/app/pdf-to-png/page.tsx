@@ -6,7 +6,9 @@ import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { RelatedUseCases } from "@/components/seo/related-use-cases"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 
@@ -69,6 +71,8 @@ export default function Page() {
                 keywords={contentData.keywords}
             />
 
+            <ToolDeepGuide toolSlug="pdf-to-png" toolName="PDF to PNG Converter" />
+
             <HowToSchema
                 toolName="Convert PDF to PNG"
                 description="Learn how to convert PDF pages to PNG images using Convertify's free online PDF to PNG converter."
@@ -79,6 +83,8 @@ export default function Page() {
                 toolName="PDF to PNG Conversion"
                 faqs={seoData.faqs}
             />
+
+            <RelatedUseCases toolHref="/pdf-to-png" />
 
             <RelatedTools currentTool="/pdf-to-png" />
         </div>

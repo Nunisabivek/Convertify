@@ -36,9 +36,6 @@ export default function MergePdfPage() {
     const handleMerge = async () => {
         setIsProcessing(true)
         try {
-            // Artificial delay to ensure ads are seen (3 seconds min)
-            await new Promise(resolve => setTimeout(resolve, 3000))
-
             const mergedPdf = await PDFDocument.create()
 
             for (const file of files) {
@@ -92,12 +89,7 @@ export default function MergePdfPage() {
     }
 
     return (
-        <div className="container mx-auto py-12 max-w-4xl px-4">
-            <div className="text-center mb-10">
-                <h1 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">Merge PDF Files</h1>
-                <p className="text-slate-500 text-lg">Combine multiple PDFs into one single file. Fast & Secure.</p>
-            </div>
-
+        <div className="container mx-auto py-8 max-w-4xl px-4">
             {files.length === 0 ? (
                 <FileUploader onFilesSelected={handleFilesSelected} />
             ) : (

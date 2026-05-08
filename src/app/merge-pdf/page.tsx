@@ -7,8 +7,10 @@ import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { RelatedUseCases } from "@/components/seo/related-use-cases"
 import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 import { blogPosts } from "@/lib/blog-data"
@@ -107,6 +109,9 @@ export default function Page() {
                 keywords={contentData.keywords}
             />
 
+            {/* Long-form guide — adds 1000-1500 words of unique content */}
+            <ToolDeepGuide toolSlug="merge-pdf" toolName="PDF Merger" />
+
             {/* How To Section with Schema */}
             <HowToSchema
                 toolName="Merge PDF Files Online"
@@ -119,6 +124,9 @@ export default function Page() {
                 toolName="Merging PDFs"
                 faqs={seoData.faqs}
             />
+
+            {/* Use-case pages — long-tail keyword cluster */}
+            <RelatedUseCases toolHref="/merge-pdf" />
 
             {/* Related Blog Posts for SEO */}
             <RelatedBlogPosts

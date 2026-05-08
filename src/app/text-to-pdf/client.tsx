@@ -17,7 +17,6 @@ export default function TextToPdfPage() {
         if (!file) return
         setIsProcessing(true)
         try {
-            await new Promise(resolve => setTimeout(resolve, 3000))
             const text = await file.text()
 
             const pdfDoc = await PDFDocument.create()
@@ -79,11 +78,7 @@ export default function TextToPdfPage() {
     }
 
     return (
-        <div className="container mx-auto py-12 max-w-4xl px-4">
-            <div className="text-center mb-10">
-                <h1 className="text-3xl md:text-5xl font-bold mb-4">Text to PDF</h1>
-                <p className="text-slate-500 text-lg">Convert plain text files (.txt) to PDF.</p>
-            </div>
+        <div className="container mx-auto py-8 max-w-4xl px-4">
             {!file ? (
                 <FileUploader
                     onFilesSelected={(f) => setFile(f[0])}
