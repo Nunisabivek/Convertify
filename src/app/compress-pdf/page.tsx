@@ -6,8 +6,10 @@ import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { RelatedUseCases } from "@/components/seo/related-use-cases"
 import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 import { blogPosts } from "@/lib/blog-data"
@@ -81,6 +83,8 @@ export default function Page() {
                 keywords={contentData.keywords}
             />
 
+            <ToolDeepGuide toolSlug="compress-pdf" toolName="PDF Compressor" />
+
             <HowToSchema
                 toolName="Compress PDF Files with Convertify"
                 description="Learn how to reduce PDF file size for email attachments using Convertify's free online PDF compressor. No download or sign-up required."
@@ -91,6 +95,8 @@ export default function Page() {
                 toolName="Convertify PDF Compressor"
                 faqs={seoData.faqs}
             />
+
+            <RelatedUseCases toolHref="/compress-pdf" />
 
             <RelatedBlogPosts
                 toolSlug="compress-pdf"

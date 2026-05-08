@@ -1,5 +1,6 @@
 import { CheckCircle, Shield, Zap, Globe, FileCheck } from 'lucide-react';
 import { TonicNativeBanner } from '@/components/ads/banner';
+import { toolBenefits } from '@/lib/tool-benefits';
 
 interface ToolContentProps {
     toolName: string;
@@ -10,12 +11,13 @@ interface ToolContentProps {
     keywords?: string[];
 }
 
-// Generic feature icons based on common PDF tool benefits
-const benefitIcons = [
-    { icon: Zap, title: "Lightning Fast", description: "Process files instantly in your browser" },
-    { icon: Shield, title: "100% Secure", description: "Files never leave your device" },
-    { icon: Globe, title: "Works Everywhere", description: "Desktop, tablet, and mobile compatible" },
-    { icon: FileCheck, title: "No Watermarks", description: "Clean, professional output every time" },
+const ICON_MAP = { zap: Zap, shield: Shield, globe: Globe, fileCheck: FileCheck } as const;
+
+const FALLBACK_BENEFITS = [
+    { icon: "zap" as const, title: "Lightning Fast", description: "Process files instantly in your browser" },
+    { icon: "shield" as const, title: "100% Secure", description: "Files never leave your device" },
+    { icon: "globe" as const, title: "Works Everywhere", description: "Desktop, tablet, and mobile compatible" },
+    { icon: "fileCheck" as const, title: "No Watermarks", description: "Clean, professional output every time" },
 ];
 
 export function ToolSeoContent({
@@ -49,19 +51,22 @@ export function ToolSeoContent({
                     </div>
                 </div>
 
-                {/* Benefits Grid */}
+                {/* Benefits Grid — tool-specific so every tool page has unique content */}
                 <div className="mb-12">
                     <h2 className="text-2xl font-bold text-slate-900 mb-6">
                         Why Use Convertify&apos;s {toolName}?
                     </h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        {benefitIcons.map((benefit, idx) => (
-                            <div key={idx} className="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                <benefit.icon className="w-7 h-7 text-indigo-600 mb-2" />
-                                <h3 className="font-semibold text-slate-900 mb-1 text-sm">{benefit.title}</h3>
-                                <p className="text-xs text-slate-600">{benefit.description}</p>
-                            </div>
-                        ))}
+                        {(toolBenefits[toolSlug] ?? FALLBACK_BENEFITS).map((benefit, idx) => {
+                            const Icon = ICON_MAP[benefit.icon];
+                            return (
+                                <div key={idx} className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                    <Icon className="w-7 h-7 text-indigo-600 mb-2" />
+                                    <h3 className="font-semibold text-slate-900 mb-1 text-sm">{benefit.title}</h3>
+                                    <p className="text-xs text-slate-600">{benefit.description}</p>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
 

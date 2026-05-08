@@ -98,8 +98,6 @@ export default function OrganizePdfClient() {
         setIsGenerating(true)
 
         try {
-            await new Promise(resolve => setTimeout(resolve, 3000)) // Min wait for ads
-
             const fileBuffer = await file.arrayBuffer()
             const originalPdf = await PDFDocument.load(fileBuffer)
             const newPdf = await PDFDocument.create()

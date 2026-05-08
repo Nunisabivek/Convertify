@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import ClientLayout from "@/components/layout/ClientLayout";
+import { PopunderLoader } from "@/components/ads/popunder";
 
 // Google Analytics Measurement ID
 const GA_MEASUREMENT_ID = "G-57C0PG4LK6";
@@ -131,40 +132,15 @@ export default function RootLayout({
         {/* Sitemap Link for Search Engines */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
-        {/* Popunder Ad — web only.
-            Loaded AFTER first user interaction (click, scroll, or keypress) so
-            Google does not classify it as an intrusive interstitial on initial
-            page load. Adsterra still earns from it on the first qualifying
-            interaction; the user just isn't hit before they engage. */}
-        {process.env.NEXT_PUBLIC_MOBILE_BUILD !== 'true' && (
-          <Script
-            id="convertify-popunder-loader"
-            strategy="lazyOnload"
-            dangerouslySetInnerHTML={{
-              __html: `
-                (function(){
-                  var loaded = false;
-                  function load() {
-                    if (loaded) return;
-                    loaded = true;
-                    var s = document.createElement('script');
-                    s.src = 'https://tonicgoverness.com/c9/10/84/c91084acdeea2a9474360f743f122509.js';
-                    s.async = true;
-                    document.body.appendChild(s);
-                    ['click','scroll','keydown','touchstart'].forEach(function(evt){
-                      window.removeEventListener(evt, load, { passive: true });
-                    });
-                  }
-                  ['click','scroll','keydown','touchstart'].forEach(function(evt){
-                    window.addEventListener(evt, load, { passive: true, once: true });
-                  });
-                  // Failsafe: load after 8s even with no interaction so revenue isn't 0
-                  setTimeout(load, 8000);
-                })();
-              `,
-            }}
-          />
-        )}
+        {/* hreflang signals — site is English-only but we want Google to
+            understand it serves all major English markets so US/CA/UK/AU
+            queries surface this domain. x-default points to the canonical. */}
+        <link rel="alternate" hrefLang="en" href="https://convertify.work" />
+        <link rel="alternate" hrefLang="en-US" href="https://convertify.work" />
+        <link rel="alternate" hrefLang="en-GB" href="https://convertify.work" />
+        <link rel="alternate" hrefLang="en-CA" href="https://convertify.work" />
+        <link rel="alternate" hrefLang="en-AU" href="https://convertify.work" />
+        <link rel="alternate" hrefLang="x-default" href="https://convertify.work" />
 
         {/* Structured Data - Website */}
         <script
@@ -199,6 +175,7 @@ export default function RootLayout({
         <ClientLayout>
           {children}
         </ClientLayout>
+        <PopunderLoader />
       </body>
     </html>
   );

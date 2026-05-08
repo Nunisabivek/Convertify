@@ -6,7 +6,9 @@ import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { RelatedUseCases } from "@/components/seo/related-use-cases"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 
@@ -69,6 +71,8 @@ export default function Page() {
                 keywords={contentData.keywords}
             />
 
+            <ToolDeepGuide toolSlug="pdf-to-text" toolName="PDF to Text Extractor" />
+
             <HowToSchema
                 toolName="Extract Text from PDF"
                 description="Learn how to extract text from PDF documents using Convertify's free online PDF to text converter."
@@ -79,6 +83,8 @@ export default function Page() {
                 toolName="PDF to Text Extraction"
                 faqs={seoData.faqs}
             />
+
+            <RelatedUseCases toolHref="/pdf-to-text" />
 
             <RelatedTools currentTool="/pdf-to-text" />
         </div>

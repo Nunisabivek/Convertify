@@ -3,22 +3,34 @@
 import { useState } from 'react'
 import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react'
 
-// Top pages to submit
+// Pages to push to IndexNow. Order matters — Bing/Yandex prioritize the
+// first URLs in the payload. Lead with the GSC "Crawled - currently not
+// indexed" set so re-crawl prioritizes the pages we just upgraded.
 const TOP_PAGES = [
-    '/',
-    '/all-tools',
-    '/merge-pdf',
-    '/split-pdf',
+    // Crawled-not-indexed list from GSC (these were fixed: dup-H1 removed,
+    // tool-specific benefit cards, hreflang, faster delays)
     '/compress-pdf',
-    '/pdf-to-word',
+    '/png-to-pdf',
     '/pdf-to-jpg',
     '/pdf-to-png',
+    '/merge-pdf',
+    '/word-to-pdf',
+    '/text-to-pdf',
+    '/pdf-to-text',
+    '/powerpoint-to-pdf',
+    '/all-tools',
+    '/pricing',
+    '/blog/split-pdf-into-separate-pages',
+    // Other high-priority tool pages
+    '/',
+    '/split-pdf',
+    '/pdf-to-word',
     '/jpg-to-pdf',
-    '/png-to-pdf',
     '/rotate-pdf',
     '/watermark-pdf',
     '/protect-pdf',
     '/unlock-pdf',
+    '/excel-to-pdf',
     '/html-to-pdf',
 ]
 

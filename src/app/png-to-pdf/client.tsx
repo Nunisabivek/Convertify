@@ -20,8 +20,6 @@ export default function PngToPdfPage() {
     const handleConvert = async () => {
         setIsProcessing(true)
         try {
-            await new Promise(resolve => setTimeout(resolve, 3000))
-
             const pdfDoc = await PDFDocument.create()
 
             for (const file of files) {
@@ -68,11 +66,7 @@ export default function PngToPdfPage() {
     }
 
     return (
-        <div className="container mx-auto py-12 max-w-4xl px-4">
-            <div className="text-center mb-10">
-                <h1 className="text-3xl md:text-5xl font-bold mb-4">PNG to PDF</h1>
-                <p className="text-slate-500 text-lg">Convert PNG images to PDF documents.</p>
-            </div>
+        <div className="container mx-auto py-8 max-w-4xl px-4">
             {files.length === 0 ? (
                 <FileUploader
                     onFilesSelected={handleFilesSelected}
