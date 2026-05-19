@@ -37,17 +37,12 @@ export function ToolDeepGuide({ toolSlug, toolName }: ToolDeepGuideProps) {
         })),
     }
 
-    // FAQPage schema for the troubleshooting Q&As — these target long-tail
-    // queries that often go directly to feature snippets.
-    const troubleshootingFaqSchema = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: troubleshooting.map((t) => ({
-            "@type": "Question",
-            name: t.question,
-            acceptedAnswer: { "@type": "Answer", text: t.answer },
-        })),
-    }
+    // No second FAQPage here on purpose. Google allows only one FAQPage
+    // entity per page; emitting a second one (alongside the page-level
+    // <FAQSchema/>) made Search Console flag "2 invalid items" and
+    // suppressed FAQ rich results. The troubleshooting Q&As below stay as
+    // visible content (still good for long-tail/AEO) — just not re-marked
+    // up as a duplicate FAQPage.
 
     // SpeakableSpecification — helps voice assistants surface the intro
     // paragraphs when users ask "how do I X". AEO/voice search optimization.
@@ -161,10 +156,6 @@ export function ToolDeepGuide({ toolSlug, toolName }: ToolDeepGuideProps) {
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(troubleshootingFaqSchema) }}
             />
             <script
                 type="application/ld+json"
