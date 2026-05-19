@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 import { useCases } from '@/lib/use-cases-data'
-import { blogPosts } from '@/lib/blog-data'
+import { indexableBlogPosts } from '@/lib/blog-data'
 
 export const dynamic = 'force-static'
 
@@ -49,8 +49,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Use a fixed date instead of new Date() — Google distrusts sitemaps
     // where every page claims to be freshly modified. Update this when the
-    // page content actually changes meaningfully.
-    const lastUpdated = '2026-05-08'
+    // page content actually changes meaningfully. Bumped on 2026-05-19 after
+    // the indexability/sitemap-consistency fix so Google re-crawls the tool
+    // pages that were stuck "Crawled - currently not indexed" from crawls
+    // that predate the deep-content rollout.
+    const lastUpdated = '2026-05-19'
 
     return [
         {
@@ -77,8 +80,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly' as const,
             priority: 0.7,
         })),
-        // All blog posts — they're full editorial content, not stubs
-        ...blogPosts.map(post => ({
+        // Only indexable blog posts. Thin posts are noindex (see
+        // blog-data.ts) and must NOT appear here — advertising a noindex
+        // URL is the contradictory signal that caused the growing
+        // "Crawled - currently not indexed" count.
+        ...indexableBlogPosts.map(post => ({
             url: `${baseUrl}/blog/${post.slug}`,
             lastModified: post.date || lastUpdated,
             changeFrequency: 'monthly' as const,

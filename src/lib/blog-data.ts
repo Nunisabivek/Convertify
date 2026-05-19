@@ -3297,3 +3297,26 @@ Don't rely on "Print to PDF" which sometimes messes up links.
 `
   }
 ];
+
+// ===========================================
+// INDEXABILITY (single source of truth)
+// ===========================================
+// A dynamic [slug] blog post earns indexing only when its article body is
+// substantial enough to deserve it. Thin posts stay noindex so they don't
+// drag down sitewide quality, but they must ALSO be excluded from the
+// sitemap — advertising a noindex URL is a contradictory signal and is the
+// main reason these pages showed up as "Crawled - currently not indexed"
+// in Search Console. blog/[slug]/page.tsx and sitemap.ts both consume this
+// so the two can never disagree again.
+const MIN_INDEXABLE_WORDS = 350
+
+export function isBlogPostIndexable(post: BlogPost): boolean {
+  const words = post.content.trim().split(/\s+/).filter(Boolean).length
+  return words >= MIN_INDEXABLE_WORDS
+}
+
+export const indexableBlogPosts: BlogPost[] = blogPosts.filter(isBlogPostIndexable)
+
+export const indexableBlogSlugs: Set<string> = new Set(
+  indexableBlogPosts.map((p) => p.slug)
+)

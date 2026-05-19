@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { blogPosts, BlogPost } from "@/lib/blog-data"
+import { blogPosts, indexableBlogSlugs } from "@/lib/blog-data"
 import { AdBanner } from "@/components/ads/banner"
 import { Button } from "@/components/ui/button"
 import { BlogPostSchema } from "@/components/seo/blog-schema"
@@ -13,21 +13,9 @@ type Props = {
     params: Promise<{ slug: string }>
 }
 
-// Only blog posts with dedicated page.tsx files and substantial unique content
-// should be indexed. All dynamic [slug] posts rendered from blog-data.ts are
-// noindexed until they have real editorial content (not just reformatted tool descriptions).
-const indexableBlogSlugs = new Set([
-    'how-to-convert-pdf-to-word-without-software',
-    'best-free-pdf-compressor-online',
-    'pdf-tools-for-small-business',
-    'compress-pdf-under-100kb-government-forms',
-    // Additional posts with substantial content targeting high-impression queries
-    'how-to-merge-pdf-files-free',
-    'compress-pdf-reduce-file-size',
-    'split-pdf-extract-pages-free',
-    'convert-jpg-to-pdf-online',
-    'merge-pdf-without-adobe-acrobat',
-])
+// Indexability is decided by content length in blog-data.ts (single source
+// of truth, also consumed by sitemap.ts). Thin posts stay noindex AND out of
+// the sitemap so the two signals can never contradict each other.
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params
