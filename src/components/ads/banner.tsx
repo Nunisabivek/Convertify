@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useSyncExternalStore } from "react"
 import { X } from "lucide-react"
 
 // Build-time flag: true when building the Capacitor Android app (npm run build:mobile)
@@ -49,6 +49,36 @@ const ADSTERRA_KEYS = {
 } as const
 
 type AdConfig = (typeof ADSTERRA_KEYS)[keyof typeof ADSTERRA_KEYS]
+
+// ── SSR-safe client hooks ─────────────────────────────────────────────────────
+// These read client-only values via useSyncExternalStore instead of a
+// setState-in-effect. getServerSnapshot returns the SSR default (no window
+// access), so there's no hydration mismatch and no cascading render.
+// ─────────────────────────────────────────────────────────────────────────────
+const noopSubscribe = () => () => {}
+
+// True only after the component is running on the client (false during SSR).
+function useIsClient() {
+    return useSyncExternalStore(
+        noopSubscribe,
+        () => true,
+        () => false,
+    )
+}
+
+function subscribeResize(callback: () => void) {
+    window.addEventListener("resize", callback)
+    return () => window.removeEventListener("resize", callback)
+}
+
+// Tracks the < 768px breakpoint, re-reading on resize. SSR default is false.
+function useIsMobile() {
+    return useSyncExternalStore(
+        subscribeResize,
+        () => window.innerWidth < 768,
+        () => false,
+    )
+}
 
 // Lazy-loads an ad iframe using IntersectionObserver. The iframe is only
 // created (and the third-party script only fetched) once the slot enters
@@ -118,37 +148,27 @@ function useLazyAdSlot(conf: AdConfig, enabled: boolean) {
     return containerRef
 }
 
+// Reads the persisted footer-ad dismissal from localStorage. SSR-safe: returns
+// false when there's no window. Used as a lazy useState initializer so we avoid
+// a setState-in-effect. Safe against hydration mismatch because the footer ad
+// only renders once hasMounted is true (i.e. after hydration).
+function readFooterDismissed(variant: AdBannerProps["variant"]) {
+    if (typeof window === "undefined" || IS_MOBILE_BUILD || variant !== "footer") return false
+    try {
+        const ts = localStorage.getItem(FOOTER_AD_DISMISS_KEY)
+        if (!ts) return false
+        const hoursSince = (Date.now() - parseInt(ts, 10)) / (1000 * 60 * 60)
+        return hoursSince < FOOTER_AD_REVISIT_HOURS
+    } catch {
+        return false
+    }
+}
+
 export function AdBanner({ variant = "footer" }: AdBannerProps) {
-    const [isMobile, setIsMobile] = useState(false)
-    const [isDismissed, setIsDismissed] = useState(false)
-    // Hydration safety: do not render the floating footer until after mount.
-    const [hasMounted, setHasMounted] = useState(false)
-
-    useEffect(() => {
-        if (IS_MOBILE_BUILD) return
-        setHasMounted(true)
-        const checkMobile = () => setIsMobile(window.innerWidth < 768)
-        checkMobile()
-        window.addEventListener("resize", checkMobile)
-        return () => window.removeEventListener("resize", checkMobile)
-    }, [])
-
-    // Restore dismiss state from localStorage on mount.
-    useEffect(() => {
-        if (IS_MOBILE_BUILD) return
-        if (variant !== "footer") return
-        try {
-            const ts = localStorage.getItem(FOOTER_AD_DISMISS_KEY)
-            if (!ts) return
-            const dismissedAt = parseInt(ts, 10)
-            const hoursSince = (Date.now() - dismissedAt) / (1000 * 60 * 60)
-            if (hoursSince < FOOTER_AD_REVISIT_HOURS) {
-                setIsDismissed(true)
-            }
-        } catch {
-            // localStorage may be blocked; fall through to showing the ad
-        }
-    }, [variant])
+    // Client-only values, read SSR-safely (no setState-in-effect / hydration risk).
+    const isMobile = useIsMobile()
+    const hasMounted = useIsClient()
+    const [isDismissed, setIsDismissed] = useState(() => readFooterDismissed(variant))
 
     const dismissFooter = () => {
         setIsDismissed(true)
