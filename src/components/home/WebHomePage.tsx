@@ -29,7 +29,8 @@ import {
     CheckCircle2,
     Smartphone,
     Globe,
-    Scaling
+    Scaling,
+    Ruler
 } from "lucide-react";
 import { InternalLinkMap } from "@/components/seo/internal-link-map";
 import { AdBanner } from "@/components/ads/banner";
@@ -259,6 +260,13 @@ const toolCategories = [
                 icon: FilePenLine,
                 color: "bg-purple-100 text-purple-600",
                 href: "/edit-pdf",
+            },
+            {
+                title: "Edit AutoCAD PDF",
+                description: "Edit SHX vector text in AutoCAD-exported PDFs.",
+                icon: Ruler,
+                color: "bg-orange-100 text-orange-600",
+                href: "/autocad-pdf-editor",
             },
             {
                 title: "Sign PDF",

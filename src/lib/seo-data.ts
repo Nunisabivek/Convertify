@@ -1421,5 +1421,50 @@ export const toolSeoData = {
             { name: "Customize Design", text: "Set colors, add a logo, and choose error correction level." },
             { name: "Download QR Code", text: "Save your QR code as PNG or SVG for immediate use." }
         ]
+    },
+    "autocad-pdf-editor": {
+        title: "Edit AutoCAD PDF Text Free Online — SHX Vector Text Editor",
+        description: "The only free online editor that can edit text inside AutoCAD-exported PDFs. Standard PDF editors fail because AutoCAD draws SHX text as vector strokes — our tool detects those strokes, lets you edit them, and exports a clean PDF. No download, no AutoCAD needed.",
+        keywords: [
+            "edit autocad pdf", "edit autocad pdf text", "autocad pdf editor", "edit shx text in pdf",
+            "edit vector text pdf", "autocad exported pdf editor", "edit cad pdf online",
+            "modify autocad pdf", "change text in autocad pdf", "autocad pdf text not editable",
+            "edit dwg pdf online", "fix text in autocad pdf", "autocad pdf no selectable text",
+            "edit drawing pdf online free", "blueprint pdf text editor", "architectural pdf editor",
+            "engineering pdf text edit", "edit dimension text pdf", "autocad pdf editor no download",
+            "free autocad pdf text changer", "convertify autocad pdf editor"
+        ],
+        h1: "Edit Text in AutoCAD-Exported PDFs",
+        faqs: [
+            {
+                question: "Why can't I edit AutoCAD PDF text in normal editors like Adobe or Smallpdf?",
+                answer: "AutoCAD exports text using SHX (stroke) fonts by default. SHX has no PDF equivalent, so each letter is drawn as individual vector line/arc strokes — not real text. Standard PDF editors look for a text layer and find none, so they treat the page as 'image-only' and refuse to edit. Convertify's AutoCAD PDF Editor scans the actual vector strokes, groups them into editable text regions, and lets you replace them."
+            },
+            {
+                question: "Will the edited PDF still open correctly when I send it to my boss or client?",
+                answer: "Yes. The output is a standard PDF that opens identically in Adobe Acrobat, Foxit, browser viewers, and re-imports cleanly into AutoCAD via PDFIMPORT. We preserve every other vector element on the page — only the edited text region is replaced."
+            },
+            {
+                question: "Will the replacement text look exactly like the original SHX strokes?",
+                answer: "Position, size, and placement are matched exactly using the original cluster's bounding box. The visual style is very close — we use a CAD-style font that mimics the thin single-stroke SHX aesthetic. Dimension numbers, labels, and callouts are visually indistinguishable from the original to the naked eye."
+            },
+            {
+                question: "What if my PDF was exported using TrueType fonts instead of SHX?",
+                answer: "If your AutoCAD drawing uses TrueType fonts (Arial, Calibri, etc.), the PDF will contain real selectable text that any standard PDF editor can handle. We detect this on upload and direct you to our general PDF editor in that case."
+            },
+            {
+                question: "Does this work for multi-page architectural drawing sets?",
+                answer: "Yes. You can navigate page by page, edit text on any page, and download the full multi-page PDF with all changes applied."
+            },
+            {
+                question: "Is my drawing safe? Do you upload my files?",
+                answer: "Your files never leave your browser. All parsing, editing, and exporting happens locally on your device — there's no server-side processing. Perfect for confidential architectural, engineering, or proprietary CAD work."
+            }
+        ],
+        howToSteps: [
+            { name: "Upload AutoCAD PDF", text: "Drag and drop your AutoCAD-exported PDF file. We'll automatically detect SHX vector text." },
+            { name: "Click to Edit Text", text: "We highlight every editable text region. Click any region to type a replacement." },
+            { name: "Download Updated PDF", text: "Export your edited PDF instantly. The file opens identically in any PDF viewer or AutoCAD." }
+        ]
     }
 }

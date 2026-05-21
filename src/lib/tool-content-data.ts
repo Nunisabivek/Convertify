@@ -839,6 +839,29 @@ export const toolContentData: Record<string, {
             "Adding scannable links to printed flyers and posters",
             "Creating QR codes for payment links and digital menus"
         ],
-        keywords: ["qr code generator", "create qr code", "qr code maker", "generate qr code free", "qr code generator online", "custom qr code", "qr code with logo", "wifi qr code generator", "qr code creator free", "qr code png", "qr code svg", "free qr code generator"]
+        keywords: ["qr code generator", "create qr code", "qr code maker", "generate qr code free", "qr code generator online", "custom qr code", "qr code with logo", "qr code creator free", "qr code png", "qr code svg", "free qr code generator", "wifi qr code generator"]
+    },
+    "autocad-pdf-editor": {
+        description: "Edit text inside AutoCAD-exported PDFs — the one thing every other PDF editor on the internet fails at. AutoCAD draws SHX text as raw vector strokes with no underlying text layer, so Adobe, Smallpdf, and ILovePDF treat the page as uneditable. Convertify scans the vector geometry, groups strokes into editable text regions, and lets you replace them with a CAD-style font so your output looks identical to the original. Fix that forgotten dimension or label without re-opening AutoCAD.",
+        features: [
+            "Detects SHX Vector Text: Finds clickable text regions other editors can't see",
+            "CAD-Style Replacement Font: Output matches AutoCAD's thin-stroke aesthetic",
+            "Position & Size Match: Replacement text sits in the exact original location",
+            "Multi-Page Support: Edit any page in a full drawing set",
+            "Auto-Detect TTF vs SHX: Routes TrueType PDFs to the standard editor",
+            "100% Browser-Based: Your drawings never leave your device",
+            "No AutoCAD License Needed: Works on any device with a browser",
+            "Free Forever: No watermarks, sign-up, or download required"
+        ],
+        useCases: [
+            "Fixing a wrong dimension on a floor plan before sending to a client",
+            "Updating a revision number on an as-built drawing",
+            "Correcting a typo in a title block or room label",
+            "Changing schedule of openings data without re-exporting from AutoCAD",
+            "Updating project addresses on architectural drawings",
+            "Editing engineering drawings when you don't have AutoCAD on this device",
+            "Making last-minute label changes for site contractors and trades"
+        ],
+        keywords: ["edit autocad pdf", "edit autocad pdf text online", "autocad pdf editor", "edit shx pdf text", "modify autocad pdf", "edit cad drawing pdf", "edit dimension text in pdf", "blueprint text editor", "engineering pdf editor", "fix autocad pdf typo", "free autocad pdf text editor"]
     }
 };

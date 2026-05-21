@@ -9,7 +9,7 @@ const POPUNDER_SRC =
     "https://tonicgoverness.com/c9/10/84/c91084acdeea2a9474360f743f122509.js"
 
 const TOOL_PATH_PATTERN =
-    /^\/(merge-pdf|compress-pdf|split-pdf|pdf-to-word|word-to-pdf|pdf-to-jpg|jpg-to-pdf|excel-to-pdf|pdf-to-png|png-to-pdf|rotate-pdf|protect-pdf|unlock-pdf|add-page-numbers|delete-pdf-pages|watermark-pdf|reorder-pdf|organize-pdf|image-compressor|resize-image|heic-to-jpg|jpg-to-png|png-to-jpg|webp-converter|pdf-to-text|html-to-pdf|bmp-to-jpg|gif-to-png|svg-to-png|tiff-to-pdf|qr-code-generator|csv-to-json|json-to-csv|xml-to-json|base64|markdown-to-pdf|text-to-pdf|edit-pdf|sign-pdf|crop-pdf|repair-pdf|redact-pdf|compare-pdf|pdf-to-excel|pdf-to-powerpoint|pdf-to-pdfa|powerpoint-to-pdf|ocr-pdf)$/
+    /^\/(merge-pdf|compress-pdf|split-pdf|pdf-to-word|word-to-pdf|pdf-to-jpg|jpg-to-pdf|excel-to-pdf|pdf-to-png|png-to-pdf|rotate-pdf|protect-pdf|unlock-pdf|add-page-numbers|delete-pdf-pages|watermark-pdf|reorder-pdf|organize-pdf|image-compressor|resize-image|heic-to-jpg|jpg-to-png|png-to-jpg|webp-converter|pdf-to-text|html-to-pdf|bmp-to-jpg|gif-to-png|svg-to-png|tiff-to-pdf|qr-code-generator|csv-to-json|json-to-csv|xml-to-json|base64|markdown-to-pdf|text-to-pdf|edit-pdf|autocad-pdf-editor|sign-pdf|crop-pdf|repair-pdf|redact-pdf|compare-pdf|pdf-to-excel|pdf-to-powerpoint|pdf-to-pdfa|powerpoint-to-pdf|ocr-pdf)$/
 
 const STATE_KEY = "__convertifyPopunderLoaded"
 const LAST_FIRED_KEY = "convertify:popunderLastFiredAt"

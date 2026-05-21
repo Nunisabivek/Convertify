@@ -1,17 +1,25 @@
 'use client';
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { AdBanner } from "@/components/ads/banner";
 import { JsonLd } from "@/components/seo/json-ld";
 import { MobileLayout } from "@/components/mobile";
 
+// Tools whose primary UI is a wide canvas/workspace — skip the side
+// skyscraper ads so the editor isn't squeezed. Bottom + rectangle ads
+// still run, so revenue impact is limited.
+const FULL_WIDTH_ROUTES = ["/autocad-pdf-editor"];
+
 export default function ClientLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    const pathname = usePathname();
+    const isFullWidth = FULL_WIDTH_ROUTES.includes(pathname || "");
     const [isNative, setIsNative] = useState(false);
     const [loading, setLoading] = useState(true);
 
@@ -45,20 +53,24 @@ export default function ClientLayout({
             <Header />
 
             <div className="flex justify-center w-full max-w-[1920px] mx-auto">
-                {/* Left Ad Sidebar */}
-                <aside className="hidden xl:flex w-[180px] shrink-0 flex-col items-center pt-8 sticky top-0 h-screen">
-                    <AdBanner variant="skyscraper" />
-                </aside>
+                {/* Left Ad Sidebar (suppressed on wide-canvas tools) */}
+                {!isFullWidth && (
+                    <aside className="hidden xl:flex w-[180px] shrink-0 flex-col items-center pt-8 sticky top-0 self-start">
+                        <AdBanner variant="skyscraper" />
+                    </aside>
+                )}
 
                 {/* Main Content */}
                 <main className="flex-1 min-w-0">
                     {children}
                 </main>
 
-                {/* Right Ad Sidebar */}
-                <aside className="hidden xl:flex w-[180px] shrink-0 flex-col items-center pt-8 sticky top-0 h-screen">
-                    <AdBanner variant="skyscraper" />
-                </aside>
+                {/* Right Ad Sidebar (suppressed on wide-canvas tools) */}
+                {!isFullWidth && (
+                    <aside className="hidden xl:flex w-[180px] shrink-0 flex-col items-center pt-8 sticky top-0 self-start">
+                        <AdBanner variant="skyscraper" />
+                    </aside>
+                )}
             </div>
 
             <AdBanner />

@@ -26,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         'pdf-to-text', 'text-to-pdf',
         'html-to-pdf', 'markdown-to-pdf',
         'tiff-to-pdf',
+        'autocad-pdf-editor',
     ]
 
     const secondaryTools = [
