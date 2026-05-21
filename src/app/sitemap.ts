@@ -53,6 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         'base64',
         'markdown-to-pdf',
         'text-to-pdf',
+        'autocad-pdf-editor',
     ]
 
     // Static pages worth indexing

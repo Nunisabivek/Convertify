@@ -143,6 +143,14 @@ export default function RootLayout({
             dangerouslySetInnerHTML={{
               __html: `
                 (function(){
+                  // Editor-type tools (e.g. the AutoCAD PDF editor) involve lots of
+                  // clicking/scrolling while editing — an interaction-triggered popunder
+                  // there feels hostile. On those routes we DON'T auto-load the popunder
+                  // at all; instead the page calls window.__convertifyLoadPopunder() at
+                  // export/download time (a natural, expected moment).
+                  var deferredTools = ['/autocad-pdf-editor'];
+                  var isDeferred = deferredTools.indexOf(location.pathname) !== -1;
+                  var events = ['click','scroll','keydown','touchstart'];
                   var loaded = false;
                   function load() {
                     if (loaded) return;
@@ -151,11 +159,18 @@ export default function RootLayout({
                     s.src = 'https://tonicgoverness.com/c9/10/84/c91084acdeea2a9474360f743f122509.js';
                     s.async = true;
                     document.body.appendChild(s);
-                    ['click','scroll','keydown','touchstart'].forEach(function(evt){
+                    events.forEach(function(evt){
                       window.removeEventListener(evt, load, { passive: true });
                     });
                   }
-                  ['click','scroll','keydown','touchstart'].forEach(function(evt){
+                  // Expose an explicit trigger for deferred tools.
+                  window.__convertifyLoadPopunder = load;
+                  if (isDeferred) {
+                    // No auto-load and no failsafe timer — wait for the explicit
+                    // export/download trigger from the page.
+                    return;
+                  }
+                  events.forEach(function(evt){
                     window.addEventListener(evt, load, { passive: true, once: true });
                   });
                   // Failsafe: load after 8s even with no interaction so revenue isn't 0

@@ -211,9 +211,9 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
 
     if (variant === "skyscraper") {
         return (
-            <div className="hidden xl:flex items-center justify-center h-full">
+            <div className="hidden xl:flex items-start justify-center">
                 <div
-                    className="flex items-center justify-center bg-slate-50 border border-slate-200 rounded-lg overflow-hidden sticky top-24 shadow-sm relative"
+                    className="flex items-center justify-center bg-slate-50 border border-slate-200 rounded-lg overflow-hidden sticky top-20 shadow-sm relative"
                     style={{ width: 160, height: 600 }}
                 >
                     <span className="absolute top-1 right-2 text-[10px] text-slate-400 uppercase tracking-wider z-10 pointer-events-none">
