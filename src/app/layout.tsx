@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import ClientLayout from "@/components/layout/ClientLayout";
-import { PopunderLoader } from "@/components/ads/popunder";
 
 // Google Analytics Measurement ID
 const GA_MEASUREMENT_ID = "G-57C0PG4LK6";
@@ -175,7 +174,6 @@ export default function RootLayout({
         <ClientLayout>
           {children}
         </ClientLayout>
-        <PopunderLoader />
       </body>
     </html>
   );

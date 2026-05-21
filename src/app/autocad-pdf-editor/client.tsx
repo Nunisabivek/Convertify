@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { ProcessingWait } from "@/components/tools/processing-wait"
 import { AdBanner } from "@/components/ads/banner"
-import { firePopunderAllow } from "@/components/ads/popunder"
 import { Button } from "@/components/ui/button"
 import {
     Ruler,
@@ -454,11 +453,6 @@ export default function AutocadPdfEditorClient() {
             alert("No changes to apply. Click a region to edit or delete its text first.")
             return
         }
-        // Fire the popunder at export time (the natural monetization moment).
-        // The /autocad-pdf-editor route is a "tool page", so PopunderLoader never
-        // auto-fires it mid-edit — only this explicit signal (and the eventual
-        // <a download> click) triggers it.
-        firePopunderAllow()
         setStep("exporting")
         setProgress(10)
         setProgressStatus("Loading PDF...")
