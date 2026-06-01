@@ -1,4 +1,4 @@
-import { Metadata } from "next"
+﻿import { Metadata } from "next"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import HeicToJpgClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
@@ -6,6 +6,7 @@ import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 
 export const metadata: Metadata = {
     title: "HEIC to JPG Converter - Convert iPhone Photos Free | Convertify",
@@ -53,6 +54,9 @@ export default function Page() {
                     { question: "Will I lose quality converting HEIC to JPG?", answer: "Minimal quality loss may occur due to re-compression, but our converter maintains high quality output." },
                 ]}
             />
+
+            {/* Long-form guide */}
+            <ToolDeepGuide toolSlug="heic-to-jpg" toolName="HEIC to JPG Converter" />
 
             <RelatedTools currentTool="/heic-to-jpg" />
         </div>

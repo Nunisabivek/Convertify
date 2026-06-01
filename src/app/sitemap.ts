@@ -54,7 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // the indexability/sitemap-consistency fix so Google re-crawls the tool
     // pages that were stuck "Crawled - currently not indexed" from crawls
     // that predate the deep-content rollout.
-    const lastUpdated = '2026-05-19'
+    const lastUpdated = '2026-06-01'
 
     return [
         {

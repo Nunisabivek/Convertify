@@ -1,4 +1,4 @@
-import { Metadata } from "next"
+﻿import { Metadata } from "next"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import WebpConverterClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
@@ -6,6 +6,7 @@ import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 
 export const metadata: Metadata = {
     title: "WebP Converter - Convert Images to/from WebP Free | Convertify",
@@ -54,6 +55,9 @@ export default function Page() {
                     { question: "Is this WebP converter free?", answer: "Yes, Convertify's WebP converter is completely free with no file limits, watermarks, or sign-up required." },
                 ]}
             />
+
+            {/* Long-form guide */}
+            <ToolDeepGuide toolSlug="webp-converter" toolName="WebP Converter" />
 
             <RelatedTools currentTool="/webp-converter" />
         </div>

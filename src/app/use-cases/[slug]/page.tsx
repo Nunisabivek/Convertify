@@ -128,7 +128,7 @@ export default async function UseCasePage({ params }: Props) {
             logo: { '@type': 'ImageObject', url: 'https://convertify.work/images/Convertify.png' },
         },
         datePublished: '2026-01-01',
-        dateModified: '2026-05-08',
+        dateModified: '2026-06-01',
         mainEntityOfPage: `https://convertify.work/use-cases/${useCase.slug}`,
     };
 

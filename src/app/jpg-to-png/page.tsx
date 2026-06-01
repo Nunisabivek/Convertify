@@ -1,4 +1,4 @@
-import { Metadata } from "next"
+﻿import { Metadata } from "next"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import JpgToPngClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
@@ -6,6 +6,7 @@ import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 
 export const metadata: Metadata = {
     title: "JPG to PNG Converter - Convert JPEG to PNG Free Online | Convertify",
@@ -52,6 +53,9 @@ export default function Page() {
                     { question: "Will I lose quality converting JPG to PNG?", answer: "No, PNG is lossless. However, since JPG is already compressed, you won't recover lost quality from the original JPG compression." },
                 ]}
             />
+
+            {/* Long-form guide */}
+            <ToolDeepGuide toolSlug="jpg-to-png" toolName="JPG to PNG Converter" />
 
             <RelatedTools currentTool="/jpg-to-png" />
         </div>

@@ -1,4 +1,4 @@
-import { Metadata } from "next"
+﻿import { Metadata } from "next"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import GifToPngClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
@@ -7,6 +7,7 @@ import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 
@@ -64,6 +65,9 @@ export default function Page() {
                 useCases={contentData.useCases}
                 keywords={contentData.keywords}
             />
+
+            {/* Long-form guide — 1000-1500 words of unique content */}
+            <ToolDeepGuide toolSlug="gif-to-png" toolName="GIF to PNG Converter" />
 
             <HowToSchema
                 toolName={seoData.title}

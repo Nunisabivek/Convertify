@@ -1,4 +1,4 @@
-import { Metadata } from "next"
+﻿import { Metadata } from "next"
 import { ComingSoonTool } from "@/components/tools/coming-soon-tool"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
@@ -6,6 +6,7 @@ import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 
@@ -75,6 +76,9 @@ export default function Page() {
                 useCases={contentData.useCases}
                 keywords={contentData.keywords}
             />
+
+            {/* Long-form guide */}
+            <ToolDeepGuide toolSlug="crop-pdf" toolName="PDF Crop Tool" />
 
             <HowToSchema
                 toolName={seoData.title}

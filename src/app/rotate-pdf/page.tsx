@@ -1,4 +1,4 @@
-import { Metadata } from "next"
+﻿import { Metadata } from "next"
 import RotatePdfClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
@@ -6,6 +6,7 @@ import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 
@@ -60,6 +61,9 @@ export default function Page() {
                 useCases={contentData.useCases}
                 keywords={contentData.keywords}
             />
+
+            {/* Long-form guide */}
+            <ToolDeepGuide toolSlug="rotate-pdf" toolName="PDF Rotator" />
 
             <HowToSchema
                 toolName="Convertify Rotate PDF Pages"

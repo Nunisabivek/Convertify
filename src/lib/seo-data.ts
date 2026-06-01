@@ -42,7 +42,7 @@ export const toolSeoData = {
         ]
     },
     "split-pdf": {
-        title: "Convertify PDF Splitter - Split PDF & Extract Pages Free Online",
+        title: "Split PDF Free Online — Extract & Separate Pages | Convertify",
         description: "Convertify PDF Splitter — split PDF files and extract specific pages online. Separate one or multiple pages instantly on Windows, Mac, or Mobile. No download needed, 100% free and private.",
         keywords: [
             "convertify pdf splitter", "split pdf", "extract pages from pdf", "separate pdf pages", "cut pdf pages", "pdf splitter online",
@@ -122,7 +122,7 @@ export const toolSeoData = {
         ]
     },
     "jpg-to-pdf": {
-        title: "Convertify JPG to PDF Free Online – Combine Photos to PDF",
+        title: "JPG to PDF Free Online — Combine Photos into One PDF | Convertify",
         description: "Convertify JPG to PDF converter — combine unlimited photos into one PDF free online. Arrange order, adjust page size. No sign-up, no watermarks, no download needed. Works on Windows, Mac & mobile.",
         keywords: [
             "convertify jpg to pdf", "jpg to pdf", "convert jpg to pdf", "image to pdf", "photos to pdf", "jpeg to pdf",
@@ -167,7 +167,7 @@ export const toolSeoData = {
         ]
     },
     "word-to-pdf": {
-        title: "Convertify Word to PDF Free Online — DOCX to PDF Without Watermark",
+        title: "Word to PDF Free Online — DOCX to PDF, No Watermark | Convertify",
         description: "Convertify Word to PDF converter — free, no Microsoft Office needed. Convert DOCX to PDF without watermark. Preserves fonts, layout & formatting perfectly. Best for resumes, CVs & legal docs. No sign-up, 100% private.",
         keywords: [
             "word to pdf", "docx to pdf", "convert word to pdf", "doc to pdf", "word to pdf converter",
@@ -419,7 +419,7 @@ export const toolSeoData = {
     },
 
     "pdf-to-word": {
-        title: "Convertify PDF to Word - Editable DOCX Free Online",
+        title: "PDF to Word Free Online — Editable DOCX, No Sign-Up | Convertify",
         description: "Official Convertify PDF to Word converter. Convert PDF to Word (DOCX) while keeping exact layout. Scanned PDF to Word OCR support. Secure, private, and free.",
         keywords: [
             "convertify pdf to word", "pdf to word", "pdf to docx", "convert pdf to word", "editable pdf to word", "pdf to word converter free",
@@ -551,7 +551,7 @@ export const toolSeoData = {
         ]
     },
     "edit-pdf": {
-        title: "Convertify PDF Editor - Edit PDF Free Online, No Download",
+        title: "Edit PDF Free Online — No Download, No Sign-Up | Convertify",
         description: "Convertify PDF Editor — the best free PDF editor for annotations and form filling. Add text, images, and shapes, then 'Flatten' your edits. No sign-up, no watermarks, no download needed.",
         keywords: [
             "convertify pdf editor", "edit pdf", "pdf editor online", "add text to pdf", "annotate pdf", "edit pdf online free", "pdf editor free no sign up",
@@ -652,7 +652,7 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-excel": {
-        title: "Convertify PDF to Excel - Convert PDF to XLSX Free Online",
+        title: "PDF to Excel Free Online — Convert PDF Tables to XLSX | Convertify",
         description: "Convertify PDF to Excel converter — convert PDF to XLSX with 99%+ accuracy for bank statements and invoices. Extract data into clean tables. No download, no sign-up, 100% free.",
         keywords: [
             "convertify pdf to excel", "pdf to excel", "pdf to xlsx", "convert pdf to excel", "extract table from pdf", "pdf to excel converter free",
@@ -851,7 +851,7 @@ export const toolSeoData = {
         ]
     },
     "sign-pdf": {
-        title: "Convertify Sign PDF - Free E-Signatures Online, No Download",
+        title: "Sign PDF Free Online — Add E-Signature, No Download | Convertify",
         description: "Convertify Sign PDF — sign contracts and agreements with legally valid e-signatures. Draw or type your signature and 'Flatten' the file. No download needed, 100% private and free.",
         keywords: [
             "convertify sign pdf", "sign pdf", "e-sign pdf", "digital signature", "sign pdf online free", "electronic signature pdf", "add signature to pdf",
@@ -885,7 +885,7 @@ export const toolSeoData = {
         ]
     },
     "rotate-pdf": {
-        title: "Convertify Rotate PDF - Fix Page Orientation Free Online",
+        title: "Rotate PDF Free Online — Fix Page Orientation & Save | Convertify",
         description: "Convertify Rotate PDF — rotate PDF pages 90°, 180°, or 270°. Fix sideways or upside-down scanned documents instantly. Free, no watermarks, no download needed.",
         keywords: ["convertify rotate pdf", "rotate pdf", "turn pdf pages", "rotate pdf 90 degrees", "flip pdf", "rotate scanned document", "pdf page orientation", "rotate pdf online free", "rotate pdf free no download"],
         h1: "Convertify Rotate PDF - Fix Page Orientation Free",
@@ -902,7 +902,7 @@ export const toolSeoData = {
         ]
     },
     "protect-pdf": {
-        title: "Convertify Protect PDF - AES-256 Encryption Free Online",
+        title: "Protect PDF Free — Password & AES-256 Encryption | Convertify",
         description: "Convertify Protect PDF — secure your PDF with military-grade AES-256 encryption. Client-side protection, your password never touches a server. No download needed, 100% private and free.",
         keywords: [
             "convertify protect pdf", "password protect pdf", "encrypt pdf", "secure pdf", "lock pdf", "pdf password", "protect pdf online free",
@@ -936,7 +936,7 @@ export const toolSeoData = {
         ]
     },
     "unlock-pdf": {
-        title: "Convertify Unlock PDF - Remove Restrictions & Passwords Free",
+        title: "Unlock PDF Free Online — Remove Password & Restrictions | Convertify",
         description: "Convertify Unlock PDF — remove printing, copying, and editing restrictions instantly. Regain access to permission-locked documents. No download needed, 100% secure and free.",
         keywords: [
             "convertify unlock pdf", "unlock pdf", "remove pdf password", "pdf password remover", "unprotect pdf", "remove password from pdf without acrobat",
@@ -1086,7 +1086,7 @@ export const toolSeoData = {
         ]
     },
     "svg-to-png": {
-        title: "Convertify SVG to PNG Converter - High Quality Free Online",
+        title: "SVG to PNG Free Online — High-Quality Vector Export | Convertify",
         description: "Convert SVG vector files to PNG images with custom resolution. Preserve transparency, set exact dimensions, and export crisp raster images. Free, private, no upload needed.",
         keywords: [
             "svg to png", "convert svg to png", "svg to png converter", "svg to png online free",
@@ -1117,7 +1117,7 @@ export const toolSeoData = {
         ]
     },
     "bmp-to-jpg": {
-        title: "Convertify BMP to JPG Converter - Reduce Size Free Online",
+        title: "BMP to JPG Free Online — Convert & Shrink Bitmaps | Convertify",
         description: "Convert BMP bitmap files to compressed JPG images instantly. Reduce file size by up to 95% with adjustable quality. Free, no sign-up, works in your browser.",
         keywords: [
             "bmp to jpg", "convert bmp to jpg", "bmp to jpeg converter", "bmp to jpg online free",
@@ -1152,7 +1152,7 @@ export const toolSeoData = {
         ]
     },
     "gif-to-png": {
-        title: "Convertify GIF to PNG Converter - Extract Frames Free Online",
+        title: "GIF to PNG Free Online — Convert & Extract Frames | Convertify",
         description: "Convert GIF images to PNG format or extract individual frames from animated GIFs. Preserve transparency and get lossless quality. Free, private, no upload required.",
         keywords: [
             "gif to png", "convert gif to png", "gif to png converter online", "gif to png free",
@@ -1183,7 +1183,7 @@ export const toolSeoData = {
         ]
     },
     "tiff-to-pdf": {
-        title: "Convertify TIFF to PDF Converter - Multi-Page Free Online",
+        title: "TIFF to PDF Free Online — Multi-Page Scans to PDF | Convertify",
         description: "Convert single or multi-page TIFF files to PDF documents. Preserve original quality, combine multiple TIFFs into one PDF. Free, private, no software installation needed.",
         keywords: [
             "tiff to pdf", "convert tiff to pdf", "tiff to pdf converter", "tiff to pdf online free",
@@ -1218,7 +1218,7 @@ export const toolSeoData = {
         ]
     },
     "csv-to-json": {
-        title: "Convertify CSV to JSON Converter - Instant Free Online",
+        title: "CSV to JSON Free Online — Instant Converter for Devs | Convertify",
         description: "Convert CSV spreadsheet data to clean JSON format instantly. Auto-detects headers, supports nested structures, and handles large files. Free, private, no upload required.",
         keywords: [
             "csv to json", "convert csv to json", "csv to json converter", "csv to json online free",
@@ -1253,7 +1253,7 @@ export const toolSeoData = {
         ]
     },
     "json-to-csv": {
-        title: "Convertify JSON to CSV Converter - Export Data Free Online",
+        title: "JSON to CSV Free Online — Export to Excel & Sheets | Convertify",
         description: "Convert JSON data to CSV spreadsheet format instantly. Flatten nested objects, auto-detect arrays, and export clean tabular data. Free, private, no sign-up needed.",
         keywords: [
             "json to csv", "convert json to csv", "json to csv converter", "json to csv online free",
@@ -1284,7 +1284,7 @@ export const toolSeoData = {
         ]
     },
     "xml-to-json": {
-        title: "Convertify XML to JSON Converter - Accurate Free Online",
+        title: "XML to JSON Free Online — Accurate API Data Converter | Convertify",
         description: "Convert XML documents to clean JSON format with accurate structure preservation. Handles attributes, namespaces, and nested elements. Free, private, browser-based.",
         keywords: [
             "xml to json", "convert xml to json", "xml to json converter", "xml to json online free",
@@ -1319,7 +1319,7 @@ export const toolSeoData = {
         ]
     },
     "markdown-to-pdf": {
-        title: "Convertify Markdown to PDF - Beautiful Export Free Online",
+        title: "Markdown to PDF Free Online — README & Docs to PDF | Convertify",
         description: "Convert Markdown files to professionally styled PDF documents. Supports GitHub-flavored Markdown, code highlighting, tables, and custom themes. Free and private.",
         keywords: [
             "markdown to pdf", "convert markdown to pdf", "markdown to pdf converter", "md to pdf online free",
@@ -1354,7 +1354,7 @@ export const toolSeoData = {
         ]
     },
     "base64": {
-        title: "Convertify Base64 Encoder Decoder - Instant Free Online",
+        title: "Base64 Encode & Decode Free Online — Image & Text | Convertify",
         description: "Encode text or files to Base64, or decode Base64 strings back to original content. Supports text, images, and binary files. Free, instant, fully private.",
         keywords: [
             "base64 encoder", "base64 decoder", "base64 encode online", "base64 decode online",
@@ -1388,7 +1388,7 @@ export const toolSeoData = {
         ]
     },
     "qr-code-generator": {
-        title: "Convertify QR Code Generator - Custom Colors Free Online",
+        title: "QR Code Generator Free — Custom Colors & Logo | Convertify",
         description: "Generate QR codes for URLs, text, Wi-Fi, vCards, and more. Customize colors, add logos, set error correction, and download as PNG or SVG. Free, no sign-up required.",
         keywords: [
             "qr code generator", "create qr code", "qr code maker free", "qr code generator online",

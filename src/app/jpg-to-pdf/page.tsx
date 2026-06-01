@@ -1,4 +1,4 @@
-
+﻿
 import { Metadata } from "next"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import JpgToPdfClient from "./client"
@@ -9,6 +9,7 @@ import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
 import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
+import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 import { blogPosts } from "@/lib/blog-data"
@@ -82,6 +83,9 @@ export default function Page() {
                 useCases={contentData.useCases}
                 keywords={contentData.keywords}
             />
+
+            {/* Long-form guide */}
+            <ToolDeepGuide toolSlug="jpg-to-pdf" toolName="JPG to PDF Converter" />
 
             <HowToSchema
                 toolName="Convertify JPG to PDF Converter"

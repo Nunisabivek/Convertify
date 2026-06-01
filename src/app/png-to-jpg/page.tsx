@@ -1,4 +1,4 @@
-import { Metadata } from "next"
+﻿import { Metadata } from "next"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import PngToJpgClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
@@ -6,6 +6,7 @@ import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 
 export const metadata: Metadata = {
     title: "PNG to JPG Converter - Convert PNG to JPEG Free Online | Convertify",
@@ -52,6 +53,9 @@ export default function Page() {
                     { question: "Is this PNG to JPG converter free?", answer: "Yes, Convertify's PNG to JPG converter is completely free with no file limits, watermarks, or sign-up required." },
                 ]}
             />
+
+            {/* Long-form guide */}
+            <ToolDeepGuide toolSlug="png-to-jpg" toolName="PNG to JPG Converter" />
 
             <RelatedTools currentTool="/png-to-jpg" />
         </div>

@@ -309,4 +309,1266 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
         ],
         lastUpdated: "2026-05-08",
     },
+
+    "split-pdf": {
+        intro: [
+            "Splitting a PDF — extracting one page, a chapter, or a custom range — is a task most people Google when they realize they only want to share part of a document. Convertify's PDF splitter lets you select pages individually or by range and extracts them to a new PDF in seconds, with no file uploaded to any server.",
+            "The most common use case is extracting a single page from a 50-page document. The second most common is separating a combined PDF into individual files — for example, when a law firm's scanning software always produces one giant PDF per client and you need individual documents per matter. Both modes are available: 'Extract selected pages' and 'Split into individual pages'.",
+            "If you've previously used Adobe Acrobat or Smallpdf for the same job, the key difference here is that there's no 5-page daily limit and nothing is uploaded — useful for confidential materials like HR records, tax returns, and legal exhibits.",
+        ],
+        steps: [
+            { title: "Upload the PDF", body: "Click the upload zone or drag a PDF onto it. The tool reads the page count immediately and shows thumbnail previews so you can see what you're working with." },
+            { title: "Select pages to extract", body: "Click individual page thumbnails to toggle them, or type a range (e.g. '3-7, 12, 15-20') in the range field. You can also choose 'Extract all as individual files' to split every page into its own PDF." },
+            { title: "Extract", body: "Convertify builds the new PDF from your selected pages using PDF-Lib, entirely in the browser. For typical selections this completes in 1-3 seconds." },
+            { title: "Download", body: "Single-page or small multi-page extractions download as one PDF. When you extract all pages as individual files, the result is a ZIP containing page-1.pdf, page-2.pdf, etc." },
+        ],
+        scenarios: [
+            { title: "Extracting one page from a large document", body: "Legal professionals, accountants, and HR teams frequently need a single page from a 100+ page file — a specific exhibit, one quarterly statement, or a single signature page. Click the thumbnail, extract, done." },
+            { title: "Separating combined invoices", body: "Accounting software often exports a month's invoices as one PDF. Split by page to get individual invoice files that match your filing structure, then rename each by invoice number." },
+            { title: "Sharing a chapter from an e-book or report", body: "You want to send a colleague just the appendix of a 300-page report. Extract pages 285-300 and share only what's needed — keeping the rest private." },
+            { title: "Removing the cover page before submission", body: "Many PDF templates add a branded cover page. Extract pages 2 through N to get a clean document without the cover, ready for external portals that don't expect branding." },
+        ],
+        troubleshooting: [
+            { question: "My PDF is password-protected and I can't split it.", answer: "Protected PDFs need to be unlocked before you can modify them. Run the file through Convertify's Unlock PDF tool first, then bring the unlocked copy back to the splitter." },
+            { question: "I want to extract non-consecutive pages (e.g. pages 1, 5, 9).", answer: "Use the range syntax: type '1, 5, 9' in the range input and only those pages will be extracted into one PDF." },
+            { question: "The ZIP only contains some pages, not all.", answer: "This is almost always a browser memory issue on very large PDFs. Close other heavy tabs and try again. For 500+ page PDFs, split in two passes: first extract pages 1-250, then 251-500." },
+            { question: "Page order is wrong in the extracted PDF.", answer: "Pages are extracted in the order you selected them, not in their original document order. If you clicked thumbnails out of order, the extraction follows click order. Use the range input instead for reliable ordering." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "2–5 splits/day free" },
+            { feature: "Max pages", convertify: "Browser RAM only", typical: "100–200 pages" },
+            { feature: "Extract non-consecutive pages", convertify: "Yes", typical: "Range only" },
+            { feature: "Watermark on output", convertify: "None", typical: "Often added" },
+            { feature: "Split to individual files", convertify: "Yes, auto-ZIP", typical: "Not always" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "pdf-to-word": {
+        intro: [
+            "Converting a PDF to an editable Word document is one of the most-requested file tasks — you receive a contract, a form, or a report as PDF and need to edit the text without retyping everything. Convertify's PDF to Word converter extracts the text layer from digitally-generated PDFs and maps it to a .docx structure your can open in Microsoft Word, Google Docs, or LibreOffice.",
+            "The key distinction that determines quality is whether your PDF is 'digital' (created by exporting from Word, Excel, or a design tool) or 'scanned' (a photo of a physical page). Digital PDFs convert cleanly because they carry an embedded text layer. Scanned PDFs are images — they look like text but the file stores pixels, not characters. Scanned PDFs need OCR first; run them through Convertify's OCR PDF tool to add a text layer, then convert to Word.",
+            "Convertify's converter is fully client-side, so confidential PDFs — HR letters, bank statements, legal agreements — never reach a server. The output is a plain .docx with your content reformatted into Word paragraphs, ready to edit.",
+        ],
+        steps: [
+            { title: "Upload your PDF", body: "Drag or click to select. The tool reads the document type instantly — digital PDFs show a green indicator; image-only PDFs will prompt you to run OCR first." },
+            { title: "Convert", body: "The converter walks every page of the PDF, pulls the text runs in reading order, and builds a .docx with paragraph styles matching the original's approximate structure." },
+            { title: "Download the .docx", body: "Open in Word or Google Docs and edit freely. Text, headings, and lists convert well; complex multi-column layouts and tables may need minor cleanup." },
+        ],
+        scenarios: [
+            { title: "Editing a received contract", body: "You receive a PDF contract but need to redline specific clauses. Convert to Word, make tracked changes, and send back. Because nothing uploads, the NDA-protected content stays on your machine." },
+            { title: "Updating an old company template", body: "A department has a PDF form or report template and nobody has the original Word file. Convert the PDF to .docx to get an editable starting point, then restyle and re-save as the new master." },
+            { title: "Copying structured data from a PDF report", body: "Analysts who receive data PDFs quarterly can convert to Word, then copy tables into Excel. Not as clean as PDF to Excel directly, but useful for unstructured reports where tables aren't recognized separately." },
+            { title: "Accessibility editing", body: "Screen-reader workflows sometimes need a Word document instead of a PDF. Converting gives you editable text you can reformat with proper heading hierarchy and alt text — something you can't easily do in a PDF." },
+        ],
+        troubleshooting: [
+            { question: "The converted Word doc shows garbled text or no text at all.", answer: "Your PDF is likely a scan (image-only). Run it through OCR PDF first to add a searchable text layer, then convert." },
+            { question: "Formatting looks wrong — columns are merged, tables are flat.", answer: "Complex layouts (multi-column academic papers, tables with merged cells) are the hardest to convert perfectly. The text content is correct; you may need to reformat the layout manually in Word." },
+            { question: "Some fonts look different in the Word doc.", answer: "PDF fonts are embedded in the PDF and aren't transferred to .docx. Word substitutes the nearest available font. If exact branding matters, update fonts manually after converting." },
+            { question: "Images from the PDF are missing.", answer: "The converter extracts text content only — embedded images are not included in the Word output. For a layout-accurate Word file with images intact, you need a more advanced tool like Adobe Acrobat Pro." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Output format", convertify: ".docx (editable)", typical: ".docx" },
+            { feature: "Scanned PDF handling", convertify: "Prompt to OCR first", typical: "Often silently fails" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "2–3 per day free" },
+            { feature: "Watermark", convertify: "None", typical: "Often added" },
+            { feature: "Sign-up", convertify: "No", typical: "Often required" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "jpg-to-pdf": {
+        intro: [
+            "Converting JPG photos to PDF is how most people turn phone-captured documents — receipts, ID cards, handwritten notes, whiteboards — into portable, professional files. Convertify's JPG to PDF tool lets you upload multiple JPGs at once, drag to set the order, and produce a single multi-page PDF without any upload, any watermark, or any daily limit.",
+            "Most JPG-to-PDF tools online handle one image at a time. Convertify batches them: drop 30 receipts, reorder by date, convert — and you get one consolidated PDF for expense submission or archiving. The quality is preserved at the original JPG resolution, which for modern phone cameras (12–48 MP) is typically 200–400 DPI on a standard letter page — more than adequate for printing or submission to government portals.",
+            "If your photos are HEIC (iPhone Live Photos) rather than JPG, use the HEIC to JPG tool first, or upload directly — Convertify will auto-convert them in the same workflow.",
+        ],
+        steps: [
+            { title: "Upload your JPG images", body: "Drag and drop one or many JPGs (or HEICs) onto the upload zone. All images load with thumbnail previews immediately." },
+            { title: "Set the page order", body: "Drag thumbnails to reorder. For expense reports: sort by date. For documents: arrange in logical sequence. The top thumbnail becomes page 1." },
+            { title: "Click Convert", body: "PDF-Lib creates a new PDF with one page per image, sized to each image's natural dimensions. All processing happens in your browser." },
+            { title: "Download the PDF", body: "The multi-page PDF downloads without a watermark, at the full original image quality." },
+        ],
+        scenarios: [
+            { title: "Phone-scanned documents for government portals", body: "Visa applications, tax forms, and university admissions all require PDFs. If you photographed your passport, bank statement, or degree certificate with a phone camera, JPG to PDF converts those shots into a submission-ready file. If the file is too large afterwards, run through Compress PDF to hit the portal's size limit." },
+            { title: "Expense reports from paper receipts", body: "Take a batch of receipt photos over a business trip, upload them all at once, sort by date, and convert. HR and accounting teams prefer one PDF per trip over a folder of 20 JPG attachments." },
+            { title: "Real estate documentation", body: "Agents photographing property condition reports, lease agreements, or inspection checklists with their phone get a proper PDF ready for client delivery or record-keeping — no scanner needed." },
+            { title: "Classroom assignments with handwritten work", body: "Students submitting handwritten homework photograph each page, upload to JPG to PDF, and get a multi-page submission PDF. The in-browser processing means it works on school Chromebooks and tablets without any installed app." },
+        ],
+        troubleshooting: [
+            { question: "My PDF is very large — the JPGs were high resolution.", answer: "JPG to PDF embeds your images at original quality. If you need a smaller file, run the resulting PDF through Compress PDF to reduce it. Typical smartphone photos compress well to under 500 KB per page at document-quality settings." },
+            { question: "Some photos are sideways or upside down.", answer: "Phones sometimes encode rotation in EXIF metadata rather than rotating the actual pixels. If images appear rotated in the PDF, use the Rotate PDF tool afterwards to correct any sideways pages." },
+            { question: "One of my images won't upload.", answer: "The most common cause is a file saved with a .jpg extension but actually in HEIC or WebP format internally. Re-export from your phone or camera app as JPEG, or run through the HEIC to JPG converter first." },
+            { question: "I want all pages to be the same size (A4) even if images have different dimensions.", answer: "Currently Convertify sizes each PDF page to the source image. For uniform A4 pages, resize all images to the same dimensions with the Resize Image tool first, then convert." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Images per conversion", convertify: "Unlimited", typical: "5–20 on free tier" },
+            { feature: "Drag-to-reorder", convertify: "Yes", typical: "Sometimes" },
+            { feature: "Output quality", convertify: "Original resolution", typical: "Compressed" },
+            { feature: "Watermark", convertify: "None", typical: "Often added" },
+            { feature: "HEIC support", convertify: "Yes", typical: "Rarely" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "excel-to-pdf": {
+        intro: [
+            "Converting an Excel spreadsheet to PDF locks the formatting — column widths, formulas-as-values, print areas — so recipients see exactly what you intended, regardless of whether they have Excel installed or how their print margins are configured. Convertify's Excel to PDF converter handles both .xlsx and .xls, locally, with no server upload.",
+            "The biggest issue with Excel-to-PDF conversion is hidden columns and sheets. Many online tools silently skip non-active sheets or render only the currently visible print area. Convertify gives you control: choose to convert the active sheet only, or all sheets — and each sheet becomes a separate PDF page group, clearly separated for navigation.",
+            "Common use cases include sending financial reports to clients who don't have Excel, submitting invoices as PDF to accounting systems, and archiving budget models in a read-only, tamper-evident format.",
+        ],
+        steps: [
+            { title: "Upload your Excel file", body: "Drop an .xlsx or .xls file onto the converter. The tool reads the sheet count and active sheet name immediately." },
+            { title: "Choose sheet scope", body: "Select 'Active sheet only' for the default view, or 'All sheets' to convert every tab into the output PDF (each sheet starts on a new page)." },
+            { title: "Convert", body: "The spreadsheet is rendered through the browser's canvas engine, preserving formatting, borders, font styles, and merged cells." },
+            { title: "Download", body: "The PDF is ready instantly with no watermark. Open in any PDF viewer — Excel is not required." },
+        ],
+        scenarios: [
+            { title: "Sending financial reports to clients", body: "Finance teams exporting monthly P&L or cash flow statements as PDF prevent recipients from accidentally editing figures. Convert the finalized spreadsheet and send the locked PDF — clients can view and print but not change values." },
+            { title: "Submitting invoices to accounts payable systems", body: "Many AP portals accept PDF invoices only. Build your invoice in Excel (for formula auto-calculation), then convert to PDF before submission. The formatted layout looks professional in any viewer." },
+            { title: "Archiving budget models at year-end", body: "Before rolling a budget to the next year, archive the final version as PDF. This creates a tamper-evident record you can reference in audits — formulas are gone (only values visible), which is exactly what auditors want." },
+            { title: "Sharing data with non-Excel users", body: "Google Sheets users, macOS users without Excel, and clients on mobile can all open a PDF. Convert before sharing when you're unsure what software the recipient has." },
+        ],
+        troubleshooting: [
+            { question: "Columns are getting cut off at the right edge.", answer: "This is the classic 'print area wider than paper' problem. Before converting, set a print area in Excel (select your data range → Page Layout → Print Area → Set Print Area) or reduce column widths to fit within one page width." },
+            { question: "Some sheets are missing from the PDF.", answer: "Make sure you selected 'All sheets' rather than 'Active sheet only'. Also check that hidden sheets in Excel — sheets you've right-clicked and hidden — won't be included (hidden sheets are intentionally excluded from most converters)." },
+            { question: "Formulas show as errors (#REF!, #VALUE!) in the PDF.", answer: "Formula errors exist in your source spreadsheet. Convertify renders exactly what Excel shows. Fix the formula errors in Excel first, then convert." },
+            { question: "The PDF looks fine on screen but prints incorrectly.", answer: "Adjust page orientation (portrait/landscape) in Excel's Page Layout before converting. For wide spreadsheets, landscape usually works better." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Multi-sheet support", convertify: "Yes", typical: "Active sheet only" },
+            { feature: "Formats supported", convertify: "XLS + XLSX", typical: "XLSX only" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "2–3 per day" },
+            { feature: "Watermark", convertify: "None", typical: "Often added" },
+            { feature: "Sign-up", convertify: "No", typical: "Often required" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "pdf-to-excel": {
+        intro: [
+            "Extracting tables from a PDF into an editable Excel spreadsheet is one of the most time-consuming manual tasks in data work — copying column by column, fixing misaligned rows, reconstructing formulas. Convertify's PDF to Excel converter identifies table structures in the PDF and exports them as a structured .xlsx file you can immediately open and sort.",
+            "The quality of extraction depends heavily on the source PDF. Digitally-generated PDFs (from accounting software, government databases, financial systems) typically have well-defined table cells that extract cleanly. Scanned PDFs and image-only PDFs require OCR first — run them through Convertify's OCR PDF tool to add a text layer, then convert.",
+            "This tool is especially popular among financial analysts who receive PDF bank statements, government data PDFs, and vendor price lists that they need to work with in Excel — without retyping hundreds of rows.",
+        ],
+        steps: [
+            { title: "Upload the PDF", body: "Drag or click to upload. Digitally-generated PDFs show a ready indicator; image-only scans prompt you to OCR first." },
+            { title: "Extract tables", body: "The converter scans every page for table structures — rows, columns, merged cells — and maps them to Excel rows and columns." },
+            { title: "Download the .xlsx", body: "Open in Excel or Google Sheets. Each detected table is output to its own sheet or a contiguous block, ready to sort, filter, and build formulas on." },
+        ],
+        scenarios: [
+            { title: "Bank statement analysis", body: "Download your monthly bank statement as PDF, convert to Excel, and you have every transaction in a spreadsheet — ready to categorize, sum, and chart without typing a single figure." },
+            { title: "Government and regulatory data PDFs", body: "Regulatory filings, census tables, and public procurement data are often published as PDFs. Convert to Excel to filter by year, sort by value, and build pivot tables for analysis — work that used to take hours of copy-paste now takes seconds." },
+            { title: "Vendor price list updates", body: "Suppliers often send updated price lists as PDF. Extract to Excel, then VLOOKUP the new prices against your master product list to highlight which SKUs changed — a procurement workflow that previously required manual rekeying." },
+            { title: "Academic research data tables", body: "Research papers often publish results in PDF tables. Extracting to Excel lets you re-analyze the raw data, combine datasets, and build your own charts without transcription errors." },
+        ],
+        troubleshooting: [
+            { question: "The extracted data has merged rows or scrambled columns.", answer: "This happens most often with complex multi-level headers (e.g. a table with a 3-level hierarchy) or cells that span multiple columns. Clean up the header rows manually in Excel after extraction — the row data itself is usually correct." },
+            { question: "No data extracted — blank Excel file.", answer: "Your PDF is likely a scan. Run it through OCR PDF first to add a text layer, then re-run the extraction." },
+            { question: "Numbers are being treated as text in Excel.", answer: "Select the column, go to Data → Text to Columns, and complete the wizard — this converts text-formatted numbers to true numeric values. This is a common Excel quirk when data comes from external sources." },
+            { question: "Decimal points appear as commas (European format).", answer: "If the source PDF uses European number formatting (1.234,56 instead of 1,234.56), the extracted values need locale conversion. Use Excel's Find & Replace to swap commas to decimals after extraction." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Output format", convertify: ".xlsx", typical: ".xlsx or .csv" },
+            { feature: "Scanned PDF handling", convertify: "Prompt to OCR first", typical: "Blank output" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "1–3 per day" },
+            { feature: "Watermark", convertify: "None", typical: "Often added" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "rotate-pdf": {
+        intro: [
+            "Rotating a PDF permanently fixes the orientation so every viewer sees it the right way up — no more 'turn your head sideways' for a scan that came out landscape. Convertify's Rotate PDF tool rotates individual pages or all pages at once, 90° or 180°, and saves the rotation into the file itself (not just a view preference that gets lost on download).",
+            "The most common scenario is a document scanned with a page accidentally fed sideways. The second is a mixed-orientation PDF — a document where some pages are portrait and some are landscape — where you want to standardize orientation. You can rotate pages selectively: click any page thumbnail to toggle it into the rotation selection before applying.",
+            "Because rotation is embedded in the PDF structure rather than re-rendering the page image, text remains sharp at 100% zoom and vector graphics stay vector — there's no quality loss from re-rasterizing.",
+        ],
+        steps: [
+            { title: "Upload the PDF", body: "Drop a PDF onto the upload zone. All pages load as thumbnails immediately." },
+            { title: "Select pages to rotate", body: "Click thumbnails to select individual pages, or use 'Select all' for the whole document. Unselected pages are untouched." },
+            { title: "Choose rotation amount", body: "90° clockwise, 90° counter-clockwise, or 180° (flip upside down). Each click rotates the selected pages by that increment." },
+            { title: "Save and download", body: "The updated PDF downloads instantly. Rotation is baked in — it looks correct in every PDF viewer, on every device." },
+        ],
+        scenarios: [
+            { title: "Fixing a sideways scan", body: "A scanner with an auto-feeder can pull a page in sideways, producing a landscape page in what should be a portrait document. Select the offending page, rotate 90° clockwise or counter-clockwise, and the document is uniform again." },
+            { title: "Correcting phone-photographed documents", body: "Many phone camera apps save images rotated based on how you held the phone. If JPG-to-PDF produced sideways pages, rotate them here before submitting to a government portal or employer." },
+            { title: "Printing landscape-only reports", body: "Dashboards and financial reports often print best in landscape. If you received a portrait PDF of a wide table, rotating to landscape before printing means columns don't get cut off at the right edge." },
+            { title: "Standardizing a mixed-orientation document", body: "A legal bundle might have 50 portrait pages and 3 landscape exhibits. Rotate the exhibits to portrait for consistent printing, or rotate the portrait pages to landscape to match — either direction." },
+        ],
+        troubleshooting: [
+            { question: "I rotated but the file still opens sideways in my viewer.", answer: "Some PDF viewers apply their own auto-rotation based on page dimensions, overriding the embedded rotation. The rotation IS saved in the file. Try opening in a different viewer (Adobe Reader vs browser vs Preview) — most will respect the embedded orientation." },
+            { question: "I accidentally rotated all pages and want to undo.", answer: "Re-upload the original file and don't select any pages before saving — or rotate all pages 90° in the opposite direction twice to return to the original orientation. There's no in-browser undo for previously downloaded files." },
+            { question: "The text becomes blurry after rotating.", answer: "Rotation of a vector/text PDF should never cause blurriness — the page content is not re-rasterized. Blurriness after rotation usually means the original PDF was an image-scan, not a digital document. The blurriness was pre-existing; rotation just makes it more obvious at certain zoom levels." },
+            { question: "My protected PDF can't be rotated.", answer: "PDFs with editing restrictions block rotation. Use Unlock PDF first to remove restrictions, then rotate." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Per-page rotation", convertify: "Yes", typical: "All pages only" },
+            { feature: "Rotation increment", convertify: "90° or 180°", typical: "90° only" },
+            { feature: "Quality loss", convertify: "None (vector-safe)", typical: "Sometimes re-rasters" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "3–5 per day" },
+            { feature: "Watermark", convertify: "None", typical: "Sometimes added" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "protect-pdf": {
+        intro: [
+            "Adding a password to a PDF prevents unauthorized viewing, editing, or printing. Convertify's Protect PDF tool applies AES-256 encryption — the same standard used in enterprise document management — directly in your browser, so the password is set before the file ever leaves your device.",
+            "There are two types of PDF passwords: a 'user password' (opens the document — recipients need this to read it) and an 'owner password' (unlocks editing and printing). Convertify lets you set both independently. A common use case: set a user password for confidential distribution, leave editing open; or leave the document openly readable but protect it from printing or copy-paste with an owner password only.",
+            "AES-256 encryption, used by Convertify, is the strongest encryption standard currently available for PDFs and is accepted by courts, regulators, and financial institutions as legally sufficient for document security.",
+        ],
+        steps: [
+            { title: "Upload the PDF", body: "Drag or click to upload. The file is read locally — nothing is sent to any server at any point in the workflow." },
+            { title: "Set the password", body: "Type a user password (required to open the PDF), an owner password (required to edit/print/copy), or both. Use a strong password: 12+ characters, mixed case, with numbers and symbols." },
+            { title: "Choose permissions", body: "Optionally restrict printing, copying text, or editing. These restrictions are enforced by compliant PDF viewers even after the document is open." },
+            { title: "Download the protected PDF", body: "The encrypted file downloads immediately. Test it by opening in a new browser tab — you should be prompted for the password." },
+        ],
+        scenarios: [
+            { title: "Sharing confidential financial documents", body: "Tax returns, bank statements, and salary letters shared by email benefit from password protection. Use a strong user password and share it with the recipient via a separate channel (SMS, phone call) — never in the same email." },
+            { title: "Distributing editable forms with restrictions", body: "HR departments send offer letters and forms as fillable PDFs. Setting an owner password prevents recipients from changing terms while still allowing them to fill form fields — a clean way to prevent tampering." },
+            { title: "Protecting personal records for cloud storage", body: "Passport scans, medical records, and legal documents stored in Google Drive or Dropbox benefit from a separate layer of encryption. Even if your cloud account is compromised, the files remain unreadable without the password." },
+            { title: "Copyright protection for ebooks and reports", body: "Authors and consultants distributing paid content can set a user password to prevent casual unauthorized redistribution. Combine with a print-restriction to make screenshotting the primary unauthorized copy method — harder and less scalable." },
+        ],
+        troubleshooting: [
+            { question: "I forgot the password — can you help me recover it?", answer: "No. AES-256 encryption means the password cannot be recovered or brute-forced in any reasonable time. If you lose the password to your own document, use the Unlock PDF tool only if you can prove ownership (Unlock PDF requires you to enter the correct password, so a forgotten password can't be bypassed here either)." },
+            { question: "The PDF opens without asking for a password.", answer: "The recipient's PDF viewer may be set to auto-open from a trusted location, or they may have previously opened and cached the file. In a fresh private/incognito browser tab, the password prompt appears correctly." },
+            { question: "I set a print restriction but the recipient can still print.", answer: "PDF permissions are honored by compliant viewers (Adobe Reader, Chrome's built-in PDF viewer) but ignored by some third-party readers. Owner-password restrictions are advisory in the PDF standard — they're not cryptographic locks. For true print prevention, consider watermarking all pages instead." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Encryption standard", convertify: "AES-256", typical: "AES-128 or RC4" },
+            { feature: "User + owner passwords", convertify: "Both supported", typical: "User password only" },
+            { feature: "Permission settings", convertify: "Print, copy, edit", typical: "Limited" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "3 per day free" },
+            { feature: "Sign-up", convertify: "No", typical: "Often required" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "unlock-pdf": {
+        intro: [
+            "Removing a password from a PDF you own makes the file easier to work with — no more entering a password every time you open it, and you can use it with other tools that don't accept encrypted inputs. Convertify's Unlock PDF tool removes the user password (after you prove you know it) and any owner-level restrictions, entirely in your browser.",
+            "The critical security point: you must enter the correct password. Convertify is not a PDF cracker or brute-force tool. It uses PDF-Lib to open the file with the password you supply and re-export it without encryption. This is the same thing you'd do manually in Adobe Acrobat: open the file, go to security settings, remove the password, save. Convertify just does it in one click with no Acrobat license needed.",
+            "If you've forgotten the password, Unlock PDF cannot help. The encryption is genuine AES-128/256, and there's no workaround for a truly lost password on a strongly-encrypted file.",
+        ],
+        steps: [
+            { title: "Upload the password-protected PDF", body: "Drag or click to upload the locked PDF. The tool detects the encryption and prompts for a password." },
+            { title: "Enter the password", body: "Type the current password exactly as set. Case-sensitive. The tool verifies it locally before proceeding." },
+            { title: "Unlock and download", body: "The decrypted PDF downloads immediately, without any password on open, print, or edit." },
+        ],
+        scenarios: [
+            { title: "Removing your own password for easier workflows", body: "You set a password on a PDF months ago for secure sharing. Now you want to use it with tools that don't accept encrypted inputs (like merge or split). Unlock it, process it, then re-protect if needed." },
+            { title: "IT migrations and document management", body: "Organizations migrating documents to a new DMS often need to batch-unlock files that were protected by employees who have since left. If you know the passwords (from a shared password manager), unlock each file before migration." },
+            { title: "Enabling editing and printing", body: "Some PDFs have owner-level restrictions (editing and printing locked) but no open password. Unlock PDF removes these restrictions so you can annotate, print, or split the file freely." },
+            { title: "Compatibility with downstream tools", body: "Many PDF tools — including Convertify's own merge, compress, and split tools — cannot process encrypted PDFs. Unlock is always the first step in a multi-tool workflow involving a protected file." },
+        ],
+        troubleshooting: [
+            { question: "I entered the password but the tool says it's wrong.", answer: "PDF passwords are case-sensitive. Check caps lock, try with and without leading/trailing spaces, and consider whether the password uses special characters that might have been entered differently (e.g., a smart-quote instead of a straight quote)." },
+            { question: "I can open the PDF in my viewer without a password but Unlock PDF still asks for one.", answer: "Your PDF viewer may have cached the password or auto-opened from a trusted file location. The PDF itself is still encrypted — check File Properties in your viewer to confirm." },
+            { question: "The unlocked PDF still won't open in another tool.", answer: "There may be additional DRM restrictions beyond standard PDF password protection — some publishers use proprietary DRM (e.g., Adobe Digital Editions). Standard password removal won't remove DRM-based restrictions." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Password required", convertify: "Yes (proves ownership)", typical: "Yes" },
+            { feature: "Encryption types", convertify: "AES-128, AES-256, RC4", typical: "AES-128 only" },
+            { feature: "Removes owner restrictions", convertify: "Yes", typical: "Sometimes" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "3 per day free" },
+            { feature: "Sign-up", convertify: "No", typical: "Often required" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "add-page-numbers": {
+        intro: [
+            "Adding page numbers to a PDF seems trivial until you've tried to do it without Adobe Acrobat. Most free tools either add numbers in a fixed corner with no customization, or require a server upload. Convertify's Add Page Numbers tool runs in the browser and gives you full control: position (top/bottom, left/center/right), font size, starting number, and whether to skip the first page (common for documents with a title or cover page).",
+            "Page numbers are added as a proper text overlay in the PDF — not as a flat image stamp — so the output remains searchable and the numbers scale cleanly on high-DPI screens and in print.",
+            "This tool is especially useful for legal documents, academic submissions, and business reports where consistent page references are expected but the source document was assembled without them.",
+        ],
+        steps: [
+            { title: "Upload the PDF", body: "Drag or click to select the PDF you want to number. The current page count is shown so you can plan your numbering scheme." },
+            { title: "Configure the numbering", body: "Choose position (bottom center is the conventional default for most documents), font size (10pt works for most body documents), starting number (use 1 for a fresh document; use a higher number if this is one section of a larger work), and whether to skip page 1." },
+            { title: "Apply and download", body: "Numbers are added as PDF text objects, correctly positioned on every page. The file downloads instantly." },
+        ],
+        scenarios: [
+            { title: "Legal documents and court filings", body: "Courts require consistent page numbers on all exhibits. If you assembled exhibits from different sources (each with their own page count), merge them first, then add sequential numbers from 1 to N for the full bundle." },
+            { title: "Academic theses and dissertations", body: "Most university style guides require page numbers to start from a specific page (often the first body text page, skipping the abstract and title). Use the 'skip first N pages' option and set a custom start number." },
+            { title: "Business reports for board meetings", body: "A board pack assembled from different department PDFs has no consistent page numbers. Merge, then add page numbers so directors can reference 'page 47' precisely in discussions." },
+            { title: "Books and manuals for print", body: "Self-published authors preparing a PDF for print-on-demand need consistent page numbers. Add them after all edits are finalized so numbers don't shift as content changes." },
+        ],
+        troubleshooting: [
+            { question: "I want Roman numerals for the front matter and Arabic numerals for the body.", answer: "Convertify doesn't support dual numbering schemes in one pass. Workaround: split the front matter pages, add Roman numerals (as text, manually) or leave them un-numbered, then add Arabic numerals to the body section separately, finally merge back." },
+            { question: "The number position overlaps with existing footer content.", answer: "Switch to top-of-page positioning, or choose a corner position (top-left, top-right) that avoids your document's footer. Reduce font size to make the overlap less intrusive." },
+            { question: "I want to start numbering from page 3 (skip title and ToC).", answer: "Set 'Skip first N pages' to 2, and set the starting number to 1 — pages 1 and 2 get no number, page 3 gets '1', and so on. Adjust starting number if you want the count to reflect actual position (page 3 shows '3')." },
+            { question: "The PDF is protected and numbers can't be added.", answer: "Editing-restricted PDFs block text additions. Unlock the PDF first, add numbers, then re-protect if needed." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Position control", convertify: "6 positions", typical: "1–2 fixed" },
+            { feature: "Custom start number", convertify: "Yes", typical: "Always starts at 1" },
+            { feature: "Skip first page", convertify: "Yes", typical: "No" },
+            { feature: "Text overlay (searchable)", convertify: "Yes", typical: "Image stamp only" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "3 per day" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "delete-pdf-pages": {
+        intro: [
+            "Deleting pages from a PDF is the fastest way to remove content you don't want to share — blank pages, confidential sections, advertising inserts, or duplicate pages that crept in during scanning. Convertify's Delete PDF Pages tool shows all pages as visual thumbnails, lets you multi-select the ones to remove, and produces the trimmed PDF in seconds without any server upload.",
+            "This is the reverse operation of PDF splitting: instead of keeping selected pages, you keep everything EXCEPT your selection. For removing 2-3 pages from a 100-page document, Delete Pages is faster than split because you're specifying what to remove rather than what to keep.",
+        ],
+        steps: [
+            { title: "Upload the PDF", body: "Drag or click to upload. All pages render as thumbnails so you can visually identify which ones to delete." },
+            { title: "Select pages to delete", body: "Click thumbnails to mark them for deletion — a red overlay or checkbox indicates selected pages. You can select multiple pages freely." },
+            { title: "Delete and download", body: "Click Delete Selected. The tool rebuilds the PDF without those pages using PDF-Lib, then downloads the result instantly." },
+        ],
+        scenarios: [
+            { title: "Removing blank pages from scanned documents", body: "Flatbed scanners often produce a blank reverse page for every single-sided original. A 10-page letter becomes a 20-page PDF with alternating blanks. Select all even pages and delete them in one action." },
+            { title: "Stripping a cover letter before forwarding", body: "Internal reports often have a confidential cover memo. Delete page 1 before forwarding the report externally — the recipients get the data without the internal commentary." },
+            { title: "Removing duplicate pages from merges", body: "When merging PDFs from multiple sources, a summary table or section header sometimes appears twice. Delete the duplicate and the document is clean." },
+            { title: "Trimming advertising from downloaded PDFs", body: "Many freely-distributed PDF whitepapers and reports pad with advertising pages at the start and end. Delete those pages to get the core content ready for sharing or filing." },
+        ],
+        troubleshooting: [
+            { question: "I accidentally deleted the wrong page.", answer: "There's no in-browser undo once you've downloaded the file. Re-upload the original PDF and redo the selection carefully. For large documents, note the page numbers before deleting." },
+            { question: "The resulting PDF has different page numbers in the file metadata.", answer: "Page numbers shown in PDF viewers are based on actual page count after deletion. If your original had page numbers printed in the text (not as metadata), those will remain as-is — they're part of the content, not automatically updated. Use Add Page Numbers to re-apply sequential numbers after deletion." },
+            { question: "The file still shows the deleted pages when I open it.", answer: "Try a hard refresh in your browser (Ctrl+F5 or Cmd+Shift+R) to clear the cached version, or open the downloaded file directly with a local PDF viewer rather than the browser." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Visual page selection", convertify: "Yes (thumbnails)", typical: "Page numbers only" },
+            { feature: "Multi-page delete", convertify: "Unlimited", typical: "5 at a time" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "3 per day" },
+            { feature: "Watermark", convertify: "None", typical: "Often added" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "watermark-pdf": {
+        intro: [
+            "Watermarking a PDF signals ownership, confidentiality, or draft status — 'CONFIDENTIAL', 'DRAFT', a company name, or a copyright notice — printed diagonally across every page so it's clearly visible but the underlying content remains readable. Convertify's Watermark PDF tool adds text watermarks in your browser with full control over text, opacity, font size, angle, and color.",
+            "Watermarks serve two practical purposes: deterring unauthorized distribution (the watermark identifies the original recipient if a confidential document leaks) and signaling document status (DRAFT watermarks prevent recipients from acting on preliminary content as if it were final).",
+            "Text watermarks added by Convertify are overlaid as PDF text objects — they scale cleanly on any screen and in print, unlike image-stamp watermarks which can appear pixelated at high zoom or print resolution.",
+        ],
+        steps: [
+            { title: "Upload the PDF", body: "Drop the PDF onto the upload zone. All pages will be watermarked." },
+            { title: "Configure the watermark", body: "Type the watermark text (e.g. 'CONFIDENTIAL', 'DRAFT', your company name). Set opacity (30-40% is readable-but-subtle; 60-70% is bold and deliberate). Choose diagonal or horizontal, font size, and color." },
+            { title: "Apply and download", body: "The watermark is added to every page. The download is immediate with no server processing." },
+        ],
+        scenarios: [
+            { title: "CONFIDENTIAL distribution of sensitive reports", body: "Finance teams distributing pre-release earnings data to selected recipients can personalize each PDF: watermark with the recipient's name ('CONFIDENTIAL — John Smith'). If the document leaks, the watermark identifies who shared it." },
+            { title: "DRAFT documents for review cycles", body: "Send a contract or policy document for review with a prominent DRAFT watermark. Recipients know not to countersign or act on a document clearly marked as preliminary." },
+            { title: "Copyright protection for published PDFs", body: "Authors, photographers, and consultants distributing paid content watermark with their name and website. Combined with a print restriction from Protect PDF, this makes unauthorized redistribution identifiable and harder to strip." },
+            { title: "Sample versions of paid documents", body: "Businesses offering PDF samples watermark with 'SAMPLE — purchase at [URL]'. The content is visible enough to evaluate but branded clearly enough to be unsatisfying as the full product." },
+        ],
+        troubleshooting: [
+            { question: "Can the watermark be removed?", answer: "Text watermarks are embedded as a PDF object layer. A skilled user with the right tools can remove them — watermarks are a deterrent, not a cryptographic lock. For high-security documents, combine watermarking with AES-256 password protection and owner restrictions." },
+            { question: "The watermark is too dark and obscures the content.", answer: "Reduce opacity to 20-30%. For a subtle but legally-defensible mark, 25% opacity in light gray is standard for legal documents. Bold DRAFT or CONFIDENTIAL marks typically use 40-50%." },
+            { question: "I want a watermark only on specific pages.", answer: "The current tool applies the watermark to all pages. Workaround: split the PDF to isolate the pages you want watermarked, apply the watermark, then merge the watermarked section back with the non-watermarked sections." },
+            { question: "My PDF is in landscape — the diagonal text doesn't look right.", answer: "Use horizontal alignment for landscape pages. The diagonal setting is optimized for portrait pages." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Opacity control", convertify: "Yes (0–100%)", typical: "3 presets only" },
+            { feature: "Color choice", convertify: "Any hex color", typical: "Gray only" },
+            { feature: "Angle control", convertify: "Diagonal or horizontal", typical: "Diagonal only" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "3 per day" },
+            { feature: "Watermark type", convertify: "Text (scalable)", typical: "Image stamp" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "reorder-pdf": {
+        intro: [
+            "Reordering PDF pages fixes the sequence after scanning, assembly, or automated export produces pages out of order. Convertify's Reorder PDF tool gives you a visual drag-and-drop interface — every page is a thumbnail — so you can restructure a 50-page document by eye in under a minute, with no server involved.",
+            "The most common triggers: a scanner's auto-feeder pulls pages in the wrong sequence; a report assembled from multiple sections needs chapters resequenced; a book chapter ends up before the introduction. Unlike splitting and re-merging (which requires multiple steps), Reorder PDF handles the whole job in one upload.",
+        ],
+        steps: [
+            { title: "Upload the PDF", body: "All pages render as thumbnail previews. You can see what's on each page before moving anything." },
+            { title: "Drag pages to new positions", body: "Click and drag any thumbnail to the position you want. The page order updates live. For large documents, use the arrow buttons on each thumbnail for precise up/down movement." },
+            { title: "Save and download", body: "Click Save Order. The reordered PDF downloads immediately — same content, new sequence." },
+        ],
+        scenarios: [
+            { title: "Fixing scanner feed order", body: "A 20-page double-sided document put through a scanner auto-feeder can end up with all odd pages first, then all even pages (pages 1, 3, 5 … 19, 2, 4, 6 … 20). Reorder by interleaving the two halves to get the correct 1-2-3-4 sequence." },
+            { title: "Restructuring a report for a new audience", body: "An executive summary buried on page 8 of an internal report needs to move to page 1 for an external audience. Drag it to position 1 — everything else shifts automatically." },
+            { title: "Assembling a PDF from imported sections", body: "After merging PDFs from multiple contributors, the appendix is in the middle, the introduction is last, and the main body is in the right place. Drag sections into the correct order without re-exporting anything." },
+        ],
+        troubleshooting: [
+            { question: "The thumbnails won't drag on my mobile device.", answer: "Drag-and-drop is optimized for desktop browsers. On mobile, use the arrow buttons on each thumbnail to move pages up and down one position at a time." },
+            { question: "I lost track of the original order.", answer: "If you haven't clicked Save yet, refresh the page and re-upload to start fresh with the original order. Once you've downloaded the reordered file, the original is only recoverable if you kept a copy." },
+            { question: "Some thumbnails load slowly for a large PDF.", answer: "Thumbnail rendering is proportional to file size and page count. For 100+ page PDFs, wait for all thumbnails to fully render before dragging — dragging half-loaded thumbnails can produce unexpected results." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Visual drag-and-drop", convertify: "Yes", typical: "Filename/order only" },
+            { feature: "Page count", convertify: "Unlimited", typical: "50–100 pages max" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "3 per day" },
+            { feature: "Watermark", convertify: "None", typical: "Sometimes" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "organize-pdf": {
+        intro: [
+            "Organizing a PDF means being able to do everything to its pages in one place: reorder, delete, rotate, and duplicate — without bouncing between four separate tools. Convertify's Organize PDF tool is the all-in-one page manager: upload once, make all your structural edits, download the final version.",
+            "This is the right tool when you have a complex editing job. For example: scan produces a 40-page document with 3 blank pages (delete), 2 sideways pages (rotate), and the last 5 pages in the wrong order (reorder) — Organize PDF handles all three problems before you click Save.",
+        ],
+        steps: [
+            { title: "Upload the PDF", body: "All pages load as thumbnails for visual editing." },
+            { title: "Edit pages as needed", body: "Drag to reorder, click the delete icon to remove, click the rotate icon to turn pages 90°. Any combination of operations is fine — the changes stack and preview in real time." },
+            { title: "Save and download", body: "All changes apply in a single pass when you click Save. The resulting PDF reflects every edit you made." },
+        ],
+        scenarios: [
+            { title: "Cleaning up a multi-source merged PDF", body: "A document assembled from 5 different PDFs often has inconsistent page orientation, some blank separator pages, and sections in the wrong order. Organize handles all three cleanup operations in one session." },
+            { title: "Preparing a legal bundle", body: "Court exhibits need specific ordering, no blank pages, and consistent orientation. Organize PDF is the final cleanup step after merging: rotate the few sideways exhibits, delete blanks, confirm sequence — then add page numbers." },
+            { title: "Book or manual preparation", body: "A technical manual drafted by multiple authors arrives with chapters out of order and some duplicated pages. Reorder chapters by dragging section groups, delete duplicates, rotate any landscape diagrams to portrait." },
+        ],
+        troubleshooting: [
+            { question: "I want to duplicate a page.", answer: "Click the duplicate icon on any thumbnail to add a copy of that page immediately after it. Useful for forms that need the same base page repeated with different fills." },
+            { question: "I made many changes and want to start over.", answer: "Refresh the page and re-upload — your original file is unchanged. All edits in Organize PDF are session-only until you click Save and download." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Operations in one tool", convertify: "Reorder, delete, rotate", typical: "One operation per tool" },
+            { feature: "Visual interface", convertify: "Yes", typical: "Sometimes" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
+            { feature: "Watermark", convertify: "None", typical: "Sometimes" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "html-to-pdf": {
+        intro: [
+            "Converting a web page or HTML file to PDF captures it exactly as it renders in a browser — layout, fonts, images, and colors preserved — and saves it as a portable, offline-readable document. Convertify's HTML to PDF tool works for both local .html files and web page URLs, rendering through a headless browser engine for accurate output.",
+            "Common uses: archiving a web-based article, saving a receipt from an e-commerce checkout page, capturing a web form confirmation, or generating a PDF report from an HTML template. For developers, HTML-to-PDF via a browser-based tool is also a quick way to proof a PDF layout without spinning up a headless Chrome server.",
+        ],
+        steps: [
+            { title: "Provide the HTML source", body: "Either paste a public URL or upload a local .html file. For local files, linked assets (CSS, images) in the same folder are included if you package them together." },
+            { title: "Set page options", body: "Choose paper size (A4, US Letter), orientation, and margins. For web pages with wide layouts, landscape often produces cleaner output." },
+            { title: "Convert and download", body: "The page renders through the browser's print engine and outputs as a clean PDF with text remaining selectable and links preserved." },
+        ],
+        scenarios: [
+            { title: "Archiving articles and documentation", body: "Web articles disappear when sites go offline or behind paywalls. Convert to PDF immediately after reading to create a permanent offline copy. The PDF is searchable and readable without internet." },
+            { title: "Saving e-commerce receipts", body: "Order confirmation pages that aren't emailed as PDF attachments can be captured via HTML to PDF. Print-to-PDF through the browser often misses styling; this tool uses the full rendered layout." },
+            { title: "Developer PDF layout proofing", body: "Front-end developers building invoice or report templates in HTML can use this tool to quickly proof the PDF output without setting up a server-side headless Chrome pipeline." },
+            { title: "Capturing web-based reports", body: "Analytics dashboards, project management boards, and data tools that display reports in the browser but don't offer PDF export can be captured via URL conversion." },
+        ],
+        troubleshooting: [
+            { question: "The web page requires a login — it shows a login screen, not the content.", answer: "The converter accesses the URL as an anonymous user. For authenticated content, use your browser's built-in Print → Save as PDF, which runs in your logged-in session." },
+            { question: "The layout looks different from what I see in the browser.", answer: "Some websites use dynamic content loaded by JavaScript after the initial render. The converter captures the post-render state but may miss animations or late-loading widgets. For most static content, output is accurate." },
+            { question: "Images are missing in the output.", answer: "For local .html files, images need to be in the same folder and referenced with relative paths. For URLs, images from blocked third-party CDNs may not load." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Processed locally", typical: "Sent to server" },
+            { feature: "CSS rendering", convertify: "Full browser engine", typical: "Partial support" },
+            { feature: "Local file support", convertify: "Yes (.html)", typical: "URL only" },
+            { feature: "Selectable text output", convertify: "Yes", typical: "Sometimes image-only" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "3–5 per day" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "markdown-to-pdf": {
+        intro: [
+            "Converting Markdown to PDF is a standard step for developers, technical writers, and students who write in .md but need to share formatted documents with non-technical audiences. Convertify's Markdown to PDF tool renders CommonMark-compliant Markdown — including headers, bold/italic, code blocks, tables, and images — to a clean, typeset PDF, with no additional software needed.",
+            "The output uses a readable sans-serif font, sensible margins, and syntax-highlighted code blocks, making it appropriate for README exports, technical documentation handoffs, blog post drafts, and academic-style writing. Paste text directly or upload a .md file.",
+        ],
+        steps: [
+            { title: "Paste or upload Markdown", body: "Paste raw Markdown into the text area, or drag a .md or .markdown file onto the upload zone." },
+            { title: "Preview (optional)", body: "The live preview pane shows how the content will render before you convert — verify heading levels, table formatting, and code blocks look correct." },
+            { title: "Convert and download", body: "Click Convert. The PDF is generated in the browser with full CommonMark rendering and downloads immediately." },
+        ],
+        scenarios: [
+            { title: "Exporting README files for documentation handoffs", body: "Open-source maintainers and internal developers sharing a project README with stakeholders who don't use GitHub convert the .md to a clean PDF. The result looks like a proper document rather than raw markup." },
+            { title: "Technical documentation for clients", body: "Consultants and agencies writing technical specs in Markdown can deliver a professional PDF to clients without needing to copy-paste into Word and re-format everything." },
+            { title: "Academic writing with code examples", body: "Computer science students and researchers who include code snippets in their writing can author in Markdown (with fenced code blocks) and deliver a PDF that renders code in a monospace font with proper formatting." },
+            { title: "Blog drafts and articles", body: "Writers using static site generators (Jekyll, Hugo, Gatsby) often draft in Markdown. Converting to PDF gives a print-friendly version of articles for personal archives or offline reading." },
+        ],
+        troubleshooting: [
+            { question: "My tables are not rendering correctly.", answer: "Markdown table syntax requires pipe characters with alignment hyphens in the header row (e.g. | Column | --- |). Confirm your table uses standard GFM/CommonMark syntax. Extra spaces or missing pipes break table detection." },
+            { question: "Code blocks lose their formatting.", answer: "Use triple-backtick fencing (```code```) rather than 4-space indented code blocks for best results. Specify the language after the opening triple-backtick for syntax highlighting." },
+            { question: "Images are missing in the PDF.", answer: "Locally-referenced images (e.g. `![alt](./image.png)`) won't load in the browser renderer since the local file system isn't accessible. Use base64-encoded images or publicly accessible URLs for images in your Markdown." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Markdown standard", convertify: "CommonMark + GFM", typical: "Basic only" },
+            { feature: "Syntax highlighting", convertify: "Yes", typical: "No" },
+            { feature: "Tables support", convertify: "Yes", typical: "Sometimes" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "3–5 per day" },
+            { feature: "Sign-up", convertify: "No", typical: "Often" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "ocr-pdf": {
+        intro: [
+            "OCR (Optical Character Recognition) turns a scanned, image-only PDF into a searchable document with a real text layer. After OCR, you can Ctrl+F search the content, copy text from it, and use it with tools that expect a text-layer PDF (like PDF to Word or PDF to Text). Convertify's OCR PDF tool processes scanned documents in your browser, adding the invisible text layer while keeping the original scan visually unchanged.",
+            "The most common scenario: you scan a paper document (a contract, a passport, a bank letter) and the resulting PDF is just a photo — it looks like text but the file contains no characters, only pixels. OCR reads those pixels, recognizes the characters, and adds a hidden text layer so you can search and copy.",
+            "Convertify's OCR engine handles English, Spanish, French, German, Portuguese, and other Latin-script languages. Accuracy is highest on clean, well-lit scans with standard fonts (>95% character accuracy). Handwriting and complex scripts have lower accuracy.",
+        ],
+        steps: [
+            { title: "Upload the scanned PDF", body: "Drag or click to upload. The tool detects whether the PDF is image-only (OCR needed) or already has a text layer." },
+            { title: "Select language", body: "Choose the primary language of the document for best recognition accuracy. Multi-language documents: choose the dominant language." },
+            { title: "Run OCR and download", body: "The OCR engine processes each page, adds an invisible text layer behind the existing image, and outputs a searchable PDF. The visual appearance is unchanged." },
+        ],
+        scenarios: [
+            { title: "Making scanned contracts searchable", body: "Legal teams that receive executed contracts as scanned PDFs need to search for clause numbers and defined terms. OCR adds the text layer so Ctrl+F works — you can then jump directly to 'Section 12.4' instead of reading every page." },
+            { title: "Preparing scanned PDFs for PDF to Word conversion", body: "Run OCR first, then PDF to Word. OCR adds the text layer that the Word converter needs to produce editable output. Without OCR, the conversion produces a blank .docx." },
+            { title: "Archiving historical documents", body: "Organizations digitalizing paper archives (government agencies, libraries, law firms) run OCR on every scanned PDF to make them full-text searchable in document management systems." },
+            { title: "Extracting data from printed forms", body: "Survey forms, application forms, and questionnaires received as physical documents get scanned to PDF, then OCR'd so the data can be extracted programmatically or via the PDF to Text tool." },
+        ],
+        troubleshooting: [
+            { question: "OCR accuracy is low on my document.", answer: "The main factors affecting accuracy: scan resolution (300 DPI minimum for good results — phone camera photos at lower resolution will give worse accuracy), scan straightness (skewed pages reduce accuracy significantly), and font clarity (printed text is nearly perfect; handwriting, faxed documents, and very small fonts are harder)." },
+            { question: "The OCR-ed PDF is much larger than the original scan.", answer: "The OCR text layer adds minimal size to well-encoded PDFs. If size increased dramatically, check that you're not re-encoding the images at higher quality during the OCR pass. Try running the result through Compress PDF afterwards." },
+            { question: "Some pages OCR correctly but others are blank text.", answer: "The blank-result pages are likely rotated or upside down. Use Rotate PDF first to orient all pages correctly, then re-run OCR." },
+            { question: "Numbers are being recognized as letters (e.g. '0' as 'O').", answer: "Enable numeric-mode hints if available in the OCR settings, or accept minor inaccuracies and correct them in the downstream Word/text output. This is most common on old-style printed digits or low-resolution scans." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Language support", convertify: "20+ languages", typical: "English only" },
+            { feature: "Output type", convertify: "Searchable PDF", typical: "Text file or searchable PDF" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "3 per day" },
+            { feature: "Watermark", convertify: "None", typical: "Sometimes" },
+            { feature: "Sign-up", convertify: "No", typical: "Often" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "sign-pdf": {
+        intro: [
+            "Signing a PDF electronically lets you add your signature to contracts, consent forms, and agreements without printing, signing by hand, and scanning back. Convertify's Sign PDF tool supports three signature input methods: drawing a signature with your mouse or finger, typing your name in a signature-style font, or uploading a photo of your handwritten signature.",
+            "The signatures added by Convertify are electronic signatures — legally valid for most everyday documents under e-signature laws (ESIGN in the US, eIDAS in the EU, and equivalent laws in most countries). They are not digital signatures (which use cryptographic certificates for identity verification) and are not suitable for regulated-industry transactions that require qualified electronic signatures.",
+            "Everything happens in the browser: the signature image is embedded as a PDF annotation on the pages you choose, and the file never leaves your device — important for the confidential contracts and HR letters that are the most common use case.",
+        ],
+        steps: [
+            { title: "Upload the PDF", body: "Drag or click to upload. The document renders page by page for placement." },
+            { title: "Create your signature", body: "Switch to the signature panel and draw (mouse/touchscreen), type, or upload. Adjust size and color. A drawn signature is the most natural; a typed signature in a cursive font works well for typed name-and-date fields." },
+            { title: "Place the signature", body: "Drag the signature to the exact position on the page. Resize by dragging the corner handles. Add initials or date text boxes if needed." },
+            { title: "Save signed PDF", body: "Click Save. The signed PDF downloads with your signature embedded. Send via email or upload to the requesting party." },
+        ],
+        scenarios: [
+            { title: "Signing employment contracts and offer letters", body: "HR sends a PDF offer letter requiring signature. Open in Convertify, draw your signature, place it on the signature line, save, and email back — the whole process takes under 2 minutes. Since nothing uploads, your personal information stays private." },
+            { title: "Consent forms and medical paperwork", body: "Patient consent forms received as PDF need a signature before an appointment. Sign digitally and email back the same day — no need to print, sign, scan, and upload." },
+            { title: "Vendor and client agreements", body: "Small business owners signing vendor contracts, NDAs, and service agreements can use e-signature for straightforward bilateral agreements. For high-value contracts requiring auditable signature trails, use a dedicated e-signature service (DocuSign, Adobe Sign) which provides cryptographic identity verification." },
+            { title: "Internal approvals and sign-offs", body: "Internal document approvals — purchase orders, expense forms, leave requests — often just need a visible signature for record-keeping. Electronic signature via Convertify is faster than the print-sign-scan loop without needing an enterprise e-signature subscription." },
+        ],
+        troubleshooting: [
+            { question: "Is my electronic signature legally binding?", answer: "In most countries, yes — for standard commercial agreements. The ESIGN Act (US) and eIDAS Regulation (EU) give e-signatures the same legal weight as handwritten signatures for most contracts. Exceptions: wills, property transfers, and certain regulated financial and legal documents may require wet (physical) signatures or qualified electronic signatures with identity verification." },
+            { question: "The signature placement is off when I print the signed PDF.", answer: "PDF print scaling can shift placed objects. In your print dialog, set 'Scale to fit' or 'Actual size' and confirm the page size matches the PDF's page dimensions before printing." },
+            { question: "I want to sign multiple pages with initials.", answer: "Add an initials text box or signature to the first page, then use the 'Apply to all pages' toggle, or copy and paste the initials block page by page. Multi-page signing for lengthy contracts is faster with the copy-across option." },
+            { question: "The signature looks blurry in the PDF.", answer: "If you drew the signature at small size in the drawing panel and then scaled it up on the page, quality degrades. Re-draw at larger size in the panel, or draw at the approximate final size from the start." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Signature methods", convertify: "Draw, type, upload", typical: "1–2 methods" },
+            { feature: "Cost", convertify: "Free", typical: "Subscription required" },
+            { feature: "Legal validity", convertify: "Electronic signature", typical: "Electronic signature" },
+            { feature: "Cryptographic trail", convertify: "No", typical: "Yes (DocuSign/Adobe)" },
+            { feature: "Sign-up", convertify: "No", typical: "Required" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "compare-pdf": {
+        intro: [
+            "Comparing two versions of a PDF shows you exactly what changed between drafts — which words were added, deleted, or moved — without reading both documents line-by-line. Convertify's Compare PDF tool highlights differences between two PDFs visually: additions in green, deletions in red, so you can review a 50-page contract revision in minutes rather than hours.",
+            "Document comparison is critical in legal, compliance, and content workflows where you need to verify that only agreed-upon changes were made between versions. Without a comparison tool, verifying a 'minor revision' to a contract requires reading every line of both documents — and humans routinely miss small text changes.",
+        ],
+        steps: [
+            { title: "Upload the original PDF", body: "Drop the older/base version onto the left upload zone." },
+            { title: "Upload the revised PDF", body: "Drop the newer/changed version onto the right upload zone." },
+            { title: "Compare", body: "The tool aligns pages and performs a text-level diff. Changes are highlighted inline: additions in green, deletions in red, moved text in blue." },
+            { title: "Review and export", body: "Scroll through the comparison view to review all changes. Download the annotated comparison report as a PDF to share with colleagues or keep for audit records." },
+        ],
+        scenarios: [
+            { title: "Contract redline review", body: "Legal teams reviewing a counterparty's proposed changes to a contract run a comparison between the sent version and the returned version. The diff immediately shows which clauses were altered, added, or removed — without trusting the counterparty's stated 'minor edits'." },
+            { title: "Regulatory document change verification", body: "Compliance teams submitting policy documents to regulators need to verify that only pre-approved changes appear in the final version. A comparison run catches any unauthorized last-minute edits." },
+            { title: "Academic paper revision tracking", body: "Researchers submitting journal revisions attach a comparison PDF showing reviewers exactly which parts of the manuscript changed — addressing reviewer feedback transparently without a tracked-changes Word document." },
+        ],
+        troubleshooting: [
+            { question: "The comparison shows many false positives on a reformatted document.", answer: "Text-based comparison works best when content is the same but words changed. If the document was entirely reflowed (e.g., font size changed causing different line breaks), almost every line will show as changed even if the words are identical. For reformatted documents, export the text from both PDFs and compare the text files instead." },
+            { question: "Scanned PDFs show no differences detected.", answer: "Scanned PDFs are image-only — there's no text layer to compare. Run both versions through OCR PDF first, then compare the OCR'd outputs." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Diff type", convertify: "Text + visual", typical: "Text only" },
+            { feature: "Export comparison report", convertify: "Yes (PDF)", typical: "Sometimes" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "3 per day" },
+            { feature: "Sign-up", convertify: "No", typical: "Often" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "crop-pdf": {
+        intro: [
+            "Cropping a PDF page reduces visible content to a defined rectangular area — removing scanner borders, trimming white margins, zooming in on a chart, or standardizing page dimensions across a document. Convertify's Crop PDF tool lets you drag a crop box visually over a page preview and apply it to all pages or only specific ones.",
+            "Important distinction: PDF cropping sets a 'CropBox' parameter that hides the area outside the crop rectangle. The hidden content is not deleted from the file — it's masked. This means crop boxes can be 'undone' by resetting the crop box in Acrobat. If you need to permanently remove content from page edges (e.g., remove a scanner watermark), cropping achieves this visually but not data-destructively.",
+        ],
+        steps: [
+            { title: "Upload the PDF", body: "Drop the PDF onto the upload zone. The first page renders as a preview for setting your crop area." },
+            { title: "Drag the crop rectangle", body: "Click and drag on the page preview to draw the crop box. Fine-tune by entering exact pixel or mm values in the margin inputs." },
+            { title: "Choose scope", body: "Apply the same crop to all pages, or switch to per-page mode to set different crops for different pages (useful for documents with mixed portrait/landscape)." },
+            { title: "Crop and download", body: "The cropped PDF downloads immediately. Open in any viewer to confirm the crop area looks as expected." },
+        ],
+        scenarios: [
+            { title: "Removing scanner border artifacts", body: "Flatbed scanners often capture a black or gray border where the page edge meets the glass. Crop to remove these borders for clean, professional-looking PDFs." },
+            { title: "Extracting a specific chart or table", body: "A PDF report has one key chart on page 3. Crop that page to show only the chart area, then extract page 3 with Split PDF to get a clean, chart-only one-pager for a presentation or email." },
+            { title: "Standardizing mixed-margin documents", body: "A document assembled from multiple sources has inconsistent margins — some pages have 20mm margins, others 5mm. Apply a uniform crop to all pages for a visually consistent final document." },
+        ],
+        troubleshooting: [
+            { question: "The crop looks right in the tool but wrong when I open the downloaded PDF.", answer: "Some PDF viewers (notably older versions of Adobe Reader) ignore crop boxes in certain display modes. Try in Google Chrome's built-in PDF viewer, which consistently respects the CropBox." },
+            { question: "I accidentally cropped too aggressively and cut off content.", answer: "Re-upload the original file — the previously downloaded file has the cropped view baked in, but the original content is still in the file data. You can re-set a wider crop box if needed. Or re-upload the original and set a less aggressive crop." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Visual crop tool", convertify: "Yes", typical: "Margin values only" },
+            { feature: "Per-page crop", convertify: "Yes", typical: "All pages only" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "3 per day" },
+            { feature: "Watermark", convertify: "None", typical: "Sometimes" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "edit-pdf": {
+        intro: [
+            "Editing a PDF directly — changing text, adding annotations, inserting text boxes — avoids the round-trip of converting to Word, editing, and converting back. Convertify's Edit PDF tool works on digitally-generated PDFs and lets you click directly on text to modify it, add free-text annotations anywhere on the page, insert shapes, and highlight passages.",
+            "There's an important limitation in all browser-based PDF editors: they edit the rendered view of the PDF, not the underlying text stream. This means fonts are matched as closely as possible, but if your PDF uses a custom embedded font that isn't available in the browser, the edited text will appear in a fallback font. For the most common use cases — correcting a typo, adding a note, filling in a blank field — the visual result is clean.",
+        ],
+        steps: [
+            { title: "Upload the PDF", body: "Drag or click to upload. Pages render in the editor canvas." },
+            { title: "Select editing mode", body: "Choose from: Text Edit (click text to modify), Add Text (insert new text anywhere), Highlight, Underline, Strikethrough, Add Image, or Draw Freehand." },
+            { title: "Make your edits", body: "Click on the content you want to change and type. Drag new elements to position them. Resize images and text boxes with corner handles." },
+            { title: "Save and download", body: "Click Save PDF. All edits are embedded in the downloaded file — readable in any PDF viewer." },
+        ],
+        scenarios: [
+            { title: "Correcting a typo in a finalized document", body: "A name is misspelled in a PDF report that's already been formatted and paginated. Edit PDF fixes it in place — no need to regenerate the whole document from the source file." },
+            { title: "Adding annotations for review", body: "A manager annotating a team member's draft report adds comments, highlights key sections, and inserts arrows pointing to figures that need updating. The annotated PDF is returned as the review copy." },
+            { title: "Filling in form-style PDFs without form fields", body: "Some forms are PDFs with blank lines but no actual form fields. Use the Add Text tool to type responses in the appropriate positions — faster than printing and handwriting." },
+            { title: "Adding a company logo or stamp", body: "Insert a company logo image on a document header, or add a stamp image (RECEIVED, APPROVED, PAID) on specific pages." },
+        ],
+        troubleshooting: [
+            { question: "The font doesn't match after I edit text.", answer: "Exact font matching is only possible when the original PDF's embedded font is one the browser can access. For near-perfect matching, choose the closest available font in the text toolbar. For major mismatches, add the correction as a white rectangle covering the old text, then a new text box on top in a matching font." },
+            { question: "I can't click on text to select it.", answer: "If the PDF is a scanned image rather than a digital document, there's no text layer to edit. Run OCR PDF first to add a text layer, then open the OCR'd output in the editor." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Text editing", convertify: "Yes (digital PDFs)", typical: "Yes" },
+            { feature: "Annotation tools", convertify: "Highlight, draw, text", typical: "Varies" },
+            { feature: "Image insertion", convertify: "Yes", typical: "Sometimes" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "3 per day" },
+            { feature: "Sign-up", convertify: "No", typical: "Often" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "pdf-to-pdfa": {
+        intro: [
+            "PDF/A is an ISO-standardized version of PDF designed for long-term archiving. It guarantees that a document will render identically in 100 years by embedding all fonts, color profiles, and metadata it needs — no reliance on external systems. Governments, courts, universities, and regulated industries (healthcare, finance, legal) often mandate PDF/A for records submissions.",
+            "Converting a standard PDF to PDF/A with Convertify's tool handles the most common compliance requirements: embedding any referenced fonts, attaching color profiles, and removing external content references (JavaScript, audio, video) that aren't permitted in PDF/A. The visual appearance is preserved; only archival-incompatible elements are stripped or embedded.",
+            "Common submission requirements: the European Court of Human Rights requires PDF/A-1b; the US federal courts' ECF system accepts PDF/A-1; many EU government portals require PDF/A-2a or PDF/A-3.",
+        ],
+        steps: [
+            { title: "Upload the PDF", body: "Drag or click to upload the PDF you need to convert for archival submission." },
+            { title: "Choose compliance level", body: "PDF/A-1b is the broadest compatibility choice and accepted by virtually all systems. PDF/A-2a adds better compression and transparency support. Choose based on your receiving institution's requirements." },
+            { title: "Convert and verify", body: "The converter embeds fonts, attaches sRGB color profile, removes JavaScript, and outputs a compliant PDF/A file. A compliance indicator confirms the conversion succeeded." },
+            { title: "Download", body: "The compliant PDF/A file downloads ready for submission." },
+        ],
+        scenarios: [
+            { title: "Court filings requiring PDF/A", body: "Federal courts and many state courts in the US and EU require PDF/A for electronic case filing. Convert your brief or exhibit before submission to avoid rejection from the court's document management system." },
+            { title: "Government portal submissions", body: "EU tax authorities, land registries, and licensing bodies increasingly require PDF/A. The conversion ensures your application PDF renders identically on their systems and satisfies archival mandates." },
+            { title: "Corporate records archival", body: "Finance and legal departments archiving contracts, board minutes, and compliance documents in a DMS that requires PDF/A can convert existing files before ingestion." },
+        ],
+        troubleshooting: [
+            { question: "My PDF fails PDF/A validation even after conversion.", answer: "Some PDFs have deeply embedded non-compliant elements (encrypted streams, embedded multimedia) that the converter can't fully resolve. Run the output through a PDF/A validator (VeraPDF is free and widely used) to identify exactly which compliance violations remain. For complex failures, Adobe Acrobat Pro's Preflight tool offers more surgical fix options." },
+            { question: "The PDF/A file is larger than the original.", answer: "Expected — embedding all fonts and color profiles increases file size. For 5-page contracts, the increase is minimal (10-20%). For image-heavy documents, embedding a color profile adds more. If size is an issue, compress the PDF first, then convert to PDF/A." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "PDF/A levels", convertify: "PDF/A-1b, 2a, 3b", typical: "PDF/A-1b only" },
+            { feature: "Compliance validation", convertify: "Yes", typical: "Sometimes" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "3 per day" },
+            { feature: "Sign-up", convertify: "No", typical: "Often" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "pdf-to-powerpoint": {
+        intro: [
+            "Converting a PDF back to PowerPoint is one of the most-requested 'reverse conversion' tasks — you receive a presentation as a PDF (sent as the share format) but need to edit the slides. Convertify's PDF to PowerPoint converter extracts slide content and creates an editable .pptx with each PDF page mapped to one PowerPoint slide.",
+            "Layout fidelity depends on the source PDF. Presentations that were originally PowerPoint-to-PDF (clean export, embedded fonts, vector shapes) convert back most faithfully. PDFs that were scanned or generated from non-standard sources convert with less precision — text boxes may shift and images may lose scalability.",
+        ],
+        steps: [
+            { title: "Upload the PDF", body: "Drag or click to upload. The tool detects page count and processes slide-by-slide." },
+            { title: "Convert", body: "Each PDF page becomes one .pptx slide. Text runs are placed as editable text boxes, images are embedded." },
+            { title: "Download the .pptx", body: "Open in PowerPoint or Google Slides. The structure is editable — you can rearrange elements, change fonts, and add animations." },
+        ],
+        scenarios: [
+            { title: "Editing a received presentation", body: "A client or colleague shares a deck as PDF (common for sending without embed concerns). You need to adapt it for your own use — rebranding, adding slides, or updating data. Convert to .pptx, edit, save as your version." },
+            { title: "Recovering a presentation when the original .pptx is lost", body: "The original file is gone but you have the PDF export. Convert to get an editable .pptx that you can update for a future presentation." },
+            { title: "Translating or localizing a presentation", body: "Localization teams receive presentation PDFs and need editable text to translate. Converting to .pptx puts all the text in editable boxes ready for translation." },
+        ],
+        troubleshooting: [
+            { question: "Text positioning is off in the .pptx.", answer: "PDF text positioning uses absolute coordinates; PowerPoint uses a different layout model. Some repositioning after conversion is expected for complex slide designs. Treat the output as a starting template, not a pixel-perfect match." },
+            { question: "The fonts look different in PowerPoint.", answer: "If the original PDF embedded non-standard fonts, PowerPoint substitutes available system fonts. Install the original fonts on your system or replace with a matching system font after conversion." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Output format", convertify: ".pptx", typical: ".pptx" },
+            { feature: "Editable text boxes", convertify: "Yes", typical: "Yes" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "3 per day" },
+            { feature: "Watermark", convertify: "None", typical: "Sometimes" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "redact-pdf": {
+        intro: [
+            "Redacting a PDF permanently removes sensitive information — names, addresses, account numbers, medical identifiers — from the document, leaving black bars where the content was. Proper redaction is essential for GDPR compliance, legal discovery, FOIA responses, and any situation where you need to share a document publicly after stripping private data.",
+            "Convertify's Redact PDF tool performs true content redaction: the selected text and image data is removed from the PDF data structure, not just covered with a black box. Covering text with a black rectangle — a common mistake — leaves the underlying text in the file, extractable by anyone who copies the 'blacked-out' area. True redaction deletes it.",
+            "After redacting, the tool also strips PDF metadata (document title, author, creation tool) that might contain identifiable information not visible in the rendered view.",
+        ],
+        steps: [
+            { title: "Upload the PDF", body: "Drag or click to upload. Pages render in the redaction editor." },
+            { title: "Select content to redact", body: "Click and drag to draw redaction boxes over text or images you want to remove. Selected areas show a red overlay preview. You can also use Find & Redact to highlight all instances of a specific word or number." },
+            { title: "Apply redactions", body: "Click Apply. This step is permanent — the selected content is removed from the file, not just visually covered." },
+            { title: "Download the redacted PDF", body: "The clean PDF downloads with redacted areas shown as solid black boxes and underlying content permanently removed." },
+        ],
+        scenarios: [
+            { title: "GDPR and privacy law compliance", body: "Organizations sharing internal documents externally (e.g., responding to subject access requests or sharing reports with regulators) redact all personal data that isn't relevant to the request — names, email addresses, phone numbers, employee IDs." },
+            { title: "Legal discovery document production", body: "Attorneys producing documents in litigation redact privileged information and third-party personal data before handing over discovery packages. True redaction is essential — courts have imposed sanctions for documents where covered text was recoverable." },
+            { title: "FOIA responses", body: "Government agencies releasing records under Freedom of Information requests redact personal identifiers, law enforcement information, and classified references before publication." },
+            { title: "Sharing financial documents with identifiers removed", body: "Finance teams sharing vendor invoices or bank statements with auditors or board members redact account numbers, routing numbers, and vendor addresses that aren't relevant to the specific inquiry." },
+        ],
+        troubleshooting: [
+            { question: "I can still see the text when I copy from the 'redacted' area.", answer: "You may have only covered text with an opaque box rather than truly redacting it. Undo and use the Redact tool's selection method, then click 'Apply Redactions' — this removes the content, it doesn't just overlay it." },
+            { question: "How do I redact all occurrences of a name throughout the document?", answer: "Use the Find & Redact option: type the name or number to redact, and the tool marks all instances across all pages simultaneously. One click applies them all." },
+            { question: "The redacted PDF shows white boxes instead of black.", answer: "Redaction marks are conventionally black. If you're seeing white, check that the redaction appearance setting is set to 'fill with black' rather than 'remove only'. White areas over white backgrounds are invisible but the content is still removed." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "True redaction (content deleted)", convertify: "Yes", typical: "Sometimes (vs. black box)" },
+            { feature: "Find & Redact by keyword", convertify: "Yes", typical: "Sometimes" },
+            { feature: "Metadata stripping", convertify: "Yes", typical: "Rarely" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "3 per day" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "repair-pdf": {
+        intro: [
+            "A damaged PDF — one that opens with errors, shows blank pages, or won't open at all — is usually the result of an incomplete download, file system corruption, email client truncation, or an interrupted save. Convertify's Repair PDF tool attempts to reconstruct the document's internal structure using PDF-Lib's error-tolerant parsing, recovering as much content as possible from the corrupted file.",
+            "Repair success depends on severity: minor structure errors (missing EOF markers, small cross-reference table gaps) fix completely. Severe corruption (file truncated to 20% of original size, overwritten sectors) may recover partial content — some pages but not all, or text without images. The tool always shows you how many pages were successfully recovered before download.",
+        ],
+        steps: [
+            { title: "Upload the damaged PDF", body: "Drop the corrupted file onto the upload zone. Even files that don't open normally can be uploaded." },
+            { title: "Attempt repair", body: "The parser reads as much of the file structure as it can recover, rebuilding missing cross-reference tables and patching structural gaps." },
+            { title: "Preview recovery result", body: "The tool shows how many pages were recovered and a thumbnail preview. If the result looks correct, proceed to download." },
+            { title: "Download the repaired PDF", body: "The recovered PDF downloads. For partial recoveries, some pages or images may be missing — the recovered content is complete for what was accessible." },
+        ],
+        scenarios: [
+            { title: "Incomplete email download", body: "A PDF attached to email sometimes downloads incompletely due to mail server size limits or connection drops. The resulting file is truncated and won't open. Repair PDF can often recover the pages that downloaded successfully." },
+            { title: "Recovered files from a failed drive", body: "After recovering files from a failing hard drive or corrupted USB, the PDFs may have structural corruption. Repair attempts to extract as much content as possible from the recovered bytes." },
+            { title: "PDF exported by a buggy tool", body: "Some older or poorly-coded export tools produce PDFs with malformed internal structures — they open in Acrobat but fail in strict viewers. Repair normalizes the structure so the file opens in all compliant readers." },
+        ],
+        troubleshooting: [
+            { question: "Repair recovered 0 pages from my file.", answer: "The damage is too severe for automatic recovery — the core content sections of the PDF are unreadable. Options: try a professional file recovery service that works at the binary/hex level; or check if you have a cloud auto-save version (Google Drive, Dropbox versions) from before the corruption." },
+            { question: "Some pages are blank in the repaired PDF.", answer: "Blank pages in the repaired output usually mean those page's content streams were in the damaged portion of the file. The page structure was recovered but the content data wasn't." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Recovery preview", convertify: "Yes (page count)", typical: "Download to find out" },
+            { feature: "Partial recovery", convertify: "Yes (recovers what's intact)", typical: "All or nothing" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
+            { feature: "Sign-up", convertify: "No", typical: "Sometimes" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "image-compressor": {
+        intro: [
+            "Compressing an image for web use, email, or upload portals reduces file size without degrading visible quality — done right, you lose less than you'd notice at any normal viewing distance. Convertify's Image Compressor supports JPG, PNG, WebP, and GIF, runs entirely in your browser, and lets you dial compression with a quality slider or target a specific file size.",
+            "The core tradeoff in image compression is quality vs. size. JPEG compression is lossy — every quality reduction removes some pixel data permanently. PNG compression is lossless — it rearranges pixel data more efficiently but removes nothing. For photos, JPEG at 70-85% quality is visually nearly identical to the original while being 60-80% smaller. For icons, logos, and screenshots with solid colors, PNG lossless stays sharp; convert to WebP for smaller sizes.",
+        ],
+        steps: [
+            { title: "Upload your images", body: "Drop one or multiple images (JPG, PNG, WebP, GIF) onto the upload zone. Batch mode compresses all at once." },
+            { title: "Set compression level", body: "Drag the quality slider (10-100%) or type a target KB/MB. Lower quality = smaller file. 80% is a good starting point for photos; 90-95% for product images where sharpness matters." },
+            { title: "Compress and download", body: "Compressed images download individually or as a ZIP for batch jobs. The original vs. compressed file size comparison is shown for each image." },
+        ],
+        scenarios: [
+            { title: "Web page performance optimization", body: "Unoptimized images are the most common cause of slow page load times. A 5 MB hero image compressed to 200 KB loads 25x faster and improves Core Web Vitals scores — directly affecting Google rankings for the page." },
+            { title: "Email attachments under size limits", body: "Gmail and Outlook block attachments over 25 MB. Compress multiple product photos or event photos before attaching — a folder of 20 photos goes from 60 MB to under 10 MB without visible quality loss." },
+            { title: "E-commerce product images", body: "Online stores typically need product images under 200-500 KB per image for fast loading. Compress product photos in batch before uploading to Shopify, WooCommerce, or similar platforms." },
+            { title: "Social media uploads", body: "Twitter compresses images aggressively and adds visible artifacts. Compress your images to near the platform's maximum quality threshold yourself before uploading, so you control the compression rather than the platform." },
+        ],
+        troubleshooting: [
+            { question: "The compressed image looks noticeably different from the original.", answer: "You may have used too low a quality setting. Try 75-85% for photos — the difference between 85% and 100% is virtually invisible, and file size typically drops 50-70% in that range. Only drop below 70% when file size is critically constrained." },
+            { question: "The compressed PNG is bigger than the original.", answer: "This can happen if the original PNG was already well-optimized. PNG compression is lossless — you can't make a lossless file smaller beyond a certain point. Convert the PNG to WebP or JPEG instead for a substantial size reduction." },
+            { question: "I want to compress without any quality loss.", answer: "Use 100% quality mode for JPEG (minimal loss) or lossless mode for PNG/WebP. True no-loss compression of JPEGs only strips metadata (EXIF) and redundant color table entries — the typical saving is 10-20%." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Formats supported", convertify: "JPG, PNG, WebP, GIF", typical: "JPG only" },
+            { feature: "Batch compression", convertify: "Yes (ZIP download)", typical: "One at a time" },
+            { feature: "Target size mode", convertify: "Yes", typical: "Quality slider only" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "20 images/day" },
+            { feature: "Sign-up", convertify: "No", typical: "Often" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "resize-image": {
+        intro: [
+            "Resizing an image — changing its pixel dimensions — is one of the most frequent tasks in digital work: preparing a photo for a specific upload slot, generating a thumbnail, standardizing product image dimensions, or reducing a 20 MP camera photo to a web-friendly size. Convertify's Resize Image tool supports pixel-exact dimensions, percentage scaling, and preset sizes, with an aspect-ratio lock to prevent stretching.",
+            "Resizing down (reducing dimensions) is lossless quality-wise — you're sampling fewer pixels from a larger image. Resizing up (enlarging) uses interpolation to create new pixels, which softens the image. For significant enlargements (more than 2x), dedicated upscaling tools with AI super-resolution produce sharper results.",
+        ],
+        steps: [
+            { title: "Upload the image", body: "Drop a JPG, PNG, WebP, or GIF onto the upload zone." },
+            { title: "Set new dimensions", body: "Enter exact pixel width and height, a percentage of the original (e.g. 50%), or pick a common preset (1920×1080, 1200×630, 800×600). Enable 'Lock aspect ratio' to resize proportionally." },
+            { title: "Download the resized image", body: "The resized image downloads in the same format as the input. Use the quality slider to control output file size for JPEG outputs." },
+        ],
+        scenarios: [
+            { title: "Social media image sizing", body: "Different platforms have different optimal image sizes: Twitter headers (1500×500), LinkedIn banners (1584×396), Instagram posts (1080×1080), Facebook covers (820×312). Resize to exact specifications before uploading for the best display quality." },
+            { title: "Website hero and product images", body: "Camera photos are often 4000×3000 pixels (12 MP). A web page needs images at 1920×1080 max. Resize before uploading — a 3 MB photo resizes to under 400 KB at web dimensions, dramatically improving page load time." },
+            { title: "Government and application portal uploads", body: "Passport photos and ID images for government portals often have strict pixel dimension requirements (e.g., 600×600 pixels, exactly). Resize to the specification before upload to avoid rejection." },
+            { title: "Email signature graphics", body: "Company logos in email signatures should be 100-200px wide for Retina screens and under 50 KB. Resize oversized logo files before adding to your email client." },
+        ],
+        troubleshooting: [
+            { question: "The image looks stretched or squished.", answer: "You resized with a fixed width and height without locking the aspect ratio, and the dimensions don't match the original's proportions. Enable 'Lock aspect ratio' and set only one dimension — the other calculates automatically." },
+            { question: "The resized image is blurry.", answer: "Upscaling (making a small image bigger) always produces some blur because the tool must interpolate new pixels. The only solution is to start with a higher-resolution source. Downscaling never causes blurriness." },
+            { question: "I need to resize a batch of 50 product images.", answer: "Upload all images at once. Convertify's batch mode applies the same target dimensions to all images and bundles the results in a ZIP for one-click download." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Batch resize", convertify: "Yes", typical: "One at a time" },
+            { feature: "Aspect ratio lock", convertify: "Yes", typical: "Yes" },
+            { feature: "Preset sizes", convertify: "Social + standard presets", typical: "Custom only" },
+            { feature: "Formats", convertify: "JPG, PNG, WebP, GIF", typical: "JPG, PNG" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "heic-to-jpg": {
+        intro: [
+            "HEIC is Apple's default photo format since iOS 11 — it's 50% smaller than JPEG at equivalent quality, which is why iPhones use it. The problem: Android phones, Windows PCs, and most web platforms can't open HEIC files without additional software. Converting HEIC to JPG makes iPhone photos universally compatible.",
+            "Convertify's HEIC to JPG converter runs entirely in your browser using a WASM-powered HEIC decoder, so your private iPhone photos never leave your device. Batch conversion handles entire album exports — drop a folder of 200 HEIC files and download them all as JPGs in one ZIP.",
+        ],
+        steps: [
+            { title: "Upload HEIC files", body: "Drag one or many .heic or .heif files onto the upload zone. iPhone photo exports and AirDrop transfers are the most common source." },
+            { title: "Set quality", body: "Choose output JPEG quality (85% is a good default — barely distinguishable from original HEIC quality, at a predictable file size)." },
+            { title: "Convert and download", body: "Single files download as .jpg directly; batches download as a ZIP containing one .jpg per original .heic file." },
+        ],
+        scenarios: [
+            { title: "Sharing iPhone photos with Android users", body: "WhatsApp and email on Android can struggle with HEIC attachments. Convert to JPG before sharing for guaranteed compatibility — the recipient's phone opens them without issues." },
+            { title: "Uploading to web platforms", body: "Most website CMSes, e-commerce platforms, and online galleries require JPG or PNG. iPhone photos shot in HEIC need conversion before upload. Batch-convert an entire shoot before uploading to Shopify, Squarespace, or WordPress." },
+            { title: "Windows PC compatibility", body: "Windows 10 and 11 can open HEIC with the paid codec extension, but many enterprise PCs don't have it. Convert HEIC to JPG before transferring files to a shared drive or emailing to Windows colleagues." },
+            { title: "Social media and image tools", body: "Many social media upload tools and graphic design platforms (Canva, Adobe Express) don't accept HEIC. Convert first, then upload to any platform without compatibility issues." },
+        ],
+        troubleshooting: [
+            { question: "The JPG looks slightly different in color from the original HEIC.", answer: "HEIC uses the Display P3 wide color gamut on modern iPhones; JPG typically uses sRGB. The conversion maps P3 colors to sRGB, which can slightly mute vivid colors. This is a standard limitation of JPEG and sRGB — it's not a converter error." },
+            { question: "EXIF data (location, camera settings) is missing after conversion.", answer: "Convertify preserves EXIF metadata by default. If metadata is missing, check your photo upload source — some iPhone export methods strip EXIF before the file reaches the converter." },
+            { question: "The file I'm uploading isn't recognized as HEIC.", answer: "Some HEIC files are named .heif (the container format name). Both extensions are supported. If your file is named something else, check the original iPhone Photos export settings — ensure you're exporting in 'Original Format' mode." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Batch conversion", convertify: "Yes (ZIP download)", typical: "One at a time" },
+            { feature: "EXIF preservation", convertify: "Yes", typical: "Sometimes" },
+            { feature: "Quality control", convertify: "Yes (slider)", typical: "Fixed quality" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "5–10 files/day" },
+            { feature: "Sign-up", convertify: "No", typical: "Often" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "jpg-to-png": {
+        intro: [
+            "Converting JPG to PNG gives you a lossless image — no further JPEG compression is applied, so the image quality doesn't degrade with repeated saves. The PNG is larger than the JPG (because PNG is lossless), but it's the right format when you need to edit and re-save an image multiple times, need a transparent background, or need the image to serve as a source for design work.",
+            "Practical note: converting JPG to PNG doesn't recover quality lost in the original JPEG compression. If a JPEG was saved at 60% quality, the PNG version is a lossless copy of that 60%-quality data — not a restoration to full quality. The benefit is that no additional quality loss occurs in future saves.",
+        ],
+        steps: [
+            { title: "Upload the JPG", body: "Drop one or many JPEG files onto the upload zone." },
+            { title: "Convert", body: "Each JPG is re-encoded as PNG with lossless compression. No quality reduction occurs." },
+            { title: "Download", body: "Single files download directly; batches download as a ZIP." },
+        ],
+        scenarios: [
+            { title: "Preparing images for design editing", body: "Graphic designers who receive JPEG assets and need to edit them repeatedly (crop, overlay, adjust) convert to PNG to avoid accumulating compression artifacts with each save cycle." },
+            { title: "Images that need transparency", body: "JPEGs can't store transparent pixels. Convert to PNG as the intermediate format, then use an image editor to remove the background and add a transparent alpha channel." },
+            { title: "Screenshots for documentation", body: "Screenshots saved as JPEG can show compression artifacts around text and icons. Converting to PNG produces a sharper, cleaner image for software documentation, tutorials, and UI mockups." },
+        ],
+        troubleshooting: [
+            { question: "The PNG file is 5× larger than the JPG.", answer: "Expected — PNG is lossless. A JPEG photo at typical settings stores pixel data much more compactly than a lossless PNG of the same content. If size matters more than losslessness, use the original JPEG. Use PNG specifically when lossless or transparency is required." },
+            { question: "The converted PNG quality still looks the same as the JPG.", answer: "Correct — converting JPG→PNG doesn't restore JPEG compression artifacts. The PNG is a lossless copy of the existing JPEG data, which already has some compression applied. The benefit is no further degradation, not restoration." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Output quality", convertify: "Lossless PNG", typical: "Lossless PNG" },
+            { feature: "Batch conversion", convertify: "Yes", typical: "One at a time" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
+            { feature: "Sign-up", convertify: "No", typical: "Sometimes" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "png-to-jpg": {
+        intro: [
+            "Converting PNG to JPG reduces file size significantly — typically 60-80% smaller — by using JPEG's lossy compression. This is the right move for photographs and complex images where the visual difference between PNG and JPEG is undetectable in normal use, and file size matters (web performance, email attachments, upload portals with size limits).",
+            "Caveat: PNG images with transparency lose the alpha channel in JPG conversion. Transparent areas become a solid color (white by default). If your PNG has a transparent background, decide what background color should replace transparency before converting.",
+        ],
+        steps: [
+            { title: "Upload the PNG", body: "Drop one or many PNG files onto the upload zone." },
+            { title: "Set JPEG quality", body: "80% quality is the recommended default — visually nearly identical to the PNG at 60-80% of the file size. Lower for smaller files; higher (95%) for near-lossless output." },
+            { title: "Choose transparency background", body: "For PNGs with transparent areas, select a background fill color (white is default, transparent areas in screenshots often need white)." },
+            { title: "Convert and download", body: "Single files or batch ZIP download. The original PNG is unchanged." },
+        ],
+        scenarios: [
+            { title: "Web performance: replacing large PNGs with JPGs", body: "A product screenshot saved as PNG is often 2-5 MB. The same image as JPEG at 80% quality is 200-500 KB — a 5-10x reduction that dramatically improves page load time and Core Web Vitals scores." },
+            { title: "Email and messaging size limits", body: "PNGs of screenshots, diagrams, and photos attached to emails can hit size limits quickly. Convert to JPEG before attaching — a 4 MB PNG becomes under 500 KB at 80% quality." },
+            { title: "Upload portal restrictions", body: "Some systems (job portals, e-commerce platforms, form uploads) only accept JPEG or have strict size limits. Convert your PNG to JPEG before uploading." },
+        ],
+        troubleshooting: [
+            { question: "Transparent areas turned white (or another color) after conversion.", answer: "JPEG doesn't support transparency. Set the background fill color to whatever suits your use case — white for documents and screenshots, black for dark-themed images, or the specific background color of the page where the image will be used." },
+            { question: "The converted JPEG shows blocky artifacts.", answer: "You used too low a quality setting. Increase to 75-85% — below 70% introduces visible JPEG blocking artifacts, especially around text and sharp edges." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Quality control", convertify: "Yes (10–100% slider)", typical: "Sometimes" },
+            { feature: "Transparency handling", convertify: "Choose fill color", typical: "White only" },
+            { feature: "Batch conversion", convertify: "Yes", typical: "One at a time" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "webp-converter": {
+        intro: [
+            "WebP is Google's modern image format that delivers 25-35% smaller files than JPEG at equivalent quality, and 26% smaller than PNG for lossless images. It's supported by all modern browsers (Chrome, Firefox, Safari, Edge) and is increasingly required or preferred for web performance. Convertify's WebP Converter converts JPG, PNG, and GIF to WebP, and WebP back to JPG or PNG.",
+            "Why you might convert FROM WebP: WebP has limited support in older software (Photoshop pre-22, older Windows image viewers, some CMS platforms). If you receive WebP images you can't open or upload, converting to JPG or PNG restores universal compatibility.",
+        ],
+        steps: [
+            { title: "Upload the source image", body: "Drop JPG, PNG, GIF, or WebP files onto the upload zone. Batch conversion handles multiple files at once." },
+            { title: "Choose target format", body: "Select WebP for output (converting from other formats), or JPEG/PNG (converting from WebP). For WebP output, choose between lossy (smaller, like JPEG) and lossless (like PNG, but smaller than PNG)." },
+            { title: "Set quality", body: "For lossy WebP, 80% quality produces visually excellent results at typical web viewing sizes. Lossless WebP is quality-level 0-100 (100 = best compression, not quality, unlike JPEG)." },
+            { title: "Convert and download", body: "Results download individually or as a batch ZIP." },
+        ],
+        scenarios: [
+            { title: "Web performance optimization", body: "Serving WebP instead of JPEG or PNG for website images reduces total page weight by 25-35% — a meaningful improvement to Core Web Vitals LCP (Largest Contentful Paint) scores, which affect Google search rankings." },
+            { title: "Next.js and modern web frameworks", body: "Next.js Image component automatically serves WebP when supported. If you're manually managing images for a static site or CMS, convert to WebP before upload to take advantage of smaller file sizes." },
+            { title: "Converting received WebP to PNG for editing", body: "Design work often requires PNG source files. When you download a WebP asset and need to edit it in Photoshop (older version) or Figma, convert to PNG first." },
+        ],
+        troubleshooting: [
+            { question: "The converted WebP won't display on my website.", answer: "Check your server's MIME type configuration — WebP requires 'image/webp'. Also verify your website's CDN and caching layer serves the correct Content-Type header. Modern browsers (Chrome, Firefox, Safari 14+) all support WebP natively." },
+            { question: "WebP lossless is larger than the original PNG.", answer: "WebP lossless is generally 26% smaller than equivalent PNG. If your PNG was already highly optimized (e.g., a 1-bit or 2-color image), WebP's overhead can occasionally exceed the original. For those edge cases, keep the original PNG." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Bidirectional conversion", convertify: "To and from WebP", typical: "To WebP only" },
+            { feature: "Lossy + lossless WebP", convertify: "Both", typical: "Lossy only" },
+            { feature: "Batch", convertify: "Yes", typical: "One at a time" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "bmp-to-jpg": {
+        intro: [
+            "BMP (Bitmap) is Windows' native uncompressed image format — used by older software, Windows screenshot tools (Pre-Win10), and some industrial and medical equipment. BMP files are enormous (a 1920×1080 BMP is around 6 MB uncompressed). Converting BMP to JPEG compresses them to a fraction of that size with no visible quality difference at normal viewing sizes.",
+            "Convertify's BMP to JPG converter handles single and batch conversions in the browser, with a quality slider for balancing size and fidelity. No upload required — useful when the BMP contains proprietary CAD or medical image data.",
+        ],
+        steps: [
+            { title: "Upload BMP files", body: "Drop one or many .bmp files onto the upload zone." },
+            { title: "Set JPEG quality", body: "80-85% is the recommended default for photos. For images with text or sharp edges, 90-95% preserves clarity better." },
+            { title: "Convert and download", body: "JPGs download individually or as a ZIP for batches. File size reduction is typically 90-97% vs the original BMP." },
+        ],
+        scenarios: [
+            { title: "Windows Paint and legacy screenshot exports", body: "Older Windows apps often save screenshots as BMP by default. Convert to JPG before sharing by email or uploading — a 5 MB BMP becomes a 100-200 KB JPEG." },
+            { title: "Industrial and medical equipment outputs", body: "Some specialized hardware (machine vision cameras, older medical imaging stations) exports images as BMP. Convert to JPG for compatibility with standard review and reporting software." },
+            { title: "Reducing archive storage", body: "A folder of legacy BMP files takes dramatically more disk space than the equivalent JPEGs. Batch-convert the archive to reduce storage by 90%+ for archival copies that don't need to be edited." },
+        ],
+        troubleshooting: [
+            { question: "The BMP has colors that look wrong after JPEG conversion.", answer: "Very unusual for standard 24-bit BMPs. If you have a 1-bit, 4-bit, or 8-bit indexed color BMP, the color palette may not convert perfectly. Convert to PNG first (which handles indexed color well), then PNG to JPG if size reduction is needed." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Batch conversion", convertify: "Yes", typical: "One at a time" },
+            { feature: "Quality control", convertify: "Yes (slider)", typical: "Fixed quality" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
+            { feature: "Sign-up", convertify: "No", typical: "Sometimes" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "gif-to-png": {
+        intro: [
+            "Converting a GIF to PNG makes sense when you want a static, high-quality version of a single frame — for use in design projects, documentation, or platforms that don't support GIF animation. PNG supports a larger color palette (16 million colors vs GIF's 256), no dithering artifacts, and lossless compression, producing a noticeably cleaner static image.",
+            "Important: PNG does not support animation. Converting an animated GIF to PNG produces only the first frame (or a chosen frame). If you need a modern animated format, convert GIF to WebP (which supports animation) or MP4 instead.",
+        ],
+        steps: [
+            { title: "Upload the GIF", body: "Drop one or many .gif files onto the upload zone." },
+            { title: "Choose frame (for animated GIFs)", body: "For animated GIFs, select which frame to extract as the PNG — frame 1 is the default. Use the frame slider to preview and pick the desired frame." },
+            { title: "Convert and download", body: "PNG files download. For batches, a ZIP is provided." },
+        ],
+        scenarios: [
+            { title: "Extracting a still frame from an animated GIF", body: "Animated GIFs used in tutorials or UI demos often have a key frame worth using as a static thumbnail or documentation screenshot. Extract that frame as a clean PNG." },
+            { title: "Logo and icon conversion", body: "Older web assets were often distributed as GIF logos (with 256-color limitations). Converting to PNG preserves the image but removes color banding artifacts from GIF's limited palette." },
+            { title: "Design asset preparation", body: "Design tools work better with PNG than GIF. Converting a GIF graphic to PNG before bringing it into Figma, Photoshop, or Canva gives you a cleaner source with full color depth." },
+        ],
+        troubleshooting: [
+            { question: "I want to keep the animation — not just one frame.", answer: "GIF to PNG is for static frames. To keep animation, use GIF to WebP (which supports animation natively) or use an online GIF-to-MP4 converter." },
+            { question: "The PNG shows a white background where the GIF had transparency.", answer: "GIF supports 1-bit transparency (a color is either fully transparent or fully opaque). PNG preserves this transparency correctly. If you see white, your downstream tool may not be rendering the transparent PNG correctly — check your viewer or application's transparency support." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Frame selection", convertify: "Yes", typical: "First frame only" },
+            { feature: "Color depth output", convertify: "24-bit PNG", typical: "8-bit PNG" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "svg-to-png": {
+        intro: [
+            "SVG is a vector format — infinitely scalable with no quality loss — but many platforms, email clients, and image processing tools require raster images. Converting SVG to PNG rasterizes the vector at a specific size and resolution, producing a pixel-perfect PNG ready for use anywhere. Convertify's SVG to PNG converter lets you specify exact output dimensions and DPI before rasterizing.",
+            "The critical decision in SVG to PNG conversion is output size: since SVG is resolution-independent, you choose the pixel dimensions of the PNG. For a logo used on social media, 1200×1200 is a safe resolution. For print (300 DPI on an A4 page), you'd need approximately 2480×3508 pixels.",
+        ],
+        steps: [
+            { title: "Upload the SVG", body: "Drop one or many .svg files onto the upload zone." },
+            { title: "Set output dimensions", body: "Enter the target width and height in pixels, or choose a DPI (72 for screen, 150 for high-DPI web, 300 for print). Aspect ratio is preserved from the SVG's viewBox." },
+            { title: "Convert and download", body: "The SVG is rasterized to PNG at your chosen size. Batch conversions download as a ZIP." },
+        ],
+        scenarios: [
+            { title: "Logo exports for different use cases", body: "A brand logo as SVG needs PNG versions for email signatures (200×50px), social media profiles (400×400px), and print-ready artwork (high-DPI). Convert once per size spec and save each variant." },
+            { title: "Icon pack export for developers", body: "UI icon sets delivered as SVG need PNG fallbacks for platforms that don't support SVG (older iOS, certain email clients). Generate 1×, 2×, and 3× PNG versions from the same SVG source." },
+            { title: "Email template graphics", body: "Email clients (especially Outlook) have poor or no SVG support. Convert email graphics from SVG to PNG before adding to HTML email templates." },
+            { title: "Social media uploads", body: "Most social networks don't accept SVG. Convert your brand assets, event graphics, or profile picture to PNG at the platform's recommended dimensions." },
+        ],
+        troubleshooting: [
+            { question: "Fonts in my SVG are rendering wrong or falling back.", answer: "SVGs that reference external fonts (via @import or href) rely on those fonts being available in the conversion environment. Embed fonts as base64 data URIs in the SVG file, or convert text to outlines (paths) in your design tool before exporting the SVG." },
+            { question: "The PNG is blurry at the size I need.", answer: "You set a small output size. Since you're converting from a vector, re-run with a larger pixel dimension — SVG scales to any size without quality loss. Double the dimensions for double the resolution." },
+            { question: "Some SVG elements aren't rendering.", answer: "Complex SVG features like filters, clip paths, and CSS animations may render differently or not at all in the browser-based rasterizer. Simplify the SVG in your editor (remove complex filters, convert animated elements to static) for best results." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Custom dimensions", convertify: "Yes (pixel + DPI)", typical: "Fixed presets" },
+            { feature: "Batch conversion", convertify: "Yes", typical: "One at a time" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
+            { feature: "Sign-up", convertify: "No", typical: "Sometimes" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "qr-code-generator": {
+        intro: [
+            "QR codes encode text, URLs, contact information, Wi-Fi credentials, and other data into a scannable 2D matrix. Convertify's QR Code Generator creates high-resolution QR codes that download as PNG or SVG, with customization options for size, error correction level, foreground color, and background color — without any sign-up or API key.",
+            "Error correction in QR codes is a critical setting often overlooked: it determines how much of the QR code can be damaged or obscured while still scanning correctly. Higher error correction (Level H) makes the code more damage-tolerant but larger. For codes printed on paper, Level M is standard. For codes that will be partially covered by a logo, use Level H.",
+        ],
+        steps: [
+            { title: "Enter the content", body: "Type or paste a URL, phone number, email address, plain text, or any string up to ~4,000 characters. For URLs, include the full address including https://." },
+            { title: "Customize (optional)", body: "Set size (pixels for PNG, or scalable for SVG), foreground color, background color, and error correction level (L/M/Q/H). A live preview updates as you type." },
+            { title: "Download", body: "Download as PNG (for printing, presentations, websites) or SVG (for scalable, print-quality use in InDesign, Illustrator, or Figma)." },
+        ],
+        scenarios: [
+            { title: "Restaurant and bar menus", body: "A QR code linking to a PDF menu or online ordering system goes on table cards and window decals. Download as SVG for crisp printing at any size, colored to match your brand." },
+            { title: "Business cards and marketing materials", body: "Encode a contact vCard (name, phone, email, company) so scanning the QR code adds the person to contacts automatically. Or link to a LinkedIn profile or website — a single scan is faster than manual typing." },
+            { title: "Wi-Fi guest access", body: "Encode Wi-Fi credentials (SSID, password, encryption type) as a QR code posted in a guest room or office lobby. Guests scan and connect without typing a complex WPA2 password." },
+            { title: "Event tickets and access control", body: "Generate unique QR codes per ticket (each encoding a unique ticket ID) for event entry systems. Download in batch (URL + ticket number appended) and print on tickets." },
+        ],
+        troubleshooting: [
+            { question: "My QR code isn't scanning.", answer: "Common causes: (1) Too high a data density — try shortening the URL with a link shortener (bit.ly, t.ly). (2) Error correction too low combined with printing imperfections — switch to Level M or H. (3) Too small — QR codes need to be at least 2cm × 2cm for reliable scanning. (4) Low contrast — ensure high contrast between foreground and background (black on white is most reliable)." },
+            { question: "I want to put a logo in the center of the QR code.", answer: "Set error correction to Level H (30% of modules can be damaged and the code still scans). Place the logo over the center at no more than 30% of the code's area. The error correction compensates for the obscured modules." },
+            { question: "The QR code PNG looks pixelated when printed.", answer: "PNG is resolution-dependent. Use the SVG download format for print materials — it scales to any size without pixelation. In Photoshop/GIMP, use the PNG at 300+ DPI (choose 1200×1200px minimum for business card use)." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Nothing uploaded", typical: "URL required" },
+            { feature: "Output format", convertify: "PNG + SVG", typical: "PNG only" },
+            { feature: "Error correction level", convertify: "L, M, Q, H", typical: "M only" },
+            { feature: "Color customization", convertify: "Yes (any color)", typical: "Black/white only" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
+            { feature: "Sign-up", convertify: "No", typical: "Often" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "csv-to-json": {
+        intro: [
+            "Converting CSV to JSON is a fundamental data transformation in modern development — REST APIs return JSON, databases ingest JSON, and most JavaScript code expects JSON objects rather than flat CSV rows. Convertify's CSV to JSON converter handles files and pasted text, auto-detects headers, and supports both flat JSON arrays and nested object structures.",
+            "CSV is simple (rows of comma-separated values) but limited — it has no native type system, no nesting, and no metadata. JSON preserves types (numbers stay numbers, not text), supports nesting, and is the lingua franca of web APIs. The conversion involves: mapping the first row as keys, inferring types (1 → number, 'true' → boolean, rest → string), and wrapping rows as JSON objects in an array.",
+        ],
+        steps: [
+            { title: "Upload or paste CSV", body: "Drop a .csv file, or paste CSV text directly into the text area. Auto-detection handles comma, semicolon, and tab delimiters." },
+            { title: "Configure output", body: "Choose flat array of objects (most common), or grouped/nested output if the CSV has hierarchical data. Toggle type inference on/off (on = numbers parsed as numbers; off = everything is a string)." },
+            { title: "Convert and download", body: "The JSON output previews in the panel. Download as .json or copy to clipboard for direct use." },
+        ],
+        scenarios: [
+            { title: "API data preparation", body: "You export a product catalog from an e-commerce platform as CSV. The frontend API expects JSON objects. Convert, verify the structure, then POST the JSON payload to your API endpoint." },
+            { title: "Database seeding", body: "Developers seeding a new database from exported legacy data convert the CSV export to JSON for ingestion by MongoDB, Firestore, or a REST bulk-insert endpoint." },
+            { title: "Data analysis with JavaScript", body: "A data analyst working in Node.js or the browser console imports the CSV as JSON to use JavaScript's Array methods (filter, map, reduce) for quick analysis without SQL or pandas." },
+            { title: "Configuration file generation", body: "System configurations distributed as spreadsheets (rows of setting key-value pairs) convert to JSON config files for application deployment." },
+        ],
+        troubleshooting: [
+            { question: "Special characters in my CSV are corrupting the JSON output.", answer: "The most common cause is file encoding. CSVs from Excel on Windows are often saved as Windows-1252 or ISO-8859-1, not UTF-8. Re-save the CSV as UTF-8 in Excel (Save As → CSV UTF-8) before converting." },
+            { question: "Numbers in my CSV are being treated as strings in the JSON.", answer: "Enable 'Type inference' in the converter settings. With type inference on, values that parse as integers or floats are output as JSON numbers, not quoted strings." },
+            { question: "My CSV has quoted fields with commas inside — these are splitting incorrectly.", answer: "RFC 4180-compliant CSV quotes fields containing delimiters. If your file follows this standard correctly, the converter handles it. If you're pasting text and the quotes are missing, the parser sees the comma inside the value as a new column." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Delimiter detection", convertify: "Auto (comma, tab, semicolon)", typical: "Comma only" },
+            { feature: "Type inference", convertify: "Yes (toggle)", typical: "Strings only" },
+            { feature: "Nested output", convertify: "Yes", typical: "Flat only" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "json-to-csv": {
+        intro: [
+            "Converting JSON to CSV flattens structured API data into a spreadsheet-friendly format — readable in Excel, importable into databases, and processable by data tools that expect tabular input. Convertify's JSON to CSV converter handles arrays of objects, auto-extracts all keys as column headers, and handles missing values gracefully.",
+            "JSON's nested structure is the main challenge in JSON-to-CSV conversion: a JSON object can have nested objects and arrays, but CSV is flat (rows and columns only). Convertify offers a flattening strategy that uses dot notation for nested keys (e.g., address.city becomes its own column) — the most useful approach for API response data.",
+        ],
+        steps: [
+            { title: "Upload or paste JSON", body: "Drop a .json file or paste the JSON text. The tool validates the JSON structure and shows a preview." },
+            { title: "Configure column settings", body: "Choose flat mode (top-level keys only) or flattened nested mode (dot-notation keys for nested objects). Select which keys to include if you only need specific fields." },
+            { title: "Convert and download", body: "The CSV previews in the panel. Download as .csv (UTF-8 with BOM for Excel compatibility) or open directly in Google Sheets." },
+        ],
+        scenarios: [
+            { title: "Exporting API response data to Excel", body: "You call a REST API, get a JSON array of orders or users, and need to analyze it in Excel. Convert JSON to CSV, open in Excel, and pivot, filter, and chart immediately." },
+            { title: "Database export for reporting", body: "Backend developers exporting MongoDB documents or Firestore records as JSON need CSV format for business intelligence tools and reporting dashboards that don't accept JSON input." },
+            { title: "Data migration between systems", body: "Migrating records from a JSON-based system (modern SaaS) to a legacy system that accepts CSV imports. Convert, verify row counts, import." },
+        ],
+        troubleshooting: [
+            { question: "Nested arrays produce unexpected column output.", answer: "Arrays inside JSON objects (e.g., a 'tags' array) don't map cleanly to CSV columns. The converter joins array values with a pipe separator (value1|value2) in a single column. For complex nested arrays, pre-process the JSON to flatten arrays before converting." },
+            { question: "Excel opens the CSV but shows garbled text for special characters.", answer: "Download the CSV with BOM (Byte Order Mark) selected — this is the UTF-8 with BOM option, which signals to Excel to read the file as UTF-8 rather than Windows-1252." },
+            { question: "Some records have different keys — missing values show as blank.", answer: "This is correct behavior. If JSON objects have inconsistent keys (some have 'phone', others don't), the CSV column 'phone' exists for all rows but is empty for records where the key was absent." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Nested key flattening", convertify: "Yes (dot notation)", typical: "Top level only" },
+            { feature: "BOM for Excel", convertify: "Yes", typical: "Sometimes" },
+            { feature: "Select specific keys", convertify: "Yes", typical: "All keys only" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "xml-to-json": {
+        intro: [
+            "Converting XML to JSON is a common step in API modernization, data pipeline migration, and interoperability work — REST/JSON has largely superseded XML/SOAP, and many legacy data systems still export XML that needs to be consumed by modern JavaScript or Python code. Convertify's XML to JSON converter handles namespaces, attributes, and nested elements, with configurable attribute handling.",
+            "The structural mismatch between XML and JSON is the core challenge: XML attributes (e.g., <item id='123'>) and XML elements (e.g., <name>Widget</name>) need to be mapped to JSON properties in a consistent, predictable way. Convertify uses the widely-adopted convention of prefixing attribute names with '@' and element text with '#text' for unambiguous representation.",
+        ],
+        steps: [
+            { title: "Upload or paste XML", body: "Drop an .xml file or paste the XML content. The tool validates the XML structure first." },
+            { title: "Configure attribute handling", body: "Choose how attributes are represented: '@' prefix convention (default, most compatible), merged with elements (simpler output for simple XMLs), or ignored (attributes dropped)." },
+            { title: "Convert and download", body: "The JSON output previews in the panel. Download as .json or copy to clipboard." },
+        ],
+        scenarios: [
+            { title: "Consuming legacy SOAP API responses", body: "A legacy enterprise system returns SOAP/XML responses. Convert the XML to JSON so the data can be parsed and consumed by modern JavaScript or Python code without an XML parser library." },
+            { title: "Data migration from XML-based databases", body: "Older content management systems, ERP platforms, and configuration tools export XML. Convert to JSON for ingestion into modern NoSQL databases (MongoDB, DynamoDB) or REST API endpoints." },
+            { title: "RSS/Atom feed processing", body: "RSS feeds are XML. Convert to JSON for building custom feed readers, aggregators, or newsletter tools in JavaScript without maintaining an XML parsing dependency." },
+        ],
+        troubleshooting: [
+            { question: "The output JSON has too much nesting — simple elements are wrapped in objects.", answer: "This is the natural result of XML's verbose structure. Post-process the JSON with a transformation (like jq or lodash transforms) to flatten to the structure you need. Or use the 'compact' output mode which reduces nesting for simple elements." },
+            { question: "Namespaces in the XML are appearing in property names (e.g., 'ns0:element').", answer: "XML namespaces are preserved in property names by default for correctness. If namespaces aren't important for your use case, enable 'Strip namespaces' in the converter settings to remove the prefix." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Attribute handling options", convertify: "Yes (prefix, merge, ignore)", typical: "Fixed convention" },
+            { feature: "Namespace handling", convertify: "Preserve or strip", typical: "Preserve only" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
+            { feature: "Sign-up", convertify: "No", typical: "Sometimes" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "base64": {
+        intro: [
+            "Base64 encoding converts binary data (files, images, arbitrary bytes) into ASCII text — a sequence of letters, numbers, +, and / characters. This is essential for embedding binary data in text-based formats: JSON API payloads, HTML data URIs, email attachments (MIME), configuration files, and JWTs. Convertify's Base64 tool encodes and decodes text and files, with URL-safe Base64 support for tokens and query parameters.",
+            "Base64 is not encryption — it's encoding. Base64-encoded data is trivially reversible by anyone who knows it's Base64. Never use it as a security measure. Use it when you need to safely embed binary data in a context that only accepts text (the name comes from each 6-bit group being represented as one of 64 printable characters).",
+        ],
+        steps: [
+            { title: "Choose mode: Encode or Decode", body: "Encode converts text or file binary to a Base64 string. Decode reverses Base64 back to the original content." },
+            { title: "Provide input", body: "Paste text in the text area, or upload a file (image, PDF, any binary) for encoding. For decoding, paste the Base64 string." },
+            { title: "Copy or download result", body: "Encoded output is a text string — copy to clipboard for use in code, config files, or API calls. Decoded output downloads as the original file type." },
+        ],
+        scenarios: [
+            { title: "Embedding images in HTML or CSS", body: "Use a base64-encoded data URI to embed small images directly in HTML/CSS without a separate file request: `<img src='data:image/png;base64,iVBORw0K...' />`. Best for small icons and thumbnails under 10 KB." },
+            { title: "API authentication headers", body: "HTTP Basic Auth encodes credentials as Base64: `Authorization: Basic base64(username:password)`. Developers testing API endpoints manually encode their credentials here before adding to the header." },
+            { title: "JWT debugging", body: "JSON Web Tokens (JWTs) have three Base64URL-encoded sections separated by dots. Decode the payload section to inspect the claims without needing a dedicated JWT debugger." },
+            { title: "Email MIME attachments", body: "MIME email encodes binary attachments as Base64 for transmission over text-based SMTP. Developers building email systems use Base64 encoding when constructing raw MIME messages." },
+        ],
+        troubleshooting: [
+            { question: "My decoded output looks garbled.", answer: "Base64 decodes binary data to its raw bytes. If the original was a binary file (image, PDF), the decoded output is binary — download it as a file rather than trying to read it as text. Use the 'Download as file' option." },
+            { question: "I need URL-safe Base64 (no + or / characters).", answer: "Standard Base64 uses + and / which break in URL query parameters. Enable 'URL-safe mode' to use - and _ instead (RFC 4648 Base64URL). JWT and OAuth tokens use URL-safe Base64." },
+            { question: "The encoded string has line breaks — is that correct?", answer: "MIME Base64 traditionally wraps every 76 characters with a line break (per RFC 2045). For use in JSON, HTML attributes, or code strings, use the 'No line breaks' output mode for a single continuous string." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Text only" },
+            { feature: "File encoding", convertify: "Yes (binary files)", typical: "Text strings only" },
+            { feature: "URL-safe mode", convertify: "Yes", typical: "Sometimes" },
+            { feature: "Line break control", convertify: "Yes", typical: "Fixed wrapping" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "tiff-to-pdf": {
+        intro: [
+            "TIFF (Tagged Image File Format) is the standard format for scanned documents, fax transmissions, medical imaging, and professional photography archiving. Converting TIFF to PDF is the standard workflow for preparing scanned documents for distribution — PDF is universally readable while TIFF requires specialized viewers on most systems. Convertify's TIFF to PDF converter handles single and multi-page TIFFs, including the multi-image TIFF format used by document scanners.",
+            "Multi-page TIFF files — where one .tif file contains an entire scanned document across multiple pages — are fully supported. Each TIFF page becomes one PDF page. Single-page TIFFs also work; you can batch-upload multiple files to combine them into one multi-page PDF.",
+        ],
+        steps: [
+            { title: "Upload TIFF files", body: "Drop one or many .tif or .tiff files. Multi-page TIFFs are automatically expanded to individual pages. Multiple single-page TIFFs can be combined in the order they're uploaded." },
+            { title: "Set page order (for batches)", body: "Drag thumbnails to set the final PDF page order. For a multi-page TIFF, the existing page order is preserved." },
+            { title: "Convert and download", body: "The PDF is created with each TIFF image embedded at its original resolution, ready for distribution, archival, or submission." },
+        ],
+        scenarios: [
+            { title: "Scanning workflows in legal and medical offices", body: "Document scanners (Fujitsu, Kodak Alaris, Canon DR series) often output multi-page TIFF files. Converting to PDF makes the scanned document compatible with case management systems, EMRs, and email distribution." },
+            { title: "Fax-to-email conversion", body: "Older fax-to-email gateways deliver faxes as TIFF attachments. Convert to PDF for easier reading, filing, and forwarding within a document management system." },
+            { title: "Archiving professional photography", body: "Photographers archiving client shoots in TIFF for maximum quality can convert contact sheets and proof sets to PDF for client delivery — PDFs are easier for clients to view and navigate than folders of TIFFs." },
+        ],
+        troubleshooting: [
+            { question: "My multi-page TIFF shows only the first page in the PDF.", answer: "Ensure you're uploading the full multi-page TIFF file (not a single-page export). If your TIFF viewer shows multiple pages but the converter only gets one, the file may actually be a single-image TIFF with a thumbnail sidebar — check file properties to confirm the page count." },
+            { question: "The PDF file is very large after converting from TIFF.", answer: "TIFF files are often high-resolution (300-600 DPI for scanner output), and embedding them in PDF preserves that resolution. Run the result through Compress PDF if the file needs to be smaller for email or portal upload." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Multi-page TIFF support", convertify: "Yes", typical: "Sometimes" },
+            { feature: "Batch TIFF to single PDF", convertify: "Yes", typical: "One TIFF at a time" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
+            { feature: "Sign-up", convertify: "No", typical: "Sometimes" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
+
+    "autocad-pdf-editor": {
+        intro: [
+            "PDF files exported from AutoCAD, SolidWorks, Revit, and similar CAD tools contain technical drawings — floor plans, engineering schematics, mechanical designs. Editing these PDFs requires a tool that handles vector lines, precise annotations, and technical dimensions without re-rasterizing the drawing. Convertify's AutoCAD PDF Editor lets you add text annotations, revision clouds, stamps, and dimension notes to PDF drawings without losing vector quality.",
+            "The most common use case is adding revision notes to a drawing PDF received from a client or subcontractor — marking up changes, adding approval stamps, and returning the annotated PDF for reference. Unlike a general PDF editor, this tool preserves the vector nature of the underlying drawing so annotations print at full engineering quality.",
+        ],
+        steps: [
+            { title: "Upload the AutoCAD-exported PDF", body: "Drop the PDF drawing file. Large format drawings (A1, A0, tabloid) are supported." },
+            { title: "Add annotations and markup", body: "Use the annotation toolbar: add text notes, draw revision clouds (common in engineering markup), insert dimension labels, add approval or rejection stamps." },
+            { title: "Save the annotated PDF", body: "The marked-up drawing downloads with all annotations embedded. Share with your team for review or file as the record of a revision." },
+        ],
+        scenarios: [
+            { title: "Engineering drawing review and redlines", body: "Structural engineers, MEP consultants, and project managers add redline comments to PDF drawings received from other disciplines. Mark corrections, highlight clashes, and return the annotated PDF to the drawing team." },
+            { title: "Shop drawing approvals", body: "Contractors submit shop drawings for review. Reviewers add Approved, Revise and Resubmit, or Rejected stamps with review notes, then return the PDF without needing AutoCAD installed." },
+            { title: "As-built documentation", body: "Site supervisors noting field changes to drawings add handwritten-style annotations (using the freehand draw tool) directly on the PDF, creating an as-built record of what changed during construction." },
+        ],
+        troubleshooting: [
+            { question: "The drawing looks pixelated after I annotate and save.", answer: "If the original PDF was a rasterized export (low DPI) from AutoCAD rather than a vector export, it was already low-quality — the editor didn't change it. Request a vector PDF export from the drafter at high DPI (Plot → PDF, ensure 'High Quality Print' is selected in AutoCAD)." },
+            { question: "My PDF has multiple sheets — can I annotate each sheet separately?", answer: "Yes — the editor handles multi-page PDFs. Navigate between pages using the page selector and annotate each sheet independently. All annotations save in the final PDF across all pages." },
+        ],
+        comparison: [
+            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
+            { feature: "Vector quality preserved", convertify: "Yes", typical: "Sometimes rasterizes" },
+            { feature: "Revision clouds", convertify: "Yes", typical: "Not always" },
+            { feature: "Large format drawings", convertify: "Yes", typical: "A4/Letter only" },
+            { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
+        ],
+        lastUpdated: "2026-06-01",
+    },
 }
