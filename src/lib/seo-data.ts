@@ -3,7 +3,7 @@
 
 export const toolSeoData = {
     "merge-pdf": {
-        title: "Merge PDF Free Online — Combine PDF Files No Limits | Convertify",
+        title: "Merge PDF Free Online — Combine PDF Files No Limits",
         description: "Combine multiple PDF files into one document instantly. Free online PDF merger with no limits, no watermarks, no sign-up required. 100% private — files never leave your device.",
         keywords: [
             "convertify pdf merger", "merge pdf", "combine pdf files", "merge pdf free", "merge pdf online",
@@ -42,7 +42,7 @@ export const toolSeoData = {
         ]
     },
     "split-pdf": {
-        title: "Split PDF Free Online — Extract & Separate Pages | Convertify",
+        title: "Split PDF Free Online — Extract & Separate Pages",
         description: "Convertify PDF Splitter — split PDF files and extract specific pages online. Separate one or multiple pages instantly on Windows, Mac, or Mobile. No download needed, 100% free and private.",
         keywords: [
             "convertify pdf splitter", "split pdf", "extract pages from pdf", "separate pdf pages", "cut pdf pages", "pdf splitter online",
@@ -81,7 +81,7 @@ export const toolSeoData = {
         ]
     },
     "compress-pdf": {
-        title: "Compress PDF Free Online — Reduce PDF to 100KB for Forms & Email | Convertify",
+        title: "Compress PDF Free Online — Reduce PDF to 100KB for Forms & Email",
         description: "Official Convertify PDF compressor. Reduce PDF to 100KB or 200KB in seconds for government forms, visa applications & passport scans. No watermarks, no limits, 100% private.",
         keywords: [
             "convertify pdf compressor", "compress pdf", "compress pdf to 100kb", "compress pdf to 200kb", "reduce pdf size", "shrink pdf",
@@ -122,7 +122,7 @@ export const toolSeoData = {
         ]
     },
     "jpg-to-pdf": {
-        title: "JPG to PDF Free Online — Combine Photos into One PDF | Convertify",
+        title: "JPG to PDF Free Online — Combine Photos into One PDF",
         description: "Convertify JPG to PDF converter — combine unlimited photos into one PDF free online. Arrange order, adjust page size. No sign-up, no watermarks, no download needed. Works on Windows, Mac & mobile.",
         keywords: [
             "convertify jpg to pdf", "jpg to pdf", "convert jpg to pdf", "image to pdf", "photos to pdf", "jpeg to pdf",
@@ -167,7 +167,7 @@ export const toolSeoData = {
         ]
     },
     "word-to-pdf": {
-        title: "Word to PDF Free Online — DOCX to PDF, No Watermark | Convertify",
+        title: "Word to PDF Free Online — DOCX to PDF, No Watermark",
         description: "Convertify Word to PDF converter — free, no Microsoft Office needed. Convert DOCX to PDF without watermark. Preserves fonts, layout & formatting perfectly. Best for resumes, CVs & legal docs. No sign-up, 100% private.",
         keywords: [
             "word to pdf", "docx to pdf", "convert word to pdf", "doc to pdf", "word to pdf converter",
@@ -179,7 +179,7 @@ export const toolSeoData = {
             "legal document to pdf", "contract to pdf", "word to pdf no sign up", "word to pdf no watermark",
             "convertify word to pdf", 
         ],
-        h1: "Word to PDF Free - No Microsoft Office | Convertify",
+        h1: "Word to PDF Free - No Microsoft Office",
         faqs: [
             {
                 question: "Can I convert Word to PDF without Microsoft Office?",
@@ -209,7 +209,7 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-jpg": {
-        title: "PDF to JPG Converter Free Online — Extract Pages as HD Images | Convertify",
+        title: "PDF to JPG Converter Free Online — Extract Pages as HD Images",
         description: "Convert PDF to JPG free online — extract pages as high-resolution images (up to 300 DPI). Crystal-clear output for social media, presentations & archiving. 100% private, files never leave your browser.",
         keywords: [
             "pdf to images converter online", "pdf to jpg", "pdf to jpeg", "convert pdf to image", "extract images from pdf", "save pdf as picture",
@@ -296,7 +296,7 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-png": {
-        title: "PDF to PNG - High-Res Transparent Page Extraction | Convertify",
+        title: "PDF to PNG - High-Res Transparent Page Extraction",
         description: "Convert PDF to crystal-clear PNG images with alpha-transparency support. Extract pages at 300 DPI for professional design and social media use.",
         keywords: [
             "pdf to png", "convert pdf to transparent png", "extract pdf as hq png", "pdf page to png 300 dpi",
@@ -325,7 +325,7 @@ export const toolSeoData = {
         ]
     },
     "text-to-pdf": {
-        title: "Text to PDF - Professional Document Generation | Convertify",
+        title: "Text to PDF - Professional Document Generation",
         description: "Convert TXT and raw text files to polished PDF documents. Customize fonts, margins, and page sizes. Ideal for logs, code, and simple manuscripts. Secure and free.",
         keywords: [
             "text to pdf", "convert txt to pdf", "make pdf from text", "professional text to pdf online free",
@@ -354,7 +354,7 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-text": {
-        title: "PDF to Text - Structured Content Extraction & OCR | Convertify",
+        title: "PDF to Text - Structured Content Extraction & OCR",
         description: "Convert PDF to clean, structured text with 100% accuracy. Our logical flow detection handles columns and tables without garbling characters. Security guaranteed.",
         keywords: [
             "pdf to text", "extract text from pdf", "convert pdf to txt", "pdf text extractor", "ocr pdf text",
@@ -389,7 +389,7 @@ export const toolSeoData = {
         ]
     },
     "powerpoint-to-pdf": {
-        title: "PowerPoint to PDF - Convert PPT/PPTX to PDF Free | Convertify",
+        title: "PowerPoint to PDF - Convert PPT/PPTX to PDF Free",
         description: "Convert PowerPoint (PPT/PPTX) to PDF online while preserving high-resolution graphics and layout. Professional slides-to-PDF conversion, secure and free.",
         keywords: [
             "powerpoint to pdf", "ppt to pdf", "pptx to pdf", "convert powerpoint to pdf", "save ppt as pdf",
@@ -419,7 +419,7 @@ export const toolSeoData = {
     },
 
     "pdf-to-word": {
-        title: "PDF to Word Free Online — Editable DOCX, No Sign-Up | Convertify",
+        title: "PDF to Word Free Online — Editable DOCX, No Sign-Up",
         description: "Official Convertify PDF to Word converter. Convert PDF to Word (DOCX) while keeping exact layout. Scanned PDF to Word OCR support. Secure, private, and free.",
         keywords: [
             "convertify pdf to word", "pdf to word", "pdf to docx", "convert pdf to word", "editable pdf to word", "pdf to word converter free",
@@ -451,7 +451,7 @@ export const toolSeoData = {
 
 
     "add-page-numbers": {
-        title: "Add Page Numbers to PDF - Bates Numbering & Formatting | Convertify",
+        title: "Add Page Numbers to PDF - Bates Numbering & Formatting",
         description: "Add sequential page numbers or Bates numbering to PDFs. Customize position, font, and starting page. Skip cover pages and tables of contents easily.",
         keywords: [
             "add page numbers to pdf", "page numbering pdf", "number pdf pages", "pdf page numbers free online",
@@ -485,7 +485,7 @@ export const toolSeoData = {
         ]
     },
     "compare-pdf": {
-        title: "Compare PDF Documents - Side-by-Side Semantic Diff | Convertify",
+        title: "Compare PDF Documents - Side-by-Side Semantic Diff",
         description: "Compare two PDF files and find every change in text, images, and layout. Clear side-by-side highlighting with an AI summary of changes. 100% private.",
         keywords: [
             "compare pdf", "pdf diff", "compare two pdfs", "find changes in pdf", "pdf comparison tool online",
@@ -518,7 +518,7 @@ export const toolSeoData = {
         ]
     },
     "crop-pdf": {
-        title: "Crop PDF - Secure Data-Level Content Removal | Convertify",
+        title: "Crop PDF - Secure Data-Level Content Removal",
         description: "Crop PDF pages precisely and securely. Our tool doesn't just hide margins—it removes the underlying data outside the crop box for total privacy and safety.",
         keywords: [
             "crop pdf", "trim pdf", "cut pdf pages", "crop pdf online free", "remove pdf margins", "trim pdf borders",
@@ -551,7 +551,7 @@ export const toolSeoData = {
         ]
     },
     "edit-pdf": {
-        title: "Edit PDF Free Online — No Download, No Sign-Up | Convertify",
+        title: "Edit PDF Free Online — No Download, No Sign-Up",
         description: "Convertify PDF Editor — the best free PDF editor for annotations and form filling. Add text, images, and shapes, then 'Flatten' your edits. No sign-up, no watermarks, no download needed.",
         keywords: [
             "convertify pdf editor", "edit pdf", "pdf editor online", "add text to pdf", "annotate pdf", "edit pdf online free", "pdf editor free no sign up",
@@ -585,7 +585,7 @@ export const toolSeoData = {
         ]
     },
     "ocr-pdf": {
-        title: "OCR PDF Online - 99.8% Text Recognition Accuracy | Convertify",
+        title: "OCR PDF Online - 99.8% Text Recognition Accuracy",
         description: "Convert scanned PDFs to searchable and editable text with high-accuracy OCR. Preserves complex layouts, tables, and formatting perfectly. Multi-language support.",
         keywords: [
             "ocr pdf", "pdf to text ocr", "scanned pdf to text", "extract text from scanned pdf online free", "ocr pdf free online",
@@ -619,7 +619,7 @@ export const toolSeoData = {
         ]
     },
     "organize-pdf": {
-        title: "Organize PDF Pages - Visual Grid Layout Manager | Convertify",
+        title: "Organize PDF Pages - Visual Grid Layout Manager",
         description: "Rearrange, delete, and sort PDF pages with ease. Our visual grid layout makes organizing 100+ page documents simple. Drag-and-drop, fast, and free.",
         keywords: [
             "organize pdf", "reorder pdf pages", "delete pdf pages", "move pdf pages", "remove pages from pdf",
@@ -652,7 +652,7 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-excel": {
-        title: "PDF to Excel Free Online — Convert PDF Tables to XLSX | Convertify",
+        title: "PDF to Excel Free Online — Convert PDF Tables to XLSX",
         description: "Convertify PDF to Excel converter — convert PDF to XLSX with 99%+ accuracy for bank statements and invoices. Extract data into clean tables. No download, no sign-up, 100% free.",
         keywords: [
             "convertify pdf to excel", "pdf to excel", "pdf to xlsx", "convert pdf to excel", "extract table from pdf", "pdf to excel converter free",
@@ -682,7 +682,7 @@ export const toolSeoData = {
         ]
     },
     "excel-to-pdf": {
-        title: "Excel to PDF Converter Free — XLS & XLSX to PDF Online | Convertify",
+        title: "Excel to PDF Converter Free — XLS & XLSX to PDF Online",
         description: "Convert Excel to PDF free online — XLS and XLSX files supported. Preserves charts, formulas & formatting. No Excel required, works on Windows, Mac & mobile. 100% private.",
         keywords: [
             "xls to pdf", "xlsx to pdf", "excel to pdf", "convert excel to pdf", "excel to pdf converter",
@@ -727,7 +727,7 @@ export const toolSeoData = {
     },
 
     "pdf-to-pdfa": {
-        title: "PDF to PDF/A - ISO-Compliant Archival Format | Convertify",
+        title: "PDF to PDF/A - ISO-Compliant Archival Format",
         description: "Convert PDFs to ISO-standardized PDF/A for long-term preservation. Ensures cross-platform compatibility and metadata integrity for decades. Secure and free.",
         keywords: [
             "pdf to pdf/a", "pdf archive format", "convert to pdfa", "iso 19005 compliant pdf", "long term pdf preservation",
@@ -756,7 +756,7 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-powerpoint": {
-        title: "Convert PDF to PowerPoint - Fully Editable Slides | Convertify",
+        title: "Convert PDF to PowerPoint - Fully Editable Slides",
         description: "Convert PDF to PowerPoint (PPTX) with editable text and images. Our engine identifies slide objects, allowing you to modify content directly in PowerPoint or Google Slides.",
         keywords: [
             "pdf to powerpoint", "convert pdf to pptx", "pdf to slides", "editable pdf to ppt converter online free",
@@ -785,7 +785,7 @@ export const toolSeoData = {
         ]
     },
     "redact-pdf": {
-        title: "Redact PDF - Permanent Data Sanitization & Blackout | Convertify",
+        title: "Redact PDF - Permanent Data Sanitization & Blackout",
         description: "Permanently remove sensitive information from PDFs. Our tool strips underlying data and metadata, ensuring redacted content is unrecoverable. 100% secure.",
         keywords: [
             "redact pdf", "blackout text pdf", "hide pdf info", "secure pdf redaction online", "permanently remove text from pdf",
@@ -818,7 +818,7 @@ export const toolSeoData = {
         ]
     },
     "repair-pdf": {
-        title: "Repair PDF - Reconstruct Corrupt & Damaged Files | Convertify",
+        title: "Repair PDF - Reconstruct Corrupt & Damaged Files",
         description: "Recover content from damaged or corrupted PDF files. Our deep-scan engine reconstructs headers, cross-reference tables (XRefs), and stream objects to fix errors instantly.",
         keywords: [
             "repair pdf", "fix corrupt pdf", "recover pdf", "repair corrupted pdf file online free", "fix damaged pdf",
@@ -851,7 +851,7 @@ export const toolSeoData = {
         ]
     },
     "sign-pdf": {
-        title: "Sign PDF Free Online — Add E-Signature, No Download | Convertify",
+        title: "Sign PDF Free Online — Add E-Signature, No Download",
         description: "Convertify Sign PDF — sign contracts and agreements with legally valid e-signatures. Draw or type your signature and 'Flatten' the file. No download needed, 100% private and free.",
         keywords: [
             "convertify sign pdf", "sign pdf", "e-sign pdf", "digital signature", "sign pdf online free", "electronic signature pdf", "add signature to pdf",
@@ -885,7 +885,7 @@ export const toolSeoData = {
         ]
     },
     "rotate-pdf": {
-        title: "Rotate PDF Free Online — Fix Page Orientation & Save | Convertify",
+        title: "Rotate PDF Free Online — Fix Page Orientation & Save",
         description: "Convertify Rotate PDF — rotate PDF pages 90°, 180°, or 270°. Fix sideways or upside-down scanned documents instantly. Free, no watermarks, no download needed.",
         keywords: ["convertify rotate pdf", "rotate pdf", "turn pdf pages", "rotate pdf 90 degrees", "flip pdf", "rotate scanned document", "pdf page orientation", "rotate pdf online free", "rotate pdf free no download"],
         h1: "Convertify Rotate PDF - Fix Page Orientation Free",
@@ -902,7 +902,7 @@ export const toolSeoData = {
         ]
     },
     "protect-pdf": {
-        title: "Protect PDF Free — Password & AES-256 Encryption | Convertify",
+        title: "Protect PDF Free — Password & AES-256 Encryption",
         description: "Convertify Protect PDF — secure your PDF with military-grade AES-256 encryption. Client-side protection, your password never touches a server. No download needed, 100% private and free.",
         keywords: [
             "convertify protect pdf", "password protect pdf", "encrypt pdf", "secure pdf", "lock pdf", "pdf password", "protect pdf online free",
@@ -936,7 +936,7 @@ export const toolSeoData = {
         ]
     },
     "unlock-pdf": {
-        title: "Unlock PDF Free Online — Remove Password & Restrictions | Convertify",
+        title: "Unlock PDF Free Online — Remove Password & Restrictions",
         description: "Convertify Unlock PDF — remove printing, copying, and editing restrictions instantly. Regain access to permission-locked documents. No download needed, 100% secure and free.",
         keywords: [
             "convertify unlock pdf", "unlock pdf", "remove pdf password", "pdf password remover", "unprotect pdf", "remove password from pdf without acrobat",
@@ -970,7 +970,7 @@ export const toolSeoData = {
         ]
     },
     "watermark-pdf": {
-        title: "Watermark PDF Online - Unremovable Permanent Stamps | Convertify",
+        title: "Watermark PDF Online - Unremovable Permanent Stamps",
         description: "Add text or image watermarks to your PDF. Control opacity and position, then 'Inject' the watermark to make it permanent and unremovable. Free and secure.",
         keywords: [
             "watermark pdf", "add watermark to pdf", "pdf watermark online", "stamp pdf", "pdf branding",
@@ -1003,7 +1003,7 @@ export const toolSeoData = {
         ]
     },
     "html-to-pdf": {
-        title: "HTML to PDF - High-Fidelity Web Page Preservation | Convertify",
+        title: "HTML to PDF - High-Fidelity Web Page Preservation",
         description: "Convert HTML files and web pages to professional PDF documents. Preserves complex CSS layouts, media queries, and clickable hyperlinks perfectly. Secure and free.",
         keywords: [
             "html to pdf", "convert html to pdf", "web page to pdf", "save webpage as pdf", "webpage to pdf converter",
@@ -1032,7 +1032,7 @@ export const toolSeoData = {
         ]
     },
     "delete-pdf-pages": {
-        title: "Delete PDF Pages - Quick & Secure Page Remover | Convertify",
+        title: "Delete PDF Pages - Quick & Secure Page Remover",
         description: "Remove unwanted pages from your PDF online. Our secure tool purges page data to reduce file size and maintain privacy. No sign-up, no watermarks.",
         keywords: [
             "delete pdf pages", "remove pages from pdf", "pdf page remover", "cut pdf pages online free",
@@ -1061,7 +1061,7 @@ export const toolSeoData = {
         ]
     },
     "reorder-pdf": {
-        title: "Reorder PDF Pages - Easy Drag-and-Drop Organizer | Convertify",
+        title: "Reorder PDF Pages - Easy Drag-and-Drop Organizer",
         description: "Rearrange PDF pages into any order instantly. Our intelligent reordering updates internal bookmarks and links, keeping your document navigation perfect. Free and secure.",
         keywords: [
             "reorder pdf pages", "rearrange pdf pages", "change pdf page order", "pdf page sorter online free",
@@ -1086,7 +1086,7 @@ export const toolSeoData = {
         ]
     },
     "svg-to-png": {
-        title: "SVG to PNG Free Online — High-Quality Vector Export | Convertify",
+        title: "SVG to PNG Free Online — High-Quality Vector Export",
         description: "Convert SVG vector files to PNG images with custom resolution. Preserve transparency, set exact dimensions, and export crisp raster images. Free, private, no upload needed.",
         keywords: [
             "svg to png", "convert svg to png", "svg to png converter", "svg to png online free",
@@ -1117,7 +1117,7 @@ export const toolSeoData = {
         ]
     },
     "bmp-to-jpg": {
-        title: "BMP to JPG Free Online — Convert & Shrink Bitmaps | Convertify",
+        title: "BMP to JPG Free Online — Convert & Shrink Bitmaps",
         description: "Convert BMP bitmap files to compressed JPG images instantly. Reduce file size by up to 95% with adjustable quality. Free, no sign-up, works in your browser.",
         keywords: [
             "bmp to jpg", "convert bmp to jpg", "bmp to jpeg converter", "bmp to jpg online free",
@@ -1152,7 +1152,7 @@ export const toolSeoData = {
         ]
     },
     "gif-to-png": {
-        title: "GIF to PNG Free Online — Convert & Extract Frames | Convertify",
+        title: "GIF to PNG Free Online — Convert & Extract Frames",
         description: "Convert GIF images to PNG format or extract individual frames from animated GIFs. Preserve transparency and get lossless quality. Free, private, no upload required.",
         keywords: [
             "gif to png", "convert gif to png", "gif to png converter online", "gif to png free",
@@ -1183,7 +1183,7 @@ export const toolSeoData = {
         ]
     },
     "tiff-to-pdf": {
-        title: "TIFF to PDF Free Online — Multi-Page Scans to PDF | Convertify",
+        title: "TIFF to PDF Free Online — Multi-Page Scans to PDF",
         description: "Convert single or multi-page TIFF files to PDF documents. Preserve original quality, combine multiple TIFFs into one PDF. Free, private, no software installation needed.",
         keywords: [
             "tiff to pdf", "convert tiff to pdf", "tiff to pdf converter", "tiff to pdf online free",
@@ -1218,7 +1218,7 @@ export const toolSeoData = {
         ]
     },
     "csv-to-json": {
-        title: "CSV to JSON Free Online — Instant Converter for Devs | Convertify",
+        title: "CSV to JSON Free Online — Instant Converter for Devs",
         description: "Convert CSV spreadsheet data to clean JSON format instantly. Auto-detects headers, supports nested structures, and handles large files. Free, private, no upload required.",
         keywords: [
             "csv to json", "convert csv to json", "csv to json converter", "csv to json online free",
@@ -1253,7 +1253,7 @@ export const toolSeoData = {
         ]
     },
     "json-to-csv": {
-        title: "JSON to CSV Free Online — Export to Excel & Sheets | Convertify",
+        title: "JSON to CSV Free Online — Export to Excel & Sheets",
         description: "Convert JSON data to CSV spreadsheet format instantly. Flatten nested objects, auto-detect arrays, and export clean tabular data. Free, private, no sign-up needed.",
         keywords: [
             "json to csv", "convert json to csv", "json to csv converter", "json to csv online free",
@@ -1284,7 +1284,7 @@ export const toolSeoData = {
         ]
     },
     "xml-to-json": {
-        title: "XML to JSON Free Online — Accurate API Data Converter | Convertify",
+        title: "XML to JSON Free Online — Accurate API Data Converter",
         description: "Convert XML documents to clean JSON format with accurate structure preservation. Handles attributes, namespaces, and nested elements. Free, private, browser-based.",
         keywords: [
             "xml to json", "convert xml to json", "xml to json converter", "xml to json online free",
@@ -1319,7 +1319,7 @@ export const toolSeoData = {
         ]
     },
     "markdown-to-pdf": {
-        title: "Markdown to PDF Free Online — README & Docs to PDF | Convertify",
+        title: "Markdown to PDF Free Online — README & Docs to PDF",
         description: "Convert Markdown files to professionally styled PDF documents. Supports GitHub-flavored Markdown, code highlighting, tables, and custom themes. Free and private.",
         keywords: [
             "markdown to pdf", "convert markdown to pdf", "markdown to pdf converter", "md to pdf online free",
@@ -1354,7 +1354,7 @@ export const toolSeoData = {
         ]
     },
     "base64": {
-        title: "Base64 Encode & Decode Free Online — Image & Text | Convertify",
+        title: "Base64 Encode & Decode Free Online — Image & Text",
         description: "Encode text or files to Base64, or decode Base64 strings back to original content. Supports text, images, and binary files. Free, instant, fully private.",
         keywords: [
             "base64 encoder", "base64 decoder", "base64 encode online", "base64 decode online",
@@ -1388,7 +1388,7 @@ export const toolSeoData = {
         ]
     },
     "qr-code-generator": {
-        title: "QR Code Generator Free — Custom Colors & Logo | Convertify",
+        title: "QR Code Generator Free — Custom Colors & Logo",
         description: "Generate QR codes for URLs, text, Wi-Fi, vCards, and more. Customize colors, add logos, set error correction, and download as PNG or SVG. Free, no sign-up required.",
         keywords: [
             "qr code generator", "create qr code", "qr code maker free", "qr code generator online",
