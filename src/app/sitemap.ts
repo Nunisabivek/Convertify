@@ -27,6 +27,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         'html-to-pdf', 'markdown-to-pdf',
         'tiff-to-pdf',
         'autocad-pdf-editor',
+        'compare-pdf', 'crop-pdf', 'edit-pdf', 'ocr-pdf',
+        'pdf-to-pdfa', 'redact-pdf', 'repair-pdf', 'sign-pdf',
     ]
 
     const secondaryTools = [
@@ -50,11 +52,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Use a fixed date instead of new Date() — Google distrusts sitemaps
     // where every page claims to be freshly modified. Update this when the
-    // page content actually changes meaningfully. Bumped on 2026-05-19 after
-    // the indexability/sitemap-consistency fix so Google re-crawls the tool
-    // pages that were stuck "Crawled - currently not indexed" from crawls
-    // that predate the deep-content rollout.
-    const lastUpdated = '2026-06-01'
+    // page content actually changes meaningfully. Bumped on 2026-06-13 after
+    // adding all missing tools and enabling indexing for guide pages.
+    const lastUpdated = '2026-06-13'
 
     return [
         {

@@ -1,4 +1,4 @@
-﻿import { Metadata } from "next"
+import { Metadata } from "next"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import { ComingSoonTool } from "@/components/tools/coming-soon-tool"
 import { FAQSchema } from "@/components/seo/faq-schema"
@@ -19,7 +19,6 @@ export const metadata: Metadata = {
     title: seoData.title,
     description: seoData.description,
     keywords: seoData.keywords,
-    robots: { index: false, follow: false },
     alternates: {
         canonical: `https://convertify.work/${toolName}`,
     },

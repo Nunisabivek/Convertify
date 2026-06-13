@@ -168,6 +168,16 @@ export default function RootLayout({
           });
         `}
       </Script>
+      {/* Google AdSense */}
+      {process.env.NEXT_PUBLIC_ADSENSE_CLIENT && (
+        <Script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT}`}
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+          id="google-adsense"
+        />
+      )}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-slate-50`}
       >

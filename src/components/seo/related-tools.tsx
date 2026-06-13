@@ -24,6 +24,13 @@ import {
     Smartphone,
     Globe,
     Scaling,
+    WandSparkles,
+    Crop,
+    LockOpen,
+    FileMinus2,
+    FileCheck,
+    Grid3x3,
+    Hash,
     LucideIcon
 } from "lucide-react"
 
@@ -42,6 +49,9 @@ const allTools: Tool[] = [
     { title: "Compress PDF", href: "/compress-pdf", icon: Minimize2, color: "bg-green-100 text-green-600", category: "organize" },
     { title: "Rotate PDF", href: "/rotate-pdf", icon: RotateCw, color: "bg-pink-100 text-pink-600", category: "organize" },
     { title: "OCR PDF", href: "/ocr-pdf", icon: ScanLine, color: "bg-teal-100 text-teal-600", category: "organize" },
+    { title: "Delete PDF Pages", href: "/delete-pdf-pages", icon: FileMinus2, color: "bg-red-100 text-red-600", category: "organize" },
+    { title: "Reorder PDF", href: "/reorder-pdf", icon: Grid3x3, color: "bg-orange-100 text-orange-600", category: "organize" },
+    { title: "Organize PDF", href: "/organize-pdf", icon: Grid3x3, color: "bg-violet-100 text-violet-600", category: "organize" },
     // Convert from PDF
     { title: "PDF to Word", href: "/pdf-to-word", icon: FileText, color: "bg-blue-100 text-blue-600", category: "convert-from" },
     { title: "PDF to JPG", href: "/pdf-to-jpg", icon: FileImage, color: "bg-purple-100 text-purple-600", category: "convert-from" },
@@ -57,6 +67,7 @@ const allTools: Tool[] = [
     { title: "PowerPoint to PDF", href: "/powerpoint-to-pdf", icon: Presentation, color: "bg-amber-100 text-amber-600", category: "convert-to" },
     { title: "HTML to PDF", href: "/html-to-pdf", icon: Code, color: "bg-rose-100 text-rose-600", category: "convert-to" },
     { title: "Markdown to PDF", href: "/markdown-to-pdf", icon: FileText, color: "bg-violet-100 text-violet-600", category: "convert-to" },
+    { title: "TIFF to PDF", href: "/tiff-to-pdf", icon: FileImage, color: "bg-indigo-100 text-indigo-600", category: "convert-to" },
     // Image tools
     { title: "HEIC to JPG", href: "/heic-to-jpg", icon: Smartphone, color: "bg-blue-100 text-blue-600", category: "image" },
     { title: "JPG to PNG", href: "/jpg-to-png", icon: ImageIcon, color: "bg-purple-100 text-purple-600", category: "image" },
@@ -65,13 +76,22 @@ const allTools: Tool[] = [
     { title: "Image Compressor", href: "/image-compressor", icon: Minimize2, color: "bg-green-100 text-green-600", category: "image" },
     { title: "Resize Image", href: "/resize-image", icon: Scaling, color: "bg-orange-100 text-orange-600", category: "image" },
     { title: "SVG to PNG", href: "/svg-to-png", icon: FileImage, color: "bg-indigo-100 text-indigo-600", category: "image" },
+    { title: "BMP to JPG", href: "/bmp-to-jpg", icon: ImageIcon, color: "bg-pink-100 text-pink-600", category: "image" },
+    { title: "GIF to PNG", href: "/gif-to-png", icon: ImageIcon, color: "bg-rose-100 text-rose-600", category: "image" },
     // Edit PDF
+    { title: "Edit PDF", href: "/edit-pdf", icon: FileText, color: "bg-purple-100 text-purple-600", category: "edit" },
     { title: "Sign PDF", href: "/sign-pdf", icon: Signature, color: "bg-cyan-100 text-cyan-600", category: "edit" },
     { title: "Protect PDF", href: "/protect-pdf", icon: Lock, color: "bg-slate-100 text-slate-600", category: "edit" },
-    { title: "Unlock PDF", href: "/unlock-pdf", icon: Unlock, color: "bg-lime-100 text-lime-600", category: "edit" },
+    { title: "Unlock PDF", href: "/unlock-pdf", icon: LockOpen, color: "bg-lime-100 text-lime-600", category: "edit" },
     { title: "Watermark PDF", href: "/watermark-pdf", icon: Droplet, color: "bg-blue-100 text-blue-600", category: "edit" },
+    { title: "Add Page Numbers", href: "/add-page-numbers", icon: Hash, color: "bg-fuchsia-100 text-fuchsia-600", category: "edit" },
+    { title: "Crop PDF", href: "/crop-pdf", icon: Crop, color: "bg-lime-100 text-lime-600", category: "edit" },
+    { title: "Redact PDF", href: "/redact-pdf", icon: FileMinus2, color: "bg-yellow-100 text-yellow-600", category: "edit" },
     // Advanced
     { title: "Compare PDF", href: "/compare-pdf", icon: FileSearch, color: "bg-cyan-100 text-cyan-600", category: "advanced" },
+    { title: "Repair PDF", href: "/repair-pdf", icon: WandSparkles, color: "bg-amber-100 text-amber-600", category: "advanced" },
+    { title: "PDF to PDF/A", href: "/pdf-to-pdfa", icon: FileCheck, color: "bg-emerald-100 text-emerald-600", category: "advanced" },
+    { title: "AutoCAD PDF Editor", href: "/autocad-pdf-editor", icon: FileCode, color: "bg-blue-100 text-blue-600", category: "advanced" },
     // Developer tools
     { title: "CSV to JSON", href: "/csv-to-json", icon: FileJson, color: "bg-emerald-100 text-emerald-600", category: "developer" },
     { title: "JSON to CSV", href: "/json-to-csv", icon: FileSpreadsheet, color: "bg-blue-100 text-blue-600", category: "developer" },

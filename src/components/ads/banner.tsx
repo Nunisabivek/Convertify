@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react"
 import { X } from "lucide-react"
+import { usePathname } from "next/navigation"
 
 // Build-time flag: true when building the Capacitor Android app (npm run build:mobile)
 // All ad components return null so zero ad code is bundled into the app.
@@ -41,10 +42,10 @@ const ADSTERRA_KEYS = {
         url: "//tonicgoverness.com/d84ed579e24fb0e02224fedd00bed35b/invoke.js",
     },
     skyscraper160x600: {
-        key: "616f9cf69cb04c34acb730e9239646e0",
-        height: 600,
+        key: "c7edb639dc75a369ede3a87c6bbe2ee7",
+        height: 300,
         width: 160,
-        url: "//tonicgoverness.com/616f9cf69cb04c34acb730e9239646e0/invoke.js",
+        url: "//tonicgoverness.com/c7edb639dc75a369ede3a87c6bbe2ee7/invoke.js",
     },
 } as const
 
@@ -164,8 +165,53 @@ function readFooterDismissed(variant: AdBannerProps["variant"]) {
     }
 }
 
+// Component to render a Google AdSense ad unit dynamically
+function AdSenseUnit({
+    client,
+    slot,
+    width,
+    height,
+    responsive = "true",
+}: {
+    client: string
+    slot?: string
+    width: number
+    height: number
+    responsive?: string
+}) {
+    const pathname = usePathname()
+
+    useEffect(() => {
+        if (typeof window !== "undefined" && slot) {
+            try {
+                // Next.js client-side route navigation can cause duplicate ins tags
+                // or require pushing to adsbygoogle array.
+                ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({})
+            } catch (err) {
+                // Silence typical AdSense push warnings/errors
+            }
+        }
+    }, [pathname, slot])
+
+    if (!slot) {
+        // If slot ID is not defined, we return null to avoid blank spaces
+        return null
+    }
+
+    return (
+        <div style={{ width, height, maxWidth: "100%", overflow: "hidden" }} className="flex items-center justify-center">
+            <ins
+                className="adsbygoogle"
+                style={{ display: "inline-block", width: `${width}px`, height: `${height}px` }}
+                data-ad-client={client}
+                data-ad-slot={slot}
+                data-full-width-responsive={responsive}
+            />
+        </div>
+    )
+}
+
 export function AdBanner({ variant = "footer" }: AdBannerProps) {
-    // Client-only values, read SSR-safely (no setState-in-effect / hydration risk).
     const isMobile = useIsMobile()
     const hasMounted = useIsClient()
     const [isDismissed, setIsDismissed] = useState(() => readFooterDismissed(variant))
@@ -179,7 +225,59 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
         }
     }
 
-    // Pick the right ad config for the variant.
+    if (IS_MOBILE_BUILD) return null
+
+    const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT
+
+    // Determine slot and dimensions
+    let adsenseSlot: string | undefined = undefined
+    let adWidth = 300
+    let adHeight = 250
+
+    if (adsenseClient) {
+        if (variant === "rectangle" || variant === "responsive" || variant === "native") {
+            adsenseSlot = process.env.NEXT_PUBLIC_ADSENSE_SLOT_RECTANGLE
+            adWidth = 300
+            adHeight = 250
+        } else if (variant === "mobile-banner") {
+            adsenseSlot = process.env.NEXT_PUBLIC_ADSENSE_SLOT_MOBILE
+            adWidth = 320
+            adHeight = 50
+        } else if (variant === "skyscraper") {
+            adsenseSlot = process.env.NEXT_PUBLIC_ADSENSE_SLOT_SKYSCRAPER
+            adWidth = 160
+            adHeight = 600
+        } else if (variant === "footer") {
+            adsenseSlot = isMobile 
+                ? process.env.NEXT_PUBLIC_ADSENSE_SLOT_MOBILE 
+                : process.env.NEXT_PUBLIC_ADSENSE_SLOT_LEADERBOARD
+            adWidth = isMobile ? 320 : 728
+            adHeight = isMobile ? 50 : 90
+        }
+    } else {
+        if (variant === "rectangle" || variant === "responsive" || variant === "native") {
+            adWidth = 300
+            adHeight = 250
+        } else if (variant === "mobile-banner") {
+            adWidth = 320
+            adHeight = 50
+        } else if (variant === "skyscraper") {
+            adWidth = 160
+            adHeight = 300 // Match the user's 160x300 Adsterra unit
+        } else if (variant === "footer") {
+            adWidth = isMobile ? 320 : 728
+            adHeight = isMobile ? 50 : 90
+        }
+    }
+
+    // If AdSense is configured but NO slot ID is provided for this variant,
+    // we hide the manual container completely to prevent blank spaces.
+    // Google AdSense Auto Ads will automatically handle placing ads.
+    if (adsenseClient && !adsenseSlot) {
+        return null
+    }
+
+    // Pick the right ad config for the variant (Adsterra Fallback).
     let conf: AdConfig = ADSTERRA_KEYS.rectangle300x250
     if (variant === "rectangle" || variant === "responsive" || variant === "native") {
         conf = ADSTERRA_KEYS.rectangle300x250
@@ -191,23 +289,24 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
         conf = ADSTERRA_KEYS.skyscraper160x600
     }
 
-    const shouldRender = !IS_MOBILE_BUILD && hasMounted && !(variant === "footer" && isDismissed)
-    const containerRef = useLazyAdSlot(conf, shouldRender)
-
-    if (IS_MOBILE_BUILD) return null
+    const shouldRender = hasMounted && !(variant === "footer" && isDismissed)
+    const containerRef = useLazyAdSlot(conf, shouldRender && !adsenseClient)
 
     if (variant === "rectangle" || variant === "responsive" || variant === "native") {
         return (
             <div className="w-full flex items-center justify-center py-4">
-                {/* Reserved-size wrapper prevents CLS even before the ad loads */}
                 <div
                     className="flex items-center justify-center bg-slate-50 border border-slate-200 rounded-lg overflow-hidden shadow-sm relative"
-                    style={{ width: 300, height: 250, maxWidth: "100%" }}
+                    style={{ width: adWidth, height: adHeight, maxWidth: "100%" }}
                 >
                     <span className="absolute top-1 right-2 text-[10px] text-slate-400 uppercase tracking-wider z-10 pointer-events-none">
                         Ad
                     </span>
-                    <div ref={containerRef} className="flex items-center justify-center" style={{ width: 300, height: 250 }} />
+                    {adsenseClient ? (
+                        <AdSenseUnit client={adsenseClient} slot={adsenseSlot} width={adWidth} height={adHeight} />
+                    ) : (
+                        <div ref={containerRef} className="flex items-center justify-center" style={{ width: adWidth, height: adHeight }} />
+                    )}
                 </div>
             </div>
         )
@@ -218,12 +317,16 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
             <div className="w-full flex items-center justify-center py-2">
                 <div
                     className="flex items-center justify-center overflow-hidden rounded-lg relative"
-                    style={{ width: 320, height: 50, maxWidth: "100%" }}
+                    style={{ width: adWidth, height: adHeight, maxWidth: "100%" }}
                 >
                     <span className="absolute top-0 right-1 text-[9px] text-slate-400 uppercase tracking-wider z-10 pointer-events-none">
                         Ad
                     </span>
-                    <div ref={containerRef} className="flex items-center justify-center" style={{ width: 320, height: 50 }} />
+                    {adsenseClient ? (
+                        <AdSenseUnit client={adsenseClient} slot={adsenseSlot} width={adWidth} height={adHeight} />
+                    ) : (
+                        <div ref={containerRef} className="flex items-center justify-center" style={{ width: adWidth, height: adHeight }} />
+                    )}
                 </div>
             </div>
         )
@@ -234,12 +337,16 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
             <div className="hidden xl:flex items-start justify-center">
                 <div
                     className="flex items-center justify-center bg-slate-50 border border-slate-200 rounded-lg overflow-hidden sticky top-20 shadow-sm relative"
-                    style={{ width: 160, height: 600 }}
+                    style={{ width: adWidth, height: adHeight }}
                 >
                     <span className="absolute top-1 right-2 text-[10px] text-slate-400 uppercase tracking-wider z-10 pointer-events-none">
                         Ad
                     </span>
-                    <div ref={containerRef} className="flex items-center justify-center" style={{ width: 160, height: 600 }} />
+                    {adsenseClient ? (
+                        <AdSenseUnit client={adsenseClient} slot={adsenseSlot} width={adWidth} height={adHeight} />
+                    ) : (
+                        <div ref={containerRef} className="flex items-center justify-center" style={{ width: adWidth, height: adHeight }} />
+                    )}
                 </div>
             </div>
         )
@@ -247,8 +354,7 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
 
     // Footer Ad — fixed bottom, dismissible, hidden until mount (no SSR flash)
     if (!hasMounted || isDismissed) return null
-    const adWidth = isMobile ? 320 : 728
-    const adHeight = isMobile ? 50 : 90
+
     return (
         <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 border-t backdrop-blur supports-[backdrop-filter]:bg-white/60 shadow-lg flex justify-center overflow-hidden">
             <div className={isMobile ? "py-1 relative" : "py-2 relative"}>
@@ -263,11 +369,15 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
                 <span className="absolute top-0 left-1 text-[9px] text-slate-400 uppercase tracking-wider z-10 pointer-events-none">
                     Ad
                 </span>
-                <div
-                    ref={containerRef}
-                    className="flex items-center justify-center overflow-hidden"
-                    style={{ width: adWidth, height: adHeight }}
-                />
+                {adsenseClient ? (
+                    <AdSenseUnit client={adsenseClient} slot={adsenseSlot} width={adWidth} height={adHeight} />
+                ) : (
+                    <div
+                        ref={containerRef}
+                        className="flex items-center justify-center overflow-hidden"
+                        style={{ width: adWidth, height: adHeight }}
+                    />
+                )}
             </div>
         </div>
     )
@@ -324,8 +434,11 @@ export function TonicNativeBanner() {
     const containerRef = useRef<HTMLDivElement>(null)
     const containerId = "container-601b8193a0d113517d9d00bae103c5f9"
 
+    const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT
+    const adsenseSlot = process.env.NEXT_PUBLIC_ADSENSE_SLOT_RECTANGLE
+
     useEffect(() => {
-        if (IS_MOBILE_BUILD) return
+        if (IS_MOBILE_BUILD || adsenseClient) return
         const target = containerRef.current
         if (!target) return
 
@@ -358,9 +471,20 @@ export function TonicNativeBanner() {
         )
         observer.observe(target)
         return () => observer.disconnect()
-    }, [])
+    }, [adsenseClient])
 
     if (IS_MOBILE_BUILD) return null
+
+    if (adsenseClient) {
+        if (adsenseSlot) {
+            return (
+                <div className="w-full my-6 flex justify-center">
+                    <AdSenseUnit client={adsenseClient} slot={adsenseSlot} width={300} height={250} />
+                </div>
+            )
+        }
+        return null
+    }
 
     // Reserve a minimum height so the lazy-injected native ad doesn't cause CLS.
     return (
