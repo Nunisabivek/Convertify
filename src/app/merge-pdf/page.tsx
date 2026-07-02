@@ -29,15 +29,23 @@ export const metadata: Metadata = {
     openGraph: {
         title: seoData.title,
         description: seoData.description,
-        url: "/merge-pdf",
+        url: "https://convertify.work/merge-pdf",
+        siteName: "Convertify",
+        type: "website",
         images: [
             {
-                url: "/images/og-banner.png",
+                url: "https://convertify.work/images/og-banner.png",
                 width: 1200,
                 height: 630,
-                alt: "Merge PDF Files Online Free - Convertify",
+                alt: "Merge PDF Free Online — Combine PDF Files | Convertify",
             },
         ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: seoData.title,
+        description: seoData.description,
+        images: ["https://convertify.work/images/og-banner.png"],
     },
 }
 

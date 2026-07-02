@@ -10,6 +10,7 @@ import { RelatedUseCases } from "@/components/seo/related-use-cases"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
 import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { AnswerBlock } from "@/components/seo/answer-block"
+import { PostActionAd } from "@/components/ads/post-action-ad"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 
@@ -26,8 +27,16 @@ export const metadata: Metadata = {
     openGraph: {
         title: seoData.title,
         description: seoData.description,
-        url: "/png-to-pdf",
-        images: [{ url: "/images/og-banner.png", width: 1200, height: 630, alt: "PNG to PDF - Convertify" }],
+        url: "https://convertify.work/png-to-pdf",
+        siteName: "Convertify",
+        type: "website",
+        images: [{ url: "https://convertify.work/images/og-banner.png", width: 1200, height: 630, alt: "PNG to PDF Converter - Free Online Tool | Convertify" }],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: seoData.title,
+        description: seoData.description,
+        images: ["https://convertify.work/images/og-banner.png"],
     },
 }
 
@@ -65,6 +74,9 @@ export default function Page() {
                 <ToolSwapper />
                 <PngToPdfClient />
             </section>
+
+            {/* Post-action ad — shown between tool and SEO content */}
+            <PostActionAd />
 
             {/* SEO Content Section */}
             <ToolSeoContent

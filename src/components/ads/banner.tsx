@@ -11,7 +11,7 @@ const IS_MOBILE_BUILD = process.env.NEXT_PUBLIC_MOBILE_BUILD === 'true'
 // LocalStorage key used to remember the user dismissed the floating footer ad.
 // Re-shows after FOOTER_AD_REVISIT_HOURS so revenue isn't permanently zeroed.
 const FOOTER_AD_DISMISS_KEY = "convertify:footerAdDismissedAt"
-const FOOTER_AD_REVISIT_HOURS = 24
+const FOOTER_AD_REVISIT_HOURS = 4
 
 interface AdBannerProps {
     variant?: "footer" | "rectangle" | "native" | "skyscraper" | "responsive" | "mobile-banner"

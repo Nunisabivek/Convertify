@@ -52,10 +52,10 @@ const organizationSchema = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Convertify - Secure Online PDF Tools (No Upload Required)",
+    default: "Convertify — Free Online PDF Tools (No Upload, No Sign-up)",
     template: "%s | Convertify",
   },
-  description: "Merge, compress, and convert PDFs 100% securely in your browser. Files never leave your device. No sign-up, no limits, no servers involved.",
+  description: "40+ free PDF tools: merge, compress, convert, edit & sign PDFs in your browser. Files never leave your device — no uploads, no sign-up, no watermarks. Works on Windows, Mac, iPhone & Android.",
   applicationName: "Convertify",
   authors: [{ name: "Convertify Team" }],
   icons: {
@@ -72,21 +72,21 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://convertify.work",
     siteName: "Convertify",
-    title: "Convertify - Secure PDF Tools (Files Stay on Device)",
-    description: "100% Private PDF tools. Merge, compress, and convert without uploading files. No servers, no tracking, no limits.",
+    title: "Convertify — Free Online PDF Tools (No Upload, No Sign-up)",
+    description: "40+ free PDF tools: merge, compress, convert, edit & sign PDFs in your browser. Files never leave your device — no uploads, no sign-up, no watermarks.",
     images: [
       {
         url: "https://convertify.work/images/og-banner.png",
         width: 1200,
         height: 630,
-        alt: "Convertify - Free PDF Tools",
+        alt: "Convertify - Free Online PDF & File Converter Tools",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Convertify - Secure PDF Tools (No Uploads)",
-    description: "Merge, compress, and convert PDFs locally in your browser. 100% Private & Free.",
+    title: "Convertify — Free PDF Tools (No Upload Required)",
+    description: "Merge, compress, convert & edit PDFs in your browser. 100% private — files never leave your device. Free, no sign-up.",
     images: ["https://convertify.work/images/og-banner.png"],
     creator: "@convertify",
   },
@@ -130,6 +130,9 @@ export default function RootLayout({
 
         {/* Sitemap Link for Search Engines */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+        {/* LLMs.txt for AI/LLM discoverability (AEO) */}
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-friendly site description" />
 
         {/* hreflang signals — site is English-only but we want Google to
             understand it serves all major English markets so US/CA/UK/AU

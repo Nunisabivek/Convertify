@@ -25,8 +25,16 @@ export const metadata: Metadata = {
     openGraph: {
         title: seoData.title,
         description: seoData.description,
-        url: "/excel-to-pdf",
-        images: [{ url: "/images/og-banner.png", width: 1200, height: 630, alt: "Excel to PDF - Convertify" }],
+        url: "https://convertify.work/excel-to-pdf",
+        siteName: "Convertify",
+        type: "website",
+        images: [{ url: "https://convertify.work/images/og-banner.png", width: 1200, height: 630, alt: "Excel to PDF Free — Convert XLS/XLSX Online | Convertify" }],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: seoData.title,
+        description: seoData.description,
+        images: ["https://convertify.work/images/og-banner.png"],
     },
 }
 

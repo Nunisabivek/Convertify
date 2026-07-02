@@ -3,8 +3,8 @@
 
 export const toolSeoData = {
     "merge-pdf": {
-        title: "Merge PDF Free Online — Combine PDF Files No Limits",
-        description: "Combine multiple PDF files into one document instantly. Free online PDF merger with no limits, no watermarks, no sign-up required. 100% private — files never leave your device.",
+        title: "Merge PDF Free Online — Combine PDF Files (No Limit, No Watermark)",
+        description: "Merge PDF files free online — combine multiple PDFs into one document in seconds. Drag-and-drop reordering, unlimited files, no watermarks, no sign-up. 100% private — files never leave your device.",
         keywords: [
             "convertify pdf merger", "merge pdf", "combine pdf files", "merge pdf free", "merge pdf online",
             "combine pdf files online free", "pdf merger", "join pdf files", "merge pdf no watermark",
@@ -81,18 +81,22 @@ export const toolSeoData = {
         ]
     },
     "compress-pdf": {
-        title: "Compress PDF Free Online — Reduce PDF to 100KB for Forms & Email",
-        description: "Official Convertify PDF compressor. Reduce PDF to 100KB or 200KB in seconds for government forms, visa applications & passport scans. No watermarks, no limits, 100% private.",
+        title: "Compress PDF Free — Reduce PDF Size to 100KB, 200KB Online",
+        description: "Compress PDF to exact target size (100KB, 200KB, 500KB) with iterative multi-pass compression. Free online PDF compressor — no watermark, no sign-up, no file limit. Perfect for government forms, visa & email.",
         keywords: [
-            "convertify pdf compressor", "compress pdf", "compress pdf to 100kb", "compress pdf to 200kb", "reduce pdf size", "shrink pdf",
+            "compress pdf", "compress pdf free", "pdf compressor", "reduce pdf size",
+            "compress pdf to 100kb", "compress pdf to 200kb", "compress pdf online",
+            "compress pdf to 100kb free online", "free pdf compressor",
             "pdf compressor 100kb", "pdf compressor 200kb", "compress pdf online free", "reduce pdf size online",
             "compress pdf for government forms", "passport scan compression 100kb", "visa application pdf compressor",
-            "compress pdf to 100kb free online", "shrink pdf file online 200kb free", "pdf size reducer",
+            "shrink pdf file online 200kb free", "pdf size reducer",
             "make pdf smaller", "smaller pdf file", "compress pdf for email", "batch compress pdf",
             "pdf compressor no watermark", "best pdf compressor free", "reduce pdf file size without losing quality",
-            "compress pdf without sign up", "free pdf compressor no limit", "online pdf size reducer"
+            "compress pdf without sign up", "free pdf compressor no limit", "online pdf size reducer",
+            "best free pdf compressor online", "shrink pdf", "tools to compress pdf",
+            "reduce pdf size to 100kb", "compress pdf up to 240 kb"
         ],
-        h1: "Convertify PDF Compressor - Compress PDF to 100KB Free",
+        h1: "Compress PDF Free — Reduce to 100KB/200KB Online",
         faqs: [
             {
                 question: "How do I compress PDF to exactly 100KB for government forms?",
@@ -209,16 +213,21 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-jpg": {
-        title: "PDF to JPG Converter Free Online — Extract Pages as HD Images",
-        description: "Convert PDF to JPG free online — extract pages as high-resolution images (up to 300 DPI). Crystal-clear output for social media, presentations & archiving. 100% private, files never leave your browser.",
+        title: "PDF to JPG Free Online — Convert PDF to High Quality Images",
+        description: "Convert PDF to JPG free online — extract every page as a high-quality image (up to 300 DPI). No sign-up, no watermark, no file limit. Download as JPG or ZIP. 100% private, files never leave your browser.",
         keywords: [
-            "pdf to images converter online", "pdf to jpg", "pdf to jpeg", "convert pdf to image", "extract images from pdf", "save pdf as picture",
-            "high quality pdf to jpg", "turn pdf into image", "batch pdf to jpg", "pdf to jpg 300 dpi",
-            "extract pages as high res photos", "pdf to image for instagram", "save pdf as hd jpeg",
+            "pdf to jpg", "pdf to jpg converter", "convert pdf to jpg", "pdf to jpeg",
+            "pdf to jpg free", "pdf to jpg online", "pdf to image", "pdf to jpg converter free",
+            "pdf to jpg high quality", "pdf to jpg 300 dpi", "pdf to jpg hd",
+            "convert pdf to image", "extract images from pdf", "save pdf as picture",
+            "pdf to jpg converter online free", "pdf to jpg free online",
+            "turn pdf into image", "batch pdf to jpg", "pdf to jpg download",
+            "pdf to jpg no sign up", "pdf to jpg no watermark",
             "convertify pdf to jpg",
-            "pdf to images free", "pdf to jpg converter online free", "convert pdf pages to images"
+            "pdf to images free", "convert pdf pages to images",
+            "free pdf to jpg converter", "pdf to photo", "pdf to picture"
         ],
-        h1: "PDF to Images Converter Online Free - HD JPG Extraction",
+        h1: "PDF to JPG — Convert PDF Pages to High Quality Images Free",
         faqs: [
             {
                 question: "What is the maximum resolution (DPI) supported?",
@@ -240,21 +249,22 @@ export const toolSeoData = {
         ]
     },
     "png-to-pdf": {
-        title: "Combine PNG to PDF Free — Merge Multiple PNG Images into One PDF (HD)",
-        description: "Combine PNG to PDF free — merge multiple PNG images into one HD PDF in seconds. Drag-and-drop reordering, 300 DPI quality, no watermarks, no sign-up. Works on Windows, Mac, iPhone & Android browsers.",
+        title: "PNG to PDF — Combine & Convert PNG Images to PDF Free Online",
+        description: "PNG to PDF converter free — combine multiple PNG images into one HD PDF instantly. Merge PNGs, set page order, download 300 DPI PDF. No watermark, no sign-up, no upload. Works on Windows, Mac, iPhone & Android.",
         keywords: [
+            "png to pdf", "png to pdf converter", "convert png to pdf", "png to pdf free",
             "combine png to pdf", "merge png to pdf", "multiple png to pdf", "png to pdf hd",
             "combine multiple png into one pdf", "combine pngs into pdf", "merge multiple png to pdf",
-            "png to pdf", "convert png to pdf", "png to pdf converter", "combine png into one pdf",
+            "png to pdf online", "png to pdf converter free", "combine png into one pdf",
             "png merge to pdf", "turn multiple pngs into pdf", "how to combine png files into one pdf",
             "how to merge png to pdf", "combine images to pdf without losing quality",
-            "merge png files into single pdf", "batch png to pdf converter", "preserve transparency png to pdf",
-            "join pngs as pdf pages", "lossless multiple image to pdf", "high quality merge pngs pdf",
-            "convert png sequence to pdf", "retain png sharpness in pdf",
+            "merge png files into single pdf", "batch png to pdf converter",
+            "join pngs as pdf pages", "high quality merge pngs pdf",
             "convert png to pdf bulk", "convert png to pdf online free", "png to pdf no watermark",
-            "png to pdf high resolution", "save png as pdf"
+            "png to pdf high resolution", "save png as pdf", "png to pdf free online",
+            "merge png", "combine png", "png to pdf merge", "pngs to pdf"
         ],
-        h1: "Combine PNG to PDF — Merge Multiple PNGs into One HD PDF",
+        h1: "PNG to PDF — Convert & Combine PNG Images to PDF Free",
         faqs: [
             {
                 question: "How do I combine multiple PNG files into one PDF?",
@@ -682,21 +692,23 @@ export const toolSeoData = {
         ]
     },
     "excel-to-pdf": {
-        title: "Excel to PDF Converter Free — XLS & XLSX to PDF Online",
-        description: "Convert Excel to PDF free online — XLS and XLSX files supported. Preserves charts, formulas & formatting. No Excel required, works on Windows, Mac & mobile. 100% private.",
+        title: "Excel to PDF Free — Convert XLS & XLSX to PDF Online (No Office)",
+        description: "Convert Excel to PDF free — XLS, XLSX, CSV supported. Preserves charts, formulas, formatting & links. No Microsoft Office needed, no sign-up, no watermark. Works on Windows, Mac, iPhone & Android.",
         keywords: [
-            "xls to pdf", "xlsx to pdf", "excel to pdf", "convert excel to pdf", "excel to pdf converter",
+            "excel to pdf", "xlsx to pdf", "xls to pdf", "convert excel to pdf",
+            "excel to pdf converter", "excel to pdf free", "convert xlsx to pdf",
             "xls to pdf converter", "xlsx to pdf converter", "xls to pdf online", "xlsx to pdf online",
-            "excel to pdf free", "xls to pdf free", "xlsx to pdf free", "convert xls to pdf online free",
-            "excel to pdf converter free online", "xls to pdf no sign up", "xlsx to pdf no registration",
+            "xls to pdf free", "xlsx to pdf free", "convert xls to pdf online free",
+            "excel to pdf converter free online", "xls to pdf no sign up",
             "excel file convert to pdf", "xls convert to pdf", "convert excel spreadsheet to pdf",
             "excel to pdf preserve formatting", "xls to pdf keep formatting", "xlsx to pdf charts",
             "spreadsheet to pdf", "convert workbook to pdf", "excel to pdf without excel",
             "excel to pdf no microsoft office", "financial report to pdf", "invoice excel to pdf",
             "convert excel to pdf free", "convert excel to pdf online", "excel to pdf convert",
-            "excel to pdf convertor", "excel pdf converter"
+            "excel to pdf convertor", "excel pdf converter",
+            "best excel to pdf converter", "best excel to pdf converter free"
         ],
-        h1: "Excel to PDF Free — XLS to PDF Converter (No Software)",
+        h1: "Excel to PDF Free — Convert XLS/XLSX to PDF Online",
         faqs: [
             {
                 question: "How do I convert XLS to PDF online for free?",

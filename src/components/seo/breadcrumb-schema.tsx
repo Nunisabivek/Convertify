@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 interface BreadcrumbItem {
     name: string
@@ -47,12 +48,12 @@ export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
                             {index === items.length - 1 ? (
                                 <span className="font-medium text-slate-900">{item.name}</span>
                             ) : (
-                                <a
+                                <Link
                                     href={item.url}
                                     className="hover:text-indigo-600 transition-colors"
                                 >
                                     {item.name}
-                                </a>
+                                </Link>
                             )}
                         </li>
                     ))}

@@ -52,9 +52,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Use a fixed date instead of new Date() — Google distrusts sitemaps
     // where every page claims to be freshly modified. Update this when the
-    // page content actually changes meaningfully. Bumped on 2026-06-13 after
-    // adding all missing tools and enabling indexing for guide pages.
-    const lastUpdated = '2026-06-13'
+    // page content actually changes meaningfully. Bumped on 2026-07-02 after
+    // major SEO overhaul: iterative compression, enhanced schemas, AEO content.
+    const lastUpdated = '2026-07-02'
 
     return [
         {

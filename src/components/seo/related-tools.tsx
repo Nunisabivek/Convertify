@@ -110,8 +110,11 @@ interface RelatedToolsProps {
     limit?: number
 }
 
-export function RelatedTools({ currentTool, limit = 4 }: RelatedToolsProps) {
+export function RelatedTools({ currentTool, limit = 6 }: RelatedToolsProps) {
     const currentCategory = getToolCategory(currentTool)
+
+    // Prioritized popular tools that should always appear in cross-links
+    const popularHrefs = ["/png-to-pdf", "/compress-pdf", "/merge-pdf", "/pdf-to-jpg", "/excel-to-pdf", "/pdf-to-word"]
 
     // First show tools from same category, then popular tools from other categories
     const relatedTools = allTools
@@ -119,7 +122,11 @@ export function RelatedTools({ currentTool, limit = 4 }: RelatedToolsProps) {
         .sort((a, b) => {
             const aMatch = a.category === currentCategory ? 0 : 1
             const bMatch = b.category === currentCategory ? 0 : 1
-            return aMatch - bMatch
+            if (aMatch !== bMatch) return aMatch - bMatch
+            // Within other categories, prioritize popular tools
+            const aPopular = popularHrefs.includes(a.href) ? 0 : 1
+            const bPopular = popularHrefs.includes(b.href) ? 0 : 1
+            return aPopular - bPopular
         })
         .slice(0, limit)
 
@@ -128,7 +135,7 @@ export function RelatedTools({ currentTool, limit = 4 }: RelatedToolsProps) {
             <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">
                 Other Tools You Might Need
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 {relatedTools.map((tool) => (
                     <Link
                         key={tool.href}
@@ -143,6 +150,14 @@ export function RelatedTools({ currentTool, limit = 4 }: RelatedToolsProps) {
                         </span>
                     </Link>
                 ))}
+            </div>
+            <div className="text-center mt-6">
+                <Link
+                    href="/all-tools"
+                    className="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors"
+                >
+                    View all 40+ tools →
+                </Link>
             </div>
         </section>
     )

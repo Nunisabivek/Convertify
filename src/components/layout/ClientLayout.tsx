@@ -73,7 +73,7 @@ export default function ClientLayout({
                 )}
             </div>
 
-            <AdBanner />
+            <AdBanner variant="footer" />
             <Footer />
             <JsonLd />
         </>

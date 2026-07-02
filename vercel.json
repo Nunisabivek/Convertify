@@ -1,6 +1,12 @@
 {
     "redirects": [
         {
+            "source": "/:path(.*)",
+            "has": [{ "type": "host", "value": "www.convertify.work" }],
+            "destination": "https://convertify.work/:path",
+            "permanent": true
+        },
+        {
             "source": "/extract-pdf",
             "destination": "/split-pdf",
             "permanent": true

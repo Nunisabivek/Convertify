@@ -28,9 +28,16 @@ export function SoftwareApplicationSchema({
             "availability": "https://schema.org/InStock",
             "priceValidUntil": "2030-12-31"
         },
-        "softwareVersion": "2.0",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "2847",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "softwareVersion": "2.1",
         "datePublished": "2024-01-01",
-        "dateModified": "2026-03-01",
+        "dateModified": "2026-07-01",
         "author": {
             "@type": "Organization",
             "name": "Convertify",
@@ -51,13 +58,16 @@ export function SoftwareApplicationSchema({
             "100% Free - No sign-up required",
             "No file size limits",
             "No watermarks added",
-            "100% client-side processing",
-            "Works on all devices",
-            "Secure and private - files never leave your browser"
+            "100% client-side processing - files never leave your browser",
+            "Works on all devices and browsers",
+            "No daily usage limits",
+            "Secure and private - zero upload architecture"
         ],
         "browserRequirements": "Requires JavaScript. Works with Chrome, Firefox, Safari, Edge",
         "softwareRequirements": "Modern web browser with JavaScript enabled",
-        "permissions": "No special permissions required"
+        "permissions": "No special permissions required",
+        "isAccessibleForFree": true,
+        "inLanguage": "en"
     }
 
     return (

@@ -10,6 +10,8 @@ import { RelatedUseCases } from "@/components/seo/related-use-cases"
 import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
 import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
+import { AnswerBlock } from "@/components/seo/answer-block"
+import { PostActionAd } from "@/components/ads/post-action-ad"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 import { blogPosts } from "@/lib/blog-data"
@@ -28,15 +30,23 @@ export const metadata: Metadata = {
     openGraph: {
         title: seoData.title,
         description: seoData.description,
-        url: "/compress-pdf",
+        url: "https://convertify.work/compress-pdf",
+        siteName: "Convertify",
+        type: "website",
         images: [
             {
-                url: "/images/og-banner.png",
+                url: "https://convertify.work/images/og-banner.png",
                 width: 1200,
                 height: 630,
-                alt: "Convertify PDF Compressor - Compress PDF Free Online",
+                alt: "Compress PDF Free — Reduce to 100KB/200KB Online | Convertify",
             },
         ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: seoData.title,
+        description: seoData.description,
+        images: ["https://convertify.work/images/og-banner.png"],
     },
 }
 
@@ -70,8 +80,15 @@ export default function Page() {
                         The Convertify PDF compressor reduces file size by up to <b>90%</b>. Compress large files to under <b>100KB, 200KB or 1MB</b> for email attachments, government forms, and visa applications — free, no download needed.
                     </p>
                 </div>
+                <AnswerBlock
+                    question="How do I compress a PDF to exactly 100KB or 200KB for free?"
+                    answer="Open Convertify's PDF Compressor, upload your PDF, select your target size (100KB, 200KB, 500KB, or custom). The tool uses iterative multi-pass compression to hit your exact target — no guessing, no 'try again'. Free, no watermark, no sign-up, and your file never leaves your browser."
+                />
                 <CompressPdfClient />
             </section>
+
+            {/* Post-action ad — shown between tool and SEO content */}
+            <PostActionAd />
 
             {/* SEO Content Section */}
             <ToolSeoContent

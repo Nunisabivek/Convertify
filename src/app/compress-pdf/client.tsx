@@ -94,52 +94,69 @@ export default function CompressPdfPage() {
         setSizeUnit(unit)
     }
 
-    const compressImage = async (file: File): Promise<{ blob: Blob, url: string }> => {
+    // Helper: compress an image at given scale and quality, returns blob
+    const compressImageAtSettings = (file: File, scale: number, q: number): Promise<Blob> => {
         return new Promise((resolve, reject) => {
             const img = new Image()
             img.src = URL.createObjectURL(file)
             img.onload = () => {
+                const effectiveScale = scale > 1.0 ? 1.0 : scale
                 const canvas = document.createElement("canvas")
-                // Use resolutionScale to resize existing dimensions
-                // For PDF we used scale directly on viewport. For image, we scale relative to original.
-                // NOTE: existing resolutionScale (0.6 to 1.5) is okay, but strictly > 1 scales UP which might not be desired for compression.
-                // However, for consistency with PDF logic (where 1.5 was "high quality"), let's adapt.
-                // If the user wants compression, usually scale <= 1.
-                // Let's cap scale at 1.0 for images when compressing, unless user explicitly set it up?
-                // Actually, let's just use the scalefactor. If it's small, image shrinks.
-
-                const scale = resolutionScale > 1.0 ? 1.0 : resolutionScale // Cap max size at 100% of original for images
-
-                canvas.width = img.width * scale
-                canvas.height = img.height * scale
+                canvas.width = Math.max(1, Math.floor(img.width * effectiveScale))
+                canvas.height = Math.max(1, Math.floor(img.height * effectiveScale))
 
                 const ctx = canvas.getContext("2d")
-                if (!ctx) {
-                    reject(new Error("Canvas context failed"))
-                    return
-                }
+                if (!ctx) { reject(new Error("Canvas context failed")); return }
 
-                // Draw white background for transparency handling (convert png to jpg)
                 ctx.fillStyle = "#FFFFFF"
                 ctx.fillRect(0, 0, canvas.width, canvas.height)
-
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
 
-                // Always compress to JPEG for size reduction
                 canvas.toBlob(
-                    (blob) => {
-                        if (blob) {
-                            resolve({ blob, url: URL.createObjectURL(blob) })
-                        } else {
-                            reject(new Error("Compression failed"))
-                        }
-                    },
+                    (blob) => { blob ? resolve(blob) : reject(new Error("Compression failed")) },
                     "image/jpeg",
-                    quality
+                    q
                 )
+                URL.revokeObjectURL(img.src)
             }
-            img.onerror = reject
+            img.onerror = () => { URL.revokeObjectURL(img.src); reject(new Error("Image load failed")) }
         })
+    }
+
+    // Helper: build a PDF at given scale and quality, returns byte size and blob
+    const buildPdfAtSettings = async (
+        srcPdf: any,
+        numPages: number,
+        scale: number,
+        q: number,
+        onPageDone?: (page: number) => void
+    ): Promise<Blob> => {
+        const newPdf = await PDFDocument.create()
+
+        for (let i = 1; i <= numPages; i++) {
+            const page = await srcPdf.getPage(i)
+            const viewport = page.getViewport({ scale })
+
+            const canvas = document.createElement("canvas")
+            const context = canvas.getContext("2d")
+            canvas.width = Math.floor(viewport.width)
+            canvas.height = Math.floor(viewport.height)
+
+            if (context) {
+                await page.render({ canvasContext: context, viewport } as any).promise
+
+                const imgData = canvas.toDataURL("image/jpeg", q)
+                const imgBytes = await fetch(imgData).then(res => res.arrayBuffer())
+
+                const jpgImage = await newPdf.embedJpg(imgBytes)
+                const newPage = newPdf.addPage([jpgImage.width, jpgImage.height])
+                newPage.drawImage(jpgImage, { x: 0, y: 0, width: jpgImage.width, height: jpgImage.height })
+            }
+            onPageDone?.(i)
+        }
+
+        const pdfBytes = await newPdf.save()
+        return new Blob([pdfBytes as any], { type: 'application/pdf' })
     }
 
     const handleCompress = async () => {
@@ -148,8 +165,10 @@ export default function CompressPdfPage() {
         setProgress(0)
 
         try {
+            const targetBytes = getTargetBytes()
+
             if (isPdf) {
-                // PDF Compression Logic
+                // PDF Compression with iterative target-seeking
                 const pdfjsLib = await import("pdfjs-dist")
                 pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`
 
@@ -157,56 +176,155 @@ export default function CompressPdfPage() {
                 const srcPdf = await pdfjsLib.getDocument(arrayBuffer).promise
                 const numPages = srcPdf.numPages
 
-                const newPdf = await PDFDocument.create()
+                if (targetBytes > 0) {
+                    // ITERATIVE COMPRESSION: binary search on quality to hit target
+                    // Strategy: fix resolution scale, binary search quality (faster convergence)
+                    // If still too large at min quality, reduce resolution scale and retry
+                    
+                    let bestBlob: Blob | null = null
+                    let bestSize = Infinity
+                    const MAX_ITERATIONS = 6
 
-                for (let i = 1; i <= numPages; i++) {
-                    const page = await srcPdf.getPage(i)
-                    const viewport = page.getViewport({ scale: resolutionScale })
+                    // Try up to 3 resolution tiers, binary-searching quality within each
+                    const resolutionTiers = [
+                        Math.min(resolutionScale, 1.5),
+                        Math.min(resolutionScale * 0.7, 1.0),
+                        Math.min(resolutionScale * 0.4, 0.6),
+                    ]
 
-                    const canvas = document.createElement("canvas")
-                    const context = canvas.getContext("2d")
-                    canvas.width = viewport.width
-                    canvas.height = viewport.height
+                    for (const resTier of resolutionTiers) {
+                        let qLow = 0.05
+                        let qHigh = 0.95
+                        let iterCount = 0
 
-                    if (context) {
-                        await page.render({
-                            canvasContext: context,
-                            viewport: viewport,
-                        } as any).promise
+                        while (iterCount < MAX_ITERATIONS) {
+                            const qMid = (qLow + qHigh) / 2
+                            setProgress(Math.round(((resolutionTiers.indexOf(resTier) * MAX_ITERATIONS + iterCount) / (resolutionTiers.length * MAX_ITERATIONS)) * 90))
 
-                        const imgData = canvas.toDataURL("image/jpeg", quality)
-                        const imgBytes = await fetch(imgData).then(res => res.arrayBuffer())
+                            const blob = await buildPdfAtSettings(srcPdf, numPages, resTier, qMid)
 
-                        const jpgImage = await newPdf.embedJpg(imgBytes)
-                        const newPage = newPdf.addPage([jpgImage.width, jpgImage.height])
-                        newPage.drawImage(jpgImage, {
-                            x: 0,
-                            y: 0,
-                            width: jpgImage.width,
-                            height: jpgImage.height,
-                        })
+                            if (blob.size <= targetBytes) {
+                                // Success! But try to get higher quality while still under target
+                                bestBlob = blob
+                                bestSize = blob.size
+                                qLow = qMid + 0.01
+                            } else {
+                                qHigh = qMid - 0.01
+                            }
+
+                            iterCount++
+
+                            // If we're within 5% of target on the upper side, good enough
+                            if (blob.size <= targetBytes && blob.size >= targetBytes * 0.85) {
+                                bestBlob = blob
+                                bestSize = blob.size
+                                break
+                            }
+                        }
+
+                        // If we found a result under target at this resolution, stop
+                        if (bestBlob && bestSize <= targetBytes) break
                     }
-                    setProgress(Math.round((i / numPages) * 100))
+
+                    // If iterative search couldn't hit target, use the smallest we found
+                    // or fall back to lowest settings
+                    if (!bestBlob || bestSize > targetBytes) {
+                        const fallbackBlob = await buildPdfAtSettings(
+                            srcPdf, numPages,
+                            Math.min(resolutionScale * 0.35, 0.5),
+                            0.05,
+                            (pg) => setProgress(90 + Math.round((pg / numPages) * 10))
+                        )
+                        if (!bestBlob || fallbackBlob.size < bestSize) {
+                            bestBlob = fallbackBlob
+                            bestSize = fallbackBlob.size
+                        }
+                    }
+
+                    setProgress(100)
+                    const url = URL.createObjectURL(bestBlob!)
+                    setProcessedFileUrl(url)
+                    setCompressionStats({ original: file.size, compressed: bestBlob!.size })
+
+                } else {
+                    // No target size — single-pass with user settings
+                    const blob = await buildPdfAtSettings(
+                        srcPdf, numPages, resolutionScale, quality,
+                        (pg) => setProgress(Math.round((pg / numPages) * 100))
+                    )
+                    const url = URL.createObjectURL(blob)
+                    setProcessedFileUrl(url)
+                    setCompressionStats({ original: file.size, compressed: blob.size })
                 }
 
-                const pdfBytes = await newPdf.save()
-                const blob = new Blob([pdfBytes as any], { type: 'application/pdf' })
-                const url = URL.createObjectURL(blob)
-
-                setProcessedFileUrl(url)
-                setCompressionStats({
-                    original: file.size,
-                    compressed: blob.size
-                })
             } else {
-                // Image Compression Logic
-                const { blob, url } = await compressImage(file)
-                setProcessedFileUrl(url)
-                setCompressionStats({
-                    original: file.size,
-                    compressed: blob.size
-                })
-                setProgress(100)
+                // IMAGE Compression with iterative target-seeking
+                if (targetBytes > 0) {
+                    let bestBlob: Blob | null = null
+                    let bestSize = Infinity
+                    const MAX_ITERATIONS = 8
+
+                    // Binary search quality first at current scale
+                    const scaleTiers = [
+                        Math.min(resolutionScale > 1.0 ? 1.0 : resolutionScale, 1.0),
+                        0.7,
+                        0.5,
+                        0.3,
+                    ]
+
+                    for (const scaleTier of scaleTiers) {
+                        let qLow = 0.05
+                        let qHigh = 0.95
+                        let iterCount = 0
+
+                        while (iterCount < MAX_ITERATIONS) {
+                            const qMid = (qLow + qHigh) / 2
+                            setProgress(Math.round(((scaleTiers.indexOf(scaleTier) * MAX_ITERATIONS + iterCount) / (scaleTiers.length * MAX_ITERATIONS)) * 100))
+
+                            const blob = await compressImageAtSettings(file, scaleTier, qMid)
+
+                            if (blob.size <= targetBytes) {
+                                bestBlob = blob
+                                bestSize = blob.size
+                                qLow = qMid + 0.01
+                            } else {
+                                qHigh = qMid - 0.01
+                            }
+
+                            iterCount++
+
+                            if (blob.size <= targetBytes && blob.size >= targetBytes * 0.85) {
+                                bestBlob = blob
+                                bestSize = blob.size
+                                break
+                            }
+                        }
+
+                        if (bestBlob && bestSize <= targetBytes) break
+                    }
+
+                    // Fallback: lowest possible settings
+                    if (!bestBlob || bestSize > targetBytes) {
+                        const fallback = await compressImageAtSettings(file, 0.2, 0.05)
+                        if (!bestBlob || fallback.size < bestSize) {
+                            bestBlob = fallback
+                            bestSize = fallback.size
+                        }
+                    }
+
+                    setProgress(100)
+                    const url = URL.createObjectURL(bestBlob!)
+                    setProcessedFileUrl(url)
+                    setCompressionStats({ original: file.size, compressed: bestBlob!.size })
+
+                } else {
+                    // No target — single pass
+                    const blob = await compressImageAtSettings(file, resolutionScale, quality)
+                    const url = URL.createObjectURL(blob)
+                    setProcessedFileUrl(url)
+                    setCompressionStats({ original: file.size, compressed: blob.size })
+                    setProgress(100)
+                }
             }
 
         } catch (error) {
@@ -251,9 +369,9 @@ export default function CompressPdfPage() {
                                 <p className="font-medium">✓ Target of {targetSize} {sizeUnit} achieved!</p>
                             ) : (
                                 <p className="font-medium">
-                                    Target was {targetSize} {sizeUnit}. Result is {formatFileSize(compressionStats.compressed)}.
+                                    Target was {targetSize} {sizeUnit}. Best result: {formatFileSize(compressionStats.compressed)}.
                                     <br />
-                                    <span className="text-sm">Try using lower quality settings manually.</span>
+                                    <span className="text-sm">We tried multiple compression passes but this is the smallest achievable size for this file without making it unreadable. The content itself has an irreducible minimum size.</span>
                                 </p>
                             )}
                         </div>

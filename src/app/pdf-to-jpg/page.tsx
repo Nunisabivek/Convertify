@@ -26,14 +26,22 @@ export const metadata: Metadata = {
         title: seoData.title,
         description: seoData.description,
         url: "https://convertify.work/pdf-to-jpg",
+        siteName: "Convertify",
+        type: "website",
         images: [
             {
                 url: "https://convertify.work/images/og-banner.png",
                 width: 1200,
                 height: 630,
-                alt: "PDF to Images Converter Online - Convertify",
+                alt: "PDF to JPG Free — Convert PDF to High Quality Images | Convertify",
             },
         ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: seoData.title,
+        description: seoData.description,
+        images: ["https://convertify.work/images/og-banner.png"],
     },
 }
 
