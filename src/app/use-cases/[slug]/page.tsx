@@ -24,17 +24,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: useCase.title,
         description: useCase.description,
         keywords: useCase.keywords,
-        // Use-case pages now carry substantial unique content (steps, FAQs,
-        // related links, scenario context) so we let them be indexed.
-        // Each one targets a specific long-tail query the parent tool can't.
+        // NOINDEX: These use-case pages are templated thin content that
+        // duplicates information already on the tool page. Including them
+        // in the index was diluting domain quality signals and causing
+        // Google's helpful content system to suppress rankings site-wide.
+        // Re-enable indexing only after adding 800+ words of unique content.
         robots: {
-            index: true,
+            index: false,
             follow: true,
             googleBot: {
-                index: true,
+                index: false,
                 follow: true,
-                'max-image-preview': 'large',
-                'max-snippet': -1,
             },
         },
         alternates: {
