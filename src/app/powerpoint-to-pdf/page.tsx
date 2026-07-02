@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     title: seoData.title,
     description: seoData.description,
     keywords: seoData.keywords,
+    robots: { index: false, follow: true },
     alternates: {
         canonical: "https://convertify.work/powerpoint-to-pdf",
     },
