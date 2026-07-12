@@ -110,43 +110,35 @@ export const toolContentData: Record<string, {
         keywords: ["pdf to jpg", "pdf to jpeg", "convert pdf to image", "extract images from pdf", "save pdf as picture", "high quality pdf to jpg", "turn pdf into image", "batch pdf to jpg"]
     },
     "word-to-pdf": {
-        description: "Convertify Word to PDF — convert DOCX to PDF free without Microsoft Office, with zero watermarks. Our Smart Font Embedding ensures your PDF looks 100% identical to the original Word document - perfect for resumes, CVs, and legal contracts. No sign-up required, no watermarks, completely free. Process documents securely in your browser - files never leave your device.",
+        description: "Convert a DOCX Word document's text content to PDF, free, without Microsoft Office, with zero watermarks. This extracts the document's text and lays it out on clean pages — it does not preserve exact fonts, images, or complex layout.",
         features: [
-            "Convert Word to PDF without Microsoft Office installed",
-            "Perfect for resumes, CVs, and job applications",
-            "Smart Font Embedding preserves exact layout & formatting",
+            "Convert Word (.docx) to PDF without Microsoft Office installed",
             "No sign-up required, no watermarks added",
-            "Secure for legal contracts and confidential documents",
-            "Supports both DOC and DOCX formats",
-            "Works on Windows, Mac, and mobile browsers"
+            "Secure for confidential documents — processed locally, never uploaded",
+            "Supports modern .docx format"
         ],
         useCases: [
-            "Converting resumes and CVs to PDF for job applications",
+            "Turning a Word draft into a shareable PDF",
             "Creating PDFs from Word without Microsoft Office",
-            "Archiving legal contracts with exact formatting preserved",
-            "Submitting academic papers and thesis documents",
-            "Sharing business reports that display perfectly everywhere"
+            "Quick text-content conversion of reports and documents"
         ],
-        keywords: ["convertify word to pdf", "word to pdf free", "word to pdf no office", "convert docx to pdf", "docx to pdf converter without watermark", "resume to pdf", "cv to pdf", "word to pdf preserve formatting", "docx to pdf online free"]
+        keywords: ["convertify word to pdf", "word to pdf free", "word to pdf no office", "convert docx to pdf", "docx to pdf converter without watermark", "docx to pdf online free"]
     },
     "pdf-to-word": {
-        description: "Convert PDF to editable Word documents with OCR accuracy. Preserves paragraph flow and table structures perfectly. Great for updating old documents, extracting content, or making scanned PDFs editable. Secure, private, and no sign-up required.",
+        description: "Convert a PDF's text content into an editable Word document (DOCX), free and instantly in your browser. Works on digitally-created PDFs with a text layer; scanned/image-only PDFs need OCR first.",
         features: [
-            "Convert PDF to editable DOCX format",
-            "Identifies logical paragraph flow (no text boxes)",
-            "Advanced AI-OCR for scanned and image-only PDFs",
-            "Preserves complex multi-column layouts and tables",
+            "Convert PDF text content to editable DOCX format",
+            "Extracts real text from each page — not placeholders",
             "Works with Word, Google Docs, and Apple Pages",
             "100% secure - all processing happens in your browser"
         ],
         useCases: [
             "Editing contracts and agreements stored as static PDFs",
             "Updating old document archives into editable formats",
-            "Extracting text from scanned receipts or reports",
             "Modifying forms and templates for new project needs",
             "Converting academic papers for easy citing and editing"
         ],
-        keywords: ["convertify pdf to word", "convert pdf to editable word free", "pdf to docx no email required", "pdf to word keep layout", "turn pdf into text document"]
+        keywords: ["convertify pdf to word", "convert pdf to editable word free", "pdf to docx no email required", "turn pdf into text document"]
     },
     "rotate-pdf": {
         description: "Rotate PDF pages to the correct orientation. Fix sideways or upside-down scans, rotate specific pages, or change the entire document orientation. Save permanently without Adobe Acrobat or any software installation.",
@@ -495,32 +487,28 @@ export const toolContentData: Record<string, {
         keywords: ["repair pdf online free", "fix corrupt pdf", "recover damaged pdf", "pdf header repair"]
     },
     "html-to-pdf": {
-        description: "Capture web pages and HTML files as professional PDF documents with pixel-perfect accuracy. Convertify uses a modern browser-based renderer to preserve complex CSS Flexbox/Grid layouts, media queries, and clickable hyperlinks. Perfect for saving receipts, document templates, or website snapshots without the 'clipping' issues of print-to-PDF.",
+        description: "Paste HTML source code and convert it to a clean, paginated PDF, right in your browser. Convertify extracts the text content and lays it out automatically — no CSS rendering, images, or external URLs.",
         features: [
-            "CSS3 Native Rendering: Support for Flexbox, Grid, and Queries",
-            "Link Preservation: Keeps all website hyperlinks functional",
-            "Media Aware: Renders images and web-fonts with high fidelity",
-            "Clean Pagination: Intelligently breaks long pages into A4/Letter",
-            "Instant conversion from both URLs and raw HTML code",
-            "Secure & Private: Your HTML content is processed locally"
+            "Instant text-layout conversion from raw HTML",
+            "Automatic word-wrap and pagination onto A4 pages",
+            "No file size limits, no sign-up",
+            "Secure & Private: HTML content is processed locally, never uploaded"
         ],
         useCases: [
-            "Saving digital receipts and invoices from web portals",
-            "Archiving website snapshots for design portfolios",
-            "Converting HTML email templates to PDF for review",
-            "Preserving online articles for offline reading",
-            "Generating PDF reports from dynamic web dashboards"
+            "Turning HTML email templates into a plain-text PDF record",
+            "Exporting HTML documentation source as a readable PDF",
+            "Quickly previewing raw HTML content as a document",
+            "Archiving HTML snippets for offline reading"
         ],
-        keywords: ["html to pdf online free", "convert website to pdf", "save webpage as pdf", "html to pdf with css"]
+        keywords: ["html to pdf online free", "html code to pdf", "paste html to pdf", "html snippet to pdf"]
     },
     "pdf-to-text": {
-        description: "Extract clean, structured text from any PDF with Convertify's high-fidelity conversion engine. We use 'Logical Flow Detection' to handle multi-column layouts, sidebars, and tables, ensuring your text is extracted in the correct reading order. For scanned documents, our AI-OCR reconstructs characters with 99.8% precision, even from low-quality or faded sources.",
+        description: "Extract the real text embedded in any digitally-created PDF, directly in your browser. Works instantly on PDFs with a text layer (exported from Word, Google Docs, etc.); scanned or image-only PDFs need to run through OCR first since they have no text layer to read.",
         features: [
-            "Logical Flow: Extracts text in correct human reading order",
-            "High-Precision OCR: Reconstructs text from blurry or faded scans",
-            "Column Awareness: Handles sidebars and 2-column layouts perfectly",
-            "Table to Text: Preserves basic row/column spacing for data",
-            "100+ Languages: Broad support for global document translation",
+            "Reads the PDF's real embedded text layer, not a placeholder",
+            "Instant, local extraction with no upload",
+            "Copy to clipboard or download as .txt",
+            "No file size limits",
             "Privacy First: Files never leave your local browser session"
         ],
         useCases: [

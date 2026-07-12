@@ -256,31 +256,31 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
 
     "word-to-pdf": {
         intro: [
-            "Converting a Word document to PDF is the most common conversion in office workflows, but it's also where formatting goes wrong most often. Headings shift, fonts get substituted, and tables overflow page edges. Convertify's Word to PDF converter uses Smart Font Embedding to make the output match the original Word file as closely as possible — important for resumes, contracts, and anything that gets visually scrutinized.",
-            "Both .doc and .docx are supported. The conversion runs in your browser, so confidential documents (CVs with personal info, contracts under NDA) never touch a server.",
+            "Converting a Word document to PDF is one of the most common file tasks in office workflows. Convertify's Word to PDF tool reads the text content of a .docx file and lays it out on clean, paginated PDF pages, right in your browser. It's a lightweight text-content conversion, not a pixel-perfect layout renderer — exact fonts, images, and tables are not carried over.",
+            "Only the modern .docx format is supported (not the older binary .doc). The conversion runs in your browser, so confidential documents never touch a server.",
         ],
         steps: [
-            { title: "Upload your Word file", body: "Drag or click to select. .doc and .docx both work." },
-            { title: "Convert", body: "Headings, body text, lists, and tables are mapped to PDF equivalents. Fonts are embedded so the result looks the same on any device." },
+            { title: "Upload your Word file", body: "Drag or click to select a .docx file." },
+            { title: "Convert", body: "The document's text is extracted and laid out on PDF pages with automatic pagination." },
             { title: "Download", body: "Get the PDF instantly with no watermark." },
         ],
         scenarios: [
-            { title: "Resumes and CVs for job applications", body: "Most ATS systems and recruiters prefer PDF over Word — formatting is locked, fonts are guaranteed, and the document is harder to accidentally edit. Convert before submitting." },
-            { title: "Contracts and legal documents", body: "PDF is the standard format for signed contracts. Convert from Word, then sign with the Sign PDF tool." },
-            { title: "Submissions to publishers and journals", body: "Most submission portals accept PDF only. Word-to-PDF preserves your formatting exactly so reviewers see what you saw." },
+            { title: "Quick drafts and text-only documents", body: "For text-heavy Word documents without complex formatting, this gives you a fast, shareable PDF." },
+            { title: "Sharing document content without Office", body: "When you need a PDF from a .docx and don't have Word installed, this extracts the text and gets you a downloadable PDF instantly." },
         ],
         troubleshooting: [
-            { question: "Fonts look different in the PDF.", answer: "If the Word file uses a font your browser doesn't have access to, Convertify falls back to a similar font. To guarantee fidelity, embed fonts in Word first (File → Options → Save → Embed fonts) before converting." },
-            { question: "Some images are missing.", answer: "Linked (rather than embedded) images in Word point to local file paths and don't transfer in conversions. Re-insert images with Insert → Pictures → choose 'Embed' before converting." },
+            { question: "The PDF doesn't look like my original Word document.", answer: "This tool extracts text content only — it does not preserve exact fonts, images, tables, or complex layout. For a visually exact PDF, use Word's own File → Save As → PDF export, or Google Docs' File → Download → PDF." },
+            { question: "Images from my Word doc are missing.", answer: "Correct — only text content is extracted. Images are not included in the PDF output." },
+            { question: "My .doc file won't convert.", answer: "Only the modern .docx format is supported. Open the file in Word or Google Docs and re-save it as .docx first." },
         ],
         comparison: [
             { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
-            { feature: "Formats supported", convertify: "DOC + DOCX", typical: "DOCX only" },
+            { feature: "Formats supported", convertify: "DOCX only", typical: "DOCX only" },
+            { feature: "Output fidelity", convertify: "Text content only", typical: "Varies" },
             { feature: "Microsoft Office needed", convertify: "No", typical: "Sometimes" },
-            { feature: "Free tier limit", convertify: "Unlimited", typical: "2–3 per day" },
             { feature: "Watermark", convertify: "None", typical: "Often added" },
         ],
-        lastUpdated: "2026-05-08",
+        lastUpdated: "2026-07-12",
     },
 
     "powerpoint-to-pdf": {
@@ -744,33 +744,31 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
 
     "html-to-pdf": {
         intro: [
-            "Converting a web page or HTML file to PDF captures it exactly as it renders in a browser — layout, fonts, images, and colors preserved — and saves it as a portable, offline-readable document. Convertify's HTML to PDF tool works for both local .html files and web page URLs, rendering through a headless browser engine for accurate output.",
-            "Common uses: archiving a web-based article, saving a receipt from an e-commerce checkout page, capturing a web form confirmation, or generating a PDF report from an HTML template. For developers, HTML-to-PDF via a browser-based tool is also a quick way to proof a PDF layout without spinning up a headless Chrome server.",
+            "Convertify's HTML to PDF tool takes HTML source you paste in, strips the markup, and lays the plain text out on clean, paginated PDF pages — entirely in your browser. It's a lightweight way to turn HTML snippets, templates, or email source into a readable document, not a pixel-perfect page renderer.",
+            "It does not fetch live URLs (browsers block cross-origin page fetches for security) and it does not render CSS, images, or hyperlinks — only the text content of the HTML you paste. If you need a visual, styled capture of a real web page, your browser's own Print → Save as PDF (which runs in your logged-in, fully-rendered session) will do a better job.",
         ],
         steps: [
-            { title: "Provide the HTML source", body: "Either paste a public URL or upload a local .html file. For local files, linked assets (CSS, images) in the same folder are included if you package them together." },
-            { title: "Set page options", body: "Choose paper size (A4, US Letter), orientation, and margins. For web pages with wide layouts, landscape often produces cleaner output." },
-            { title: "Convert and download", body: "The page renders through the browser's print engine and outputs as a clean PDF with text remaining selectable and links preserved." },
+            { title: "Paste your HTML", body: "Paste HTML source into the text box — a snippet, an email template, or a full document." },
+            { title: "Convert", body: "Convertify strips the tags and lays the remaining text out on A4 pages with automatic word-wrapping and pagination." },
+            { title: "Download", body: "The PDF downloads immediately with selectable plain text." },
         ],
         scenarios: [
-            { title: "Archiving articles and documentation", body: "Web articles disappear when sites go offline or behind paywalls. Convert to PDF immediately after reading to create a permanent offline copy. The PDF is searchable and readable without internet." },
-            { title: "Saving e-commerce receipts", body: "Order confirmation pages that aren't emailed as PDF attachments can be captured via HTML to PDF. Print-to-PDF through the browser often misses styling; this tool uses the full rendered layout." },
-            { title: "Developer PDF layout proofing", body: "Front-end developers building invoice or report templates in HTML can use this tool to quickly proof the PDF output without setting up a server-side headless Chrome pipeline." },
-            { title: "Capturing web-based reports", body: "Analytics dashboards, project management boards, and data tools that display reports in the browser but don't offer PDF export can be captured via URL conversion." },
+            { title: "Turning HTML email templates into a readable record", body: "Paste the HTML source of a transactional or marketing email to get a plain-text PDF copy for records or review." },
+            { title: "Exporting HTML documentation source", body: "Quickly turn raw HTML docs or generated markup into a plain-text PDF without needing a browser or renderer." },
+            { title: "Previewing HTML content as a document", body: "Useful when you just need the text content of markup as a document, not a styled visual capture." },
         ],
         troubleshooting: [
-            { question: "The web page requires a login — it shows a login screen, not the content.", answer: "The converter accesses the URL as an anonymous user. For authenticated content, use your browser's built-in Print → Save as PDF, which runs in your logged-in session." },
-            { question: "The layout looks different from what I see in the browser.", answer: "Some websites use dynamic content loaded by JavaScript after the initial render. The converter captures the post-render state but may miss animations or late-loading widgets. For most static content, output is accurate." },
-            { question: "Images are missing in the output.", answer: "For local .html files, images need to be in the same folder and referenced with relative paths. For URLs, images from blocked third-party CDNs may not load." },
+            { question: "My PDF doesn't look like the styled web page.", answer: "This tool only extracts and lays out plain text — it does not render CSS, images, or layout. For a visual capture of a real page, use your browser's built-in Print → Save as PDF instead." },
+            { question: "Can I convert a page by URL?", answer: "Not currently. Browsers block client-side tools from fetching another site's page content (CORS), so you'll need to paste the HTML source directly." },
+            { question: "The links from my HTML aren't clickable in the PDF.", answer: "Correct — only the visible text is extracted. Anchor tags and other markup are stripped, so links are not preserved as clickable PDF links." },
         ],
         comparison: [
             { feature: "Files uploaded", convertify: "Processed locally", typical: "Sent to server" },
-            { feature: "CSS rendering", convertify: "Full browser engine", typical: "Partial support" },
-            { feature: "Local file support", convertify: "Yes (.html)", typical: "URL only" },
-            { feature: "Selectable text output", convertify: "Yes", typical: "Sometimes image-only" },
+            { feature: "Output type", convertify: "Plain text, paginated", typical: "Rendered visual capture" },
+            { feature: "URL fetching", convertify: "Not supported", typical: "Varies" },
             { feature: "Daily limit", convertify: "Unlimited", typical: "3–5 per day" },
         ],
-        lastUpdated: "2026-06-01",
+        lastUpdated: "2026-07-12",
     },
 
     "markdown-to-pdf": {

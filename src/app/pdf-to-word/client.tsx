@@ -3,8 +3,58 @@
 import { useState, useCallback } from "react"
 import { useDropzone } from "react-dropzone"
 import { FileText, Upload, Download, Loader2, AlertCircle } from "lucide-react"
-import { PDFDocument } from "pdf-lib"
+import JSZip from "jszip"
 import { AdBanner } from "@/components/ads/banner"
+
+function escapeXml(text: string) {
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+}
+
+async function buildDocx(pages: string[][]): Promise<Blob> {
+    const paragraphs = pages
+        .map((lines, i) => {
+            const pageLines = lines.length ? lines : [""]
+            const body = pageLines
+                .map((line) => `<w:p><w:r><w:t xml:space="preserve">${escapeXml(line)}</w:t></w:r></w:p>`)
+                .join("")
+            const pageBreak = i < pages.length - 1 ? '<w:p><w:r><w:br w:type="page"/></w:r></w:p>' : ""
+            return body + pageBreak
+        })
+        .join("")
+
+    const documentXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:body>
+    ${paragraphs}
+    <w:sectPr/>
+  </w:body>
+</w:document>`
+
+    const contentTypesXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+  <Default Extension="xml" ContentType="application/xml"/>
+  <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
+</Types>`
+
+    const relsXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
+</Relationships>`
+
+    const zip = new JSZip()
+    zip.file("[Content_Types].xml", contentTypesXml)
+    zip.folder("_rels")!.file(".rels", relsXml)
+    zip.folder("word")!.file("document.xml", documentXml)
+
+    return zip.generateAsync({
+        type: "blob",
+        mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    })
+}
 
 export default function PdfToWordClient() {
     const [file, setFile] = useState<File | null>(null)
@@ -36,33 +86,35 @@ export default function PdfToWordClient() {
         setError(null)
 
         try {
-            const arrayBuffer = await file.arrayBuffer()
-            const pdfDoc = await PDFDocument.load(arrayBuffer)
+            const pdfjsLib = await import("pdfjs-dist")
+            pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`
 
-            const numPages = pdfDoc.getPageCount()
-            let fullText = ""
+            const pdf = await pdfjsLib.getDocument(await file.arrayBuffer()).promise
+            const pages: string[][] = []
 
-            // Extract text from each page
-            for (let i = 0; i < numPages; i++) {
-                const page = pdfDoc.getPage(i)
-                // Note: pdf-lib doesn't have built-in text extraction
-                // For a real implementation, you'd use a library like pdf.js
-                fullText += `\n\n--- Page ${i + 1} ---\n\n`
-                fullText += `[Text content from page ${i + 1}]\n`
+            for (let i = 1; i <= pdf.numPages; i++) {
+                const page = await pdf.getPage(i)
+                const content = await page.getTextContent()
+
+                const lines: string[] = []
+                let currentLine = ""
+                for (const item of content.items as any[]) {
+                    currentLine += (currentLine ? " " : "") + item.str
+                    if (item.hasEOL) {
+                        lines.push(currentLine)
+                        currentLine = ""
+                    }
+                }
+                if (currentLine) lines.push(currentLine)
+                pages.push(lines)
             }
 
-            // Create a simple DOCX-like structure (simplified version)
-            // For production, use a library like docx or mammoth
-            const docContent = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
-  <w:body>
-    <w:p><w:r><w:t>Converted from PDF: ${file.name}</w:t></w:r></w:p>
-    <w:p><w:r><w:t>Pages: ${numPages}</w:t></w:r></w:p>
-    <w:p><w:r><w:t>${fullText.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</w:t></w:r></w:p>
-  </w:body>
-</w:document>`
+            if (pages.every((lines) => lines.every((l) => !l.trim()))) {
+                setError("No extractable text found. This PDF may be a scanned image without a text layer.")
+                return
+            }
 
-            const blob = new Blob([docContent], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" })
+            const blob = await buildDocx(pages)
             const url = URL.createObjectURL(blob)
             setConvertedUrl(url)
         } catch (err) {
@@ -77,7 +129,7 @@ export default function PdfToWordClient() {
         if (convertedUrl && file) {
             const link = document.createElement("a")
             link.href = convertedUrl
-            link.download = file.name.replace(".pdf", ".docx")
+            link.download = file.name.replace(/\.pdf$/i, "") + ".docx"
             link.click()
         }
     }
@@ -170,11 +222,11 @@ export default function PdfToWordClient() {
                 <ul className="space-y-2 text-slate-600">
                     <li className="flex items-start gap-2">
                         <span className="text-blue-600 font-bold">•</span>
-                        <span>Converts PDF files to editable Word documents (DOCX format)</span>
+                        <span>Converts PDF text content to an editable Word document (DOCX format)</span>
                     </li>
                     <li className="flex items-start gap-2">
                         <span className="text-blue-600 font-bold">•</span>
-                        <span>Preserves text content and structure from your PDF</span>
+                        <span>Extracts real text from each page - not just placeholders</span>
                     </li>
                     <li className="flex items-start gap-2">
                         <span className="text-blue-600 font-bold">•</span>
@@ -189,5 +241,3 @@ export default function PdfToWordClient() {
         </div>
     )
 }
-
-

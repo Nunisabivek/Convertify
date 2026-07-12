@@ -4,12 +4,65 @@ import { useState } from "react"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
-import { FileText, Printer, Loader2, ArrowLeft } from "lucide-react"
+import { FileText, Download, Loader2, ArrowLeft, AlertCircle } from "lucide-react"
+import { PDFDocument, rgb, StandardFonts } from "pdf-lib"
+
+async function buildPdfFromText(rawText: string): Promise<Blob> {
+    const pdfDoc = await PDFDocument.create()
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
+    const fontSize = 12
+    const pageWidth = 595
+    const pageHeight = 842
+    const margin = 50
+    const maxWidth = pageWidth - margin * 2
+
+    let page = pdfDoc.addPage([pageWidth, pageHeight])
+    let y = pageHeight - margin
+
+    const newPage = () => {
+        page = pdfDoc.addPage([pageWidth, pageHeight])
+        y = pageHeight - margin
+    }
+
+    const paragraphs = rawText.split(/\n+/)
+    for (const paragraph of paragraphs) {
+        const words = paragraph.split(/\s+/).filter(Boolean)
+        if (words.length === 0) {
+            y -= fontSize + 6
+            if (y < margin) newPage()
+            continue
+        }
+
+        let line = ""
+        for (const word of words) {
+            const testLine = line ? `${line} ${word}` : word
+            if (font.widthOfTextAtSize(testLine, fontSize) > maxWidth && line) {
+                if (y < margin) newPage()
+                page.drawText(line, { x: margin, y, size: fontSize, font, color: rgb(0, 0, 0) })
+                y -= fontSize + 4
+                line = word
+            } else {
+                line = testLine
+            }
+        }
+        if (line) {
+            if (y < margin) newPage()
+            page.drawText(line, { x: margin, y, size: fontSize, font, color: rgb(0, 0, 0) })
+            y -= fontSize + 4
+        }
+        y -= 8 // paragraph spacing
+    }
+
+    const bytes = await pdfDoc.save()
+    return new Blob([bytes as any], { type: "application/pdf" })
+}
 
 export default function WordToPdfPage() {
     const [file, setFile] = useState<File | null>(null)
     const [isProcessing, setIsProcessing] = useState(false)
-    const [htmlContent, setHtmlContent] = useState<string | null>(null)
+    const [htmlPreview, setHtmlPreview] = useState<string | null>(null)
+    const [pdfUrl, setPdfUrl] = useState<string | null>(null)
+    const [error, setError] = useState<string | null>(null)
 
     const handleFilesSelected = (files: File[]) => {
         if (files.length > 0) setFile(files[0])
@@ -18,73 +71,66 @@ export default function WordToPdfPage() {
     const handleConvert = async () => {
         if (!file) return
         setIsProcessing(true)
+        setError(null)
 
         try {
-            // Dynamic import for mammoth using CDN or check if I can 'import "mammoth"' if it was installed (it's not).
-            // Since I cannot install packages, I will load it via script tag or just fetch it.
-            // Actually, for a clean React implementation without npm, using a script loader is tricky.
-            // I will use a simple fetch to a CDN to get the library? No, that evaluates it.
-            // Best bet: use the 'mammoth' browser global.
-
-            // Check if script exists
-            if (!(window as any).mammoth) {
-                const script = document.createElement("script")
-                script.src = "https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"
-                script.async = true
-                document.body.appendChild(script)
-
-                await new Promise((resolve, reject) => {
-                    script.onload = resolve
-                    script.onerror = reject
-                })
-            }
-
+            const mammothModule: any = await import("mammoth")
+            const mammoth = mammothModule.default ?? mammothModule
             const arrayBuffer = await file.arrayBuffer()
-            const result = await (window as any).mammoth.convertToHtml({ arrayBuffer: arrayBuffer })
-            setHtmlContent(result.value)
 
-        } catch (error) {
-            console.error("Conversion error:", error)
-            alert("Failed to read Word file. Please try again.")
+            const [htmlResult, textResult] = await Promise.all([
+                mammoth.convertToHtml({ arrayBuffer }),
+                mammoth.extractRawText({ arrayBuffer }),
+            ])
+
+            const blob = await buildPdfFromText(textResult.value)
+            setPdfUrl(URL.createObjectURL(blob))
+            setHtmlPreview(htmlResult.value)
+        } catch (err) {
+            console.error("Conversion error:", err)
+            setError("Failed to read this Word file. Make sure it's a valid .docx document.")
         } finally {
             setIsProcessing(false)
         }
     }
 
-    const handlePrint = () => {
-        window.print()
+    const handleDownload = () => {
+        if (!pdfUrl || !file) return
+        const link = document.createElement("a")
+        link.href = pdfUrl
+        link.download = file.name.replace(/\.docx$/i, "") + ".pdf"
+        link.click()
     }
 
-    if (htmlContent) {
+    if (htmlPreview) {
         return (
             <div className="container py-8 max-w-4xl">
                 <div className="flex items-center justify-between mb-6 no-print">
                     <Button variant="ghost" onClick={() => {
                         setFile(null)
-                        setHtmlContent(null)
+                        setHtmlPreview(null)
+                        setPdfUrl(null)
                     }}>
                         <ArrowLeft className="mr-2 h-4 w-4" />
                         Convert Another
                     </Button>
-                    <div className="flex gap-4">
-                        <Button size="lg" onClick={handlePrint} className="bg-blue-600 hover:bg-blue-700">
-                            <Printer className="mr-2 h-5 w-5" />
-                            Save as PDF
-                        </Button>
-                    </div>
+                    <Button size="lg" onClick={handleDownload} className="bg-blue-600 hover:bg-blue-700">
+                        <Download className="mr-2 h-5 w-5" />
+                        Download PDF
+                    </Button>
                 </div>
 
-                <div className="bg-amber-50 border border-amber-200 text-amber-800 p-4 rounded-lg mb-8 text-sm flex items-start gap-3 no-print">
+                <div className="bg-green-50 border border-green-200 text-green-800 p-4 rounded-lg mb-8 text-sm flex items-start gap-3 no-print">
                     <FileText className="h-5 w-5 shrink-0 mt-0.5" />
                     <div>
-                        <strong>How to Save:</strong> Your document is ready! Click "Save as PDF" and choose
-                        "Save to PDF" in the print destination options.
+                        <strong>Ready!</strong> Your PDF has been generated. Click "Download PDF" to save it.
+                        Preview below shows your document's text and structure.
                     </div>
                 </div>
 
-                {/* The Printable Area */}
+                {/* Preview only - the actual PDF is generated separately via pdf-lib */}
                 <div className="print-content bg-white shadow-lg p-10 md:p-20 min-h-[1000px] text-slate-900 prose prose-slate max-w-none">
-                    <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+                    <div dangerouslySetInnerHTML={{ __html: htmlPreview }} />
                 </div>
 
                 <div className="mt-12 no-print">
@@ -115,6 +161,13 @@ export default function WordToPdfPage() {
                             <p className="text-slate-500">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
                         </div>
 
+                        {error && (
+                            <div className="w-full p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2 text-red-700">
+                                <AlertCircle className="w-5 h-5 shrink-0" />
+                                <p className="text-sm">{error}</p>
+                            </div>
+                        )}
+
                         <Button size="xl" onClick={handleConvert} disabled={isProcessing} className="bg-blue-600 hover:bg-blue-700 w-full md:w-auto px-12">
                             {isProcessing ? (
                                 <>
@@ -136,4 +189,3 @@ export default function WordToPdfPage() {
         </div>
     )
 }
-

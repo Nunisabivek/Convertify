@@ -60,7 +60,7 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-6">
-                        Convertify Word to PDF — convert DOCX with <b>100% layout accuracy</b>. Perfect for Resumes, Legal Contracts, and Thesis papers. No download needed.
+                        Convert your .docx Word document's text content to PDF, free, right in your browser. No download needed.
                     </p>
 
                     {/* Preview/Trust Image */}
@@ -75,12 +75,12 @@ export default function Page() {
                                 <span className="text-2xl">→</span>
                                 <span className="flex flex-col items-center">
                                     <span className="text-4xl mb-2 text-red-500">📄</span>
-                                    <span className="text-sm font-medium text-slate-700">Perfect PDF</span>
+                                    <span className="text-sm font-medium text-slate-700">PDF</span>
                                 </span>
                             </div>
                         </div>
                         <div className="absolute bottom-0 inset-x-0 bg-black/50 text-white text-xs py-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                            Preserves Fonts, Tables & Layouts 100%
+                            Text content extracted and laid out on clean PDF pages
                         </div>
                     </div>
                 </div>

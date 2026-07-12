@@ -172,44 +172,43 @@ export const toolSeoData = {
     },
     "word-to-pdf": {
         title: "Word to PDF Free Online — DOCX to PDF, No Watermark",
-        description: "Convertify Word to PDF converter — free, no Microsoft Office needed. Convert DOCX to PDF without watermark. Preserves fonts, layout & formatting perfectly. Best for resumes, CVs & legal docs. No sign-up, 100% private.",
+        description: "Convert a .docx Word document's text content to PDF, free, no Microsoft Office needed, no watermark. Extracts your document's text and lays it out on clean pages. No sign-up, 100% private.",
         keywords: [
-            "word to pdf", "docx to pdf", "convert word to pdf", "doc to pdf", "word to pdf converter",
+            "word to pdf", "docx to pdf", "convert word to pdf", "word to pdf converter",
             "word to pdf free", "word to pdf online", "word to pdf converter free online",
-            "convert word to pdf free", "docx to pdf free", "docx to pdf converter without watermark", "doc to pdf converter",
-            "word to pdf without microsoft office", "word to pdf no office", "word to pdf preserve formatting",
-            "convert docx to pdf online free", "word to pdf keep fonts", "word to pdf exact layout",
-            "resume to pdf", "cv to pdf", "resume word to pdf", "convert resume to pdf free",
-            "legal document to pdf", "contract to pdf", "word to pdf no sign up", "word to pdf no watermark",
-            "convertify word to pdf", 
+            "convert word to pdf free", "docx to pdf free", "docx to pdf converter without watermark",
+            "word to pdf without microsoft office", "word to pdf no office",
+            "convert docx to pdf online free",
+            "word to pdf no sign up", "word to pdf no watermark",
+            "convertify word to pdf",
         ],
         h1: "Word to PDF Free - No Microsoft Office",
         faqs: [
             {
                 question: "Can I convert Word to PDF without Microsoft Office?",
-                answer: "Yes! Convertify works 100% independently of Microsoft Office. Convert any DOC or DOCX file from Windows, Mac, or mobile without needing Word installed or any license."
+                answer: "Yes. Convertify works entirely independently of Microsoft Office, right in your browser, on Windows, Mac, or mobile."
             },
             {
-                question: "Will my resume formatting be preserved exactly?",
-                answer: "Absolutely. We use 'Subset Font Embedding' to package your exact fonts into the PDF. Your resume layout, spacing, headers, and margins stay 100% identical to the original Word document."
+                question: "Will my document's exact formatting be preserved?",
+                answer: "No — this tool extracts your document's text content and lays it out on clean PDF pages. Exact fonts, images, tables, and complex layout are not preserved. For a visually exact PDF, use Word's own \"Save as PDF\" export."
             },
             {
                 question: "Is this Word to PDF converter really free?",
-                answer: "Yes! Convert unlimited Word documents to PDF completely free. No sign-up required, no watermarks added, and no hidden limits. Professional quality for everyone."
+                answer: "Yes! Convert unlimited Word documents to PDF completely free. No sign-up required, no watermarks added, and no hidden limits."
             },
             {
-                question: "Is it secure for CVs and legal contracts?",
-                answer: "Completely secure. Everything is processed locally in your browser. Your resume, CV, and legal documents never touch any server - safer than Word's own cloud export."
+                question: "Is it secure for confidential documents?",
+                answer: "Yes. Everything is processed locally in your browser. Your document never touches a server."
             },
             {
-                question: "Why is this better than other free converters?",
-                answer: "Unlike basic tools that substitute fonts, our engine respects precise margin definitions and page breaks from the DOCX format, preventing the 'text overflow' and layout shifts common in other tools."
+                question: "Does it support the older .doc format?",
+                answer: "No — only the modern .docx format is supported. If you have an old .doc file, open and re-save it as .docx in Word or Google Docs first."
             }
         ],
         howToSteps: [
-            { name: "Upload Word File", text: "Drag & drop your DOC or DOCX - works without Microsoft Office." },
-            { name: "Auto Convert", text: "We embed fonts and preserve your exact layout automatically." },
-            { name: "Download Free", text: "Get your perfect PDF instantly - no sign-up, no watermarks." }
+            { name: "Upload Word File", text: "Drag & drop your .docx file - works without Microsoft Office." },
+            { name: "Convert", text: "We extract the document's text and lay it out on PDF pages." },
+            { name: "Download Free", text: "Get your PDF instantly - no sign-up, no watermarks." }
         ]
     },
     "pdf-to-jpg": {
@@ -364,38 +363,36 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-text": {
-        title: "PDF to Text - Structured Content Extraction & OCR",
-        description: "Convert PDF to clean, structured text with 100% accuracy. Our logical flow detection handles columns and tables without garbling characters. Security guaranteed.",
+        title: "PDF to Text - Extract Text From PDF Free",
+        description: "Extract the real text from any PDF that has a text layer, instantly, in your browser. Works great on digitally-created PDFs; scanned/image-only PDFs need OCR first.",
         keywords: [
-            "pdf to text", "extract text from pdf", "convert pdf to txt", "pdf text extractor", "ocr pdf text",
-            "extract text from scanned pdf", "ocr pdf to editable text", "copy paste text from pdf",
-            "preserve pdf formatting text", "convert scanned document to text", "pdf text recognition online",
-            "unlock copyable text pdf", "high accuracy ocr extractor", "multi-column pdf text pull",
-            "table extraction from pdf", "structured data extraction pdf", "pdf to plain text pro", "extract text no garble"
+            "pdf to text", "extract text from pdf", "convert pdf to txt", "pdf text extractor",
+            "copy paste text from pdf", "pdf text extraction online", "unlock copyable text pdf",
+            "pdf to plain text", "extract text no garble"
         ],
-        h1: "PDF to Text - Structured Content Extraction",
+        h1: "PDF to Text - Extract Text From PDF",
         faqs: [
             {
                 question: "Will the text come out in the correct order for multi-column layouts?",
-                answer: "Yes. Our 'Logical Flow' engine identifies columns and sidebars, extracting text in the order a human would read it rather than just pulling random character positions."
+                answer: "Usually, but not guaranteed. The extractor follows the PDF's internal text order, which lines up with visual reading order for most documents but can get confused by complex multi-column layouts."
             },
             {
                 question: "Does it work with scanned receipts and faded documents?",
-                answer: "Absolutely. Our advanced AI-OCR specifically identifies low-contrast text and reconstructs characters from faded scans with high precision."
+                answer: "No — this tool reads the text layer already embedded in a PDF. Scanned or image-only PDFs have no text layer, so nothing will be extracted. Run the OCR PDF tool first to add a text layer, then extract."
             },
             {
                 question: "Can I extract data from tables into a text format?",
-                answer: "Yes, the tool preserves basic table structures using tab spacing, making it easier to copy data into Excel or other data processing tools."
+                answer: "The tool pulls the raw text runs from the PDF, so simple tables often come out reasonably readable, but column alignment isn't specially preserved."
             },
             {
                 question: "Is my data private during extraction?",
-                answer: "100% private. Text extraction happens entirely in your browser. Your sensitive reports and personal letters are never uploaded to our servers."
+                answer: "100% private. Text extraction happens entirely in your browser. Your files are never uploaded to our servers."
             }
         ],
         howToSteps: [
-            { name: "Upload", text: "Select your PDF file (digital or scanned)." },
-            { name: "Analyze", text: "Our engine maps the logical flow and identifies text characters." },
-            { name: "Download", text: "Save your clean, structured TXT file instantly." }
+            { name: "Upload", text: "Select your PDF file." },
+            { name: "Extract", text: "Convertify reads the embedded text layer directly in your browser." },
+            { name: "Download", text: "Copy the text or save it as a .txt file instantly." }
         ]
     },
     "powerpoint-to-pdf": {
@@ -430,32 +427,31 @@ export const toolSeoData = {
 
     "pdf-to-word": {
         title: "PDF to Word Free Online — Editable DOCX, No Sign-Up",
-        description: "Official Convertify PDF to Word converter. Convert PDF to Word (DOCX) while keeping exact layout. Scanned PDF to Word OCR support. Secure, private, and free.",
+        description: "Convert a PDF's text into an editable Word document (DOCX) for free. Works instantly on digitally-created PDFs. Secure, private, no sign-up.",
         keywords: [
             "convertify pdf to word", "pdf to word", "pdf to docx", "convert pdf to word", "editable pdf to word", "pdf to word converter free",
-            "pdf to word accurate layout", "scanned pdf to word ocr", "convert pdf to editable docx",
-            "retain layout pdf to word", "pdf to word converter no sign up", "make pdf editable in word",
+            "convert pdf to editable docx", "pdf to word converter no sign up", "make pdf editable in word",
             "convertify free pdf to word", "pdf to word online free no download"
         ],
-        h1: "Convertify PDF to Word - Editable & Accurate",
+        h1: "Convertify PDF to Word - Free & Private",
         faqs: [
             {
                 question: "Will the Word document look like my original PDF?",
-                answer: "Yes. Our conversion engine uses advanced Optical Character Recognition (OCR) and layout analysis to preserve your original fonts, images, and column structures perfectly."
+                answer: "The text content converts accurately, but this tool extracts text only — images, exact fonts, and complex multi-column layouts are not preserved. Treat the output as an editable starting point, not a pixel-perfect copy."
             },
             {
                 question: "Can I edit the text in the converted Word file?",
-                answer: "Absolutely. Unlike basic tools that give you text in separate boxes, our engine identifies paragraph flow and table structures so you can edit the content naturally."
+                answer: "Yes. The output is a standard .docx with your PDF's text laid out in paragraphs, ready to edit in Word, Google Docs, or LibreOffice."
             },
             {
                 question: "Does it work on scanned PDFs?",
-                answer: "Yes! Our built-in OCR automatically detects scanned images and converts the text into selectable, editable characters."
+                answer: "No — this tool reads the text layer already embedded in a PDF. Scanned or image-only PDFs have no text layer, so nothing will be extracted. Run the OCR PDF tool first to add a text layer, then convert."
             }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Drag and drop your PDF. Scanned documents are supported automatically." },
-            { name: "Convert to DOCX", text: "We analyze the file and recreate it as an editable Word document." },
-            { name: "Download", text: "Get your fully editable Word file instantly." }
+            { name: "Upload PDF", text: "Drag and drop your PDF (must have a text layer, not a scanned image)." },
+            { name: "Convert to DOCX", text: "We extract the text from every page and build an editable Word document." },
+            { name: "Download", text: "Get your Word file instantly." }
         ]
     },
 
@@ -914,71 +910,53 @@ export const toolSeoData = {
         ]
     },
     "protect-pdf": {
-        title: "Protect PDF Free — Password & AES-256 Encryption",
-        description: "Convertify Protect PDF — secure your PDF with military-grade AES-256 encryption. Client-side protection, your password never touches a server. No download needed, 100% private and free.",
+        title: "Protect PDF — Coming Soon",
+        description: "Convertify Protect PDF — real client-side password protection is in development. Check back soon, or explore our other free PDF tools in the meantime.",
         keywords: [
             "convertify protect pdf", "password protect pdf", "encrypt pdf", "secure pdf", "lock pdf", "pdf password", "protect pdf online free",
             "add password to pdf", "pdf encryption", "aes-256 pdf protection", "secure pdf for email",
             "prevent pdf printing", "disable pdf copying", "lock pdf editing", "bank grade pdf security",
             "private pdf protector", "client side pdf encryption", "secure financial documents", "protect legal pdfs"
         ],
-        h1: "Convertify Protect PDF - AES-256 Encryption Free",
+        h1: "Protect PDF — Coming Soon",
         faqs: [
             {
-                question: "Is it safe to type my password into an online tool?",
-                answer: "With Convertify, yes. Unlike other tools that upload your file to a server, our encryption happens locally in your browser. Your password and document never leave your device, making it 'Financial Safe'."
+                question: "Is this tool available yet?",
+                answer: "Not yet — real client-side PDF password protection is still in development. This page will be updated once it's ready."
             },
             {
-                question: "What encryption standard do you use?",
-                answer: "We use 128-bit and 256-bit AES (Advanced Encryption Standard), which is the industry's military-grade benchmark for securing sensitive information."
-            },
-            {
-                question: "Can I prevent someone from printing my PDF?",
-                answer: "Yes. You can set a 'Permissions Password' that specifically disables printing, copying text, or modifying the document structure while still allowing it to be viewed."
-            },
-            {
-                question: "What if I forget the password?",
-                answer: "Because we prioritize security and don't store your data, there is no 'recovery' option. We recommend using a password manager for your protected files."
+                question: "Will it be safe to type my password into this tool?",
+                answer: "Yes — when it ships, encryption will happen entirely in your browser. Your password and document will never be uploaded to a server."
             }
         ],
         howToSteps: [
-            { name: "Upload", text: "Select your sensitive PDF document." },
-            { name: "Secure", text: "Set your password and choose print/copy permissions." },
-            { name: "Download", text: "Save your encrypted, military-grade PDF." }
+            { name: "Coming Soon", text: "This tool is still in development." },
+            { name: "In the Meantime", text: "Explore Convertify's other free PDF tools." },
+            { name: "Check Back", text: "We'll update this page once it's ready." }
         ]
     },
     "unlock-pdf": {
-        title: "Unlock PDF Free Online — Remove Password & Restrictions",
-        description: "Convertify Unlock PDF — remove printing, copying, and editing restrictions instantly. Regain access to permission-locked documents. No download needed, 100% secure and free.",
+        title: "Unlock PDF — Coming Soon",
+        description: "Convertify Unlock PDF — real client-side PDF unlocking is in development. Check back soon, or explore our other free PDF tools in the meantime.",
         keywords: [
-            "convertify unlock pdf", "unlock pdf", "remove pdf password", "pdf password remover", "unprotect pdf", "remove password from pdf without acrobat",
-            "unlock secured pdf for printing online", "decrypt pdf", "unlock pdf online free", "remove pdf security",
-            "enable pdf printing locked", "copy text from locked pdf", "remove editing restrictions pdf",
-            "bypass pdf owner password", "unlock pdf for google docs", "remove pdf permissions free", "unlock pdf free no download"
+            "convertify unlock pdf", "unlock pdf", "remove pdf password", "pdf password remover", "unprotect pdf",
+            "decrypt pdf", "unlock pdf online free", "remove pdf security", "unlock pdf free no download"
         ],
-        h1: "Convertify Unlock PDF - Remove Restrictions Free",
+        h1: "Unlock PDF — Coming Soon",
         faqs: [
             {
-                question: "What is the difference between an Open Password and a Permission Password?",
-                answer: "An 'Open Password' locks the whole file from view. A 'Permission Password' (or Owner Password) allows viewing but restricts printing, copying, or editing. Convertify can remove permission restrictions instantly."
+                question: "Is this tool available yet?",
+                answer: "Not yet — real client-side PDF unlocking is still in development. This page will be updated once it's ready."
             },
             {
-                question: "Can you unlock a PDF if I totally lost the Open Password?",
-                answer: "For your security, we don't use 'brute-force' methods. If the file is encrypted with an Open Password, you must provide it once to authorize the removal of protection. We prioritize legal document integrity."
-            },
-            {
-                question: "Will unlocking a PDF reduce its quality?",
-                answer: "No. Unlocking is a metadata operation that flips the security flag. Your text, images, and formatting remain 100% identical to the original."
-            },
-            {
-                question: "Is it secure for my confidential files?",
-                answer: "Completely. The 'unlocking' logic runs in your browser's memory. Your file is never uploaded to a cloud server, ensuring your sensitive data remains under your control."
+                question: "Will it be safe to use on my confidential files?",
+                answer: "Yes — when it ships, unlocking will run entirely in your browser. Your file will never be uploaded to a server."
             }
         ],
         howToSteps: [
-            { name: "Upload", text: "Select the locked PDF file." },
-            { name: "Unlock", text: "Enter password (if required) to authorize restriction removal." },
-            { name: "Download", text: "Save your fully accessible, unlocked PDF." }
+            { name: "Coming Soon", text: "This tool is still in development." },
+            { name: "In the Meantime", text: "Explore Convertify's other free PDF tools." },
+            { name: "Check Back", text: "We'll update this page once it's ready." }
         ]
     },
     "watermark-pdf": {
@@ -1015,32 +993,31 @@ export const toolSeoData = {
         ]
     },
     "html-to-pdf": {
-        title: "HTML to PDF - High-Fidelity Web Page Preservation",
-        description: "Convert HTML files and web pages to professional PDF documents. Preserves complex CSS layouts, media queries, and clickable hyperlinks perfectly. Secure and free.",
+        title: "HTML to PDF Converter - Paste Code, Get a PDF",
+        description: "Paste HTML source and convert it to a downloadable PDF. Convertify extracts the text content and lays it out on clean, paginated pages, right in your browser.",
         keywords: [
-            "html to pdf", "convert html to pdf", "web page to pdf", "save webpage as pdf", "webpage to pdf converter",
-            "convert website to pdf", "html to pdf online free", "css native pdf rendering", "preserve web layout in pdf",
-            "save website with working links", "bulk html to pdf conversion"
+            "html to pdf", "convert html to pdf", "html code to pdf", "html to pdf online free",
+            "paste html to pdf", "html snippet to pdf", "html to pdf converter free"
         ],
-        h1: "HTML to PDF - High-Fidelity Web Snapshots",
+        h1: "HTML to PDF Converter",
         faqs: [
             {
-                question: "Does it preserve clickable links from the original website?",
-                answer: "Yes! All internal and external hyperlinks are preserved in the PDF output, allowing readers to navigate your content just like on the live web."
+                question: "Does it preserve clickable links from the original HTML?",
+                answer: "No. This tool extracts the plain text from your HTML and lays it out on the page — links, images, and CSS styling are not carried over to the PDF."
             },
             {
                 question: "Can it handle complex CSS and modern layouts?",
-                answer: "Absolutely. Our engine uses a modern browser-based renderer to ensure that Flexbox, Grid, and other CSS3 styles are honored exactly as they appear in a browser."
+                answer: "No — this is a text-only converter. It strips HTML tags and lays out the remaining text on paginated pages. For a pixel-perfect visual capture of a real page, use your browser's built-in Print → Save as PDF."
             },
             {
-                question: "Is there a limit on web page length?",
-                answer: "No. Our tool automatically divides long web pages into logical A4 or Letter sections while ensuring text and images aren't cut in half awkwardly."
+                question: "Can I convert a live web page by URL?",
+                answer: "Not currently. Browsers block client-side tools from fetching another site's content (CORS), so paste the HTML source directly instead."
             }
         ],
         howToSteps: [
-            { name: "Upload or URL", text: "Paste your HTML code or provide the URL of the web page." },
-            { name: "Render", text: "Our engine captures the styling and layout using native CSS rendering." },
-            { name: "Download", text: "Save your pixel-perfect PDF document." }
+            { name: "Paste HTML", text: "Paste your HTML source code into the text box." },
+            { name: "Convert", text: "Convertify strips the markup and lays the text out on paginated pages." },
+            { name: "Download", text: "Save your PDF document." }
         ]
     },
     "delete-pdf-pages": {

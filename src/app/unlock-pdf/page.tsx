@@ -1,6 +1,5 @@
 ﻿import { Metadata } from "next"
-import { ToolSwapper } from "@/components/tools/tool-swapper"
-import UnlockPdfClient from "./client"
+import { ComingSoonTool } from "@/components/tools/coming-soon-tool"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
@@ -18,6 +17,7 @@ export const metadata: Metadata = {
     title: seoData.title,
     description: seoData.description,
     keywords: seoData.keywords,
+    robots: { index: false, follow: true },
     alternates: {
         canonical: "https://convertify.work/unlock-pdf",
     },
@@ -50,8 +50,7 @@ export default function Page() {
                         Convertify Unlock PDF — remove restrictions and passwords instantly. No download needed, 100% secure and free.
                     </p>
                 </div>
-                <ToolSwapper />
-                <UnlockPdfClient />
+                <ComingSoonTool />
             </section>
 
             {/* SEO Content Section */}

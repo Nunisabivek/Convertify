@@ -46,7 +46,7 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Convert web pages and HTML code to PDF documents. Perfect for saving articles, documentation, and web content.
+                        Paste any HTML code and convert it to a PDF document. Perfect for saving snippets, documentation, and generated markup.
                     </p>
                 </div>
                 <HtmlToPdfClient />

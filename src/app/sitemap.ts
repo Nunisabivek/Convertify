@@ -19,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         'pdf-to-jpg', 'jpg-to-pdf',
         'pdf-to-png', 'png-to-pdf',
         'excel-to-pdf',
-        'rotate-pdf', 'protect-pdf', 'unlock-pdf',
+        'rotate-pdf',
         'add-page-numbers',
         'watermark-pdf',
         'organize-pdf',
@@ -43,8 +43,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: 'about', priority: 0.4 },
     ]
 
-    // Bumped on 2026-07-02 after major quality-focused overhaul.
-    const lastUpdated = '2026-07-02'
+    // Bumped on 2026-07-12: protect-pdf/unlock-pdf removed (were fake —
+    // no real encryption), pdf-to-word/word-to-pdf/html-to-pdf rebuilt with
+    // real conversions, and inflated marketing copy corrected sitewide.
+    const lastUpdated = '2026-07-12'
 
     return [
         {

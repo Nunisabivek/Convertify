@@ -1,20 +1,18 @@
 'use client'
 
 import { useState } from "react"
-import { Code, FileDown, Loader2, AlertCircle, Link as LinkIcon } from "lucide-react"
+import { Code, FileDown, Loader2, AlertCircle } from "lucide-react"
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib"
 import { AdBanner } from "@/components/ads/banner"
 
 export default function HtmlToPdfClient() {
     const [htmlContent, setHtmlContent] = useState("")
-    const [url, setUrl] = useState("")
-    const [activeTab, setActiveTab] = useState<"html" | "url">("url")
     const [isConverting, setIsConverting] = useState(false)
     const [error, setError] = useState<string | null>(null)
 
     const convertToPdf = async () => {
-        if ((!htmlContent && activeTab === "html") || (!url && activeTab === "url")) {
-            setError("Please provide HTML content or a URL")
+        if (!htmlContent) {
+            setError("Please paste some HTML code")
             return
         }
 
@@ -29,13 +27,8 @@ export default function HtmlToPdfClient() {
             const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
             const fontSize = 12
 
-            let content = htmlContent
-            if (activeTab === "url") {
-                content = `Content from: ${url}\n\nNote: For full HTML rendering, please use the HTML input option or a server-side conversion tool.`
-            }
-
             // Remove HTML tags for simple text rendering (simplified version)
-            const plainText = content.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+            const plainText = htmlContent.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
 
             // Split text into lines that fit the page width
             const maxWidth = width - 100
@@ -89,7 +82,7 @@ export default function HtmlToPdfClient() {
 
             const link = document.createElement("a")
             link.href = downloadUrl
-            link.download = activeTab === "url" ? "webpage.pdf" : "html-content.pdf"
+            link.download = "html-content.pdf"
             link.click()
         } catch (err) {
             console.error(err)
@@ -101,61 +94,20 @@ export default function HtmlToPdfClient() {
 
     return (
         <div className="w-full max-w-4xl mx-auto px-4">
-            {/* Tabs */}
-            <div className="flex gap-2 mb-6">
-                <button
-                    onClick={() => setActiveTab("url")}
-                    className={`flex-1 py-3 px-6 rounded-lg font-semibold transition-all ${activeTab === "url"
-                        ? "bg-rose-600 text-white shadow-lg"
-                        : "bg-white text-slate-600 border border-slate-200 hover:border-rose-300"
-                        }`}
-                >
-                    <LinkIcon className="w-5 h-5 inline mr-2" />
-                    From URL
-                </button>
-                <button
-                    onClick={() => setActiveTab("html")}
-                    className={`flex-1 py-3 px-6 rounded-lg font-semibold transition-all ${activeTab === "html"
-                        ? "bg-rose-600 text-white shadow-lg"
-                        : "bg-white text-slate-600 border border-slate-200 hover:border-rose-300"
-                        }`}
-                >
-                    <Code className="w-5 h-5 inline mr-2" />
-                    From HTML
-                </button>
-            </div>
-
-            {/* URL Input */}
-            {activeTab === "url" && (
-                <div className="mb-6">
-                    <label className="block text-sm font-semibold text-slate-700 mb-2">
-                        Enter Website URL
-                    </label>
-                    <input
-                        type="url"
-                        value={url}
-                        onChange={(e) => setUrl(e.target.value)}
-                        placeholder="https://example.com"
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent"
-                    />
-                </div>
-            )}
-
             {/* HTML Input */}
-            {activeTab === "html" && (
-                <div className="mb-6">
-                    <label className="block text-sm font-semibold text-slate-700 mb-2">
-                        Paste Your HTML Code
-                    </label>
-                    <textarea
-                        value={htmlContent}
-                        onChange={(e) => setHtmlContent(e.target.value)}
-                        placeholder="<html><body><h1>Hello World</h1></body></html>"
-                        rows={12}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent font-mono text-sm"
-                    />
-                </div>
-            )}
+            <div className="mb-6">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    <Code className="w-4 h-4 inline mr-1" />
+                    Paste Your HTML Code
+                </label>
+                <textarea
+                    value={htmlContent}
+                    onChange={(e) => setHtmlContent(e.target.value)}
+                    placeholder="<html><body><h1>Hello World</h1></body></html>"
+                    rows={12}
+                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent font-mono text-sm"
+                />
+            </div>
 
             {/* Ad Banner */}
             <div className="my-6 flex justify-center">
@@ -197,7 +149,7 @@ export default function HtmlToPdfClient() {
                 <ul className="space-y-2 text-slate-600">
                     <li className="flex items-start gap-2">
                         <span className="text-rose-600 font-bold">•</span>
-                        <span>Enter a website URL or paste your HTML code</span>
+                        <span>Paste your HTML code into the box above</span>
                     </li>
                     <li className="flex items-start gap-2">
                         <span className="text-rose-600 font-bold">•</span>
