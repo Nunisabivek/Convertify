@@ -1,9 +1,10 @@
 import Link from 'next/link'
-import { BlogPost } from '@/lib/blog-data'
 
+// Only the card fields are needed, so this accepts both blogPosts entries
+// and the lighter staticBlogPosts entries (hand-written route files).
 interface RelatedBlogPostsProps {
     toolSlug: string
-    posts: BlogPost[]
+    posts: { slug: string; title: string; excerpt: string; readingTime: number }[]
     title?: string
 }
 

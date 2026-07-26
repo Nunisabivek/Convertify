@@ -14,7 +14,7 @@ import { AnswerBlock } from "@/components/seo/answer-block"
 import { PostActionAd } from "@/components/ads/post-action-ad"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
-import { blogPosts } from "@/lib/blog-data"
+import { allIndexableBlogPosts } from "@/lib/blog-data"
 import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
 
 const seoData = toolSeoData["compress-pdf"]
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
     const relatedBlogSlugs = getBlogPostsForTool('compress-pdf')
-    const relatedBlogs = blogPosts.filter(post => relatedBlogSlugs.includes(post.slug))
+    const relatedBlogs = allIndexableBlogPosts.filter(post => relatedBlogSlugs.includes(post.slug))
 
     return (
         <div className="flex flex-col items-center">

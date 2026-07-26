@@ -217,15 +217,15 @@ export const toolContentData: Record<string, {
         keywords: ["pdf to excel converter free online", "extract tables from pdf to excel", "convert pdf to xlsx free", "pdf data to spreadsheet"]
     },
     "excel-to-pdf": {
-        description: "Convertify Excel to PDF converter free — convert XLS and XLSX to PDF online, no Excel required. The best Excel to PDF converter that preserves all your charts, formatting, cell borders, and clickable links perfectly. Works on any device (Windows, Mac, mobile) without installing software. Secure browser-based processing means your financial spreadsheets never leave your device.",
+        description: "Convert XLS and XLSX spreadsheets to PDF in your browser, with no Microsoft Excel needed. Convertify reads the cell values from your sheet and lays them out as a clean, readable table across paginated PDF pages. Your spreadsheet is processed locally and never uploaded to a server.",
         features: [
             "Convert XLS and XLSX to PDF without Microsoft Excel",
-            "Preserves charts, graphs, and data visualizations",
-            "Maintains cell formatting, borders, and column widths",
-            "Keeps clickable links functional in the PDF",
+            "Cell values laid out as a clean, readable table",
+            "Automatic pagination for long sheets",
             "No sign-up, no watermarks, completely free",
-            "Works on Windows, Mac, and mobile devices",
-            "Secure - files never uploaded to any server"
+            "Works on Windows, Mac, and mobile browsers",
+            "Secure: the file never leaves your device",
+            "Note: This is a values-only export. Charts, images, cell formatting, borders, formulas and hyperlinks are not carried into the PDF — you get the data, not the styling.",
         ],
         useCases: [
             "Converting XLS financial reports to PDF",
@@ -278,14 +278,15 @@ export const toolContentData: Record<string, {
         keywords: ["pdf to png converter free online", "convert pdf to high quality png", "extract pdf pages as images", "pdf to png no watermark"]
     },
     "watermark-pdf": {
-        description: "Add professional, unremovable watermarks to your PDF files with Convertify. Whether you need an opaque 'CONFIDENTIAL' stamp or a subtle 'Soft Brand' logo, our tool allows you to control opacity and position with precision. Use our 'Injection' technology to flatten watermarks into the document layer, making them significantly harder to remove than standard overlays.",
+        description: "Stamp a text watermark across every page of a PDF with Convertify. Set the wording, colour, font size and opacity, and the stamp is drawn diagonally across the centre of each page — useful for CONFIDENTIAL and DRAFT marks or light brand text. Everything runs in your browser, so the document is never uploaded.",
         features: [
-            "Unremovable Injection: Flatten watermarks into the PDF content",
-            "Opacity Control: Fine-tune transparency for 'Soft Branding'",
-            "Custom Logos: Upload any JPG/PNG image as a watermark",
-            "Batch Stamping: Apply watermarks to all pages instantly",
-            "Full Customization: Adjust font, size, rotation, and color",
-            "Secure & Private: Files are processed locally, never uploaded"
+            "Text watermark applied to every page in one pass",
+            "Opacity control for subtle 'soft branding' or a bold stamp",
+            "Pick any colour and font size",
+            "Drawn diagonally across the page centre",
+            "No sign-up, no watermark of ours added on top",
+            "Secure and private: the file is processed locally, never uploaded",
+            "Note: Image/logo watermarks are not supported yet. A PDF watermark is a deterrent, not a lock — someone with the right tools can remove it.",
         ],
         useCases: [
             "Adding 'CONFIDENTIAL' stamps to sensitive reports",
@@ -763,16 +764,15 @@ export const toolContentData: Record<string, {
         keywords: ["xml to json", "convert xml to json", "xml to json converter", "xml to json online", "xml to json free", "xml parser to json", "xml to json online free", "xml to json converter free", "xml data to json", "parse xml to json", "xml to json transformer"]
     },
     "markdown-to-pdf": {
-        description: "Convert Markdown files to beautifully formatted PDF documents with Convertify. Our renderer supports full GitHub Flavored Markdown including tables, code blocks with syntax highlighting, task lists, and embedded images. Generate professional documentation, reports, and manuscripts from plain text Markdown with customizable styling and page layout options.",
+        description: "Turn a Markdown file or pasted Markdown into a styled PDF. Convertify renders headings, lists, links, bold and italic text, blockquotes, horizontal rules and fenced code blocks with a clean document stylesheet, showing you a live preview as you type. Everything is processed in your browser.",
         features: [
-            "GitHub Flavored Markdown: Full GFM support including tables and task lists",
-            "Syntax Highlighting: Beautiful code block rendering for 50+ languages",
-            "Custom Styling: Choose fonts, margins, and page sizes for your PDF",
-            "Table of Contents: Auto-generate TOC from Markdown headings",
-            "Image Support: Embeds linked and inline images into the PDF",
-            "Math Rendering: Supports LaTeX math equations and formulas",
-            "Page Headers/Footers: Add custom headers, footers, and page numbers",
-            "100% Private: Conversion happens entirely in your browser"
+            "Headings, paragraphs, ordered and unordered lists",
+            "Bold, italic, inline code and fenced code blocks",
+            "Links, blockquotes and horizontal rules",
+            "Live preview beside the editor as you type",
+            "Upload a .md file or paste Markdown directly",
+            "100% private: nothing is uploaded",
+            "Note: Tables, task lists, syntax highlighting, LaTeX math and embedded images are not supported. Export opens your browser's print dialog — choose 'Save as PDF' there.",
         ],
         useCases: [
             "Generating professional PDF documentation from README files",
@@ -807,16 +807,14 @@ export const toolContentData: Record<string, {
         keywords: ["base64 encoder", "base64 decoder", "base64 encode", "base64 decode", "base64 converter", "base64 to text", "text to base64", "base64 online", "base64 encode online", "base64 decode online", "image to base64", "base64 to image"]
     },
     "qr-code-generator": {
-        description: "Generate custom QR codes instantly with Convertify. Create scannable QR codes for URLs, text, WiFi credentials, vCards, and more with full customization of colors, size, and error correction levels. Download in PNG or SVG format for both digital and print use. All generation happens locally in your browser for complete privacy.",
+        description: "Generate a scannable QR code for any URL or text and download it as a PNG. Pick the output size — 256, 400, 512 or 1024 pixels — and save it straight to your device. No sign-up, no account, and no limit on how many you make.",
         features: [
-            "Multiple Data Types: URLs, text, WiFi, vCard, email, and SMS",
-            "Custom Colors: Set foreground and background colors to match branding",
-            "Size Control: Generate QR codes from 128px to 2048px resolution",
-            "Error Correction: Choose from L, M, Q, or H correction levels",
-            "SVG Export: Download vector QR codes for perfect print quality",
-            "Logo Embedding: Add a custom logo or icon to the center of QR codes",
-            "Batch Generation: Create multiple QR codes from a list of inputs",
-            "100% Private: QR codes are generated entirely in your browser"
+            "Encode any URL or text, up to 4000 characters",
+            "Choose an output size from 256px up to 1024px",
+            "Live preview before you download",
+            "Download as PNG, ready for print or screen",
+            "Free with no sign-up and no usage limit",
+            "Note: QR images are rendered by the third-party goqr.me API, so unlike our PDF tools the text you encode does leave your device. Colour customisation, centre logos, error-correction control and SVG export are not supported.",
         ],
         useCases: [
             "Creating QR codes for business cards and marketing materials",

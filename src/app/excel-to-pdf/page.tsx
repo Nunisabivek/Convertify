@@ -6,6 +6,9 @@ import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
+import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
+import { allIndexableBlogPosts } from "@/lib/blog-data"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
 import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { AnswerBlock } from "@/components/seo/answer-block"
@@ -39,6 +42,9 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
+    const relatedBlogSlugs = getBlogPostsForTool('excel-to-pdf')
+    const relatedBlogs = allIndexableBlogPosts.filter(post => relatedBlogSlugs.includes(post.slug))
+
     return (
         <div className="flex flex-col items-center">
 
@@ -93,6 +99,12 @@ export default function Page() {
             <FAQSchema
                 toolName="Excel to PDF Conversion"
                 faqs={seoData.faqs}
+            />
+
+            <RelatedBlogPosts
+                toolSlug="excel-to-pdf"
+                posts={relatedBlogs}
+                title="📚 Guides: Spreadsheets to PDF"
             />
 
             <RelatedTools currentTool="/excel-to-pdf" />

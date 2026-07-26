@@ -1,19 +1,13 @@
 import { Metadata } from "next"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import { ComingSoonTool } from "@/components/tools/coming-soon-tool"
-import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
-import { ToolSeoContent } from "@/components/seo/tool-seo-content"
-import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
-import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 
 const toolName = "pdf-to-powerpoint"
 const seoData = toolSeoData[toolName]
-const contentData = toolContentData[toolName]
 
 export const metadata: Metadata = {
     title: seoData.title,
@@ -68,30 +62,6 @@ export default function Page() {
                 <ToolSwapper />
                 <ComingSoonTool />
             </section>
-
-            {/* SEO Content Section */}
-            <ToolSeoContent
-                toolName="PDF to PowerPoint Converter"
-                toolSlug={toolName}
-                description={contentData.description}
-                features={contentData.features}
-                useCases={contentData.useCases}
-                keywords={contentData.keywords}
-            />
-
-            {/* Long-form guide */}
-            <ToolDeepGuide toolSlug="pdf-to-powerpoint" toolName="PDF to PowerPoint Converter" />
-
-            <HowToSchema
-                toolName={seoData.title}
-                description={seoData.description}
-                steps={seoData.howToSteps}
-            />
-
-            <FAQSchema
-                toolName={seoData.h1}
-                faqs={seoData.faqs}
-            />
 
             <RelatedTools currentTool={`/${toolName}`} />
         </div>

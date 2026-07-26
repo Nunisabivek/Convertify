@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Metadata } from "next"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { AdBanner } from "@/components/ads/banner"
-import { blogPosts, blogContentCalendar } from "@/lib/blog-data"
+import { allIndexableBlogPosts } from "@/lib/blog-data"
 import { ArrowRight, Calendar, Clock, Tag, BookOpen } from "lucide-react"
 
 export const metadata: Metadata = {
@@ -21,8 +21,11 @@ export const metadata: Metadata = {
 }
 
 export default function BlogIndexPage() {
-    // Sort posts by date (newest first)
-    const sortedPosts = [...blogPosts].sort((a, b) =>
+    // Sort posts by date (newest first). Lists only posts that are actually
+    // indexable — thin noindex posts were being linked from here, which both
+    // wasted crawl budget and inflated the article count with pages Google
+    // is told to ignore.
+    const sortedPosts = [...allIndexableBlogPosts].sort((a, b) =>
         new Date(b.date).getTime() - new Date(a.date).getTime()
     )
 
@@ -66,7 +69,7 @@ export default function BlogIndexPage() {
                 <div className="max-w-4xl mx-auto">
                     <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-100 rounded-full text-indigo-700 text-sm font-medium mb-6">
                         <BookOpen className="w-4 h-4" />
-                        {blogPosts.length} Articles & Growing
+                        {sortedPosts.length} Articles & Growing
                     </div>
                     <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
                         PDF Tips & Tutorials
@@ -155,22 +158,6 @@ export default function BlogIndexPage() {
                                     </CardContent>
                                 </Card>
                             </Link>
-                        ))}
-                    </div>
-                </section>
-
-                {/* Upcoming Topics Preview */}
-                <section className="bg-slate-100 rounded-2xl p-8">
-                    <div className="text-center mb-8">
-                        <h2 className="text-2xl font-bold text-slate-900 mb-2">Coming Soon</h2>
-                        <p className="text-slate-600">We're working on these helpful guides</p>
-                    </div>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {blogContentCalendar.slice(0, 6).map((item, index) => (
-                            <div key={index} className="p-4 bg-white rounded-xl border border-slate-200">
-                                <span className="text-xs font-medium text-slate-400">Coming Day {item.day}</span>
-                                <p className="mt-1 font-medium text-slate-700 line-clamp-2">{item.topic}</p>
-                            </div>
                         ))}
                     </div>
                 </section>

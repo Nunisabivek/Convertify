@@ -12,7 +12,7 @@ import { ToolSeoContent } from "@/components/seo/tool-seo-content"
 import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
-import { blogPosts } from "@/lib/blog-data"
+import { allIndexableBlogPosts } from "@/lib/blog-data"
 import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
 
 const seoData = toolSeoData["jpg-to-pdf"]
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
     const relatedBlogSlugs = getBlogPostsForTool('jpg-to-pdf')
-    const relatedBlogs = blogPosts.filter(post => relatedBlogSlugs.includes(post.slug))
+    const relatedBlogs = allIndexableBlogPosts.filter(post => relatedBlogSlugs.includes(post.slug))
 
     return (
         <div className="flex flex-col items-center">

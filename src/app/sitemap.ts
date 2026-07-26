@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { indexableBlogPosts } from '@/lib/blog-data'
+import { allIndexableBlogPosts } from '@/lib/blog-data'
 
 export const dynamic = 'force-static'
 
@@ -43,10 +43,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: 'about', priority: 0.4 },
     ]
 
-    // Bumped on 2026-07-12: protect-pdf/unlock-pdf removed (were fake —
-    // no real encryption), pdf-to-word/word-to-pdf/html-to-pdf rebuilt with
-    // real conversions, and inflated marketing copy corrected sitewide.
-    const lastUpdated = '2026-07-12'
+    // Bumped on 2026-07-26: 6 orphaned hand-written blog posts re-attached,
+    // titles/descriptions trimmed to SERP width, remaining false capability
+    // claims removed.
+    const lastUpdated = '2026-07-26'
 
     return [
         {
@@ -73,8 +73,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly' as const,
             priority: 0.7,
         })),
-        // Only blog posts with substantial unique content (350+ words)
-        ...indexableBlogPosts.map(post => ({
+        // Blog posts with substantial unique content (350+ words), plus the
+        // hand-written posts that live as their own route files — those were
+        // orphaned out of the sitemap entirely until 2026-07-26.
+        ...allIndexableBlogPosts.map(post => ({
             url: `${baseUrl}/blog/${post.slug}`,
             lastModified: post.date || lastUpdated,
             changeFrequency: 'monthly' as const,

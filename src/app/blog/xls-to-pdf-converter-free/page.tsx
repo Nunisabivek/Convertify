@@ -7,7 +7,7 @@ import { AuthorByline } from "@/components/seo/author-byline"
 
 export const metadata: Metadata = {
     title: "XLS to PDF Converter Free — Convert Excel (.xls) to PDF Online",
-    description: "Convert XLS to PDF in your browser — free, no watermark, no Excel install needed. Preserves charts, formulas, cell borders, and links. Works on Windows, Mac, iPhone & Android.",
+    description: "Convert XLS to PDF in your browser — free, no watermark, no Excel install needed. A values-only export of your sheet data. Works on Windows, Mac, iPhone & Android.",
     keywords: [
         "xls to pdf",
         "xls to pdf converter",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     },
     openGraph: {
         title: "XLS to PDF Converter Free — Convert Excel (.xls) to PDF Online",
-        description: "How to convert XLS to PDF in seconds, free, in your browser. Charts and formulas preserved, no Microsoft Excel needed.",
+        description: "How to convert XLS to PDF in seconds, free, in your browser — and exactly what does and doesn't survive the trip. No Microsoft Excel needed.",
         url: "https://convertify.work/blog/xls-to-pdf-converter-free",
         type: "article",
         publishedTime: "2026-04-26T00:00:00.000Z",
@@ -42,31 +42,31 @@ export const metadata: Metadata = {
 const faqs = [
     {
         question: "How do I convert XLS to PDF for free?",
-        answer: "Open Convertify's Excel to PDF converter, drop your .xls file in, and click Convert. The PDF downloads instantly with charts, formulas, and formatting preserved — no sign-up, no watermark, no Microsoft Excel needed. Files stay in your browser.",
+        answer: "Open Convertify's Excel to PDF converter, drop your .xls file in, pick the sheet you want, and click Convert. The PDF downloads instantly — no sign-up, no watermark, no Microsoft Excel needed. The file stays in your browser.",
     },
     {
         question: "What's the difference between XLS and XLSX?",
-        answer: "XLS is the older binary Excel format used in Excel 97 through 2003. XLSX is the modern XML-based format introduced in Excel 2007. They look identical to a human, but XLSX is smaller and more reliable. Both convert to identical-quality PDFs in Convertify.",
+        answer: "XLS is the older binary Excel format used in Excel 97 through 2003. XLSX is the modern XML-based format introduced in Excel 2007. They look identical to a human, but XLSX is smaller and more reliable. Convertify reads both.",
     },
     {
-        question: "Will my charts and formulas survive the conversion?",
-        answer: "Yes. Charts are rendered into the PDF as crisp images. Formulas are evaluated to their final values (so the PDF shows the calculated number, not the formula text). Cell borders, fonts, colors, and column widths are all preserved.",
+        question: "Will my charts and formatting survive the conversion?",
+        answer: "No. This is a values-only export: the converter reads the cell values and lays them out as a plain table. Charts, images, cell colours, borders, merged cells and number formatting are not carried over. Formulas are exported as the value they currently show, not as the formula. If you need a visually faithful PDF, use Excel's own File → Export → Create PDF.",
     },
     {
         question: "Do I need Microsoft Excel installed to convert XLS to PDF?",
-        answer: "No. Convertify works entirely in your browser — it can read both .xls and .xlsx files without any Microsoft software. Works on Windows, Mac, Linux, iPhone, and Android.",
+        answer: "No. Convertify works entirely in your browser — it reads both .xls and .xlsx without any Microsoft software. Works on Windows, Mac, Linux, iPhone, and Android.",
     },
     {
         question: "Is it safe to convert sensitive financial XLS files?",
         answer: "Yes. Convertify processes the file 100% in your browser. There is no server upload — you can verify in your browser's DevTools Network tab. Safe for invoices, bank reports, financial models, and confidential spreadsheets.",
     },
     {
-        question: "Can I convert multiple XLS files to PDF at once?",
-        answer: "Yes. Drop multiple .xls or .xlsx files in and Convertify will produce one PDF per spreadsheet. For a single combined PDF from multiple Excel files, convert each one and then use our Merge PDF tool.",
+        question: "Can I convert multiple sheets or multiple XLS files at once?",
+        answer: "One sheet per conversion. Pick a sheet, convert, then repeat for the next one. To end up with a single document, convert each sheet in turn and combine the PDFs with our Merge PDF tool.",
     },
     {
-        question: "How big can the XLS file be?",
-        answer: "There's no hard size limit because the conversion runs locally. Practically, files up to 50MB convert smoothly on a typical laptop. Very large workbooks with thousands of charts may slow down older devices.",
+        question: "Why are some of my columns missing from the PDF?",
+        answer: "The page layout fits seven columns. Anything past the seventh column isn't drawn, and each cell is truncated at 20 characters so the columns stay aligned. Trim or reorder your columns before converting if that clips something important.",
     },
     {
         question: "Can I convert .xls to PDF on my phone?",
@@ -91,7 +91,7 @@ export default function BlogPost() {
                         XLS to PDF Converter Free — Convert Excel (.xls) to PDF Online
                     </h1>
                     <p className="text-xl text-slate-600 mb-6">
-                        Need to convert an old .xls spreadsheet to PDF without buying Excel or uploading sensitive data to a stranger&apos;s server? Here&apos;s the 30-second method, plus what actually happens to your charts, formulas, and formatting.
+                        Need to convert an old .xls spreadsheet to PDF without buying Excel or uploading sensitive data to a stranger&apos;s server? Here&apos;s the 30-second method — and an honest account of what does and doesn&apos;t survive the trip.
                     </p>
                 </header>
 
@@ -103,7 +103,7 @@ export default function BlogPost() {
 
                 <AnswerBlock
                     question="How do I convert XLS to PDF for free?"
-                    answer="Open Convertify's Excel to PDF converter, drop your .xls or .xlsx file in, and click Convert. You'll get a polished PDF in under 10 seconds — charts, formulas, cell borders, and links all preserved. Free, no watermark, no sign-up, no Microsoft Excel needed."
+                    answer="Open Convertify's Excel to PDF converter, drop your .xls or .xlsx file in, pick the sheet, and click Convert. You'll get a PDF in under 10 seconds. It's a values-only export — your data laid out as a clean table, without charts or cell formatting. Free, no watermark, no sign-up, no Microsoft Excel needed."
                 />
 
                 <nav className="bg-white rounded-xl p-6 my-10 shadow-sm border border-slate-200">
@@ -112,7 +112,7 @@ export default function BlogPost() {
                         <li><a href="#quick" className="hover:text-indigo-600">The 30-Second Method</a></li>
                         <li><a href="#why" className="hover:text-indigo-600">Why Convert XLS to PDF?</a></li>
                         <li><a href="#xls-vs-xlsx" className="hover:text-indigo-600">XLS vs XLSX: What Actually Changes</a></li>
-                        <li><a href="#charts" className="hover:text-indigo-600">What Happens to Charts &amp; Formulas?</a></li>
+                        <li><a href="#charts" className="hover:text-indigo-600">What Survives the Conversion (and What Doesn&apos;t)</a></li>
                         <li><a href="#mobile" className="hover:text-indigo-600">Converting XLS to PDF on iPhone &amp; Android</a></li>
                         <li><a href="#alternatives" className="hover:text-indigo-600">Comparison: Convertify vs Excel vs Smallpdf</a></li>
                         <li><a href="#troubleshooting" className="hover:text-indigo-600">Troubleshooting</a></li>
@@ -126,9 +126,10 @@ export default function BlogPost() {
                     <ol>
                         <li>Open <Link href="/excel-to-pdf" className="text-indigo-600 hover:underline font-medium">Convertify&apos;s Excel to PDF converter</Link>.</li>
                         <li>Drag your .xls (or .xlsx) file into the upload area, or tap to pick it from your device.</li>
+                        <li>Pick which sheet to convert — a preview of the first ten rows appears so you can check you got the right tab.</li>
                         <li>Click <strong>Convert</strong>. Your PDF downloads in seconds.</li>
                     </ol>
-                    <p>That&apos;s it. The PDF will keep your tables, charts, formatting, fonts, and clickable links — just like Excel&apos;s built-in &quot;Save as PDF.&quot; The only difference is you don&apos;t need to own Excel.</p>
+                    <p>What you get is a values export: your cell data laid out as a clean table across paginated pages, with the first row bolded as a header. It is not a picture of your spreadsheet — read the next section before you rely on it for anything with charts or heavy formatting.</p>
 
                     <h2 id="why" className="text-2xl font-bold text-slate-900 mt-8 mb-4">Why Convert XLS to PDF?</h2>
                     <p>Excel files are great for working — bad for sending. Common reasons people convert XLS to PDF:</p>
@@ -147,17 +148,25 @@ export default function BlogPost() {
                         <li><strong>.xls files have a 65,536-row limit per sheet</strong> (XLSX raised that to 1,048,576). If your XLS hits that limit, the PDF will too.</li>
                         <li><strong>.xls macros (.xlsm equivalents) won&apos;t run during PDF conversion.</strong> Their last-saved output values are converted, but no fresh recalculation happens.</li>
                     </ul>
-                    <p>Other than that, the visual output is identical. Convertify reads both formats the same way.</p>
+                    <p>Other than that, Convertify reads both formats the same way.</p>
 
-                    <h2 id="charts" className="text-2xl font-bold text-slate-900 mt-8 mb-4">What Happens to Charts &amp; Formulas?</h2>
-                    <p>The most common worry: &quot;Will my pivot chart still look right?&quot; Quick answers:</p>
+                    <h2 id="charts" className="text-2xl font-bold text-slate-900 mt-8 mb-4">What Survives the Conversion (and What Doesn&apos;t)</h2>
+                    <p>Most guides on this topic are vague here, so let&apos;s be specific. Convertify reads the <em>values</em> out of your sheet and draws them as a table. That means:</p>
+                    <p><strong>What comes through:</strong></p>
                     <ul>
-                        <li><strong>Charts</strong> render into the PDF as crisp vector or image data. Bar, line, pie, scatter, area — all render. Custom 3-D charts with rotation may flatten to 2-D in some edge cases.</li>
-                        <li><strong>Formulas</strong> are not stored in the PDF. Instead, the converter evaluates each formula and writes the resulting value into the PDF cell. So a cell showing <code>=SUM(B2:B10)</code> in Excel will show <code>1,247</code> (or whatever the sum is) in the PDF.</li>
-                        <li><strong>Cell formatting</strong> — borders, fills, font sizes, font families, conditional formatting colors — all transfer.</li>
-                        <li><strong>Hyperlinks</strong> remain clickable in the PDF.</li>
-                        <li><strong>Comments / cell notes</strong> are not visible by default in the PDF (they aren&apos;t shown when you print from Excel either).</li>
+                        <li><strong>Cell values</strong>, in their original rows and columns, on paginated pages.</li>
+                        <li><strong>Formula results.</strong> A cell showing <code>=SUM(B2:B10)</code> in Excel appears as <code>1247</code> in the PDF. The formula itself isn&apos;t stored.</li>
+                        <li><strong>The header row</strong>, bolded on a tinted band so the table is readable.</li>
                     </ul>
+                    <p><strong>What does not come through:</strong></p>
+                    <ul>
+                        <li><strong>Charts and images.</strong> Bar, line, pie, pivot charts — none of them are drawn. If your sheet is mostly charts, this is the wrong tool.</li>
+                        <li><strong>Cell formatting</strong> — fills, borders, font families, conditional formatting colours, merged cells and number formats (a currency-formatted cell exports as the raw number).</li>
+                        <li><strong>Hyperlinks.</strong> The link text appears; it isn&apos;t clickable.</li>
+                        <li><strong>Comments and cell notes.</strong></li>
+                    </ul>
+                    <p>There are also two hard limits worth knowing before you convert: <strong>only the first seven columns</strong> fit the page layout, and <strong>each cell is truncated at 20 characters</strong> so the columns stay aligned. Wide sheets and long text cells will get clipped.</p>
+                    <p>If you need a PDF that looks like your spreadsheet rather than one that carries its data, use Excel&apos;s own File → Export → Create PDF, or Google Sheets&apos; File → Download → PDF. Both reproduce the visual layout properly. Convertify&apos;s value here is that it&apos;s free, needs no software, and never sends your figures to a server.</p>
 
                     <h2 id="mobile" className="text-2xl font-bold text-slate-900 mt-8 mb-4">Converting XLS to PDF on iPhone &amp; Android</h2>
                     <p>iOS doesn&apos;t come with anything that opens .xls files, and the &quot;Files → share as PDF&quot; trick only works for files iOS can already preview. Use Convertify in Safari (iOS) or Chrome (Android) — same three-step flow as desktop. The converted PDF saves to your phone&apos;s Files / Downloads folder.</p>
@@ -216,14 +225,17 @@ export default function BlogPost() {
                     </div>
 
                     <h2 id="troubleshooting" className="text-2xl font-bold text-slate-900 mt-8 mb-4">Troubleshooting</h2>
-                    <h3 className="text-xl font-semibold text-slate-800 mt-6 mb-3">Charts look pixelated in the PDF</h3>
-                    <p>Open the .xls in Excel and resize the chart before converting. Charts that are very small in the source spreadsheet render at low resolution in the PDF. Doubling the chart size in Excel before converting fixes this.</p>
+                    <h3 className="text-xl font-semibold text-slate-800 mt-6 mb-3">Columns on the right are missing</h3>
+                    <p>The layout fits seven columns per page and drops anything beyond that. Reorder your sheet so the columns that matter come first, or split a wide sheet into two narrower ones and convert each, then join them with <Link href="/merge-pdf" className="text-indigo-600 hover:underline">Merge PDF</Link>.</p>
 
-                    <h3 className="text-xl font-semibold text-slate-800 mt-6 mb-3">Page breaks split tables awkwardly</h3>
-                    <p>Set explicit page breaks in Excel (Page Layout → Breaks → Insert Page Break) before converting. Or use Page Layout → Print Area → Set Print Area to control what each PDF page contains.</p>
+                    <h3 className="text-xl font-semibold text-slate-800 mt-6 mb-3">Cell text is cut off partway through</h3>
+                    <p>Each cell is truncated at 20 characters. Long descriptions, pasted URLs and free-text notes will be clipped. Shorten those values in the spreadsheet before converting, or move the long-text column out into its own document.</p>
 
-                    <h3 className="text-xl font-semibold text-slate-800 mt-6 mb-3">Some rows / columns are missing from the PDF</h3>
-                    <p>Check Excel&apos;s Print Area in the source file. If a print area is set, only that range gets converted. Clear the print area (Page Layout → Print Area → Clear Print Area) to convert the entire sheet.</p>
+                    <h3 className="text-xl font-semibold text-slate-800 mt-6 mb-3">Only one sheet came out</h3>
+                    <p>That&apos;s by design — one sheet per conversion. Convert each tab in turn, then combine the resulting PDFs with <Link href="/merge-pdf" className="text-indigo-600 hover:underline">Merge PDF</Link>.</p>
+
+                    <h3 className="text-xl font-semibold text-slate-800 mt-6 mb-3">My charts and colours are gone</h3>
+                    <p>Expected — this is a values-only export. For a visually faithful PDF, use Excel&apos;s File → Export → Create PDF or Google Sheets&apos; File → Download → PDF.</p>
 
                     <h3 className="text-xl font-semibold text-slate-800 mt-6 mb-3">PDF is too large to email</h3>
                     <p>Run it through our <Link href="/compress-pdf" className="text-indigo-600 hover:underline">PDF compressor</Link> with the &quot;Medium&quot; setting. Most spreadsheet PDFs compress 60–80% with no visible quality change.</p>
@@ -239,7 +251,7 @@ export default function BlogPost() {
                 <div className="mt-12 p-8 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-2xl text-white text-center">
                     <h2 className="text-2xl font-bold mb-4">Convert Your XLS to PDF Now</h2>
                     <p className="text-lg mb-6 text-emerald-100">
-                        Free, no watermark, no sign-up. Charts and formulas preserved.
+                        Free, no watermark, no sign-up. Your data never leaves your browser.
                     </p>
                     <Link
                         href="/excel-to-pdf"

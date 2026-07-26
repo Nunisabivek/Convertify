@@ -1,17 +1,11 @@
 ﻿import { Metadata } from "next"
 import { ComingSoonTool } from "@/components/tools/coming-soon-tool"
-import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
-import { ToolSeoContent } from "@/components/seo/tool-seo-content"
-import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
-import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 
 const seoData = toolSeoData["unlock-pdf"]
-const contentData = toolContentData["unlock-pdf"]
 
 export const metadata: Metadata = {
     title: seoData.title,
@@ -52,27 +46,6 @@ export default function Page() {
                 </div>
                 <ComingSoonTool />
             </section>
-
-            {/* SEO Content Section */}
-            <ToolSeoContent
-                toolName="Convertify PDF Unlocker"
-                toolSlug="unlock-pdf"
-                description={contentData.description}
-                features={contentData.features}
-                useCases={contentData.useCases}
-                keywords={contentData.keywords}
-            />
-
-            {/* Long-form guide */}
-            <ToolDeepGuide toolSlug="unlock-pdf" toolName="PDF Unlocker" />
-
-            <HowToSchema
-                toolName="Convertify Unlock PDF"
-                description="Learn how to remove password protection from PDF documents using Convertify."
-                steps={seoData.howToSteps}
-            />
-
-            <FAQSchema toolName="PDF Unlocking" faqs={seoData.faqs} />
             <RelatedTools currentTool="/unlock-pdf" />
         </div>
     )

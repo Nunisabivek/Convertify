@@ -53,7 +53,11 @@ const organizationSchema = {
 export const metadata: Metadata = {
   title: {
     default: "Convertify — Free Online PDF Tools (No Upload, No Sign-up)",
-    template: "%s | Convertify",
+    // No " | Convertify" suffix. Google truncates titles around 60 characters
+    // and the brand costs 13 of them on a domain nobody searches by name yet,
+    // pushing the actual keywords out of the visible SERP snippet. Page titles
+    // below carry the brand only where it earns its space.
+    template: "%s",
   },
   description: "40+ free PDF tools: merge, compress, convert, edit & sign PDFs in your browser. Files never leave your device — no uploads, no sign-up, no watermarks. Works on Windows, Mac, iPhone & Android.",
   applicationName: "Convertify",

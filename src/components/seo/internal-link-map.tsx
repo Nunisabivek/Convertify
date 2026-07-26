@@ -9,22 +9,17 @@ import {
     FileImage,
     FileText,
     Sheet,
-    Presentation,
-    FilePenLine,
-    Signature,
     Droplet,
     RotateCw,
-    Lock,
-    LockOpen,
     Grid3x3,
-    FileCheck,
-    FileSearch,
-    FileMinus2,
-    Crop,
     Hash,
     Code,
-    WandSparkles,
-    ScanLine,
+    QrCode,
+    Braces,
+    Ruler,
+    Shrink,
+    FileType,
+    PenLine,
     LucideIcon,
 } from "lucide-react"
 
@@ -36,51 +31,59 @@ interface ToolLink {
     description: string
 }
 
-// Complete list of all 29 tools for 1-click access
+// Only tools that actually work and are in the sitemap. The 13 "coming
+// soon" placeholder tools that used to be listed here (edit-pdf, ocr-pdf,
+// protect-pdf, unlock-pdf, sign-pdf, redact-pdf, crop-pdf, compare-pdf,
+// repair-pdf, pdf-to-excel, pdf-to-powerpoint, powerpoint-to-pdf,
+// pdf-to-pdfa) are all noindex — linking them from the homepage sent both
+// crawlers and real users into dead ends. Add an entry back here only when
+// its tool ships and rejoins the sitemap.
 const allToolLinks: ToolLink[] = [
     // Organize PDF
     { title: "Merge PDF", href: "/merge-pdf", icon: FileStack, color: "text-red-500", description: "Combine multiple PDFs into one" },
     { title: "Split PDF", href: "/split-pdf", icon: Scissors, color: "text-blue-500", description: "Extract pages from PDF" },
     { title: "Organize PDF", href: "/organize-pdf", icon: Grid3x3, color: "text-violet-500", description: "Rearrange & delete pages" },
     { title: "Rotate PDF", href: "/rotate-pdf", icon: RotateCw, color: "text-pink-500", description: "Rotate PDF pages" },
+    { title: "Add Page Numbers", href: "/add-page-numbers", icon: Hash, color: "text-fuchsia-500", description: "Number PDF pages" },
+    { title: "Watermark PDF", href: "/watermark-pdf", icon: Droplet, color: "text-sky-500", description: "Add a watermark" },
 
-    // Optimize PDF
+    // Optimize
     { title: "Compress PDF", href: "/compress-pdf", icon: Minimize2, color: "text-green-500", description: "Reduce PDF file size" },
-    { title: "Repair PDF", href: "/repair-pdf", icon: WandSparkles, color: "text-amber-500", description: "Fix corrupted PDFs" },
-    { title: "OCR PDF", href: "/ocr-pdf", icon: ScanLine, color: "text-teal-500", description: "Extract text from scanned PDFs" },
+    { title: "Compress Image", href: "/image-compressor", icon: Shrink, color: "text-lime-600", description: "Shrink JPG & PNG files" },
+    { title: "Resize Image", href: "/resize-image", icon: Ruler, color: "text-amber-500", description: "Change image dimensions" },
 
     // Convert from PDF
-    { title: "PDF to Word", href: "/pdf-to-word", icon: FileText, color: "text-blue-600", description: "Convert PDF to DOCX" },
-    { title: "PDF to Excel", href: "/pdf-to-excel", icon: Sheet, color: "text-emerald-600", description: "Extract tables to spreadsheet" },
-    { title: "PDF to PowerPoint", href: "/pdf-to-powerpoint", icon: Presentation, color: "text-orange-500", description: "Convert PDF to PPTX" },
+    { title: "PDF to Word", href: "/pdf-to-word", icon: FileText, color: "text-blue-600", description: "Extract PDF text to DOCX" },
     { title: "PDF to JPG", href: "/pdf-to-jpg", icon: FileImage, color: "text-yellow-500", description: "Convert PDF pages to images" },
     { title: "PDF to PNG", href: "/pdf-to-png", icon: FileImage, color: "text-cyan-500", description: "High-quality PNG images" },
     { title: "PDF to Text", href: "/pdf-to-text", icon: FileText, color: "text-slate-500", description: "Extract text content" },
 
     // Convert to PDF
-    { title: "Word to PDF", href: "/word-to-pdf", icon: FileText, color: "text-indigo-600", description: "DOC/DOCX to PDF" },
+    { title: "Word to PDF", href: "/word-to-pdf", icon: FileText, color: "text-indigo-600", description: "DOCX to PDF" },
     { title: "Excel to PDF", href: "/excel-to-pdf", icon: Sheet, color: "text-green-600", description: "Spreadsheet to PDF" },
-    { title: "PowerPoint to PDF", href: "/powerpoint-to-pdf", icon: Presentation, color: "text-orange-600", description: "PPTX to PDF" },
     { title: "JPG to PDF", href: "/jpg-to-pdf", icon: ImageIcon, color: "text-purple-500", description: "Images to PDF" },
     { title: "PNG to PDF", href: "/png-to-pdf", icon: ImageIcon, color: "text-emerald-500", description: "PNG images to PDF" },
     { title: "Text to PDF", href: "/text-to-pdf", icon: FileText, color: "text-slate-600", description: "TXT files to PDF" },
-    { title: "HTML to PDF", href: "/html-to-pdf", icon: Code, color: "text-rose-500", description: "Web pages to PDF" },
+    { title: "HTML to PDF", href: "/html-to-pdf", icon: Code, color: "text-rose-500", description: "HTML markup to PDF" },
+    { title: "Markdown to PDF", href: "/markdown-to-pdf", icon: FileType, color: "text-stone-600", description: "README & docs to PDF" },
+    { title: "TIFF to PDF", href: "/tiff-to-pdf", icon: FileImage, color: "text-orange-500", description: "Multi-page scans to PDF" },
 
-    // Edit PDF
-    { title: "Edit PDF", href: "/edit-pdf", icon: FilePenLine, color: "text-purple-600", description: "Add text & annotations" },
-    { title: "Sign PDF", href: "/sign-pdf", icon: Signature, color: "text-indigo-500", description: "E-sign documents" },
-    { title: "Watermark PDF", href: "/watermark-pdf", icon: Droplet, color: "text-sky-500", description: "Add watermarks" },
-    { title: "Add Page Numbers", href: "/add-page-numbers", icon: Hash, color: "text-fuchsia-500", description: "Number PDF pages" },
-    { title: "Crop PDF", href: "/crop-pdf", icon: Crop, color: "text-lime-600", description: "Trim PDF pages" },
+    // Images
+    { title: "HEIC to JPG", href: "/heic-to-jpg", icon: ImageIcon, color: "text-teal-500", description: "iPhone photos to JPG" },
+    { title: "WebP Converter", href: "/webp-converter", icon: ImageIcon, color: "text-sky-600", description: "WebP to and from JPG/PNG" },
+    { title: "JPG to PNG", href: "/jpg-to-png", icon: FileImage, color: "text-indigo-500", description: "Convert JPG to PNG" },
+    { title: "PNG to JPG", href: "/png-to-jpg", icon: FileImage, color: "text-red-400", description: "Convert PNG to JPG" },
+    { title: "BMP to JPG", href: "/bmp-to-jpg", icon: FileImage, color: "text-violet-500", description: "Shrink old bitmaps" },
+    { title: "GIF to PNG", href: "/gif-to-png", icon: FileImage, color: "text-pink-500", description: "Extract GIF frames" },
+    { title: "SVG to PNG", href: "/svg-to-png", icon: FileImage, color: "text-emerald-600", description: "Rasterize vector art" },
 
-    // Security
-    { title: "Protect PDF", href: "/protect-pdf", icon: Lock, color: "text-red-600", description: "Password protect" },
-    { title: "Unlock PDF", href: "/unlock-pdf", icon: LockOpen, color: "text-green-600", description: "Remove password" },
-    { title: "Redact PDF", href: "/redact-pdf", icon: FileMinus2, color: "text-yellow-600", description: "Blackout sensitive info" },
-
-    // Advanced
-    { title: "Compare PDF", href: "/compare-pdf", icon: FileSearch, color: "text-cyan-600", description: "Find differences" },
-    { title: "PDF to PDF/A", href: "/pdf-to-pdfa", icon: FileCheck, color: "text-emerald-600", description: "Archival format" },
+    // Data & developer tools
+    { title: "CSV to JSON", href: "/csv-to-json", icon: Braces, color: "text-cyan-600", description: "Spreadsheet rows to JSON" },
+    { title: "JSON to CSV", href: "/json-to-csv", icon: Sheet, color: "text-blue-500", description: "JSON to Excel & Sheets" },
+    { title: "XML to JSON", href: "/xml-to-json", icon: Braces, color: "text-purple-600", description: "Convert API data" },
+    { title: "Base64", href: "/base64", icon: Code, color: "text-slate-700", description: "Encode & decode Base64" },
+    { title: "QR Code Generator", href: "/qr-code-generator", icon: QrCode, color: "text-neutral-800", description: "Make a QR code" },
+    { title: "AutoCAD PDF Editor", href: "/autocad-pdf-editor", icon: PenLine, color: "text-amber-600", description: "Edit SHX vector text" },
 ]
 
 interface InternalLinkMapProps {
@@ -137,43 +140,5 @@ export function InternalLinkMap({
                 </div>
             </div>
         </section>
-    )
-}
-
-// Compact version for footer or sidebar
-export function InternalLinkMapCompact({ excludeTools = [] }: { excludeTools?: string[] }) {
-    const filteredTools = allToolLinks.filter(tool => !excludeTools.includes(tool.href))
-
-    const categories = [
-        { name: "Organize", tools: filteredTools.slice(0, 4) },
-        { name: "Optimize", tools: filteredTools.slice(4, 7) },
-        { name: "Convert from PDF", tools: filteredTools.slice(7, 13) },
-        { name: "Convert to PDF", tools: filteredTools.slice(13, 20) },
-        { name: "Edit", tools: filteredTools.slice(20, 25) },
-        { name: "Security", tools: filteredTools.slice(25, 28) },
-        { name: "Advanced", tools: filteredTools.slice(28) },
-    ]
-
-    return (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {categories.map((category) => (
-                <div key={category.name}>
-                    <h4 className="font-semibold text-slate-900 mb-3">{category.name}</h4>
-                    <ul className="space-y-2">
-                        {category.tools.map((tool) => (
-                            <li key={tool.href}>
-                                <Link
-                                    href={tool.href}
-                                    className="text-sm text-slate-600 hover:text-indigo-600 transition-colors flex items-center gap-2"
-                                >
-                                    <tool.icon className={`w-4 h-4 ${tool.color}`} />
-                                    {tool.title}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            ))}
-        </div>
     )
 }

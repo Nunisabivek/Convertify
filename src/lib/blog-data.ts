@@ -3320,3 +3320,88 @@ export const indexableBlogPosts: BlogPost[] = blogPosts.filter(isBlogPostIndexab
 export const indexableBlogSlugs: Set<string> = new Set(
   indexableBlogPosts.map((p) => p.slug)
 )
+
+// ===========================================
+// HAND-WRITTEN POSTS (own route files)
+// ===========================================
+// These posts live as their own src/app/blog/<slug>/page.tsx files rather
+// than as entries in blogPosts, so the sitemap and the blog index — both of
+// which read from blogPosts — never saw them. They were fully orphaned:
+// no sitemap entry, no internal link, no index listing. Listing their
+// metadata here re-attaches them to both without duplicating the article
+// bodies, which stay in their route files.
+export interface StaticBlogPost {
+  slug: string
+  title: string
+  excerpt: string
+  date: string
+  category: BlogPost['category']
+  readingTime: number
+  relatedTool: string
+}
+
+export const staticBlogPosts: StaticBlogPost[] = [
+  {
+    slug: "compress-pdf-under-100kb-government-forms",
+    title: "How to Compress PDF to Under 100KB for Government Forms",
+    excerpt: "Stop getting 'file too large' errors on government portals. How to shrink any PDF under 100KB without ruining readability.",
+    date: "2026-04-04",
+    category: "how-to",
+    readingTime: 9,
+    relatedTool: "/compress-pdf",
+  },
+  {
+    slug: "combine-multiple-png-to-pdf",
+    title: "How to Combine Multiple PNG Files into One PDF (Free)",
+    excerpt: "Merge multiple PNG images into a single HD PDF in your browser — no watermark, no sign-up, no software install.",
+    date: "2026-04-26",
+    category: "how-to",
+    readingTime: 8,
+    relatedTool: "/png-to-pdf",
+  },
+  {
+    slug: "xls-to-pdf-converter-free",
+    title: "XLS to PDF Converter Free — Convert Excel to PDF Online",
+    excerpt: "Convert XLS and XLSX spreadsheets to PDF in seconds, free, in your browser. No Microsoft Excel install needed.",
+    date: "2026-04-26",
+    category: "how-to",
+    readingTime: 8,
+    relatedTool: "/excel-to-pdf",
+  },
+  {
+    slug: "best-free-pdf-compressor-online",
+    title: "Best Free PDF Compressor Online — Reduce Size, Keep Quality",
+    excerpt: "Which free PDF compressors actually work, how much they really shrink a file, and where each one falls over.",
+    date: "2026-02-08",
+    category: "comparison",
+    readingTime: 7,
+    relatedTool: "/compress-pdf",
+  },
+  {
+    slug: "how-to-convert-pdf-to-word-without-software",
+    title: "How to Convert PDF to Word Without Installing Software",
+    excerpt: "Get editable text out of a PDF on Windows, Mac, or mobile without Microsoft Office or any download.",
+    date: "2026-02-08",
+    category: "how-to",
+    readingTime: 7,
+    relatedTool: "/pdf-to-word",
+  },
+  {
+    slug: "pdf-tools-for-small-business",
+    title: "Essential PDF Tools for Small Business",
+    excerpt: "The PDF workflows a small business actually needs — invoices, contracts, scans — without an Acrobat subscription.",
+    date: "2026-02-08",
+    category: "tips",
+    readingTime: 8,
+    relatedTool: "/all-tools",
+  },
+]
+
+// Everything that should appear in the blog index and the sitemap: the
+// substantial data-driven posts plus the hand-written route files.
+export const allIndexableBlogPosts = [
+  ...indexableBlogPosts.map(({ slug, title, excerpt, date, category, readingTime, relatedTool }) => ({
+    slug, title, excerpt, date, category, readingTime, relatedTool,
+  })),
+  ...staticBlogPosts,
+]

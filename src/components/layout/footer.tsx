@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { InternalLinkMapCompact } from "@/components/seo/internal-link-map"
 
 export function Footer() {
     return (
@@ -15,6 +14,7 @@ export function Footer() {
                             <li><Link href="/split-pdf" className="hover:text-indigo-600 transition-colors">Split PDF</Link></li>
                             <li><Link href="/organize-pdf" className="hover:text-indigo-600 transition-colors">Organize PDF</Link></li>
                             <li><Link href="/rotate-pdf" className="hover:text-indigo-600 transition-colors">Rotate PDF</Link></li>
+                            <li><Link href="/add-page-numbers" className="hover:text-indigo-600 transition-colors">Add Page Numbers</Link></li>
                         </ul>
                     </div>
 
@@ -23,8 +23,9 @@ export function Footer() {
                         <h4 className="font-semibold text-slate-900 mb-3 text-sm">Optimize PDF</h4>
                         <ul className="space-y-2 text-sm text-slate-600">
                             <li><Link href="/compress-pdf" className="hover:text-indigo-600 transition-colors">Compress PDF</Link></li>
-                            <li><Link href="/repair-pdf" className="hover:text-indigo-600 transition-colors">Repair PDF</Link></li>
-                            <li><Link href="/ocr-pdf" className="hover:text-indigo-600 transition-colors">OCR PDF</Link></li>
+                            <li><Link href="/watermark-pdf" className="hover:text-indigo-600 transition-colors">Watermark PDF</Link></li>
+                            <li><Link href="/image-compressor" className="hover:text-indigo-600 transition-colors">Compress Image</Link></li>
+                            <li><Link href="/resize-image" className="hover:text-indigo-600 transition-colors">Resize Image</Link></li>
                         </ul>
                     </div>
 
@@ -33,10 +34,9 @@ export function Footer() {
                         <h4 className="font-semibold text-slate-900 mb-3 text-sm">Convert from PDF</h4>
                         <ul className="space-y-2 text-sm text-slate-600">
                             <li><Link href="/pdf-to-word" className="hover:text-indigo-600 transition-colors">PDF to Word</Link></li>
-                            <li><Link href="/pdf-to-excel" className="hover:text-indigo-600 transition-colors">PDF to Excel</Link></li>
                             <li><Link href="/pdf-to-jpg" className="hover:text-indigo-600 transition-colors">PDF to JPG</Link></li>
                             <li><Link href="/pdf-to-png" className="hover:text-indigo-600 transition-colors">PDF to PNG</Link></li>
-                            <li><Link href="/pdf-to-powerpoint" className="hover:text-indigo-600 transition-colors">PDF to PPT</Link></li>
+                            <li><Link href="/pdf-to-text" className="hover:text-indigo-600 transition-colors">PDF to Text</Link></li>
                         </ul>
                     </div>
 
@@ -52,15 +52,15 @@ export function Footer() {
                         </ul>
                     </div>
 
-                    {/* Edit & Security */}
+                    {/* Images & Data */}
                     <div>
-                        <h4 className="font-semibold text-slate-900 mb-3 text-sm">Edit & Secure</h4>
+                        <h4 className="font-semibold text-slate-900 mb-3 text-sm">Images & Data</h4>
                         <ul className="space-y-2 text-sm text-slate-600">
-                            <li><Link href="/edit-pdf" className="hover:text-indigo-600 transition-colors">Edit PDF</Link></li>
-                            <li><Link href="/sign-pdf" className="hover:text-indigo-600 transition-colors">Sign PDF</Link></li>
-                            <li><Link href="/protect-pdf" className="hover:text-indigo-600 transition-colors">Protect PDF</Link></li>
-                            <li><Link href="/unlock-pdf" className="hover:text-indigo-600 transition-colors">Unlock PDF</Link></li>
-                            <li><Link href="/watermark-pdf" className="hover:text-indigo-600 transition-colors">Watermark</Link></li>
+                            <li><Link href="/heic-to-jpg" className="hover:text-indigo-600 transition-colors">HEIC to JPG</Link></li>
+                            <li><Link href="/webp-converter" className="hover:text-indigo-600 transition-colors">WebP Converter</Link></li>
+                            <li><Link href="/svg-to-png" className="hover:text-indigo-600 transition-colors">SVG to PNG</Link></li>
+                            <li><Link href="/csv-to-json" className="hover:text-indigo-600 transition-colors">CSV to JSON</Link></li>
+                            <li><Link href="/qr-code-generator" className="hover:text-indigo-600 transition-colors">QR Code Generator</Link></li>
                         </ul>
                     </div>
 
@@ -89,7 +89,7 @@ export function Footer() {
                             © 2026 Convertify. All rights reserved. Made with ❤️ for everyone.
                         </p>
                         <div className="flex items-center gap-4 text-sm text-slate-500">
-                            <span>29 Tools</span>
+                            <span>34 Tools</span>
                             <span>•</span>
                             <span>100% Free</span>
                             <span>•</span>

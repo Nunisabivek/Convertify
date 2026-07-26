@@ -1,20 +1,14 @@
 import { Metadata } from "next"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
-import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
 import { RelatedUseCases } from "@/components/seo/related-use-cases"
-import { ToolSeoContent } from "@/components/seo/tool-seo-content"
-import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
-import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 import { Presentation } from "lucide-react"
 import Link from "next/link"
 
 const seoData = toolSeoData["powerpoint-to-pdf"]
-const contentData = toolContentData["powerpoint-to-pdf"]
 
 export const metadata: Metadata = {
     title: seoData.title,
@@ -83,29 +77,6 @@ export default function Page() {
                     </div>
                 </div>
             </section>
-
-            {/* SEO Content Section */}
-            <ToolSeoContent
-                toolName="PowerPoint to PDF Converter"
-                toolSlug="powerpoint-to-pdf"
-                description={contentData.description}
-                features={contentData.features}
-                useCases={contentData.useCases}
-                keywords={contentData.keywords}
-            />
-
-            <ToolDeepGuide toolSlug="powerpoint-to-pdf" toolName="PowerPoint to PDF Converter" />
-
-            <HowToSchema
-                toolName="Convert PowerPoint to PDF"
-                description="Learn how to convert PPT presentations to PDF using Convertify's free online slideshow to PDF converter."
-                steps={seoData.howToSteps}
-            />
-
-            <FAQSchema
-                toolName="PowerPoint to PDF Conversion"
-                faqs={seoData.faqs}
-            />
 
             <RelatedUseCases toolHref="/powerpoint-to-pdf" />
 

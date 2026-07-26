@@ -25,6 +25,12 @@ import {
     WandSparkles,
     ScanLine,
     FileStack,
+    QrCode,
+    Braces,
+    Ruler,
+    Shrink,
+    PenLine,
+    FileImage,
 } from "lucide-react"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -40,7 +46,20 @@ export const metadata: Metadata = {
     },
 }
 
-const tools = [
+// `comingSoon` tools have no working implementation yet. They render as a
+// greyed-out card with a badge instead of a link, so visitors don't click
+// through to a dead page and crawlers don't follow links into noindex
+// placeholders. Drop the flag when the tool actually ships.
+interface Tool {
+    title: string
+    description: string
+    icon: typeof FileText
+    href: string
+    color: string
+    comingSoon?: boolean
+}
+
+const tools: { category: string; items: Tool[] }[] = [
     {
         category: "Organize PDF",
         items: [
@@ -48,73 +67,91 @@ const tools = [
             { title: "Split PDF", description: "Extract pages or split your PDF into multiple files.", icon: Scissors, href: "/split-pdf", color: "text-blue-600 bg-blue-50" },
             { title: "Organize PDF", description: "Reorder, rotate, and organize PDF pages.", icon: Grid3x3, href: "/organize-pdf", color: "text-violet-600 bg-violet-50" },
             { title: "Rotate PDF", description: "Rotate your PDF pages as needed.", icon: RotateCw, href: "/rotate-pdf", color: "text-pink-600 bg-pink-50" },
+            { title: "Add Page Numbers", description: "Insert page numbers into your PDF.", icon: Hash, href: "/add-page-numbers", color: "text-fuchsia-600 bg-fuchsia-50" },
+            { title: "Watermark PDF", description: "Stamp text or an image across every page.", icon: Droplet, href: "/watermark-pdf", color: "text-sky-600 bg-sky-50" },
         ]
     },
     {
-        category: "Optimize PDF",
+        category: "Optimize",
         items: [
-            { title: "Compress PDF", description: "Reduce file size while maintaining good quality.", icon: Minimize2, href: "/compress-pdf", color: "text-green-600 bg-green-50" },
-            { title: "Repair PDF", description: "Fix corrupted PDF files automatically.", icon: WandSparkles, href: "/repair-pdf", color: "text-amber-600 bg-amber-50" },
-            { title: "OCR PDF", description: "Extract text from scanned PDFs.", icon: ScanLine, href: "/ocr-pdf", color: "text-teal-600 bg-teal-50" },
+            { title: "Compress PDF", description: "Hit an exact target size — 100KB, 200KB, 1MB.", icon: Minimize2, href: "/compress-pdf", color: "text-green-600 bg-green-50" },
+            { title: "Compress Image", description: "Shrink JPG and PNG files without visible loss.", icon: Shrink, href: "/image-compressor", color: "text-lime-600 bg-lime-50" },
+            { title: "Resize Image", description: "Change image dimensions to an exact size.", icon: Ruler, href: "/resize-image", color: "text-amber-600 bg-amber-50" },
         ]
     },
     {
         category: "Convert from PDF",
         items: [
-            { title: "PDF to Word", description: "Convert PDF to editable DOCX documents.", icon: FileText, href: "/pdf-to-word", color: "text-blue-600 bg-blue-50" },
-            { title: "PDF to Excel", description: "Extract data from PDF to spreadsheets.", icon: Sheet, href: "/pdf-to-excel", color: "text-green-600 bg-green-50" },
-            { title: "PDF to PowerPoint", description: "Convert PDF to editable presentations.", icon: Presentation, href: "/pdf-to-powerpoint", color: "text-orange-600 bg-orange-50" },
+            { title: "PDF to Word", description: "Pull the text out of a PDF into an editable DOCX.", icon: FileText, href: "/pdf-to-word", color: "text-blue-600 bg-blue-50" },
             { title: "PDF to JPG", description: "Convert PDF pages to JPG images.", icon: ImageIcon, href: "/pdf-to-jpg", color: "text-yellow-600 bg-yellow-50" },
             { title: "PDF to PNG", description: "Convert PDF pages to PNG images.", icon: ImageIcon, href: "/pdf-to-png", color: "text-cyan-600 bg-cyan-50" },
-            { title: "PDF to Text", description: "Extract text content from PDF.", icon: FileText, href: "/pdf-to-text", color: "text-gray-600 bg-gray-50" },
+            { title: "PDF to Text", description: "Extract plain text content from a PDF.", icon: FileText, href: "/pdf-to-text", color: "text-gray-600 bg-gray-50" },
         ]
     },
     {
         category: "Convert to PDF",
         items: [
             { title: "Word to PDF", description: "Convert DOCX to PDF.", icon: FileText, href: "/word-to-pdf", color: "text-indigo-600 bg-indigo-50" },
-            { title: "Excel to PDF", description: "Convert Spreadsheets to PDF.", icon: Sheet, href: "/excel-to-pdf", color: "text-green-600 bg-green-50" },
-            { title: "PowerPoint to PDF", description: "Convert PPTX to PDF.", icon: Presentation, href: "/powerpoint-to-pdf", color: "text-orange-600 bg-orange-50" },
+            { title: "Excel to PDF", description: "Convert XLS and XLSX spreadsheets to PDF.", icon: Sheet, href: "/excel-to-pdf", color: "text-green-600 bg-green-50" },
             { title: "JPG to PDF", description: "Convert JPG images to PDF.", icon: ImageIcon, href: "/jpg-to-pdf", color: "text-purple-600 bg-purple-50" },
             { title: "PNG to PDF", description: "Convert PNG images to PDF.", icon: ImageIcon, href: "/png-to-pdf", color: "text-emerald-600 bg-emerald-50" },
             { title: "Text to PDF", description: "Convert TXT files to PDF.", icon: FileText, href: "/text-to-pdf", color: "text-slate-600 bg-slate-50" },
-            { title: "HTML to PDF", description: "Convert web pages and HTML to PDF.", icon: Code, href: "/html-to-pdf", color: "text-rose-600 bg-rose-50" },
+            { title: "HTML to PDF", description: "Paste HTML markup and get a PDF.", icon: Code, href: "/html-to-pdf", color: "text-rose-600 bg-rose-50" },
+            { title: "Markdown to PDF", description: "Turn a README or notes file into a PDF.", icon: FileType, href: "/markdown-to-pdf", color: "text-stone-600 bg-stone-50" },
+            { title: "TIFF to PDF", description: "Bundle multi-page TIFF scans into one PDF.", icon: FileImage, href: "/tiff-to-pdf", color: "text-orange-600 bg-orange-50" },
         ]
     },
     {
-        category: "Edit PDF",
+        category: "Image Tools",
         items: [
-            { title: "Edit PDF", description: "Add text, images and annotations to PDF.", icon: FilePenLine, href: "/edit-pdf", color: "text-purple-600 bg-purple-50" },
-            { title: "Sign PDF", description: "Add electronic signatures to your PDF.", icon: Signature, href: "/sign-pdf", color: "text-indigo-600 bg-indigo-50" },
-            { title: "Watermark PDF", description: "Add text or image watermarks to PDF.", icon: Droplet, href: "/watermark-pdf", color: "text-sky-600 bg-sky-50" },
-            { title: "Add Page Numbers", description: "Insert page numbers to your PDF.", icon: Hash, href: "/add-page-numbers", color: "text-fuchsia-600 bg-fuchsia-50" },
-            { title: "Crop PDF", description: "Trim and crop PDF pages easily.", icon: Crop, href: "/crop-pdf", color: "text-lime-600 bg-lime-50" },
+            { title: "HEIC to JPG", description: "Convert iPhone HEIC photos to JPG.", icon: ImageIcon, href: "/heic-to-jpg", color: "text-teal-600 bg-teal-50" },
+            { title: "WebP Converter", description: "Convert WebP to and from JPG and PNG.", icon: ImageIcon, href: "/webp-converter", color: "text-sky-600 bg-sky-50" },
+            { title: "JPG to PNG", description: "Convert JPG images to PNG.", icon: FileImage, href: "/jpg-to-png", color: "text-indigo-600 bg-indigo-50" },
+            { title: "PNG to JPG", description: "Convert PNG images to JPG.", icon: FileImage, href: "/png-to-jpg", color: "text-red-600 bg-red-50" },
+            { title: "BMP to JPG", description: "Convert and shrink old bitmap files.", icon: FileImage, href: "/bmp-to-jpg", color: "text-violet-600 bg-violet-50" },
+            { title: "GIF to PNG", description: "Extract GIF frames as PNG images.", icon: FileImage, href: "/gif-to-png", color: "text-pink-600 bg-pink-50" },
+            { title: "SVG to PNG", description: "Rasterize vector art at any resolution.", icon: FileImage, href: "/svg-to-png", color: "text-emerald-600 bg-emerald-50" },
         ]
     },
     {
-        category: "Security",
+        category: "Data & Developer Tools",
         items: [
-            { title: "Protect PDF", description: "Add password protection to your PDF.", icon: Lock, href: "/protect-pdf", color: "text-red-600 bg-red-50" },
-            { title: "Unlock PDF", description: "Remove password from protected PDF.", icon: LockOpen, href: "/unlock-pdf", color: "text-green-600 bg-green-50" },
-            { title: "Redact PDF", description: "Remove sensitive information from PDF.", icon: FileMinus2, href: "/redact-pdf", color: "text-yellow-600 bg-yellow-50" },
+            { title: "CSV to JSON", description: "Turn spreadsheet rows into JSON.", icon: Braces, href: "/csv-to-json", color: "text-cyan-600 bg-cyan-50" },
+            { title: "JSON to CSV", description: "Flatten JSON into Excel-ready CSV.", icon: Sheet, href: "/json-to-csv", color: "text-blue-600 bg-blue-50" },
+            { title: "XML to JSON", description: "Convert XML API responses to JSON.", icon: Braces, href: "/xml-to-json", color: "text-purple-600 bg-purple-50" },
+            { title: "Base64", description: "Encode and decode Base64 text and images.", icon: Code, href: "/base64", color: "text-slate-600 bg-slate-50" },
+            { title: "QR Code Generator", description: "Generate a QR code for any link or text.", icon: QrCode, href: "/qr-code-generator", color: "text-neutral-700 bg-neutral-100" },
+            { title: "AutoCAD PDF Editor", description: "Edit SHX vector text inside CAD PDFs.", icon: PenLine, href: "/autocad-pdf-editor", color: "text-amber-600 bg-amber-50" },
         ]
     },
     {
-        category: "Advanced Tools",
+        category: "In Development",
         items: [
-            { title: "Compare PDF", description: "Find differences between two PDFs.", icon: FileSearch, href: "/compare-pdf", color: "text-cyan-600 bg-cyan-50" },
-            { title: "PDF to PDF/A", description: "Convert to archival PDF/A format.", icon: FileCheck, href: "/pdf-to-pdfa", color: "text-emerald-600 bg-emerald-50" },
+            { title: "Edit PDF", description: "Add text, images and annotations to PDF.", icon: FilePenLine, href: "/edit-pdf", color: "text-purple-600 bg-purple-50", comingSoon: true },
+            { title: "Sign PDF", description: "Add electronic signatures to your PDF.", icon: Signature, href: "/sign-pdf", color: "text-indigo-600 bg-indigo-50", comingSoon: true },
+            { title: "OCR PDF", description: "Recognize text inside scanned PDFs.", icon: ScanLine, href: "/ocr-pdf", color: "text-teal-600 bg-teal-50", comingSoon: true },
+            { title: "Protect PDF", description: "Add password protection to your PDF.", icon: Lock, href: "/protect-pdf", color: "text-red-600 bg-red-50", comingSoon: true },
+            { title: "Unlock PDF", description: "Remove the password from a protected PDF.", icon: LockOpen, href: "/unlock-pdf", color: "text-green-600 bg-green-50", comingSoon: true },
+            { title: "Redact PDF", description: "Permanently remove sensitive information.", icon: FileMinus2, href: "/redact-pdf", color: "text-yellow-600 bg-yellow-50", comingSoon: true },
+            { title: "Crop PDF", description: "Trim and crop PDF page margins.", icon: Crop, href: "/crop-pdf", color: "text-lime-600 bg-lime-50", comingSoon: true },
+            { title: "Repair PDF", description: "Rebuild corrupted PDF files.", icon: WandSparkles, href: "/repair-pdf", color: "text-amber-600 bg-amber-50", comingSoon: true },
+            { title: "Compare PDF", description: "Find differences between two PDFs.", icon: FileSearch, href: "/compare-pdf", color: "text-cyan-600 bg-cyan-50", comingSoon: true },
+            { title: "PDF to Excel", description: "Extract PDF tables into a spreadsheet.", icon: Sheet, href: "/pdf-to-excel", color: "text-green-600 bg-green-50", comingSoon: true },
+            { title: "PDF to PowerPoint", description: "Convert PDF pages into slides.", icon: Presentation, href: "/pdf-to-powerpoint", color: "text-orange-600 bg-orange-50", comingSoon: true },
+            { title: "PowerPoint to PDF", description: "Convert PPTX presentations to PDF.", icon: Presentation, href: "/powerpoint-to-pdf", color: "text-orange-600 bg-orange-50", comingSoon: true },
+            { title: "PDF to PDF/A", description: "Convert to the PDF/A archival format.", icon: FileCheck, href: "/pdf-to-pdfa", color: "text-emerald-600 bg-emerald-50", comingSoon: true },
         ]
     }
 ]
 
-const totalTools = tools.reduce((sum, cat) => sum + cat.items.length, 0)
+const liveTools = tools.flatMap(cat => cat.items).filter(t => !t.comingSoon)
+const totalTools = liveTools.length
 
 export default function AllToolsPage() {
     return (
         <div className="container py-12 space-y-16">
             <div className="text-center space-y-4">
-                <h1 className="text-4xl font-bold tracking-tight">All PDF Tools ({totalTools}+)</h1>
+                <h1 className="text-4xl font-bold tracking-tight">All Free PDF Tools ({totalTools} Working Tools)</h1>
                 <p className="text-xl text-slate-500 max-w-2xl mx-auto">
                     Every PDF tool you need in one place. Convertify is 100% free — no pricing tiers, no download required. Works directly in your browser.
                 </p>
@@ -128,7 +165,27 @@ export default function AllToolsPage() {
                     <div key={section.category} className="space-y-6">
                         <h2 className="text-2xl font-bold text-slate-800 border-b pb-2">{section.category}</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {section.items.map((tool) => (
+                            {section.items.map((tool) => tool.comingSoon ? (
+                                <Card key={tool.title} className="h-full border-slate-200 border-dashed bg-slate-50/60 opacity-70">
+                                    <CardHeader>
+                                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 grayscale ${tool.color}`}>
+                                            <tool.icon className="w-6 h-6" />
+                                        </div>
+                                        <CardTitle className="text-xl text-slate-600 flex items-center gap-2 flex-wrap">
+                                            {tool.title}
+                                            <span className="text-[11px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full bg-slate-200 text-slate-600">
+                                                Coming soon
+                                            </span>
+                                        </CardTitle>
+                                        <CardDescription className="text-base pt-2 text-slate-500">
+                                            {tool.description}
+                                        </CardDescription>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <div className="text-sm text-slate-400">Not available yet</div>
+                                    </CardContent>
+                                </Card>
+                            ) : (
                                 <Link key={tool.title} href={tool.href} className="group">
                                     <Card className="h-full transition-all hover:shadow-lg hover:-translate-y-1 border-slate-200">
                                         <CardHeader>
