@@ -6,6 +6,9 @@ import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
+import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
+import { allIndexableBlogPosts } from "@/lib/blog-data"
 import { RelatedUseCases } from "@/components/seo/related-use-cases"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
 import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
@@ -31,6 +34,9 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
+    const relatedBlogSlugs = getBlogPostsForTool('text-to-pdf')
+    const relatedBlogs = allIndexableBlogPosts.filter(post => relatedBlogSlugs.includes(post.slug))
+
     return (
         <div className="flex flex-col items-center">
             
@@ -85,6 +91,12 @@ export default function Page() {
             />
 
             <RelatedUseCases toolHref="/text-to-pdf" />
+
+            <RelatedBlogPosts
+                toolSlug="text-to-pdf"
+                posts={relatedBlogs}
+                title="📚 Guides & Tutorials"
+            />
 
             <RelatedTools currentTool="/text-to-pdf" />
         </div>

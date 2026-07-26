@@ -6,6 +6,9 @@ import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
+import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
+import { allIndexableBlogPosts } from "@/lib/blog-data"
 import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 
 export const metadata: Metadata = {
@@ -21,6 +24,9 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
+    const relatedBlogSlugs = getBlogPostsForTool('heic-to-jpg')
+    const relatedBlogs = allIndexableBlogPosts.filter(post => relatedBlogSlugs.includes(post.slug))
+
     return (
         <div className="flex flex-col items-center">
             <BreadcrumbSchema items={[{ name: "Home", url: "/" }, { name: "All Tools", url: "/all-tools" }, { name: "HEIC to JPG", url: "/heic-to-jpg" }]} />
@@ -57,6 +63,12 @@ export default function Page() {
 
             {/* Long-form guide */}
             <ToolDeepGuide toolSlug="heic-to-jpg" toolName="HEIC to JPG Converter" />
+
+            <RelatedBlogPosts
+                toolSlug="heic-to-jpg"
+                posts={relatedBlogs}
+                title="📚 Guides & Tutorials"
+            />
 
             <RelatedTools currentTool="/heic-to-jpg" />
         </div>

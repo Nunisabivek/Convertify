@@ -1,5 +1,6 @@
 // Blog Content Calendar & SEO-Optimized Blog Posts
 // Each post targets specific long-tail keywords with high search intent
+import { longTailPosts } from './blog-posts-longtail'
 
 export interface BlogPost {
   slug: string
@@ -3315,7 +3316,12 @@ export function isBlogPostIndexable(post: BlogPost): boolean {
   return words >= MIN_INDEXABLE_WORDS
 }
 
-export const indexableBlogPosts: BlogPost[] = blogPosts.filter(isBlogPostIndexable)
+// Long-tail posts live in their own file to keep this one navigable, but they
+// are ordinary BlogPost entries and flow through the same indexability gate,
+// the same /blog/[slug] route and the same sitemap logic.
+export const allBlogPosts: BlogPost[] = [...blogPosts, ...longTailPosts]
+
+export const indexableBlogPosts: BlogPost[] = allBlogPosts.filter(isBlogPostIndexable)
 
 export const indexableBlogSlugs: Set<string> = new Set(
   indexableBlogPosts.map((p) => p.slug)

@@ -6,6 +6,9 @@ import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
+import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
+import { allIndexableBlogPosts } from "@/lib/blog-data"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
 import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { toolContentData } from "@/lib/tool-content-data"
@@ -29,6 +32,9 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
+    const relatedBlogSlugs = getBlogPostsForTool('json-to-csv')
+    const relatedBlogs = allIndexableBlogPosts.filter(post => relatedBlogSlugs.includes(post.slug))
+
     return (
         <div className="flex flex-col items-center">
             <BreadcrumbSchema
@@ -79,6 +85,12 @@ export default function Page() {
             <FAQSchema
                 toolName={seoData.h1}
                 faqs={seoData.faqs}
+            />
+
+            <RelatedBlogPosts
+                toolSlug="json-to-csv"
+                posts={relatedBlogs}
+                title="📚 Guides & Tutorials"
             />
 
             <RelatedTools currentTool={`/${toolName}`} />

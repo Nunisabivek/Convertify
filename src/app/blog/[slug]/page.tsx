@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { blogPosts, indexableBlogSlugs } from "@/lib/blog-data"
+import { allBlogPosts, indexableBlogSlugs, allIndexableBlogPosts } from "@/lib/blog-data"
 import { AdBanner } from "@/components/ads/banner"
 import { Button } from "@/components/ui/button"
 import { BlogPostSchema } from "@/components/seo/blog-schema"
@@ -19,14 +19,16 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params
-    const post = blogPosts.find((p) => p.slug === slug)
+    const post = allBlogPosts.find((p) => p.slug === slug)
     if (!post) return {}
 
     const url = `https://convertify.work/blog/${slug}`
     const shouldIndex = indexableBlogSlugs.has(slug)
 
     return {
-        title: `${post.title} | Convertify Blog`,
+        // No " | Convertify Blog" suffix — it costs ~18 of the ~60 characters
+        // Google shows and pushes the actual keywords out of the snippet.
+        title: post.title,
         description: post.excerpt,
         keywords: post.keywords,
         // Noindex weaker blog posts to improve overall site quality signals
@@ -66,7 +68,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-    return blogPosts.map((post) => ({
+    return allBlogPosts.map((post) => ({
         slug: post.slug,
     }))
 }
@@ -141,7 +143,7 @@ function renderContent(content: string) {
 
 export default async function BlogPostPage({ params }: Props) {
     const { slug } = await params
-    const post = blogPosts.find((p) => p.slug === slug)
+    const post = allBlogPosts.find((p) => p.slug === slug)
 
     if (!post) {
         notFound()
@@ -149,10 +151,14 @@ export default async function BlogPostPage({ params }: Props) {
 
     const url = `https://convertify.work/blog/${slug}`
 
-    // Get 3 related posts (excluding current)
-    const relatedPosts = blogPosts
-        .filter(p => p.slug !== slug)
-        .slice(0, 3)
+    // Related posts: prefer ones sharing this post's tool, then fill from the
+    // rest. Only indexable posts — the old version always showed the same
+    // first three entries of blogPosts, thin noindex ones included.
+    const candidates = allIndexableBlogPosts.filter(p => p.slug !== slug)
+    const relatedPosts = [
+        ...candidates.filter(p => p.relatedTool === post.relatedTool),
+        ...candidates.filter(p => p.relatedTool !== post.relatedTool),
+    ].slice(0, 3)
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
