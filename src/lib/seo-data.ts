@@ -217,8 +217,7 @@ export const toolSeoData = {
         keywords: [
             "pdf to jpg", "pdf to jpg converter", "convert pdf to jpg", "pdf to jpeg",
             "pdf to jpg free", "pdf to jpg online", "pdf to image", "pdf to jpg converter free",
-            "pdf to jpg high quality", "pdf to jpg 300 dpi", "pdf to jpg hd",
-            "convert pdf to image", "extract images from pdf", "save pdf as picture",
+            "convert pdf to image", "save pdf as picture", "pdf pages to jpg",
             "pdf to jpg converter online free", "pdf to jpg free online",
             "turn pdf into image", "batch pdf to jpg", "pdf to jpg download",
             "pdf to jpg no sign up", "pdf to jpg no watermark",
