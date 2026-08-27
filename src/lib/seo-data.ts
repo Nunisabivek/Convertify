@@ -131,48 +131,48 @@ export const toolSeoData = {
         ]
     },
     "jpg-to-pdf": {
-        title: "JPG to PDF Free — Combine Photos into One PDF",
-        description: "Turn JPG photos into a single PDF. Set the page order and page size, download instantly. No sign-up, no watermark, works on phone and desktop.",
+        title: "JPG to PDF — Combine Photos into One PDF, No Upload",
+        description: "Combine JPG photos into one PDF. Drag to set the order, no watermark, nothing uploaded. For PNG screenshots, use PNG to PDF.",
         keywords: [
             "convertify jpg to pdf", "jpg to pdf", "convert jpg to pdf", "image to pdf", "photos to pdf", "jpeg to pdf",
             "jpg to pdf converter free", "combine jpg to pdf", "multiple jpg to one pdf",
             "combine photos into pdf", "merge images to pdf", "convert multiple images to pdf",
             "jpg to pdf no sign up", "jpg to pdf no watermark", "jpg to pdf online free",
             "scan to pdf iphone", "scan to pdf android", "photo to pdf converter",
-            "batch jpg to pdf", "jpg to pdf a4 size", "compress jpg to pdf",
+            "batch jpg to pdf", "photo to pdf no upload",
             "high quality jpg to pdf", "jpg to pdf keep quality", "image to pdf combiner"
         ],
-        h1: "Convertify JPG to PDF Free – Combine Photos to PDF Online",
+        h1: "JPG to PDF — Combine Photos into One PDF",
         faqs: [
             {
-                question: "How do I combine multiple JPG images into one PDF?",
-                answer: "Simply drag and drop all your JPG images at once. Convertify lets you upload unlimited photos, rearrange their order by dragging, and combine them into a single multi-page PDF. No sign-up required!"
+                question: "How do I combine multiple JPG photos into one PDF?",
+                answer: "Drop all your JPG photos at once, drag the thumbnails to set the page order, then convert. You get a single multi-page PDF. No sign-up, no watermark, and the photos stay on your device."
             },
             {
                 question: "Can I convert photos from my phone camera to PDF?",
-                answer: "Yes! Convertify works perfectly on iPhone, Android, and tablets. Just open our website in your mobile browser, select photos from your gallery, and convert them to PDF instantly – great for homework, receipts, and document scans."
+                answer: "Yes. Open the page in Safari or Chrome on iPhone or Android, pick photos from your gallery, and convert. It is built for receipts, homework scans, and document photos."
             },
             {
                 question: "Will my photos lose quality when converted to PDF?",
-                answer: "No. We preserve your original image quality. You can also choose compression settings if you need a smaller file size for email attachments while maintaining excellent visual quality."
+                answer: "Each photo is embedded at its original resolution. There is no extra compression step on this page. If the PDF is too large to email, run it through Compress PDF afterwards."
             },
             {
-                question: "Can I adjust the page size to A4, Letter, or custom?",
-                answer: "Yes! Choose from standard page sizes like A4, Letter, or Legal. You can also fit images to page, stretch to fill, or use original image dimensions for complete control."
+                question: "Can I set the page size to A4 or Letter?",
+                answer: "Not on this tool. Each PDF page is sized to that photo, so a tall receipt stays tall and a landscape shot stays landscape. For PNG screenshots, use PNG to PDF instead — that combiner is separate so photo and screenshot searches stay distinct."
             },
             {
-                question: "Is there a limit on how many images I can convert?",
-                answer: "No limits! Convert 1 image or 100 images – all free with no watermarks. Our browser-based processing handles large batches efficiently without slowing down."
+                question: "Is there a limit on how many photos I can convert?",
+                answer: "No hard limit. Convert one photo or a large batch. Because it runs in your browser, very large sets depend on your device memory."
             },
             {
                 question: "Is it safe to convert personal photos?",
-                answer: "100% safe and private. All conversion happens locally in your browser. Your photos are never uploaded to any server, making it secure for personal documents, IDs, and private photos."
+                answer: "Yes. Conversion happens in your browser. Photos are never uploaded to a server, so it is suitable for IDs, receipts, and private pictures."
             }
         ],
         howToSteps: [
-            { name: "Upload Images", text: "Drag & drop your JPG, PNG, or other image files. Upload from computer, phone, or tablet." },
-            { name: "Arrange Order", text: "Drag to reorder images. Choose page size (A4, Letter) and orientation." },
-            { name: "Download PDF", text: "Click convert and download your combined PDF instantly – no watermarks!" }
+            { name: "Add your JPG photos", text: "Drag and drop JPG or JPEG photos from your computer or phone gallery." },
+            { name: "Arrange the order", text: "Drag thumbnails to set the page order. The first photo becomes page 1." },
+            { name: "Download the PDF", text: "Convert and download one combined PDF — no watermark, nothing uploaded." }
         ]
     },
     "word-to-pdf": {
@@ -217,13 +217,12 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-jpg": {
-        title: "PDF to JPG Free — Convert PDF Pages to Images",
-        description: "Turn every PDF page into a high-quality JPG at up to 300 DPI. Download singly or as a ZIP. Free, no watermark, files stay in your browser.",
+        title: "PDF to JPG — Extract Pages as Images, No Upload",
+        description: "Turn each PDF page into a JPG on your device. Multi-page files download as a ZIP. Free, no watermark, nothing uploaded.",
         keywords: [
             "pdf to jpg", "pdf to jpg converter", "convert pdf to jpg", "pdf to jpeg",
             "pdf to jpg free", "pdf to jpg online", "pdf to image", "pdf to jpg converter free",
-            "pdf to jpg high quality", "pdf to jpg 300 dpi", "pdf to jpg hd",
-            "convert pdf to image", "extract images from pdf", "save pdf as picture",
+            "convert pdf to image", "save pdf as picture", "pdf pages to jpg",
             "pdf to jpg converter online free", "pdf to jpg free online",
             "turn pdf into image", "batch pdf to jpg", "pdf to jpg download",
             "pdf to jpg no sign up", "pdf to jpg no watermark",
@@ -231,30 +230,38 @@ export const toolSeoData = {
             "pdf to images free", "convert pdf pages to images",
             "free pdf to jpg converter", "pdf to photo", "pdf to picture"
         ],
-        h1: "PDF to JPG — Convert PDF Pages to High Quality Images Free",
+        h1: "PDF to JPG — Convert PDF Pages to Images",
         faqs: [
             {
-                question: "What is the maximum resolution (DPI) supported?",
-                answer: "Our engine supports up to 300 DPI for high-print quality, and 72-96 DPI for web use, ensuring your text and graphics remain razor-sharp."
+                question: "How do I convert a PDF to JPG?",
+                answer: "Drop your PDF, then convert. Each page is rendered as a JPG in your browser. A one-page PDF downloads as a single JPG; a multi-page PDF downloads as a ZIP of JPGs."
             },
             {
-                question: "Can I extract specific images embedded inside the PDF?",
-                answer: "Yes! You can choose to convert the entire page or use our 'Asset Extractor' to only pull the raw photos and logos embedded in the file."
+                question: "Can I extract just one photo or logo from inside a page?",
+                answer: "No. This tool renders each full PDF page as a JPG. It does not pull individual embedded images out of a page. Crop the JPG afterwards if you only need part of the page."
+            },
+            {
+                question: "What resolution are the JPGs?",
+                answer: "Pages are rendered at 2× the PDF’s native size (about 144 DPI on a letter-size page). There is no DPI picker on this page. Text and line art stay sharper than a screenshot of the file."
             },
             {
                 question: "Are my files uploaded to convert them?",
-                answer: "Never. The conversion from PDF vector to JPG pixels happens locally in your browser. This is 100% private and ideal for sensitive ID cards or photos."
+                answer: "No. PDF.js renders pages locally in your browser. The file never leaves your device, which is why this works for IDs, contracts, and other private pages."
+            },
+            {
+                question: "Does it add a watermark?",
+                answer: "No. The JPGs are plain page images — no Convertify stamp, no sign-up, no daily cap."
             }
         ],
         howToSteps: [
-            { name: "Upload", text: "Select your PDF file." },
-            { name: "Configure", text: "Choose DPI quality and whether to extract pages or images." },
-            { name: "Download", text: "Save as individual JPGs or a convenient ZIP file." }
+            { name: "Select your PDF", text: "Drop a PDF or click to browse. The file stays on your device." },
+            { name: "Convert the pages", text: "Each page is drawn to a canvas in your browser and saved as a JPG." },
+            { name: "Download JPG or ZIP", text: "One page downloads as a JPG. Two or more pages download together as a ZIP." }
         ]
     },
     "png-to-pdf": {
-        title: "PNG to PDF Free — Combine PNG Images into One PDF",
-        description: "Combine multiple PNG images into one 300 DPI PDF. Drag thumbnails to set page order, download instantly. No watermark, no sign-up, no upload.",
+        title: "PNG to PDF Converter — Combine Multiple, No Upload",
+        description: "Combine multiple PNG images into one PDF. Drag to set the page order, no watermark, nothing uploaded. Free PNG to PDF converter for screenshots and exports.",
         keywords: [
             "png to pdf", "png to pdf converter", "convert png to pdf", "png to pdf free",
             "combine png to pdf", "merge png to pdf", "multiple png to pdf", "png to pdf hd",
@@ -268,19 +275,19 @@ export const toolSeoData = {
             "png to pdf high resolution", "save png as pdf", "png to pdf free online",
             "merge png", "combine png", "png to pdf merge", "pngs to pdf"
         ],
-        h1: "PNG to PDF — Convert & Combine PNG Images to PDF Free",
+        h1: "PNG to PDF — Combine Multiple PNG Images into One PDF",
         faqs: [
             {
                 question: "How do I combine multiple PNG files into one PDF?",
-                answer: "Open Convertify’s PNG to PDF combiner, drop or select all of your PNG files at once, drag the thumbnails to set the page order, then click Convert. You’ll get a single multi-page PDF containing every PNG, in order, in under 10 seconds. No software install and no sign-up."
+                answer: "Drop or select all of your PNG files at once, drag the thumbnails to set the page order, then click Convert. You get a single multi-page PDF with every PNG, in order. No software install and no sign-up."
             },
             {
                 question: "How do I merge PNG to PDF for free without a watermark?",
-                answer: "Convertify is 100% free and never adds a watermark. Just upload your PNGs, arrange the order, and download the merged PDF. There are no daily limits, no “pro” features locked behind a paywall, and no email required."
+                answer: "This combiner is free and never adds a watermark. Drop your PNGs, arrange the order, and download the merged PDF. There is no daily limit, no locked “pro” mode, and no email required."
             },
             {
-                question: "Is the merged PNG to PDF output HD (high resolution)?",
-                answer: "Yes. We keep the original PNG resolution and embed each image at up to 300 DPI — sharp enough for printing. Text, screenshots, and design mockups stay crisp in the final PDF."
+                question: "Is the merged PNG to PDF output high resolution?",
+                answer: "Each PNG is embedded at its original pixel size, so screenshots and design exports stay as sharp as the source file. There is no extra 300 DPI upscale — what you drop is what goes into the PDF."
             },
             {
                 question: "Does it preserve PNG transparency in the PDF?",
@@ -306,7 +313,7 @@ export const toolSeoData = {
         howToSteps: [
             { name: "Upload your PNG images", text: "Drag and drop, or tap to select, all the PNG files you want to combine. You can add more at any time before converting." },
             { name: "Reorder the pages", text: "Drag the thumbnails to set the exact page order in the final PDF." },
-            { name: "Click Convert and download", text: "Hit Convert. Your single multi-page HD PDF downloads instantly — no watermark, no sign-up, no upload to any server." }
+            { name: "Click Convert and download", text: "Hit Convert. Your single multi-page PDF downloads instantly — no watermark, no sign-up, nothing uploaded." }
         ]
     },
     "pdf-to-png": {
@@ -693,8 +700,8 @@ export const toolSeoData = {
         ]
     },
     "excel-to-pdf": {
-        title: "Excel to PDF Free — Convert XLS & XLSX Online",
-        description: "Convert Excel spreadsheets to PDF free, no Microsoft Office needed. Cell values are laid out as a clean table; charts and formatting are not carried over.",
+        title: "Excel to PDF — Convert XLSX Spreadsheets, No Upload",
+        description: "Convert Excel or XLSX to PDF in your browser. Cell values become a clean table. No Microsoft Excel, no watermark, nothing uploaded.",
         keywords: [
             "excel to pdf", "xlsx to pdf", "xls to pdf", "convert excel to pdf",
             "excel to pdf converter", "excel to pdf free", "convert xlsx to pdf",
@@ -702,40 +709,39 @@ export const toolSeoData = {
             "xls to pdf free", "xlsx to pdf free", "convert xls to pdf online free",
             "excel to pdf converter free online", "xls to pdf no sign up",
             "excel file convert to pdf", "xls convert to pdf", "convert excel spreadsheet to pdf",
-            "excel to pdf preserve formatting", "xls to pdf keep formatting", "xlsx to pdf charts",
             "spreadsheet to pdf", "convert workbook to pdf", "excel to pdf without excel",
             "excel to pdf no microsoft office", "financial report to pdf", "invoice excel to pdf",
             "convert excel to pdf free", "convert excel to pdf online", "excel to pdf convert",
             "excel to pdf convertor", "excel pdf converter",
             "best excel to pdf converter", "best excel to pdf converter free"
         ],
-        h1: "Excel to PDF Free — Convert XLS/XLSX to PDF Online",
+        h1: "Excel to PDF — Convert XLSX Spreadsheets Online",
         faqs: [
             {
-                question: "How do I convert XLS to PDF online for free?",
-                answer: "Simply drag and drop your XLS or XLSX file into Convertify. We'll instantly convert it to PDF while preserving all your formatting, charts, and formulas. No sign-up required!"
+                question: "How do I convert Excel or XLSX to PDF for free?",
+                answer: "Drop an .xlsx or .xls file, pick the sheet if the workbook has more than one, then convert. Cell values are laid out as a clean table in the PDF. No Microsoft Excel, no sign-up, nothing uploaded."
             },
             {
                 question: "Do I need Microsoft Excel installed to convert?",
-                answer: "No! Convertify works 100% in your browser. You can convert Excel files to PDF from any device - Windows, Mac, or mobile - without installing any software."
+                answer: "No. Conversion runs in your browser on Windows, Mac, or a phone. You do not need Excel or Microsoft Office installed."
             },
             {
                 question: "Will my charts and formatting be preserved?",
-                answer: "Yes! Our conversion engine is specifically designed to keep your charts, graphs, cell formatting, column widths, and even clickable links fully intact in the final PDF."
+                answer: "No. This is a values-only export: you get the numbers and text from the sheet, not charts, colors, borders, or formulas. For a pixel-accurate copy of a formatted spreadsheet, use Excel’s own File → Export → Create PDF."
             },
             {
                 question: "What's the difference between XLS and XLSX?",
-                answer: "XLS is the older Excel format (pre-2007) and XLSX is the modern standard. Convertify handles both formats seamlessly with identical quality output."
+                answer: "XLS is the older Excel format (pre-2007) and XLSX is the modern one. Both are accepted. Wide sheets only fit about seven columns per page, and long cell text is trimmed so columns stay aligned."
             },
             {
                 question: "Is it safe for financial spreadsheets?",
-                answer: "Absolutely. All processing happens locally in your browser. Your sensitive financial data, invoices, and reports are never uploaded to any server - 100% private."
+                answer: "Yes. The file is read in your browser and never uploaded. That makes it suitable for invoices, budgets, and other numbers you would not send to a random converter."
             }
         ],
         howToSteps: [
-            { name: "Upload Excel File", text: "Drag & drop your XLS or XLSX file - no software needed." },
-            { name: "Instant Conversion", text: "We preserve all charts, formatting, and links automatically." },
-            { name: "Download PDF Free", text: "Get your professional PDF instantly - no sign-up required." }
+            { name: "Drop your spreadsheet", text: "Select an XLS or XLSX file. It is read in your browser — nothing is uploaded." },
+            { name: "Pick the sheet", text: "If the workbook has several tabs, choose one. A preview of the first ten rows appears first." },
+            { name: "Download the PDF", text: "Cell values are drawn as a table. No watermark, no Microsoft Excel needed." }
         ]
     },
 

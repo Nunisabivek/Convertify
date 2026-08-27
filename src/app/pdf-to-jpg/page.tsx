@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import Link from "next/link"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import PdfToJpgClient from "./client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
                 url: "https://convertify.work/images/og-banner.png",
                 width: 1200,
                 height: 630,
-                alt: "PDF to JPG Free — Convert PDF to High Quality Images | Convertify",
+                alt: "PDF to JPG — Extract Pages as Images, No Upload",
             },
         ],
     },
@@ -62,7 +63,7 @@ export default function Page() {
                 ]}
             />
             <SoftwareApplicationSchema
-                toolName="PDF to Images Converter Online"
+                toolName="PDF to JPG Converter"
                 toolSlug="pdf-to-jpg"
                 description={seoData.description}
             />
@@ -73,7 +74,12 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
-                        Free PDF to images converter online — extract every page of your PDF as high-quality JPG images. Download as a ZIP file with Convertify.
+                        Turn every PDF page into a JPG on your device. Multi-page files download as a ZIP. No watermark, nothing uploaded. Also:{" "}
+                        <Link href="/png-to-pdf" className="text-indigo-600 hover:underline font-medium">PNG to PDF</Link>
+                        {" · "}
+                        <Link href="/excel-to-pdf" className="text-indigo-600 hover:underline font-medium">Excel to PDF</Link>
+                        {" · "}
+                        <Link href="/jpg-to-pdf" className="text-indigo-600 hover:underline font-medium">JPG to PDF</Link>.
                     </p>
 
                     {/* Visual Preview / Trust Signal */}
@@ -93,7 +99,7 @@ export default function Page() {
                             </div>
                         </div>
                         <div className="absolute bottom-0 inset-x-0 bg-black/50 text-white text-xs py-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                            High-Quality 300 DPI Extraction
+                            Each page saved as a JPG
                         </div>
                     </div>
                 </div>
@@ -103,7 +109,7 @@ export default function Page() {
 
             {/* SEO Content Section */}
             <ToolSeoContent
-                toolName="PDF to Images Converter Online"
+                toolName="PDF to JPG Converter"
                 toolSlug="pdf-to-jpg"
                 description={contentData.description}
                 features={contentData.features}
@@ -115,12 +121,12 @@ export default function Page() {
 
             <HowToSchema
                 toolName="Convert PDF to JPG Images"
-                description="Learn how to convert PDF pages to JPG images using Convertify's free online PDF to images converter."
+                description="Learn how to convert PDF pages to JPG images using Convertify's free online PDF to JPG converter."
                 steps={seoData.howToSteps}
             />
 
             <FAQSchema
-                toolName="PDF to Images Conversion"
+                toolName="PDF to JPG Conversion"
                 faqs={seoData.faqs}
             />
 

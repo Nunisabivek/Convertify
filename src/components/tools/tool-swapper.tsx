@@ -149,6 +149,27 @@ export function ToolSwapper() {
 
     if (!swapInfo) return null
 
+    // Never send people (or crawlers) from a working tool into a noindex
+    // placeholder. Excel → PDF to Excel was the live example on /excel-to-pdf.
+    const noindexSwapTargets = new Set([
+        "edit-pdf",
+        "sign-pdf",
+        "ocr-pdf",
+        "protect-pdf",
+        "unlock-pdf",
+        "redact-pdf",
+        "compare-pdf",
+        "crop-pdf",
+        "delete-pdf-pages",
+        "reorder-pdf",
+        "repair-pdf",
+        "pdf-to-excel",
+        "pdf-to-pdfa",
+        "pdf-to-powerpoint",
+        "powerpoint-to-pdf",
+    ])
+    if (noindexSwapTargets.has(swapInfo.target)) return null
+
     return (
         <div className="flex justify-center mb-8">
             <Link

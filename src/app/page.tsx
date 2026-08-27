@@ -6,8 +6,8 @@ import { IS_MOBILE_BUILD } from '@/lib/is-mobile-build';
 
 // Generate metadata for homepage
 export const metadata: Metadata = {
-  title: 'Convertify - Free Online PDF Tools | Merge, Compress, Convert',
-  description: 'Free online PDF tool suite — merge, compress, convert PDF to Word, images and more. No sign-up, no watermarks, no file limits. Works entirely in your browser.',
+  title: 'Convertify — Free Online PDF Tools, No Upload',
+  description: 'Free PDF tools that run on your device. Merge, compress, and convert without uploading files. No sign-up, no watermark.',
   keywords: ['free pdf tools', 'online pdf converter', 'merge pdf free', 'compress pdf online', 'pdf to word converter', 'pdf to jpg', 'word to pdf', 'split pdf online'],
   alternates: {
     canonical: 'https://convertify.work',
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Convertify - Free Online PDF & File Converter Tools',
-    description: 'Merge, compress, convert PDFs to Word & images — free, no watermarks, no sign-up. Works entirely in your browser with no file uploads to servers.',
+    title: 'Convertify — Free Online PDF Tools, No Upload',
+    description: 'Free PDF tools that run on your device. Merge, compress, and convert without uploading files. No sign-up, no watermark.',
     url: 'https://convertify.work',
     siteName: 'Convertify',
     images: [

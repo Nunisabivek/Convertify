@@ -1,5 +1,6 @@
 ﻿
 import { Metadata } from "next"
+import Link from "next/link"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import JpgToPdfClient from "./client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
                 url: "/images/og-banner.png",
                 width: 1200,
                 height: 630,
-                alt: "JPG to PDF Converter - Convertify",
+                alt: "JPG to PDF — Combine Photos into One PDF, No Upload",
             },
         ],
     },
@@ -60,7 +61,7 @@ export default function Page() {
                 ]}
             />
             <SoftwareApplicationSchema
-                toolName="Convertify JPG to PDF Converter"
+                toolName="JPG to PDF Converter"
                 toolSlug="jpg-to-pdf"
                 description={seoData.description}
             />
@@ -71,7 +72,8 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Convertify JPG to PDF — convert images to PDF instantly. Combine multiple photos into one document. No download needed, no sign-up.
+                        Combine camera photos into one PDF. Drag to set the order. No watermark, nothing uploaded. Combining PNG screenshots? Use{" "}
+                        <Link href="/png-to-pdf" className="text-indigo-600 hover:underline font-medium">PNG to PDF</Link> instead.
                     </p>
                 </div>
                 <ToolSwapper />
@@ -80,7 +82,7 @@ export default function Page() {
 
             {/* SEO Content Section */}
             <ToolSeoContent
-                toolName="Convertify JPG to PDF Converter"
+                toolName="JPG to PDF Converter"
                 toolSlug="jpg-to-pdf"
                 description={contentData.description}
                 features={contentData.features}
@@ -92,7 +94,7 @@ export default function Page() {
             <ToolDeepGuide toolSlug="jpg-to-pdf" toolName="JPG to PDF Converter" />
 
             <HowToSchema
-                toolName="Convertify JPG to PDF Converter"
+                toolName="JPG to PDF Converter"
                 description="Learn how to convert JPG images to PDF documents using Convertify's free online image to PDF converter."
                 steps={seoData.howToSteps}
             />

@@ -56,12 +56,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ]
 
     const lastUpdated = '2026-07-26'
-    const uniqueToolsUpdated = '2026-08-27'
+    const recrawlToday = '2026-08-27'
+    const uniqueToolsUpdated = recrawlToday
+    const toolLastModified: Record<string, string> = {
+        'png-to-pdf': recrawlToday,
+        'excel-to-pdf': recrawlToday,
+        'pdf-to-jpg': recrawlToday,
+        'jpg-to-pdf': recrawlToday,
+    }
 
     const entries: MetadataRoute.Sitemap = [
         {
             url: baseUrl,
-            lastModified: lastUpdated,
+            lastModified: recrawlToday,
             changeFrequency: 'weekly',
             priority: 1,
         },
@@ -73,7 +80,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         })),
         ...coreTools.map(tool => ({
             url: `${baseUrl}/${tool}`,
-            lastModified: lastUpdated,
+            lastModified: toolLastModified[tool] ?? lastUpdated,
             changeFrequency: 'weekly' as const,
             priority: 0.9,
         })),

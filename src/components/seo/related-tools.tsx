@@ -94,13 +94,14 @@ interface RelatedToolsProps {
 export function RelatedTools({ currentTool, limit = 6 }: RelatedToolsProps) {
     const currentCategory = getToolCategory(currentTool)
 
-    // Prioritized unique + popular tools that should appear in cross-links
+    // Unique form tools first, then the GSC convert cluster
     const popularHrefs = [
         "/fit-to-size",
         "/passport-photo",
         "/remove-background",
         "/compress-pdf",
         "/png-to-pdf",
+        "/jpg-to-pdf",
         "/merge-pdf",
         "/pdf-to-jpg",
         "/excel-to-pdf",
