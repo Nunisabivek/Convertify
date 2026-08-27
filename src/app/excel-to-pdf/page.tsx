@@ -1,4 +1,5 @@
 ﻿import { Metadata } from "next"
+import Link from "next/link"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import ExcelToPdfClient from "./client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
         url: "https://convertify.work/excel-to-pdf",
         siteName: "Convertify",
         type: "website",
-        images: [{ url: "https://convertify.work/images/og-banner.png", width: 1200, height: 630, alt: "Excel to PDF Free — Convert XLS/XLSX Online | Convertify" }],
+        images: [{ url: "https://convertify.work/images/og-banner.png", width: 1200, height: 630, alt: "Excel to PDF — Convert XLSX Spreadsheets, No Upload" }],
     },
     twitter: {
         card: "summary_large_image",
@@ -60,7 +61,7 @@ export default function Page() {
                 ]}
             />
             <SoftwareApplicationSchema
-                toolName="Convertify Excel to PDF Converter"
+                toolName="Excel to PDF Converter"
                 toolSlug="excel-to-pdf"
                 description={seoData.description}
             />
@@ -71,19 +72,22 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Convert XLS, XLSX, and CSV spreadsheets to PDF in seconds. Charts, formulas, cell formatting, and clickable links are preserved. No Microsoft Excel needed, no watermark, no sign-up — and your spreadsheet never leaves your browser.
+                        Convert XLS and XLSX to a PDF of cell values in your browser. Charts and styling are not carried over. No Microsoft Excel, no watermark, nothing uploaded. Also:{" "}
+                        <Link href="/png-to-pdf" className="text-indigo-600 hover:underline font-medium">PNG to PDF</Link>
+                        {" · "}
+                        <Link href="/pdf-to-jpg" className="text-indigo-600 hover:underline font-medium">PDF to JPG</Link>.
                     </p>
                 </div>
                 <AnswerBlock
                     question="How do I convert XLS or Excel to PDF for free?"
-                    answer="Open Convertify's Excel to PDF converter, drop your XLS or XLSX file, and click Convert. The PDF downloads in seconds with charts, formulas, cell borders, and links preserved — no Microsoft Excel install, no watermark, no sign-up. Files stay on your device."
+                    answer="Drop your XLS or XLSX file, pick the sheet if needed, and convert. Cell values are laid out as a clean table — no Microsoft Excel, no watermark, nothing uploaded. Charts and formatting are not carried over."
                 />
                 <ToolSwapper />
                 <ExcelToPdfClient />
             </section>
 
             <ToolSeoContent
-                toolName="Convertify Excel to PDF Converter"
+                toolName="Excel to PDF Converter"
                 toolSlug="excel-to-pdf"
                 description={contentData.description}
                 features={contentData.features}

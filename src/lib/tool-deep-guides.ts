@@ -138,37 +138,36 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
 
     "pdf-to-jpg": {
         intro: [
-            "Turning a PDF into JPG images is one of the most common conversion tasks — for sharing on social media, embedding pages in slide decks, or sending screenshots of a contract section without the whole file. Convertify's PDF to JPG converter renders pages at up to 300 DPI right in your browser using PDF.js, so the output is sharp enough to print.",
-            "The renderer treats PDF as a true vector format: text and line art rasterize cleanly at the chosen DPI rather than scaling up a low-resolution preview. This matters most for technical drawings, scanned documents, and infographics where text legibility breaks down on lower-quality converters.",
-            "If you have a multi-page PDF, the tool exports one JPG per page; for five or more pages it auto-bundles into a ZIP so you don't have to click download fifty times.",
+            "Turning a PDF into JPG images is one of the most common conversion tasks — for sharing on social media, embedding pages in slide decks, or sending a contract page without the whole file. Convertify’s PDF to JPG converter renders each page in your browser with PDF.js. Nothing is uploaded.",
+            "The renderer treats PDF as a vector format: text and line art are drawn to a canvas at 2× the page’s native size, then saved as JPEG. That is sharper than photographing the screen, and there is no DPI picker on this page.",
+            "A one-page PDF downloads as a single JPG. Two or more pages download as a ZIP so you are not clicking download on every page.",
         ],
         steps: [
-            { title: "Drop your PDF", body: "Click or drag a PDF onto the upload zone. The tool reads the page count immediately so you know how many JPGs to expect." },
-            { title: "Pick the quality", body: "Choose Print (300 DPI), Web (150 DPI), or Mobile (72 DPI). Print quality is best for archival and physical printing; Web is the right balance for blog posts and emails; Mobile produces small files for fast sharing." },
-            { title: "Click Convert", body: "PDF.js renders each page to a canvas, then encodes the canvas as JPEG. For typical document PDFs (under 50 pages) this finishes in 5-15 seconds." },
-            { title: "Download", body: "Single-page PDFs download as a single .jpg; multi-page PDFs download as a .zip containing page-1.jpg, page-2.jpg, etc." },
+            { title: "Drop your PDF", body: "Click or drag a PDF onto the upload zone. The file stays on your device." },
+            { title: "Click Convert", body: "PDF.js renders each page to a canvas, then encodes the canvas as JPEG. Typical documents finish in a few seconds." },
+            { title: "Download", body: "Single-page PDFs download as a .jpg; multi-page PDFs download as a .zip of page images." },
         ],
         scenarios: [
-            { title: "Social media — sharing a PDF page on Instagram or LinkedIn", body: "Most social platforms don't accept PDF attachments natively. Convert the page you want to share to JPG at Web quality, post it as an image, and link the full PDF in the caption or first comment." },
-            { title: "Slide decks — embedding a contract or report excerpt", body: "PowerPoint and Google Slides render embedded PDFs poorly. Converting each relevant page to JPG and inserting as an image gives you crisp visuals at any zoom level, plus the ability to crop and annotate without affecting the source PDF." },
-            { title: "Email previews — sending a quick visual reference", body: "When you want a recipient to see one page of a long PDF without opening the file, send the JPG inline. Mobile-quality output is small enough to embed directly without hitting size limits." },
+            { title: "Social media — sharing a PDF page on Instagram or LinkedIn", body: "Most social platforms don't accept PDF attachments natively. Convert the page you want to share to JPG, post it as an image, and link the full PDF in the caption or first comment." },
+            { title: "Slide decks — embedding a contract or report excerpt", body: "PowerPoint and Google Slides render embedded PDFs poorly. Converting each relevant page to JPG and inserting as an image gives you a crisp visual you can crop and annotate without touching the source PDF." },
+            { title: "Email previews — sending a quick visual reference", body: "When you want a recipient to see one page of a long PDF without opening the file, send the JPG inline." },
             { title: "Archival and OCR pre-processing", body: "Some OCR engines work better on JPG than on raw PDF (especially when the source is image-only). Converting to JPG first lets you batch-OCR through any image-based pipeline." },
         ],
         troubleshooting: [
-            { question: "The text in my JPG is fuzzy.", answer: "You probably converted at Mobile (72 DPI) or Web (150 DPI). Re-run with Print (300 DPI). Note that the source PDF also matters — if the PDF itself was generated from a low-res scan, no DPI setting can recover detail that wasn't there." },
+            { question: "The text in my JPG is fuzzy.", answer: "This tool renders at 2× the PDF’s native size. If the source PDF was generated from a low-res scan, no conversion can recover detail that was never there. For line art where JPEG artifacts show, use PDF to PNG instead." },
             { question: "I converted a 200-page PDF and only got the first 100 in the ZIP.", answer: "Some browsers (notably mobile Safari) cap memory available to a single tab. For 100+ page conversions, use a desktop browser with at least 8 GB RAM, or split the PDF into 50-page chunks first." },
             { question: "Colors look slightly off.", answer: "JPEG is a lossy format with limited color depth. For pages with subtle gradient or photographic content, use the PDF to PNG tool instead — PNG is lossless and preserves color fidelity." },
-            { question: "Is OCR (text extraction) included?", answer: "PDF to JPG only renders pages — it doesn't extract text. For text extraction use the PDF to Text tool, or for searchable text inside a PDF use OCR PDF." },
+            { question: "Is OCR (text extraction) included?", answer: "PDF to JPG only renders pages — it doesn't extract text. For text that is already in the PDF, use PDF to Text." },
         ],
         comparison: [
             { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
-            { feature: "Max DPI", convertify: "300 DPI (print)", typical: "150 DPI" },
+            { feature: "How pages render", convertify: "2× PDF.js canvas", typical: "Often a low-res preview" },
             { feature: "Multi-page batch", convertify: "Auto-ZIP", typical: "One file at a time" },
             { feature: "Pages per conversion", convertify: "Unlimited", typical: "5–25 on free tier" },
             { feature: "Watermark", convertify: "None", typical: "Often added" },
             { feature: "Free tier limit", convertify: "None", typical: "1–3 per day" },
         ],
-        lastUpdated: "2026-05-08",
+        lastUpdated: "2026-08-27",
     },
 
     "pdf-to-png": {

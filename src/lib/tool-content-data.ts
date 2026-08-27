@@ -68,14 +68,13 @@ export const toolContentData: Record<string, {
         keywords: ["convertify pdf compressor", "compress pdf to 100kb", "compress pdf to 200kb", "pdf compressor 100kb", "reduce pdf size", "shrink pdf online free", "compress pdf for government forms", "best pdf compressor free", "pdf size reducer no watermark"]
     },
     "jpg-to-pdf": {
-        description: "Convert JPG to PDF free online with no limits and no watermarks. Combine unlimited photos into one multi-page PDF, adjust page sizes (A4, Letter, Legal), and arrange images in any order. Works perfectly on iPhone, Android, Windows, and Mac. All conversion happens in your browser - your photos are never uploaded to any server, making it 100% private and secure.",
+        description: "Convert JPG photos to PDF free. Combine unlimited camera photos into one multi-page PDF and arrange them in any order. For PNG screenshots and design exports, use PNG to PDF instead so the two tools stay distinct.",
         features: [
-            "Combine unlimited JPG/PNG images into one PDF - no limits",
+            "Combine unlimited JPG photos into one PDF - no limits",
             "Works on iPhone, Android, Windows, Mac & tablets",
-            "Choose page size: A4, Letter, Legal, or fit to image",
+            "Each page is sized to the photo, not a forced A4 box",
             "Drag and drop to reorder photos before converting",
-            "High quality output - preserves original image resolution",
-            "Compression options for smaller file sizes",
+            "Original photo resolution is preserved",
             "100% private - photos never leave your device",
             "No sign-up, no watermarks, completely free"
         ],
@@ -83,31 +82,30 @@ export const toolContentData: Record<string, {
             "Converting phone camera photos to PDF for homework submissions",
             "Scanning receipts and documents to PDF on iPhone/Android",
             "Creating photo albums from vacation pictures",
-            "Combining product images into catalogs for ecommerce",
-            "Converting screenshots into PDF documentation",
-            "Creating portfolios from design work or artwork",
-            "Batch converting multiple images for official applications"
+            "Combining product photos into catalogs for ecommerce",
+            "Bundling receipt photos for expense reports",
+            "Creating portfolios from photographed artwork",
+            "Batch converting camera photos for official applications"
         ],
-        keywords: ["jpg to pdf", "convert jpg to pdf free", "combine photos to pdf", "multiple jpg to one pdf", "scan to pdf iphone", "scan to pdf android", "photo to pdf converter", "jpg to pdf no watermark", "image to pdf combiner", "jpg to pdf a4 size"]
+        keywords: ["jpg to pdf", "convert jpg to pdf free", "combine photos to pdf", "multiple jpg to one pdf", "scan to pdf iphone", "scan to pdf android", "photo to pdf converter", "jpg to pdf no watermark", "image to pdf combiner"]
     },
     "pdf-to-jpg": {
-        description: "Convert PDFs to high-resolution JPG images with Convertify. Whether you need to save an entire document as a picture or extract specific images from a PDF, our HD rendering engine does it instantly at up to 300 DPI. Enjoy vector-to-pixel rendering for sharp text and vibrant graphics. Secure, browser-based processing ensures your files stay private.",
+        description: "Convert each PDF page to a JPG in your browser. A one-page file downloads as a single image; multi-page files come as a ZIP. Nothing is uploaded, and no watermark is added.",
         features: [
-            "Convert full pages to HD JPG (up to 300 DPI)",
-            "Vector-to-Pixel rendering for razor-sharp text",
-            "Extract distinct images embedded in any PDF",
-            "Batch process multiple files or 100+ pages instantly",
-            "Adjustable quality settings (Print, Web, or Mobile)",
-            "100% private - no server uploads or storage"
+            "Each PDF page becomes one JPG",
+            "Rendered locally with PDF.js — nothing uploaded",
+            "Multi-page PDFs download as a ZIP of JPGs",
+            "No watermark, no sign-up, no daily cap",
+            "Works for sharing a page on social, slides, or email"
         ],
         useCases: [
             "Converting presentation slides to images for sharing",
-            "Extracting high-res photos from a PDF portfolio",
-            "Saving document pages as pictures for Instagram/LinkedIn",
-            "Archiving invoices as lightweight, searchable JPGs",
+            "Saving a contract page as a picture for chat or email",
+            "Putting PDF pages into a slide deck as images",
+            "Archiving invoices as lightweight JPGs",
             "Turning design mockups into reviewable image sets"
         ],
-        keywords: ["pdf to jpg", "pdf to jpeg", "convert pdf to image", "extract images from pdf", "save pdf as picture", "high quality pdf to jpg", "turn pdf into image", "batch pdf to jpg"]
+        keywords: ["pdf to jpg", "pdf to jpeg", "convert pdf to image", "pdf pages to jpg", "save pdf as picture", "turn pdf into image", "batch pdf to jpg"]
     },
     "word-to-pdf": {
         description: "Convert a DOCX Word document's text content to PDF, free, without Microsoft Office, with zero watermarks. This extracts the document's text and lays it out on clean pages — it does not preserve exact fonts, images, or complex layout.",
@@ -237,10 +235,10 @@ export const toolContentData: Record<string, {
         keywords: ["xls to pdf", "xlsx to pdf", "excel to pdf free", "convert xls to pdf online", "excel to pdf no sign up", "xls to pdf converter", "excel to pdf without excel", "excel to pdf converter", "convert excel to pdf", "convert excel to pdf free", "excel pdf converter"]
     },
     "png-to-pdf": {
-        description: "Combine PNG to PDF in seconds — Convertify’s HD PNG combiner merges multiple PNG images into one crystal-clear, multi-page PDF at up to 300 DPI. Drag-and-drop ordering, transparency preserved, batch up to 100+ images, and zero watermarks. Whether you’re combining screenshots, design mockups, scanned receipts, or product photos, the result is a single professional PDF — created entirely in your browser, so your images never touch a server.",
+        description: "Combine PNG images into one PDF in your browser. Drag-and-drop ordering, transparency preserved, and zero watermarks. Built for screenshots, design exports, and scanned pages — not camera photos (those belong on JPG to PDF).",
         features: [
-            "Combine multiple PNGs into one professional multi-page PDF",
-            "HD quality output up to 300 DPI — print-ready",
+            "Combine multiple PNGs into one multi-page PDF",
+            "Each image is embedded at its original resolution",
             "Drag-and-drop to set the exact page order before converting",
             "Preserves PNG transparency and alpha channels",
             "Works on iPhone, Android, Windows & Mac browsers",

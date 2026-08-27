@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import Link from "next/link"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import PngToPdfClient from "./client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
         url: "https://convertify.work/png-to-pdf",
         siteName: "Convertify",
         type: "website",
-        images: [{ url: "https://convertify.work/images/og-banner.png", width: 1200, height: 630, alt: "PNG to PDF Converter - Free Online Tool | Convertify" }],
+        images: [{ url: "https://convertify.work/images/og-banner.png", width: 1200, height: 630, alt: "PNG to PDF Converter — Combine Multiple, No Upload" }],
     },
     twitter: {
         card: "summary_large_image",
@@ -74,12 +75,15 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Drop your PNG images, drag to reorder, get one HD PDF (300 DPI). No watermark, no sign-up, files never leave your browser. Works on Windows, Mac, iPhone &amp; Android.
+                        Drop PNG images, drag to reorder, get one PDF. No watermark, nothing uploaded. Works on Windows, Mac, iPhone and Android. For camera photos use{" "}
+                        <Link href="/jpg-to-pdf" className="text-indigo-600 hover:underline font-medium">JPG to PDF</Link>
+                        ; to extract PDF pages as images use{" "}
+                        <Link href="/pdf-to-jpg" className="text-indigo-600 hover:underline font-medium">PDF to JPG</Link>.
                     </p>
                 </div>
                 <AnswerBlock
                     question="How do I combine multiple PNG files into one PDF?"
-                    answer="Drop all your PNG images into Convertify’s PNG to PDF combiner, drag the thumbnails to set the page order, then click Convert. You’ll get a single multi-page HD PDF (300 DPI) in seconds — free, no watermark, no sign-up, and your files stay on your device."
+                    answer="Drop all your PNG images into the combiner, drag the thumbnails to set the page order, then click Convert. You get a single multi-page PDF in seconds — free, no watermark, no sign-up, and the files stay on your device."
                 />
                 <ToolSwapper />
                 <PngToPdfClient />

@@ -88,7 +88,7 @@ export function RelatedTools({ currentTool, limit = 6 }: RelatedToolsProps) {
     const currentCategory = getToolCategory(currentTool)
 
     // Prioritized popular tools that should always appear in cross-links
-    const popularHrefs = ["/png-to-pdf", "/compress-pdf", "/merge-pdf", "/pdf-to-jpg", "/excel-to-pdf", "/pdf-to-word"]
+    const popularHrefs = ["/png-to-pdf", "/jpg-to-pdf", "/compress-pdf", "/merge-pdf", "/pdf-to-jpg", "/excel-to-pdf"]
 
     // First show tools from same category, then popular tools from other categories
     const relatedTools = allTools

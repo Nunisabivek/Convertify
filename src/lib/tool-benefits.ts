@@ -34,19 +34,19 @@ export const toolBenefits: Record<string, Benefit[]> = {
         { icon: "globe", title: "Forms-Ready", description: "Built for visa portals and gov.uk uploads" },
     ],
     "pdf-to-jpg": [
-        { icon: "zap", title: "Up to 300 DPI", description: "Print-grade rendering, not blurry exports" },
-        { icon: "fileCheck", title: "All Pages or Range", description: "Export every page or just the ones you need" },
+        { icon: "zap", title: "One JPG Per Page", description: "Every PDF page is rendered as its own image" },
+        { icon: "fileCheck", title: "ZIP for Many Pages", description: "Two or more pages download together as a ZIP" },
         { icon: "shield", title: "No Server Round-Trip", description: "Pages render locally to JPG in your browser" },
-        { icon: "globe", title: "ZIP for Many Pages", description: "Auto-bundles into one download for 5+ pages" },
+        { icon: "globe", title: "No Watermark", description: "Plain page images, no stamp, no sign-up" },
     ],
     "jpg-to-pdf": [
         { icon: "zap", title: "Drag to Reorder", description: "Arrange photos before turning into PDF" },
-        { icon: "fileCheck", title: "Choose Page Size", description: "A4, US Letter, Legal or fit-to-image" },
+        { icon: "fileCheck", title: "Page Fits the Photo", description: "Each page is sized to that photo, not a forced A4 box" },
         { icon: "shield", title: "Camera-Roll Safe", description: "Photos never leave your phone or laptop" },
         { icon: "globe", title: "Phone & Desktop", description: "Same flow on iPhone, Android, Mac, PC" },
     ],
     "png-to-pdf": [
-        { icon: "zap", title: "300 DPI Output", description: "Sharp, presentation-grade PDF from PNGs" },
+        { icon: "zap", title: "Original Resolution", description: "Each PNG is embedded at its own pixel size" },
         { icon: "fileCheck", title: "Transparent PNGs OK", description: "Handles alpha-channel images cleanly" },
         { icon: "shield", title: "Browser-Only", description: "PNGs never touch our servers" },
         { icon: "globe", title: "Multi-Image Merge", description: "Drop dozens at once into one PDF" },
@@ -70,10 +70,10 @@ export const toolBenefits: Record<string, Benefit[]> = {
         { icon: "globe", title: "All Major OS", description: "Works the same on Windows, Mac, Linux" },
     ],
     "excel-to-pdf": [
-        { icon: "fileCheck", title: "Sheet-Aware", description: "Each worksheet becomes its own PDF page" },
+        { icon: "fileCheck", title: "Pick a Sheet", description: "Choose one worksheet per PDF, with a 10-row preview" },
         { icon: "shield", title: "Numbers Stay Private", description: "Spreadsheets never uploaded to a server" },
         { icon: "zap", title: "XLS + XLSX", description: "Legacy and modern Excel formats supported" },
-        { icon: "globe", title: "Print-Ready", description: "Auto page-fit for A4 and US Letter" },
+        { icon: "globe", title: "Values as a Table", description: "Cell values laid out on paginated pages — not a styled clone" },
     ],
     "pdf-to-text": [
         { icon: "zap", title: "Instant Extraction", description: "Pulls every text run from a PDF in seconds" },
