@@ -6,6 +6,7 @@ import { FileText, Image, FileSpreadsheet, Presentation, FileType } from "lucide
 import { Button } from "@/components/ui/button"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import { persistPickedFiles, pickFilesNative, isNativeAndroid } from "@/lib/native-file"
+import { tapHaptic } from "@/lib/haptics"
 
 interface FileUploaderProps {
     onFilesSelected: (files: File[]) => void
@@ -55,6 +56,9 @@ function matchesAccept(file: File, accept?: Record<string, string[]>): boolean {
 
 function shortChooseLabel(fileTypeLabel: string): string {
     const lower = fileTypeLabel.toLowerCase()
+    if (lower.includes("pdf") && (lower.includes("photo") || lower.includes("image"))) {
+        return "Choose PDF or photo"
+    }
     if (lower.includes("pdf")) return "Choose PDF"
     if (lower.includes("heic") || lower.includes("iphone")) return "Choose photos"
     if (lower.includes("image") || lower.includes("jpg") || lower.includes("png") || lower.includes("photo")) {
@@ -136,6 +140,7 @@ export function FileUploader({
                     onClick={async (event) => {
                         event.preventDefault()
                         event.stopPropagation()
+                        void tapHaptic()
                         const input = event.currentTarget.parentElement?.querySelector("input[type=file]") as HTMLInputElement | null
                         if (await isNativeAndroid()) {
                             try {

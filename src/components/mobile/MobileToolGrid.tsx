@@ -4,21 +4,10 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { AppIcon } from '@/components/mobile/AppIcon'
 import { getAndroidQuickTools, shortToolName } from '@/lib/mobile-tools'
+import { tapHaptic } from '@/lib/haptics'
 
 export default function MobileToolGrid() {
     const tools = getAndroidQuickTools()
-
-    const handlePress = async () => {
-        try {
-            const { Haptics, ImpactStyle } = await import('@capacitor/haptics')
-            const { Capacitor } = await import('@capacitor/core')
-            if (Capacitor.isNativePlatform()) {
-                await Haptics.impact({ style: ImpactStyle.Light })
-            }
-        } catch {
-            // optional
-        }
-    }
 
     return (
         <div className="mobile-section">
@@ -31,12 +20,13 @@ export default function MobileToolGrid() {
 
             <div className="mobile-tool-grid">
                 {tools.map((tool) => (
-                    <motion.div key={tool.id} whileTap={{ scale: 0.96 }}>
+                    <motion.div key={tool.id} whileTap={{ scale: 0.97 }} transition={{ duration: 0.08 }}>
                         <Link
                             href={`/${tool.href}`}
                             className="mobile-tool-card"
-                            onClick={handlePress}
-                            style={{ '--tool-color': tool.color.hex } as React.CSSProperties}
+                            onClick={() => {
+                                void tapHaptic()
+                            }}
                         >
                             <div className="mobile-tool-icon">
                                 <AppIcon name={tool.icon.lucide} size={26} />

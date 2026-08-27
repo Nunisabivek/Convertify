@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Light paper chrome. Dark icons on a warm gray status bar. -->
+    <!-- White chrome, logo-blue accents. Dark icons on a light status bar. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/convertify_primary</item>
         <item name="colorPrimaryDark">@color/convertify_primary_dark</item>
         <item name="colorAccent">@color/convertify_primary</item>
-        <item name="android:windowBackground">@color/convertify_paper</item>
-        <item name="android:statusBarColor">@color/convertify_paper</item>
+        <item name="android:windowBackground">@color/convertify_surface</item>
+        <item name="android:statusBarColor">@color/convertify_surface</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:navigationBarColor">@color/convertify_paper</item>
+        <item name="android:navigationBarColor">@color/convertify_surface</item>
         <item name="android:windowLightNavigationBar">true</item>
         <item name="android:forceDarkAllowed">false</item>
     </style>
@@ -18,18 +18,18 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:background">@null</item>
-        <item name="android:windowBackground">@color/convertify_paper</item>
-        <item name="android:statusBarColor">@color/convertify_paper</item>
+        <item name="android:windowBackground">@color/convertify_surface</item>
+        <item name="android:statusBarColor">@color/convertify_surface</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:navigationBarColor">@color/convertify_paper</item>
+        <item name="android:navigationBarColor">@color/convertify_surface</item>
         <item name="android:windowLightNavigationBar">true</item>
         <item name="android:forceDarkAllowed">false</item>
     </style>
 
     <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
         <item name="android:background">@drawable/splash</item>
-        <item name="android:windowBackground">@color/convertify_paper</item>
-        <item name="android:statusBarColor">@color/convertify_paper</item>
+        <item name="android:windowBackground">@color/convertify_surface</item>
+        <item name="android:statusBarColor">@color/convertify_surface</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="postSplashScreenTheme">@style/AppTheme.NoActionBar</item>
     </style>

@@ -6,26 +6,26 @@
 html:has(.mobile-app),
 body:has(.mobile-app),
 .mobile-root {
-  background: #f3f0ea;
+  background: #ffffff;
   color-scheme: light;
 }
 
 .mobile-app {
-  --md-paper: #f3f0ea;
-  --md-primary: #2f5fbf;
-  --md-primary-container: #e4eaf6;
-  --md-on-primary: #f8f6f2;
-  --md-surface: #f8f6f2;
-  --md-surface-dim: #f3f0ea;
+  --md-paper: #ffffff;
+  --md-primary: #026eff;
+  --md-primary-container: #e8eef6;
+  --md-on-primary: #ffffff;
+  --md-surface: #ffffff;
+  --md-surface-dim: #ffffff;
   --md-on-surface: #1f2933;
-  --md-on-surface-variant: #6b6560;
-  --md-outline: #e2ddd4;
+  --md-on-surface-variant: #5b6b7c;
+  --md-outline: #e8eef6;
   --md-error: #9b2c2c;
   --md-ok: #3b7d4f;
   --md-radius: 16px;
   --md-tap: 52px;
   --nav-h: 64px;
-  --md-shadow: 0 1px 2px rgba(55, 45, 35, 0.06);
+  --md-shadow: 0 1px 3px rgba(2, 110, 255, 0.06);
   /* Android WebView does not implement env(safe-area-inset-*). Capacitor and
      ConvertifyFiles.getSafeAreaInsets set these CSS variables on <html>. */
   --inset-top: var(--safe-area-inset-top, env(safe-area-inset-top, 0px));
@@ -124,6 +124,7 @@ body:has(.mobile-app),
   letter-spacing: -0.03em;
   line-height: 1.2;
   margin: 0 0 8px;
+  color: var(--md-primary);
 }
 
 .mobile-hero-subtitle {
@@ -184,7 +185,7 @@ body:has(.mobile-app),
 }
 
 .mobile-tool-card:active {
-  background: color-mix(in srgb, var(--md-paper) 70%, #ddd8ce);
+  transform: scale(0.97);
 }
 
 .mobile-tool-icon {
@@ -194,8 +195,8 @@ body:has(.mobile-app),
   display: flex;
   align-items: center;
   justify-content: center;
-  color: color-mix(in srgb, var(--tool-color, var(--md-primary)) 62%, #3d3a36);
-  background: color-mix(in srgb, var(--tool-color, var(--md-primary)) 18%, var(--md-paper));
+  color: var(--md-primary);
+  background: color-mix(in srgb, var(--md-primary) 8%, #ffffff);
 }
 
 .mobile-tool-name {
@@ -267,7 +268,7 @@ body:has(.mobile-app),
 }
 
 .mobile-file-chevron {
-  color: #9a948c;
+  color: var(--md-on-surface-variant);
   flex-shrink: 0;
 }
 
@@ -381,8 +382,8 @@ body:has(.mobile-app),
   display: flex;
   align-items: center;
   justify-content: center;
-  color: color-mix(in srgb, var(--tool-color, var(--md-primary)) 62%, #3d3a36);
-  background: color-mix(in srgb, var(--tool-color, var(--md-primary)) 18%, var(--md-paper));
+  color: var(--md-primary);
+  background: color-mix(in srgb, var(--md-primary) 8%, #ffffff);
   flex-shrink: 0;
 }
 
@@ -405,7 +406,7 @@ body:has(.mobile-app),
 }
 
 .mobile-tool-list-arrow {
-  color: #9a948c;
+  color: var(--md-on-surface-variant);
 }
 
 .mobile-about {
@@ -547,6 +548,7 @@ body:has(.mobile-app),
   font-size: 24px !important;
   font-weight: 800;
   letter-spacing: -0.03em;
+  color: var(--md-primary);
 }
 
 .mobile-tool-lead {
@@ -588,8 +590,12 @@ body:has(.mobile-app),
   font-weight: 700;
 }
 
-.mobile-choose-btn:active {
-  opacity: 0.9;
+.mobile-choose-btn:active,
+.mobile-result-primary:active,
+.mobile-nav-item:active,
+.mobile-size-chip:active,
+.mobile-tool-list-item:active {
+  transform: scale(0.97);
 }
 
 .mobile-choose-hint {
@@ -692,7 +698,7 @@ body:has(.mobile-app),
   min-height: 112px;
 }
 
-/* Website tool clients still use Tailwind white/slate. Restyle them to paper. */
+/* Website tool clients still use Tailwind palettes. Restyle them to white + blue. */
 .mobile-app .bg-white,
 .mobile-app .bg-slate-50,
 .mobile-app .bg-slate-100,
@@ -701,6 +707,18 @@ body:has(.mobile-app),
 .mobile-app [class*="bg-green-100"],
 .mobile-app [class*="bg-indigo-50"] {
   background-color: var(--md-surface) !important;
+}
+
+.mobile-app .mobile-tool-card,
+.mobile-app .mobile-choose-btn,
+.mobile-app .mobile-nav-item,
+.mobile-app .mobile-size-chip,
+.mobile-app .mobile-tool-list-item,
+.mobile-app .mobile-result-primary,
+.mobile-app .mobile-result-secondary,
+.mobile-app .mobile-file-item,
+.mobile-app .mobile-icon-btn {
+  transition: transform 80ms ease-out, background-color 80ms ease-out, opacity 80ms ease-out;
 }
 
 .mobile-app .text-slate-900,
@@ -740,5 +758,209 @@ body:has(.mobile-app),
   color: var(--md-on-surface);
   border-color: var(--md-outline);
 }
+
+.mobile-job {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mobile-chip-label {
+  margin: 4px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--md-on-surface);
+}
+
+.mobile-range-chips {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.mobile-live-size {
+  margin: 0;
+  padding: 12px 14px;
+  background: color-mix(in srgb, var(--md-primary) 6%, #ffffff);
+  border: 1px solid var(--md-outline);
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 650;
+  color: var(--md-primary);
+}
+
+.mobile-custom-range {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.mobile-custom-range label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--md-on-surface-variant);
+}
+
+.mobile-custom-range input {
+  min-height: 48px;
+  border-radius: 12px;
+  border: 1px solid var(--md-outline);
+  padding: 0 12px;
+  font-size: 16px;
+}
+
+.mobile-job-error {
+  margin: 0;
+  color: var(--md-error);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.mobile-picked-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  background: var(--md-surface);
+  border: 1px solid var(--md-outline);
+  border-radius: 14px;
+}
+
+.mobile-picked-row p {
+  margin: 4px 0 0;
+  color: var(--md-on-surface-variant);
+  font-size: 13px;
+}
+
+.mobile-text-btn {
+  background: none;
+  border: 0;
+  color: var(--md-primary);
+  font-weight: 700;
+  min-height: 44px;
+  padding: 0 8px;
+}
+
+.mobile-fineprint {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--md-on-surface-variant);
+}
+
+.mobile-crop {
+  position: relative;
+  width: min(100%, 280px);
+  margin: 4px auto 0;
+  aspect-ratio: 630 / 810;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid var(--md-outline);
+  border-radius: 12px;
+  touch-action: none;
+}
+
+.mobile-crop.is-sign {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 360 / 120;
+}
+
+.mobile-crop img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  width: auto;
+  min-width: 100%;
+  transform-origin: center center;
+  user-select: none;
+  pointer-events: none;
+}
+
+.mobile-crop-guide {
+  position: absolute;
+  inset: 8%;
+  border: 2px dashed color-mix(in srgb, var(--md-primary) 45%, #ffffff);
+  border-radius: 50% / 42%;
+  pointer-events: none;
+}
+
+.mobile-crop.is-sign .mobile-crop-guide {
+  inset: 6%;
+  border-radius: 8px;
+}
+
+.mobile-zoom {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.mobile-zoom input {
+  accent-color: var(--md-primary);
+}
+
+.mobile-bg-preview {
+  width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  background: var(--md-surface);
+  border: 1px solid var(--md-outline);
+  border-radius: 12px;
+}
+
+.mobile-work-bar {
+  position: sticky;
+  bottom: 8px;
+  z-index: 15;
+}
+
+.mobile-work-card {
+  background: var(--md-surface);
+  border: 1px solid var(--md-outline);
+  border-radius: 14px;
+  padding: 14px 14px 12px;
+  box-shadow: var(--md-shadow);
+}
+
+.mobile-work-note {
+  margin: 0 0 4px;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.mobile-work-size {
+  margin: 0 0 10px;
+  color: var(--md-primary);
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.mobile-work-cancel {
+  width: 100%;
+  min-height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--md-outline);
+  background: var(--md-surface);
+  color: var(--md-on-surface);
+  font-weight: 700;
+}
+
+.mobile-app button:disabled {
+  opacity: 0.45;
+}
+
+.mobile-app .bg-orange-600 {
+  background-color: var(--md-primary) !important;
+  border-color: var(--md-primary) !important;
+}
+
 
 

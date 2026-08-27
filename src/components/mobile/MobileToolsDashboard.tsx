@@ -19,7 +19,7 @@ export default function MobileToolsDashboard() {
 
     return (
         <div className="mobile-tools-dashboard">
-            <MobileSearch onSearch={setQuery} placeholder="Try “photo to pdf” or “compress”" />
+            <MobileSearch onSearch={setQuery} placeholder="Try “20kb” or “passport”" />
 
             {searching ? (
                 <div className="mobile-tool-list">

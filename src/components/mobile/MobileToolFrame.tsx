@@ -5,6 +5,9 @@ import { ANDROID_SHORT_NAMES } from '@/lib/mobile-tools'
 import { getToolById } from '@/lib/tools-registry'
 
 const LEADS: Record<string, string> = {
+    'fit-to-size': 'Pick a PDF or photo and set the min and max KB a form asks for.',
+    'passport-photo': 'Make a white-background photo at the usual pixel and KB numbers.',
+    'remove-background': 'Replace a plain wall with white or light blue. Works best on a simple backdrop.',
     'merge-pdf': 'Combine several PDFs into one file.',
     'split-pdf': 'Pull pages out of a PDF.',
     'compress-pdf': 'Make a PDF small enough for a job form or KYC upload.',

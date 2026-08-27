@@ -7,10 +7,9 @@ import {
     storeOutput,
     shareStoredOutput,
     saveStoredOutputToDownloads,
+    CONVERT_OFFER,
     type StoredOutput,
 } from '@/lib/native-file'
-
-const OFFER_EVENT = 'convertify-offer-output'
 
 export interface OfferOutputDetail {
     blob?: Blob
@@ -141,12 +140,12 @@ export default function NativeResultSheet() {
         }
 
         document.addEventListener('click', onClick, true)
-        window.addEventListener(OFFER_EVENT, onOffer)
+        window.addEventListener(CONVERT_OFFER, onOffer)
         return () => {
             HTMLAnchorElement.prototype.click = originalClick
             EventTarget.prototype.dispatchEvent = originalDispatch
             document.removeEventListener('click', onClick, true)
-            window.removeEventListener(OFFER_EVENT, onOffer)
+            window.removeEventListener(CONVERT_OFFER, onOffer)
         }
     }, [native])
 
@@ -219,5 +218,5 @@ export default function NativeResultSheet() {
 
 export function offerNativeOutput(detail: OfferOutputDetail): void {
     if (typeof window === 'undefined') return
-    window.dispatchEvent(new CustomEvent<OfferOutputDetail>(OFFER_EVENT, { detail }))
+    window.dispatchEvent(new CustomEvent<OfferOutputDetail>(CONVERT_OFFER, { detail }))
 }

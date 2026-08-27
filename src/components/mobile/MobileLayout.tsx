@@ -8,6 +8,8 @@ import { AppIcon } from '@/components/mobile/AppIcon'
 import NativeResultSheet from '@/components/mobile/NativeResultSheet'
 import { getToolById } from '@/lib/tools-registry'
 import { ANDROID_SHORT_NAMES } from '@/lib/mobile-tools'
+import { tapHaptic } from '@/lib/haptics'
+import { abortConvertWorker } from '@/lib/jobs/media'
 
 interface MobileLayoutProps {
     children: ReactNode
@@ -52,7 +54,7 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
                 if (!Capacitor.isNativePlatform() || cancelled) return
                 const { StatusBar, Style } = await import('@capacitor/status-bar')
                 await StatusBar.setOverlaysWebView({ overlay: false })
-                await StatusBar.setBackgroundColor({ color: '#F3F0EA' })
+                await StatusBar.setBackgroundColor({ color: '#FFFFFF' })
                 await StatusBar.setStyle({ style: Style.Light })
                 await applySafeArea()
             } catch {
@@ -67,6 +69,12 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
             window.removeEventListener('orientationchange', applySafeArea)
         }
     }, [])
+
+    useEffect(() => {
+        return () => {
+            abortConvertWorker()
+        }
+    }, [pathname])
 
     const isTab = navItems.some((item) => item.href === pathname)
     const toolTitle = toolTitleFromPath(pathname)
@@ -105,7 +113,7 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
                         initial={{ opacity: 0, y: 6 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.14, ease: 'easeOut' }}
+                        transition={{ duration: 0.08, ease: 'easeOut' }}
                     >
                         {children}
                     </motion.div>
@@ -120,6 +128,9 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
                             key={item.href}
                             href={item.href}
                             className={`mobile-nav-item${active ? ' active' : ''}`}
+                            onClick={() => {
+                                void tapHaptic()
+                            }}
                         >
                             <AppIcon name={item.icon} className="mobile-nav-icon" size={22} />
                             <span className="mobile-nav-label">{item.label}</span>

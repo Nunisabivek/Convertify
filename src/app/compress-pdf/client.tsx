@@ -450,7 +450,7 @@ export default function CompressPdfPage() {
                                     {[
                                         { value: 100, unit: "KB" as SizeUnit, label: "100 KB", hint: "Most forms" },
                                         { value: 200, unit: "KB" as SizeUnit, label: "200 KB", hint: "Job / KYC" },
-                                        { value: 500, unit: "KB" as SizeUnit, label: "500 KB", hint: "Clearer" },
+                                        { value: 300, unit: "KB" as SizeUnit, label: "300 KB", hint: "Clearer" },
                                     ].map((preset) => {
                                         const isSelected = targetSize === preset.value.toString() && sizeUnit === preset.unit
                                         return (
@@ -469,6 +469,7 @@ export default function CompressPdfPage() {
                                 <div className="flex flex-wrap gap-2">
                                     {[
                                         { value: 50, unit: "KB" as SizeUnit, label: "50 KB" },
+                                        { value: 500, unit: "KB" as SizeUnit, label: "500 KB" },
                                         { value: 1, unit: "MB" as SizeUnit, label: "1 MB" },
                                         { value: 2, unit: "MB" as SizeUnit, label: "2 MB" },
                                         { value: 5, unit: "MB" as SizeUnit, label: "5 MB" },

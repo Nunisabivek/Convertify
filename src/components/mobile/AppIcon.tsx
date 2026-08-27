@@ -22,6 +22,9 @@ import {
     ChevronLeft,
     Check,
     Plus,
+    Gauge,
+    UserRound,
+    Eraser,
     type LucideIcon,
 } from 'lucide-react'
 
@@ -47,6 +50,9 @@ const ICONS: Record<string, LucideIcon> = {
     ChevronLeft,
     Check,
     Plus,
+    Gauge,
+    UserRound,
+    Eraser,
 }
 
 export function AppIcon({

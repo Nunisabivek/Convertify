@@ -31,6 +31,9 @@ import {
     Shrink,
     PenLine,
     FileImage,
+    Gauge,
+    UserRound,
+    Eraser,
 } from "lucide-react"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -62,6 +65,14 @@ interface Tool {
 }
 
 const tools: { category: string; items: Tool[] }[] = [
+    {
+        category: "Forms & KYC",
+        items: [
+            { title: "Fit to size", description: "Make a PDF or photo land between a min and max KB.", icon: Gauge, href: "/fit-to-size", color: "text-blue-600 bg-blue-50" },
+            { title: "Passport photo", description: "Make a 630×810 JPEG on a white background.", icon: UserRound, href: "/passport-photo", color: "text-blue-600 bg-blue-50" },
+            { title: "Background", description: "Replace a plain backdrop with white or light blue.", icon: Eraser, href: "/remove-background", color: "text-blue-600 bg-blue-50" },
+        ]
+    },
     {
         category: "Organize PDF",
         items: [

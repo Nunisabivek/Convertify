@@ -10,6 +10,9 @@ import {
  * "active"; the app must never show those even if the website does.
  */
 export const ANDROID_V1_TOOL_IDS = [
+    'fit-to-size',
+    'passport-photo',
+    'remove-background',
     'merge-pdf',
     'split-pdf',
     'compress-pdf',
@@ -36,20 +39,32 @@ const ANDROID_V1_SET = new Set<string>(ANDROID_V1_TOOL_IDS)
 
 /** Home Quick Tools — the six jobs people actually open the app for. */
 export const ANDROID_QUICK_TOOL_IDS = [
-    'merge-pdf',
+    'fit-to-size',
+    'passport-photo',
     'compress-pdf',
     'jpg-to-pdf',
-    'pdf-to-jpg',
-    'word-to-pdf',
-    'split-pdf',
+    'remove-background',
+    'merge-pdf',
 ] as const
 
 /** Extra phrases a non-technical person would type. */
 const SEARCH_ALIASES: Record<string, string[]> = {
+    'fit-to-size': [
+        '20kb', '50kb', '100kb', '200kb', '300kb', 'kb', 'size',
+        'upsc', 'epfo', 'form', 'too big', 'too small', 'increase kb',
+        'government', 'job form',
+    ],
+    'passport-photo': [
+        'passport', 'passport seva', 'icao', '630', 'photo', 'selfie',
+        'signature', 'upsc photo', 'white background',
+    ],
+    'remove-background': [
+        'background', 'remove bg', 'white background', 'kyc photo', 'cutout',
+    ],
     'merge-pdf': ['combine', 'join', 'put together', 'one pdf'],
     'split-pdf': ['separate', 'extract pages', 'cut'],
     'compress-pdf': [
-        '100kb', '200kb', '500kb', 'small', 'reduce size', 'shrink',
+        '100kb', '200kb', '300kb', 'small', 'reduce size', 'shrink',
         'government', 'kyc', 'job form', 'form upload',
     ],
     'jpg-to-pdf': [
@@ -113,9 +128,12 @@ export function searchAndroidV1Tools(query: string): Tool[] {
 
 /** Short labels for home cards — one or two words, no jargon. */
 export const ANDROID_SHORT_NAMES: Record<string, string> = {
+    'fit-to-size': 'Fit to size',
+    'passport-photo': 'Passport photo',
+    'remove-background': 'Background',
     'merge-pdf': 'Merge',
     'split-pdf': 'Split',
-    'compress-pdf': 'Compress',
+    'compress-pdf': 'Compress PDF',
     'rotate-pdf': 'Rotate',
     'jpg-to-pdf': 'JPG → PDF',
     'png-to-pdf': 'PNG → PDF',
