@@ -128,7 +128,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
                 href: 'compress-pdf',
                 color: { text: 'text-green-600', bg: 'bg-green-50', hex: '#16A34A' },
                 status: 'active',
-                keywords: ['compress', 'reduce', 'shrink', 'optimize', 'size'],
+                keywords: ['compress', 'reduce', 'shrink', 'optimize', 'size', '100kb', '200kb', 'kyc'],
                 offlineSupported: true,
                 premium: false,
                 priority: 90,
