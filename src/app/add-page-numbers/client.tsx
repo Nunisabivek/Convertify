@@ -35,8 +35,6 @@ export default function AddPageNumbersClient() {
         setIsProcessing(true)
 
         try {
-            await new Promise(resolve => setTimeout(resolve, 2000)) // Min wait for ads
-
             const fileBuffer = await files[0].arrayBuffer()
             const pdfDoc = await PDFDocument.load(fileBuffer)
             const pages = pdfDoc.getPages()

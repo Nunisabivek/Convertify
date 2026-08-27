@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import ClientLayout from "@/components/layout/ClientLayout";
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build";
 
 // Google Analytics Measurement ID
 const GA_MEASUREMENT_ID = "G-57C0PG4LK6";
@@ -48,6 +49,13 @@ const organizationSchema = {
     contactType: "customer support",
     email: "support@convertify.work"
   }
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: IS_MOBILE_BUILD ? "#FFFFFF" : "#ffffff",
 };
 
 export const metadata: Metadata = {
@@ -124,6 +132,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {!IS_MOBILE_BUILD && (
+          <>
         {/* Preconnect to critical domains for faster loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -131,6 +141,8 @@ export default function RootLayout({
         {/* Google Fonts loaded as link tags (non-render-blocking) instead of CSS @import */}
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+          </>
+        )}
 
         {/* Sitemap Link for Search Engines */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
@@ -162,6 +174,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
       </head>
+      {!IS_MOBILE_BUILD && (
+        <>
       {/* Google Analytics */}
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
@@ -188,8 +202,10 @@ export default function RootLayout({
           id="google-adsense"
         />
       )}
+        </>
+      )}
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-slate-50`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col ${IS_MOBILE_BUILD ? "mobile-root" : "bg-slate-50"}`}
       >
         <ClientLayout>
           {children}

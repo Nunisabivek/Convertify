@@ -1,6 +1,8 @@
 ﻿import { Metadata } from "next"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import HeicToJpgClient from "./client"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
+import MobileToolFrame from "@/components/mobile/MobileToolFrame"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
@@ -24,6 +26,8 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
+    if (IS_MOBILE_BUILD) return <MobileToolFrame toolId="heic-to-jpg"><HeicToJpgClient /></MobileToolFrame>
+
     const relatedBlogSlugs = getBlogPostsForTool('heic-to-jpg')
     const relatedBlogs = allIndexableBlogPosts.filter(post => relatedBlogSlugs.includes(post.slug))
 

@@ -6,7 +6,9 @@ import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
 import { ProcessingWait } from "@/components/tools/processing-wait"
-import { ImageIcon, Download } from "lucide-react"
+import { Download } from "lucide-react"
+import { ImageReorderList } from "@/components/tools/image-reorder-list"
+import { friendlyFileError } from "@/lib/file-types"
 
 export default function PngToPdfPage() {
     const [files, setFiles] = useState<File[]>([])
@@ -39,7 +41,7 @@ export default function PngToPdfPage() {
             setProcessedPdfUrl(URL.createObjectURL(blob))
         } catch (error) {
             console.error("Error:", error)
-            alert("Failed. Please ensure files are valid PNGs.")
+            alert(friendlyFileError(error, "Could not open that picture. Try another file."))
         } finally {
             setIsProcessing(false)
         }
@@ -76,9 +78,13 @@ export default function PngToPdfPage() {
                 />
             ) : (
                 <div className="space-y-8">
-                    <div className="bg-white p-6 rounded-xl border text-center">
-                        <p className="mb-4 font-bold">{files.length} PNG files selected</p>
-                        <Button size="xl" onClick={handleConvert}>Convert to PDF</Button>
+                    <div className="bg-white p-6 rounded-xl border space-y-4">
+                        <ImageReorderList
+                            files={files}
+                            onReorder={setFiles}
+                            onRemove={(index) => setFiles((prev) => prev.filter((_, i) => i !== index))}
+                        />
+                        <Button size="xl" className="w-full" onClick={handleConvert}>Convert to PDF</Button>
                     </div>
                     <AdBanner variant="rectangle" />
                 </div>
@@ -86,4 +92,3 @@ export default function PngToPdfPage() {
         </div>
     )
 }
-

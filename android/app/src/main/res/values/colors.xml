@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="convertify_paper">#FFFFFF</color>
+    <color name="convertify_surface">#FFFFFF</color>
+    <color name="convertify_primary">#026EFF</color>
+    <color name="convertify_primary_dark">#0256CC</color>
+    <color name="convertify_hairline">#E8EEF6</color>
+</resources>

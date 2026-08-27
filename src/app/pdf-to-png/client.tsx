@@ -25,8 +25,8 @@ export default function PdfToPngPage() {
         setProgress(0)
 
         try {
-            const pdfjsLib = await import("pdfjs-dist")
-            pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`
+            const { loadPdfjs } = await import("@/lib/pdfjs")
+            const pdfjsLib = await loadPdfjs()
 
             const pdf = await pdfjsLib.getDocument(await file.arrayBuffer()).promise
             const numPages = pdf.numPages

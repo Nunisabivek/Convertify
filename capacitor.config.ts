@@ -4,23 +4,30 @@ const config: CapacitorConfig = {
   appId: 'com.convertify.app',
   appName: 'Convertify',
   webDir: 'out',
+  // Do not put server.url here. Live reload is `npm run cap:live` and only
+  // writes a temporary URL into the gitignored android assets config.
   server: {
     androidScheme: 'https',
+    hostname: 'localhost',
   },
   plugins: {
     SplashScreen: {
-      launchShowDuration: 2000,
+      launchShowDuration: 1200,
       backgroundColor: '#FFFFFF',
-      showSpinner: true,
-      spinnerColor: '#4F46E5',
+      showSpinner: false,
+    },
+    StatusBar: {
+      overlaysWebView: false,
+      style: 'LIGHT',
+      backgroundColor: '#FFFFFF',
     },
   },
   android: {
     buildOptions: {
       keystorePath: undefined,
       keystoreAlias: undefined,
-    }
-  }
+    },
+  },
 };
 
 export default config;

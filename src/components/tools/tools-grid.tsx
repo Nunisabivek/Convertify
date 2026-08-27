@@ -53,6 +53,9 @@ import {
     FileMinus2,
     FileSearch,
     FileCheck,
+    Gauge,
+    UserRound,
+    Eraser,
     type LucideIcon,
 } from 'lucide-react';
 
@@ -79,6 +82,9 @@ const ICON_MAP: Record<string, LucideIcon> = {
     FileMinus2,
     FileSearch,
     FileCheck,
+    Gauge,
+    UserRound,
+    Eraser,
 };
 
 // Check if running in Capacitor (mobile)

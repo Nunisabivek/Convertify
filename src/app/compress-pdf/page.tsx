@@ -1,6 +1,9 @@
 
 import { Metadata } from "next"
 import CompressPdfClient from "./client"
+import CompressMobileClient from "./mobile-client"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
+import MobileToolFrame from "@/components/mobile/MobileToolFrame"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
@@ -51,6 +54,8 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
+    if (IS_MOBILE_BUILD) return <MobileToolFrame toolId="compress-pdf"><CompressMobileClient /></MobileToolFrame>
+
     const relatedBlogSlugs = getBlogPostsForTool('compress-pdf')
     const relatedBlogs = allIndexableBlogPosts.filter(post => relatedBlogSlugs.includes(post.slug))
 

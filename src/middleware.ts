@@ -2,6 +2,13 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
+    // Android live reload (`npm run dev:mobile`) and the Capacitor export
+    // must not run website SEO/canonical middleware. Production website
+    // builds do not set NEXT_PUBLIC_MOBILE_BUILD, so this is a no-op there.
+    if (process.env.NEXT_PUBLIC_MOBILE_BUILD === 'true') {
+        return NextResponse.next()
+    }
+
     const { hostname, pathname } = request.nextUrl
 
     // Redirect www to non-www (301 permanent — consolidates domain authority)

@@ -1,6 +1,8 @@
 import { Metadata } from "next"
 import Link from "next/link"
 import { Shield, Zap, Globe, Lock, Users, Heart, FileCheck, Code2, Calendar } from "lucide-react"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
+import { MobileAboutPage } from "@/components/mobile"
 
 export const metadata: Metadata = {
     title: "About Convertify — Privacy-First, Browser-Based PDF Tools",
@@ -44,6 +46,10 @@ const aboutPageSchema = {
 }
 
 export default function AboutPage() {
+    if (IS_MOBILE_BUILD) {
+        return <MobileAboutPage />
+    }
+
     return (
         <div className="flex flex-col items-center">
             <script

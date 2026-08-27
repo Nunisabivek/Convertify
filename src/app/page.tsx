@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Script from 'next/script';
 import WebHomePage from '@/components/home/WebHomePage';
 import { MobileHomePage } from '@/components/mobile';
+import { IS_MOBILE_BUILD } from '@/lib/is-mobile-build';
 
 // Generate metadata for homepage
 export const metadata: Metadata = {
@@ -68,6 +69,10 @@ const softwareSchema = {
 };
 
 export default function Home() {
+  if (IS_MOBILE_BUILD) {
+    return <MobileHomePage />;
+  }
+
   return (
     <>
       <Script

@@ -1,5 +1,7 @@
 ﻿import { Metadata } from "next"
 import RotatePdfClient from "./client"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
+import MobileToolFrame from "@/components/mobile/MobileToolFrame"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
@@ -26,6 +28,8 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
+    if (IS_MOBILE_BUILD) return <MobileToolFrame toolId="rotate-pdf"><RotatePdfClient /></MobileToolFrame>
+
     const relatedBlogSlugs = getBlogPostsForTool('rotate-pdf')
     const relatedBlogs = allIndexableBlogPosts.filter(post => relatedBlogSlugs.includes(post.slug))
 

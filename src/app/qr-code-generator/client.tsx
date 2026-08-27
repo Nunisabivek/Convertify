@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Download } from "lucide-react"
 
@@ -8,10 +8,37 @@ export default function QrCodeClient() {
     const [text, setText] = useState("")
     const [size, setSize] = useState(400)
     const [error, setError] = useState<string | null>(null)
+    const [qrUrl, setQrUrl] = useState("")
 
-    const qrUrl = text.trim()
-        ? `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(text.trim())}&format=png&margin=10`
-        : ""
+    useEffect(() => {
+        let revoked = ""
+        const value = text.trim()
+        if (!value) {
+            setQrUrl("")
+            return
+        }
+        let cancelled = false
+        ;(async () => {
+            try {
+                const QRCode = (await import("qrcode")).default
+                const url = await QRCode.toDataURL(value, {
+                    width: size,
+                    margin: 2,
+                    errorCorrectionLevel: "M",
+                })
+                if (!cancelled) setQrUrl(url)
+            } catch {
+                if (!cancelled) {
+                    setQrUrl("")
+                    setError("Could not make that QR code. Try shorter text.")
+                }
+            }
+        })()
+        return () => {
+            cancelled = true
+            if (revoked) URL.revokeObjectURL(revoked)
+        }
+    }, [text, size])
 
     const downloadQr = async () => {
         if (!qrUrl) return
@@ -26,7 +53,7 @@ export default function QrCodeClient() {
             a.click()
             URL.revokeObjectURL(url)
         } catch {
-            setError("Failed to download QR code")
+            setError("Could not save that QR code. Try again.")
         }
     }
 
@@ -34,21 +61,21 @@ export default function QrCodeClient() {
         <div className="max-w-2xl mx-auto px-4 py-6">
             <div className="space-y-4">
                 <div>
-                    <label className="text-sm font-semibold text-slate-700 mb-2 block">Content</label>
+                    <label className="text-sm font-semibold text-slate-700 mb-2 block">Link or text</label>
                     <textarea
                         value={text}
-                        onChange={e => setText(e.target.value)}
-                        placeholder="Enter URL, text, or data to encode..."
+                        onChange={e => { setText(e.target.value); setError(null) }}
+                        placeholder="Paste a link or type some text"
                         className="w-full h-24 p-3 border rounded-lg text-sm resize-none focus:ring-2 focus:ring-indigo-300 focus:border-indigo-400 outline-none"
                         maxLength={4000}
                     />
-                    <p className="text-xs text-slate-400 mt-1">{text.length}/4000 characters</p>
+                    <p className="text-xs text-slate-400 mt-1">{text.length}/4000</p>
                 </div>
 
                 <div>
                     <label className="text-sm font-semibold text-slate-700 mb-2 block">Size</label>
                     <div className="flex gap-2">
-                        {[256, 400, 512, 1024].map(s => (
+                        {[256, 400, 512].map(s => (
                             <button
                                 key={s}
                                 onClick={() => setSize(s)}
@@ -68,15 +95,15 @@ export default function QrCodeClient() {
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                                 src={qrUrl}
-                                alt="Generated QR Code"
+                                alt="QR code"
                                 width={Math.min(size, 300)}
                                 height={Math.min(size, 300)}
                                 className="rounded"
                             />
                         </div>
-                        <Button onClick={downloadQr} className="mt-4">
+                        <Button onClick={downloadQr} className="mt-4 min-h-12">
                             <Download className="w-4 h-4 mr-2" />
-                            Download QR Code ({size}x{size})
+                            Save QR code
                         </Button>
                     </div>
                 )}

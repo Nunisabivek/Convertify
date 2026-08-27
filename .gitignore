@@ -56,7 +56,9 @@ android/app/build/
 *.log
 build_log.txt
 
-# Temporary and test files
+# Copied from pdfjs-dist during the mobile build
+/public/pdf.worker.min.mjs
+.mobile-build-stash/
 test.pdf
 *.tmp
 *.temp

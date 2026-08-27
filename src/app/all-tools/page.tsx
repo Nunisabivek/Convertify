@@ -31,11 +31,16 @@ import {
     Shrink,
     PenLine,
     FileImage,
+    Gauge,
+    UserRound,
+    Eraser,
 } from "lucide-react"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
 import { Metadata } from "next"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
+import { MobileToolsDashboard } from "@/components/mobile"
 
 export const metadata: Metadata = {
     title: "All Free PDF Tools | Convertify - No Pricing, No Download, 100% Free",
@@ -60,6 +65,14 @@ interface Tool {
 }
 
 const tools: { category: string; items: Tool[] }[] = [
+    {
+        category: "Forms & KYC",
+        items: [
+            { title: "Fit to size", description: "Make a PDF or photo land between a min and max KB.", icon: Gauge, href: "/fit-to-size", color: "text-blue-600 bg-blue-50" },
+            { title: "Passport photo", description: "Make a 630×810 JPEG on a white background.", icon: UserRound, href: "/passport-photo", color: "text-blue-600 bg-blue-50" },
+            { title: "Background", description: "Replace a plain backdrop with white or light blue.", icon: Eraser, href: "/remove-background", color: "text-blue-600 bg-blue-50" },
+        ]
+    },
     {
         category: "Organize PDF",
         items: [
@@ -148,6 +161,10 @@ const liveTools = tools.flatMap(cat => cat.items).filter(t => !t.comingSoon)
 const totalTools = liveTools.length
 
 export default function AllToolsPage() {
+    if (IS_MOBILE_BUILD) {
+        return <MobileToolsDashboard />
+    }
+
     return (
         <div className="container py-12 space-y-16">
             <div className="text-center space-y-4">

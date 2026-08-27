@@ -6,7 +6,9 @@ import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
 import { ProcessingWait } from "@/components/tools/processing-wait"
-import { ImageIcon, Download, Loader2, ArrowUp, ArrowDown, Trash2 } from "lucide-react"
+import { Download, Loader2 } from "lucide-react"
+import { ImageReorderList } from "@/components/tools/image-reorder-list"
+import { isJpegFile, isPngFile, friendlyFileError } from "@/lib/file-types"
 
 export default function JpgToPdfPage() {
     const [files, setFiles] = useState<File[]>([])
@@ -19,18 +21,6 @@ export default function JpgToPdfPage() {
 
     const removeFile = (index: number) => {
         setFiles((prev) => prev.filter((_, i) => i !== index))
-    }
-
-    const moveFile = (index: number, direction: 'up' | 'down') => {
-        if (direction === 'up' && index === 0) return
-        if (direction === 'down' && index === files.length - 1) return
-
-        const newFiles = [...files]
-        const swapIndex = direction === 'up' ? index - 1 : index + 1
-        const temp = newFiles[index]
-        newFiles[index] = newFiles[swapIndex]
-        newFiles[swapIndex] = temp
-        setFiles(newFiles)
     }
 
     const handleConvert = async () => {
@@ -55,9 +45,9 @@ export default function JpgToPdfPage() {
             for (const file of files) {
                 const imageBytes = await file.arrayBuffer()
                 let image
-                if (file.type === 'image/jpeg' || file.type === 'image/jpg') {
+                if (isJpegFile(file)) {
                     image = await pdfDoc.embedJpg(imageBytes)
-                } else if (file.type === 'image/png') {
+                } else if (isPngFile(file)) {
                     image = await pdfDoc.embedPng(imageBytes)
                 } else {
                     continue // Skip unsupported
@@ -78,7 +68,7 @@ export default function JpgToPdfPage() {
             setProcessedPdfUrl(url)
         } catch (error) {
             console.error("Error creating PDF:", error)
-            alert("Failed to create PDF. Please ensure files are valid JPG or PNG images.")
+            alert(friendlyFileError(error, "Could not open that picture. Try another file."))
         } finally {
             clearInterval(progressInterval!)
             setIsProcessing(false)
@@ -128,30 +118,11 @@ export default function JpgToPdfPage() {
             ) : (
                 <div className="space-y-8">
                     <div className="bg-white rounded-2xl shadow-sm border p-6 space-y-4">
-                        {files.map((file, index) => (
-                            <div key={`${file.name}-${index}`} className="flex items-center justify-between p-4 bg-slate-50 rounded-xl border">
-                                <div className="flex items-center gap-4 overflow-hidden">
-                                    <div className="p-3 bg-purple-100 rounded-lg text-purple-600">
-                                        <ImageIcon className="w-6 h-6" />
-                                    </div>
-                                    <div className="truncate font-medium text-slate-700">
-                                        {file.name}
-                                        <span className="block text-xs text-slate-400">{(file.size / 1024 / 1024).toFixed(2)} MB</span>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <Button size="icon" variant="ghost" onClick={() => moveFile(index, 'up')} disabled={index === 0}>
-                                        <ArrowUp className="w-4 h-4" />
-                                    </Button>
-                                    <Button size="icon" variant="ghost" onClick={() => moveFile(index, 'down')} disabled={index === files.length - 1}>
-                                        <ArrowDown className="w-4 h-4" />
-                                    </Button>
-                                    <Button size="icon" variant="destructive" onClick={() => removeFile(index)}>
-                                        <Trash2 className="w-4 h-4" />
-                                    </Button>
-                                </div>
-                            </div>
-                        ))}
+                        <ImageReorderList
+                            files={files}
+                            onReorder={setFiles}
+                            onRemove={removeFile}
+                        />
                     </div>
 
                     <div className="flex flex-col md:flex-row gap-4 justify-center">

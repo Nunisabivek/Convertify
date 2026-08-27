@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { PDFDocument } from "pdf-lib"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
@@ -19,11 +19,11 @@ export default function CompressPdfPage() {
     // Settings
     const [quality, setQuality] = useState(0.6)
     const [resolutionScale, setResolutionScale] = useState(1.5)
-    const [targetSize, setTargetSize] = useState<string>("")
+    const [targetSize, setTargetSize] = useState<string>("200")
     const [sizeUnit, setSizeUnit] = useState<SizeUnit>("KB")
     const [showAdvanced, setShowAdvanced] = useState(false)
 
-    const isPdf = file?.type === "application/pdf"
+    const isPdf = file ? (file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf")) : false
 
     // Accept PDF and common image formats
     const ACCEPTED_TYPES = {
@@ -52,41 +52,12 @@ export default function CompressPdfPage() {
             setFile(files[0])
             setQuality(0.6)
             setResolutionScale(1.5)
-            setTargetSize("")
+            setTargetSize("200")
             setSizeUnit("KB")
             setProcessedFileUrl(null)
             setCompressionStats(null)
         }
     }
-
-    // Auto-adjust compression settings based on target size
-    useEffect(() => {
-        const targetBytes = getTargetBytes()
-        if (!targetBytes || !file) return
-
-        const ratio = targetBytes / file.size
-
-        if (ratio < 0.1) {
-            // Extreme compression needed
-            setResolutionScale(0.6)
-            setQuality(0.3)
-        } else if (ratio < 0.2) {
-            setResolutionScale(0.8)
-            setQuality(0.4)
-        } else if (ratio < 0.4) {
-            setResolutionScale(1.0)
-            setQuality(0.5)
-        } else if (ratio < 0.6) {
-            setResolutionScale(1.2)
-            setQuality(0.6)
-        } else if (ratio < 0.8) {
-            setResolutionScale(1.4)
-            setQuality(0.7)
-        } else {
-            setResolutionScale(1.5)
-            setQuality(0.8)
-        }
-    }, [targetSize, sizeUnit, file])
 
     // Preset button handler
     const handlePreset = (value: number, unit: SizeUnit) => {
@@ -169,8 +140,8 @@ export default function CompressPdfPage() {
 
             if (isPdf) {
                 // PDF Compression with iterative target-seeking
-                const pdfjsLib = await import("pdfjs-dist")
-                pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`
+                const { loadPdfjs } = await import("@/lib/pdfjs")
+                const pdfjsLib = await loadPdfjs()
 
                 const arrayBuffer = await file.arrayBuffer()
                 const srcPdf = await pdfjsLib.getDocument(arrayBuffer).promise
@@ -185,12 +156,8 @@ export default function CompressPdfPage() {
                     let bestSize = Infinity
                     const MAX_ITERATIONS = 6
 
-                    // Try up to 3 resolution tiers, binary-searching quality within each
-                    const resolutionTiers = [
-                        Math.min(resolutionScale, 1.5),
-                        Math.min(resolutionScale * 0.7, 1.0),
-                        Math.min(resolutionScale * 0.4, 0.6),
-                    ]
+                    // Quality first: keep page resolution, then drop it only if quality is already low.
+                    const resolutionTiers = [1.25, 1.0, 0.7]
 
                     for (const resTier of resolutionTiers) {
                         let qLow = 0.05
@@ -265,12 +232,7 @@ export default function CompressPdfPage() {
                     const MAX_ITERATIONS = 8
 
                     // Binary search quality first at current scale
-                    const scaleTiers = [
-                        Math.min(resolutionScale > 1.0 ? 1.0 : resolutionScale, 1.0),
-                        0.7,
-                        0.5,
-                        0.3,
-                    ]
+                    const scaleTiers = [1.0, 0.84, 0.7]
 
                     for (const scaleTier of scaleTiers) {
                         let qLow = 0.05
@@ -397,7 +359,7 @@ export default function CompressPdfPage() {
                         setFile(null)
                         setProcessedFileUrl(null)
                         setCompressionStats(null)
-                        setTargetSize("")
+                        setTargetSize("200")
                     }}>
                         Compress Another File
                     </Button>
@@ -445,17 +407,34 @@ export default function CompressPdfPage() {
 
                             {/* Quick Presets */}
                             <div className="space-y-3">
-                                <label className="text-sm font-medium text-slate-600">Quick Presets (click to select)</label>
+                                <label className="text-sm font-medium text-slate-600">How small? (for forms and KYC)</label>
+                                <div className="mobile-size-chips">
+                                    {[
+                                        { value: 100, unit: "KB" as SizeUnit, label: "100 KB", hint: "Most forms" },
+                                        { value: 200, unit: "KB" as SizeUnit, label: "200 KB", hint: "Job / KYC" },
+                                        { value: 300, unit: "KB" as SizeUnit, label: "300 KB", hint: "Clearer" },
+                                    ].map((preset) => {
+                                        const isSelected = targetSize === preset.value.toString() && sizeUnit === preset.unit
+                                        return (
+                                            <button
+                                                key={preset.label}
+                                                type="button"
+                                                onClick={() => handlePreset(preset.value, preset.unit)}
+                                                className={`mobile-size-chip ${isSelected ? "is-selected" : ""}`}
+                                            >
+                                                <strong>{preset.label}</strong>
+                                                <span>{preset.hint}</span>
+                                            </button>
+                                        )
+                                    })}
+                                </div>
                                 <div className="flex flex-wrap gap-2">
                                     {[
                                         { value: 50, unit: "KB" as SizeUnit, label: "50 KB" },
-                                        { value: 100, unit: "KB" as SizeUnit, label: "100 KB" },
-                                        { value: 200, unit: "KB" as SizeUnit, label: "200 KB" },
                                         { value: 500, unit: "KB" as SizeUnit, label: "500 KB" },
                                         { value: 1, unit: "MB" as SizeUnit, label: "1 MB" },
                                         { value: 2, unit: "MB" as SizeUnit, label: "2 MB" },
                                         { value: 5, unit: "MB" as SizeUnit, label: "5 MB" },
-                                        { value: 10, unit: "MB" as SizeUnit, label: "10 MB" },
                                     ].map((preset) => {
                                         const isSelected = targetSize === preset.value.toString() && sizeUnit === preset.unit
                                         return (
@@ -511,6 +490,17 @@ export default function CompressPdfPage() {
                                         </button>
                                     </div>
                                 </div>
+                                {sizeUnit === "KB" ? (
+                                    <input
+                                        type="range"
+                                        min="10"
+                                        max="2000"
+                                        step="1"
+                                        value={Math.min(2000, Math.max(10, parseFloat(targetSize) || 200))}
+                                        onChange={(e) => setTargetSize(e.target.value)}
+                                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-orange-500"
+                                    />
+                                ) : null}
 
                                 {/* Size Comparison */}
                                 {targetSize && getTargetBytes() > 0 && (
