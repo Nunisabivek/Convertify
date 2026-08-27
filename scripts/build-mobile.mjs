@@ -50,14 +50,24 @@ function stash(rel) {
   if (!existsSync(from)) return null
   mkdirSync(tmp, { recursive: true })
   const to = join(tmp, rel.replaceAll('/', '__'))
-  renameSync(from, to)
+  try {
+    renameSync(from, to)
+  } catch {
+    cpSync(from, to, { recursive: true })
+    rmSync(from, { recursive: true, force: true })
+  }
   return { from, to }
 }
 
 function restore(entry) {
   if (!entry) return
   if (existsSync(entry.from)) rmSync(entry.from, { recursive: true, force: true })
-  renameSync(entry.to, entry.from)
+  try {
+    renameSync(entry.to, entry.from)
+  } catch {
+    cpSync(entry.to, entry.from, { recursive: true })
+    rmSync(entry.to, { recursive: true, force: true })
+  }
 }
 
 function copyWorker() {
@@ -101,7 +111,8 @@ function pruneOut(outDir) {
 }
 
 function run(cmd, args) {
-  const result = spawnSync(cmd, args, { cwd: root, stdio: 'inherit', env: process.env })
+  const resolved = process.platform === 'win32' && cmd === 'npx' ? 'npx.cmd' : cmd
+  const result = spawnSync(resolved, args, { cwd: root, stdio: 'inherit', env: process.env, shell: process.platform === 'win32' })
   if (result.status !== 0) process.exit(result.status ?? 1)
 }
 
