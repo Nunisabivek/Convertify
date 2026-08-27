@@ -135,8 +135,11 @@ export default function RootLayout({
         {/* Sitemap Link for Search Engines */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
-        {/* LLMs.txt for AI/LLM discoverability (AEO) */}
-        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-friendly site description" />
+        {/* Do not advertise /llms.txt as text/plain alternate on every page.
+            Crawlers that prefer text/plain (including some policy checkers)
+            followed that link from /privacy and treated the SEO dump as the
+            privacy policy. Homepage metadata in src/app/page.tsx still
+            advertises llms.txt. */}
 
         {/* hreflang signals — site is English-only but we want Google to
             understand it serves all major English markets so US/CA/UK/AU
