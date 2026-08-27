@@ -47,25 +47,23 @@ export const toolContentData: Record<string, {
         keywords: ["split pdf", "extract pdf pages", "separate pdf pages", "how to split pdf on windows", "pdf splitter online", "pdf page separator"]
     },
     "compress-pdf": {
-        description: "Compress PDF to 100KB or 200KB with intelligent multi-pass optimization. Perfect for government forms, visa applications, and passport scans. No watermarks, no limits, no sign-up required. Files are processed privately in your browser.",
+        description: "Compress a PDF to 50KB, 100KB or 200KB for government and visa uploads, or under 10MB / Gmail’s 25MB attachment cap. Multi-pass, no watermark, no sign-up. Files stay in your browser.",
         features: [
-            "Reliable and fast PDF compression",
-            "Compress PDF to exactly 100KB or 200KB for government portals",
-            "Best for visa applications, passport scans & official forms",
-            "No watermarks, no limits, no sign-up required",
-            "100% private - documents never leave your device",
-            "Intelligent compression preserves text & photo clarity",
-            "Extreme mode for strict file size requirements",
-            "Batch compress multiple PDFs simultaneously"
+            "Target 50KB, 100KB, 200KB, 10MB, or a custom size",
+            "Built for form uploads and email attachment limits",
+            "No watermarks, no daily cap, no sign-up",
+            "100% private — the PDF never leaves your device",
+            "Multi-pass quality search until the file is at or under the cap",
+            "Also accepts a photo if you need a one-file PDF under a KB limit"
         ],
         useCases: [
-            "Compressing PDFs to 100KB for government form uploads",
-            "Reducing passport scans to 200KB for visa portals",
-            "Shrinking PDFs for email attachment limits",
-            "Making official documents smaller without quality loss",
-            "Optimizing scanned IDs for online applications"
+            "Compressing PDFs to 100KB or 200KB for government form uploads",
+            "Getting a scan under Gmail’s 25MB limit or a 10MB office cap",
+            "Reducing passport and visa supporting documents for portal uploads",
+            "Making a job or university application PDF small enough to attach",
+            "Shrinking a scan that was rejected as too large, without an account"
         ],
-        keywords: ["convertify pdf compressor", "compress pdf to 100kb", "compress pdf to 200kb", "pdf compressor 100kb", "reduce pdf size", "shrink pdf online free", "compress pdf for government forms", "best pdf compressor free", "pdf size reducer no watermark"]
+        keywords: ["convertify pdf compressor", "compress pdf to 100kb", "compress pdf to 200kb", "compress pdf for gmail", "compress pdf for email", "pdf compressor 100kb", "reduce pdf size", "shrink pdf online free", "compress pdf for government forms", "best pdf compressor free", "pdf size reducer no watermark"]
     },
     "jpg-to-pdf": {
         description: "Convert JPG to PDF free online with no limits and no watermarks. Combine unlimited photos into one multi-page PDF, adjust page sizes (A4, Letter, Legal), and arrange images in any order. Works perfectly on iPhone, Android, Windows, and Mac. All conversion happens in your browser - your photos are never uploaded to any server, making it 100% private and secure.",

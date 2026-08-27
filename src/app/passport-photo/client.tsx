@@ -25,7 +25,7 @@ type Preset = {
 const PRESETS: Preset[] = [
     {
         id: 'passport',
-        label: 'Passport',
+        label: 'India 630×810',
         hint: '630×810, 10–250 KB',
         width: 630,
         height: 810,
@@ -33,6 +33,28 @@ const PRESETS: Preset[] = [
         maxKb: 250,
         fill: '#FFFFFF',
         cropClass: '',
+    },
+    {
+        id: 'us-2x2',
+        label: 'US 2×2',
+        hint: '600×600, 50–240 KB',
+        width: 600,
+        height: 600,
+        minKb: 50,
+        maxKb: 240,
+        fill: '#FFFFFF',
+        cropClass: 'is-square',
+    },
+    {
+        id: 'visa-35x45',
+        label: 'Visa 35×45',
+        hint: '600×750, 50–240 KB',
+        width: 600,
+        height: 750,
+        minKb: 50,
+        maxKb: 240,
+        fill: '#FFFFFF',
+        cropClass: 'is-uk',
     },
     {
         id: 'upsc',
@@ -224,7 +246,7 @@ export default function PassportPhotoClient() {
     return (
         <div className="mobile-job">
             <p className="mobile-fineprint">
-                Hits the usual pixel and KB numbers for form uploads. This is not an official MEA check.
+                Hits the pixel and KB numbers the form lists. This is not an official State Department, MEA, or GOV.UK pose check.
             </p>
             <div className="mobile-preset-row">
                 {PRESETS.map((item) => (

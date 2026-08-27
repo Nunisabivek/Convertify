@@ -407,12 +407,12 @@ export default function CompressPdfPage() {
 
                             {/* Quick Presets */}
                             <div className="space-y-3">
-                                <label className="text-sm font-medium text-slate-600">How small? (for forms and KYC)</label>
+                                <label className="text-sm font-medium text-slate-600">How small? Forms and email</label>
                                 <div className="mobile-size-chips">
                                     {[
                                         { value: 100, unit: "KB" as SizeUnit, label: "100 KB", hint: "Most forms" },
                                         { value: 200, unit: "KB" as SizeUnit, label: "200 KB", hint: "Job / KYC" },
-                                        { value: 300, unit: "KB" as SizeUnit, label: "300 KB", hint: "Clearer" },
+                                        { value: 10, unit: "MB" as SizeUnit, label: "10 MB", hint: "Email" },
                                     ].map((preset) => {
                                         const isSelected = targetSize === preset.value.toString() && sizeUnit === preset.unit
                                         return (
@@ -431,10 +431,12 @@ export default function CompressPdfPage() {
                                 <div className="flex flex-wrap gap-2">
                                     {[
                                         { value: 50, unit: "KB" as SizeUnit, label: "50 KB" },
+                                        { value: 300, unit: "KB" as SizeUnit, label: "300 KB" },
                                         { value: 500, unit: "KB" as SizeUnit, label: "500 KB" },
                                         { value: 1, unit: "MB" as SizeUnit, label: "1 MB" },
                                         { value: 2, unit: "MB" as SizeUnit, label: "2 MB" },
                                         { value: 5, unit: "MB" as SizeUnit, label: "5 MB" },
+                                        { value: 20, unit: "MB" as SizeUnit, label: "20 MB" },
                                     ].map((preset) => {
                                         const isSelected = targetSize === preset.value.toString() && sizeUnit === preset.unit
                                         return (

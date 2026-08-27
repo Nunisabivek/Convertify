@@ -3401,6 +3401,15 @@ export const staticBlogPosts: StaticBlogPost[] = [
     readingTime: 8,
     relatedTool: "/all-tools",
   },
+  {
+    slug: "passport-photo-size-us-india-uk",
+    title: "Passport Photo Size: US 2×2 vs India 630×810 vs Visa 35×45",
+    excerpt: "Pixel sizes, KB caps, and JPEG vs PNG for US 2×2, India 630×810, UPSC, and visa 35×45 photos. Crop on your device.",
+    date: "2026-08-27",
+    category: "how-to",
+    readingTime: 8,
+    relatedTool: "/passport-photo",
+  },
 ]
 
 // Everything that should appear in the blog index. Sitemap URLs are listed

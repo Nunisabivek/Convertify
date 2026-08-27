@@ -20,7 +20,10 @@ import {
     Smartphone,
     Globe,
     Scaling,
-    Ruler
+    Ruler,
+    Gauge,
+    UserRound,
+    Eraser
 } from "lucide-react";
 import { InternalLinkMap } from "@/components/seo/internal-link-map";
 import { AdBanner } from "@/components/ads/banner";
@@ -28,6 +31,40 @@ import { blogPosts } from "@/lib/blog-data";
 
 // Organized tool categories like ilovePDF
 const toolCategories = [
+    {
+        category: "Forms, photos & exact size",
+        description: "Hit the pixel and KB numbers a form, visa, or email actually asks for",
+        tools: [
+            {
+                title: "Compress PDF",
+                description: "100KB, 200KB, 10MB, or under Gmail’s 25MB attachment cap.",
+                icon: Minimize2,
+                color: "bg-green-100 text-green-600",
+                href: "/compress-pdf",
+            },
+            {
+                title: "Fit to size",
+                description: "Land a photo or PDF between a min and max KB or MB.",
+                icon: Gauge,
+                color: "bg-blue-100 text-blue-600",
+                href: "/fit-to-size",
+            },
+            {
+                title: "Passport photo",
+                description: "US 2×2 (600×600), India 630×810, visa 35×45, bank and signature.",
+                icon: UserRound,
+                color: "bg-indigo-100 text-indigo-600",
+                href: "/passport-photo",
+            },
+            {
+                title: "White background",
+                description: "Fill a plain wall for passport, KYC, or LinkedIn headshots.",
+                icon: Eraser,
+                color: "bg-sky-100 text-sky-600",
+                href: "/remove-background",
+            },
+        ],
+    },
     {
         category: "Organize PDF",
         description: "Merge, split, and organize your PDFs",
@@ -68,7 +105,7 @@ const toolCategories = [
         tools: [
             {
                 title: "Compress PDF",
-                description: "Reduce file size while keeping quality.",
+                description: "Hit 100KB, 200KB, 10MB, or Gmail’s 25MB cap.",
                 icon: Minimize2,
                 color: "bg-green-100 text-green-600",
                 href: "/compress-pdf",
@@ -429,7 +466,7 @@ export default function WebHomePage() {
                                 <Lock className="w-5 h-5 text-indigo-600" /> Secure & Private
                             </h3>
                             <p className="text-slate-600">
-                                Your files are processed securely. We don't store your documents—they are automatically deleted from our servers after processing.
+                                Your files are processed in your browser. We don&apos;t upload them, so there is nothing to store or delete on a server.
                             </p>
                         </div>
                         <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100">
@@ -455,11 +492,11 @@ export default function WebHomePage() {
                             </div>
                             <div>
                                 <h4 className="font-semibold text-lg text-slate-800 mb-2">Can I use PDF tools without creating an account?</h4>
-                                <p className="text-slate-600">Absolutely. Convertify is a "no sign-up" platform. There is no registration, no email requirement, and no subscription fees. You can use all our premium-grade features instantly and indefinitely without ever sharing your personal information.</p>
+                                <p className="text-slate-600">Absolutely. Convertify is a &quot;no sign-up&quot; platform. There is no registration, no email requirement, and no subscription fees. You can use all our premium-grade features instantly and indefinitely without ever sharing your personal information.</p>
                             </div>
                             <div>
                                 <h4 className="font-semibold text-lg text-slate-800 mb-2">How do I merge PDFs without uploading to servers?</h4>
-                                <p className="text-slate-600">Simply use our "Merge PDF" tool. Our advanced technology runs logic directly in your web browser (WebAssembly/Javascript), so your files are combined locally. This is the safest way to merge sensitive documents without risk of data breaches from server-side storage.</p>
+                                <p className="text-slate-600">Simply use our &quot;Merge PDF&quot; tool. Our advanced technology runs logic directly in your web browser (WebAssembly/Javascript), so your files are combined locally. This is the safest way to merge sensitive documents without risk of data breaches from server-side storage.</p>
                             </div>
                             <div>
                                 <h4 className="font-semibold text-lg text-slate-800 mb-2">What is the pricing for Convertify?</h4>

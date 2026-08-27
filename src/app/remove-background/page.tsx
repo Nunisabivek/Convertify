@@ -5,17 +5,29 @@ import type { Metadata } from 'next'
 import { BreadcrumbSchema } from '@/components/seo/breadcrumb-schema'
 import { SoftwareApplicationSchema } from '@/components/seo/software-schema'
 import { RelatedTools } from '@/components/seo/related-tools'
+import { RelatedFormTools } from '@/components/seo/related-form-tools'
+import { RelatedBlogPosts } from '@/components/seo/related-blog-posts'
+import { FAQSchema } from '@/components/seo/faq-schema'
+import { HowToSchema } from '@/components/seo/howto-schema'
+import { AnswerBlock } from '@/components/seo/answer-block'
+import { uniqueToolSeo } from '@/lib/unique-tools-seo'
+import { allIndexableBlogPosts } from '@/lib/blog-data'
+import { getBlogPostsForTool } from '@/lib/tool-blog-mapping'
 
-const title = 'Replace Photo Background — White or Light Blue, Free'
+const title = 'Remove Photo Background for Passport & ID — Free'
 const description =
-    'Swap a plain photo backdrop for white or light blue for KYC and passport uploads. Runs in your browser — files never leave your device.'
+    'Replace a plain backdrop with white for passport, KYC, and LinkedIn headshots. Light blue optional. Runs in your browser — the photo never leaves your device.'
+const seo = uniqueToolSeo['remove-background']
 
 export const metadata: Metadata = {
     title,
     description,
     keywords: [
-        'replace photo background',
+        'remove background passport photo',
         'white background for kyc photo',
+        'linkedin photo white background',
+        'id headshot white background',
+        'replace photo background',
         'light blue passport background',
         'plain backdrop to white',
         'kyc photo white background',
@@ -57,6 +69,9 @@ export default function Page() {
         )
     }
 
+    const relatedBlogSlugs = getBlogPostsForTool('remove-background')
+    const relatedBlogs = allIndexableBlogPosts.filter((post) => relatedBlogSlugs.includes(post.slug))
+
     return (
         <div className="flex flex-col items-center">
             <BreadcrumbSchema
@@ -75,13 +90,18 @@ export default function Page() {
             <section className="w-full py-8 bg-gradient-to-b from-blue-50 to-white">
                 <div className="max-w-4xl mx-auto px-4 text-center mb-8">
                     <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
-                        Replace a plain backdrop with white or light blue
+                        White background for passport, KYC, and ID headshots
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Built for KYC and passport uploads that reject busy walls. The live URL
-                        is <strong>/remove-background</strong> — /background-remove does not exist.
+                        Built for a photo already taken against a reasonably even wall.
+                        Fill white (usual for passport, KYC, LinkedIn) or light blue. The file
+                        never leaves this device.
                     </p>
                 </div>
+                <AnswerBlock
+                    question="How do I get a white background on a passport or LinkedIn photo without uploading it?"
+                    answer="Use this page on a photo shot against a plain wall. Convertify fills that backdrop with solid white (or light blue) in your browser. Then crop to US 2×2 or 630×810 on Passport photo, or hit a KB band on Fit to size."
+                />
                 <RemoveBackgroundClient />
             </section>
 
@@ -89,23 +109,36 @@ export default function Page() {
                 <h2 className="text-2xl font-bold text-slate-900">What it does — and what it does not</h2>
                 <p>
                     This tool samples a plain backdrop and fills it with solid white or a light
-                    blue. It is meant for a photo already taken against a reasonably even wall,
-                    not for cutting hair-accurate subjects out of a crowded street like a
-                    dedicated studio editor.
+                    blue. It is meant for KYC, passport, and LinkedIn-style ID headshots, not
+                    for cutting hair-accurate subjects out of a crowded street. JPEG output is
+                    what those portals expect; PNG transparency would fail a white-background
+                    rule and a small KB cap.
                 </p>
                 <p>
                     After the background is filled, pair it with{' '}
                     <a className="text-indigo-600 hover:underline" href="/passport-photo">
                         Passport photo
                     </a>{' '}
-                    to crop to 630×810, or{' '}
+                    to crop to US 2×2 (600×600), India 630×810, or visa 35×45, or{' '}
                     <a className="text-indigo-600 hover:underline" href="/fit-to-size">
                         Fit to size
                     </a>{' '}
-                    if the portal only cares about kilobytes. Files stay on your device.
+                    if the portal only cares about kilobytes.
                 </p>
             </section>
 
+            <HowToSchema
+                toolName="Replace a Photo Background"
+                description="Fill a plain photo backdrop with white or light blue for passport, KYC, and LinkedIn uploads. Runs in your browser."
+                steps={[...seo.howToSteps]}
+            />
+            <FAQSchema toolName="Photo Background Replacer" faqs={[...seo.faqs]} />
+            <RelatedBlogPosts
+                toolSlug="remove-background"
+                posts={relatedBlogs}
+                title="Passport photo size guides"
+            />
+            <RelatedFormTools currentHref="/remove-background" />
             <RelatedTools currentTool="/remove-background" />
         </div>
     )

@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // and would bloat this route.
 
     const coreTools = [
-        'merge-pdf', 'compress-pdf', 'split-pdf',
+        'merge-pdf', 'split-pdf',
         'pdf-to-word', 'word-to-pdf',
         'pdf-to-jpg', 'jpg-to-pdf',
         'pdf-to-png', 'png-to-pdf',
@@ -34,6 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Working first-class tools with unique pages (not Android-only).
     // Do not add /passport or /background-remove — those 404.
     const uniqueTools = [
+        'compress-pdf',
         'fit-to-size',
         'passport-photo',
         'remove-background',

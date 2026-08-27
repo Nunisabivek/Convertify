@@ -18,6 +18,7 @@ export const toolToBlogMapping: Record<string, string[]> = {
         'compress-pdf-to-500kb',
         'compress-pdf-under-100kb-government-forms',
         'compress-pdf-for-visa-application',
+        'compress-pdf-for-email-attachment',
         'best-free-pdf-compressor-online',
         'reduce-pdf-size-without-losing-quality',
     ],
@@ -75,6 +76,19 @@ export const toolToBlogMapping: Record<string, string[]> = {
     'excel-to-pdf': [
         'xls-to-pdf-converter-free',
         'pdf-tools-for-small-business',
+    ],
+    'passport-photo': [
+        'passport-photo-size-us-india-uk',
+        'resize-image-for-passport-photo',
+    ],
+    'remove-background': [
+        'passport-photo-size-us-india-uk',
+        'resize-image-for-passport-photo',
+    ],
+    'fit-to-size': [
+        'compress-pdf-under-100kb-government-forms',
+        'compress-pdf-for-visa-application',
+        'passport-photo-size-us-india-uk',
     ],
     'image-compressor': [
         'compress-image-for-website-speed',

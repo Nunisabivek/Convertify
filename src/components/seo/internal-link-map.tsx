@@ -20,6 +20,9 @@ import {
     Shrink,
     FileType,
     PenLine,
+    Gauge,
+    UserRound,
+    Eraser,
     LucideIcon,
 } from "lucide-react"
 
@@ -39,6 +42,11 @@ interface ToolLink {
 // crawlers and real users into dead ends. Add an entry back here only when
 // its tool ships and rejoins the sitemap.
 const allToolLinks: ToolLink[] = [
+    // Forms & KYC (indexed unique tools — not placeholders)
+    { title: "Fit to size", href: "/fit-to-size", icon: Gauge, color: "text-blue-500", description: "Hit an exact KB or MB window" },
+    { title: "Passport photo", href: "/passport-photo", icon: UserRound, color: "text-indigo-500", description: "US 2×2, 630×810, visa sizes" },
+    { title: "White background", href: "/remove-background", icon: Eraser, color: "text-sky-500", description: "Passport, KYC, LinkedIn headshot" },
+
     // Organize PDF
     { title: "Merge PDF", href: "/merge-pdf", icon: FileStack, color: "text-red-500", description: "Combine multiple PDFs into one" },
     { title: "Split PDF", href: "/split-pdf", icon: Scissors, color: "text-blue-500", description: "Extract pages from PDF" },
