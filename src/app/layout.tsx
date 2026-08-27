@@ -55,7 +55,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#ffffff",
+  themeColor: IS_MOBILE_BUILD ? "#F3F0EA" : "#ffffff",
 };
 
 export const metadata: Metadata = {
@@ -202,7 +202,7 @@ export default function RootLayout({
         </>
       )}
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-slate-50`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col ${IS_MOBILE_BUILD ? "mobile-root" : "bg-slate-50"}`}
       >
         <ClientLayout>
           {children}

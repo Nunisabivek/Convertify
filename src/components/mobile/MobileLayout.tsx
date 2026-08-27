@@ -52,7 +52,7 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
                 if (!Capacitor.isNativePlatform() || cancelled) return
                 const { StatusBar, Style } = await import('@capacitor/status-bar')
                 await StatusBar.setOverlaysWebView({ overlay: false })
-                await StatusBar.setBackgroundColor({ color: '#ffffff' })
+                await StatusBar.setBackgroundColor({ color: '#F3F0EA' })
                 await StatusBar.setStyle({ style: Style.Light })
                 await applySafeArea()
             } catch {

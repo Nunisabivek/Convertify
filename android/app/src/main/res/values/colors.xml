@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="convertify_paper">#F3F0EA</color>
+    <color name="convertify_surface">#F8F6F2</color>
+    <color name="convertify_primary">#2F5FBF</color>
+    <color name="convertify_primary_dark">#254A96</color>
+</resources>

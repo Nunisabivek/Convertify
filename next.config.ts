@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
   trailingSlash: false,
   compress: true,
   poweredByHeader: false,
+  // Emulator WebView (10.0.2.2) talking to `next dev`. Ignored in production.
+  allowedDevOrigins: ['10.0.2.2', '127.0.0.1', 'localhost'],
   images: {
     unoptimized: true,
   },

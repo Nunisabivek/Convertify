@@ -8,10 +8,12 @@
     "start": "next start",
     "lint": "next lint",
     "seo:ping": "node scripts/ping-google.js",
-    "dev:mobile": "next dev -H 0.0.0.0",
+    "dev:mobile": "NEXT_PUBLIC_MOBILE_BUILD=true next dev -H 0.0.0.0 --port 3000",
     "build:mobile": "NEXT_PUBLIC_MOBILE_BUILD=true node scripts/build-mobile.mjs",
     "cap:sync": "npx cap sync android",
-    "mobile": "npm run build:mobile && npm run cap:sync"
+    "cap:live": "node scripts/cap-live.mjs",
+    "mobile": "npm run build:mobile && npm run cap:sync",
+    "icons:android": "python3 scripts/generate-android-icons.py"
   },
   "dependencies": {
     "@capacitor/android": "^8.0.0",
