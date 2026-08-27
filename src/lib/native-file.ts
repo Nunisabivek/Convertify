@@ -214,18 +214,16 @@ export async function storeOutput(blob: Blob, filename: string): Promise<StoredO
 }
 
 export async function shareStoredOutput(output: StoredOutput): Promise<void> {
-    if (!(await isNativeAndroid())) {
+    if (!(await isNativeAndroid()) || !output.appPath) {
         const a = document.createElement('a')
         a.href = output.uri
         a.download = output.filename
         a.click()
         return
     }
-    const { Share } = await import('@capacitor/share')
-    await Share.share({
-        title: output.filename,
-        url: output.uri,
-        dialogTitle: 'Share',
+    await ConvertifyFiles.shareFile({
+        appPath: output.appPath,
+        mime: output.mime,
     })
 }
 
@@ -247,17 +245,9 @@ export async function shareRecentFile(file: RecentFile): Promise<void> {
         dropRecentFile(file.id)
         throw new Error('gone')
     }
-    const { Filesystem, Directory } = await import('@capacitor/filesystem')
-    const { uri } = await Filesystem.getUri({
-        path: file.appPath,
-        directory: Directory.Data,
-    })
-    await shareStoredOutput({
+    await ConvertifyFiles.shareFile({
         appPath: file.appPath,
-        filename: file.name,
         mime: file.type || mimeFromName(file.name),
-        size: file.size,
-        uri,
     })
 }
 

@@ -8,6 +8,14 @@ export interface PickedNativeFile {
     uri: string
 }
 
+export interface SafeAreaInsets {
+    top: number
+    right: number
+    bottom: number
+    left: number
+    edgeToEdge: boolean
+}
+
 export interface ConvertifyFilesPlugin {
     pickFiles(options: {
         multiple?: boolean
@@ -19,6 +27,8 @@ export interface ConvertifyFilesPlugin {
         mime: string
     }): Promise<{ ok: boolean; uri: string }>
     fileExists(options: { appPath: string }): Promise<{ exists: boolean }>
+    getSafeAreaInsets(): Promise<SafeAreaInsets>
+    shareFile(options: { appPath: string; mime?: string }): Promise<{ ok: boolean }>
 }
 
 const ConvertifyFiles = registerPlugin<ConvertifyFilesPlugin>('ConvertifyFiles')

@@ -32,6 +32,20 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
 
     useEffect(() => {
         let cancelled = false
+        const applySafeArea = async () => {
+            try {
+                const ConvertifyFiles = (await import('@/lib/convertify-files')).default
+                const insets = await ConvertifyFiles.getSafeAreaInsets()
+                if (cancelled) return
+                const root = document.documentElement
+                root.style.setProperty('--safe-area-inset-top', `${insets.top}px`)
+                root.style.setProperty('--safe-area-inset-right', `${insets.right}px`)
+                root.style.setProperty('--safe-area-inset-bottom', `${insets.bottom}px`)
+                root.style.setProperty('--safe-area-inset-left', `${insets.left}px`)
+            } catch {
+                // Web preview has no native plugin
+            }
+        }
         ;(async () => {
             try {
                 const { Capacitor } = await import('@capacitor/core')
@@ -40,12 +54,17 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
                 await StatusBar.setOverlaysWebView({ overlay: false })
                 await StatusBar.setBackgroundColor({ color: '#ffffff' })
                 await StatusBar.setStyle({ style: Style.Light })
+                await applySafeArea()
             } catch {
                 // StatusBar plugin may be missing in web preview
             }
         })()
+        window.addEventListener('resize', applySafeArea)
+        window.addEventListener('orientationchange', applySafeArea)
         return () => {
             cancelled = true
+            window.removeEventListener('resize', applySafeArea)
+            window.removeEventListener('orientationchange', applySafeArea)
         }
     }, [])
 

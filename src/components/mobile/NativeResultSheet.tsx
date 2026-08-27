@@ -10,6 +10,14 @@ import {
     type StoredOutput,
 } from '@/lib/native-file'
 
+const OFFER_EVENT = 'convertify-offer-output'
+
+export interface OfferOutputDetail {
+    blob?: Blob
+    href?: string
+    filename: string
+}
+
 function downloadName(anchor: HTMLAnchorElement): string {
     const attr = anchor.getAttribute('download')
     if (attr && attr !== 'true' && attr !== '') return attr
@@ -22,8 +30,15 @@ function downloadName(anchor: HTMLAnchorElement): string {
     }
 }
 
+function isDownloadAnchor(el: HTMLAnchorElement | null): el is HTMLAnchorElement {
+    if (!el) return false
+    if (!el.hasAttribute('download')) return false
+    return Boolean(el.getAttribute('href') || el.href)
+}
+
 /**
  * After a convert, Android gets Share + Save — never a naked blob download.
+ * Intercepts in-document clicks AND detached `a.click()` / file-saver.
  */
 export default function NativeResultSheet() {
     const [native, setNative] = useState(false)
@@ -45,20 +60,21 @@ export default function NativeResultSheet() {
     useEffect(() => {
         if (!native) return
 
-        const onClick = async (event: MouseEvent) => {
-            const target = event.target as Element | null
-            const anchor = target?.closest?.('a[download]') as HTMLAnchorElement | null
-            if (!anchor?.href) return
-
-            event.preventDefault()
-            event.stopPropagation()
+        let lastKey = ''
+        let lastAt = 0
+        const capture = async (href: string, filename: string) => {
+            const key = `${href}|${filename}`
+            const now = Date.now()
+            if (key === lastKey && now - lastAt < 600) return
+            lastKey = key
+            lastAt = now
             setError(null)
             setSaved(false)
             setBusy(true)
             try {
-                const response = await fetch(anchor.href)
+                const response = await fetch(href)
                 const blob = await response.blob()
-                const stored = await storeOutput(blob, downloadName(anchor))
+                const stored = await storeOutput(blob, filename)
                 setOutput(stored)
             } catch {
                 setError('Could not save that file. Try again.')
@@ -67,8 +83,71 @@ export default function NativeResultSheet() {
             }
         }
 
+        const captureBlob = async (blob: Blob, filename: string) => {
+            setError(null)
+            setSaved(false)
+            setBusy(true)
+            try {
+                const stored = await storeOutput(blob, filename)
+                setOutput(stored)
+            } catch {
+                setError('Could not save that file. Try again.')
+            } finally {
+                setBusy(false)
+            }
+        }
+
+        const onClick = (event: MouseEvent) => {
+            const target = event.target as Element | null
+            const anchor = target?.closest?.('a[download]') as HTMLAnchorElement | null
+            if (!isDownloadAnchor(anchor)) return
+            event.preventDefault()
+            event.stopPropagation()
+            void capture(anchor.href, downloadName(anchor))
+        }
+
+        const originalClick = HTMLAnchorElement.prototype.click
+        HTMLAnchorElement.prototype.click = function patchedClick(this: HTMLAnchorElement) {
+            if (isDownloadAnchor(this)) {
+                void capture(this.href, downloadName(this))
+                return
+            }
+            return originalClick.call(this)
+        }
+
+        const originalDispatch = EventTarget.prototype.dispatchEvent
+        EventTarget.prototype.dispatchEvent = function patchedDispatch(this: EventTarget, event: Event) {
+            if (
+                this instanceof HTMLAnchorElement &&
+                event?.type === 'click' &&
+                isDownloadAnchor(this)
+            ) {
+                void capture(this.href, downloadName(this))
+                return true
+            }
+            return originalDispatch.call(this, event)
+        }
+
+        const onOffer = (event: Event) => {
+            const detail = (event as CustomEvent<OfferOutputDetail>).detail
+            if (!detail?.filename) return
+            if (detail.blob) {
+                void captureBlob(detail.blob, detail.filename)
+                return
+            }
+            if (detail.href) {
+                void capture(detail.href, detail.filename)
+            }
+        }
+
         document.addEventListener('click', onClick, true)
-        return () => document.removeEventListener('click', onClick, true)
+        window.addEventListener(OFFER_EVENT, onOffer)
+        return () => {
+            HTMLAnchorElement.prototype.click = originalClick
+            EventTarget.prototype.dispatchEvent = originalDispatch
+            document.removeEventListener('click', onClick, true)
+            window.removeEventListener(OFFER_EVENT, onOffer)
+        }
     }, [native])
 
     if (!native || (!output && !busy && !error)) return null
@@ -136,4 +215,9 @@ export default function NativeResultSheet() {
             </div>
         </div>
     )
+}
+
+export function offerNativeOutput(detail: OfferOutputDetail): void {
+    if (typeof window === 'undefined') return
+    window.dispatchEvent(new CustomEvent<OfferOutputDetail>(OFFER_EVENT, { detail }))
 }

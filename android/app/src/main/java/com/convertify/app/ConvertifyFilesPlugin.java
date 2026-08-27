@@ -1,5 +1,6 @@
 package com.convertify.app;
 
+import android.content.ClipData;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -9,9 +10,14 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
+import android.view.View;
 import android.webkit.MimeTypeMap;
 
 import androidx.activity.result.ActivityResult;
+import androidx.core.content.FileProvider;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
@@ -145,6 +151,79 @@ public class ConvertifyFilesPlugin extends Plugin {
         JSObject ret = new JSObject();
         ret.put("exists", src.exists());
         call.resolve(ret);
+    }
+
+    /**
+     * Android 15+ draws the WebView edge-to-edge. env(safe-area-inset-*) is 0
+     * in the WebView; Capacitor sets --safe-area-inset-* CSS variables instead.
+     * On older APIs with overlaysWebView=false the WebView is already below
+     * the status bar, so we report 0 to avoid double padding.
+     */
+    @PluginMethod
+    public void getSafeAreaInsets(PluginCall call) {
+        boolean edgeToEdge = Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM;
+        int top = 0;
+        int right = 0;
+        int bottom = 0;
+        int left = 0;
+        if (edgeToEdge) {
+            View decor = getActivity().getWindow().getDecorView();
+            WindowInsetsCompat insets = ViewCompat.getRootWindowInsets(decor);
+            if (insets != null) {
+                Insets safe = insets.getInsets(
+                    WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout()
+                );
+                float density = getContext().getResources().getDisplayMetrics().density;
+                top = Math.round(safe.top / density);
+                right = Math.round(safe.right / density);
+                bottom = Math.round(safe.bottom / density);
+                left = Math.round(safe.left / density);
+            }
+        }
+        JSObject ret = new JSObject();
+        ret.put("top", top);
+        ret.put("right", right);
+        ret.put("bottom", bottom);
+        ret.put("left", left);
+        ret.put("edgeToEdge", edgeToEdge);
+        call.resolve(ret);
+    }
+
+    /** Share via FileProvider content:// — never a file:// URI. */
+    @PluginMethod
+    public void shareFile(PluginCall call) {
+        String appPath = call.getString("appPath");
+        String mime = call.getString("mime", "application/octet-stream");
+        if (appPath == null) {
+            call.reject("Missing file");
+            return;
+        }
+        File src = new File(getContext().getFilesDir(), appPath);
+        if (!src.exists()) {
+            src = new File(getContext().getCacheDir(), appPath);
+        }
+        if (!src.exists()) {
+            call.reject("File is no longer on this phone");
+            return;
+        }
+        try {
+            Uri uri = FileProvider.getUriForFile(
+                getContext(),
+                getContext().getPackageName() + ".fileprovider",
+                src
+            );
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType(mime != null ? mime : "application/octet-stream");
+            intent.putExtra(Intent.EXTRA_STREAM, uri);
+            intent.setClipData(ClipData.newRawUri("", uri));
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            getActivity().startActivity(Intent.createChooser(intent, "Share"));
+            JSObject ret = new JSObject();
+            ret.put("ok", true);
+            call.resolve(ret);
+        } catch (Exception e) {
+            call.reject("Could not open the share sheet. Try Save instead.");
+        }
     }
 
     private void takePersistablePermission(Uri uri) {
