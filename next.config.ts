@@ -1,11 +1,14 @@
 import type { NextConfig } from "next";
 
-// Enable static export for Capacitor mobile builds via env variable:
-// NEXT_PUBLIC_MOBILE_BUILD=true npm run build
+// Capacitor packaging uses a static export. `next dev` (including
+// `npm run dev:mobile` live reload) must not set `output: 'export'`,
+// because that mode cannot run middleware and Next paints a red overlay.
 const isMobileBuild = process.env.NEXT_PUBLIC_MOBILE_BUILD === 'true';
+const isDevServer =
+  process.env.NODE_ENV === 'development' || process.argv.includes('dev');
 
 const nextConfig: NextConfig = {
-  ...(isMobileBuild && { output: 'export' }),
+  ...(isMobileBuild && !isDevServer && { output: 'export' }),
   trailingSlash: false,
   compress: true,
   poweredByHeader: false,
