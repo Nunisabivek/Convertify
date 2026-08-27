@@ -37,10 +37,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
         'csv-to-json', 'json-to-csv', 'xml-to-json', 'base64',
     ]
 
-    const staticPages = [
+    const staticPages: { path: string; priority: number; lastModified?: string }[] = [
         { path: 'all-tools', priority: 0.8 },
         { path: 'blog', priority: 0.7 },
-        { path: 'privacy', priority: 0.3 },
+        { path: 'privacy', priority: 0.3, lastModified: '2026-08-27' },
         { path: 'about', priority: 0.4 },
     ]
 
@@ -58,7 +58,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         ...staticPages.map(page => ({
             url: `${baseUrl}/${page.path}`,
-            lastModified: lastUpdated,
+            lastModified: page.lastModified ?? lastUpdated,
             changeFrequency: 'monthly' as const,
             priority: page.priority,
         })),
