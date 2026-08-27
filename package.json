@@ -10,7 +10,7 @@
     "seo:ping": "node scripts/ping-google.js",
     "dev:mobile": "NEXT_PUBLIC_MOBILE_BUILD=true next dev -H 0.0.0.0 --port 3000",
     "build:mobile": "NEXT_PUBLIC_MOBILE_BUILD=true node scripts/build-mobile.mjs",
-    "cap:sync": "npx cap sync android",
+    "cap:sync": "npx cap sync android && node scripts/ensure-bundled-capacitor-config.mjs",
     "cap:live": "node scripts/cap-live.mjs",
     "mobile": "npm run build:mobile && npm run cap:sync",
     "icons:android": "python3 scripts/generate-android-icons.py"

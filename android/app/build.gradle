@@ -1,5 +1,22 @@
 apply plugin: 'com.android.application'
 
+// Optional Play upload signing. Create android/key.properties locally (gitignored):
+//   storeFile=C:\\Users\\nunis\\Convertify-play-signing\\convertify-upload.jks
+//   storePassword=...
+//   keyAlias=...
+//   keyPassword=...
+// Do not commit that file or the keystore.
+def keystorePropertiesFile = rootProject.file("key.properties")
+def keystoreProperties = new Properties()
+def hasReleaseKeystore = false
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withInputStream { keystoreProperties.load(it) }
+    hasReleaseKeystore = keystoreProperties['storeFile'] &&
+        keystoreProperties['storePassword'] &&
+        keystoreProperties['keyAlias'] &&
+        keystoreProperties['keyPassword']
+}
+
 android {
     namespace = "com.convertify.app"
     compileSdk = rootProject.ext.compileSdkVersion
@@ -16,10 +33,23 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    signingConfigs {
+        release {
+            if (hasReleaseKeystore) {
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            }
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (hasReleaseKeystore) {
+                signingConfig signingConfigs.release
+            }
         }
     }
 }
@@ -51,4 +81,29 @@ try {
     }
 } catch(Exception e) {
     logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+}
+
+// Play/store (release) must load bundled web assets, never Capacitor live-reload.
+tasks.register("assertNoLiveReloadConfig") {
+    doLast {
+        def capConfig = file("src/main/assets/capacitor.config.json")
+        if (!capConfig.exists()) {
+            return
+        }
+        def text = capConfig.getText("UTF-8")
+        def hasLiveReloadHost = text.contains("10.0.2.2") || text.contains("localhost:3000")
+        def hasHttpServerUrl = (text =~ /"url"\s*:\s*"https?:\/\//).find()
+        if (hasLiveReloadHost || hasHttpServerUrl) {
+            throw new GradleException(
+                "Release/Play build cannot include Capacitor live-reload server.url. " +
+                "Run `npm run mobile` so the app loads bundled assets, then rebuild."
+            )
+        }
+    }
+}
+
+afterEvaluate {
+    tasks.matching { it.name == "preReleaseBuild" }.configureEach {
+        dependsOn "assertNoLiveReloadConfig"
+    }
 }
