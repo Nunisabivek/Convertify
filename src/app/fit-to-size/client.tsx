@@ -11,7 +11,7 @@ import { fitPdfToRange } from '@/lib/jobs/fit-pdf'
 import { qualityNote, releaseJob, takeJob } from '@/lib/jobs/session'
 import { TOO_BIG } from '@/lib/brand'
 
-const RANGES: { min: number; max: number; label: string }[] = [
+const RANGES: { min: number; max: number; label: string; unit?: string }[] = [
     { min: 10, max: 20, label: '10–20' },
     { min: 20, max: 50, label: '20–50' },
     { min: 20, max: 100, label: '20–100' },
@@ -19,6 +19,12 @@ const RANGES: { min: number; max: number; label: string }[] = [
     { min: 20, max: 300, label: '20–300' },
     { min: 50, max: 200, label: '50–200' },
     { min: 100, max: 200, label: '100–200' },
+]
+
+const MB_RANGES: { min: number; max: number; label: string }[] = [
+    { min: 500, max: 1024, label: '0.5–1 MB' },
+    { min: 1024, max: 2048, label: '1–2 MB' },
+    { min: 2048, max: 5000, label: '2–5 MB' },
 ]
 
 function isPdf(file: File) {
@@ -132,7 +138,7 @@ export default function FitToSizeClient() {
                 {formatFileSize(now)} → {minKb}–{maxKb} KB
             </p>
 
-            <p className="mobile-chip-label">Size a form asks for</p>
+            <p className="mobile-chip-label">KB a form asks for</p>
             <div className="mobile-range-chips">
                 {RANGES.map((chip) => {
                     const on = minKb === chip.min && maxKb === chip.max
@@ -145,6 +151,23 @@ export default function FitToSizeClient() {
                         >
                             <strong>{chip.label}</strong>
                             <span>KB</span>
+                        </button>
+                    )
+                })}
+            </div>
+            <p className="mobile-chip-label">Job / university MB caps</p>
+            <div className="mobile-range-chips">
+                {MB_RANGES.map((chip) => {
+                    const on = minKb === chip.min && maxKb === chip.max
+                    return (
+                        <button
+                            key={chip.label}
+                            type="button"
+                            className={`mobile-size-chip ${on ? 'is-selected' : ''}`}
+                            onClick={() => applyChip(chip.min, chip.max)}
+                        >
+                            <strong>{chip.label}</strong>
+                            <span>range</span>
                         </button>
                     )
                 })}

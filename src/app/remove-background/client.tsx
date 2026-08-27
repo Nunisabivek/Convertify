@@ -96,7 +96,7 @@ export default function RemoveBackgroundClient() {
                     onClick={() => setFill('white')}
                 >
                     <strong>White</strong>
-                    <span>KYC default</span>
+                    <span>Passport / ID</span>
                 </button>
                 <button
                     type="button"

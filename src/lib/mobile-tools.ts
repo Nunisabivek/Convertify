@@ -52,21 +52,24 @@ const SEARCH_ALIASES: Record<string, string[]> = {
     'fit-to-size': [
         '20kb', '50kb', '100kb', '200kb', '300kb', 'kb', 'size',
         'upsc', 'epfo', 'form', 'too big', 'too small', 'increase kb',
-        'government', 'job form',
+        'government', 'job form', 'job portal', 'university', '1mb', '2mb', 'visa',
     ],
     'passport-photo': [
         'passport', 'passport seva', 'icao', '630', 'photo', 'selfie',
         'signature', 'upsc photo', 'white background', 'bank photo',
         'ibps', 'ssc', 'thumb', 'thumb impression', '10kb', '20kb',
+        '2x2', '600x600', 'us passport', 'visa photo', 'schengen', '35x45',
     ],
     'remove-background': [
         'background', 'remove bg', 'white background', 'kyc photo', 'cutout',
+        'linkedin', 'headshot', 'id photo',
     ],
     'merge-pdf': ['combine', 'join', 'put together', 'one pdf'],
     'split-pdf': ['separate', 'extract pages', 'cut'],
     'compress-pdf': [
         '100kb', '200kb', '300kb', 'small', 'reduce size', 'shrink',
         'government', 'kyc', 'job form', 'form upload',
+        'gmail', 'email', '10mb', '25mb', 'attachment',
     ],
     'jpg-to-pdf': [
         'photo to pdf', 'picture to pdf', 'image to pdf', 'camera to pdf',

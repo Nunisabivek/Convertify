@@ -68,9 +68,9 @@ const tools: { category: string; items: Tool[] }[] = [
     {
         category: "Forms & KYC",
         items: [
-            { title: "Fit to size", description: "Make a PDF or photo land between a min and max KB.", icon: Gauge, href: "/fit-to-size", color: "text-blue-600 bg-blue-50" },
-            { title: "Passport photo", description: "Make a 630×810 JPEG on a white background.", icon: UserRound, href: "/passport-photo", color: "text-blue-600 bg-blue-50" },
-            { title: "Background", description: "Replace a plain backdrop with white or light blue.", icon: Eraser, href: "/remove-background", color: "text-blue-600 bg-blue-50" },
+            { title: "Fit to size", description: "Hit an exact KB or MB window for forms and uploads.", icon: Gauge, href: "/fit-to-size", color: "text-blue-600 bg-blue-50" },
+            { title: "Passport photo", description: "US 2×2, India 630×810, visa 35×45, bank and signature.", icon: UserRound, href: "/passport-photo", color: "text-blue-600 bg-blue-50" },
+            { title: "Background", description: "White backdrop for passport, KYC, and LinkedIn photos.", icon: Eraser, href: "/remove-background", color: "text-blue-600 bg-blue-50" },
         ]
     },
     {
@@ -87,7 +87,7 @@ const tools: { category: string; items: Tool[] }[] = [
     {
         category: "Optimize",
         items: [
-            { title: "Compress PDF", description: "Hit an exact target size — 100KB, 200KB, 1MB.", icon: Minimize2, href: "/compress-pdf", color: "text-green-600 bg-green-50" },
+            { title: "Compress PDF", description: "100KB, 200KB, 10MB, or Gmail’s 25MB cap.", icon: Minimize2, href: "/compress-pdf", color: "text-green-600 bg-green-50" },
             { title: "Compress Image", description: "Shrink JPG and PNG files without visible loss.", icon: Shrink, href: "/image-compressor", color: "text-lime-600 bg-lime-50" },
             { title: "Resize Image", description: "Change image dimensions to an exact size.", icon: Ruler, href: "/resize-image", color: "text-amber-600 bg-amber-50" },
         ]

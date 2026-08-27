@@ -81,8 +81,8 @@ export const toolSeoData = {
         ]
     },
     "compress-pdf": {
-        title: "Compress PDF to 100KB, 200KB or 1MB — Free Online",
-        description: "Compress a PDF to an exact target size using multi-pass compression. Built for government forms, visa uploads and email limits. Free, no watermark.",
+        title: "Compress PDF for Email, 100KB & 200KB Forms — Free",
+        description: "Shrink a PDF to 50KB, 100KB or 200KB for form uploads, or under 10MB / Gmail’s 25MB attachment cap. Multi-pass, free, no upload.",
         keywords: [
             "compress pdf", "compress pdf free", "pdf compressor", "reduce pdf size",
             "compress pdf to 100kb", "compress pdf to 200kb", "compress pdf online",
@@ -90,39 +90,44 @@ export const toolSeoData = {
             "pdf compressor 100kb", "pdf compressor 200kb", "compress pdf online free", "reduce pdf size online",
             "compress pdf for government forms", "passport scan compression 100kb", "visa application pdf compressor",
             "shrink pdf file online 200kb free", "pdf size reducer",
-            "make pdf smaller", "smaller pdf file", "compress pdf for email", "batch compress pdf",
+            "make pdf smaller", "smaller pdf file", "compress pdf for email", "compress pdf for gmail",
+            "gmail 25mb attachment", "compress pdf under 10mb", "reduce pdf for email attachment",
             "pdf compressor no watermark", "best pdf compressor free", "reduce pdf file size without losing quality",
             "compress pdf without sign up", "free pdf compressor no limit", "online pdf size reducer",
             "best free pdf compressor online", "shrink pdf", "tools to compress pdf",
             "reduce pdf size to 100kb", "compress pdf up to 240 kb"
         ],
-        h1: "Compress PDF Free — Reduce to 100KB/200KB Online",
+        h1: "Compress a PDF to 100KB, 200KB, or email size",
         faqs: [
             {
-                question: "How do I compress PDF to exactly 100KB for government forms?",
-                answer: "Our 'High Compression' mode uses multi-pass optimization to get as close to your target (100KB/200KB) as possible while ensuring your photo and text remain legible for officials. Perfect for visa applications and passport uploads."
+                question: "How do I compress a PDF to 100KB or 200KB for a government or visa form?",
+                answer: "Upload the PDF, tap the 100 KB or 200 KB preset, and download. Convertify runs several quality/resolution passes until the file is at or under that cap. 50 KB is there for stricter photo scans. This is a real PDF, processed in your browser — nothing is uploaded."
             },
             {
-                question: "Will my passport photo be blurry after compression?",
-                answer: "No. Our algorithm prioritizes text and face recognition areas, applying heavier compression only to background metadata and redundant layout info to keep your IDs crisp and clear."
+                question: "How do I compress a PDF for Gmail or an email attachment under 10MB?",
+                answer: "Gmail rejects attachments over 25 MB; many offices still ask for under 10 MB. Choose the 10 MB preset (or 20 MB if you only need Gmail headroom). For a 2 MB job-portal cap, use 2 MB. If the file is already a tight 100–200 KB form upload, you do not need the email presets."
             },
             {
-                question: "Is this PDF compressor free with no limits?",
-                answer: "Yes! Compress unlimited PDFs for free. No sign-up required, no watermarks added, and no file size limits. Processing happens 100% in your browser for complete privacy."
+                question: "The file is still too large after compression. What now?",
+                answer: "Open Advanced settings and drop quality, or pick a smaller target. Image-heavy scans shrink more than text PDFs. If you also have a minimum size (too small as well as too large), use Fit to size instead of a single ceiling."
             },
             {
-                question: "What if the file is still over 100KB after compression?",
-                answer: "Try our 'Extreme' mode. It removes embedded thumbnails and non-essential fonts to shave off the final few bytes needed for strict government portals."
+                question: "Will the text stay selectable?",
+                answer: "Not after this compressor. Pages are rasterized to JPEG so we can hit a hard KB target. The result still opens as a PDF and stays readable at sensible targets; it is no longer a text layer. Do not use this pass if you must keep selectable text or a digital signature."
             },
             {
-                question: "Is it safe to compress sensitive documents online?",
-                answer: "Absolutely. Unlike other tools, Convertify processes files 100% in your browser. Your sensitive government forms, passport scans, and visa documents are never uploaded to any server."
+                question: "Does compressing a PDF upload my file?",
+                answer: "No. Compression runs in your browser. Close the tab and the working copy is gone. Only the file you choose to download stays on your device — including passport scans and visa packets."
+            },
+            {
+                question: "JPEG vs a “real” PDF — will the portal accept it?",
+                answer: "Yes. The download is a standard PDF with each page as an embedded JPEG. Government, visa, university, and email systems check type and size, not whether the pages were re-encoded. Photos that also need exact pixels belong on Passport photo; a min–max KB band belongs on Fit to size."
             }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Select your PDF file - works with government forms, IDs, and any document." },
-            { name: "Choose Compression", text: "Select 'High' for 100KB or 'Extreme' for maximum compression." },
-            { name: "Download Free", text: "Get your compressed PDF instantly - no watermarks, no sign-up." }
+            { name: "Upload PDF", text: "Drop a PDF (or a photo). The current size is shown so you can pick a realistic target." },
+            { name: "Choose a target", text: "Use 100 KB / 200 KB for forms, 10 MB for email, or type a custom KB or MB value." },
+            { name: "Download", text: "Get the smaller PDF on your device — no watermark, no sign-up, no upload." }
         ]
     },
     "jpg-to-pdf": {

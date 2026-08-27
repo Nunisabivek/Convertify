@@ -880,6 +880,16 @@ body:has(.mobile-app),
   aspect-ratio: 160 / 200;
 }
 
+.mobile-crop.is-square {
+  width: min(100%, 260px);
+  aspect-ratio: 1 / 1;
+}
+
+.mobile-crop.is-uk {
+  width: min(100%, 260px);
+  aspect-ratio: 600 / 750;
+}
+
 .mobile-crop img {
   position: absolute;
   left: 50%;
@@ -1072,6 +1082,11 @@ body:has(.mobile-app),
 .mobile-crop.is-bank .mobile-crop-guide,
 .mobile-crop.is-thumb .mobile-crop-guide {
   border-radius: 8px;
+}
+
+.mobile-crop.is-square .mobile-crop-guide {
+  inset: 10%;
+  border-radius: 50%;
 }
 
 html.is-converting .mobile-app * {

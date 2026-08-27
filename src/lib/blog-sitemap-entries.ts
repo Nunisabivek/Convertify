@@ -49,6 +49,7 @@ export const INDEXABLE_BLOG_SITEMAP_ENTRIES: SitemapBlogEntry[] = [
   { slug: 'merge-pdf-windows-10-without-software', date: '2026-01-09' },
   { slug: 'merge-pdf-without-adobe-acrobat', date: '2026-01-02' },
   { slug: 'organize-pdf-reorder-delete-pages', date: '2026-06-11' },
+  { slug: 'passport-photo-size-us-india-uk', date: '2026-08-27' },
   { slug: 'pdf-tips-for-students', date: '2025-12-29' },
   { slug: 'pdf-to-jpg-convert-pages-images', date: '2026-01-03' },
   { slug: 'pdf-to-png-for-presentation-slides', date: '2026-06-25' },
