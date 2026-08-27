@@ -3403,8 +3403,10 @@ export const staticBlogPosts: StaticBlogPost[] = [
   },
 ]
 
-// Everything that should appear in the blog index and the sitemap: the
-// substantial data-driven posts plus the hand-written route files.
+// Everything that should appear in the blog index. Sitemap URLs are listed
+// separately in blog-sitemap-entries.ts (slug + date only) so /sitemap.xml
+// does not import these post bodies. Keep the two slug sets in sync when
+// adding or retiring an indexable post.
 export const allIndexableBlogPosts = [
   ...indexableBlogPosts.map(({ slug, title, excerpt, date, category, readingTime, relatedTool }) => ({
     slug, title, excerpt, date, category, readingTime, relatedTool,

@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { allIndexableBlogPosts } from '@/lib/blog-data'
+import { INDEXABLE_BLOG_SITEMAP_ENTRIES } from '@/lib/blog-sitemap-entries'
 
 export const dynamic = 'force-static'
 
@@ -11,7 +11,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // was suppressing domain-wide rankings). Blog posts only included if
     // they pass the 350-word minimum quality threshold.
     //
-    // Target: ~60 high-quality URLs instead of 161 thin ones.
+    // Blog URLs come from blog-sitemap-entries.ts (slug + date only). Do
+    // not import blog-data.ts here — that module ships full post bodies
+    // and would bloat this route.
 
     const coreTools = [
         'merge-pdf', 'compress-pdf', 'split-pdf',
@@ -29,6 +31,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
         'autocad-pdf-editor',
     ]
 
+    // Working first-class tools with unique pages (not Android-only).
+    // Do not add /passport or /background-remove — those 404.
+    const uniqueTools = [
+        'fit-to-size',
+        'passport-photo',
+        'remove-background',
+    ]
+
     const secondaryTools = [
         'image-compressor', 'resize-image',
         'heic-to-jpg', 'jpg-to-png', 'png-to-jpg',
@@ -44,12 +54,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: 'about', priority: 0.4 },
     ]
 
-    // Bumped on 2026-07-26: 6 orphaned hand-written blog posts re-attached,
-    // titles/descriptions trimmed to SERP width, remaining false capability
-    // claims removed.
     const lastUpdated = '2026-07-26'
+    const uniqueToolsUpdated = '2026-08-27'
 
-    return [
+    const entries: MetadataRoute.Sitemap = [
         {
             url: baseUrl,
             lastModified: lastUpdated,
@@ -68,23 +76,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'weekly' as const,
             priority: 0.9,
         })),
+        ...uniqueTools.map(tool => ({
+            url: `${baseUrl}/${tool}`,
+            lastModified: uniqueToolsUpdated,
+            changeFrequency: 'weekly' as const,
+            priority: 0.9,
+        })),
         ...secondaryTools.map(tool => ({
             url: `${baseUrl}/${tool}`,
             lastModified: lastUpdated,
             changeFrequency: 'monthly' as const,
             priority: 0.7,
         })),
-        // Blog posts with substantial unique content (350+ words), plus the
-        // hand-written posts that live as their own route files — those were
-        // orphaned out of the sitemap entirely until 2026-07-26.
-        ...allIndexableBlogPosts.map(post => ({
+        ...INDEXABLE_BLOG_SITEMAP_ENTRIES.map(post => ({
             url: `${baseUrl}/blog/${post.slug}`,
             lastModified: post.date || lastUpdated,
             changeFrequency: 'monthly' as const,
             priority: 0.6,
         })),
-        // USE-CASE PAGES REMOVED — they are templated thin content that
-        // dilutes domain quality signals. Noindexed in their page.tsx.
-        // Will re-add only when each page has 800+ words of unique content.
+        // USE-CASE PAGES OMITTED — templated thin content, noindexed on
+        // purpose. Placeholder tools (edit-pdf, sign-pdf, ocr-pdf, …)
+        // stay out of the sitemap until they ship a real client.
     ]
+
+    const seen = new Set<string>()
+    return entries.filter((item) => {
+        if (seen.has(item.url)) return false
+        seen.add(item.url)
+        return true
+    })
 }

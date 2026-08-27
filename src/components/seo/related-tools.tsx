@@ -20,6 +20,9 @@ import {
     Scaling,
     Grid3x3,
     Hash,
+    Gauge,
+    UserRound,
+    Eraser,
     LucideIcon
 } from "lucide-react"
 
@@ -32,6 +35,10 @@ interface Tool {
 }
 
 const allTools: Tool[] = [
+    // Forms & KYC
+    { title: "Fit to size", href: "/fit-to-size", icon: Gauge, color: "bg-blue-100 text-blue-600", category: "forms-kyc" },
+    { title: "Passport photo", href: "/passport-photo", icon: UserRound, color: "bg-blue-100 text-blue-600", category: "forms-kyc" },
+    { title: "Background", href: "/remove-background", icon: Eraser, color: "bg-blue-100 text-blue-600", category: "forms-kyc" },
     // Organize PDF
     { title: "Merge PDF", href: "/merge-pdf", icon: FileStack, color: "bg-red-100 text-red-600", category: "organize" },
     { title: "Split PDF", href: "/split-pdf", icon: Scissors, color: "bg-orange-100 text-orange-600", category: "organize" },
