@@ -40,6 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const staticPages = [
         { path: 'all-tools', priority: 0.8 },
         { path: 'blog', priority: 0.7 },
+        { path: 'privacy', priority: 0.3 },
         { path: 'about', priority: 0.4 },
     ]
 

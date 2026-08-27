@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   keywords: ['free pdf tools', 'online pdf converter', 'merge pdf free', 'compress pdf online', 'pdf to word converter', 'pdf to jpg', 'word to pdf', 'split pdf online'],
   alternates: {
     canonical: 'https://convertify.work',
+    types: {
+      'text/plain': 'https://convertify.work/llms.txt',
+    },
   },
   openGraph: {
     title: 'Convertify - Free Online PDF & File Converter Tools',
