@@ -1,6 +1,6 @@
 import { PDFDocument } from 'pdf-lib'
 import { MAX_INPUT_BYTES, TOO_BIG } from '@/lib/brand'
-import { yieldToUi } from '@/lib/jobs/media'
+import { yieldToUi, type JobResult } from '@/lib/jobs/media'
 
 const MAX_PAGES = 40
 
@@ -10,9 +10,14 @@ export async function fitPdfToRange(
     maxBytes: number,
     signal: AbortSignal,
     onProgress: (info: { size: number; note: string }) => void
-): Promise<Blob> {
+): Promise<JobResult> {
     if (signal.aborted) throw new DOMException('Cancelled', 'AbortError')
     if (file.size > MAX_INPUT_BYTES) throw new Error(TOO_BIG)
+    if (file.size <= maxBytes && file.size >= minBytes) {
+        onProgress({ size: file.size, note: 'Already in range' })
+        return { blob: file, size: file.size, shrunk: false }
+    }
+
     const { loadPdfjs } = await import('@/lib/pdfjs')
     const pdfjsLib = await loadPdfjs()
     const data = await file.arrayBuffer()
@@ -22,8 +27,10 @@ export async function fitPdfToRange(
     }
 
     let scale = src.numPages > 12 ? 1.0 : 1.25
-    let quality = 0.72
+    const startScale = scale
+    let quality = 0.78
     let best: Blob | null = null
+    let shrunk = false
 
     for (let attempt = 0; attempt < 8; attempt++) {
         if (signal.aborted) throw new DOMException('Cancelled', 'AbortError')
@@ -39,17 +46,25 @@ export async function fitPdfToRange(
             throw new Error(TOO_BIG)
         }
         onProgress({ size: best.size, note: `Now ${(best.size / 1024).toFixed(0)} KB` })
-        if (best.size >= minBytes && best.size <= maxBytes) return best
+        if (best.size >= minBytes && best.size <= maxBytes) {
+            return { blob: best, size: best.size, shrunk: shrunk || scale < startScale - 0.01 }
+        }
         if (best.size > maxBytes) {
-            if (quality > 0.35) quality = Math.max(0.28, quality - 0.12)
-            else scale = Math.max(0.45, scale * 0.8)
+            if (quality > 0.32) {
+                quality = Math.max(0.26, quality - 0.12)
+            } else {
+                scale = Math.max(0.45, scale * 0.8)
+                shrunk = true
+                quality = 0.5
+            }
+        } else if (quality < 0.9) {
+            quality = Math.min(0.92, quality + 0.1)
         } else {
-            if (quality < 0.9) quality = Math.min(0.92, quality + 0.1)
-            else scale = Math.min(2.0, scale * 1.12)
+            break
         }
         await yieldToUi()
     }
-    return best!
+    return { blob: best!, size: best!.size, shrunk }
 }
 
 async function buildPdf(

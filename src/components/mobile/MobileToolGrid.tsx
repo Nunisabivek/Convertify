@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import { AppIcon } from '@/components/mobile/AppIcon'
 import { getAndroidQuickTools, shortToolName } from '@/lib/mobile-tools'
 import { tapHaptic } from '@/lib/haptics'
@@ -20,20 +19,19 @@ export default function MobileToolGrid() {
 
             <div className="mobile-tool-grid">
                 {tools.map((tool) => (
-                    <motion.div key={tool.id} whileTap={{ scale: 0.97 }} transition={{ duration: 0.08 }}>
-                        <Link
-                            href={`/${tool.href}`}
-                            className="mobile-tool-card"
-                            onClick={() => {
-                                void tapHaptic()
-                            }}
-                        >
-                            <div className="mobile-tool-icon">
-                                <AppIcon name={tool.icon.lucide} size={26} />
-                            </div>
-                            <span className="mobile-tool-name">{shortToolName(tool)}</span>
-                        </Link>
-                    </motion.div>
+                    <Link
+                        key={tool.id}
+                        href={`/${tool.href}`}
+                        className="mobile-tool-card"
+                        onClick={() => {
+                            void tapHaptic()
+                        }}
+                    >
+                        <div className="mobile-tool-icon">
+                            <AppIcon name={tool.icon.lucide} size={26} />
+                        </div>
+                        <span className="mobile-tool-name">{shortToolName(tool)}</span>
+                    </Link>
                 ))}
             </div>
         </div>

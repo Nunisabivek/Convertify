@@ -253,7 +253,7 @@ export async function shareRecentFile(file: RecentFile): Promise<void> {
 
 export const CONVERT_OFFER = 'convertify-offer-output'
 
-export async function finishConvert(blob: Blob, filename: string): Promise<void> {
+export async function finishConvert(blob: Blob, filename: string, note?: string): Promise<void> {
     try {
         const { tapHaptic } = await import('@/lib/haptics')
         await tapHaptic('medium')
@@ -261,7 +261,7 @@ export async function finishConvert(blob: Blob, filename: string): Promise<void>
         // optional
     }
     if (await isNativeAndroid()) {
-        window.dispatchEvent(new CustomEvent(CONVERT_OFFER, { detail: { blob, filename } }))
+        window.dispatchEvent(new CustomEvent(CONVERT_OFFER, { detail: { blob, filename, note } }))
         return
     }
     const url = URL.createObjectURL(blob)

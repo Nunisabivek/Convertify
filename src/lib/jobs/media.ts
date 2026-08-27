@@ -1,5 +1,11 @@
 import { MAX_IMAGE_EDGE, MAX_INPUT_BYTES, MAX_PIXELS, TOO_BIG } from '@/lib/brand'
 
+export type JobResult = {
+    blob: Blob
+    size: number
+    shrunk: boolean
+}
+
 let worker: Worker | null = null
 let seq = 1
 
@@ -34,6 +40,12 @@ export function assertFitsPhone(file: File) {
     }
 }
 
+async function fileBuffer(file: File): Promise<ArrayBuffer> {
+    assertFitsPhone(file)
+    return file.arrayBuffer()
+}
+
+/** Fallback only. Processing should decode in the worker. */
 export async function loadImageBitmap(file: File): Promise<ImageBitmap> {
     assertFitsPhone(file)
     try {
@@ -83,10 +95,15 @@ type WorkerOk = {
     size?: number
     blob?: Blob
     ratio?: number
-    buffer?: ArrayBuffer
+    shrunk?: boolean
 }
 
-function callWorker(payload: Record<string, unknown>, transfer: Transferable[], signal: AbortSignal, onProgress?: (size: number) => void) {
+function callWorker(
+    payload: Record<string, unknown>,
+    transfer: Transferable[],
+    signal: AbortSignal,
+    onProgress?: (size: number) => void
+) {
     return new Promise<WorkerOk>((resolve, reject) => {
         const id = seq++
         const w = getWorker()
@@ -124,81 +141,129 @@ function callWorker(payload: Record<string, unknown>, transfer: Transferable[], 
     })
 }
 
-export async function workerRemoveBackground(
-    imageData: ImageData,
-    fill: [number, number, number],
-    signal: AbortSignal
-): Promise<{ imageData: ImageData; ratio: number }> {
-    try {
-        const copy = imageData.data.buffer.slice(0)
-        const result = await callWorker(
-            {
-                type: 'remove-bg',
-                width: imageData.width,
-                height: imageData.height,
-                buffer: copy,
-                fill,
-            },
-            [copy],
-            signal
-        )
-        const data = new Uint8ClampedArray(result.buffer!)
-        return {
-            ratio: result.ratio ?? 0,
-            imageData: new ImageData(data, imageData.width, imageData.height),
-        }
-    } catch (error) {
-        if ((error as Error).name === 'AbortError') throw error
-        // Fallback: tiny images can run on the main thread in slices.
-        const { removeBackgroundPixels } = await import('@/lib/jobs/image-ops')
-        const data = new Uint8ClampedArray(imageData.data)
-        const ratio = removeBackgroundPixels(data, imageData.width, imageData.height, fill)
-        await yieldToUi()
-        return { ratio, imageData: new ImageData(data, imageData.width, imageData.height) }
-    }
-}
-
 export async function workerFitImage(
     file: File,
     minBytes: number,
     maxBytes: number,
     signal: AbortSignal,
     onProgress?: (size: number) => void
-): Promise<Blob> {
-    assertFitsPhone(file)
+): Promise<JobResult> {
+    const buffer = await fileBuffer(file)
     try {
-        const bitmap = await loadImageBitmap(file)
         const result = await callWorker(
-            { type: 'fit-image', bitmap, minBytes, maxBytes },
-            [bitmap],
+            { type: 'fit-image', buffer, minBytes, maxBytes, allowUpscale: true },
+            [buffer],
             signal,
             onProgress
         )
         if (!result.blob) throw new Error('Could not fit that file.')
-        return result.blob
+        return { blob: result.blob, size: result.size ?? result.blob.size, shrunk: Boolean(result.shrunk) }
     } catch (error) {
         if ((error as Error).name === 'AbortError') throw error
-        // ImageBitmap is transferred into the worker, so retry from the File.
         const bitmap = await loadImageBitmap(file)
         try {
-            return await fitImageOnMain(bitmap, minBytes, maxBytes, signal, onProgress)
+            const blob = await fitImageOnMain(bitmap, minBytes, maxBytes, true, signal, onProgress)
+            return { blob, size: blob.size, shrunk: true }
         } finally {
             bitmap.close()
         }
     }
 }
 
+export async function workerCompressImage(
+    file: File,
+    minBytes: number,
+    maxBytes: number,
+    signal: AbortSignal,
+    onProgress?: (size: number) => void
+): Promise<JobResult> {
+    const buffer = await fileBuffer(file)
+    try {
+        const result = await callWorker(
+            { type: 'compress-image', buffer, minBytes, maxBytes, allowUpscale: false },
+            [buffer],
+            signal,
+            onProgress
+        )
+        if (!result.blob) throw new Error('Could not compress that photo.')
+        return { blob: result.blob, size: result.size ?? result.blob.size, shrunk: Boolean(result.shrunk) }
+    } catch (error) {
+        if ((error as Error).name === 'AbortError') throw error
+        const bitmap = await loadImageBitmap(file)
+        try {
+            const blob = await fitImageOnMain(bitmap, minBytes, maxBytes, false, signal, onProgress)
+            return { blob, size: blob.size, shrunk: true }
+        } finally {
+            bitmap.close()
+        }
+    }
+}
+
+export async function workerMakePhoto(
+    file: File,
+    options: {
+        width: number
+        height: number
+        minBytes: number
+        maxBytes: number
+        fill: string
+        crop: { x: number; y: number; w: number; h: number }
+    },
+    signal: AbortSignal,
+    onProgress?: (size: number) => void
+): Promise<JobResult> {
+    const buffer = await fileBuffer(file)
+    try {
+        const result = await callWorker(
+            {
+                type: 'make-photo',
+                buffer,
+                minBytes: options.minBytes,
+                maxBytes: options.maxBytes,
+                outW: options.width,
+                outH: options.height,
+                fill: options.fill,
+                crop: options.crop,
+            },
+            [buffer],
+            signal,
+            onProgress
+        )
+        if (!result.blob) throw new Error('Could not make that photo.')
+        return { blob: result.blob, size: result.size ?? result.blob.size, shrunk: Boolean(result.shrunk) }
+    } catch (error) {
+        if ((error as Error).name === 'AbortError') throw error
+        throw new Error((error as Error).message || TOO_BIG)
+    }
+}
+
+export async function workerRemoveBackground(
+    file: File,
+    fill: [number, number, number],
+    signal: AbortSignal
+): Promise<{ blob: Blob; ratio: number }> {
+    const buffer = await fileBuffer(file)
+    const result = await callWorker(
+        { type: 'remove-bg', buffer, fill },
+        [buffer],
+        signal
+    )
+    if (!result.blob) throw new Error('Could not pick out the background.')
+    return { blob: result.blob, ratio: result.ratio ?? 0 }
+}
+
 async function fitImageOnMain(
     bitmap: ImageBitmap,
     minBytes: number,
     maxBytes: number,
+    allowUpscale: boolean,
     signal: AbortSignal,
     onProgress?: (size: number) => void
 ): Promise<Blob> {
     const canvas = await canvasFromBitmap(bitmap)
     let w = canvas.width
     let h = canvas.height
-    let q = 0.85
+    let q = 0.88
     let best = await encodeJpeg(canvas, q)
     onProgress?.(best.size)
     let guard = 0
@@ -206,10 +271,10 @@ async function fitImageOnMain(
         if (signal.aborted) throw new DOMException('Cancelled', 'AbortError')
         if (best.size >= minBytes && best.size <= maxBytes) return best
         if (best.size > maxBytes) {
-            if (q > 0.28) q = Math.max(0.22, q - 0.12)
+            if (q > 0.28) q = Math.max(0.2, q - 0.12)
             else {
-                w = Math.max(320, Math.round(w * 0.82))
-                h = Math.max(320, Math.round(h * 0.82))
+                w = Math.max(48, Math.round(w * 0.84))
+                h = Math.max(48, Math.round(h * 0.84))
                 const tmp = document.createElement('canvas')
                 tmp.width = w
                 tmp.height = h
@@ -221,9 +286,9 @@ async function fitImageOnMain(
             }
         } else if (q < 0.95) {
             q = Math.min(0.95, q + 0.1)
-        } else {
-            const nextW = Math.round(w * 1.15)
-            const nextH = Math.round(h * 1.15)
+        } else if (allowUpscale) {
+            const nextW = Math.round(w * 1.12)
+            const nextH = Math.round(h * 1.12)
             if (nextW * nextH > MAX_PIXELS) break
             const tmp = document.createElement('canvas')
             tmp.width = nextW
@@ -237,35 +302,12 @@ async function fitImageOnMain(
             w = nextW
             h = nextH
             q = 0.92
+        } else {
+            break
         }
         best = await encodeJpeg(canvas, q)
         onProgress?.(best.size)
         await yieldToUi()
-    }
-    return best
-}
-
-export async function fitJpegOnCanvas(
-    canvas: HTMLCanvasElement,
-    minBytes: number,
-    maxBytes: number,
-    signal: AbortSignal,
-    onProgress?: (size: number) => void
-): Promise<Blob> {
-    let q = 0.82
-    let best = await encodeJpeg(canvas, q)
-    onProgress?.(best.size)
-    let guard = 0
-    while (guard++ < 12) {
-        if (signal.aborted) throw new DOMException('Cancelled', 'AbortError')
-        if (best.size >= minBytes && best.size <= maxBytes) return best
-        if (best.size > maxBytes) q = Math.max(0.2, q - 0.1)
-        else q = Math.min(0.95, q + 0.08)
-        best = await encodeJpeg(canvas, q)
-        onProgress?.(best.size)
-        await yieldToUi()
-        if (best.size > maxBytes && q <= 0.22) break
-        if (best.size < minBytes && q >= 0.94) break
     }
     return best
 }

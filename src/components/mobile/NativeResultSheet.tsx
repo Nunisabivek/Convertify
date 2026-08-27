@@ -15,6 +15,7 @@ export interface OfferOutputDetail {
     blob?: Blob
     href?: string
     filename: string
+    note?: string
 }
 
 function downloadName(anchor: HTMLAnchorElement): string {
@@ -45,6 +46,7 @@ export default function NativeResultSheet() {
     const [output, setOutput] = useState<StoredOutput | null>(null)
     const [saved, setSaved] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const [note, setNote] = useState<string | null>(null)
 
     useEffect(() => {
         let alive = true
@@ -82,9 +84,10 @@ export default function NativeResultSheet() {
             }
         }
 
-        const captureBlob = async (blob: Blob, filename: string) => {
+        const captureBlob = async (blob: Blob, filename: string, quality?: string) => {
             setError(null)
             setSaved(false)
+            setNote(quality ?? null)
             setBusy(true)
             try {
                 const stored = await storeOutput(blob, filename)
@@ -131,7 +134,7 @@ export default function NativeResultSheet() {
             const detail = (event as CustomEvent<OfferOutputDetail>).detail
             if (!detail?.filename) return
             if (detail.blob) {
-                void captureBlob(detail.blob, detail.filename)
+                void captureBlob(detail.blob, detail.filename, detail.note)
                 return
             }
             if (detail.href) {
@@ -159,6 +162,7 @@ export default function NativeResultSheet() {
                 </div>
                 <h2>{saved ? 'Saved' : busy ? 'Saving…' : 'Done'}</h2>
                 {output && <p className="mobile-result-name">{output.filename}</p>}
+                {note && !busy ? <p className="mobile-result-quality">{note}</p> : null}
                 {saved && (
                     <p className="mobile-result-note">
                         Saved. You can find it in Files → Downloads → Convertify.
@@ -206,6 +210,7 @@ export default function NativeResultSheet() {
                             setOutput(null)
                             setSaved(false)
                             setError(null)
+                            setNote(null)
                         }}
                     >
                         Close

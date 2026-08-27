@@ -5,15 +5,8 @@ import { FileUploader } from '@/components/tools/file-uploader'
 import MobileWorkBar from '@/components/mobile/MobileWorkBar'
 import { finishConvert, formatFileSize } from '@/lib/native-file'
 import { tapHaptic } from '@/lib/haptics'
-import {
-    abortConvertWorker,
-    assertFitsPhone,
-    canvasFromBitmap,
-    encodeJpeg,
-    loadImageBitmap,
-    warmConvertWorker,
-    workerRemoveBackground,
-} from '@/lib/jobs/media'
+import { abortConvertWorker, warmConvertWorker, workerRemoveBackground } from '@/lib/jobs/media'
+import { qualityNote, releaseJob, takeJob } from '@/lib/jobs/session'
 import { TOO_BIG } from '@/lib/brand'
 
 const FILLS = {
@@ -53,33 +46,19 @@ export default function RemoveBackgroundClient() {
         if (!file) return
         setError(null)
         setWorking(true)
-        const ac = new AbortController()
+        const ac = takeJob()
         abortRef.current = ac
         await tapHaptic()
         try {
-            assertFitsPhone(file)
-            const bitmap = await loadImageBitmap(file)
-            const canvas = await canvasFromBitmap(bitmap)
-            bitmap.close()
-            const ctx = canvas.getContext('2d', { willReadFrequently: true })
-            if (!ctx) throw new Error(TOO_BIG)
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-            const { imageData: next, ratio } = await workerRemoveBackground(imageData, FILLS[fill], ac.signal)
-            if (ratio < 0.04) {
-                throw new Error('Could not pick out the background. Try a photo with a plain wall behind you.')
-            }
-            if (ratio > 0.88) {
-                throw new Error('Too much of the photo looked like background. Try a clearer selfie.')
-            }
-            ctx.putImageData(next, 0, 0)
-            const blob = await encodeJpeg(canvas, 0.88)
+            const { blob } = await workerRemoveBackground(file, FILLS[fill], ac.signal)
             if (preview) URL.revokeObjectURL(preview)
             setPreview(URL.createObjectURL(blob))
-            await finishConvert(blob, file.name.replace(/\.[^.]+$/, '') + '-bg.jpg')
+            await finishConvert(blob, file.name.replace(/\.[^.]+$/, '') + '-bg.jpg', qualityNote(false))
         } catch (err) {
             if ((err as Error).name === 'AbortError') return
             setError((err as Error).message || TOO_BIG)
         } finally {
+            releaseJob(ac)
             setWorking(false)
         }
     }

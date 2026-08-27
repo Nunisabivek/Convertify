@@ -867,7 +867,17 @@ body:has(.mobile-app),
 .mobile-crop.is-sign {
   width: 100%;
   max-width: 100%;
-  aspect-ratio: 360 / 120;
+  aspect-ratio: 140 / 60;
+}
+
+.mobile-crop.is-bank {
+  width: min(100%, 220px);
+  aspect-ratio: 200 / 230;
+}
+
+.mobile-crop.is-thumb {
+  width: min(100%, 200px);
+  aspect-ratio: 160 / 200;
 }
 
 .mobile-crop img {
@@ -961,6 +971,114 @@ body:has(.mobile-app),
   background-color: var(--md-primary) !important;
   border-color: var(--md-primary) !important;
 }
+
+.mobile-size-control {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile-size-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.mobile-size-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--md-on-surface-variant);
+}
+
+.mobile-size-field input {
+  min-height: 48px;
+  border-radius: 12px;
+  border: 1px solid var(--md-outline);
+  padding: 0 12px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.mobile-unit-toggle {
+  display: flex;
+  border: 1px solid var(--md-outline);
+  border-radius: 12px;
+  overflow: hidden;
+  height: 48px;
+}
+
+.mobile-unit-toggle button {
+  min-width: 52px;
+  background: var(--md-surface);
+  border: 0;
+  font-weight: 700;
+  color: var(--md-on-surface-variant);
+}
+
+.mobile-unit-toggle button.is-on {
+  background: var(--md-primary);
+  color: #fff;
+}
+
+.mobile-size-slider {
+  width: 100%;
+  accent-color: var(--md-primary);
+}
+
+.mobile-preset-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 2px;
+}
+
+.mobile-preset-chip {
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--md-outline);
+  background: var(--md-surface);
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--md-on-surface);
+}
+
+.mobile-preset-chip.is-selected {
+  border-color: var(--md-primary);
+  background: color-mix(in srgb, var(--md-primary) 10%, #fff);
+  color: var(--md-primary);
+}
+
+.mobile-preset-hint {
+  margin: 0;
+  font-size: 13px;
+  color: var(--md-on-surface-variant);
+}
+
+.mobile-result-quality {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 650;
+  color: var(--md-primary);
+}
+
+.mobile-crop.is-bank .mobile-crop-guide,
+.mobile-crop.is-thumb .mobile-crop-guide {
+  border-radius: 8px;
+}
+
+html.is-converting .mobile-app * {
+  transition: none !important;
+  animation: none !important;
+}
+
 
 
 

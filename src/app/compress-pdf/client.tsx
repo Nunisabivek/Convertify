@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { PDFDocument } from "pdf-lib"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
@@ -19,7 +19,7 @@ export default function CompressPdfPage() {
     // Settings
     const [quality, setQuality] = useState(0.6)
     const [resolutionScale, setResolutionScale] = useState(1.5)
-    const [targetSize, setTargetSize] = useState<string>("")
+    const [targetSize, setTargetSize] = useState<string>("200")
     const [sizeUnit, setSizeUnit] = useState<SizeUnit>("KB")
     const [showAdvanced, setShowAdvanced] = useState(false)
 
@@ -52,41 +52,12 @@ export default function CompressPdfPage() {
             setFile(files[0])
             setQuality(0.6)
             setResolutionScale(1.5)
-            setTargetSize("")
+            setTargetSize("200")
             setSizeUnit("KB")
             setProcessedFileUrl(null)
             setCompressionStats(null)
         }
     }
-
-    // Auto-adjust compression settings based on target size
-    useEffect(() => {
-        const targetBytes = getTargetBytes()
-        if (!targetBytes || !file) return
-
-        const ratio = targetBytes / file.size
-
-        if (ratio < 0.1) {
-            // Extreme compression needed
-            setResolutionScale(0.6)
-            setQuality(0.3)
-        } else if (ratio < 0.2) {
-            setResolutionScale(0.8)
-            setQuality(0.4)
-        } else if (ratio < 0.4) {
-            setResolutionScale(1.0)
-            setQuality(0.5)
-        } else if (ratio < 0.6) {
-            setResolutionScale(1.2)
-            setQuality(0.6)
-        } else if (ratio < 0.8) {
-            setResolutionScale(1.4)
-            setQuality(0.7)
-        } else {
-            setResolutionScale(1.5)
-            setQuality(0.8)
-        }
-    }, [targetSize, sizeUnit, file])
 
     // Preset button handler
     const handlePreset = (value: number, unit: SizeUnit) => {
@@ -185,12 +156,8 @@ export default function CompressPdfPage() {
                     let bestSize = Infinity
                     const MAX_ITERATIONS = 6
 
-                    // Try up to 3 resolution tiers, binary-searching quality within each
-                    const resolutionTiers = [
-                        Math.min(resolutionScale, 1.5),
-                        Math.min(resolutionScale * 0.7, 1.0),
-                        Math.min(resolutionScale * 0.4, 0.6),
-                    ]
+                    // Quality first: keep page resolution, then drop it only if quality is already low.
+                    const resolutionTiers = [1.25, 1.0, 0.7]
 
                     for (const resTier of resolutionTiers) {
                         let qLow = 0.05
@@ -265,12 +232,7 @@ export default function CompressPdfPage() {
                     const MAX_ITERATIONS = 8
 
                     // Binary search quality first at current scale
-                    const scaleTiers = [
-                        Math.min(resolutionScale > 1.0 ? 1.0 : resolutionScale, 1.0),
-                        0.7,
-                        0.5,
-                        0.3,
-                    ]
+                    const scaleTiers = [1.0, 0.84, 0.7]
 
                     for (const scaleTier of scaleTiers) {
                         let qLow = 0.05
@@ -397,7 +359,7 @@ export default function CompressPdfPage() {
                         setFile(null)
                         setProcessedFileUrl(null)
                         setCompressionStats(null)
-                        setTargetSize("")
+                        setTargetSize("200")
                     }}>
                         Compress Another File
                     </Button>
@@ -528,6 +490,17 @@ export default function CompressPdfPage() {
                                         </button>
                                     </div>
                                 </div>
+                                {sizeUnit === "KB" ? (
+                                    <input
+                                        type="range"
+                                        min="10"
+                                        max="2000"
+                                        step="1"
+                                        value={Math.min(2000, Math.max(10, parseFloat(targetSize) || 200))}
+                                        onChange={(e) => setTargetSize(e.target.value)}
+                                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-orange-500"
+                                    />
+                                ) : null}
 
                                 {/* Size Comparison */}
                                 {targetSize && getTargetBytes() > 0 && (

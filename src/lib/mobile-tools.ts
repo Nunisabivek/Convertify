@@ -56,7 +56,8 @@ const SEARCH_ALIASES: Record<string, string[]> = {
     ],
     'passport-photo': [
         'passport', 'passport seva', 'icao', '630', 'photo', 'selfie',
-        'signature', 'upsc photo', 'white background',
+        'signature', 'upsc photo', 'white background', 'bank photo',
+        'ibps', 'ssc', 'thumb', 'thumb impression', '10kb', '20kb',
     ],
     'remove-background': [
         'background', 'remove bg', 'white background', 'kyc photo', 'cutout',

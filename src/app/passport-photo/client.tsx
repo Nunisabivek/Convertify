@@ -3,9 +3,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { FileUploader } from '@/components/tools/file-uploader'
 import MobileWorkBar from '@/components/mobile/MobileWorkBar'
+import MobileSizeControl from '@/components/mobile/MobileSizeControl'
 import { finishConvert, formatFileSize } from '@/lib/native-file'
 import { tapHaptic } from '@/lib/haptics'
-import { abortConvertWorker, assertFitsPhone, canvasFromBitmap, fitJpegOnCanvas, loadImageBitmap } from '@/lib/jobs/media'
+import { abortConvertWorker, workerMakePhoto } from '@/lib/jobs/media'
+import { qualityNote, releaseJob, takeJob } from '@/lib/jobs/session'
 import { TOO_BIG } from '@/lib/brand'
 
 type Preset = {
@@ -16,8 +18,8 @@ type Preset = {
     height: number
     minKb: number
     maxKb: number
-    aimMin: number
-    aimMax: number
+    fill: string
+    cropClass: string
 }
 
 const PRESETS: Preset[] = [
@@ -29,8 +31,8 @@ const PRESETS: Preset[] = [
         height: 810,
         minKb: 10,
         maxKb: 250,
-        aimMin: 50,
-        aimMax: 200,
+        fill: '#FFFFFF',
+        cropClass: '',
     },
     {
         id: 'upsc',
@@ -40,19 +42,52 @@ const PRESETS: Preset[] = [
         height: 531,
         minKb: 20,
         maxKb: 300,
-        aimMin: 20,
-        aimMax: 300,
+        fill: '#FFFFFF',
+        cropClass: '',
+    },
+    {
+        id: 'bank',
+        label: 'Bank photo',
+        hint: '200×230, 20–50 KB',
+        width: 200,
+        height: 230,
+        minKb: 20,
+        maxKb: 50,
+        fill: '#F2F4F7',
+        cropClass: 'is-bank',
     },
     {
         id: 'sign',
         label: 'Signature',
-        hint: 'JPG 20–100 KB',
-        width: 360,
-        height: 120,
+        hint: '140×60, 10–20 KB',
+        width: 140,
+        height: 60,
+        minKb: 10,
+        maxKb: 20,
+        fill: '#FFFFFF',
+        cropClass: 'is-sign',
+    },
+    {
+        id: 'thumb',
+        label: 'Thumb',
+        hint: '160×200, 10–20 KB',
+        width: 160,
+        height: 200,
+        minKb: 10,
+        maxKb: 20,
+        fill: '#FFFFFF',
+        cropClass: 'is-thumb',
+    },
+    {
+        id: 'custom',
+        label: 'Custom',
+        hint: 'Your KB and crop',
+        width: 413,
+        height: 531,
         minKb: 20,
-        maxKb: 100,
-        aimMin: 20,
-        aimMax: 100,
+        maxKb: 200,
+        fill: '#FFFFFF',
+        cropClass: '',
     },
 ]
 
@@ -65,14 +100,23 @@ export default function PassportPhotoClient() {
     const [working, setWorking] = useState(false)
     const [liveSize, setLiveSize] = useState<number | null>(null)
     const [error, setError] = useState<string | null>(null)
+    const [customW, setCustomW] = useState(413)
+    const [customH, setCustomH] = useState(531)
+    const [maxKb, setMaxKb] = useState(PRESETS[0].maxKb)
     const drag = useRef<{ x: number; y: number; ox: number; oy: number } | null>(null)
     const abortRef = useRef<AbortController | null>(null)
     const imgRef = useRef<HTMLImageElement | null>(null)
+    const frameRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => () => {
         abortRef.current?.abort()
         abortConvertWorker()
-        if (preview) URL.revokeObjectURL(preview)
+    }, [])
+
+    useEffect(() => {
+        return () => {
+            if (preview) URL.revokeObjectURL(preview)
+        }
     }, [preview])
 
     const pick = (files: File[]) => {
@@ -86,10 +130,20 @@ export default function PassportPhotoClient() {
         }
         setFile(next)
         setPreview(URL.createObjectURL(next))
-        setZoom(1.15)
+        setZoom(preset.id === 'sign' ? 1.05 : 1.15)
         setOffset({ x: 0, y: 0 })
         setError(null)
         setLiveSize(next.size)
+    }
+
+    const applyPreset = (item: Preset) => {
+        void tapHaptic()
+        setPreset(item)
+        setMaxKb(item.maxKb)
+        if (item.id !== 'custom') {
+            setCustomW(item.width)
+            setCustomH(item.height)
+        }
     }
 
     const onPointerDown = (event: React.PointerEvent) => {
@@ -113,79 +167,78 @@ export default function PassportPhotoClient() {
         setWorking(false)
     }
 
+    const cropNorm = () => {
+        const frame = frameRef.current
+        const img = imgRef.current
+        if (!frame || !img) throw new Error('Could not read that photo. Try another.')
+        const fr = frame.getBoundingClientRect()
+        const ir = img.getBoundingClientRect()
+        return {
+            x: (fr.left - ir.left) / ir.width,
+            y: (fr.top - ir.top) / ir.height,
+            w: fr.width / ir.width,
+            h: fr.height / ir.height,
+        }
+    }
+
     const run = async () => {
         if (!file || !preview) return
+        const width = preset.id === 'custom' ? customW : preset.width
+        const height = preset.id === 'custom' ? customH : preset.height
+        const minKb = preset.minKb
+        const cap = Math.max(minKb + 1, maxKb)
         setError(null)
         setWorking(true)
-        const ac = new AbortController()
+        const ac = takeJob()
         abortRef.current = ac
         await tapHaptic()
         try {
-            assertFitsPhone(file)
-            const bitmap = await loadImageBitmap(file)
-            const source = await canvasFromBitmap(bitmap)
-            bitmap.close()
-            const out = document.createElement('canvas')
-            out.width = preset.width
-            out.height = preset.height
-            const ctx = out.getContext('2d')
-            if (!ctx) throw new Error(TOO_BIG)
-            ctx.fillStyle = '#FFFFFF'
-            ctx.fillRect(0, 0, preset.width, preset.height)
-
-            const frame = imgRef.current?.parentElement
-            const img = imgRef.current
-            if (!frame || !img) throw new Error('Could not read that photo. Try another.')
-            const fr = frame.getBoundingClientRect()
-            const ir = img.getBoundingClientRect()
-            const scaleX = source.width / ir.width
-            const scaleY = source.height / ir.height
-            const sx = Math.max(0, (fr.left - ir.left) * scaleX)
-            const sy = Math.max(0, (fr.top - ir.top) * scaleY)
-            const sw = Math.min(source.width - sx, fr.width * scaleX)
-            const sh = Math.min(source.height - sy, fr.height * scaleY)
-            ctx.drawImage(source, sx, sy, sw, sh, 0, 0, preset.width, preset.height)
-
-            const blob = await fitJpegOnCanvas(
-                out,
-                preset.aimMin * 1024,
-                preset.aimMax * 1024,
+            const result = await workerMakePhoto(
+                file,
+                {
+                    width,
+                    height,
+                    minBytes: minKb * 1024,
+                    maxBytes: cap * 1024,
+                    fill: preset.fill,
+                    crop: cropNorm(),
+                },
                 ac.signal,
                 (size) => setLiveSize(size)
             )
-            if (blob.size < preset.minKb * 1024 || blob.size > preset.maxKb * 1024) {
-                setError(`Got ${formatFileSize(blob.size)}. Need ${preset.minKb}–${preset.maxKb} KB.`)
+            if (result.blob.size < minKb * 1024 || result.blob.size > cap * 1024) {
+                setError(`Got ${formatFileSize(result.blob.size)}. Need ${minKb}–${cap} KB.`)
             }
-            await finishConvert(blob, `${preset.id}-${Date.now()}.jpg`)
+            await finishConvert(result.blob, `${preset.id}-${Date.now()}.jpg`, qualityNote(result.shrunk))
         } catch (err) {
             if ((err as Error).name === 'AbortError') return
             setError((err as Error).message || TOO_BIG)
         } finally {
+            releaseJob(ac)
             setWorking(false)
         }
     }
 
+    const isWide = preset.cropClass === 'is-sign'
+
     return (
         <div className="mobile-job">
             <p className="mobile-fineprint">
-                Hits the usual pixel and KB numbers. This is not an official MEA check.
+                Hits the usual pixel and KB numbers for form uploads. This is not an official MEA check.
             </p>
-            <div className="mobile-range-chips">
+            <div className="mobile-preset-row">
                 {PRESETS.map((item) => (
                     <button
                         key={item.id}
                         type="button"
-                        className={`mobile-size-chip ${preset.id === item.id ? 'is-selected' : ''}`}
-                        onClick={async () => {
-                            await tapHaptic()
-                            setPreset(item)
-                        }}
+                        className={`mobile-preset-chip ${preset.id === item.id ? 'is-selected' : ''}`}
+                        onClick={() => applyPreset(item)}
                     >
-                        <strong>{item.label}</strong>
-                        <span>{item.hint}</span>
+                        {item.label}
                     </button>
                 ))}
             </div>
+            <p className="mobile-preset-hint">{preset.hint}</p>
 
             {!file ? (
                 <FileUploader
@@ -207,7 +260,8 @@ export default function PassportPhotoClient() {
                         </button>
                     </div>
                     <div
-                        className={`mobile-crop ${preset.id === 'sign' ? 'is-sign' : ''}`}
+                        ref={frameRef}
+                        className={`mobile-crop ${preset.cropClass} ${isWide ? 'is-sign' : ''}`}
                         onPointerDown={onPointerDown}
                         onPointerMove={onPointerMove}
                         onPointerUp={onPointerUp}
@@ -236,9 +290,36 @@ export default function PassportPhotoClient() {
                             onChange={(e) => setZoom(parseFloat(e.target.value))}
                         />
                     </label>
+                    {preset.id === 'custom' ? (
+                        <div className="mobile-custom-range">
+                            <label>
+                                Width px
+                                <input
+                                    type="number"
+                                    min={40}
+                                    value={customW}
+                                    onChange={(e) => setCustomW(Math.max(40, parseInt(e.target.value, 10) || 40))}
+                                />
+                            </label>
+                            <label>
+                                Height px
+                                <input
+                                    type="number"
+                                    min={40}
+                                    value={customH}
+                                    onChange={(e) => setCustomH(Math.max(40, parseInt(e.target.value, 10) || 40))}
+                                />
+                            </label>
+                        </div>
+                    ) : null}
+                    <MobileSizeControl
+                        valueKb={maxKb}
+                        onChangeKb={setMaxKb}
+                        fileBytes={file.size}
+                        minKb={preset.minKb}
+                    />
                     <p className="mobile-live-size">
-                        Need {preset.minKb}–{preset.maxKb} KB
-                        {liveSize ? ` · last save ${formatFileSize(liveSize)}` : ''}
+                        {liveSize ? formatFileSize(liveSize) : formatFileSize(file.size)} → {preset.minKb}–{maxKb} KB
                     </p>
                     {error ? <p className="mobile-job-error">{error}</p> : null}
                     <button type="button" className="mobile-choose-btn" disabled={working} onClick={run}>
@@ -250,7 +331,7 @@ export default function PassportPhotoClient() {
             {working ? (
                 <MobileWorkBar
                     note="Building the photo…"
-                    sizeLabel={liveSize ? formatFileSize(liveSize) : undefined}
+                    sizeLabel={liveSize ? `${formatFileSize(liveSize)} → ${preset.minKb}–${maxKb} KB` : undefined}
                     onCancel={cancel}
                 />
             ) : null}

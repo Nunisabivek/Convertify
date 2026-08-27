@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, useEffect } from 'react'
+import { ReactNode, useEffect, useRef, useSyncExternalStore } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,6 +10,7 @@ import { getToolById } from '@/lib/tools-registry'
 import { ANDROID_SHORT_NAMES } from '@/lib/mobile-tools'
 import { tapHaptic } from '@/lib/haptics'
 import { abortConvertWorker } from '@/lib/jobs/media'
+import { isConverting, subscribeConverting } from '@/lib/jobs/session'
 
 interface MobileLayoutProps {
     children: ReactNode
@@ -31,6 +32,8 @@ function toolTitleFromPath(pathname: string): string | null {
 
 export default function MobileLayout({ children }: MobileLayoutProps) {
     const pathname = usePathname() || '/'
+    const converting = useSyncExternalStore(subscribeConverting, isConverting, () => false)
+    const wasTool = useRef(false)
 
     useEffect(() => {
         let cancelled = false
@@ -79,6 +82,11 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
     const isTab = navItems.some((item) => item.href === pathname)
     const toolTitle = toolTitleFromPath(pathname)
     const showBack = !isTab
+    const isTool = Boolean(toolTitle)
+    const forward = isTool && !wasTool.current
+    const back = !isTool && wasTool.current
+    wasTool.current = isTool
+    const axis = converting ? 0 : forward ? 28 : back ? -28 : 0
     const heading =
         toolTitle ||
         (pathname === '/all-tools'
@@ -110,10 +118,10 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={pathname}
-                        initial={{ opacity: 0, y: 6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.08, ease: 'easeOut' }}
+                        initial={{ opacity: converting ? 1 : 0, x: axis }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: converting ? 1 : 0, x: converting ? 0 : axis * -0.5 }}
+                        transition={{ duration: converting ? 0 : 0.2, ease: 'easeOut' }}
                     >
                         {children}
                     </motion.div>
