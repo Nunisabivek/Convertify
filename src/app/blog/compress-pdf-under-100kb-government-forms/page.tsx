@@ -89,7 +89,7 @@ export default function BlogPost() {
 
                 <AnswerBlock
                     question="How do I compress a PDF to under 100KB for a government form?"
-                    answer="Open Convertify's PDF compressor, upload the PDF, choose 'High' compression, and download. A typical 1–2 page form PDF (500KB–2MB) drops to 60–120KB while keeping text readable. If you need even smaller, split the PDF first or convert color scans to grayscale."
+                    answer="Open Convertify's PDF compressor, upload the PDF, tap 100 KB (or 50 / 200 KB), and download. A typical 1–2 page form PDF (500KB–2MB) drops under the cap while keeping text readable. If the form also sets a minimum size, use Fit to size instead."
                 />
 
                 {/* Table of Contents */}
@@ -290,8 +290,13 @@ export default function BlogPost() {
                     </div>
 
                     <p>
-                        When in doubt, compress to the smallest size you can while keeping text readable.
-                        There&apos;s no penalty for uploading a 50KB file when the limit is 100KB—smaller is always fine.
+                        When the form only prints a <em>maximum</em>, a smaller file is fine — a 50 KB PDF is accepted on a 100 KB cap.
+                        When it prints a <em>band</em> (20–50 KB, 50–200 KB, 20–300 KB), a file that is too small is rejected too.
+                        Those fields are usually photos and signatures: use{' '}
+                        <a href="/fit-to-size" className="text-indigo-600 hover:underline">Fit to size</a>
+                        {' '}or the{' '}
+                        <a href="/passport-photo" className="text-indigo-600 hover:underline">passport / UPSC photo maker</a>
+                        {' '}instead of shrinking past the floor.
                     </p>
 
                     <h2 id="before-you-scan" className="text-2xl font-bold text-slate-900 mt-8 mb-4">

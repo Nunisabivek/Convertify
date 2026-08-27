@@ -5,7 +5,18 @@ export function Footer() {
         <footer className="w-full border-t bg-slate-50 border-slate-200">
             {/* Primary Footer - Tool Categories for SEO Internal Linking */}
             <div className="container py-12 px-4 md:px-6">
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 mb-12">
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 mb-12">
+                    {/* Forms & KYC */}
+                    <div>
+                        <h4 className="font-semibold text-slate-900 mb-3 text-sm">Forms & KYC</h4>
+                        <ul className="space-y-2 text-sm text-slate-600">
+                            <li><Link href="/compress-pdf" className="hover:text-indigo-600 transition-colors">Compress PDF</Link></li>
+                            <li><Link href="/fit-to-size" className="hover:text-indigo-600 transition-colors">Fit to size</Link></li>
+                            <li><Link href="/passport-photo" className="hover:text-indigo-600 transition-colors">Passport photo</Link></li>
+                            <li><Link href="/remove-background" className="hover:text-indigo-600 transition-colors">Remove background</Link></li>
+                        </ul>
+                    </div>
+
                     {/* Organize PDF */}
                     <div>
                         <h4 className="font-semibold text-slate-900 mb-3 text-sm">Organize PDF</h4>
@@ -22,7 +33,6 @@ export function Footer() {
                     <div>
                         <h4 className="font-semibold text-slate-900 mb-3 text-sm">Optimize PDF</h4>
                         <ul className="space-y-2 text-sm text-slate-600">
-                            <li><Link href="/compress-pdf" className="hover:text-indigo-600 transition-colors">Compress PDF</Link></li>
                             <li><Link href="/watermark-pdf" className="hover:text-indigo-600 transition-colors">Watermark PDF</Link></li>
                             <li><Link href="/image-compressor" className="hover:text-indigo-600 transition-colors">Compress Image</Link></li>
                             <li><Link href="/resize-image" className="hover:text-indigo-600 transition-colors">Resize Image</Link></li>

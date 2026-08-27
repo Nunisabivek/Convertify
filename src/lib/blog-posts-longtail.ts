@@ -809,6 +809,8 @@ Passport and visa portals reject photos for three separate reasons and usually t
 
 Crop first, then resize, then compress. Doing it in any other order means redoing steps.
 
+If the form is an India government or bank upload, you often need pixels **and** a KB band in one file (Passport Seva 630×810 at 10–250 KB, UPSC 413×531 at 20–300 KB, bank 200×230 at 20–50 KB). The dedicated [passport photo maker](/passport-photo) does that crop + JPEG + KB pass in one step. Use Resize Image when you only need dimensions.
+
 1. **Crop to the aspect ratio** in your phone's photo editor or any image editor. For 35x45mm that is a 7:9 ratio; for a 2x2 inch US photo it is square. Get the head position right at this stage — most specs want the head to occupy 70-80% of the frame height with a small gap above.
 2. **Resize to the pixel dimensions** with [Resize Image](/resize-image). Since the crop already matches the aspect ratio, this scales cleanly with no distortion.
 3. **Compress if needed** with [Image Compressor](/image-compressor) to bring the file under the size cap.

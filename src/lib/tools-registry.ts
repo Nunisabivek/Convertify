@@ -97,7 +97,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
             {
                 id: 'fit-to-size',
                 name: 'Fit to size',
-                description: 'Make a PDF or photo land between a min and max KB.',
+                description: 'Land a photo or PDF between a min and max KB (20–50, 50–200).',
                 icon: { lucide: 'Gauge', material: 'straighten' },
                 href: 'fit-to-size',
                 color: { text: 'text-blue-600', bg: 'bg-blue-50', hex: '#026EFF' },
@@ -110,7 +110,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
             {
                 id: 'passport-photo',
                 name: 'Passport photo',
-                description: 'Make a 630×810 JPEG on a white background.',
+                description: '630×810, UPSC 413×531, bank 200×230, signature 140×60.',
                 icon: { lucide: 'UserRound', material: 'portrait' },
                 href: 'passport-photo',
                 color: { text: 'text-blue-600', bg: 'bg-blue-50', hex: '#026EFF' },
@@ -122,8 +122,8 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
             },
             {
                 id: 'remove-background',
-                name: 'Background',
-                description: 'Replace a plain backdrop with white or light blue.',
+                name: 'Remove background',
+                description: 'White or light-blue backdrop for passport and KYC photos.',
                 icon: { lucide: 'Eraser', material: 'auto_fix_high' },
                 href: 'remove-background',
                 color: { text: 'text-blue-600', bg: 'bg-blue-50', hex: '#026EFF' },
@@ -169,7 +169,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
             {
                 id: 'compress-pdf',
                 name: 'Compress PDF',
-                description: 'Reduce file size while maintaining quality.',
+                description: 'Compress a PDF to 50KB, 100KB or 200KB for form uploads.',
                 icon: { lucide: 'Minimize2', material: 'compress' },
                 href: 'compress-pdf',
                 color: { text: 'text-green-600', bg: 'bg-green-50', hex: '#16A34A' },

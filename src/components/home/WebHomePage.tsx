@@ -20,7 +20,10 @@ import {
     Smartphone,
     Globe,
     Scaling,
-    Ruler
+    Ruler,
+    Gauge,
+    UserRound,
+    Eraser
 } from "lucide-react";
 import { InternalLinkMap } from "@/components/seo/internal-link-map";
 import { AdBanner } from "@/components/ads/banner";
@@ -28,6 +31,40 @@ import { blogPosts } from "@/lib/blog-data";
 
 // Organized tool categories like ilovePDF
 const toolCategories = [
+    {
+        category: "Forms & KYC",
+        description: "Exact pixels and KB for India government, bank and job uploads",
+        tools: [
+            {
+                title: "Fit to size",
+                description: "Land a photo or PDF between 20–50, 50–200 or 100–200 KB.",
+                icon: Gauge,
+                color: "bg-blue-100 text-blue-600",
+                href: "/fit-to-size",
+            },
+            {
+                title: "Passport photo",
+                description: "630×810, UPSC 413×531, bank 200×230, signature 140×60.",
+                icon: UserRound,
+                color: "bg-sky-100 text-sky-600",
+                href: "/passport-photo",
+            },
+            {
+                title: "Remove background",
+                description: "White or light-blue backdrop for passport and KYC photos.",
+                icon: Eraser,
+                color: "bg-cyan-100 text-cyan-600",
+                href: "/remove-background",
+            },
+            {
+                title: "Compress PDF",
+                description: "Shrink a PDF to 50 KB, 100 KB or 200 KB for form uploads.",
+                icon: Minimize2,
+                color: "bg-green-100 text-green-600",
+                href: "/compress-pdf",
+            },
+        ],
+    },
     {
         category: "Organize PDF",
         description: "Merge, split, and organize your PDFs",
@@ -59,19 +96,6 @@ const toolCategories = [
                 icon: RotateCw,
                 color: "bg-pink-100 text-pink-600",
                 href: "/rotate-pdf",
-            },
-        ],
-    },
-    {
-        category: "Optimize PDF",
-        description: "Compress and enhance your PDFs",
-        tools: [
-            {
-                title: "Compress PDF",
-                description: "Reduce file size while keeping quality.",
-                icon: Minimize2,
-                color: "bg-green-100 text-green-600",
-                href: "/compress-pdf",
             },
         ],
     },
@@ -429,7 +453,7 @@ export default function WebHomePage() {
                                 <Lock className="w-5 h-5 text-indigo-600" /> Secure & Private
                             </h3>
                             <p className="text-slate-600">
-                                Your files are processed securely. We don't store your documents—they are automatically deleted from our servers after processing.
+                                Your files are processed in your browser. They never upload, so there is nothing on a server to store or delete.
                             </p>
                         </div>
                         <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100">

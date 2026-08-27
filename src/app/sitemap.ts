@@ -27,6 +27,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         'html-to-pdf', 'markdown-to-pdf',
         'tiff-to-pdf',
         'autocad-pdf-editor',
+        // Unique India form tools — indexed on their own slugs, not doorway clones.
+        'fit-to-size', 'passport-photo', 'remove-background',
     ]
 
     const secondaryTools = [
@@ -44,10 +46,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: 'about', priority: 0.4 },
     ]
 
-    // Bumped on 2026-07-26: 6 orphaned hand-written blog posts re-attached,
-    // titles/descriptions trimmed to SERP width, remaining false capability
-    // claims removed.
-    const lastUpdated = '2026-07-26'
+    // Bumped on 2026-08-27: fit-to-size, passport-photo and remove-background
+    // joined the indexable unique-tool set (no doorway clones).
+    const lastUpdated = '2026-08-27'
 
     return [
         {

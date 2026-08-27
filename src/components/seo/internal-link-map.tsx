@@ -20,6 +20,9 @@ import {
     Shrink,
     FileType,
     PenLine,
+    Gauge,
+    UserRound,
+    Eraser,
     LucideIcon,
 } from "lucide-react"
 
@@ -39,6 +42,11 @@ interface ToolLink {
 // crawlers and real users into dead ends. Add an entry back here only when
 // its tool ships and rejoins the sitemap.
 const allToolLinks: ToolLink[] = [
+    // Forms & KYC
+    { title: "Fit to size", href: "/fit-to-size", icon: Gauge, color: "text-blue-600", description: "Min–max KB for form uploads" },
+    { title: "Passport photo", href: "/passport-photo", icon: UserRound, color: "text-sky-600", description: "630×810, UPSC, bank, signature" },
+    { title: "Remove background", href: "/remove-background", icon: Eraser, color: "text-cyan-600", description: "White backdrop for KYC photos" },
+
     // Organize PDF
     { title: "Merge PDF", href: "/merge-pdf", icon: FileStack, color: "text-red-500", description: "Combine multiple PDFs into one" },
     { title: "Split PDF", href: "/split-pdf", icon: Scissors, color: "text-blue-500", description: "Extract pages from PDF" },
@@ -48,7 +56,7 @@ const allToolLinks: ToolLink[] = [
     { title: "Watermark PDF", href: "/watermark-pdf", icon: Droplet, color: "text-sky-500", description: "Add a watermark" },
 
     // Optimize
-    { title: "Compress PDF", href: "/compress-pdf", icon: Minimize2, color: "text-green-500", description: "Reduce PDF file size" },
+    { title: "Compress PDF", href: "/compress-pdf", icon: Minimize2, color: "text-green-500", description: "50KB, 100KB or 200KB for forms" },
     { title: "Compress Image", href: "/image-compressor", icon: Shrink, color: "text-lime-600", description: "Shrink JPG & PNG files" },
     { title: "Resize Image", href: "/resize-image", icon: Ruler, color: "text-amber-500", description: "Change image dimensions" },
 

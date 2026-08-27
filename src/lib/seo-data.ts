@@ -81,48 +81,162 @@ export const toolSeoData = {
         ]
     },
     "compress-pdf": {
-        title: "Compress PDF to 100KB, 200KB or 1MB — Free Online",
-        description: "Compress a PDF to an exact target size using multi-pass compression. Built for government forms, visa uploads and email limits. Free, no watermark.",
+        title: "Compress PDF to 50KB, 100KB or 200KB — Free Online",
+        description: "Shrink a PDF to 50KB, 100KB or 200KB for UPSC, EPFO, Passport Seva and bank KYC uploads. Pick the target, compress on your device — no upload, no watermark.",
         keywords: [
-            "compress pdf", "compress pdf free", "pdf compressor", "reduce pdf size",
-            "compress pdf to 100kb", "compress pdf to 200kb", "compress pdf online",
-            "compress pdf to 100kb free online", "free pdf compressor",
-            "pdf compressor 100kb", "pdf compressor 200kb", "compress pdf online free", "reduce pdf size online",
-            "compress pdf for government forms", "passport scan compression 100kb", "visa application pdf compressor",
-            "shrink pdf file online 200kb free", "pdf size reducer",
-            "make pdf smaller", "smaller pdf file", "compress pdf for email", "batch compress pdf",
-            "pdf compressor no watermark", "best pdf compressor free", "reduce pdf file size without losing quality",
-            "compress pdf without sign up", "free pdf compressor no limit", "online pdf size reducer",
-            "best free pdf compressor online", "shrink pdf", "tools to compress pdf",
-            "reduce pdf size to 100kb", "compress pdf up to 240 kb"
+            "compress pdf to 100kb", "compress pdf to 200kb", "compress pdf to 50kb",
+            "compress pdf", "pdf compressor 100kb", "pdf compressor 200kb",
+            "reduce pdf size to 100kb", "compress pdf for government forms",
+            "epfo pdf size", "upsc document upload size", "compress pdf online free",
+            "pdf size reducer", "shrink pdf", "compress pdf without sign up"
         ],
-        h1: "Compress PDF Free — Reduce to 100KB/200KB Online",
+        h1: "Compress PDF to 100KB or 200KB for Form Uploads",
         faqs: [
             {
-                question: "How do I compress PDF to exactly 100KB for government forms?",
-                answer: "Our 'High Compression' mode uses multi-pass optimization to get as close to your target (100KB/200KB) as possible while ensuring your photo and text remain legible for officials. Perfect for visa applications and passport uploads."
+                question: "How do I compress a PDF to 100KB or 200KB?",
+                answer: "Upload the PDF, tap the 50 KB, 100 KB or 200 KB chip (or type a custom target), and compress. Convertify runs several quality passes in your browser until the file is at or under that number. Use this when the form only sets a maximum — UPSC certificates, EPFO PDFs, Passport Seva documents, bank KYC scans."
             },
             {
-                question: "Will my passport photo be blurry after compression?",
-                answer: "No. Our algorithm prioritizes text and face recognition areas, applying heavier compression only to background metadata and redundant layout info to keep your IDs crisp and clear."
+                question: "The form also has a minimum size. Will this tool handle that?",
+                answer: "No — this compressor aims at or below a maximum. If the portal rejects files that are too small as well as too large (common on photo and signature fields: 20–50 KB, 50–200 KB, 20–300 KB), use Fit to size instead. That tool lands the file inside a min–max range."
             },
             {
-                question: "Is this PDF compressor free with no limits?",
-                answer: "Yes! Compress unlimited PDFs for free. No sign-up required, no watermarks added, and no file size limits. Processing happens 100% in your browser for complete privacy."
+                question: "What if the PDF is still over 100KB after compression?",
+                answer: "Open Advanced settings and drop quality toward 30–40% and resolution scale toward 0.7×, then run again. A 10-page colour scan may never reach 100 KB without splitting pages first. A one-page ID or certificate usually will."
             },
             {
-                question: "What if the file is still over 100KB after compression?",
-                answer: "Try our 'Extreme' mode. It removes embedded thumbnails and non-essential fonts to shave off the final few bytes needed for strict government portals."
+                question: "JPEG or PDF — which should I upload to the portal?",
+                answer: "Follow the form. Document fields (marksheets, ID proof, address proof) almost always want a PDF. Photo and signature fields want a JPEG. Compressing a photo inside this PDF tool still gives you a PDF; for a JPEG in an exact pixel box, use the passport photo maker."
             },
             {
-                question: "Is it safe to compress sensitive documents online?",
-                answer: "Absolutely. Unlike other tools, Convertify processes files 100% in your browser. Your sensitive government forms, passport scans, and visa documents are never uploaded to any server."
+                question: "Does my file leave this device?",
+                answer: "No. Compression runs in your browser with PDF.js and PDF-Lib. There is no upload, no account, and no copy stored on a server — which matters for passport scans, bank statements and KYC packs."
+            },
+            {
+                question: "Will the compressed PDF stay readable?",
+                answer: "For a one- or two-page scan, 100 KB or 200 KB is usually still legible. The compressor redraws each page as an image, so text is no longer selectable. If a line of small print goes muddy, raise the target (try 200 KB or 300 KB) or start from a sharper scan."
             }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Select your PDF file - works with government forms, IDs, and any document." },
-            { name: "Choose Compression", text: "Select 'High' for 100KB or 'Extreme' for maximum compression." },
-            { name: "Download Free", text: "Get your compressed PDF instantly - no watermarks, no sign-up." }
+            { name: "Upload the PDF", text: "Drop a PDF (or a JPG/PNG scan) into the compressor. The current size is shown so you can see how far you need to go." },
+            { name: "Pick 50 KB, 100 KB or 200 KB", text: "Use a preset chip or type a custom target. These three sizes cover most India government, job and bank form limits." },
+            { name: "Download and check", text: "The result stays on your device. Confirm the new size before you upload it to UPSC, EPFO, Passport Seva or a bank portal." }
+        ]
+    },
+    "fit-to-size": {
+        title: "Fit Photo or PDF to 20–50 KB or 50–200 KB",
+        description: "Land a photo or PDF between a min and max KB — 20–50, 50–200, 100–200 — for UPSC, EPFO and bank KYC. Runs in your browser, never uploaded.",
+        keywords: [
+            "compress photo to 50kb", "compress pdf to 20-50kb", "compress image 50kb to 200kb",
+            "fit to size kb", "photo 20kb to 50kb", "pdf 100kb to 200kb",
+            "epfo photo size", "kyc photo 20kb 50kb", "compress photo for form upload"
+        ],
+        h1: "Fit a Photo or PDF to an Exact KB Range",
+        faqs: [
+            {
+                question: "When should I use Fit to size instead of Compress PDF?",
+                answer: "Use Compress PDF when the form only says “under 100 KB” or “under 200 KB”. Use Fit to size when it also sets a floor — 20–50 KB, 50–200 KB, 20–300 KB. Many UPSC, EPFO and bank photo fields reject a file that is too small as well as one that is too large."
+            },
+            {
+                question: "Can I hit 20–50 KB, 50–200 KB or 100–200 KB?",
+                answer: "Yes. Those ranges are on the chip row, along with 10–20, 20–100, 20–200 and 20–300 KB. You can also type any min and max. The tool tries quality first and only shrinks pixels if it must, so a face stays usable on a 20–50 KB bank photo."
+            },
+            {
+                question: "Does it work on both photos and PDFs?",
+                answer: "Yes. Drop a JPG, PNG, WebP or PDF. Photos come back as JPEG; PDFs stay PDFs. If the form wants a JPEG in a fixed pixel size (630×810, 413×531, 200×230), use the passport photo maker instead — that tool also crops."
+            },
+            {
+                question: "What if the smallest I can get is still over the max?",
+                answer: "The tool stops when further compression would wreck the file and tells you the size it reached. For a dense multi-page PDF, split it or compress a single page. For a huge phone photo, crop first. A busy colour scan of ten pages will not fit in 50 KB."
+            },
+            {
+                question: "Does the file stay on my device?",
+                answer: "Yes. Fitting happens in the browser. KYC photos and scanned IDs are not uploaded to Convertify."
+            }
+        ],
+        howToSteps: [
+            { name: "Upload a photo or PDF", text: "One file at a time. JPG, PNG, WebP and PDF are accepted." },
+            { name: "Pick the range the form asks for", text: "Tap 20–50, 50–200, 100–200 KB, or type your own min and max." },
+            { name: "Download when it lands in range", text: "Check the live size. If it cannot hit the band, the error states the size it reached." }
+        ]
+    },
+    "passport-photo": {
+        title: "Passport Photo 630×810, 10–250 KB — White Background",
+        description: "Make a 630×810 JPEG (10–250 KB) for Passport Seva, or UPSC 3.5×4.5 cm (413×531, 20–300 KB), bank 200×230, and signature 140×60. White background. On your device.",
+        keywords: [
+            "passport photo 630x810", "passport photo 10kb to 250kb", "passport seva photo size",
+            "upsc photo size", "upsc photo 3.5 x 4.5 cm", "upsc photo 413x531",
+            "bank photo 200x230", "signature 140x60", "passport photo white background",
+            "kyc photo jpeg"
+        ],
+        h1: "Passport Photo 630×810, UPSC, Bank & Signature Size",
+        faqs: [
+            {
+                question: "What size is a Passport Seva digital photo?",
+                answer: "The Passport preset exports a 630×810 JPEG between 10 KB and 250 KB on a white background. That matches the usual Passport Seva online-upload spec. Print-shop 2×2 inch photos are a different product — this tool is for the digital upload, not an ICAO print check."
+            },
+            {
+                question: "What is the UPSC photo size?",
+                answer: "Most UPSC notifications ask for a 3.5 × 4.5 cm photograph as a JPEG between 20 KB and 300 KB. At 300 DPI that is 413×531 pixels. Tap the UPSC photo preset — it uses those numbers. Always re-read the PDF notification for the exam you are applying to; a given year can tweak the KB band."
+            },
+            {
+                question: "Can I make a 200×230 bank photo or a 140×60 signature?",
+                answer: "Yes. Bank photo is 200×230, 20–50 KB. Signature is 140×60, 10–20 KB. There is also a thumb-impression preset (160×200, 10–20 KB) and a custom pixel box if your form is slightly different."
+            },
+            {
+                question: "JPEG or PNG — which does the form want?",
+                answer: "India government, bank and job portals almost always want JPEG (.jpg). The output of this tool is JPEG. PNG files are larger and often rejected even when the pixels are right. Upload a PNG or WebP source if that is what you have; the download is still a .jpg."
+            },
+            {
+                question: "Why was my photo rejected for the background?",
+                answer: "Most forms want a plain white or very light backdrop with no shadows, patterns or other people. If the wall behind you is busy, run Remove background first, then come back here to crop to 630×810 or 413×531. This maker fills empty crop area with white (or light grey on the bank preset); it does not magically cut you out of a crowd."
+            },
+            {
+                question: "Does the photo leave my phone or laptop?",
+                answer: "No. Cropping, resizing and the KB fit all run in the browser. Convertify is not an official MEA or UPSC check — it only hits the pixel and file-size numbers the form prints."
+            }
+        ],
+        howToSteps: [
+            { name: "Choose the preset", text: "Passport (630×810), UPSC (413×531), bank (200×230), signature (140×60), thumb, or custom." },
+            { name: "Upload and crop", text: "Drag the photo so the face (or signature) sits in the guide. Zoom if you need to." },
+            { name: "Make the JPEG", text: "The tool resizes to the exact pixels and compresses into the KB band. Download the .jpg and upload it to the form." }
+        ]
+    },
+    "remove-background": {
+        title: "Remove Background for Passport & KYC Photos — Free",
+        description: "Replace a plain backdrop with white or light blue for Passport Seva, UPSC and bank KYC photos. Runs on your device — the photo never uploads.",
+        keywords: [
+            "remove background passport photo", "white background kyc photo",
+            "passport photo white background", "remove background for upsc photo",
+            "kyc photo white background", "change photo background to white"
+        ],
+        h1: "Remove Background for Passport and KYC Photos",
+        faqs: [
+            {
+                question: "Will this pass a Passport Seva or UPSC white-background check?",
+                answer: "It is built for that job: it replaces a plain wall with white (KYC default) or light blue. It works best when you already stood against a simple backdrop. A patterned curtain, harsh shadow or a second person in frame will not cut cleanly. Retake against a plain wall in daylight if the preview looks messy."
+            },
+            {
+                question: "Is this the same as a studio cut-out or remove.bg?",
+                answer: "No. This is a local, on-device pass for KYC and passport uploads, not a general-purpose product-photo editor. It does not send the image to a cloud model. After you have a white backdrop, open the passport photo maker to crop to 630×810 or UPSC 413×531 and hit the KB limit."
+            },
+            {
+                question: "JPEG or PNG output?",
+                answer: "The download is a JPEG, which is what Passport Seva, UPSC and bank forms ask for. Keep the original if you need a transparent PNG for something else — this tool is not aiming at transparent cut-outs."
+            },
+            {
+                question: "Does the photo upload to a server?",
+                answer: "No. Background replacement runs in your browser. That is the point for KYC selfies and passport photos."
+            },
+            {
+                question: "The edges around my hair look rough. What now?",
+                answer: "Stand further from the wall, use even window light, and avoid backlight. Then re-run. If hair still frays, the source photo is the problem — a phone shot against a white wall is faster than fighting a busy background."
+            }
+        ],
+        howToSteps: [
+            { name: "Upload the photo", text: "JPG, PNG or WebP. A simple backdrop gives a cleaner result than a busy room." },
+            { name: "Pick white or light blue", text: "White is the KYC and Passport Seva default. Light blue is a softer studio look some bank forms accept." },
+            { name: "Download, then size it", text: "Use the passport photo maker next so pixels and KB match the form." }
         ]
     },
     "jpg-to-pdf": {

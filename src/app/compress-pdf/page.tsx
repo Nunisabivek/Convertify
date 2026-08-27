@@ -1,4 +1,3 @@
-
 import { Metadata } from "next"
 import CompressPdfClient from "./client"
 import CompressMobileClient from "./mobile-client"
@@ -9,16 +8,17 @@ import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
-import { RelatedUseCases } from "@/components/seo/related-use-cases"
 import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
 import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { AnswerBlock } from "@/components/seo/answer-block"
+import { KycRelatedTools } from "@/components/seo/kyc-related-tools"
 import { PostActionAd } from "@/components/ads/post-action-ad"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 import { allIndexableBlogPosts } from "@/lib/blog-data"
 import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
+import Link from "next/link"
 
 const seoData = toolSeoData["compress-pdf"]
 const contentData = toolContentData["compress-pdf"]
@@ -27,6 +27,7 @@ export const metadata: Metadata = {
     title: seoData.title,
     description: seoData.description,
     keywords: seoData.keywords,
+    robots: { index: true, follow: true },
     alternates: {
         canonical: "https://convertify.work/compress-pdf",
     },
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
                 url: "https://convertify.work/images/og-banner.png",
                 width: 1200,
                 height: 630,
-                alt: "Compress PDF Free — Reduce to 100KB/200KB Online | Convertify",
+                alt: seoData.h1,
             },
         ],
     },
@@ -62,7 +63,6 @@ export default function Page() {
     return (
         <div className="flex flex-col items-center">
 
-            {/* Structured Data Schemas */}
             <BreadcrumbSchema
                 items={[
                     { name: "Home", url: "/" },
@@ -71,7 +71,7 @@ export default function Page() {
                 ]}
             />
             <SoftwareApplicationSchema
-                toolName="Convertify PDF Compressor"
+                toolName="PDF Compressor"
                 toolSlug="compress-pdf"
                 description={seoData.description}
             />
@@ -82,22 +82,68 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        The Convertify PDF compressor reduces file size by up to <b>90%</b>. Compress large files to under <b>100KB, 200KB or 1MB</b> for email attachments, government forms, and visa applications — free, no download needed.
+                        Pick <b>50 KB, 100 KB or 200 KB</b> and compress a scan for UPSC, EPFO, Passport Seva or bank KYC.
+                        The file stays on this device.
                     </p>
                 </div>
                 <AnswerBlock
-                    question="How do I compress a PDF to exactly 100KB or 200KB for free?"
-                    answer="Open Convertify's PDF Compressor, upload your PDF, select your target size (100KB, 200KB, 500KB, or custom). The tool uses iterative multi-pass compression to hit your exact target — no guessing, no 'try again'. Free, no watermark, no sign-up, and your file never leaves your browser."
+                    question="How do I compress a PDF to 100KB or 200KB for a government form?"
+                    answer="Open Compress PDF, upload the file, tap 50 KB, 100 KB or 200 KB, and download. Use this when the form only sets a maximum. If it also sets a minimum (20–50 KB, 50–200 KB), use Fit to size instead."
                 />
                 <CompressPdfClient />
             </section>
 
-            {/* Post-action ad — shown between tool and SEO content */}
             <PostActionAd />
 
-            {/* SEO Content Section */}
+            <section className="w-full max-w-4xl mx-auto px-4 py-10">
+                <h2 className="text-2xl font-bold text-slate-900 mb-4">When 100 KB is a document, not a photo</h2>
+                <p className="text-slate-700 leading-relaxed mb-4">
+                    India portals mix two different problems. A marksheet, ID proof or address PDF is usually “under 100 KB” or “under 200 KB” — a ceiling. A photograph or signature is often “20–300 KB” or “20–50 KB” — a band. This page is the ceiling tool.{" "}
+                    <Link href="/fit-to-size" className="text-indigo-600 font-medium hover:underline">Fit to size</Link>{" "}
+                    is the band tool.{" "}
+                    <Link href="/passport-photo" className="text-indigo-600 font-medium hover:underline">Passport photo</Link>{" "}
+                    is the pixel box (630×810, 413×531, 200×230, 140×60).
+                </p>
+                <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+                    <table className="w-full text-sm">
+                        <thead className="bg-slate-50 text-left text-slate-700">
+                            <tr>
+                                <th className="px-4 py-3 font-semibold">Typical field</th>
+                                <th className="px-4 py-3 font-semibold">Usual cap</th>
+                                <th className="px-4 py-3 font-semibold">Use</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-100 text-slate-700">
+                            <tr>
+                                <td className="px-4 py-3">UPSC / SSC certificate or ID PDF</td>
+                                <td className="px-4 py-3">100 KB or 200 KB max</td>
+                                <td className="px-4 py-3">This compressor</td>
+                            </tr>
+                            <tr>
+                                <td className="px-4 py-3">EPFO KYC document</td>
+                                <td className="px-4 py-3">Often 100–200 KB max</td>
+                                <td className="px-4 py-3">This compressor</td>
+                            </tr>
+                            <tr>
+                                <td className="px-4 py-3">Passport Seva supporting PDF</td>
+                                <td className="px-4 py-3">Small max, varies by doc</td>
+                                <td className="px-4 py-3">This compressor</td>
+                            </tr>
+                            <tr>
+                                <td className="px-4 py-3">Photo / signature with min and max KB</td>
+                                <td className="px-4 py-3">e.g. 20–50 or 20–300 KB</td>
+                                <td className="px-4 py-3"><Link href="/fit-to-size" className="text-indigo-600 hover:underline">Fit to size</Link></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p className="text-sm text-slate-500 mt-3">
+                    Limits move between notifications. If the PDF is still over the cap, drop quality in Advanced, or split a multi-page scan first.
+                </p>
+            </section>
+
             <ToolSeoContent
-                toolName="Convertify PDF Compressor"
+                toolName="PDF Compressor"
                 toolSlug="compress-pdf"
                 description={contentData.description}
                 features={contentData.features}
@@ -108,22 +154,22 @@ export default function Page() {
             <ToolDeepGuide toolSlug="compress-pdf" toolName="PDF Compressor" />
 
             <HowToSchema
-                toolName="Compress PDF Files with Convertify"
-                description="Learn how to reduce PDF file size for email attachments using Convertify's free online PDF compressor. No download or sign-up required."
+                toolName="Compress a PDF to 100KB or 200KB"
+                description="Reduce a PDF to 50KB, 100KB or 200KB in the browser for India form uploads. No sign-up."
                 steps={seoData.howToSteps}
             />
 
             <FAQSchema
-                toolName="Convertify PDF Compressor"
+                toolName="compressing a PDF to 50KB, 100KB or 200KB"
                 faqs={seoData.faqs}
             />
 
-            <RelatedUseCases toolHref="/compress-pdf" />
+            <KycRelatedTools currentHref="/compress-pdf" />
 
             <RelatedBlogPosts
                 toolSlug="compress-pdf"
                 posts={relatedBlogs}
-                title="📚 Guides: How to Compress PDFs"
+                title="Guides: hitting 100KB on a form"
             />
 
             <RelatedTools currentTool="/compress-pdf" />

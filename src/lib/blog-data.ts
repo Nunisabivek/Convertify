@@ -3348,6 +3348,15 @@ export interface StaticBlogPost {
 
 export const staticBlogPosts: StaticBlogPost[] = [
   {
+    slug: "upsc-photo-size-2026",
+    title: "UPSC Photo Size 2026: 3.5×4.5 cm, 413×531, 20–300 KB",
+    excerpt: "UPSC photographs are usually 3.5×4.5 cm (413×531 px), JPEG, 20–300 KB, white background. Signature is often 140×60. How to hit it without uploading the selfie.",
+    date: "2026-08-27",
+    category: "how-to",
+    readingTime: 8,
+    relatedTool: "/passport-photo",
+  },
+  {
     slug: "compress-pdf-under-100kb-government-forms",
     title: "How to Compress PDF to Under 100KB for Government Forms",
     excerpt: "Stop getting 'file too large' errors on government portals. How to shrink any PDF under 100KB without ruining readability.",

@@ -28,10 +28,28 @@ export const toolBenefits: Record<string, Benefit[]> = {
         { icon: "globe", title: "Works on Mobile", description: "Split PDFs from iPhone, iPad, or Android" },
     ],
     "compress-pdf": [
-        { icon: "fileCheck", title: "Hit Exact Size", description: "Target 100KB, 200KB or any custom limit" },
+        { icon: "fileCheck", title: "Hit Exact Size", description: "Target 50KB, 100KB, 200KB or any maximum" },
         { icon: "shield", title: "Local Compression", description: "PDF.js renders pages without uploading" },
         { icon: "zap", title: "Multi-Pass Engine", description: "Auto-tunes quality + DPI to your target" },
-        { icon: "globe", title: "Forms-Ready", description: "Built for visa portals and gov.uk uploads" },
+        { icon: "globe", title: "India Forms", description: "UPSC, EPFO, Passport Seva, bank KYC PDFs" },
+    ],
+    "fit-to-size": [
+        { icon: "fileCheck", title: "Min and Max KB", description: "20–50, 50–200, 100–200, or type your own" },
+        { icon: "zap", title: "Photo or PDF", description: "Same range tool for JPEG uploads and PDFs" },
+        { icon: "shield", title: "Stays On Device", description: "KYC files never leave the browser" },
+        { icon: "globe", title: "Too-Small Rejects", description: "For portals that bounce an 8 KB signature" },
+    ],
+    "passport-photo": [
+        { icon: "fileCheck", title: "Exact Pixels", description: "630×810, 413×531, 200×230, 140×60" },
+        { icon: "zap", title: "KB Band Built In", description: "10–250, 20–300, 20–50, 10–20 KB presets" },
+        { icon: "globe", title: "White Fill", description: "Empty crop area is white, not stretched" },
+        { icon: "shield", title: "JPEG On Device", description: "The format the form wants; no upload" },
+    ],
+    "remove-background": [
+        { icon: "globe", title: "White or Light Blue", description: "KYC default white; soft blue if allowed" },
+        { icon: "zap", title: "Plain Walls", description: "Honest: busy rooms do not cut cleanly" },
+        { icon: "fileCheck", title: "Then Size It", description: "Hand off to 630×810 / UPSC crop next" },
+        { icon: "shield", title: "No Cloud Model", description: "The selfie never leaves this device" },
     ],
     "pdf-to-jpg": [
         { icon: "zap", title: "Up to 300 DPI", description: "Print-grade rendering, not blurry exports" },

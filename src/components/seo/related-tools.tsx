@@ -20,6 +20,9 @@ import {
     Scaling,
     Grid3x3,
     Hash,
+    Gauge,
+    UserRound,
+    Eraser,
     LucideIcon
 } from "lucide-react"
 
@@ -32,6 +35,10 @@ interface Tool {
 }
 
 const allTools: Tool[] = [
+    // Forms & KYC — unique money tools, same cluster as the four live pages
+    { title: "Fit to size", href: "/fit-to-size", icon: Gauge, color: "bg-blue-100 text-blue-600", category: "kyc" },
+    { title: "Passport photo", href: "/passport-photo", icon: UserRound, color: "bg-sky-100 text-sky-600", category: "kyc" },
+    { title: "Remove background", href: "/remove-background", icon: Eraser, color: "bg-cyan-100 text-cyan-600", category: "kyc" },
     // Organize PDF
     { title: "Merge PDF", href: "/merge-pdf", icon: FileStack, color: "bg-red-100 text-red-600", category: "organize" },
     { title: "Split PDF", href: "/split-pdf", icon: Scissors, color: "bg-orange-100 text-orange-600", category: "organize" },
@@ -88,7 +95,7 @@ export function RelatedTools({ currentTool, limit = 6 }: RelatedToolsProps) {
     const currentCategory = getToolCategory(currentTool)
 
     // Prioritized popular tools that should always appear in cross-links
-    const popularHrefs = ["/png-to-pdf", "/compress-pdf", "/merge-pdf", "/pdf-to-jpg", "/excel-to-pdf", "/pdf-to-word"]
+    const popularHrefs = ["/passport-photo", "/fit-to-size", "/compress-pdf", "/png-to-pdf", "/merge-pdf", "/pdf-to-jpg"]
 
     // First show tools from same category, then popular tools from other categories
     const relatedTools = allTools

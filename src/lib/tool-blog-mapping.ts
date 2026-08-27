@@ -21,6 +21,18 @@ export const toolToBlogMapping: Record<string, string[]> = {
         'best-free-pdf-compressor-online',
         'reduce-pdf-size-without-losing-quality',
     ],
+    'fit-to-size': [
+        'compress-pdf-under-100kb-government-forms',
+        'upsc-photo-size-2026',
+    ],
+    'passport-photo': [
+        'upsc-photo-size-2026',
+        'resize-image-for-passport-photo',
+    ],
+    'remove-background': [
+        'upsc-photo-size-2026',
+        'resize-image-for-passport-photo',
+    ],
     'split-pdf': [
         'extract-one-page-from-pdf',
         'split-pdf-bank-statement-by-month',

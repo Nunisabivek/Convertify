@@ -64,7 +64,7 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
 
     "compress-pdf": {
         intro: [
-            "Compressing a PDF to a specific KB target — 100 KB, 200 KB, 500 KB — is one of those small problems that gets surprisingly hard to solve well. Government forms, university applications, and visa portals enforce strict size caps, and most online compressors give you three vague choices (\"low\", \"medium\", \"high\") that rarely hit the number you actually need.",
+            "Compressing a PDF to a specific KB target — 50 KB, 100 KB, 200 KB — is one of those small problems that gets surprisingly hard to solve well. Government forms, university applications, and visa portals enforce strict size caps, and most online compressors give you three vague choices (\"low\", \"medium\", \"high\") that rarely hit the number you actually need.",
             "Convertify's PDF compressor takes a target-size-first approach. You type the limit (e.g. 100 KB), and the compressor uses a multi-pass engine to auto-tune both DPI and JPEG quality until the output is at or below your number. It runs entirely in your browser using PDF.js for rendering and PDF-Lib for re-assembly — your document never touches a server.",
             "If you came here because a portal rejected your upload (\"file must be under 200 KB\"), you're in the right place. The result is a real PDF, not a flattened image, and text remains selectable when the source was a text PDF.",
         ],
@@ -77,7 +77,7 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
         ],
         scenarios: [
             { title: "US visa applications (DS-160, I-130) — under 240 KB", body: "The Department of State's CEAC portal limits supporting document uploads to 240 KB. Set the Convertify target to 200 KB to leave headroom and run your scanned passport, marriage certificate, or financial proof through. Because compression happens locally, your personal documents never leave your device — important when you're handling biometric or financial proof." },
-            { title: "Indian government forms (UPSC, SSC, banking exams) — 100/200/500 KB", body: "Indian recruitment portals are notorious for strict size caps: photo under 50 KB, signature under 30 KB, ID proof under 100 KB, education certificate under 500 KB. The presets in Convertify map directly to the common limits, and the exact-target mode means you don't get rejected for being over by a few KB." },
+            { title: "Indian government forms (UPSC, SSC, banking exams) — 100/200/500 KB", body: "Indian recruitment portals are notorious for strict size caps: photo under 50 KB or in a 20–300 KB band, signature 10–20 KB, ID proof under 100 KB, education certificate under 200–500 KB. Use this compressor when the field is a PDF maximum. Photos and signatures with a min and max belong on Fit to size or the passport photo maker (413×531 UPSC, 200×230 bank)." },
             { title: "UK passport / NHS forms — under 1 MB", body: "GOV.UK and NHS forms typically cap supporting documents at 1 MB. Compress to 800 KB to leave margin for any portal-side overhead, and keep text mode in advanced settings if the document has fine print that needs to remain readable." },
             { title: "Email attachments — under Gmail's 25 MB limit", body: "Gmail rejects attachments over 25 MB. For a 35-50 MB scanned brief or design deck, set the target to 20 MB and let the compressor reduce DPI on image-heavy pages. The final PDF still opens cleanly in any reader." },
             { title: "WhatsApp / Telegram sharing — under 16 MB", body: "WhatsApp's document share caps at 100 MB but quality degrades over 16 MB; Telegram is similar. Use the 10 MB or 5 MB preset for fast share-and-forward without quality complaints from recipients." },
@@ -97,7 +97,7 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
             { feature: "Multi-pass tuning", convertify: "Auto-targets exact size", typical: "Single pass" },
             { feature: "Watermark", convertify: "None", typical: "Often added" },
         ],
-        lastUpdated: "2026-05-08",
+        lastUpdated: "2026-08-27",
     },
 
     "png-to-pdf": {

@@ -47,25 +47,80 @@ export const toolContentData: Record<string, {
         keywords: ["split pdf", "extract pdf pages", "separate pdf pages", "how to split pdf on windows", "pdf splitter online", "pdf page separator"]
     },
     "compress-pdf": {
-        description: "Compress PDF to 100KB or 200KB with intelligent multi-pass optimization. Perfect for government forms, visa applications, and passport scans. No watermarks, no limits, no sign-up required. Files are processed privately in your browser.",
+        description: "Compress a PDF to 50KB, 100KB or 200KB for India form uploads — UPSC documents, EPFO KYC, Passport Seva scans, bank proofs. You pick the target; a multi-pass engine in your browser tunes quality until the file is at or under that size. Nothing is uploaded.",
         features: [
-            "Reliable and fast PDF compression",
-            "Compress PDF to exactly 100KB or 200KB for government portals",
-            "Best for visa applications, passport scans & official forms",
-            "No watermarks, no limits, no sign-up required",
-            "100% private - documents never leave your device",
-            "Intelligent compression preserves text & photo clarity",
-            "Extreme mode for strict file size requirements",
-            "Batch compress multiple PDFs simultaneously"
+            "Target 50 KB, 100 KB, 200 KB or any custom maximum",
+            "Built for UPSC, EPFO, Passport Seva and bank document fields",
+            "Multi-pass quality + DPI tuning instead of vague low/medium/high",
+            "No watermark, no sign-up, no daily cap",
+            "Runs on your device — ID scans never leave the browser",
+            "Advanced sliders if a one-page scan still sits over the cap"
         ],
         useCases: [
-            "Compressing PDFs to 100KB for government form uploads",
-            "Reducing passport scans to 200KB for visa portals",
-            "Shrinking PDFs for email attachment limits",
-            "Making official documents smaller without quality loss",
-            "Optimizing scanned IDs for online applications"
+            "UPSC / SSC document uploads that cap a PDF at 100 KB or 200 KB",
+            "EPFO member KYC proofs that reject files over 100–200 KB",
+            "Passport Seva supporting documents that must stay under a small cap",
+            "Bank and job-portal ID scans labelled “PDF, max 200 KB”",
+            "Emailing a scanned certificate that bounced the 1 MB attachment limit"
         ],
-        keywords: ["convertify pdf compressor", "compress pdf to 100kb", "compress pdf to 200kb", "pdf compressor 100kb", "reduce pdf size", "shrink pdf online free", "compress pdf for government forms", "best pdf compressor free", "pdf size reducer no watermark"]
+        keywords: ["compress pdf to 100kb", "compress pdf to 200kb", "compress pdf to 50kb", "pdf compressor 100kb", "epfo pdf size", "compress pdf for government forms"]
+    },
+    "fit-to-size": {
+        description: "Fit a photo or PDF into a min–max KB band — 20–50, 50–200, 100–200, and other form ranges. Portals that reject “file too small” as well as “file too large” need this, not a compressor that only shrinks. Processing stays on your device.",
+        features: [
+            "Chips for 10–20, 20–50, 20–100, 20–200, 20–300, 50–200 and 100–200 KB",
+            "Custom min and max if your notification prints a different band",
+            "Accepts JPG, PNG, WebP and PDF",
+            "Quality-first: pixels shrink only if the KB cap still fails",
+            "Clear error when the file cannot land in range",
+            "No upload, no account, no watermark"
+        ],
+        useCases: [
+            "Bank KYC photos that must sit between 20 KB and 50 KB",
+            "EPFO / UPSC attachments labelled 50–200 KB or 100–200 KB",
+            "Signature or thumb files that reject anything under 10 KB",
+            "A PDF that is 18 KB when the portal wants 50–200 KB",
+            "Any form that prints both a minimum and a maximum in KB"
+        ],
+        keywords: ["compress photo to 50kb", "20kb to 50kb photo", "fit pdf to size", "50kb to 200kb", "kyc photo size"]
+    },
+    "passport-photo": {
+        description: "Make the JPEG India forms actually ask for: Passport Seva 630×810 (10–250 KB, white), UPSC 3.5×4.5 cm / 413×531 (20–300 KB), bank 200×230 (20–50 KB), and signature 140×60 (10–20 KB). Crop on device, then hit the pixel and KB numbers in one pass.",
+        features: [
+            "Passport preset: 630×810 JPEG, 10–250 KB, white fill",
+            "UPSC preset: 413×531 (3.5×4.5 cm at 300 DPI), 20–300 KB",
+            "Bank photo 200×230, 20–50 KB; signature 140×60, 10–20 KB",
+            "Thumb and custom pixel boxes when the notification differs",
+            "Crop + zoom before export so the face is not stretched",
+            "JPEG output — the format UPSC, Passport Seva and banks want",
+            "Runs locally; not an official MEA or UPSC validator"
+        ],
+        useCases: [
+            "Passport Seva online photo upload (630×810, 10–250 KB)",
+            "UPSC CSE / recruitment photograph (3.5×4.5 cm, 20–300 KB)",
+            "SBI / IBPS / bank KYC photo (200×230, 20–50 KB)",
+            "Application signature scan (140×60, 10–20 KB)",
+            "Thumb impression where the form prints 160×200 and 10–20 KB"
+        ],
+        keywords: ["passport photo 630x810", "upsc photo size", "upsc photo 413x531", "bank photo 200x230", "signature 140x60"]
+    },
+    "remove-background": {
+        description: "Replace a plain backdrop with white or light blue so a Passport Seva, UPSC or bank KYC photo stops failing the background check. This is an on-device pass for form photos, not a cloud cut-out studio. Size the result in the passport photo maker next.",
+        features: [
+            "White fill for Passport Seva, UPSC and most KYC forms",
+            "Light-blue fill when a bank or studio look is allowed",
+            "Works best on a simple wall — honest about busy scenes",
+            "JPEG download, which is what the portals accept",
+            "No upload, no account, no watermark",
+            "Pairs with the 630×810 / 413×531 photo maker for pixels and KB"
+        ],
+        useCases: [
+            "Passport Seva photo taken against a cream or grey wall",
+            "UPSC photograph rejected for a non-white background",
+            "Bank KYC selfie with a cluttered room behind you",
+            "Cleaning a signature scan on off-white paper before the 140×60 crop"
+        ],
+        keywords: ["remove background passport photo", "white background kyc", "passport photo white background", "upsc photo background"]
     },
     "jpg-to-pdf": {
         description: "Convert JPG to PDF free online with no limits and no watermarks. Combine unlimited photos into one multi-page PDF, adjust page sizes (A4, Letter, Legal), and arrange images in any order. Works perfectly on iPhone, Android, Windows, and Mac. All conversion happens in your browser - your photos are never uploaded to any server, making it 100% private and secure.",
