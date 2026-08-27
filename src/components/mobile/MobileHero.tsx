@@ -1,14 +1,12 @@
-'use client';
+'use client'
 
 export default function MobileHero() {
     return (
         <div className="mobile-hero">
-            <h1 className="mobile-hero-title">
-                What would you like to do today?
-            </h1>
+            <h1 className="mobile-hero-title">PDF tools</h1>
             <p className="mobile-hero-subtitle">
-                Select a tool or upload a file to get started
+                Merge, compress, or turn photos into a PDF. Files stay on this phone.
             </p>
         </div>
-    );
+    )
 }

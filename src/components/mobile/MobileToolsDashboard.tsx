@@ -1,57 +1,92 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
-import { TOOL_CATEGORIES, ToolCategory } from '@/lib/tools-registry';
-
-// Material icons mapping for categories
-const categoryIcons: Record<string, string> = {
-    'organize': 'folder_special',
-    'convert-from-pdf': 'transform',
-    'convert-to-pdf': 'picture_as_pdf',
-    'edit-pdf': 'edit',
-    'advanced': 'auto_awesome',
-};
+import { useMemo, useState } from 'react'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { AppIcon } from '@/components/mobile/AppIcon'
+import MobileSearch from '@/components/mobile/MobileSearch'
+import {
+    getAndroidV1Categories,
+    searchAndroidV1Tools,
+    shortToolName,
+} from '@/lib/mobile-tools'
 
 export default function MobileToolsDashboard() {
+    const [query, setQuery] = useState('')
+    const categories = getAndroidV1Categories()
+    const results = useMemo(() => searchAndroidV1Tools(query), [query])
+    const searching = query.trim().length > 0
+
     return (
         <div className="mobile-tools-dashboard">
-            {TOOL_CATEGORIES.map((category: ToolCategory) => (
-                <div key={category.id} className="mobile-category">
-                    <div className="mobile-category-header">
-                        <div className="mobile-category-icon">
-                            <span className="material-icons">
-                                {categoryIcons[category.id] || category.icon}
-                            </span>
-                        </div>
-                        <span className="mobile-category-name">{category.name}</span>
-                    </div>
+            <MobileSearch onSearch={setQuery} placeholder="Try “photo to pdf” or “compress”" />
 
-                    <div className="mobile-tool-list">
-                        {category.tools
-                            .filter(tool => tool.status === 'active')
-                            .sort((a, b) => b.priority - a.priority)
-                            .map((tool) => (
-                                <Link
-                                    key={tool.id}
-                                    href={`/${tool.href}`}
-                                    className="mobile-tool-list-item"
-                                    style={{ '--tool-color': tool.color.hex } as React.CSSProperties}
-                                >
-                                    <div className="mobile-tool-list-icon">
-                                        <span className="material-icons">{tool.icon.material}</span>
-                                    </div>
-                                    <div className="mobile-tool-list-content">
-                                        <div className="mobile-tool-list-name">{tool.name}</div>
-                                        <div className="mobile-tool-list-desc">{tool.description}</div>
-                                    </div>
-                                    <span className="material-icons mobile-tool-list-arrow">
-                                        chevron_right
-                                    </span>
-                                </Link>
-                            ))}
-                    </div>
+            {searching ? (
+                <div className="mobile-tool-list">
+                    {results.length === 0 ? (
+                        <p className="mobile-empty-line">No tools match that. Try “merge” or “jpg”.</p>
+                    ) : (
+                        results.map((tool) => (
+                            <ToolRow key={tool.id} id={tool.id} href={tool.href} lucide={tool.icon.lucide} name={shortToolName(tool)} description={tool.description} color={tool.color.hex} />
+                        ))
+                    )}
                 </div>
-            ))}
+            ) : (
+                categories.map((category) => (
+                    <div key={category.id} className="mobile-category">
+                        <div className="mobile-category-header">
+                            <span className="mobile-category-name">{category.name}</span>
+                        </div>
+                        <div className="mobile-tool-list">
+                            {category.tools.map((tool) => (
+                                <ToolRow
+                                    key={tool.id}
+                                    id={tool.id}
+                                    href={tool.href}
+                                    lucide={tool.icon.lucide}
+                                    name={shortToolName(tool)}
+                                    description={tool.description}
+                                    color={tool.color.hex}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                ))
+            )}
         </div>
-    );
+    )
+}
+
+function ToolRow({
+    href,
+    lucide,
+    name,
+    description,
+    color,
+}: {
+    id: string
+    href: string
+    lucide: string
+    name: string
+    description: string
+    color: string
+}) {
+    return (
+        <motion.div whileTap={{ scale: 0.98 }}>
+            <Link
+                href={`/${href}`}
+                className="mobile-tool-list-item"
+                style={{ '--tool-color': color } as React.CSSProperties}
+            >
+                <div className="mobile-tool-list-icon">
+                    <AppIcon name={lucide} size={22} />
+                </div>
+                <div className="mobile-tool-list-content">
+                    <div className="mobile-tool-list-name">{name}</div>
+                    <div className="mobile-tool-list-desc">{description}</div>
+                </div>
+                <AppIcon name="ChevronRight" className="mobile-tool-list-arrow" size={18} />
+            </Link>
+        </motion.div>
+    )
 }

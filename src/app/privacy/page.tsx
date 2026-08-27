@@ -55,6 +55,11 @@ export default function PrivacyPage() {
                         Our advertising partners may use cookies to serve ads based on your prior visits to our website
                         or other websites.
                     </p>
+                    <p className="mt-4">
+                        The Convertify Android app does not include website ads. File conversion in the app
+                        happens on the device. This policy describes the Convertify website and the Android app
+                        together; it is not legal advice.
+                    </p>
                 </section>
 
                 <section className="mb-8">

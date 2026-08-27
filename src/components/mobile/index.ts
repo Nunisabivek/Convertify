@@ -8,3 +8,5 @@ export { default as MobileRecentFiles } from './MobileRecentFiles';
 export { default as MobileHero } from './MobileHero';
 export { default as MobileSearch } from './MobileSearch';
 export { default as MobileHomePage } from './MobileHomePage';
+export { default as MobileAboutPage } from './MobileAboutPage';
+export { default as MobileToolFrame } from './MobileToolFrame';

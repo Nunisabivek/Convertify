@@ -6,21 +6,26 @@ const config: CapacitorConfig = {
   webDir: 'out',
   server: {
     androidScheme: 'https',
+    hostname: 'localhost',
   },
   plugins: {
     SplashScreen: {
-      launchShowDuration: 2000,
+      launchShowDuration: 1200,
       backgroundColor: '#FFFFFF',
-      showSpinner: true,
-      spinnerColor: '#4F46E5',
+      showSpinner: false,
+    },
+    StatusBar: {
+      overlaysWebView: false,
+      style: 'LIGHT',
+      backgroundColor: '#FFFFFF',
     },
   },
   android: {
     buildOptions: {
       keystorePath: undefined,
       keystoreAlias: undefined,
-    }
-  }
+    },
+  },
 };
 
 export default config;

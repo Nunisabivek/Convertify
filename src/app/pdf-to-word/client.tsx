@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useCallback } from "react"
-import { useDropzone } from "react-dropzone"
-import { FileText, Upload, Download, Loader2, AlertCircle } from "lucide-react"
+import { useState } from "react"
+import { Download, Loader2, AlertCircle, Upload } from "lucide-react"
 import JSZip from "jszip"
 import { AdBanner } from "@/components/ads/banner"
+import { FileUploader } from "@/components/tools/file-uploader"
 
 function escapeXml(text: string) {
     return text
@@ -62,23 +62,6 @@ export default function PdfToWordClient() {
     const [error, setError] = useState<string | null>(null)
     const [convertedUrl, setConvertedUrl] = useState<string | null>(null)
 
-    const onDrop = useCallback((acceptedFiles: File[]) => {
-        const pdfFile = acceptedFiles[0]
-        if (pdfFile && pdfFile.type === "application/pdf") {
-            setFile(pdfFile)
-            setError(null)
-            setConvertedUrl(null)
-        } else {
-            setError("Please upload a valid PDF file")
-        }
-    }, [])
-
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
-        onDrop,
-        accept: { "application/pdf": [".pdf"] },
-        multiple: false,
-    })
-
     const convertToWord = async () => {
         if (!file) return
 
@@ -86,8 +69,8 @@ export default function PdfToWordClient() {
         setError(null)
 
         try {
-            const pdfjsLib = await import("pdfjs-dist")
-            pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`
+            const { loadPdfjs } = await import("@/lib/pdfjs")
+            const pdfjsLib = await loadPdfjs()
 
             const pdf = await pdfjsLib.getDocument(await file.arrayBuffer()).promise
             const pages: string[][] = []
@@ -110,7 +93,7 @@ export default function PdfToWordClient() {
             }
 
             if (pages.every((lines) => lines.every((l) => !l.trim()))) {
-                setError("No extractable text found. This PDF may be a scanned image without a text layer.")
+                setError("This PDF is a picture of text. Try PDF to JPG instead.")
                 return
             }
 
@@ -119,7 +102,7 @@ export default function PdfToWordClient() {
             setConvertedUrl(url)
         } catch (err) {
             console.error(err)
-            setError("Failed to convert PDF. The file might be corrupted or password-protected.")
+            setError("Could not open that PDF. Try another file.")
         } finally {
             setIsConverting(false)
         }
@@ -136,30 +119,24 @@ export default function PdfToWordClient() {
 
     return (
         <div className="w-full max-w-3xl mx-auto px-4">
-            {/* Upload Area */}
-            <div
-                {...getRootProps()}
-                className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all ${isDragActive
-                    ? "border-blue-500 bg-blue-50"
-                    : "border-slate-300 hover:border-blue-400 hover:bg-slate-50"
-                    }`}
-            >
-                <input {...getInputProps()} />
-                <FileText className="w-16 h-16 mx-auto mb-4 text-blue-600" />
-                {file ? (
-                    <div>
-                        <p className="text-lg font-semibold text-slate-900 mb-1">{file.name}</p>
-                        <p className="text-sm text-slate-500">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
-                    </div>
-                ) : (
-                    <div>
-                        <p className="text-lg font-semibold text-slate-900 mb-2">
-                            Drop your PDF file here or click to browse
-                        </p>
-                        <p className="text-sm text-slate-500">Supports PDF files only</p>
-                    </div>
-                )}
-            </div>
+            {!file ? (
+                <FileUploader
+                    multiple={false}
+                    fileTypeLabel="PDF"
+                    onFilesSelected={(files) => {
+                        if (files[0]) {
+                            setFile(files[0])
+                            setError(null)
+                            setConvertedUrl(null)
+                        }
+                    }}
+                />
+            ) : (
+                <div className="p-4 bg-white border border-slate-200 rounded-xl flex items-center justify-between gap-3">
+                    <p className="font-semibold truncate">{file.name}</p>
+                    <button type="button" className="text-red-600 font-medium min-h-11" onClick={() => { setFile(null); setConvertedUrl(null) }}>Remove</button>
+                </div>
+            )}
 
             {/* Ad Banner */}
             <div className="my-6 flex justify-center">

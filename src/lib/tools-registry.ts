@@ -298,7 +298,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
                 href: 'jpg-to-pdf',
                 color: { text: 'text-rose-600', bg: 'bg-rose-50', hex: '#E11D48' },
                 status: 'active',
-                keywords: ['jpg', 'jpeg', 'image', 'photo', 'picture'],
+                keywords: ['jpg', 'jpeg', 'image', 'photo', 'picture', 'photo to pdf', 'picture to pdf'],
                 offlineSupported: true,
                 premium: false,
                 priority: 80,

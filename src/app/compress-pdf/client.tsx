@@ -23,7 +23,7 @@ export default function CompressPdfPage() {
     const [sizeUnit, setSizeUnit] = useState<SizeUnit>("KB")
     const [showAdvanced, setShowAdvanced] = useState(false)
 
-    const isPdf = file?.type === "application/pdf"
+    const isPdf = file ? (file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf")) : false
 
     // Accept PDF and common image formats
     const ACCEPTED_TYPES = {
@@ -169,8 +169,8 @@ export default function CompressPdfPage() {
 
             if (isPdf) {
                 // PDF Compression with iterative target-seeking
-                const pdfjsLib = await import("pdfjs-dist")
-                pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`
+                const { loadPdfjs } = await import("@/lib/pdfjs")
+                const pdfjsLib = await loadPdfjs()
 
                 const arrayBuffer = await file.arrayBuffer()
                 const srcPdf = await pdfjsLib.getDocument(arrayBuffer).promise
@@ -445,17 +445,33 @@ export default function CompressPdfPage() {
 
                             {/* Quick Presets */}
                             <div className="space-y-3">
-                                <label className="text-sm font-medium text-slate-600">Quick Presets (click to select)</label>
+                                <label className="text-sm font-medium text-slate-600">How small? (for forms and KYC)</label>
+                                <div className="mobile-size-chips">
+                                    {[
+                                        { value: 100, unit: "KB" as SizeUnit, label: "100 KB", hint: "Most forms" },
+                                        { value: 200, unit: "KB" as SizeUnit, label: "200 KB", hint: "Job / KYC" },
+                                        { value: 500, unit: "KB" as SizeUnit, label: "500 KB", hint: "Clearer" },
+                                    ].map((preset) => {
+                                        const isSelected = targetSize === preset.value.toString() && sizeUnit === preset.unit
+                                        return (
+                                            <button
+                                                key={preset.label}
+                                                type="button"
+                                                onClick={() => handlePreset(preset.value, preset.unit)}
+                                                className={`mobile-size-chip ${isSelected ? "is-selected" : ""}`}
+                                            >
+                                                <strong>{preset.label}</strong>
+                                                <span>{preset.hint}</span>
+                                            </button>
+                                        )
+                                    })}
+                                </div>
                                 <div className="flex flex-wrap gap-2">
                                     {[
                                         { value: 50, unit: "KB" as SizeUnit, label: "50 KB" },
-                                        { value: 100, unit: "KB" as SizeUnit, label: "100 KB" },
-                                        { value: 200, unit: "KB" as SizeUnit, label: "200 KB" },
-                                        { value: 500, unit: "KB" as SizeUnit, label: "500 KB" },
                                         { value: 1, unit: "MB" as SizeUnit, label: "1 MB" },
                                         { value: 2, unit: "MB" as SizeUnit, label: "2 MB" },
                                         { value: 5, unit: "MB" as SizeUnit, label: "5 MB" },
-                                        { value: 10, unit: "MB" as SizeUnit, label: "10 MB" },
                                     ].map((preset) => {
                                         const isSelected = targetSize === preset.value.toString() && sizeUnit === preset.unit
                                         return (

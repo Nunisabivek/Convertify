@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useCallback } from "react"
-import { useDropzone } from "react-dropzone"
-import { FileText, RotateCw, Download, Loader2, AlertCircle } from "lucide-react"
+import { useState } from "react"
+import { RotateCw, Download, Loader2, AlertCircle } from "lucide-react"
 import { PDFDocument, degrees } from "pdf-lib"
 import { AdBanner } from "@/components/ads/banner"
+import { FileUploader } from "@/components/tools/file-uploader"
 
 export default function RotatePdfClient() {
     const [file, setFile] = useState<File | null>(null)
@@ -13,22 +13,6 @@ export default function RotatePdfClient() {
     const [rotation, setRotation] = useState(90)
     const [applyToAll, setApplyToAll] = useState(true)
     const [specificPages, setSpecificPages] = useState("")
-
-    const onDrop = useCallback((acceptedFiles: File[]) => {
-        const pdfFile = acceptedFiles[0]
-        if (pdfFile && pdfFile.type === "application/pdf") {
-            setFile(pdfFile)
-            setError(null)
-        } else {
-            setError("Please upload a valid PDF file")
-        }
-    }, [])
-
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
-        onDrop,
-        accept: { "application/pdf": [".pdf"] },
-        multiple: false,
-    })
 
     const rotatePdf = async () => {
         if (!file) return
@@ -68,7 +52,7 @@ export default function RotatePdfClient() {
             link.click()
         } catch (err) {
             console.error(err)
-            setError("Failed to rotate PDF. The file might be corrupted or password-protected.")
+            setError("Could not rotate that PDF. Try another file.")
         } finally {
             setIsProcessing(false)
         }
@@ -97,30 +81,23 @@ export default function RotatePdfClient() {
 
     return (
         <div className="w-full max-w-3xl mx-auto px-4">
-            {/* Upload Area */}
-            <div
-                {...getRootProps()}
-                className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all ${isDragActive
-                        ? "border-pink-500 bg-pink-50"
-                        : "border-slate-300 hover:border-pink-400 hover:bg-slate-50"
-                    }`}
-            >
-                <input {...getInputProps()} />
-                <FileText className="w-16 h-16 mx-auto mb-4 text-pink-600" />
-                {file ? (
-                    <div>
-                        <p className="text-lg font-semibold text-slate-900 mb-1">{file.name}</p>
-                        <p className="text-sm text-slate-500">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
-                    </div>
-                ) : (
-                    <div>
-                        <p className="text-lg font-semibold text-slate-900 mb-2">
-                            Drop your PDF here or click to browse
-                        </p>
-                        <p className="text-sm text-slate-500">Supports PDF files</p>
-                    </div>
-                )}
-            </div>
+            {!file ? (
+                <FileUploader
+                    multiple={false}
+                    fileTypeLabel="PDF"
+                    onFilesSelected={(files) => {
+                        if (files[0]) {
+                            setFile(files[0])
+                            setError(null)
+                        }
+                    }}
+                />
+            ) : (
+                <div className="p-4 bg-white border border-slate-200 rounded-xl flex items-center justify-between gap-3">
+                    <p className="font-semibold truncate">{file.name}</p>
+                    <button type="button" className="text-red-600 font-medium min-h-11" onClick={() => setFile(null)}>Remove</button>
+                </div>
+            )}
 
             {/* Options */}
             {file && (

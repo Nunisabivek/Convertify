@@ -51,7 +51,7 @@ export default function MergePdfPage() {
             setProcessedPdfUrl(url)
         } catch (error) {
             console.error("Error merging PDFs:", error)
-            alert("Failed to merge PDFs. Please try again.")
+            alert("Could not open that PDF. Try another file.")
         } finally {
             setIsProcessing(false)
         }

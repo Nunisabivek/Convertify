@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useCallback } from "react"
-import { useDropzone } from "react-dropzone"
-import { FileText, Droplet, Download, Loader2, AlertCircle, Type, Image as ImageIcon } from "lucide-react"
+import { useState } from "react"
+import { Droplet, Download, Loader2, AlertCircle, Type, Image as ImageIcon } from "lucide-react"
 import { PDFDocument, rgb, degrees } from "pdf-lib"
 import { AdBanner } from "@/components/ads/banner"
+import { FileUploader } from "@/components/tools/file-uploader"
 
 export default function WatermarkPdfClient() {
     const [file, setFile] = useState<File | null>(null)
@@ -15,22 +15,6 @@ export default function WatermarkPdfClient() {
     const [opacity, setOpacity] = useState(0.3)
     const [fontSize, setFontSize] = useState(48)
     const [color, setColor] = useState("#000000")
-
-    const onDrop = useCallback((acceptedFiles: File[]) => {
-        const pdfFile = acceptedFiles[0]
-        if (pdfFile && pdfFile.type === "application/pdf") {
-            setFile(pdfFile)
-            setError(null)
-        } else {
-            setError("Please upload a valid PDF file")
-        }
-    }, [])
-
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
-        onDrop,
-        accept: { "application/pdf": [".pdf"] },
-        multiple: false,
-    })
 
     const addWatermark = async () => {
         if (!file) return
@@ -85,30 +69,23 @@ export default function WatermarkPdfClient() {
 
     return (
         <div className="w-full max-w-3xl mx-auto px-4">
-            {/* Upload Area */}
-            <div
-                {...getRootProps()}
-                className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all ${isDragActive
-                        ? "border-sky-500 bg-sky-50"
-                        : "border-slate-300 hover:border-sky-400 hover:bg-slate-50"
-                    }`}
-            >
-                <input {...getInputProps()} />
-                <FileText className="w-16 h-16 mx-auto mb-4 text-sky-600" />
-                {file ? (
-                    <div>
-                        <p className="text-lg font-semibold text-slate-900 mb-1">{file.name}</p>
-                        <p className="text-sm text-slate-500">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
-                    </div>
-                ) : (
-                    <div>
-                        <p className="text-lg font-semibold text-slate-900 mb-2">
-                            Drop your PDF here or click to browse
-                        </p>
-                        <p className="text-sm text-slate-500">Supports PDF files</p>
-                    </div>
-                )}
-            </div>
+            {!file ? (
+                <FileUploader
+                    multiple={false}
+                    fileTypeLabel="PDF"
+                    onFilesSelected={(files) => {
+                        if (files[0]) {
+                            setFile(files[0])
+                            setError(null)
+                        }
+                    }}
+                />
+            ) : (
+                <div className="p-4 bg-white border border-slate-200 rounded-xl flex items-center justify-between gap-3">
+                    <p className="font-semibold truncate">{file.name}</p>
+                    <button type="button" className="text-red-600 font-medium min-h-11" onClick={() => setFile(null)}>Remove</button>
+                </div>
+            )}
 
             {/* Watermark Options */}
             {file && (

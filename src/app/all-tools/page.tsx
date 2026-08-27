@@ -36,6 +36,8 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
 import { Metadata } from "next"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
+import { MobileToolsDashboard } from "@/components/mobile"
 
 export const metadata: Metadata = {
     title: "All Free PDF Tools | Convertify - No Pricing, No Download, 100% Free",
@@ -148,6 +150,10 @@ const liveTools = tools.flatMap(cat => cat.items).filter(t => !t.comingSoon)
 const totalTools = liveTools.length
 
 export default function AllToolsPage() {
+    if (IS_MOBILE_BUILD) {
+        return <MobileToolsDashboard />
+    }
+
     return (
         <div className="container py-12 space-y-16">
             <div className="text-center space-y-4">

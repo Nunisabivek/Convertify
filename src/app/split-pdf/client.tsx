@@ -38,7 +38,7 @@ export default function SplitPdfPage() {
                 setSelectedPages(Array.from({ length: count }, (_, i) => i + 1))
             } catch (error) {
                 console.error("Error reading PDF:", error)
-                alert("Could not read PDF. Please try another file.")
+                alert("Could not open that PDF. Try another file.")
                 setFile(null)
             }
         }

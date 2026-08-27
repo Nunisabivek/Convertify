@@ -11,7 +11,7 @@ interface ProcessingWaitProps {
     status?: string
 }
 
-export function ProcessingWait({ progress, title = "Processing...", status = "Please wait while we convert your file" }: ProcessingWaitProps) {
+export function ProcessingWait({ progress, title = "Working…", status = "This stays on your phone." }: ProcessingWaitProps) {
     const [tipIndex, setTipIndex] = useState(0)
 
     const tips = [

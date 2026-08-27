@@ -121,7 +121,7 @@ export default function HeicToJpgClient() {
                 <FileUploader
                     onFilesSelected={handleFilesSelected}
                     multiple={true}
-                    accept={{ "image/heic": [".heic", ".heif"], "image/heif": [".heic", ".heif"] }}
+                    accept={{ "image/heic": [".heic", ".heif"], "image/heif": [".heic", ".heif"], "image/*": [".heic", ".heif"] }}
                     fileTypeLabel="HEIC/HEIF images (iPhone photos)"
                 />
             ) : (
@@ -154,7 +154,7 @@ export default function HeicToJpgClient() {
                         </Button>
                     </div>
                     <div className="text-center">
-                        <FileUploader onFilesSelected={handleFilesSelected} multiple={true} accept={{ "image/heic": [".heic", ".heif"], "image/heif": [".heic", ".heif"] }} />
+                        <FileUploader onFilesSelected={handleFilesSelected} multiple={true} accept={{ "image/heic": [".heic", ".heif"], "image/heif": [".heic", ".heif"], "image/*": [".heic", ".heif"] }} />
                     </div>
                 </div>
             )}
