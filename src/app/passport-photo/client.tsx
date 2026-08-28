@@ -4,11 +4,13 @@ import { useEffect, useRef, useState } from 'react'
 import { FileUploader } from '@/components/tools/file-uploader'
 import MobileWorkBar from '@/components/mobile/MobileWorkBar'
 import MobileSizeControl from '@/components/mobile/MobileSizeControl'
+import MobileJobCta from '@/components/mobile/MobileJobCta'
 import { finishConvert, formatFileSize } from '@/lib/native-file'
 import { tapHaptic } from '@/lib/haptics'
 import { abortConvertWorker, workerMakePhoto } from '@/lib/jobs/media'
 import { qualityNote, releaseJob, takeJob } from '@/lib/jobs/session'
 import { TOO_BIG } from '@/lib/brand'
+import { IS_MOBILE_BUILD } from '@/lib/is-mobile-build'
 
 type Preset = {
     id: string
@@ -112,6 +114,27 @@ const PRESETS: Preset[] = [
         cropClass: '',
     },
 ]
+
+function outputNameForPreset(preset: Preset): string {
+    switch (preset.id) {
+        case 'us-2x2':
+            return 'us-passport-photo.jpg'
+        case 'visa-35x45':
+            return 'visa-photo.jpg'
+        case 'upsc':
+            return 'upsc-photo.jpg'
+        case 'bank':
+            return 'bank-photo.jpg'
+        case 'sign':
+            return 'signature.jpg'
+        case 'thumb':
+            return 'thumb.jpg'
+        case 'custom':
+            return 'form-photo.jpg'
+        default:
+            return 'passport-photo.jpg'
+    }
+}
 
 export default function PassportPhotoClient() {
     const [file, setFile] = useState<File | null>(null)
@@ -231,7 +254,7 @@ export default function PassportPhotoClient() {
             if (result.blob.size < minKb * 1024 || result.blob.size > cap * 1024) {
                 setError(`Got ${formatFileSize(result.blob.size)}. Need ${minKb}–${cap} KB.`)
             }
-            await finishConvert(result.blob, `${preset.id}-${Date.now()}.jpg`, qualityNote(result.shrunk))
+            await finishConvert(result.blob, outputNameForPreset(preset), qualityNote(result.shrunk))
         } catch (err) {
             if ((err as Error).name === 'AbortError') return
             setError((err as Error).message || TOO_BIG)
@@ -301,62 +324,132 @@ export default function PassportPhotoClient() {
                         ) : null}
                         <div className="mobile-crop-guide" />
                     </div>
-                    <label className="mobile-zoom">
-                        Zoom
-                        <input
-                            type="range"
-                            min={1}
-                            max={2.4}
-                            step={0.02}
-                            value={zoom}
-                            onChange={(e) => setZoom(parseFloat(e.target.value))}
+                    {IS_MOBILE_BUILD ? (
+                        <details className="mobile-job-advanced">
+                            <summary>Zoom and size</summary>
+                            <PassportAdvancedControls
+                                zoom={zoom}
+                                setZoom={setZoom}
+                                preset={preset}
+                                customW={customW}
+                                customH={customH}
+                                setCustomW={setCustomW}
+                                setCustomH={setCustomH}
+                                maxKb={maxKb}
+                                setMaxKb={setMaxKb}
+                                fileSize={file.size}
+                            />
+                        </details>
+                    ) : (
+                        <PassportAdvancedControls
+                            zoom={zoom}
+                            setZoom={setZoom}
+                            preset={preset}
+                            customW={customW}
+                            customH={customH}
+                            setCustomW={setCustomW}
+                            setCustomH={setCustomH}
+                            maxKb={maxKb}
+                            setMaxKb={setMaxKb}
+                            fileSize={file.size}
                         />
-                    </label>
-                    {preset.id === 'custom' ? (
-                        <div className="mobile-custom-range">
-                            <label>
-                                Width px
-                                <input
-                                    type="number"
-                                    min={40}
-                                    value={customW}
-                                    onChange={(e) => setCustomW(Math.max(40, parseInt(e.target.value, 10) || 40))}
-                                />
-                            </label>
-                            <label>
-                                Height px
-                                <input
-                                    type="number"
-                                    min={40}
-                                    value={customH}
-                                    onChange={(e) => setCustomH(Math.max(40, parseInt(e.target.value, 10) || 40))}
-                                />
-                            </label>
-                        </div>
-                    ) : null}
-                    <MobileSizeControl
-                        valueKb={maxKb}
-                        onChangeKb={setMaxKb}
-                        fileBytes={file.size}
-                        minKb={preset.minKb}
-                    />
-                    <p className="mobile-live-size">
-                        {liveSize ? formatFileSize(liveSize) : formatFileSize(file.size)} → {preset.minKb}–{maxKb} KB
-                    </p>
+                    )}
+                    {IS_MOBILE_BUILD ? null : (
+                        <p className="mobile-live-size">
+                            {liveSize ? formatFileSize(liveSize) : formatFileSize(file.size)} → {preset.minKb}–{maxKb} KB
+                        </p>
+                    )}
                     {error ? <p className="mobile-job-error">{error}</p> : null}
-                    <button type="button" className="mobile-choose-btn" disabled={working} onClick={run}>
-                        Make photo
-                    </button>
+                    <MobileJobCta>
+                        {working ? (
+                            <MobileWorkBar
+                                note="Building the photo…"
+                                sizeLabel={liveSize ? `${formatFileSize(liveSize)} → ${preset.minKb}–${maxKb} KB` : undefined}
+                                onCancel={cancel}
+                            />
+                        ) : (
+                            <>
+                                {IS_MOBILE_BUILD ? (
+                                    <p className="mobile-job-cta-hint">
+                                        {liveSize ? formatFileSize(liveSize) : formatFileSize(file.size)} → {preset.minKb}–{maxKb} KB
+                                    </p>
+                                ) : null}
+                                <button type="button" className="mobile-choose-btn" disabled={working} onClick={run}>
+                                    Make photo
+                                </button>
+                            </>
+                        )}
+                    </MobileJobCta>
                 </>
             )}
-
-            {working ? (
-                <MobileWorkBar
-                    note="Building the photo…"
-                    sizeLabel={liveSize ? `${formatFileSize(liveSize)} → ${preset.minKb}–${maxKb} KB` : undefined}
-                    onCancel={cancel}
-                />
-            ) : null}
         </div>
+    )
+}
+
+function PassportAdvancedControls({
+    zoom,
+    setZoom,
+    preset,
+    customW,
+    customH,
+    setCustomW,
+    setCustomH,
+    maxKb,
+    setMaxKb,
+    fileSize,
+}: {
+    zoom: number
+    setZoom: (value: number) => void
+    preset: Preset
+    customW: number
+    customH: number
+    setCustomW: (value: number) => void
+    setCustomH: (value: number) => void
+    maxKb: number
+    setMaxKb: (value: number) => void
+    fileSize: number
+}) {
+    return (
+        <>
+            <label className="mobile-zoom">
+                Zoom
+                <input
+                    type="range"
+                    min={1}
+                    max={2.4}
+                    step={0.02}
+                    value={zoom}
+                    onChange={(e) => setZoom(parseFloat(e.target.value))}
+                />
+            </label>
+            {preset.id === 'custom' ? (
+                <div className="mobile-custom-range">
+                    <label>
+                        Width px
+                        <input
+                            type="number"
+                            min={40}
+                            value={customW}
+                            onChange={(e) => setCustomW(Math.max(40, parseInt(e.target.value, 10) || 40))}
+                        />
+                    </label>
+                    <label>
+                        Height px
+                        <input
+                            type="number"
+                            min={40}
+                            value={customH}
+                            onChange={(e) => setCustomH(Math.max(40, parseInt(e.target.value, 10) || 40))}
+                        />
+                    </label>
+                </div>
+            ) : null}
+            <MobileSizeControl
+                valueKb={maxKb}
+                onChangeKb={setMaxKb}
+                fileBytes={fileSize}
+                minKb={preset.minKb}
+            />
+        </>
     )
 }

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { FileUploader } from '@/components/tools/file-uploader'
 import MobileWorkBar from '@/components/mobile/MobileWorkBar'
 import MobileSizeControl from '@/components/mobile/MobileSizeControl'
+import MobileJobCta from '@/components/mobile/MobileJobCta'
 import { formatFileSize, finishConvert } from '@/lib/native-file'
 import { tapHaptic } from '@/lib/haptics'
 import { abortConvertWorker, assertFitsPhone, workerFitImage } from '@/lib/jobs/media'
@@ -206,16 +207,20 @@ export default function FitToSizeClient() {
 
             {error ? <p className="mobile-job-error">{error}</p> : null}
 
-            <button type="button" className="mobile-choose-btn" disabled={!file || working} onClick={run}>
-                Fit to size
-            </button>
-
-            {working ? (
-                <MobileWorkBar
-                    note={note}
-                    sizeLabel={`${formatFileSize(now)} → ${minKb}–${maxKb} KB`}
-                    onCancel={cancel}
-                />
+            {file ? (
+                <MobileJobCta>
+                    {working ? (
+                        <MobileWorkBar
+                            note={note}
+                            sizeLabel={`${formatFileSize(now)} → ${minKb}–${maxKb} KB`}
+                            onCancel={cancel}
+                        />
+                    ) : (
+                        <button type="button" className="mobile-choose-btn" disabled={working} onClick={run}>
+                            Fit to size
+                        </button>
+                    )}
+                </MobileJobCta>
             ) : null}
         </div>
     )

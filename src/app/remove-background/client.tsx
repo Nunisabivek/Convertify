@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { FileUploader } from '@/components/tools/file-uploader'
 import MobileWorkBar from '@/components/mobile/MobileWorkBar'
+import MobileJobCta from '@/components/mobile/MobileJobCta'
 import { finishConvert, formatFileSize } from '@/lib/native-file'
 import { tapHaptic } from '@/lib/haptics'
 import { abortConvertWorker, warmConvertWorker, workerRemoveBackground } from '@/lib/jobs/media'
@@ -111,12 +112,16 @@ export default function RemoveBackgroundClient() {
             {preview ? <img className="mobile-bg-preview" src={preview} alt="" /> : null}
             {error ? <p className="mobile-job-error">{error}</p> : null}
 
-            <button type="button" className="mobile-choose-btn" disabled={!file || working} onClick={run}>
-                Remove background
-            </button>
-
-            {working ? (
-                <MobileWorkBar note="Picking out the background…" onCancel={cancel} />
+            {file ? (
+                <MobileJobCta>
+                    {working ? (
+                        <MobileWorkBar note="Picking out the background…" onCancel={cancel} />
+                    ) : (
+                        <button type="button" className="mobile-choose-btn" disabled={working} onClick={run}>
+                            Remove background
+                        </button>
+                    )}
+                </MobileJobCta>
             ) : null}
         </div>
     )

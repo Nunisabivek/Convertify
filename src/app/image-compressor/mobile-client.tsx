@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { FileUploader } from '@/components/tools/file-uploader'
 import MobileWorkBar from '@/components/mobile/MobileWorkBar'
 import MobileSizeControl from '@/components/mobile/MobileSizeControl'
+import MobileJobCta from '@/components/mobile/MobileJobCta'
 import { formatFileSize, finishConvert } from '@/lib/native-file'
 import { tapHaptic } from '@/lib/haptics'
 import { abortConvertWorker, assertFitsPhone, workerCompressImage } from '@/lib/jobs/media'
@@ -113,20 +114,24 @@ export default function ImageCompressMobile() {
 
             {error ? <p className="mobile-job-error">{error}</p> : null}
 
-            <button type="button" className="mobile-choose-btn" disabled={!file || working} onClick={run}>
-                Compress
-            </button>
-
-            {working ? (
-                <MobileWorkBar
-                    note="Compressing photo…"
-                    sizeLabel={`${formatFileSize(now)} → ${targetKb} KB`}
-                    onCancel={() => {
-                        abortRef.current?.abort()
-                        abortConvertWorker()
-                        setWorking(false)
-                    }}
-                />
+            {file ? (
+                <MobileJobCta>
+                    {working ? (
+                        <MobileWorkBar
+                            note="Compressing photo…"
+                            sizeLabel={`${formatFileSize(now)} → ${targetKb} KB`}
+                            onCancel={() => {
+                                abortRef.current?.abort()
+                                abortConvertWorker()
+                                setWorking(false)
+                            }}
+                        />
+                    ) : (
+                        <button type="button" className="mobile-choose-btn" disabled={working} onClick={run}>
+                            Compress
+                        </button>
+                    )}
+                </MobileJobCta>
             ) : null}
         </div>
     )
