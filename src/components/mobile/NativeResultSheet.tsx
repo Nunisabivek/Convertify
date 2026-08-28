@@ -77,6 +77,7 @@ export default function NativeResultSheet() {
                 const blob = await response.blob()
                 const stored = await storeOutput(blob, filename)
                 setOutput(stored)
+                void import('@/lib/native-ads').then((m) => m.noteSuccessfulConversion()).catch(() => {})
             } catch {
                 setError('Could not save that file. Try again.')
             } finally {
@@ -92,6 +93,7 @@ export default function NativeResultSheet() {
             try {
                 const stored = await storeOutput(blob, filename)
                 setOutput(stored)
+                void import('@/lib/native-ads').then((m) => m.noteSuccessfulConversion()).catch(() => {})
             } catch {
                 setError('Could not save that file. Try again.')
             } finally {

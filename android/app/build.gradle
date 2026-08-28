@@ -18,10 +18,10 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "com.convertify.app"
+    namespace = "com.convertify.work"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.convertify.app"
+        applicationId "com.convertify.work"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

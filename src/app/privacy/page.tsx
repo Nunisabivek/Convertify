@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-const LAST_UPDATED = "27 August 2026";
+const LAST_UPDATED = "28 August 2026";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -60,7 +60,7 @@ export default function PrivacyPolicyPage() {
               </li>
               <li>
                 The Convertify Android app (package name{" "}
-                <code className="rounded bg-slate-100 px-1 py-0.5 text-sm">com.convertify.app</code>
+                <code className="rounded bg-slate-100 px-1 py-0.5 text-sm">com.convertify.work</code>
                 ), a free app we plan to list on Google Play.
               </li>
             </ul>
@@ -142,26 +142,37 @@ export default function PrivacyPolicyPage() {
               to serve and measure ads. We do not control how Adsterra sets cookies.
             </p>
             <p className="mt-3">
-              <strong>Android app (current version).</strong> The current Android app
-              does not show in-app ads. It does not include AdMob or a Facebook SDK
-              in this version.
+              <strong>Android app (current version).</strong> The Android app shows
+              in-app ads from Google AdMob: a banner at the bottom of the screen, and
+              an occasional full-screen (interstitial) ad after a conversion finishes
+              and the file is ready to share or save. Those ads are not shown on the
+              Convertify website. The Android app does not include a Facebook ads SDK.
+            </p>
+            <p className="mt-3">
+              Google AdMob may collect device and advertising information (for example
+              the Google advertising ID, IP address, and crash or diagnostics data) to
+              serve and measure ads. That collection is by Google. Conversion of the
+              file you pick still runs on the device and is not uploaded to Convertify
+              servers.
             </p>
             <p className="mt-3">
               <strong>Possible later changes.</strong> We may later:
             </p>
             <ul className="mt-2 list-disc space-y-1 pl-6">
-              <li>show in-app ads in the Android app using Google AdMob;</li>
+              <li>
+                replace Google&apos;s test ad units with live AdMob units once the Play
+                listing is approved;
+              </li>
               <li>
                 promote the app with paid campaigns such as Google Ads and Meta /
-                Facebook ads.
+                Facebook ads (those campaigns are not an in-app Facebook SDK).
               </li>
             </ul>
             <p className="mt-3">
-              If we add in-app ads or paid install campaigns, we may use advertising
-              identifiers and install attribution (for example the Google advertising
-              ID and Play Install Referrer) for that purpose. Those features are{" "}
-              <strong>not</strong> in the current Android app. We will update this
-              policy before or when they are added.
+              In-app AdMob ads may use the Google advertising ID. If we add paid
+              install campaigns, we may also use install attribution (for example Play
+              Install Referrer). We will update this policy if those campaign tools
+              change how data is collected.
             </p>
             <p className="mt-3">
               <strong>Cookies on the website.</strong> The website may set cookies or
@@ -177,13 +188,13 @@ export default function PrivacyPolicyPage() {
             </h2>
             <p className="mt-3">
               The Android app only requests access needed to pick a file, convert it
-              on the device, and let you save or share the result:
+              on the device, let you save or share the result, and show in-app ads:
             </p>
             <ul className="mt-2 list-disc space-y-1 pl-6">
               <li>
                 <strong>Internet.</strong> Used so the WebView can load the app and
-                related web resources. Conversion of the file you pick does not upload
-                that file to Convertify servers.
+                related web resources, and so Google AdMob can request ads. Conversion
+                of the file you pick does not upload that file to Convertify servers.
               </li>
               <li>
                 <strong>Files you choose.</strong> You grant access to a specific file
@@ -195,6 +206,11 @@ export default function PrivacyPolicyPage() {
                 example to Downloads) or share it with another app using Android&apos;s
                 share sheet. On older Android versions (9 and below) the app may use
                 a storage permission to write to Downloads.
+              </li>
+              <li>
+                <strong>Advertising ID.</strong> Used by Google AdMob to serve and
+                measure in-app ads. You can reset or opt out of ads personalization in
+                Android settings.
               </li>
             </ul>
             <p className="mt-3">
@@ -222,9 +238,10 @@ export default function PrivacyPolicyPage() {
             </h2>
             <p className="mt-3">
               We may update this page when the website or Android app changes — for
-              example if we add in-app ads or install campaigns. The date at the top
-              will change when we do. Continued use after an update means you are
-              using the product under the revised description.
+              example if we switch from test AdMob units to live ads, or add install
+              campaigns. The date at the top will change when we do. Continued use
+              after an update means you are using the product under the revised
+              description.
             </p>
           </section>
 
