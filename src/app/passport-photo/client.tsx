@@ -8,7 +8,7 @@ import MobileJobCta from '@/components/mobile/MobileJobCta'
 import { finishConvert, formatFileSize } from '@/lib/native-file'
 import { tapHaptic } from '@/lib/haptics'
 import { abortConvertWorker, workerMakePhoto } from '@/lib/jobs/media'
-import { qualityNote, releaseJob, takeJob } from '@/lib/jobs/session'
+import { cropNote, missedBandNote, releaseJob, takeJob } from '@/lib/jobs/session'
 import { TOO_BIG } from '@/lib/brand'
 import { IS_MOBILE_BUILD } from '@/lib/is-mobile-build'
 
@@ -251,10 +251,15 @@ export default function PassportPhotoClient() {
                 ac.signal,
                 (size) => setLiveSize(size)
             )
-            if (result.blob.size < minKb * 1024 || result.blob.size > cap * 1024) {
-                setError(`Got ${formatFileSize(result.blob.size)}. Need ${minKb}–${cap} KB.`)
+            const missed = result.blob.size < minKb * 1024 || result.blob.size > cap * 1024
+            if (missed) {
+                const tooBig = result.blob.size > cap * 1024
+                const note = missedBandNote(formatFileSize(result.blob.size), minKb, cap, tooBig)
+                setError(note)
+                await finishConvert(result.blob, outputNameForPreset(preset), note, 'warn')
+            } else {
+                await finishConvert(result.blob, outputNameForPreset(preset), cropNote(result.shrunk))
             }
-            await finishConvert(result.blob, outputNameForPreset(preset), qualityNote(result.shrunk))
         } catch (err) {
             if ((err as Error).name === 'AbortError') return
             setError((err as Error).message || TOO_BIG)

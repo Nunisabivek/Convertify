@@ -43,6 +43,4 @@ export function releaseJob(controller: AbortController) {
     }
 }
 
-export function qualityNote(shrunk: boolean) {
-    return shrunk ? 'Had to shrink a little' : 'Kept full size'
-}
+export { qualityNote, cropNote, missedBandNote } from '@/lib/result-notes'

@@ -1,4 +1,5 @@
 import ConvertifyFiles, { type PickedNativeFile } from '@/lib/convertify-files'
+import { IS_MOBILE_BUILD } from '@/lib/is-mobile-build'
 import { nextHumanFilename } from '@/lib/human-filename'
 
 const RECENT_KEY = 'convertify-recent-files'
@@ -258,15 +259,22 @@ export async function shareRecentFile(file: RecentFile): Promise<void> {
 
 export const CONVERT_OFFER = 'convertify-offer-output'
 
-export async function finishConvert(blob: Blob, filename: string, note?: string): Promise<void> {
+export type ResultTone = 'ok' | 'warn'
+
+export async function finishConvert(
+    blob: Blob,
+    filename: string,
+    note?: string,
+    tone: ResultTone = 'ok',
+): Promise<void> {
     try {
         const { tapHaptic } = await import('@/lib/haptics')
         await tapHaptic('medium')
     } catch {
         // optional
     }
-    if (await isNativeAndroid()) {
-        window.dispatchEvent(new CustomEvent(CONVERT_OFFER, { detail: { blob, filename, note } }))
+    if (IS_MOBILE_BUILD || (await isNativeAndroid())) {
+        window.dispatchEvent(new CustomEvent(CONVERT_OFFER, { detail: { blob, filename, note, tone } }))
         return
     }
     const name = uniqueVisibleName(filename)

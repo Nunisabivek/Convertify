@@ -10,27 +10,24 @@
  * website-only. If an ad fails to load, we fail silently.
  */
 import { IS_MOBILE_BUILD } from '@/lib/is-mobile-build'
+import { shouldOfferInterstitial, type InterstitialGate } from '@/lib/interstitial-gate'
+
+export { shouldOfferInterstitial, type InterstitialGate }
 
 /** Google sample App ID is in Android strings.xml; these are sample units. */
 const TEST_BANNER_ID = 'ca-app-pub-3940256099942544/6300978111'
 const TEST_INTERSTITIAL_ID = 'ca-app-pub-3940256099942544/1033173712'
 
-const INTERSTITIAL_EVERY_N_CONVERSIONS = 3
-const INTERSTITIAL_MIN_INTERVAL_MS = 3 * 60 * 1000
 const STATE_KEY = 'convertify:admob-interstitial'
 
 type AdMobModule = typeof import('@capacitor-community/admob')
-
-interface InterstitialGate {
-    conversions: number
-    lastShownAt: number
-    conversionsAtLastShow: number
-}
 
 let startPromise: Promise<void> | null = null
 let admob: AdMobModule | null = null
 let interstitialReady = false
 let interstitialShowing = false
+let lastNoteAt = 0
+const NOTE_DEBOUNCE_MS = 2000
 
 function adsAllowed(): boolean {
     return IS_MOBILE_BUILD && typeof window !== 'undefined'
@@ -59,13 +56,6 @@ function writeGate(gate: InterstitialGate): void {
     } catch {
         // ignore
     }
-}
-
-function canShowInterstitial(gate: InterstitialGate): boolean {
-    const conversionsSince = gate.conversions - gate.conversionsAtLastShow
-    const elapsed = gate.lastShownAt === 0 ? INTERSTITIAL_MIN_INTERVAL_MS : Date.now() - gate.lastShownAt
-    // Stricter of the two caps: need 3 conversions AND 3 minutes.
-    return conversionsSince >= INTERSTITIAL_EVERY_N_CONVERSIONS && elapsed >= INTERSTITIAL_MIN_INTERVAL_MS
 }
 
 function setBannerInset(height: number): void {
@@ -193,6 +183,10 @@ export function startNativeAds(): Promise<void> {
  */
 export async function noteSuccessfulConversion(): Promise<void> {
     if (!adsAllowed()) return
+    const now = Date.now()
+    // Same convert used to fire intercept + CONVERT_OFFER, so 2 jobs looked like 3.
+    if (now - lastNoteAt < NOTE_DEBOUNCE_MS) return
+    lastNoteAt = now
     try {
         await startNativeAds()
         const plugin = admob
@@ -202,7 +196,7 @@ export async function noteSuccessfulConversion(): Promise<void> {
         gate.conversions += 1
         writeGate(gate)
 
-        if (!canShowInterstitial(gate)) return
+        if (!shouldOfferInterstitial(gate, now)) return
         if (!interstitialReady || interstitialShowing) return
 
         interstitialShowing = true

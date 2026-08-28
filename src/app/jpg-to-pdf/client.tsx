@@ -9,11 +9,15 @@ import { ProcessingWait } from "@/components/tools/processing-wait"
 import { Download, Loader2 } from "lucide-react"
 import { ImageReorderList } from "@/components/tools/image-reorder-list"
 import { isJpegFile, isPngFile, friendlyFileError } from "@/lib/file-types"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
+import { finishConvert } from "@/lib/native-file"
+import { nameFromSources } from "@/lib/human-filename"
 
 export default function JpgToPdfPage() {
     const [files, setFiles] = useState<File[]>([])
     const [isProcessing, setIsProcessing] = useState(false)
     const [processedPdfUrl, setProcessedPdfUrl] = useState<string | null>(null)
+    const [outputName, setOutputName] = useState("photos.pdf")
 
     const handleFilesSelected = (newFiles: File[]) => {
         setFiles((prev) => [...prev, ...newFiles])
@@ -64,8 +68,14 @@ export default function JpgToPdfPage() {
 
             const pdfBytes = await pdfDoc.save()
             const blob = new Blob([pdfBytes as any], { type: 'application/pdf' })
-            const url = URL.createObjectURL(blob)
-            setProcessedPdfUrl(url)
+            const filename = nameFromSources(files, 'pdf')
+            if (IS_MOBILE_BUILD) {
+                await finishConvert(blob, filename)
+            } else {
+                const url = URL.createObjectURL(blob)
+                setOutputName(filename)
+                setProcessedPdfUrl(url)
+            }
         } catch (error) {
             console.error("Error creating PDF:", error)
             alert(friendlyFileError(error, "Could not open that picture. Try another file."))
@@ -88,7 +98,7 @@ export default function JpgToPdfPage() {
                 <h1 className="text-4xl font-bold">PDF Created Successfully!</h1>
                 <div className="flex flex-col gap-4">
                     <Button size="xl" asChild className="w-full">
-                        <a href={processedPdfUrl} download="images-convertify.pdf">
+                        <a href={processedPdfUrl} download={outputName}>
                             Download PDF
                         </a>
                     </Button>

@@ -9,7 +9,7 @@ import { formatFileSize, finishConvert } from '@/lib/native-file'
 import { tapHaptic } from '@/lib/haptics'
 import { abortConvertWorker, assertFitsPhone, workerFitImage } from '@/lib/jobs/media'
 import { fitPdfToRange } from '@/lib/jobs/fit-pdf'
-import { qualityNote, releaseJob, takeJob } from '@/lib/jobs/session'
+import { qualityNote, missedBandNote, releaseJob, takeJob } from '@/lib/jobs/session'
 import { TOO_BIG } from '@/lib/brand'
 
 const RANGES: { min: number; max: number; label: string; unit?: string }[] = [
@@ -85,14 +85,16 @@ export default function FitToSizeClient() {
                     setNote('Fitting photo…')
                 })
             const inRange = result.blob.size >= minBytes && result.blob.size <= maxBytes
-            if (!inRange && result.blob.size > maxBytes) {
-                setError(`Smallest we could get is ${formatFileSize(result.blob.size)}. Need ${min}–${max} KB.`)
-            } else if (!inRange && result.blob.size < minBytes) {
-                setError(`Largest we could get is ${formatFileSize(result.blob.size)}. Need ${min}–${max} KB.`)
-            }
             const base = file.name.replace(/\.[^.]+$/, '')
             const name = isPdf(file) ? `${base}-fit.pdf` : `${base}-fit.jpg`
-            await finishConvert(result.blob, name, qualityNote(result.shrunk))
+            if (!inRange) {
+                const tooBig = result.blob.size > maxBytes
+                const note = missedBandNote(formatFileSize(result.blob.size), min, max, tooBig)
+                setError(note)
+                await finishConvert(result.blob, name, note, 'warn')
+            } else {
+                await finishConvert(result.blob, name, qualityNote(result.shrunk))
+            }
         } catch (err) {
             if ((err as Error).name === 'AbortError') return
             setError((err as Error).message || TOO_BIG)

@@ -9,6 +9,7 @@ import {
     getAndroidV1Categories,
     searchAndroidV1Tools,
     shortToolName,
+    shortToolDescription,
 } from '@/lib/mobile-tools'
 
 export default function MobileToolsDashboard() {
@@ -27,7 +28,7 @@ export default function MobileToolsDashboard() {
                         <p className="mobile-empty-line">No tools match that. Try “merge” or “jpg”.</p>
                     ) : (
                         results.map((tool) => (
-                            <ToolRow key={tool.id} id={tool.id} href={tool.href} lucide={tool.icon.lucide} name={shortToolName(tool)} description={tool.description} color={tool.color.hex} />
+                            <ToolRow key={tool.id} id={tool.id} href={tool.href} lucide={tool.icon.lucide} name={shortToolName(tool)} description={shortToolDescription(tool)} color={tool.color.hex} />
                         ))
                     )}
                 </div>
@@ -45,7 +46,7 @@ export default function MobileToolsDashboard() {
                                     href={tool.href}
                                     lucide={tool.icon.lucide}
                                     name={shortToolName(tool)}
-                                    description={tool.description}
+                                    description={shortToolDescription(tool)}
                                     color={tool.color.hex}
                                 />
                             ))}

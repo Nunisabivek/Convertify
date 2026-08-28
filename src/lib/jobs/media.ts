@@ -96,6 +96,8 @@ type WorkerOk = {
     blob?: Blob
     ratio?: number
     shrunk?: boolean
+    likelyBad?: boolean
+    busyBackdrop?: boolean
 }
 
 function callWorker(
@@ -241,7 +243,7 @@ export async function workerRemoveBackground(
     file: File,
     fill: [number, number, number],
     signal: AbortSignal
-): Promise<{ blob: Blob; ratio: number }> {
+): Promise<{ blob: Blob; ratio: number; likelyBad: boolean; busyBackdrop: boolean }> {
     const buffer = await fileBuffer(file)
     const result = await callWorker(
         { type: 'remove-bg', buffer, fill },
@@ -249,7 +251,12 @@ export async function workerRemoveBackground(
         signal
     )
     if (!result.blob) throw new Error('Could not pick out the background.')
-    return { blob: result.blob, ratio: result.ratio ?? 0 }
+    return {
+        blob: result.blob,
+        ratio: result.ratio ?? 0,
+        likelyBad: Boolean(result.likelyBad),
+        busyBackdrop: Boolean(result.busyBackdrop),
+    }
 }
 
 async function fitImageOnMain(
