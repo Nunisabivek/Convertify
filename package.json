@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test:unit": "node --experimental-strip-types src/lib/human-filename.test.ts && node --experimental-strip-types src/lib/native-ads.test.ts && node --experimental-strip-types src/lib/session-notes.test.ts",
     "seo:ping": "node scripts/ping-google.js",
     "dev:mobile": "NEXT_PUBLIC_MOBILE_BUILD=true next dev -H 0.0.0.0 --port 3000",
     "build:mobile": "NEXT_PUBLIC_MOBILE_BUILD=true node scripts/build-mobile.mjs",
@@ -18,6 +19,7 @@
   "dependencies": {
     "@capacitor-community/admob": "^8.1.0",
     "@capacitor/android": "^8.0.0",
+    "@capacitor/app": "^8.1.1",
     "@capacitor/cli": "^8.0.2",
     "@capacitor/core": "^8.0.2",
     "@capacitor/filesystem": "^8.1.0",

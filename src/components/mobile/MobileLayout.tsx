@@ -1,16 +1,16 @@
 'use client'
 
-import { ReactNode, useEffect, useRef, useSyncExternalStore } from 'react'
-import { usePathname } from 'next/navigation'
+import { ReactNode, useEffect, useSyncExternalStore } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
 import { AppIcon } from '@/components/mobile/AppIcon'
 import NativeResultSheet from '@/components/mobile/NativeResultSheet'
 import { getToolById } from '@/lib/tools-registry'
-import { ANDROID_SHORT_NAMES } from '@/lib/mobile-tools'
+import { ANDROID_SHORT_NAMES, ANDROID_V1_TOOL_IDS } from '@/lib/mobile-tools'
 import { tapHaptic } from '@/lib/haptics'
 import { abortConvertWorker } from '@/lib/jobs/media'
 import { isConverting, subscribeConverting } from '@/lib/jobs/session'
+import { closeResultSheet, isResultSheetOpen } from '@/lib/result-sheet'
 
 interface MobileLayoutProps {
     children: ReactNode
@@ -22,6 +22,8 @@ const navItems = [
     { href: '/about', icon: 'Info', label: 'About' },
 ]
 
+const LAST_TAB_KEY = 'convertify-last-tab'
+
 function toolTitleFromPath(pathname: string): string | null {
     const slug = pathname.replace(/^\//, '').replace(/\/$/, '')
     if (!slug || slug === 'all-tools' || slug === 'about' || slug === 'privacy') return null
@@ -30,10 +32,61 @@ function toolTitleFromPath(pathname: string): string | null {
     return null
 }
 
+function normalizePath(pathname: string): string {
+    if (!pathname || pathname === '') return '/'
+    return pathname.replace(/\/$/, '') || '/'
+}
+
+function isNavActive(href: string, pathname: string): boolean {
+    const path = normalizePath(pathname)
+    if (href === '/') return path === '/'
+    if (href === '/all-tools') return path === '/all-tools'
+    if (href === '/about') return path === '/about' || path === '/privacy'
+    return false
+}
+
+function rememberTab(pathname: string): void {
+    const path = normalizePath(pathname)
+    if (path === '/' || path === '/all-tools') {
+        try {
+            sessionStorage.setItem(LAST_TAB_KEY, path)
+        } catch {
+            // ignore
+        }
+    }
+}
+
+function lastTab(): string {
+    try {
+        const stored = sessionStorage.getItem(LAST_TAB_KEY)
+        if (stored === '/' || stored === '/all-tools') return stored
+    } catch {
+        // ignore
+    }
+    return '/'
+}
+
+function isRootTab(pathname: string): boolean {
+    const path = normalizePath(pathname)
+    return path === '/' || path === '/all-tools'
+}
+
 export default function MobileLayout({ children }: MobileLayoutProps) {
     const pathname = usePathname() || '/'
+    const router = useRouter()
     const converting = useSyncExternalStore(subscribeConverting, isConverting, () => false)
-    const wasTool = useRef(false)
+
+    useEffect(() => {
+        rememberTab(pathname)
+    }, [pathname])
+
+    useEffect(() => {
+        ANDROID_V1_TOOL_IDS.forEach((id) => {
+            void router.prefetch(`/${id}`)
+        })
+        void router.prefetch('/all-tools')
+        void router.prefetch('/about')
+    }, [router])
 
     useEffect(() => {
         let cancelled = false
@@ -80,30 +133,72 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
         }
     }, [pathname])
 
-    const isTab = navItems.some((item) => item.href === pathname)
-    const toolTitle = toolTitleFromPath(pathname)
+    useEffect(() => {
+        let handle: { remove: () => Promise<void> } | null = null
+        let cancelled = false
+        ;(async () => {
+            try {
+                const { Capacitor } = await import('@capacitor/core')
+                if (!Capacitor.isNativePlatform() || cancelled) return
+                const { App } = await import('@capacitor/app')
+                handle = await App.addListener('backButton', ({ canGoBack }) => {
+                    if (closeResultSheet()) return
+                    const path = normalizePath(window.location.pathname)
+                    if (path === '/about' || path === '/privacy') {
+                        router.push(lastTab())
+                        return
+                    }
+                    if (!isRootTab(path)) {
+                        if (canGoBack) router.back()
+                        else router.push(lastTab())
+                        return
+                    }
+                    if (path === '/all-tools') {
+                        router.push('/')
+                        return
+                    }
+                    void App.exitApp()
+                })
+            } catch {
+                // plugin missing in web preview
+            }
+        })()
+        return () => {
+            cancelled = true
+            void handle?.remove()
+        }
+    }, [router])
+
+    const path = normalizePath(pathname)
+    const isTab = isRootTab(path) || path === '/about' || path === '/privacy'
+    const toolTitle = toolTitleFromPath(path)
     const showBack = !isTab
-    const isTool = Boolean(toolTitle)
-    const forward = isTool && !wasTool.current
-    const back = !isTool && wasTool.current
-    wasTool.current = isTool
-    const axis = converting ? 0 : forward ? 28 : back ? -28 : 0
     const heading =
         toolTitle ||
-        (pathname === '/all-tools'
+        (path === '/all-tools'
             ? 'All tools'
-            : pathname === '/about' || pathname === '/privacy'
+            : path === '/about' || path === '/privacy'
                 ? 'About'
                 : 'Convertify')
+
+    const goBack = () => {
+        void tapHaptic()
+        if (closeResultSheet()) return
+        if (typeof window !== 'undefined' && window.history.length > 1) {
+            router.back()
+            return
+        }
+        router.push(lastTab())
+    }
 
     return (
         <div className="mobile-app is-native">
             <NativeResultSheet />
             <header className="mobile-top-bar">
                 {showBack ? (
-                    <Link href="/" className="mobile-icon-btn" aria-label="Back">
+                    <button type="button" className="mobile-icon-btn" aria-label="Back" onClick={goBack}>
                         <AppIcon name="ChevronLeft" size={24} />
-                    </Link>
+                    </button>
                 ) : (
                     <div className="mobile-top-bar-brand" aria-hidden>
                         <span className="mobile-mark">C</span>
@@ -116,29 +211,24 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
             </header>
 
             <main className="mobile-content">
-                <AnimatePresence mode="wait">
-                    <motion.div
-                        key={pathname}
-                        initial={{ opacity: converting ? 1 : 0, x: axis }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: converting ? 1 : 0, x: converting ? 0 : axis * -0.5 }}
-                        transition={{ duration: converting ? 0 : 0.2, ease: 'easeOut' }}
-                    >
-                        {children}
-                    </motion.div>
-                </AnimatePresence>
+                <div key={path} className={converting ? 'mobile-route-page' : 'mobile-route-page is-enter'}>
+                    {children}
+                </div>
             </main>
 
             <nav className="mobile-bottom-nav" aria-label="Main">
                 {navItems.map((item) => {
-                    const active = pathname === item.href
+                    const active = isNavActive(item.href, path)
                     return (
                         <Link
                             key={item.href}
                             href={item.href}
+                            prefetch
+                            aria-current={active ? 'page' : undefined}
                             className={`mobile-nav-item${active ? ' active' : ''}`}
                             onClick={() => {
                                 void tapHaptic()
+                                if (isResultSheetOpen()) closeResultSheet()
                             }}
                         >
                             <AppIcon name={item.icon} className="mobile-nav-icon" size={22} />

@@ -7,11 +7,15 @@ import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
 import { ProcessingWait } from "@/components/tools/processing-wait"
 import { Trash2, ArrowUp, ArrowDown, FileText, Download, Merge } from "lucide-react"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
+import { finishConvert } from "@/lib/native-file"
+import { nameFromSources } from "@/lib/human-filename"
 
 export default function MergePdfPage() {
     const [files, setFiles] = useState<File[]>([])
     const [isProcessing, setIsProcessing] = useState(false)
     const [processedPdfUrl, setProcessedPdfUrl] = useState<string | null>(null)
+    const [outputName, setOutputName] = useState("merged.pdf")
 
     const handleFilesSelected = (newFiles: File[]) => {
         setFiles((prev) => [...prev, ...newFiles])
@@ -47,8 +51,14 @@ export default function MergePdfPage() {
 
             const pdfBytes = await mergedPdf.save()
             const blob = new Blob([pdfBytes as any], { type: 'application/pdf' })
-            const url = URL.createObjectURL(blob)
-            setProcessedPdfUrl(url)
+            const filename = nameFromSources(files, 'pdf', 'merged')
+            if (IS_MOBILE_BUILD) {
+                await finishConvert(blob, filename)
+            } else {
+                const url = URL.createObjectURL(blob)
+                setOutputName(filename)
+                setProcessedPdfUrl(url)
+            }
         } catch (error) {
             console.error("Error merging PDFs:", error)
             alert("Could not open that PDF. Try another file.")
@@ -70,7 +80,7 @@ export default function MergePdfPage() {
                 <h1 className="text-4xl font-bold">PDF Merged Successfully!</h1>
                 <div className="flex flex-col gap-4">
                     <Button size="xl" asChild className="w-full">
-                        <a href={processedPdfUrl} download="merged-convertify.pdf">
+                        <a href={processedPdfUrl} download={outputName}>
                             Download Merged PDF
                         </a>
                     </Button>

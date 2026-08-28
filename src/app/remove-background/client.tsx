@@ -7,7 +7,7 @@ import MobileJobCta from '@/components/mobile/MobileJobCta'
 import { finishConvert, formatFileSize } from '@/lib/native-file'
 import { tapHaptic } from '@/lib/haptics'
 import { abortConvertWorker, warmConvertWorker, workerRemoveBackground } from '@/lib/jobs/media'
-import { qualityNote, releaseJob, takeJob } from '@/lib/jobs/session'
+import { releaseJob, takeJob } from '@/lib/jobs/session'
 import { TOO_BIG } from '@/lib/brand'
 
 const FILLS = {
@@ -51,10 +51,14 @@ export default function RemoveBackgroundClient() {
         abortRef.current = ac
         await tapHaptic()
         try {
-            const { blob } = await workerRemoveBackground(file, FILLS[fill], ac.signal)
+            const { blob, likelyBad, busyBackdrop } = await workerRemoveBackground(file, FILLS[fill], ac.signal)
             if (preview) URL.revokeObjectURL(preview)
             setPreview(URL.createObjectURL(blob))
-            await finishConvert(blob, file.name.replace(/\.[^.]+$/, '') + '-bg.jpg', qualityNote(false))
+            const warn = likelyBad || busyBackdrop
+            const note = warn
+                ? 'This is not a studio cut-out. Retake against a blank wall, then try again.'
+                : 'Background replaced. Check the edges before you share.'
+            await finishConvert(blob, file.name.replace(/\.[^.]+$/, '') + '-bg.jpg', note, warn ? 'warn' : 'ok')
         } catch (err) {
             if ((err as Error).name === 'AbortError') return
             setError((err as Error).message || TOO_BIG)

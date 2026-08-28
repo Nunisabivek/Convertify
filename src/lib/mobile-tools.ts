@@ -159,3 +159,32 @@ export const ANDROID_SHORT_NAMES: Record<string, string> = {
 export function shortToolName(tool: Tool): string {
     return ANDROID_SHORT_NAMES[tool.id] ?? tool.name
 }
+
+/** One or two lines on the Tools list — website descriptions stay long for SEO. */
+export const ANDROID_SHORT_DESCRIPTIONS: Record<string, string> = {
+    'fit-to-size': 'Land a file between a min and max KB.',
+    'passport-photo': 'US 2×2, India 630×810, visa, bank.',
+    'remove-background': 'White or light-blue ID backdrop.',
+    'merge-pdf': 'Combine PDFs into one file.',
+    'split-pdf': 'Pull pages out of a PDF.',
+    'compress-pdf': 'Shrink a PDF to a target KB.',
+    'rotate-pdf': 'Turn pages the right way up.',
+    'jpg-to-pdf': 'Turn photos into one PDF.',
+    'png-to-pdf': 'Turn PNG pictures into one PDF.',
+    'pdf-to-jpg': 'Save each PDF page as a photo.',
+    'pdf-to-png': 'Save each PDF page as a PNG.',
+    'word-to-pdf': 'Turn a Word file into a PDF.',
+    'pdf-to-word': 'Turn a PDF into a Word file.',
+    'excel-to-pdf': 'Turn a spreadsheet into a PDF.',
+    'image-compressor': 'Shrink a photo to a target KB.',
+    'resize-image': 'Change a photo’s width and height.',
+    'heic-to-jpg': 'Turn iPhone photos into JPG.',
+    'webp-converter': 'Convert WebP pictures to JPG or PNG.',
+    'watermark-pdf': 'Stamp text on every page.',
+    'add-page-numbers': 'Add page numbers to a PDF.',
+    'qr-code-generator': 'Make a QR code from a link or text.',
+}
+
+export function shortToolDescription(tool: Tool): string {
+    return ANDROID_SHORT_DESCRIPTIONS[tool.id] ?? tool.description
+}

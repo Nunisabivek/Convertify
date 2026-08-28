@@ -9,11 +9,15 @@ import { ProcessingWait } from "@/components/tools/processing-wait"
 import { Download } from "lucide-react"
 import { ImageReorderList } from "@/components/tools/image-reorder-list"
 import { friendlyFileError } from "@/lib/file-types"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
+import { finishConvert } from "@/lib/native-file"
+import { nameFromSources } from "@/lib/human-filename"
 
 export default function PngToPdfPage() {
     const [files, setFiles] = useState<File[]>([])
     const [isProcessing, setIsProcessing] = useState(false)
     const [processedPdfUrl, setProcessedPdfUrl] = useState<string | null>(null)
+    const [outputName, setOutputName] = useState("photos.pdf")
 
     const handleFilesSelected = (newFiles: File[]) => {
         setFiles((prev) => [...prev, ...newFiles])
@@ -38,7 +42,13 @@ export default function PngToPdfPage() {
 
             const pdfBytes = await pdfDoc.save()
             const blob = new Blob([pdfBytes as any], { type: 'application/pdf' })
-            setProcessedPdfUrl(URL.createObjectURL(blob))
+            const filename = nameFromSources(files, 'pdf')
+            if (IS_MOBILE_BUILD) {
+                await finishConvert(blob, filename)
+            } else {
+                setOutputName(filename)
+                setProcessedPdfUrl(URL.createObjectURL(blob))
+            }
         } catch (error) {
             console.error("Error:", error)
             alert(friendlyFileError(error, "Could not open that picture. Try another file."))
@@ -58,7 +68,7 @@ export default function PngToPdfPage() {
                 <h1 className="text-4xl font-bold">PDF Ready!</h1>
                 <div className="flex flex-col gap-4">
                     <Button size="xl" asChild className="w-full">
-                        <a href={processedPdfUrl} download="images.pdf">Download PDF</a>
+                        <a href={processedPdfUrl} download={outputName}>Download PDF</a>
                     </Button>
                     <AdBanner variant="rectangle" />
                     <Button variant="outline" onClick={() => { setFiles([]); setProcessedPdfUrl(null) }}>Convert More</Button>

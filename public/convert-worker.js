@@ -12,6 +12,29 @@ function colorDist(r1, g1, b1, r2, g2, b2) {
     return Math.abs(r1 - r2) + Math.abs(g1 - g2) + Math.abs(b1 - b2)
 }
 
+function cornerSpreadOf(data, width, height) {
+    const n = width * height
+    const corners = [0, width - 1, (height - 1) * width, n - 1]
+    let maxd = 0
+    for (let i = 0; i < 4; i++) {
+        for (let j = i + 1; j < 4; j++) {
+            const a = corners[i] * 4
+            const b = corners[j] * 4
+            maxd = Math.max(
+                maxd,
+                colorDist(data[a], data[a + 1], data[a + 2], data[b], data[b + 1], data[b + 2])
+            )
+        }
+    }
+    return maxd
+}
+
+function inFace(x, y, width, height) {
+    const nx = (x - width * 0.5) / (width * 0.28)
+    const ny = (y - height * 0.42) / (height * 0.34)
+    return nx * nx + ny * ny < 1
+}
+
 function removeBackgroundPixels(data, width, height, fill, threshold) {
     const n = width * height
     const visited = new Uint8Array(n)
@@ -21,6 +44,9 @@ function removeBackgroundPixels(data, width, height, fill, threshold) {
     const fr = fill[0]
     const fg = fill[1]
     const fb = fill[2]
+    const spread = cornerSpreadOf(data, width, height)
+    const edgeThreshold = spread > 70 ? Math.min(threshold, 36) : threshold
+    const faceThreshold = Math.max(16, Math.round(edgeThreshold * 0.42))
     const corners = [0, width - 1, (height - 1) * width, n - 1]
     let sr = 0
     let sg = 0
@@ -40,7 +66,8 @@ function removeBackgroundPixels(data, width, height, fill, threshold) {
         const i = y * width + x
         if (visited[i]) return
         const p = i * 4
-        if (colorDist(data[p], data[p + 1], data[p + 2], sr, sg, sb) > threshold) return
+        const limit = inFace(x, y, width, height) ? faceThreshold : edgeThreshold
+        if (colorDist(data[p], data[p + 1], data[p + 2], sr, sg, sb) > limit) return
         visited[i] = 1
         queue[qt++] = i
     }
@@ -70,7 +97,23 @@ function removeBackgroundPixels(data, width, height, fill, threshold) {
         tryPush(x, y + 1)
         tryPush(x, y - 1)
     }
-    return replaced / n
+
+    let faceTotal = 0
+    let faceEaten = 0
+    for (let y = 0; y < height; y += 2) {
+        for (let x = 0; x < width; x += 2) {
+            if (!inFace(x, y, width, height)) continue
+            faceTotal++
+            const p = (y * width + x) * 4
+            if (data[p] === fr && data[p + 1] === fg && data[p + 2] === fb) faceEaten++
+        }
+    }
+
+    const ratio = replaced / n
+    const centerEaten = faceTotal ? faceEaten / faceTotal : 0
+    const busyBackdrop = spread > 70
+    const likelyBad = busyBackdrop || ratio < 0.1 || ratio > 0.7 || centerEaten > 0.12
+    return { ratio, cornerSpread: spread, centerEaten, busyBackdrop, likelyBad }
 }
 
 async function decodeBitmap(buffer) {
@@ -173,16 +216,18 @@ self.onmessage = async (event) => {
                 if (!ctx) throw new Error(TOO_BIG)
                 ctx.drawImage(bitmap, 0, 0)
                 const imageData = ctx.getImageData(0, 0, bitmap.width, bitmap.height)
-                const ratio = removeBackgroundPixels(imageData.data, bitmap.width, bitmap.height, fill, 74)
-                if (ratio < 0.04) {
-                    throw new Error('Could not pick out the background. Try a photo with a plain wall behind you.')
-                }
-                if (ratio > 0.88) {
-                    throw new Error('Too much of the photo looked like background. Try a clearer selfie.')
-                }
+                const stats = removeBackgroundPixels(imageData.data, bitmap.width, bitmap.height, fill, 52)
                 ctx.putImageData(imageData, 0, 0)
                 const blob = await canvas.convertToBlob({ type: 'image/jpeg', quality: 0.88 })
-                self.postMessage({ id, ok: true, blob, ratio, size: blob.size })
+                self.postMessage({
+                    id,
+                    ok: true,
+                    blob,
+                    ratio: stats.ratio,
+                    size: blob.size,
+                    likelyBad: stats.likelyBad,
+                    busyBackdrop: stats.busyBackdrop,
+                })
             } finally {
                 bitmap.close()
             }
