@@ -1,4 +1,4 @@
-package com.convertify.app;
+package com.convertify.work;
 
 import android.os.Bundle;
 import com.getcapacitor.BridgeActivity;

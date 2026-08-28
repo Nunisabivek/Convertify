@@ -66,6 +66,7 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
         })()
         window.addEventListener('resize', applySafeArea)
         window.addEventListener('orientationchange', applySafeArea)
+        void import('@/lib/native-ads').then((m) => m.startNativeAds()).catch(() => {})
         return () => {
             cancelled = true
             window.removeEventListener('resize', applySafeArea)

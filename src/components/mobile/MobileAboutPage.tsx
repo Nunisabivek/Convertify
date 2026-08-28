@@ -29,7 +29,8 @@ export default function MobileAboutPage() {
             <section className="mobile-about-card">
                 <h2>Privacy</h2>
                 <p>
-                    This Android version does not include website ads. Read the full privacy notes
+                    This Android version does not include website ads. It may show Google ads at
+                    the bottom of the screen and after a conversion. Read the full privacy notes
                     for how the Convertify website and this app handle data.
                 </p>
                 <Link href="/privacy" className="mobile-about-link">
