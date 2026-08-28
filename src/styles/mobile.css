@@ -1090,6 +1090,98 @@ body:has(.mobile-app),
   border-radius: 50%;
 }
 
+/* Pin Make photo / Convert / Fit to size above the nav + AdMob banner. */
+.mobile-app .mobile-job-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--nav-h) + var(--ad-banner-h) + var(--inset-bottom));
+  z-index: 25;
+  padding: 10px 16px 12px;
+  background: var(--md-surface);
+  border-top: 1px solid var(--md-outline);
+}
+
+.mobile-app .mobile-job-cta .mobile-choose-btn {
+  width: 100%;
+}
+
+.mobile-app .mobile-job-cta-hint {
+  margin: 0 0 8px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--md-primary);
+}
+
+.mobile-app .mobile-job-cta .mobile-work-bar {
+  position: static;
+  bottom: auto;
+}
+
+.mobile-app .mobile-job:has(.mobile-job-cta) {
+  padding-bottom: 110px;
+}
+
+.mobile-app .mobile-tool-frame:has(.mobile-job-cta) .mobile-tool-lead,
+.mobile-app .mobile-job:has(.mobile-job-cta) .mobile-fineprint {
+  display: none;
+}
+
+.mobile-app .mobile-tool-frame:has(.mobile-job-cta) .mobile-tool-title {
+  font-size: 18px !important;
+  margin: 0 0 10px;
+}
+
+.mobile-app .mobile-job:has(.mobile-job-cta) .mobile-crop:not(.is-sign) {
+  width: min(100%, 200px);
+  max-height: min(34dvh, 260px);
+}
+
+.mobile-app .mobile-job-advanced {
+  border: 1px solid var(--md-outline);
+  border-radius: 14px;
+  background: var(--md-surface);
+  padding: 0 12px;
+}
+
+.mobile-app .mobile-job-advanced summary {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--md-on-surface);
+  cursor: pointer;
+  list-style: none;
+}
+
+.mobile-app .mobile-job-advanced summary::-webkit-details-marker {
+  display: none;
+}
+
+.mobile-app .mobile-job-advanced summary::after {
+  content: "▾";
+  margin-left: auto;
+  color: var(--md-on-surface-variant);
+  font-weight: 500;
+}
+
+.mobile-app .mobile-job-advanced[open] summary::after {
+  content: "▴";
+}
+
+.mobile-app .mobile-job-advanced[open] summary {
+  border-bottom: 1px solid var(--md-outline);
+  margin-bottom: 12px;
+}
+
+.mobile-app .mobile-job-advanced .mobile-zoom,
+.mobile-app .mobile-job-advanced .mobile-custom-range,
+.mobile-app .mobile-job-advanced .mobile-size-control {
+  margin-bottom: 12px;
+}
+
 html.is-converting .mobile-app * {
   transition: none !important;
   animation: none !important;

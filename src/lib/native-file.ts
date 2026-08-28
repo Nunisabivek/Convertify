@@ -1,4 +1,5 @@
 import ConvertifyFiles, { type PickedNativeFile } from '@/lib/convertify-files'
+import { nextHumanFilename } from '@/lib/human-filename'
 
 const RECENT_KEY = 'convertify-recent-files'
 const MAX_RECENTS = 12
@@ -92,7 +93,11 @@ export function mimeFromName(filename: string): string {
 }
 
 function safeFileName(name: string): string {
-    return name.replace(/[/\\?%*:|"<>]/g, '-').slice(0, 120) || 'converted-file'
+    return nextHumanFilename(name)
+}
+
+function uniqueVisibleName(filename: string): string {
+    return nextHumanFilename(filename, loadRecentFiles().map((file) => file.name))
 }
 
 async function blobToBase64(blob: Blob): Promise<string> {
@@ -170,7 +175,7 @@ export interface StoredOutput {
 
 /** Write the converted file into app-owned storage (not Downloads yet). */
 export async function storeOutput(blob: Blob, filename: string): Promise<StoredOutput> {
-    const name = safeFileName(filename)
+    const name = uniqueVisibleName(filename)
     const mime = blob.type || mimeFromName(name)
 
     if (!(await isNativeAndroid())) {
@@ -264,10 +269,11 @@ export async function finishConvert(blob: Blob, filename: string, note?: string)
         window.dispatchEvent(new CustomEvent(CONVERT_OFFER, { detail: { blob, filename, note } }))
         return
     }
+    const name = uniqueVisibleName(filename)
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = filename
+    a.download = name
     a.click()
 }
 
@@ -278,4 +284,4 @@ export async function saveOrShareFile(blob: Blob, filename: string): Promise<Sto
     return stored
 }
 
-export { safeFileName }
+export { safeFileName, uniqueVisibleName }

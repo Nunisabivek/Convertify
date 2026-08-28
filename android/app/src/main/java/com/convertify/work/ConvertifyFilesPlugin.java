@@ -331,7 +331,7 @@ public class ConvertifyFilesPlugin extends Plugin {
         if (!dir.exists() && !dir.mkdirs()) {
             throw new Exception("Could not save");
         }
-        File dest = new File(dir, filename);
+        File dest = uniqueDownloadFile(dir, filename);
         try (InputStream in = new FileInputStream(src);
              OutputStream out = new FileOutputStream(dest)) {
             byte[] buf = new byte[8192];
@@ -341,5 +341,22 @@ public class ConvertifyFilesPlugin extends Plugin {
             }
         }
         return Uri.fromFile(dest);
+    }
+
+    private File uniqueDownloadFile(File dir, String filename) {
+        File dest = new File(dir, filename);
+        if (!dest.exists()) {
+            return dest;
+        }
+        int dot = filename.lastIndexOf('.');
+        String base = dot > 0 ? filename.substring(0, dot) : filename;
+        String ext = dot > 0 ? filename.substring(dot) : "";
+        for (int n = 2; n < 1000; n++) {
+            dest = new File(dir, base + "-" + n + ext);
+            if (!dest.exists()) {
+                return dest;
+            }
+        }
+        return new File(dir, base + "-copy" + ext);
     }
 }

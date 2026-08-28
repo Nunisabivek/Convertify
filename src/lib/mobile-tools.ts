@@ -110,6 +110,7 @@ export function getAndroidV1Categories(): ToolCategory[] {
     return TOOL_CATEGORIES
         .map((category) => ({
             ...category,
+            name: category.id === 'forms-kyc' ? 'Form photos' : category.name,
             tools: category.tools.filter((tool) => isAndroidV1Tool(tool.id)),
         }))
         .filter((category) => category.tools.length > 0)
