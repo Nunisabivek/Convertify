@@ -27,12 +27,13 @@ body:has(.mobile-app),
   --md-radius: 16px;
   --md-tap: 56px;
   --nav-h: 64px;
-  --ad-banner-h: 0px;
+  --ad-banner-h: 50px;
   --md-shadow: 0 1px 3px rgba(2, 110, 255, 0.06);
   /* Android WebView does not implement env(safe-area-inset-*). Capacitor and
      ConvertifyFiles.getSafeAreaInsets set these CSS variables on <html>. */
   --inset-top: var(--safe-area-inset-top, env(safe-area-inset-top, 0px));
   --inset-bottom: var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px));
+  --chrome-bottom: calc(var(--nav-h) + var(--ad-banner-h) + var(--inset-bottom));
 
   display: flex;
   flex-direction: column;
@@ -61,7 +62,16 @@ body:has(.mobile-app),
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   background: var(--md-surface);
-  padding-bottom: calc(var(--nav-h) + 36px + var(--inset-bottom) + var(--ad-banner-h));
+  padding-bottom: 16px;
+  scroll-padding-bottom: calc(var(--chrome-bottom) + 96px);
+}
+
+.mobile-content::after {
+  content: "";
+  display: block;
+  height: calc(var(--chrome-bottom) + 80px);
+  pointer-events: none;
+  flex-shrink: 0;
 }
 
 .mobile-route-page {
@@ -411,7 +421,7 @@ body:has(.mobile-app),
 }
 
 .mobile-tools-dashboard {
-  padding-bottom: 20px;
+  padding-bottom: 32px;
 }
 
 .mobile-category {
@@ -954,6 +964,7 @@ body:has(.mobile-app),
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+  scroll-margin-bottom: calc(var(--chrome-bottom) + 96px);
 }
 
 .mobile-custom-range label {
@@ -1147,6 +1158,7 @@ body:has(.mobile-app),
   display: flex;
   flex-direction: column;
   gap: 10px;
+  scroll-margin-bottom: calc(var(--chrome-bottom) + 96px);
 }
 
 .mobile-size-row {
@@ -1284,7 +1296,8 @@ body:has(.mobile-app),
 }
 
 .mobile-app .mobile-job:has(.mobile-job-cta) {
-  padding-bottom: 110px;
+  /* Clear the pinned Convert bar; ::after on .mobile-content clears nav + banner. */
+  padding-bottom: 96px;
 }
 
 .mobile-app .mobile-tool-frame:has(.mobile-job-cta) .mobile-tool-lead,

@@ -60,7 +60,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Convertify — Free Online PDF Tools (No Upload, No Sign-up)",
+    default: IS_MOBILE_BUILD ? "Convertify" : "Convertify — Free Online PDF Tools (No Upload, No Sign-up)",
     // No " | Convertify" suffix. Google truncates titles around 60 characters
     // and the brand costs 13 of them on a domain nobody searches by name yet,
     // pushing the actual keywords out of the visible SERP snippet. Page titles

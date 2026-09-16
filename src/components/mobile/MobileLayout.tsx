@@ -182,6 +182,10 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
                 ? 'About'
                 : 'Convertify')
 
+    useEffect(() => {
+        document.title = heading
+    }, [heading])
+
     const goBack = () => {
         void tapHaptic()
         if (closeResultSheet()) return

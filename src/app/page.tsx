@@ -3,10 +3,11 @@ import Script from 'next/script';
 import WebHomePage from '@/components/home/WebHomePage';
 import { MobileHomePage } from '@/components/mobile';
 import { IS_MOBILE_BUILD } from '@/lib/is-mobile-build';
+import { appChromeTitle } from '@/lib/app-title';
 
 // Generate metadata for homepage
 export const metadata: Metadata = {
-  title: 'Convertify — Free Online PDF Tools, No Upload',
+  title: appChromeTitle('Convertify', 'Convertify — Free Online PDF Tools, No Upload'),
   description: 'Free PDF tools that run on your device. Merge, compress, and convert without uploading files. No sign-up, no watermark.',
   keywords: ['free pdf tools', 'online pdf converter', 'merge pdf free', 'compress pdf online', 'pdf to word converter', 'pdf to jpg', 'word to pdf', 'split pdf online'],
   alternates: {
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Convertify — Free Online PDF Tools, No Upload',
+    title: appChromeTitle('Convertify', 'Convertify — Free Online PDF Tools, No Upload'),
     description: 'Free PDF tools that run on your device. Merge, compress, and convert without uploading files. No sign-up, no watermark.',
     url: 'https://convertify.work',
     siteName: 'Convertify',

@@ -14,12 +14,13 @@ import { ToolSeoContent } from "@/components/seo/tool-seo-content"
 import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
+import { appToolTitle } from '@/lib/app-title'
 
 const seoData = toolSeoData["rotate-pdf"]
 const contentData = toolContentData["rotate-pdf"]
 
 export const metadata: Metadata = {
-    title: seoData.title,
+    title: appToolTitle('rotate-pdf', seoData.title),
     description: seoData.description,
     keywords: seoData.keywords,
     alternates: {

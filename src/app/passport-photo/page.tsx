@@ -13,6 +13,7 @@ import { AnswerBlock } from '@/components/seo/answer-block'
 import { uniqueToolSeo } from '@/lib/unique-tools-seo'
 import { allIndexableBlogPosts } from '@/lib/blog-data'
 import { getBlogPostsForTool } from '@/lib/tool-blog-mapping'
+import { appToolTitle } from '@/lib/app-title'
 
 const title = 'Passport Photo: US 2×2, 630×810 & Visa Sizes'
 const description =
@@ -20,7 +21,7 @@ const description =
 const seo = uniqueToolSeo['passport-photo']
 
 export const metadata: Metadata = {
-    title,
+    title: appToolTitle('passport-photo', title),
     description,
     keywords: [
         'passport photo maker',

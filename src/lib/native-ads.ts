@@ -59,6 +59,8 @@ function writeGate(gate: InterstitialGate): void {
     }
 }
 
+const DEFAULT_BANNER_H = 50
+
 function setBannerInset(height: number): void {
     const px = Math.max(0, Math.round(height))
     const root = document.querySelector('.mobile-app') as HTMLElement | null
@@ -117,8 +119,10 @@ async function prepareInterstitial(plugin: AdMobModule): Promise<void> {
 }
 
 async function showBanner(plugin: AdMobModule): Promise<void> {
+    setBannerInset(DEFAULT_BANNER_H)
     await plugin.AdMob.addListener(plugin.BannerAdPluginEvents.SizeChanged, (size) => {
-        setBannerInset(size?.height ?? 0)
+        const height = Number(size?.height) || 0
+        setBannerInset(height > 0 ? height : DEFAULT_BANNER_H)
     })
     await plugin.AdMob.addListener(plugin.BannerAdPluginEvents.FailedToLoad, () => {
         setBannerInset(0)
@@ -181,6 +185,7 @@ export function startNativeAds(): Promise<void> {
 /**
  * After a file is ready to share/save. Never on cold start, back, picker, or tap.
  * At most once every 3 conversions and 3 minutes (whichever is stricter).
+ * Count persists in localStorage (`convertify:admob-interstitial`) across launches.
  * Only shows if an interstitial is already loaded — never waits and never
  * blocks Share/Save on the Done sheet.
  */

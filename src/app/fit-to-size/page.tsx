@@ -13,6 +13,7 @@ import { AnswerBlock } from '@/components/seo/answer-block'
 import { uniqueToolSeo } from '@/lib/unique-tools-seo'
 import { allIndexableBlogPosts } from '@/lib/blog-data'
 import { getBlogPostsForTool } from '@/lib/tool-blog-mapping'
+import { appToolTitle } from '@/lib/app-title'
 
 const title = 'Fit Photo or PDF to 20–50KB or Any Exact Size'
 const description =
@@ -20,7 +21,7 @@ const description =
 const seo = uniqueToolSeo['fit-to-size']
 
 export const metadata: Metadata = {
-    title,
+    title: appToolTitle('fit-to-size', title),
     description,
     keywords: [
         'fit pdf to size',

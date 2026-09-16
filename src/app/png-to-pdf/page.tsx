@@ -19,12 +19,13 @@ import { AnswerBlock } from "@/components/seo/answer-block"
 import { PostActionAd } from "@/components/ads/post-action-ad"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
+import { appToolTitle } from '@/lib/app-title'
 
 const seoData = toolSeoData["png-to-pdf"]
 const contentData = toolContentData["png-to-pdf"]
 
 export const metadata: Metadata = {
-    title: seoData.title,
+    title: appToolTitle('png-to-pdf', seoData.title),
     description: seoData.description,
     keywords: seoData.keywords,
     alternates: {

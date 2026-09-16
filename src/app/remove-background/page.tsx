@@ -13,6 +13,7 @@ import { AnswerBlock } from '@/components/seo/answer-block'
 import { uniqueToolSeo } from '@/lib/unique-tools-seo'
 import { allIndexableBlogPosts } from '@/lib/blog-data'
 import { getBlogPostsForTool } from '@/lib/tool-blog-mapping'
+import { appToolTitle } from '@/lib/app-title'
 
 const title = 'Remove Photo Background for Passport & ID — Free'
 const description =
@@ -20,7 +21,7 @@ const description =
 const seo = uniqueToolSeo['remove-background']
 
 export const metadata: Metadata = {
-    title,
+    title: appToolTitle('remove-background', title),
     description,
     keywords: [
         'remove background passport photo',

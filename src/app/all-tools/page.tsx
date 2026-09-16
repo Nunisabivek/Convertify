@@ -41,9 +41,10 @@ import { AdBanner } from "@/components/ads/banner"
 import { Metadata } from "next"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import { MobileToolsDashboard } from "@/components/mobile"
+import { appChromeTitle } from '@/lib/app-title'
 
 export const metadata: Metadata = {
-    title: "All Free PDF Tools | Convertify - No Pricing, No Download, 100% Free",
+    title: appChromeTitle('All tools', "All Free PDF Tools | Convertify - No Pricing, No Download, 100% Free"),
     description: "Browse 30+ free PDF tools from Convertify. Merge, split, compress, convert PDF to Word and images online. No download, no registration, and no file limits.",
     keywords: ["convertify tools", "free pdf tools", "pdf tools list", "all pdf converters", "online pdf editor", "pdf to images converter online"],
     alternates: {

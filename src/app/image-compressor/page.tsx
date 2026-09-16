@@ -13,9 +13,10 @@ import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
 import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
 import { allIndexableBlogPosts } from "@/lib/blog-data"
 import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
+import { appToolTitle } from '@/lib/app-title'
 
 export const metadata: Metadata = {
-    title: "Image Compressor - Compress Images Online Free | Convertify",
+    title: appToolTitle('image-compressor', "Image Compressor - Compress Images Online Free | Convertify"),
     description: "Compress JPG, PNG, and WebP images online for free. Reduce file size by up to 80% without losing quality. No sign-up, no watermarks.",
     keywords: ["image compressor", "compress images", "reduce image size", "optimize images", "compress jpg", "compress png", "free image compression"],
     alternates: { canonical: "https://convertify.work/image-compressor" },

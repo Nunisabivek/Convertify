@@ -17,12 +17,13 @@ import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 import { allIndexableBlogPosts } from "@/lib/blog-data"
 import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
+import { appToolTitle } from '@/lib/app-title'
 
 const seoData = toolSeoData["jpg-to-pdf"]
 const contentData = toolContentData["jpg-to-pdf"]
 
 export const metadata: Metadata = {
-    title: seoData.title,
+    title: appToolTitle('jpg-to-pdf', seoData.title),
     description: seoData.description,
     keywords: seoData.keywords,
     alternates: {

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { appChromeTitle } from '@/lib/app-title'
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Convertify",
+  title: appChromeTitle('Privacy', "Privacy Policy | Convertify"),
   description:
     "Privacy policy for the Convertify website and Android app. File conversion runs on your device. We do not upload your files to Convertify servers.",
   robots: { index: true, follow: true },
