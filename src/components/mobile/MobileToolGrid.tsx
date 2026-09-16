@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { AppIcon } from '@/components/mobile/AppIcon'
+import { ToolGlyph } from '@/components/mobile/ToolGlyph'
 import { getAndroidQuickTools, shortToolName, ANDROID_QUICK_HINTS } from '@/lib/mobile-tools'
 import { tapHaptic } from '@/lib/haptics'
 
@@ -28,7 +28,7 @@ export default function MobileToolGrid() {
                         }}
                     >
                         <div className="mobile-tool-icon">
-                            <AppIcon name={tool.icon.lucide} size={28} />
+                            <ToolGlyph toolId={tool.id} size={32} />
                         </div>
                         <span className="mobile-tool-name">{shortToolName(tool)}</span>
                         <span className="mobile-tool-hint">{ANDROID_QUICK_HINTS[tool.id] ?? shortToolName(tool)}</span>

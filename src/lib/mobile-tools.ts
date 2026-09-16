@@ -37,14 +37,16 @@ export type AndroidV1ToolId = (typeof ANDROID_V1_TOOL_IDS)[number]
 
 const ANDROID_V1_SET = new Set<string>(ANDROID_V1_TOOL_IDS)
 
-/** Home Quick Tools — the six jobs people actually open the app for. */
+/** Home Quick Tools — common jobs, including buried convert reverses. */
 export const ANDROID_QUICK_TOOL_IDS = [
     'fit-to-size',
     'passport-photo',
     'compress-pdf',
     'jpg-to-pdf',
-    'remove-background',
+    'pdf-to-jpg',
     'merge-pdf',
+    'remove-background',
+    'word-to-pdf',
 ] as const
 
 /** Extra phrases a non-technical person would type. */
@@ -161,8 +163,10 @@ export const ANDROID_QUICK_HINTS: Record<string, string> = {
     'passport-photo': 'US, India, visa, bank',
     'compress-pdf': 'Shrink to a target KB',
     'jpg-to-pdf': 'Photos into one PDF',
+    'pdf-to-jpg': 'Each page as a photo',
     'remove-background': 'White ID backdrop',
     'merge-pdf': 'Combine PDFs',
+    'word-to-pdf': 'Word file into a PDF',
 }
 
 export function shortToolName(tool: Tool): string {

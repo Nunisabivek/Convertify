@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
 import { AppIcon } from '@/components/mobile/AppIcon'
+import { ToolGlyph } from '@/components/mobile/ToolGlyph'
 import MobileSearch from '@/components/mobile/MobileSearch'
 import {
     getAndroidV1Categories,
@@ -28,7 +29,7 @@ export default function MobileToolsDashboard() {
                         <p className="mobile-empty-line">No tools match that. Try “merge” or “jpg”.</p>
                     ) : (
                         results.map((tool) => (
-                            <ToolRow key={tool.id} id={tool.id} href={tool.href} lucide={tool.icon.lucide} name={shortToolName(tool)} description={shortToolDescription(tool)} color={tool.color.hex} />
+                            <ToolRow key={tool.id} id={tool.id} href={tool.href} name={shortToolName(tool)} description={shortToolDescription(tool)} color={tool.color.hex} />
                         ))
                     )}
                 </div>
@@ -44,7 +45,6 @@ export default function MobileToolsDashboard() {
                                     key={tool.id}
                                     id={tool.id}
                                     href={tool.href}
-                                    lucide={tool.icon.lucide}
                                     name={shortToolName(tool)}
                                     description={shortToolDescription(tool)}
                                     color={tool.color.hex}
@@ -59,15 +59,14 @@ export default function MobileToolsDashboard() {
 }
 
 function ToolRow({
+    id,
     href,
-    lucide,
     name,
     description,
     color,
 }: {
     id: string
     href: string
-    lucide: string
     name: string
     description: string
     color: string
@@ -81,7 +80,7 @@ function ToolRow({
                 style={{ '--tool-color': color } as React.CSSProperties}
             >
                 <div className="mobile-tool-list-icon">
-                    <AppIcon name={lucide} size={22} />
+                    <ToolGlyph toolId={id} size={30} />
                 </div>
                 <div className="mobile-tool-list-content">
                     <div className="mobile-tool-list-name">{name}</div>

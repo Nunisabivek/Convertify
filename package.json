@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:unit": "node --experimental-strip-types src/lib/human-filename.test.ts && node --experimental-strip-types src/lib/native-ads.test.ts && node --experimental-strip-types src/lib/session-notes.test.ts && node --experimental-strip-types src/lib/document-title.test.ts",
+    "test:unit": "node --experimental-strip-types src/lib/human-filename.test.ts && node --experimental-strip-types src/lib/native-ads.test.ts && node --experimental-strip-types src/lib/session-notes.test.ts && node --experimental-strip-types src/lib/document-title.test.ts && node --experimental-strip-types src/lib/tool-swap.test.ts",
     "seo:ping": "node scripts/ping-google.js",
     "dev:mobile": "cross-env NEXT_PUBLIC_MOBILE_BUILD=true next dev -H 0.0.0.0 --port 3000",
     "build:mobile": "cross-env NEXT_PUBLIC_MOBILE_BUILD=true node scripts/build-mobile.mjs",

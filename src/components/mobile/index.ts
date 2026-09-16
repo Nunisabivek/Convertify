@@ -10,3 +10,4 @@ export { default as MobileHomePage } from './MobileHomePage';
 export { default as MobileAboutPage } from './MobileAboutPage';
 export { default as MobileToolFrame } from './MobileToolFrame';
 export { default as MobileJobCta } from './MobileJobCta';
+export { ToolGlyph } from './ToolGlyph';
