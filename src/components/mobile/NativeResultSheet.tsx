@@ -107,6 +107,7 @@ export default function NativeResultSheet() {
                 })
                 setOutput(stored)
                 setResultSheetOpen(true)
+                // Fire-and-forget — Share/Save must not wait for an interstitial.
                 void import('@/lib/native-ads').then((m) => m.noteSuccessfulConversion()).catch(() => {})
             } catch {
                 setError('Could not save that file. Try again.')
@@ -130,6 +131,7 @@ export default function NativeResultSheet() {
                 })
                 setOutput(stored)
                 setResultSheetOpen(true)
+                // Fire-and-forget — Share/Save must not wait for an interstitial.
                 void import('@/lib/native-ads').then((m) => m.noteSuccessfulConversion()).catch(() => {})
             } catch {
                 setError('Could not save that file. Try again.')

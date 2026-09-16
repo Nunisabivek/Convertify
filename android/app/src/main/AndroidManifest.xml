@@ -35,7 +35,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <!-- Google sample (test) App ID. Required by the Mobile Ads SDK at launch. -->
+        <!-- Live AdMob App ID from strings.xml `admob_app_id`. Do not hardcode a second copy. -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admob_app_id" />

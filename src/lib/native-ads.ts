@@ -1,22 +1,23 @@
 /**
- * Native AdMob for the Capacitor Android shell only.
+ * Native AdMob for the Capacitor Android shell only (`IS_MOBILE_BUILD`).
  *
- * Google sample (TEST) ad unit IDs — never put live units here until Play
- * is approved and the owner swaps them in one place:
- *   android/app/src/main/res/values/strings.xml  (App ID)
- *   this file (banner + interstitial unit IDs)
+ * Live IDs from the owner. When they change, swap them in exactly two places:
+ *   android/app/src/main/res/values/strings.xml  →  `admob_app_id`
+ *     (AndroidManifest `APPLICATION_ID` meta reads that string — do not duplicate)
+ *   this file → `BANNER_AD_UNIT_ID` + `INTERSTITIAL_AD_UNIT_ID`
  *
- * The public website (convertify.work) never calls this. Adsterra stays
- * website-only. If an ad fails to load, we fail silently.
+ * convertify.work never calls this module. Adsterra stays website-only.
+ * Ad failures are silent. Share/Save on the Done sheet never waits for an ad.
  */
 import { IS_MOBILE_BUILD } from '@/lib/is-mobile-build'
 import { shouldOfferInterstitial, type InterstitialGate } from '@/lib/interstitial-gate'
 
 export { shouldOfferInterstitial, type InterstitialGate }
 
-/** Google sample App ID is in Android strings.xml; these are sample units. */
-const TEST_BANNER_ID = 'ca-app-pub-3940256099942544/6300978111'
-const TEST_INTERSTITIAL_ID = 'ca-app-pub-3940256099942544/1033173712'
+/** Live banner unit. App ID is only in strings.xml (`admob_app_id`). */
+export const BANNER_AD_UNIT_ID = 'ca-app-pub-4814181825408625/7919857158'
+/** Live interstitial unit. Shown only after a successful convert + gate. */
+export const INTERSTITIAL_AD_UNIT_ID = 'ca-app-pub-4814181825408625/4065381782'
 
 const STATE_KEY = 'convertify:admob-interstitial'
 
@@ -100,7 +101,7 @@ async function maybeRequestConsent(plugin: AdMobModule): Promise<boolean> {
         }
         return info.canRequestAds !== false
     } catch {
-        // Sample App ID has no UMP message. Do not block test ads.
+        // UMP missing or slow — never block the shell. Fail open for ads.
         return true
     }
 }
@@ -108,7 +109,7 @@ async function maybeRequestConsent(plugin: AdMobModule): Promise<boolean> {
 async function prepareInterstitial(plugin: AdMobModule): Promise<void> {
     interstitialReady = false
     try {
-        await plugin.AdMob.prepareInterstitial({ adId: TEST_INTERSTITIAL_ID })
+        await plugin.AdMob.prepareInterstitial({ adId: INTERSTITIAL_AD_UNIT_ID })
         interstitialReady = true
     } catch {
         interstitialReady = false
@@ -123,7 +124,7 @@ async function showBanner(plugin: AdMobModule): Promise<void> {
         setBannerInset(0)
     })
     await plugin.AdMob.showBanner({
-        adId: TEST_BANNER_ID,
+        adId: BANNER_AD_UNIT_ID,
         adSize: plugin.BannerAdSize.ADAPTIVE_BANNER,
         position: plugin.BannerAdPosition.BOTTOM_CENTER,
         margin: 0,
@@ -162,6 +163,7 @@ async function startNativeAdsInternal(): Promise<void> {
         setBannerInset(0)
     }
 
+    // Prefetch in the background so a later convert can show without waiting.
     void prepareInterstitial(plugin)
 }
 
@@ -179,35 +181,40 @@ export function startNativeAds(): Promise<void> {
 /**
  * After a file is ready to share/save. Never on cold start, back, picker, or tap.
  * At most once every 3 conversions and 3 minutes (whichever is stricter).
- * Only shows if an interstitial is already loaded — never waits and interrupts Share.
+ * Only shows if an interstitial is already loaded — never waits and never
+ * blocks Share/Save on the Done sheet.
  */
-export async function noteSuccessfulConversion(): Promise<void> {
+export function noteSuccessfulConversion(): void {
     if (!adsAllowed()) return
     const now = Date.now()
     // Same convert used to fire intercept + CONVERT_OFFER, so 2 jobs looked like 3.
     if (now - lastNoteAt < NOTE_DEBOUNCE_MS) return
     lastNoteAt = now
-    try {
-        await startNativeAds()
-        const plugin = admob
-        if (!plugin) return
 
-        const gate = readGate()
-        gate.conversions += 1
-        writeGate(gate)
+    const gate = readGate()
+    gate.conversions += 1
+    writeGate(gate)
 
-        if (!shouldOfferInterstitial(gate, now)) return
-        if (!interstitialReady || interstitialShowing) return
-
-        interstitialShowing = true
-        interstitialReady = false
-        await plugin.AdMob.showInterstitial()
-        gate.lastShownAt = Date.now()
-        gate.conversionsAtLastShow = gate.conversions
-        writeGate(gate)
-    } catch {
-        interstitialShowing = false
-        interstitialReady = false
-        if (admob) void prepareInterstitial(admob)
+    const plugin = admob
+    if (!plugin) {
+        void startNativeAds()
+        return
     }
+    if (!shouldOfferInterstitial(gate, now)) return
+    if (!interstitialReady || interstitialShowing) return
+
+    interstitialShowing = true
+    interstitialReady = false
+    void plugin.AdMob.showInterstitial()
+        .then(() => {
+            const shown = readGate()
+            shown.lastShownAt = Date.now()
+            shown.conversionsAtLastShow = shown.conversions
+            writeGate(shown)
+        })
+        .catch(() => {
+            interstitialShowing = false
+            interstitialReady = false
+            if (admob) void prepareInterstitial(admob)
+        })
 }

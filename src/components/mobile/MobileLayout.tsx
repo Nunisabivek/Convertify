@@ -119,6 +119,7 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
         })()
         window.addEventListener('resize', applySafeArea)
         window.addEventListener('orientationchange', applySafeArea)
+        // Banner from the first Android screen only. Website never mounts this layout.
         void import('@/lib/native-ads').then((m) => m.startNativeAds()).catch(() => {})
         return () => {
             cancelled = true

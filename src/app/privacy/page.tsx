@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-const LAST_UPDATED = "28 August 2026";
+const LAST_UPDATED = "16 September 2026";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -156,18 +156,10 @@ export default function PrivacyPolicyPage() {
               servers.
             </p>
             <p className="mt-3">
-              <strong>Possible later changes.</strong> We may later:
+              <strong>Possible later changes.</strong> We may later promote the app
+              with paid campaigns such as Google Ads and Meta / Facebook ads (those
+              campaigns are not an in-app Facebook SDK).
             </p>
-            <ul className="mt-2 list-disc space-y-1 pl-6">
-              <li>
-                replace Google&apos;s test ad units with live AdMob units once the Play
-                listing is approved;
-              </li>
-              <li>
-                promote the app with paid campaigns such as Google Ads and Meta /
-                Facebook ads (those campaigns are not an in-app Facebook SDK).
-              </li>
-            </ul>
             <p className="mt-3">
               In-app AdMob ads may use the Google advertising ID. If we add paid
               install campaigns, we may also use install attribution (for example Play
@@ -238,10 +230,9 @@ export default function PrivacyPolicyPage() {
             </h2>
             <p className="mt-3">
               We may update this page when the website or Android app changes — for
-              example if we switch from test AdMob units to live ads, or add install
-              campaigns. The date at the top will change when we do. Continued use
-              after an update means you are using the product under the revised
-              description.
+              example if ad units or install campaigns change. The date at the top
+              will change when we do. Continued use after an update means you are
+              using the product under the revised description.
             </p>
           </section>
 

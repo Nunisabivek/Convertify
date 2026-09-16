@@ -1,3 +1,5 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import type { NextConfig } from "next";
 
 // Capacitor packaging uses a static export. `next dev` (including
@@ -6,6 +8,7 @@ import type { NextConfig } from "next";
 const isMobileBuild = process.env.NEXT_PUBLIC_MOBILE_BUILD === 'true';
 const isDevServer =
   process.env.NODE_ENV === 'development' || process.argv.includes('dev');
+const nativeAdsWeb = path.join(path.dirname(fileURLToPath(import.meta.url)), 'src/lib/native-ads.web.ts');
 
 const nextConfig: NextConfig = {
   ...(isMobileBuild && !isDevServer && { output: 'export' }),
@@ -17,6 +20,21 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  // Website builds must not ship AdMob unit IDs or the Capacitor ads plugin.
+  ...(!isMobileBuild && {
+    turbopack: {
+      resolveAlias: {
+        '@/lib/native-ads': './src/lib/native-ads.web.ts',
+      },
+    },
+    webpack: (config) => {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        '@/lib/native-ads': nativeAdsWeb,
+      };
+      return config;
+    },
+  }),
   // Redirects and headers are consolidated in vercel.json
   // X-Robots-Tag removed from here - it was applying "index, follow" to 404 pages too,
   // confusing Google. Vercel.json handles this for valid pages only.

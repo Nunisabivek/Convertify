@@ -13,16 +13,14 @@ cd android
 
 The APK is at `android/app/build/outputs/apk/debug/app-debug.apk`.
 
-`npm run mobile` runs a static Next.js export (`NEXT_PUBLIC_MOBILE_BUILD=true`) and `npx cap sync android`. Website Adsterra code is stripped in that export. The Android shell uses Google AdMob with **Google's official sample (test) ad unit IDs only**. Live AdMob IDs are not in this repo yet.
+`npm run mobile` runs a static Next.js export (`NEXT_PUBLIC_MOBILE_BUILD=true`) and `npx cap sync android`. Website Adsterra code is stripped in that export. The Android shell uses Google AdMob. Live IDs live in exactly two files:
 
-The Play application id is **`com.convertify.work`**. Do not change it back to `com.convertify.app` — Play rejected that package name as already in use.
-
-To swap in live AdMob units later (after Play approval), edit:
-
-1. `android/app/src/main/res/values/strings.xml` — `admob_app_id`
+1. `android/app/src/main/res/values/strings.xml` — `admob_app_id` (the manifest `APPLICATION_ID` meta reads this string)
 2. `src/lib/native-ads.ts` — banner and interstitial unit IDs
 
-Then rebuild with `npm run mobile` and `./gradlew bundleRelease`. Do not click your own ads.
+Do not put AdMob on convertify.work. Rebuild with `npm run mobile` after ID changes. Do not click your own ads. Do not commit a keystore.
+
+The Play application id is **`com.convertify.work`**. Do not change it back to `com.convertify.app` — Play rejected that package name as already in use.
 
 ## Live reload on the Android emulator
 

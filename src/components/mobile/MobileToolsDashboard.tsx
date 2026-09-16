@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { AppIcon } from '@/components/mobile/AppIcon'
 import MobileSearch from '@/components/mobile/MobileSearch'
 import {
@@ -72,8 +72,9 @@ function ToolRow({
     description: string
     color: string
 }) {
+    const reduceMotion = useReducedMotion()
     return (
-        <motion.div whileTap={{ scale: 0.98 }}>
+        <motion.div whileTap={reduceMotion ? undefined : { scale: 0.97 }}>
             <Link
                 href={`/${href}`}
                 className="mobile-tool-list-item"

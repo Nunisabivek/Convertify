@@ -51,7 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const staticPages: { path: string; priority: number; lastModified?: string }[] = [
         { path: 'all-tools', priority: 0.8 },
         { path: 'blog', priority: 0.7 },
-        { path: 'privacy', priority: 0.3, lastModified: '2026-08-27' },
+        { path: 'privacy', priority: 0.3, lastModified: '2026-09-16' },
         { path: 'about', priority: 0.4 },
     ]
 
