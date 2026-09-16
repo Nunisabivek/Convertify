@@ -5,6 +5,12 @@ import { FileUploader } from "@/components/tools/file-uploader"
 import { ProcessingWait } from "@/components/tools/processing-wait"
 import { AdBanner } from "@/components/ads/banner"
 import { Button } from "@/components/ui/button"
+import MobileWorkBar from "@/components/mobile/MobileWorkBar"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
+import { finishConvert } from "@/lib/native-file"
+import { takeJob, releaseJob } from "@/lib/jobs/session"
+import { assertFitsPhone } from "@/lib/jobs/media"
+import { loadPdfjs } from "@/lib/pdfjs"
 import {
     Ruler,
     Download,
@@ -21,6 +27,7 @@ import {
     MoveHorizontal,
     Trash2,
     RotateCcw,
+    Type,
 } from "lucide-react"
 
 type Step = "upload" | "analyzing" | "editing" | "exporting" | "done"
@@ -208,6 +215,7 @@ export default function AutocadPdfEditorClient() {
     const [autocadMode, setAutocadMode] = useState(false)
 
     const pdfBytesRef = useRef<ArrayBuffer | null>(null)
+    const abortRef = useRef<AbortController | null>(null)
     const canvasWrapperRef = useRef<HTMLDivElement>(null)
     const toolbarRef = useRef<HTMLDivElement>(null)
 
@@ -243,21 +251,23 @@ export default function AutocadPdfEditorClient() {
         setStep("analyzing")
         setProgress(5)
         setProgressStatus("Reading file...")
+        const ac = takeJob()
+        abortRef.current = ac
 
         try {
+            assertFitsPhone(selectedFile)
             const buffer = await selectedFile.arrayBuffer()
             pdfBytesRef.current = buffer.slice(0)
 
-            const pdfjsLib = await import("pdfjs-dist")
-            pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`
-
+            const pdfjsLib = await loadPdfjs()
             const pdf = await pdfjsLib.getDocument({ data: new Uint8Array(buffer) }).promise
             setNumPages(pdf.numPages)
             setProgress(15)
 
             const newPageData = new Map<number, PageData>()
             for (let i = 1; i <= pdf.numPages; i++) {
-                setProgressStatus(`Analyzing page ${i} of ${pdf.numPages}...`)
+                if (ac.signal.aborted) throw new DOMException("Aborted", "AbortError")
+                setProgressStatus(`Reading page ${i} of ${pdf.numPages}...`)
                 const baseShare = 20 + ((i - 1) / pdf.numPages) * 75
                 setProgress(baseShare)
 
@@ -367,14 +377,26 @@ export default function AutocadPdfEditorClient() {
                 })
             }
 
+            if (ac.signal.aborted) {
+                setStep("upload")
+                return
+            }
             setPageData(newPageData)
             setProgress(100)
             setProgressStatus("Done")
             setStep("editing")
         } catch (e) {
+            if ((e as Error)?.name === "AbortError" || ac.signal.aborted) {
+                setStep("upload")
+                return
+            }
             console.error(e)
-            alert("Failed to analyze PDF. Make sure it's a valid AutoCAD-exported PDF.")
+            const msg = (e as Error)?.message || "Failed to analyze PDF. Try another AutoCAD-exported PDF."
+            alert(msg)
             setStep("upload")
+        } finally {
+            if (abortRef.current === ac) abortRef.current = null
+            releaseJob(ac)
         }
     }, [])
 
@@ -450,12 +472,14 @@ export default function AutocadPdfEditorClient() {
 
     const handleExport = async () => {
         if (!pdfBytesRef.current || (edits.size === 0 && deletedKeys.size === 0)) {
-            alert("No changes to apply. Click a region to edit or delete its text first.")
+            alert("No changes to apply. Tap a text region to edit or delete it first.")
             return
         }
         setStep("exporting")
         setProgress(10)
         setProgressStatus("Loading PDF...")
+        const ac = takeJob()
+        abortRef.current = ac
 
         try {
             const { PDFDocument, rgb, StandardFonts, PDFName, decodePDFRawStream, degrees } = await import("pdf-lib")
@@ -631,14 +655,29 @@ export default function AutocadPdfEditorClient() {
 
             const out = await pdfDoc.save()
             const blob = new Blob([new Uint8Array(out)], { type: "application/pdf" })
-            const url = URL.createObjectURL(blob)
-            setExportUrl(url)
+            const filename = file
+                ? file.name.replace(/\.pdf$/i, "") + "-edited.pdf"
+                : "edited.pdf"
             setProgress(100)
-            setStep("done")
+            if (IS_MOBILE_BUILD) {
+                await finishConvert(
+                    blob,
+                    filename,
+                    `Applied ${edits.size + deletedKeys.size} change${edits.size + deletedKeys.size === 1 ? "" : "s"}.`,
+                )
+                setStep("editing")
+            } else {
+                const url = URL.createObjectURL(blob)
+                setExportUrl(url)
+                setStep("done")
+            }
         } catch (e) {
             console.error(e)
             alert("Failed to export. Please try again.")
             setStep("editing")
+        } finally {
+            if (abortRef.current === ac) abortRef.current = null
+            releaseJob(ac)
         }
     }
 
@@ -670,10 +709,25 @@ export default function AutocadPdfEditorClient() {
     }
 
     if (step === "analyzing" || step === "exporting") {
+        if (IS_MOBILE_BUILD) {
+            return (
+                <div className="mobile-job px-1">
+                    <MobileWorkBar
+                        note={progressStatus || (step === "analyzing" ? "Finding text..." : "Saving PDF...")}
+                        sizeLabel={file ? file.name : undefined}
+                        onCancel={() => {
+                            abortRef.current?.abort()
+                            setStep(step === "exporting" ? "editing" : "upload")
+                        }}
+                    />
+                    <p className="mt-3 text-center text-sm text-slate-500">{progress}%</p>
+                </div>
+            )
+        }
         return (
             <ProcessingWait
                 progress={progress}
-                title={step === "analyzing" ? "Analyzing AutoCAD PDF..." : "Building Edited PDF..."}
+                title={step === "analyzing" ? "Finding text on pages..." : "Saving edited PDF..."}
                 status={progressStatus}
             />
         )
@@ -685,7 +739,7 @@ export default function AutocadPdfEditorClient() {
                 <div className="bg-amber-50 border border-amber-200 text-amber-900 rounded-xl p-4 mb-6 flex gap-3 text-sm">
                     <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-0.5" />
                     <div>
-                        <strong>How this differs from a normal PDF editor:</strong> AutoCAD exports SHX text as vector strokes (not real text). Standard editors can&apos;t touch them. We scan the strokes and let you click each text region to edit it.
+                        <strong>Made for AutoCAD-exported PDFs:</strong> correct labels, notes, and dimensions without opening AutoCAD. We find text regions (including SHX vector strokes) so you can tap, type a fix, and save.
                     </div>
                 </div>
                 <FileUploader
@@ -695,9 +749,11 @@ export default function AutocadPdfEditorClient() {
                     fileTypeLabel="AutoCAD PDF"
                     iconType="pdf"
                 />
-                <div className="mt-6">
-                    <AdBanner variant="rectangle" />
-                </div>
+                {!IS_MOBILE_BUILD ? (
+                    <div className="mt-6">
+                        <AdBanner variant="rectangle" />
+                    </div>
+                ) : null}
             </div>
         )
     }
@@ -771,8 +827,8 @@ export default function AutocadPdfEditorClient() {
     // Reserve vertical space for site header (~65) + sticky toolbar (~60)
     // + legend (~28) + small breathing room (~20) when the toolbar is
     // auto-scrolled to top. Leaves the rest for the canvas.
-    const reservedV = 175
-    const availH = Math.max(400, viewportHeight - reservedV)
+    const reservedV = IS_MOBILE_BUILD ? 210 : 175
+    const availH = Math.max(IS_MOBILE_BUILD ? 280 : 400, viewportHeight - reservedV)
     const availW = containerWidth > 0 ? containerWidth : pd.width
 
     let displayScale: number
@@ -801,7 +857,7 @@ export default function AutocadPdfEditorClient() {
 
     return (
         <div className="w-full px-4 space-y-4 mx-auto max-w-[1400px]">
-            <div ref={toolbarRef} className="flex flex-wrap items-center gap-2 bg-white border rounded-xl p-2 sm:p-3 sticky top-16 z-20 shadow-md">
+            <div ref={toolbarRef} className={`flex flex-wrap items-center gap-2 bg-white border rounded-xl p-2 sm:p-3 sticky z-20 shadow-md ${IS_MOBILE_BUILD ? "top-2 border-[#026EFF]/20" : "top-16"}`}>
                 <div className="flex items-center gap-1">
                     <Button
                         size="sm"
@@ -906,6 +962,7 @@ export default function AutocadPdfEditorClient() {
                     <span className="sm:hidden">AutoCAD mode</span>
                 </label>
 
+                {!IS_MOBILE_BUILD && (
                 <Button
                     size="sm"
                     onClick={handleExport}
@@ -914,6 +971,7 @@ export default function AutocadPdfEditorClient() {
                 >
                     <Download className="w-4 h-4 mr-1" /> Export PDF
                 </Button>
+                )}
             </div>
 
             <div className="text-xs text-slate-500 flex items-center gap-4 flex-wrap">
@@ -1035,9 +1093,62 @@ export default function AutocadPdfEditorClient() {
                         if (pPart !== `p${currentPage}`) return null
                         const c = pd.clusters.find((x) => x.id === idPart)
                         if (!c) return null
+                        if (IS_MOBILE_BUILD) {
+                            return (
+                                <div
+                                    className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white p-3 pb-[max(12px,env(safe-area-inset-bottom))] shadow-[0_-8px_24px_rgba(2,110,255,0.12)]"
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-slate-600">
+                                        <Type className="h-3.5 w-3.5 text-[#026EFF]" />
+                                        Fix this text
+                                        {c.originalText ? (
+                                            <span className="truncate font-normal text-slate-400">
+                                                was &ldquo;{c.originalText}&rdquo;
+                                            </span>
+                                        ) : null}
+                                    </p>
+                                    <input
+                                        autoFocus
+                                        type="text"
+                                        value={draftText}
+                                        onChange={(e) => setDraftText(e.target.value)}
+                                        onKeyDown={(e) => {
+                                            if (e.key === "Enter") saveDraft()
+                                            if (e.key === "Escape") cancelDraft()
+                                        }}
+                                        placeholder="Type the corrected text"
+                                        className="mb-2 w-full rounded-xl border border-slate-200 px-3 py-3 text-base focus:border-[#026EFF] focus:outline-none"
+                                    />
+                                    <div className="flex gap-2">
+                                        <button
+                                            type="button"
+                                            onClick={saveDraft}
+                                            className="mobile-choose-btn flex-1"
+                                        >
+                                            Save text
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={deleteActiveCluster}
+                                            className="min-h-11 rounded-xl border border-red-200 px-3 text-sm font-semibold text-red-600"
+                                        >
+                                            Delete
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={cancelDraft}
+                                            className="min-h-11 rounded-xl border border-slate-200 px-3 text-sm font-semibold text-slate-600"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            )
+                        }
                         return (
                             <div
-                                className="absolute bg-white border-2 border-blue-600 rounded-md shadow-lg p-2 flex gap-1 items-center z-20"
+                                className="absolute z-20 flex items-center gap-1 rounded-md border-2 border-[#026EFF] bg-white p-2 shadow-lg"
                                 style={{
                                     left: c.x * displayScale,
                                     top: (c.y + c.h) * displayScale + 4,
@@ -1055,22 +1166,22 @@ export default function AutocadPdfEditorClient() {
                                         if (e.key === "Escape") cancelDraft()
                                     }}
                                     placeholder="Type replacement text"
-                                    className="flex-1 px-2 py-1 text-sm border border-slate-200 rounded focus:outline-none focus:border-blue-500"
+                                    className="flex-1 rounded border border-slate-200 px-2 py-1 text-sm focus:border-[#026EFF] focus:outline-none"
                                 />
-                                <Button size="sm" onClick={saveDraft} className="bg-blue-600 hover:bg-blue-700 h-8 px-2" title="Save replacement text">
-                                    <Check className="w-4 h-4" />
+                                <Button size="sm" onClick={saveDraft} className="h-8 bg-[#026EFF] px-2 hover:bg-[#0256d6]" title="Save replacement text">
+                                    <Check className="h-4 w-4" />
                                 </Button>
                                 <Button
                                     size="sm"
                                     variant="outline"
                                     onClick={deleteActiveCluster}
-                                    className="h-8 px-2 text-red-600 border-red-300 hover:bg-red-50"
+                                    className="h-8 border-red-300 px-2 text-red-600 hover:bg-red-50"
                                     title="Delete this text completely (leave it blank)"
                                 >
-                                    <Trash2 className="w-4 h-4" />
+                                    <Trash2 className="h-4 w-4" />
                                 </Button>
                                 <Button size="sm" variant="outline" onClick={cancelDraft} className="h-8 px-2" title="Cancel">
-                                    <X className="w-4 h-4" />
+                                    <X className="h-4 w-4" />
                                 </Button>
                             </div>
                         )
@@ -1136,9 +1247,28 @@ export default function AutocadPdfEditorClient() {
                 </div>
             )}
 
-            <div className="pt-4">
-                <AdBanner variant="rectangle" />
-            </div>
+            {IS_MOBILE_BUILD ? (
+                <div className="sticky bottom-0 z-30 -mx-4 border-t border-slate-100 bg-white/95 px-4 py-3 backdrop-blur pb-[max(12px,env(safe-area-inset-bottom))]">
+                    <button
+                        type="button"
+                        className="mobile-choose-btn w-full"
+                        disabled={edits.size === 0 && deletedKeys.size === 0}
+                        onClick={() => void handleExport()}
+                    >
+                        Save edited PDF
+                        {edits.size + deletedKeys.size > 0
+                            ? ` (${edits.size + deletedKeys.size})`
+                            : ""}
+                    </button>
+                    <p className="mt-1 text-center text-xs text-slate-500">
+                        Tap outlined text to correct it. Pinch to zoom the page.
+                    </p>
+                </div>
+            ) : (
+                <div className="pt-4">
+                    <AdBanner variant="rectangle" />
+                </div>
+            )}
         </div>
     )
 }

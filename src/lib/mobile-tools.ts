@@ -31,6 +31,7 @@ export const ANDROID_V1_TOOL_IDS = [
     'watermark-pdf',
     'add-page-numbers',
     'qr-code-generator',
+    'autocad-pdf-editor',
 ] as const
 
 export type AndroidV1ToolId = (typeof ANDROID_V1_TOOL_IDS)[number]
@@ -91,6 +92,10 @@ const SEARCH_ALIASES: Record<string, string[]> = {
     'add-page-numbers': ['page number', 'number pages'],
     'qr-code-generator': ['qr', 'barcode', 'scan code'],
     'rotate-pdf': ['turn page', 'upside down', 'landscape'],
+    'autocad-pdf-editor': [
+        'edit pdf', 'fix pdf text', 'autocad', 'cad pdf', 'shx', 'label',
+        'dimension', 'blueprint text', 'correct text', 'change text',
+    ],
 }
 
 export function isAndroidV1Tool(id: string): boolean {
@@ -156,6 +161,7 @@ export const ANDROID_SHORT_NAMES: Record<string, string> = {
     'watermark-pdf': 'Watermark',
     'add-page-numbers': 'Page numbers',
     'qr-code-generator': 'QR code',
+    'autocad-pdf-editor': 'Edit PDF text',
 }
 
 export const ANDROID_QUICK_HINTS: Record<string, string> = {
@@ -196,6 +202,7 @@ export const ANDROID_SHORT_DESCRIPTIONS: Record<string, string> = {
     'watermark-pdf': 'Stamp text on every page.',
     'add-page-numbers': 'Add page numbers to a PDF.',
     'qr-code-generator': 'Make a QR code from a link or some text.',
+    'autocad-pdf-editor': 'Correct labels and notes on AutoCAD-exported PDFs.',
 }
 
 export function shortToolDescription(tool: Tool): string {

@@ -41,6 +41,7 @@ const KEEP_ROUTES = new Set([
   'watermark-pdf',
   'add-page-numbers',
   'qr-code-generator',
+  'autocad-pdf-editor',
   'convert-worker.js',
   '_next',
   'pdf.worker.min.mjs',

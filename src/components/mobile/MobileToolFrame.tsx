@@ -31,6 +31,7 @@ const LEADS: Record<string, string> = {
     'watermark-pdf': 'Stamp text on every page.',
     'add-page-numbers': 'Add page numbers to a PDF.',
     'qr-code-generator': 'Make a QR code from a link or some text.',
+    'autocad-pdf-editor': 'Open an AutoCAD-exported PDF, tap a label or note, type the fix, then save.',
 }
 
 export default function MobileToolFrame({
@@ -50,10 +51,11 @@ export default function MobileToolFrame({
     return (
         <div className="mobile-tool-frame">
             <div className="mobile-tool-hero">
-                <div className="mobile-tool-hero-icon">
-                    <ToolGlyph toolId={toolId} size={36} />
+                <div className="mobile-tool-hero-icon" aria-hidden>
+                    <ToolGlyph toolId={toolId} size={34} />
                 </div>
                 <div className="mobile-tool-hero-copy">
+                    <p className="mobile-tool-eyebrow">Convertify</p>
                     <h1 className="mobile-tool-title">{title}</h1>
                     <p className="mobile-tool-lead">{lead}</p>
                 </div>
@@ -64,7 +66,9 @@ export default function MobileToolFrame({
                     {direction ? (
                         <div className="mobile-dir-chips" aria-hidden>
                             <span className="mobile-dir-chip">{direction.from}</span>
-                            <span className="mobile-dir-arrow">→</span>
+                            <span className="mobile-dir-arrow" aria-hidden>
+                                →
+                            </span>
                             <span className="mobile-dir-chip is-out">{direction.to}</span>
                         </div>
                     ) : null}
@@ -83,7 +87,7 @@ export default function MobileToolFrame({
                 </div>
             )}
 
-            {children}
+            <div className="mobile-tool-body">{children}</div>
         </div>
     )
 }

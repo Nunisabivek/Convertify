@@ -6,6 +6,7 @@ import {
     Minimize2,
     RotateCw,
     FileText,
+    FilePenLine,
     Droplet,
     Hash,
     QrCode,
@@ -33,6 +34,7 @@ const ACTION_ICONS: Record<string, LucideIcon> = {
     'watermark-pdf': Droplet,
     'add-page-numbers': Hash,
     'qr-code-generator': QrCode,
+    'autocad-pdf-editor': FilePenLine,
 }
 
 function ConvertBadgeGlyph({ from, to }: { from: string; to: string }) {

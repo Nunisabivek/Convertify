@@ -1645,6 +1645,112 @@ html.is-converting .mobile-work-track-bar {
   }
 }
 
+/* === tool-page premium uplift (cheap, no heavy blur) === */
+.mobile-tool-frame {
+  padding: 10px 16px 28px;
+}
 
+.mobile-tool-hero {
+  gap: 14px;
+  margin: 0 0 16px;
+  padding: 16px;
+  border-radius: 22px;
+  border: 1px solid color-mix(in srgb, #026EFF 12%, #e8eef8);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, #026EFF 7%, #ffffff) 0%, #ffffff 72%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 10px 28px rgba(15, 23, 42, 0.05);
+}
 
+.mobile-tool-hero-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  border: 1.5px solid color-mix(in srgb, #026EFF 20%, #ffffff);
+  box-shadow: 0 6px 14px rgba(2, 110, 255, 0.1);
+}
 
+.mobile-tool-eyebrow {
+  margin: 0 0 2px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, #026EFF 70%, #64748b);
+}
+
+.mobile-tool-title {
+  margin: 0 0 6px;
+  font-size: 26px !important;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  color: #0f172a;
+}
+
+.mobile-tool-lead {
+  font-size: 15px;
+  line-height: 1.45;
+  color: #64748b;
+}
+
+.mobile-tool-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 22px;
+  border: 1px solid #e8eef8;
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.04);
+}
+
+.mobile-tool-body > .mobile-job,
+.mobile-tool-body > .w-full {
+  gap: inherit;
+}
+
+.mobile-app .mobile-tool-body .mobile-picked-row,
+.mobile-app .mobile-tool-body .mobile-live-size,
+.mobile-app .mobile-tool-body .mobile-size-chip {
+  border-radius: 16px;
+}
+
+.mobile-app .mobile-tool-body .mobile-choose-btn {
+  border-radius: 18px;
+  min-height: 54px;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  box-shadow: 0 10px 22px rgba(2, 110, 255, 0.2);
+}
+
+.mobile-app .mobile-tool-body .mobile-range-chips {
+  gap: 10px;
+}
+
+.mobile-app .mobile-tool-body .mobile-chip-label {
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.mobile-dir-chip,
+.mobile-swap-btn {
+  transition: transform 120ms ease, background-color 120ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-dir-chip,
+  .mobile-swap-btn,
+  .mobile-choose-btn:active,
+  .mobile-result-primary:active,
+  .mobile-nav-item:active,
+  .mobile-size-chip:active,
+  .mobile-tool-list-item:active,
+  .mobile-tool-card:active {
+    transition: none;
+    transform: none;
+  }
+}
