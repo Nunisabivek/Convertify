@@ -9,4 +9,10 @@ export function startNativeAds(): Promise<void> {
 
 export function noteSuccessfulConversion(): void {}
 
+export function holdNativeAds(_reason: string): void {}
+
+export function releaseNativeAds(_reason: string): void {}
+
+export function flushQueuedInterstitial(): void {}
+
 export { shouldOfferInterstitial, type InterstitialGate } from './interstitial-gate'

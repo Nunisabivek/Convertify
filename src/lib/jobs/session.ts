@@ -25,6 +25,14 @@ function setConverting(value: boolean) {
         document.documentElement.classList.toggle('is-converting', value)
     }
     listeners.forEach((fn) => fn())
+    if (typeof window !== 'undefined') {
+        void import('@/lib/native-ads')
+            .then((m) => {
+                if (value) m.holdNativeAds('job')
+                else m.releaseNativeAds('job')
+            })
+            .catch(() => {})
+    }
 }
 
 /** Abort any in-flight job and start a new one. */

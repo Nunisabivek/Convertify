@@ -2,9 +2,9 @@
  * Native AdMob for the Capacitor Android shell only (`IS_MOBILE_BUILD`).
  *
  * Live IDs from the owner. When they change, swap them in exactly two places:
- *   android/app/src/main/res/values/strings.xml  →  `admob_app_id`
- *     (AndroidManifest `APPLICATION_ID` meta reads that string — do not duplicate)
- *   this file → `BANNER_AD_UNIT_ID` + `INTERSTITIAL_AD_UNIT_ID`
+ *   android/app/src/main/res/values/strings.xml  ->  `admob_app_id`
+ *     (AndroidManifest `APPLICATION_ID` meta reads that string - do not duplicate)
+ *   this file -> `BANNER_AD_UNIT_ID` + `INTERSTITIAL_AD_UNIT_ID`
  *
  * convertify.work never calls this module. Adsterra stays website-only.
  * Ad failures are silent. Share/Save on the Done sheet never waits for an ad.
@@ -27,8 +27,13 @@ let startPromise: Promise<void> | null = null
 let admob: AdMobModule | null = null
 let interstitialReady = false
 let interstitialShowing = false
+let interstitialQueued = false
 let lastNoteAt = 0
 const NOTE_DEBOUNCE_MS = 2000
+/** Hide native banner (no tap steal) without collapsing reserved space. */
+const holds = new Set<string>()
+let lastBannerHeight = 50
+let bannerLaidOut = false
 
 function adsAllowed(): boolean {
     return IS_MOBILE_BUILD && typeof window !== 'undefined'
@@ -61,10 +66,20 @@ function writeGate(gate: InterstitialGate): void {
 
 function setBannerInset(height: number): void {
     const px = Math.max(0, Math.round(height))
+    if (px > 0) lastBannerHeight = px
     const value = `${px}px`
     document.documentElement.style.setProperty('--ad-banner-h', value)
     const root = document.querySelector('.mobile-app') as HTMLElement | null
     root?.style.setProperty('--ad-banner-h', value)
+}
+
+function onBannerSize(height: number): void {
+    // hideBanner reports 0. Keep the last real height so nav/CTAs do not jump.
+    if (holds.size > 0 && height <= 0) {
+        setBannerInset(lastBannerHeight)
+        return
+    }
+    setBannerInset(height)
 }
 
 async function loadPlugin(): Promise<AdMobModule | null> {
@@ -103,7 +118,7 @@ async function maybeRequestConsent(plugin: AdMobModule): Promise<boolean> {
         }
         return info.canRequestAds !== false
     } catch {
-        // UMP missing or slow — never block the shell. Fail open for ads.
+        // UMP missing or slow - never block the shell. Fail open for ads.
         return true
     }
 }
@@ -120,19 +135,56 @@ async function prepareInterstitial(plugin: AdMobModule): Promise<void> {
 
 async function showBanner(plugin: AdMobModule): Promise<void> {
     await plugin.AdMob.addListener(plugin.BannerAdPluginEvents.SizeChanged, (size) => {
-        setBannerInset(size?.height ?? 0)
+        onBannerSize(size?.height ?? 0)
     })
     await plugin.AdMob.addListener(plugin.BannerAdPluginEvents.FailedToLoad, () => {
-        setBannerInset(0)
+        if (holds.size === 0) setBannerInset(0)
     })
     // Typical phone adaptive-banner row until SizeChanged reports the real height.
-    setBannerInset(50)
+    setBannerInset(lastBannerHeight)
     await plugin.AdMob.showBanner({
         adId: BANNER_AD_UNIT_ID,
         adSize: plugin.BannerAdSize.ADAPTIVE_BANNER,
         position: plugin.BannerAdPosition.BOTTOM_CENTER,
         margin: 0,
     })
+    bannerLaidOut = true
+    if (holds.size > 0) {
+        await plugin.AdMob.hideBanner().catch(() => {})
+        setBannerInset(lastBannerHeight)
+    }
+}
+
+async function applyHolds(): Promise<void> {
+    const plugin = admob
+    if (!plugin || !bannerLaidOut) return
+    try {
+        if (holds.size > 0) {
+            await plugin.AdMob.hideBanner()
+            setBannerInset(lastBannerHeight)
+        } else {
+            await plugin.AdMob.resumeBanner()
+        }
+    } catch {
+        // fail silently
+    }
+}
+
+/**
+ * Hide the native banner so it cannot steal taps (convert progress, Done sheet).
+ * Reserved `--ad-banner-h` space stays so the shell does not jump.
+ */
+export function holdNativeAds(reason: string): void {
+    if (!adsAllowed() || !reason) return
+    const before = holds.size
+    holds.add(reason)
+    if (before === 0) void applyHolds()
+}
+
+export function releaseNativeAds(reason: string): void {
+    if (!adsAllowed() || !reason) return
+    holds.delete(reason)
+    if (holds.size === 0) void applyHolds()
 }
 
 async function startNativeAdsInternal(): Promise<void> {
@@ -165,6 +217,7 @@ async function startNativeAdsInternal(): Promise<void> {
         await showBanner(plugin)
     } catch {
         setBannerInset(0)
+        bannerLaidOut = false
     }
 
     // Prefetch in the background so a later convert can show without waiting.
@@ -182,11 +235,35 @@ export function startNativeAds(): Promise<void> {
     return startPromise
 }
 
+function tryShowInterstitial(): void {
+    const plugin = admob
+    if (!plugin) return
+    if (!interstitialReady || interstitialShowing) return
+    if (holds.has('job')) return
+
+    interstitialShowing = true
+    interstitialReady = false
+    interstitialQueued = false
+    void plugin.AdMob.showInterstitial()
+        .then(() => {
+            const shown = readGate()
+            shown.lastShownAt = Date.now()
+            shown.conversionsAtLastShow = shown.conversions
+            writeGate(shown)
+        })
+        .catch(() => {
+            interstitialShowing = false
+            interstitialReady = false
+            if (admob) void prepareInterstitial(admob)
+        })
+}
+
 /**
  * After a file is ready to share/save. Never on cold start, back, picker, or tap.
  * At most once every 3 conversions and 3 minutes (whichever is stricter).
- * Only shows if an interstitial is already loaded — never waits and never
- * blocks Share/Save on the Done sheet.
+ * Only queues if an interstitial is already loaded - never waits and never
+ * blocks Share/Save on the Done sheet. Actual show happens in
+ * `flushQueuedInterstitial` after the sheet closes.
  */
 export function noteSuccessfulConversion(): void {
     if (!adsAllowed()) return
@@ -206,19 +283,18 @@ export function noteSuccessfulConversion(): void {
     }
     if (!shouldOfferInterstitial(gate, now)) return
     if (!interstitialReady || interstitialShowing) return
+    interstitialQueued = true
+}
 
-    interstitialShowing = true
-    interstitialReady = false
-    void plugin.AdMob.showInterstitial()
-        .then(() => {
-            const shown = readGate()
-            shown.lastShownAt = Date.now()
-            shown.conversionsAtLastShow = shown.conversions
-            writeGate(shown)
-        })
-        .catch(() => {
-            interstitialShowing = false
-            interstitialReady = false
-            if (admob) void prepareInterstitial(admob)
-        })
+/**
+ * Show a queued interstitial after Share/Save had a chance (Done sheet closed).
+ * Short delay so Close does not feel like it opened the ad.
+ */
+export function flushQueuedInterstitial(): void {
+    if (!adsAllowed() || !interstitialQueued) return
+    window.setTimeout(() => {
+        if (!interstitialQueued) return
+        interstitialQueued = false
+        tryShowInterstitial()
+    }, 360)
 }

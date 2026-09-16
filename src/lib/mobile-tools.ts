@@ -159,9 +159,9 @@ export const ANDROID_SHORT_NAMES: Record<string, string> = {
 }
 
 export const ANDROID_QUICK_HINTS: Record<string, string> = {
-    'fit-to-size': 'Any KB a form asks for',
+    'fit-to-size': 'Hit the size a form wants',
     'passport-photo': 'US, India, visa, bank',
-    'compress-pdf': 'Shrink to a target KB',
+    'compress-pdf': 'Small enough to upload',
     'jpg-to-pdf': 'Photos into one PDF',
     'pdf-to-jpg': 'Each page as a photo',
     'remove-background': 'White ID backdrop',
@@ -175,21 +175,21 @@ export function shortToolName(tool: Tool): string {
 
 /** One or two lines on the Tools list — website descriptions stay long for SEO. */
 export const ANDROID_SHORT_DESCRIPTIONS: Record<string, string> = {
-    'fit-to-size': 'Make a file land between a min and max KB.',
-    'passport-photo': 'US 2×2, India 630×810, visa, or bank photo.',
+    'fit-to-size': 'Make a file the size a form asks for.',
+    'passport-photo': 'US 2x2, India, visa, or bank photo.',
     'remove-background': 'Replace a backdrop with white or light blue.',
     'merge-pdf': 'Combine several PDFs into one file.',
     'split-pdf': 'Pull pages out of a PDF.',
-    'compress-pdf': 'Shrink a PDF down to a target KB.',
+    'compress-pdf': 'Make a PDF small enough to upload.',
     'rotate-pdf': 'Turn pages the right way up.',
-    'jpg-to-pdf': 'Turn photos into one PDF.',
+    'jpg-to-pdf': 'Photos into one PDF, in any order.',
     'png-to-pdf': 'Turn PNG pictures into one PDF.',
     'pdf-to-jpg': 'Save each PDF page as a photo.',
     'pdf-to-png': 'Save each PDF page as a PNG.',
     'word-to-pdf': 'Turn a Word file into a PDF.',
     'pdf-to-word': 'Turn a PDF into a Word file.',
     'excel-to-pdf': 'Turn a spreadsheet into a PDF.',
-    'image-compressor': 'Shrink a photo down to a target KB.',
+    'image-compressor': 'Make a photo small enough to upload.',
     'resize-image': 'Change a photo’s width and height.',
     'heic-to-jpg': 'Turn iPhone photos into JPG.',
     'webp-converter': 'Convert WebP pictures to JPG or PNG.',

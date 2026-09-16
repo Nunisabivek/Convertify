@@ -32,4 +32,7 @@ assert.equal(shouldOfferInterstitial({ ...afterShow, conversions: 5 }, shownAt +
 assert.equal(shouldOfferInterstitial({ ...afterShow, conversions: 6 }, shownAt + 60 * 1000), false)
 assert.equal(shouldOfferInterstitial({ ...afterShow, conversions: 6 }, shownAt + 3 * 60 * 1000), true)
 
+assert.match(adsSrc, /export function holdNativeAds/)
+assert.match(adsSrc, /export function flushQueuedInterstitial/)
+assert.match(adsSrc, /interstitialQueued/)
 console.log('interstitial-gate tests passed')

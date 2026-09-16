@@ -76,6 +76,12 @@ export default function NativeResultSheet() {
             return null
         })
         setResultSheetOpen(false)
+        void import('@/lib/native-ads')
+            .then((m) => {
+                m.releaseNativeAds('sheet')
+                m.flushQueuedInterstitial()
+            })
+            .catch(() => {})
     }, [])
 
     useEffect(() => {
@@ -111,8 +117,12 @@ export default function NativeResultSheet() {
                 })
                 setOutput(stored)
                 setResultSheetOpen(true)
-                // Fire-and-forget — Share/Save must not wait for an interstitial.
-                void import('@/lib/native-ads').then((m) => m.noteSuccessfulConversion()).catch(() => {})
+                void import('@/lib/native-ads')
+                    .then((m) => {
+                        m.holdNativeAds('sheet')
+                        m.noteSuccessfulConversion()
+                    })
+                    .catch(() => {})
             } catch {
                 setError('Could not save that file. Try again.')
                 setResultSheetOpen(true)
@@ -135,8 +145,12 @@ export default function NativeResultSheet() {
                 })
                 setOutput(stored)
                 setResultSheetOpen(true)
-                // Fire-and-forget — Share/Save must not wait for an interstitial.
-                void import('@/lib/native-ads').then((m) => m.noteSuccessfulConversion()).catch(() => {})
+                void import('@/lib/native-ads')
+                    .then((m) => {
+                        m.holdNativeAds('sheet')
+                        m.noteSuccessfulConversion()
+                    })
+                    .catch(() => {})
             } catch {
                 setError('Could not save that file. Try again.')
                 setResultSheetOpen(true)

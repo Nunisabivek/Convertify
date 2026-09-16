@@ -3,6 +3,7 @@ import { Metadata } from "next"
 import Link from "next/link"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import JpgToPdfClient from "./client"
+import JpgToPdfMobileClient from "./mobile-client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import MobileToolFrame from "@/components/mobile/MobileToolFrame"
 import { FAQSchema } from "@/components/seo/faq-schema"
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-    if (IS_MOBILE_BUILD) return <MobileToolFrame toolId="jpg-to-pdf"><JpgToPdfClient /></MobileToolFrame>
+    if (IS_MOBILE_BUILD) return <MobileToolFrame toolId="jpg-to-pdf"><JpgToPdfMobileClient /></MobileToolFrame>
 
     const relatedBlogSlugs = getBlogPostsForTool('jpg-to-pdf')
     const relatedBlogs = allIndexableBlogPosts.filter(post => relatedBlogSlugs.includes(post.slug))
