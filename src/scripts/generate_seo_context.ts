@@ -1,6 +1,6 @@
 import fs from 'fs';
-import { blogPosts } from '../lib/blog-data';
-import { toolSeoData } from '../lib/seo-data';
+import { blogPosts } from '../lib/blog-data.ts';
+import { toolSeoData } from '../lib/seo-data.ts';
 
 const OUTPUT_FILE = 'convertify_seo_context.md';
 

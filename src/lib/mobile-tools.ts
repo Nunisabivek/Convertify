@@ -3,7 +3,7 @@ import {
     getAllTools,
     type Tool,
     type ToolCategory,
-} from './tools-registry'
+} from './tools-registry.ts'
 
 /**
  * Android v1 allowlist. Website registry may mark unfinished tools as

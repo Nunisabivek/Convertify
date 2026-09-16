@@ -29,8 +29,15 @@ assert.match(css, /\.mobile-app \.mobile-job:has\(\.mobile-job-cta\)[\s\S]{0,280
 assert.doesNotMatch(css, /\.mobile-app \.mobile-job:has\(\.mobile-job-cta\)[\s\S]{0,280}padding-bottom:\s*calc\(110px \+ var\(--chrome-bottom\)\)/)
 
 const seoSrc = readFileSync(join(root, 'src/lib/seo-data.ts'), 'utf8')
-assert.match(seoSrc, /from '\.\/document-title'/)
+assert.match(seoSrc, /from '\.\/document-title\.ts'/)
 assert.equal(seoSrc.includes('@/lib/document-title'), false)
+
+const mobileToolsSrc = readFileSync(join(root, 'src/lib/mobile-tools.ts'), 'utf8')
+assert.match(mobileToolsSrc, /from '\.\/tools-registry\.ts'/)
+
+const genSrc = readFileSync(join(root, 'src/scripts/generate_seo_context.ts'), 'utf8')
+assert.match(genSrc, /from '\.\.\/lib\/seo-data\.ts'/)
+assert.match(genSrc, /from '\.\.\/lib\/blog-data\.ts'/)
 
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')) as {
     scripts: Record<string, string>

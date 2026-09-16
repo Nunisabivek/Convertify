@@ -11,7 +11,7 @@
 //      hurts more than an admitted limitation.
 //   3. 600+ words of actual substance. Posts under 350 words are auto-
 //      noindexed by isBlogPostIndexable() and excluded from the sitemap.
-import type { BlogPost } from './blog-data'
+import type { BlogPost } from './blog-data.ts'
 
 export const longTailPosts: BlogPost[] = [
   {
