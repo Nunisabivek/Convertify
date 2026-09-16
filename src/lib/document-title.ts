@@ -1,5 +1,5 @@
-import { IS_MOBILE_BUILD } from './is-mobile-build'
-import { ANDROID_SHORT_NAMES } from './mobile-tools'
+import { IS_MOBILE_BUILD } from './is-mobile-build.ts'
+import { ANDROID_SHORT_NAMES } from './mobile-tools.ts'
 
 /** Android recents / WebView `<title>` — never website SEO strings. */
 export const MOBILE_HOME_TITLE = 'Convertify'

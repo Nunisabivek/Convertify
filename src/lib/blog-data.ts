@@ -1,6 +1,6 @@
 // Blog Content Calendar & SEO-Optimized Blog Posts
 // Each post targets specific long-tail keywords with high search intent
-import { longTailPosts } from './blog-posts-longtail'
+import { longTailPosts } from './blog-posts-longtail.ts'
 
 export interface BlogPost {
   slug: string
