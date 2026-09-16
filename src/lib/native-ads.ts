@@ -126,7 +126,10 @@ async function maybeRequestConsent(plugin: AdMobModule): Promise<boolean> {
 async function prepareInterstitial(plugin: AdMobModule): Promise<void> {
     interstitialReady = false
     try {
-        await plugin.AdMob.prepareInterstitial({ adId: INTERSTITIAL_AD_UNIT_ID })
+        await plugin.AdMob.prepareInterstitial({
+            adId: INTERSTITIAL_AD_UNIT_ID,
+            isTesting: false,
+        })
         interstitialReady = true
     } catch {
         interstitialReady = false
@@ -147,6 +150,7 @@ async function showBanner(plugin: AdMobModule): Promise<void> {
         adSize: plugin.BannerAdSize.ADAPTIVE_BANNER,
         position: plugin.BannerAdPosition.BOTTOM_CENTER,
         margin: 0,
+        isTesting: false,
     })
     bannerLaidOut = true
     if (holds.size > 0) {
@@ -192,7 +196,10 @@ async function startNativeAdsInternal(): Promise<void> {
     const plugin = await loadPlugin()
     if (!plugin) return
 
-    await plugin.AdMob.initialize()
+    await plugin.AdMob.initialize({
+        // Production/Play: never register test devices or force test creatives.
+        initializeForTesting: false,
+    })
     const canRequest = await maybeRequestConsent(plugin)
     if (!canRequest) return
 

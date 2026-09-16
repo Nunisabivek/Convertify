@@ -14,6 +14,9 @@ assert.match(adsSrc, /ca-app-pub-4814181825408625\/7919857158/)
 assert.match(adsSrc, /ca-app-pub-4814181825408625\/4065381782/)
 assert.equal(adsSrc.includes(SAMPLE_PUBLISHER), false)
 assert.equal(stringsSrc.includes(SAMPLE_PUBLISHER), false)
+assert.match(adsSrc, /initializeForTesting:\s*false/)
+assert.match(adsSrc, /isTesting:\s*false/)
+assert.equal((adsSrc.match(/isTesting:\s*false/g) || []).length >= 2, true)
 
 const empty: InterstitialGate = { conversions: 0, lastShownAt: 0, conversionsAtLastShow: 0 }
 
