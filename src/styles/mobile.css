@@ -296,6 +296,28 @@ body:has(.mobile-app),
   padding: 4px 5px;
 }
 
+.mobile-tool-list-icon .mobile-convert-from,
+.mobile-tool-list-icon .mobile-convert-to {
+  font-size: 9px;
+  min-width: 34px;
+  padding: 2px 3px;
+  border-radius: 5px;
+}
+
+.mobile-tool-list-icon .mobile-convert-arrow {
+  font-size: 9px;
+}
+
+.mobile-app .mobile-tool-icon,
+.mobile-app .mobile-tool-list-icon,
+.mobile-app .mobile-tool-hero-icon {
+  background: #ffffff;
+  color: #026EFF;
+  border: 1.5px solid color-mix(in srgb, #026EFF 22%, #ffffff);
+  box-shadow: 0 1px 2px rgba(2, 110, 255, 0.08);
+}
+
+
 .mobile-tool-name {
   font-size: 15px;
   font-weight: 700;
