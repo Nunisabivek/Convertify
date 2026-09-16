@@ -3,6 +3,10 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { spawnSync } from 'node:child_process'
 
+// PowerShell cannot parse `FOO=bar cmd`. npm scripts use cross-env; this is the
+// equivalent if someone runs `node scripts/build-mobile.mjs` directly.
+process.env.NEXT_PUBLIC_MOBILE_BUILD = 'true'
+
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const tmp = join(root, '.mobile-build-stash')
 

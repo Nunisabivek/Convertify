@@ -60,11 +60,12 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Convertify — Free Online PDF Tools (No Upload, No Sign-up)",
+    default: IS_MOBILE_BUILD ? "Convertify" : "Convertify — Free Online PDF Tools (No Upload, No Sign-up)",
     // No " | Convertify" suffix. Google truncates titles around 60 characters
     // and the brand costs 13 of them on a domain nobody searches by name yet,
     // pushing the actual keywords out of the visible SERP snippet. Page titles
-    // below carry the brand only where it earns its space.
+    // below carry the brand only where it earns its space. The Android shell
+    // uses the short app name so recents never show website SEO strings.
     template: "%s",
   },
   description: "40+ free PDF tools: merge, compress, convert, edit & sign PDFs in your browser. Files never leave your device — no uploads, no sign-up, no watermarks. Works on Windows, Mac, iPhone & Android.",

@@ -1,3 +1,5 @@
+import { applyMobileSeoTitles } from '@/lib/document-title'
+
 // Centralized SEO data for all tools
 // This helps maintain consistent, keyword-rich content across all pages
 
@@ -1471,3 +1473,5 @@ export const toolSeoData = {
         ]
     }
 }
+
+applyMobileSeoTitles(toolSeoData)

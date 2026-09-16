@@ -13,14 +13,15 @@ import { AnswerBlock } from '@/components/seo/answer-block'
 import { uniqueToolSeo } from '@/lib/unique-tools-seo'
 import { allIndexableBlogPosts } from '@/lib/blog-data'
 import { getBlogPostsForTool } from '@/lib/tool-blog-mapping'
+import { toolDocumentTitle } from '@/lib/document-title'
 
-const title = 'Fit Photo or PDF to 20–50KB or Any Exact Size'
+const webTitle = 'Fit Photo or PDF to 20–50KB or Any Exact Size'
 const description =
     'Land a photo or PDF between a min and max size: 20–50 KB, 50–200 KB, 100–200 KB, or 1–2 MB for job, visa, and university uploads. Runs in your browser.'
 const seo = uniqueToolSeo['fit-to-size']
 
 export const metadata: Metadata = {
-    title,
+    title: toolDocumentTitle('fit-to-size', webTitle),
     description,
     keywords: [
         'fit pdf to size',
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
         canonical: 'https://convertify.work/fit-to-size',
     },
     openGraph: {
-        title,
+        title: webTitle,
         description,
         url: 'https://convertify.work/fit-to-size',
         siteName: 'Convertify',
@@ -52,13 +53,13 @@ export const metadata: Metadata = {
                 url: 'https://convertify.work/images/og-banner.png',
                 width: 1200,
                 height: 630,
-                alt: title,
+                alt: webTitle,
             },
         ],
     },
     twitter: {
         card: 'summary_large_image',
-        title,
+        title: webTitle,
         description,
         images: ['https://convertify.work/images/og-banner.png'],
     },

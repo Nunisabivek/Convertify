@@ -11,6 +11,7 @@ import { tapHaptic } from '@/lib/haptics'
 import { abortConvertWorker } from '@/lib/jobs/media'
 import { isConverting, subscribeConverting } from '@/lib/jobs/session'
 import { closeResultSheet, isResultSheetOpen } from '@/lib/result-sheet'
+import { mobileRouteTitle } from '@/lib/document-title'
 
 interface MobileLayoutProps {
     children: ReactNode
@@ -78,6 +79,7 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
 
     useEffect(() => {
         rememberTab(pathname)
+        document.title = mobileRouteTitle(pathname)
     }, [pathname])
 
     useEffect(() => {

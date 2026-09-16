@@ -33,6 +33,8 @@ body:has(.mobile-app),
      ConvertifyFiles.getSafeAreaInsets set these CSS variables on <html>. */
   --inset-top: var(--safe-area-inset-top, env(safe-area-inset-top, 0px));
   --inset-bottom: var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px));
+  /* Fixed bottom nav sits above the AdMob banner. Scroll content must pad by this. */
+  --chrome-bottom: calc(var(--nav-h) + var(--inset-bottom) + var(--ad-banner-h));
 
   display: flex;
   flex-direction: column;
@@ -61,12 +63,17 @@ body:has(.mobile-app),
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   background: var(--md-surface);
-  padding-bottom: calc(var(--nav-h) + 36px + var(--inset-bottom) + var(--ad-banner-h));
+  /* Padding on this overflow scroller is dropped from scrollHeight on some
+     Android WebViews, so the gap lives on `.mobile-route-page` instead. */
+  padding-bottom: 0;
+  scroll-padding-bottom: calc(var(--chrome-bottom) + 24px);
 }
 
 .mobile-route-page {
   min-height: 100%;
   background: var(--md-surface);
+  box-sizing: border-box;
+  padding-bottom: calc(var(--chrome-bottom) + 24px);
 }
 
 .mobile-route-page.is-enter {
@@ -411,7 +418,7 @@ body:has(.mobile-app),
 }
 
 .mobile-tools-dashboard {
-  padding-bottom: 20px;
+  padding-bottom: 8px;
 }
 
 .mobile-category {
@@ -714,7 +721,7 @@ body:has(.mobile-app),
   top: 0;
   left: 0;
   right: 0;
-  bottom: calc(var(--nav-h) + var(--inset-bottom) + var(--ad-banner-h));
+  bottom: var(--chrome-bottom);
   z-index: 28;
   background: rgba(15, 23, 42, 0.4);
   display: flex;
@@ -1259,7 +1266,7 @@ body:has(.mobile-app),
   position: fixed;
   left: 0;
   right: 0;
-  bottom: calc(var(--nav-h) + var(--ad-banner-h) + var(--inset-bottom));
+  bottom: var(--chrome-bottom);
   z-index: 25;
   padding: 10px 16px 12px;
   background: var(--md-surface);
@@ -1284,7 +1291,8 @@ body:has(.mobile-app),
 }
 
 .mobile-app .mobile-job:has(.mobile-job-cta) {
-  padding-bottom: 110px;
+  /* CTA is fixed above nav+banner; keep Min/Max and similar fields in view. */
+  padding-bottom: calc(110px + var(--chrome-bottom));
 }
 
 .mobile-app .mobile-tool-frame:has(.mobile-job-cta) .mobile-tool-lead,
