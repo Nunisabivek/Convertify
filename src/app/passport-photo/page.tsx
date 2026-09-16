@@ -13,14 +13,15 @@ import { AnswerBlock } from '@/components/seo/answer-block'
 import { uniqueToolSeo } from '@/lib/unique-tools-seo'
 import { allIndexableBlogPosts } from '@/lib/blog-data'
 import { getBlogPostsForTool } from '@/lib/tool-blog-mapping'
+import { toolDocumentTitle } from '@/lib/document-title'
 
-const title = 'Passport Photo: US 2×2, 630×810 & Visa Sizes'
+const webTitle = 'Passport Photo: US 2×2, 630×810 & Visa Sizes'
 const description =
     'Make a US 2×2 inch (600×600), India 630×810, visa 35×45, UPSC, bank, or signature JPEG with a white background and the KB cap the form lists. No upload.'
 const seo = uniqueToolSeo['passport-photo']
 
 export const metadata: Metadata = {
-    title,
+    title: toolDocumentTitle('passport-photo', webTitle),
     description,
     keywords: [
         'passport photo maker',
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
         canonical: 'https://convertify.work/passport-photo',
     },
     openGraph: {
-        title,
+        title: webTitle,
         description,
         url: 'https://convertify.work/passport-photo',
         siteName: 'Convertify',
@@ -50,13 +51,13 @@ export const metadata: Metadata = {
                 url: 'https://convertify.work/images/og-banner.png',
                 width: 1200,
                 height: 630,
-                alt: title,
+                alt: webTitle,
             },
         ],
     },
     twitter: {
         card: 'summary_large_image',
-        title,
+        title: webTitle,
         description,
         images: ['https://convertify.work/images/og-banner.png'],
     },

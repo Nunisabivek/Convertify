@@ -12,9 +12,10 @@ import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
 import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
 import { allIndexableBlogPosts } from "@/lib/blog-data"
 import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
+import { toolDocumentTitle } from "@/lib/document-title"
 
 export const metadata: Metadata = {
-    title: "Resize Image - Change Image Dimensions Free Online | Convertify",
+    title: toolDocumentTitle("resize-image", "Resize Image - Change Image Dimensions Free Online | Convertify"),
     description: "Resize images to any dimension online for free. Change width and height, maintain aspect ratio. Works with JPG, PNG, WebP. No sign-up required.",
     keywords: ["resize image", "change image size", "image resizer", "resize photo", "image dimensions", "scale image", "free image resizer"],
     alternates: { canonical: "https://convertify.work/resize-image" },

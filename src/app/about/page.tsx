@@ -3,9 +3,10 @@ import Link from "next/link"
 import { Shield, Zap, Globe, Lock, Users, Heart, FileCheck, Code2, Calendar } from "lucide-react"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import { MobileAboutPage } from "@/components/mobile"
+import { appDocumentTitle, MOBILE_ABOUT_TITLE } from "@/lib/document-title"
 
 export const metadata: Metadata = {
-    title: "About Convertify — Privacy-First, Browser-Based PDF Tools",
+    title: appDocumentTitle("About Convertify — Privacy-First, Browser-Based PDF Tools", MOBILE_ABOUT_TITLE),
     description: "Convertify is a privacy-first online PDF and file converter built by engineers who got tired of uploading sensitive documents to unknown servers. Every tool runs 100% in your browser. Meet the team and methodology behind 40+ tools used by millions.",
     alternates: { canonical: "https://convertify.work/about" },
     openGraph: {

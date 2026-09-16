@@ -61,8 +61,10 @@ function writeGate(gate: InterstitialGate): void {
 
 function setBannerInset(height: number): void {
     const px = Math.max(0, Math.round(height))
+    const value = `${px}px`
+    document.documentElement.style.setProperty('--ad-banner-h', value)
     const root = document.querySelector('.mobile-app') as HTMLElement | null
-    ;(root ?? document.documentElement).style.setProperty('--ad-banner-h', `${px}px`)
+    root?.style.setProperty('--ad-banner-h', value)
 }
 
 async function loadPlugin(): Promise<AdMobModule | null> {
@@ -123,6 +125,8 @@ async function showBanner(plugin: AdMobModule): Promise<void> {
     await plugin.AdMob.addListener(plugin.BannerAdPluginEvents.FailedToLoad, () => {
         setBannerInset(0)
     })
+    // Typical phone adaptive-banner row until SizeChanged reports the real height.
+    setBannerInset(50)
     await plugin.AdMob.showBanner({
         adId: BANNER_AD_UNIT_ID,
         adSize: plugin.BannerAdSize.ADAPTIVE_BANNER,

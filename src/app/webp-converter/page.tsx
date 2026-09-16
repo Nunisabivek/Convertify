@@ -12,9 +12,10 @@ import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
 import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
 import { allIndexableBlogPosts } from "@/lib/blog-data"
 import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
+import { toolDocumentTitle } from "@/lib/document-title"
 
 export const metadata: Metadata = {
-    title: "WebP Converter - Convert Images to/from WebP Free | Convertify",
+    title: toolDocumentTitle("webp-converter", "WebP Converter - Convert Images to/from WebP Free | Convertify"),
     description: "Convert images to and from WebP format online for free. Compress JPG, PNG to WebP for smaller files. Convert WebP to JPG/PNG for compatibility. No sign-up.",
     keywords: ["webp converter", "convert to webp", "convert from webp", "webp to jpg", "png to webp", "image converter", "free webp converter"],
     alternates: { canonical: "https://convertify.work/webp-converter" },

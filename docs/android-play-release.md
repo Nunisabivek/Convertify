@@ -13,7 +13,7 @@ cd android
 
 The APK is at `android/app/build/outputs/apk/debug/app-debug.apk`.
 
-`npm run mobile` runs a static Next.js export (`NEXT_PUBLIC_MOBILE_BUILD=true`) and `npx cap sync android`. Website Adsterra code is stripped in that export. The Android shell uses Google AdMob. Live IDs live in exactly two files:
+`npm run mobile` runs a static Next.js export (`NEXT_PUBLIC_MOBILE_BUILD=true`) and `npx cap sync android`. Scripts use `cross-env` so this works in PowerShell as well as bash. Website Adsterra code is stripped in that export. The Android shell uses Google AdMob. Live IDs live in exactly two files:
 
 1. `android/app/src/main/res/values/strings.xml` — `admob_app_id` (the manifest `APPLICATION_ID` meta reads this string)
 2. `src/lib/native-ads.ts` — banner and interstitial unit IDs
@@ -32,7 +32,7 @@ This is how you watch the app update like `next dev` on the website. It does **n
 npm run dev:mobile
 ```
 
-That is `NEXT_PUBLIC_MOBILE_BUILD=true next dev -H 0.0.0.0 --port 3000`. The emulator reaches this machine at `10.0.2.2`.
+That is `cross-env NEXT_PUBLIC_MOBILE_BUILD=true next dev -H 0.0.0.0 --port 3000` (PowerShell-safe). The emulator reaches this machine at `10.0.2.2`.
 
 **2. Start the Android emulator** from Android Studio (or `emulator -avd <name>`).
 

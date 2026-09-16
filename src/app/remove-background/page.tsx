@@ -13,14 +13,15 @@ import { AnswerBlock } from '@/components/seo/answer-block'
 import { uniqueToolSeo } from '@/lib/unique-tools-seo'
 import { allIndexableBlogPosts } from '@/lib/blog-data'
 import { getBlogPostsForTool } from '@/lib/tool-blog-mapping'
+import { toolDocumentTitle } from '@/lib/document-title'
 
-const title = 'Remove Photo Background for Passport & ID — Free'
+const webTitle = 'Remove Photo Background for Passport & ID — Free'
 const description =
     'Replace a plain backdrop with white for passport, KYC, and LinkedIn headshots. Light blue optional. Runs in your browser — the photo never leaves your device.'
 const seo = uniqueToolSeo['remove-background']
 
 export const metadata: Metadata = {
-    title,
+    title: toolDocumentTitle('remove-background', webTitle),
     description,
     keywords: [
         'remove background passport photo',
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
         canonical: 'https://convertify.work/remove-background',
     },
     openGraph: {
-        title,
+        title: webTitle,
         description,
         url: 'https://convertify.work/remove-background',
         siteName: 'Convertify',
@@ -48,13 +49,13 @@ export const metadata: Metadata = {
                 url: 'https://convertify.work/images/og-banner.png',
                 width: 1200,
                 height: 630,
-                alt: title,
+                alt: webTitle,
             },
         ],
     },
     twitter: {
         card: 'summary_large_image',
-        title,
+        title: webTitle,
         description,
         images: ['https://convertify.work/images/og-banner.png'],
     },
