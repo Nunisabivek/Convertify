@@ -1,7 +1,6 @@
 // Mobile Components Barrel Export
 // ================================
 
-export { default as MobileLayout } from './MobileLayout';
 export { default as MobileToolGrid } from './MobileToolGrid';
 export { default as MobileToolsDashboard } from './MobileToolsDashboard';
 export { default as MobileRecentFiles } from './MobileRecentFiles';

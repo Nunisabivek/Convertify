@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { AppIcon } from '@/components/mobile/AppIcon'
-import { getAndroidQuickTools, shortToolName } from '@/lib/mobile-tools'
+import { getAndroidQuickTools, shortToolName, ANDROID_QUICK_HINTS } from '@/lib/mobile-tools'
 import { tapHaptic } from '@/lib/haptics'
 
 export default function MobileToolGrid() {
@@ -28,9 +28,10 @@ export default function MobileToolGrid() {
                         }}
                     >
                         <div className="mobile-tool-icon">
-                            <AppIcon name={tool.icon.lucide} size={26} />
+                            <AppIcon name={tool.icon.lucide} size={28} />
                         </div>
                         <span className="mobile-tool-name">{shortToolName(tool)}</span>
+                        <span className="mobile-tool-hint">{ANDROID_QUICK_HINTS[tool.id] ?? shortToolName(tool)}</span>
                     </Link>
                 ))}
             </div>

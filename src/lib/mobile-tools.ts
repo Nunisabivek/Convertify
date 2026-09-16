@@ -156,18 +156,27 @@ export const ANDROID_SHORT_NAMES: Record<string, string> = {
     'qr-code-generator': 'QR code',
 }
 
+export const ANDROID_QUICK_HINTS: Record<string, string> = {
+    'fit-to-size': 'Any KB a form asks for',
+    'passport-photo': 'US, India, visa, bank',
+    'compress-pdf': 'Shrink to a target KB',
+    'jpg-to-pdf': 'Photos into one PDF',
+    'remove-background': 'White ID backdrop',
+    'merge-pdf': 'Combine PDFs',
+}
+
 export function shortToolName(tool: Tool): string {
     return ANDROID_SHORT_NAMES[tool.id] ?? tool.name
 }
 
 /** One or two lines on the Tools list — website descriptions stay long for SEO. */
 export const ANDROID_SHORT_DESCRIPTIONS: Record<string, string> = {
-    'fit-to-size': 'Land a file between a min and max KB.',
-    'passport-photo': 'US 2×2, India 630×810, visa, bank.',
-    'remove-background': 'White or light-blue ID backdrop.',
-    'merge-pdf': 'Combine PDFs into one file.',
+    'fit-to-size': 'Make a file land between a min and max KB.',
+    'passport-photo': 'US 2×2, India 630×810, visa, or bank photo.',
+    'remove-background': 'Replace a backdrop with white or light blue.',
+    'merge-pdf': 'Combine several PDFs into one file.',
     'split-pdf': 'Pull pages out of a PDF.',
-    'compress-pdf': 'Shrink a PDF to a target KB.',
+    'compress-pdf': 'Shrink a PDF down to a target KB.',
     'rotate-pdf': 'Turn pages the right way up.',
     'jpg-to-pdf': 'Turn photos into one PDF.',
     'png-to-pdf': 'Turn PNG pictures into one PDF.',
@@ -176,13 +185,13 @@ export const ANDROID_SHORT_DESCRIPTIONS: Record<string, string> = {
     'word-to-pdf': 'Turn a Word file into a PDF.',
     'pdf-to-word': 'Turn a PDF into a Word file.',
     'excel-to-pdf': 'Turn a spreadsheet into a PDF.',
-    'image-compressor': 'Shrink a photo to a target KB.',
+    'image-compressor': 'Shrink a photo down to a target KB.',
     'resize-image': 'Change a photo’s width and height.',
     'heic-to-jpg': 'Turn iPhone photos into JPG.',
     'webp-converter': 'Convert WebP pictures to JPG or PNG.',
     'watermark-pdf': 'Stamp text on every page.',
     'add-page-numbers': 'Add page numbers to a PDF.',
-    'qr-code-generator': 'Make a QR code from a link or text.',
+    'qr-code-generator': 'Make a QR code from a link or some text.',
 }
 
 export function shortToolDescription(tool: Tool): string {

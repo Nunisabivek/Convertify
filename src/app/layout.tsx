@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import ClientLayout from "@/components/layout/ClientLayout";
+import AppShell from "@/components/layout/AppShell";
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build";
 
 // Google Analytics Measurement ID
@@ -207,9 +207,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col ${IS_MOBILE_BUILD ? "mobile-root" : "bg-slate-50"}`}
       >
-        <ClientLayout>
+        <AppShell>
           {children}
-        </ClientLayout>
+        </AppShell>
       </body>
     </html>
   );

@@ -5,12 +5,11 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { AdBanner } from "@/components/ads/banner";
 import { JsonLd } from "@/components/seo/json-ld";
-import { MobileLayout } from "@/components/mobile";
-import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build";
 import { usePathname } from "next/navigation";
 
 const FULL_WIDTH_ROUTES = ["/autocad-pdf-editor"];
 
+/** Website chrome only. The Android shell never imports this file. */
 export default function ClientLayout({
     children,
 }: {
@@ -18,10 +17,6 @@ export default function ClientLayout({
 }) {
     const pathname = usePathname();
     const isFullWidth = FULL_WIDTH_ROUTES.includes(pathname || "");
-
-    if (IS_MOBILE_BUILD) {
-        return <MobileLayout>{children}</MobileLayout>;
-    }
 
     return (
         <>

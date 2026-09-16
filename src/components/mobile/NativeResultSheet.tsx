@@ -54,6 +54,8 @@ function previewUrlFor(blob: Blob, filename: string): string | null {
 export default function NativeResultSheet() {
     const pathname = usePathname() || '/'
     const [busy, setBusy] = useState(false)
+    const [sharing, setSharing] = useState(false)
+    const [saving, setSaving] = useState(false)
     const [output, setOutput] = useState<StoredOutput | null>(null)
     const [saved, setSaved] = useState(false)
     const [error, setError] = useState<string | null>(null)
@@ -64,6 +66,8 @@ export default function NativeResultSheet() {
     const reset = useCallback(() => {
         setOutput(null)
         setSaved(false)
+        setSharing(false)
+        setSaving(false)
         setError(null)
         setNote(null)
         setTone('ok')
@@ -107,6 +111,7 @@ export default function NativeResultSheet() {
                 })
                 setOutput(stored)
                 setResultSheetOpen(true)
+                // Fire-and-forget — Share/Save must not wait for an interstitial.
                 void import('@/lib/native-ads').then((m) => m.noteSuccessfulConversion()).catch(() => {})
             } catch {
                 setError('Could not save that file. Try again.')
@@ -130,6 +135,7 @@ export default function NativeResultSheet() {
                 })
                 setOutput(stored)
                 setResultSheetOpen(true)
+                // Fire-and-forget — Share/Save must not wait for an interstitial.
                 void import('@/lib/native-ads').then((m) => m.noteSuccessfulConversion()).catch(() => {})
             } catch {
                 setError('Could not save that file. Try again.')
@@ -227,35 +233,41 @@ export default function NativeResultSheet() {
                     <button
                         type="button"
                         className="mobile-result-primary"
-                        disabled={!output || busy}
+                        disabled={!output || busy || sharing}
                         onClick={async () => {
                             if (!output) return
                             setError(null)
+                            setSharing(true)
                             try {
                                 await shareStoredOutput(output)
                             } catch {
                                 setError('Could not open the share sheet. Try Save instead.')
+                            } finally {
+                                setSharing(false)
                             }
                         }}
                     >
-                        Share
+                        {sharing ? 'Opening…' : 'Share'}
                     </button>
                     <button
                         type="button"
                         className="mobile-result-secondary"
-                        disabled={!output || busy}
+                        disabled={!output || busy || saving}
                         onClick={async () => {
                             if (!output) return
                             setError(null)
+                            setSaving(true)
                             try {
                                 await saveStoredOutputToDownloads(output)
                                 setSaved(true)
                             } catch {
                                 setError('Could not save. Try Share and pick Files.')
+                            } finally {
+                                setSaving(false)
                             }
                         }}
                     >
-                        Save to Files
+                        {saving ? 'Saving…' : 'Save to Files'}
                     </button>
                     <button type="button" className="mobile-result-ghost" onClick={reset}>
                         Close
