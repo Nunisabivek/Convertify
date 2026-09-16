@@ -65,5 +65,5 @@ export function AppIcon({
     size?: number
 }) {
     const Icon = ICONS[name] || FileText
-    return <Icon className={className} size={size} strokeWidth={2} aria-hidden />
+    return <Icon className={className} size={size} strokeWidth={2.4} aria-hidden />
 }

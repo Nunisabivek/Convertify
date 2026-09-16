@@ -233,14 +233,67 @@ body:has(.mobile-app),
 }
 
 .mobile-tool-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--md-primary);
   background: color-mix(in srgb, var(--md-primary) 10%, #ffffff);
+}
+
+.mobile-tool-glyph {
+  display: block;
+  max-width: none;
+  flex-shrink: 0;
+}
+
+.mobile-convert-glyph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  line-height: 1;
+}
+
+.mobile-convert-from,
+.mobile-convert-to {
+  min-width: 38px;
+  padding: 3px 4px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.mobile-convert-from {
+  background: var(--md-primary);
+  color: #ffffff;
+}
+
+.mobile-convert-to {
+  background: #ffffff;
+  color: var(--md-primary);
+  border: 1.5px solid var(--md-primary);
+}
+
+.mobile-convert-arrow {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--md-primary);
+  line-height: 1;
+}
+
+.mobile-tool-icon .mobile-convert-from,
+.mobile-tool-icon .mobile-convert-to,
+.mobile-tool-hero-icon .mobile-convert-from,
+.mobile-tool-hero-icon .mobile-convert-to {
+  font-size: 11px;
+  min-width: 40px;
+  padding: 4px 5px;
 }
 
 .mobile-tool-name {
@@ -266,11 +319,13 @@ body:has(.mobile-app),
 }
 
 .mobile-tool-grid .mobile-tool-card:nth-child(1) { animation-delay: 0ms; }
-.mobile-tool-grid .mobile-tool-card:nth-child(2) { animation-delay: 40ms; }
-.mobile-tool-grid .mobile-tool-card:nth-child(3) { animation-delay: 80ms; }
-.mobile-tool-grid .mobile-tool-card:nth-child(4) { animation-delay: 120ms; }
-.mobile-tool-grid .mobile-tool-card:nth-child(5) { animation-delay: 160ms; }
-.mobile-tool-grid .mobile-tool-card:nth-child(6) { animation-delay: 200ms; }
+.mobile-tool-grid .mobile-tool-card:nth-child(2) { animation-delay: 24ms; }
+.mobile-tool-grid .mobile-tool-card:nth-child(3) { animation-delay: 48ms; }
+.mobile-tool-grid .mobile-tool-card:nth-child(4) { animation-delay: 72ms; }
+.mobile-tool-grid .mobile-tool-card:nth-child(5) { animation-delay: 96ms; }
+.mobile-tool-grid .mobile-tool-card:nth-child(6) { animation-delay: 120ms; }
+.mobile-tool-grid .mobile-tool-card:nth-child(7) { animation-delay: 144ms; }
+.mobile-tool-grid .mobile-tool-card:nth-child(8) { animation-delay: 168ms; }
 
 @keyframes mobile-tile-in {
   from {
@@ -463,14 +518,14 @@ body:has(.mobile-app),
 }
 
 .mobile-tool-list-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--md-primary);
-  background: color-mix(in srgb, var(--md-primary) 8%, #ffffff);
+  background: color-mix(in srgb, var(--md-primary) 10%, #ffffff);
   flex-shrink: 0;
 }
 
@@ -636,8 +691,32 @@ body:has(.mobile-app),
   padding: 8px 16px 24px;
 }
 
+.mobile-tool-hero {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 4px 0 12px;
+}
+
+.mobile-tool-hero-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--md-primary) 10%, #ffffff);
+  color: var(--md-primary);
+  flex-shrink: 0;
+}
+
+.mobile-tool-hero-copy {
+  min-width: 0;
+  flex: 1;
+}
+
 .mobile-tool-title {
-  margin: 8px 0 6px;
+  margin: 2px 0 6px;
   font-size: 24px !important;
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -645,10 +724,67 @@ body:has(.mobile-app),
 }
 
 .mobile-tool-lead {
-  margin: 0 0 20px;
+  margin: 0;
   font-size: 16px;
   line-height: 1.45;
   color: var(--md-on-surface-variant);
+}
+
+.mobile-tool-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+}
+
+.mobile-dir-chips {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mobile-dir-chip {
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--md-primary) 10%, #ffffff);
+  color: var(--md-primary);
+  font-size: 14px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+}
+
+.mobile-dir-chip.is-out {
+  background: var(--md-primary);
+  color: #ffffff;
+}
+
+.mobile-dir-arrow {
+  color: var(--md-primary);
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.mobile-swap-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 2px solid var(--md-primary);
+  background: #ffffff;
+  color: var(--md-primary);
+  font-size: 14px;
+  font-weight: 800;
+  touch-action: manipulation;
+}
+
+.mobile-swap-btn:active {
+  transform: scale(0.97);
+  background: color-mix(in srgb, var(--md-primary) 10%, #ffffff);
 }
 
 .mobile-tool-frame .container {
@@ -682,6 +818,7 @@ body:has(.mobile-app),
   font-size: 18px;
   font-weight: 700;
   touch-action: manipulation;
+  box-shadow: 0 8px 18px rgba(2, 110, 255, 0.18);
 }
 
 .mobile-app .mobile-choose-btn:disabled,
@@ -885,7 +1022,8 @@ body:has(.mobile-app),
 .mobile-app .mobile-result-primary,
 .mobile-app .mobile-result-secondary,
 .mobile-app .mobile-file-item,
-.mobile-app .mobile-icon-btn {
+.mobile-app .mobile-icon-btn,
+.mobile-app .mobile-swap-btn {
   transition: transform 120ms ease-out, background-color 120ms ease-out, opacity 120ms ease-out;
 }
 
@@ -1302,7 +1440,21 @@ body:has(.mobile-app),
 
 .mobile-app .mobile-tool-frame:has(.mobile-job-cta) .mobile-tool-title {
   font-size: 18px !important;
-  margin: 0 0 10px;
+  margin: 0 0 4px;
+}
+
+.mobile-app .mobile-tool-frame:has(.mobile-job-cta) .mobile-tool-hero {
+  margin-bottom: 8px;
+}
+
+.mobile-app .mobile-tool-frame:has(.mobile-job-cta) .mobile-tool-hero-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+}
+
+.mobile-app .mobile-tool-frame:has(.mobile-job-cta) .mobile-tool-chips {
+  margin-bottom: 10px;
 }
 
 .mobile-app .mobile-job:has(.mobile-job-cta) .mobile-crop:not(.is-sign) {
@@ -1377,7 +1529,8 @@ html.is-converting .mobile-app * {
   .mobile-app .mobile-result-primary,
   .mobile-app .mobile-result-secondary,
   .mobile-app .mobile-file-item,
-  .mobile-app .mobile-icon-btn {
+  .mobile-app .mobile-icon-btn,
+  .mobile-app .mobile-swap-btn {
     transition: none;
   }
 
@@ -1386,7 +1539,8 @@ html.is-converting .mobile-app * {
   .mobile-nav-item:active,
   .mobile-size-chip:active,
   .mobile-tool-list-item:active,
-  .mobile-tool-card:active {
+  .mobile-tool-card:active,
+  .mobile-swap-btn:active {
     transform: none;
   }
 }

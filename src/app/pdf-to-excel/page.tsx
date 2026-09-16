@@ -1,5 +1,4 @@
 import { Metadata } from "next"
-import { ToolSwapper } from "@/components/tools/tool-swapper"
 import { ComingSoonTool } from "@/components/tools/coming-soon-tool"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
@@ -59,7 +58,6 @@ export default function Page() {
                         {seoData.description}
                     </p>
                 </div>
-                <ToolSwapper />
                 <ComingSoonTool />
             </section>
 

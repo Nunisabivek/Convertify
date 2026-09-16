@@ -1,8 +1,13 @@
 'use client'
 
 import { ReactNode } from 'react'
-import { ANDROID_SHORT_NAMES } from '@/lib/mobile-tools'
+import Link from 'next/link'
+import { ArrowLeftRight } from 'lucide-react'
+import { ANDROID_SHORT_NAMES, isAndroidV1Tool } from '@/lib/mobile-tools'
 import { getToolById } from '@/lib/tools-registry'
+import { getSwapInfo, parseConvertDirection } from '@/lib/tool-swap'
+import { ToolGlyph } from '@/components/mobile/ToolGlyph'
+import { tapHaptic } from '@/lib/haptics'
 
 const LEADS: Record<string, string> = {
     'fit-to-size': 'Pick a PDF or photo. Type any KB, or use a chip. Quality first — pixels only shrink if they must.',
@@ -38,11 +43,46 @@ export default function MobileToolFrame({
     const tool = getToolById(toolId)
     const title = ANDROID_SHORT_NAMES[toolId] ?? tool?.name ?? 'Tool'
     const lead = LEADS[toolId] ?? tool?.description ?? ''
+    const direction = parseConvertDirection(toolId)
+    const swap = getSwapInfo(toolId)
+    const showSwap = Boolean(swap && isAndroidV1Tool(swap.target))
 
     return (
         <div className="mobile-tool-frame">
-            <h1 className="mobile-tool-title">{title}</h1>
-            <p className="mobile-tool-lead">{lead}</p>
+            <div className="mobile-tool-hero">
+                <div className="mobile-tool-hero-icon">
+                    <ToolGlyph toolId={toolId} size={36} />
+                </div>
+                <div className="mobile-tool-hero-copy">
+                    <h1 className="mobile-tool-title">{title}</h1>
+                    <p className="mobile-tool-lead">{lead}</p>
+                </div>
+            </div>
+
+            {(direction || showSwap) && (
+                <div className="mobile-tool-chips">
+                    {direction ? (
+                        <div className="mobile-dir-chips" aria-hidden>
+                            <span className="mobile-dir-chip">{direction.from}</span>
+                            <span className="mobile-dir-arrow">→</span>
+                            <span className="mobile-dir-chip is-out">{direction.to}</span>
+                        </div>
+                    ) : null}
+                    {showSwap && swap ? (
+                        <Link
+                            href={`/${swap.target}`}
+                            className="mobile-swap-btn"
+                            onClick={() => {
+                                void tapHaptic()
+                            }}
+                        >
+                            <ArrowLeftRight size={18} strokeWidth={2.4} aria-hidden />
+                            Swap to {swap.targetDirection}
+                        </Link>
+                    ) : null}
+                </div>
+            )}
+
             {children}
         </div>
     )
