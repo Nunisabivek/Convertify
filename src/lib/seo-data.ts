@@ -1,4 +1,4 @@
-import { applyMobileSeoTitles } from '@/lib/document-title'
+import { applyMobileSeoTitles } from './document-title'
 
 // Centralized SEO data for all tools
 // This helps maintain consistent, keyword-rich content across all pages

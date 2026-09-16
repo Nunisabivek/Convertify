@@ -25,7 +25,12 @@ assert.match(toolsSrc, /appDocumentTitle\("All Free PDF Tools \| Convertify - No
 const css = readFileSync(join(root, 'src/styles/mobile.css'), 'utf8')
 assert.match(css, /--chrome-bottom:\s*calc\(var\(--nav-h\) \+ var\(--inset-bottom\) \+ var\(--ad-banner-h\)\)/)
 assert.match(css, /\.mobile-route-page[\s\S]{0,400}padding-bottom:\s*calc\(var\(--chrome-bottom\)/)
-assert.match(css, /\.mobile-app \.mobile-job:has\(\.mobile-job-cta\)[\s\S]{0,280}padding-bottom:\s*calc\(110px \+ var\(--chrome-bottom\)\)/)
+assert.match(css, /\.mobile-app \.mobile-job:has\(\.mobile-job-cta\)[\s\S]{0,280}padding-bottom:\s*110px;/)
+assert.doesNotMatch(css, /\.mobile-app \.mobile-job:has\(\.mobile-job-cta\)[\s\S]{0,280}padding-bottom:\s*calc\(110px \+ var\(--chrome-bottom\)\)/)
+
+const seoSrc = readFileSync(join(root, 'src/lib/seo-data.ts'), 'utf8')
+assert.match(seoSrc, /from '\.\/document-title'/)
+assert.equal(seoSrc.includes('@/lib/document-title'), false)
 
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')) as {
     scripts: Record<string, string>

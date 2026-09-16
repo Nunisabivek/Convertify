@@ -1291,8 +1291,8 @@ body:has(.mobile-app),
 }
 
 .mobile-app .mobile-job:has(.mobile-job-cta) {
-  /* CTA is fixed above nav+banner; keep Min/Max and similar fields in view. */
-  padding-bottom: calc(110px + var(--chrome-bottom));
+  /* CTA height only. `.mobile-route-page` already pads by `--chrome-bottom`. */
+  padding-bottom: 110px;
 }
 
 .mobile-app .mobile-tool-frame:has(.mobile-job-cta) .mobile-tool-lead,
