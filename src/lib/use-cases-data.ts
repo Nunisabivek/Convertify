@@ -6,6 +6,11 @@ export interface UseCase {
     toolHref: string;
     toolName: string;
     keywords: string[];
+    /** Whether this use-case page has enough unique content to be indexed.
+     *  Rich use cases (the original 17) have detailed, hand-written FAQs
+     *  that add ~800+ words of unique content per page. Programmatic SEO
+     *  expansions stay noindexed until they're fleshed out. */
+    indexable?: boolean;
     faqs: {
         question: string;
         answer: string;
@@ -20,6 +25,7 @@ export const useCases: UseCase[] = [
         toolHref: '/merge-pdf',
         toolName: 'Merge PDF',
         keywords: ['merge bank statements', 'combine pdf bank statements', 'secure pdf merger', 'merge pdf offline'],
+        indexable: true,
         faqs: [
             {
                 question: 'Is it safe to merge bank statements here?',
@@ -50,6 +56,7 @@ export const useCases: UseCase[] = [
         toolHref: '/compress-pdf',
         toolName: 'Compress PDF',
         keywords: ['compress pdf for email', 'reduce pdf size for gmail', 'shrink pdf for outlook', 'pdf compressor email'],
+        indexable: true,
         faqs: [
             {
                 question: 'How small can I make my PDF?',
@@ -80,6 +87,7 @@ export const useCases: UseCase[] = [
         toolHref: '/jpg-to-pdf',
         toolName: 'JPG to PDF',
         keywords: ['jpg to pdf for job', 'convert photo to pdf for application', 'resume photo to pdf'],
+        indexable: true,
         faqs: [
             {
                 question: 'Can I combine multiple photos into one PDF?',
@@ -110,6 +118,7 @@ export const useCases: UseCase[] = [
         toolHref: '/split-pdf',
         toolName: 'Split PDF',
         keywords: ['split pdf for court', 'extract pages for legal evidence', 'legal pdf splitter'],
+        indexable: true,
         faqs: [
             {
                 question: 'Does this remove metadata?',
@@ -140,6 +149,7 @@ export const useCases: UseCase[] = [
         toolHref: '/merge-pdf',
         toolName: 'Merge PDF',
         keywords: ['merge pdf chromebook', 'combine pdf on chrome os', 'free pdf merger chromebook'],
+        indexable: true,
         faqs: [
             {
                 question: 'Do I need to install an app?',
@@ -170,6 +180,7 @@ export const useCases: UseCase[] = [
         toolHref: '/compress-pdf',
         toolName: 'Compress PDF',
         keywords: ['compress pdf to 100kb', 'reduce pdf size below 100kb', 'resize pdf to 100kb', 'pdf compressor 100kb'],
+        indexable: true,
         faqs: [
             {
                 question: 'How do I compress a PDF to 100KB?',
@@ -200,6 +211,7 @@ export const useCases: UseCase[] = [
         toolHref: '/merge-pdf',
         toolName: 'Merge PDF',
         keywords: ['merge pdf mac', 'combine pdf macbook', 'join pdf files mac os', 'free pdf merger for mac'],
+        indexable: true,
         faqs: [
             {
                 question: 'Is this better than Mac Preview?',
@@ -230,6 +242,7 @@ export const useCases: UseCase[] = [
         toolHref: '/pdf-to-word',
         toolName: 'PDF to Word',
         keywords: ['pdf to word editable', 'convert pdf to docx free', 'scanned pdf to word', 'pdf to word ocr'],
+        indexable: true,
         faqs: [
             {
                 question: 'Does it work with scanned documents?',
@@ -260,6 +273,7 @@ export const useCases: UseCase[] = [
         toolHref: '/organize-pdf',
         toolName: 'Organize PDF',
         keywords: ['remove pages from pdf', 'delete pdf pages', 'extract pdf pages', 'cut pages from pdf'],
+        indexable: true,
         faqs: [
             {
                 question: 'Can I delete multiple pages at once?',
@@ -290,6 +304,7 @@ export const useCases: UseCase[] = [
         toolHref: '/ocr-pdf',
         toolName: 'OCR PDF',
         keywords: ['ocr pdf online', 'make pdf searchable', 'recognize text in pdf', 'convert scanned pdf to text'],
+        indexable: true,
         faqs: [
             {
                 question: 'What languages are supported?',
@@ -320,6 +335,7 @@ export const useCases: UseCase[] = [
         toolHref: '/jpg-to-pdf',
         toolName: 'JPG to PDF',
         keywords: ['heic to pdf', 'iphone photo to pdf', 'convert ios photos to pdf', 'apple image to pdf'],
+        indexable: true,
         faqs: [
             {
                 question: 'Do I need to convert HEIC to JPG first?',
@@ -350,6 +366,7 @@ export const useCases: UseCase[] = [
         toolHref: '/merge-pdf',
         toolName: 'Merge PDF',
         keywords: ['merge pdf windows 11', 'combine pdf windows 10', 'join pdf files windows', 'pdf merger for pc'],
+        indexable: true,
         faqs: [
             {
                 question: 'Does this work on Microsoft Edge?',
@@ -380,6 +397,7 @@ export const useCases: UseCase[] = [
         toolHref: '/compress-pdf',
         toolName: 'Compress PDF',
         keywords: ['compress pdf 200kb', 'reduce pdf size 200kb', 'optimize pdf size', 'shrink pdf file'],
+        indexable: true,
         faqs: [
             {
                 question: 'Will my text become blurry?',
@@ -410,6 +428,7 @@ export const useCases: UseCase[] = [
         toolHref: '/excel-to-pdf',
         toolName: 'Excel to PDF',
         keywords: ['excel to pdf', 'xlsx to pdf', 'convert spreadsheet to pdf', 'excel to pdf converter free'],
+        indexable: true,
         faqs: [
             {
                 question: 'Does it handle multiple sheets?',
@@ -440,6 +459,7 @@ export const useCases: UseCase[] = [
         toolHref: '/rotate-pdf',
         toolName: 'Rotate PDF',
         keywords: ['rotate pdf permanent', 'turn pdf pages', 'fix pdf orientation', 'rotate pdf 90 degrees'],
+        indexable: true,
         faqs: [
             {
                 question: 'Can I rotate just one page?',
@@ -470,6 +490,7 @@ export const useCases: UseCase[] = [
         toolHref: '/unlock-pdf',
         toolName: 'Unlock PDF',
         keywords: ['unlock pdf online', 'remove pdf password', 'decrypt pdf', 'remove pdf restrictions'],
+        indexable: true,
         faqs: [
             {
                 question: 'Can you open any password protected PDF?',
@@ -1501,3 +1522,8 @@ export const useCases: UseCase[] = [
         ]
     }
 ];
+
+/** Use-case slugs with enough unique content to merit indexing. */
+export const indexableUseCaseSlugs = new Set(
+    useCases.filter(uc => uc.indexable).map(uc => uc.slug)
+);

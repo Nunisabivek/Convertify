@@ -23,7 +23,17 @@ import {
     Ruler,
     Gauge,
     UserRound,
-    Eraser
+    Eraser,
+    Signature,
+    LockOpen,
+    FileCheck,
+    FileSearch,
+    ScanLine,
+    Presentation,
+    WandSparkles,
+    Crop,
+    FileMinus2,
+    PenTool
 } from "lucide-react";
 import { InternalLinkMap } from "@/components/seo/internal-link-map";
 import { AdBanner } from "@/components/ads/banner";
@@ -165,6 +175,13 @@ const toolCategories = [
                 href: "/excel-to-pdf",
             },
             {
+                title: "PowerPoint to PDF",
+                description: "Convert PPT and PPTX presentations to PDF.",
+                icon: Presentation,
+                color: "bg-orange-100 text-orange-600",
+                href: "/powerpoint-to-pdf",
+            },
+            {
                 title: "JPG to PDF",
                 description: "Turn your JPG images into PDF.",
                 icon: ImageIcon,
@@ -247,6 +264,20 @@ const toolCategories = [
         description: "Modify and annotate your PDFs",
         tools: [
             {
+                title: "Edit PDF",
+                description: "Add text, freehand notes, highlights, and stamps.",
+                icon: PenTool,
+                color: "bg-purple-100 text-purple-600",
+                href: "/edit-pdf",
+            },
+            {
+                title: "Crop PDF",
+                description: "Trim margins and remove white space with live preview.",
+                icon: Crop,
+                color: "bg-lime-100 text-lime-600",
+                href: "/crop-pdf",
+            },
+            {
                 title: "Edit AutoCAD PDF",
                 description: "Edit SHX vector text in AutoCAD-exported PDFs.",
                 icon: Ruler,
@@ -273,12 +304,82 @@ const toolCategories = [
         category: "Security",
         description: "Protect and secure your PDFs",
         tools: [
+            {
+                title: "Protect PDF",
+                description: "Add AES-256 password protection and permissions.",
+                icon: Lock,
+                color: "bg-blue-100 text-blue-600",
+                href: "/protect-pdf",
+            },
+            {
+                title: "Sign PDF",
+                description: "Draw, type, or stamp electronic signatures.",
+                icon: Signature,
+                color: "bg-indigo-100 text-indigo-600",
+                href: "/sign-pdf",
+            },
+            {
+                title: "Unlock PDF",
+                description: "Remove passwords and printing restrictions.",
+                icon: LockOpen,
+                color: "bg-emerald-100 text-emerald-600",
+                href: "/unlock-pdf",
+            },
+            {
+                title: "Redact PDF",
+                description: "Permanently blackout sensitive data and SSNs.",
+                icon: FileMinus2,
+                color: "bg-slate-100 text-slate-800",
+                href: "/redact-pdf",
+            },
         ],
     },
     {
         category: "Advanced Tools",
         description: "Professional PDF features",
         tools: [
+            {
+                title: "Compare PDF",
+                description: "Find visual and text differences between two versions.",
+                icon: FileSearch,
+                color: "bg-cyan-100 text-cyan-600",
+                href: "/compare-pdf",
+            },
+            {
+                title: "OCR PDF",
+                description: "Extract selectable text from scanned PDF pages.",
+                icon: ScanLine,
+                color: "bg-teal-100 text-teal-600",
+                href: "/ocr-pdf",
+            },
+            {
+                title: "PDF to Excel",
+                description: "Extract tables into editable XLSX spreadsheets.",
+                icon: Sheet,
+                color: "bg-emerald-100 text-emerald-600",
+                href: "/pdf-to-excel",
+            },
+            {
+                title: "PDF to PowerPoint",
+                description: "Convert PDF pages into presentation slides (.pptx).",
+                icon: Presentation,
+                color: "bg-orange-100 text-orange-600",
+                href: "/pdf-to-powerpoint",
+            },
+            {
+                title: "PDF to PDF/A",
+                description: "Convert documents to ISO 19005 archival format.",
+                icon: FileCheck,
+                color: "bg-emerald-100 text-emerald-600",
+                href: "/pdf-to-pdfa",
+            },
+            {
+                title: "Repair PDF",
+                description: "Reconstruct corrupted XRef tables and damaged files.",
+                icon: WandSparkles,
+                color: "bg-amber-100 text-amber-600",
+                href: "/repair-pdf",
+            },
         ],
     },
 ];
@@ -290,25 +391,25 @@ export default function WebHomePage() {
     return (
         <div className="flex flex-col items-center">
             {/* Hero Section */}
-            <section className="w-full pt-20 pb-12 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-100/50 via-slate-50 to-white text-center px-4 relative overflow-hidden">
+            <section className="w-full pt-20 pb-12 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-100/40 via-slate-50 to-white text-center px-4 relative overflow-hidden">
                 <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
                 <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 drop-shadow-sm">
-                    Convertify: <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">Free Online PDF Tools</span>
+                    Convertify: <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#026EFF] to-indigo-600">Free Online PDF Tools</span>
                 </h1>
                 <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-6 leading-relaxed">
                     Merge, convert, compress, and edit PDFs entirely in your browser. Your files never leave your device — 100% private, no sign-up required.
                 </p>
                 {/* Trust Badges - Addresses "convertify pricing" queries */}
                 <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 mb-4">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100/80 text-green-700 rounded-full text-sm font-semibold border border-green-200">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50/80 text-[#026EFF] rounded-full text-sm font-semibold border border-blue-200/60 shadow-xs">
                         <CheckCircle2 className="w-4 h-4" />
                         100% Free Forever
                     </div>
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-100/80 text-indigo-700 rounded-full text-sm font-semibold border border-indigo-200">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50/80 text-emerald-700 rounded-full text-sm font-semibold border border-emerald-200/60 shadow-xs">
                         <Lock className="w-4 h-4" />
                         No Sign-Up Required
                     </div>
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100/80 text-purple-700 rounded-full text-sm font-semibold border border-purple-200">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50/80 text-indigo-700 rounded-full text-sm font-semibold border border-indigo-200/60 shadow-xs">
                         <FileStack className="w-4 h-4" />
                         No Watermarks
                     </div>
@@ -340,12 +441,12 @@ export default function WebHomePage() {
                                 <Link
                                     key={tool.title}
                                     href={tool.href}
-                                    className="group relative flex flex-col p-6 bg-white/50 backdrop-blur-sm rounded-2xl border border-slate-200/60 hover:border-indigo-300/50 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300"
+                                    className="group relative flex flex-col p-6 bg-white/70 backdrop-blur-sm rounded-2xl border border-slate-200/60 hover:border-[#026EFF]/50 hover:shadow-[0_8px_30px_rgba(2,110,255,0.08)] hover:-translate-y-1 transition-all duration-300"
                                 >
                                     <div className={`p-3.5 rounded-2xl w-14 h-14 flex items-center justify-center mb-5 ${tool.color} group-hover:scale-110 transition-transform duration-300`}>
                                         <tool.icon className="w-7 h-7" />
                                     </div>
-                                    <h3 className="text-lg font-bold text-slate-800 group-hover:text-indigo-600 transition-colors mb-2">
+                                    <h3 className="text-lg font-bold text-slate-800 group-hover:text-[#026EFF] transition-colors mb-2">
                                         {tool.title}
                                     </h3>
                                     <p className="text-slate-500 text-sm leading-relaxed">

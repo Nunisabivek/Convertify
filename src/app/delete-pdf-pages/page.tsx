@@ -1,8 +1,13 @@
-﻿import { Metadata } from "next"
+import { Metadata } from "next"
 import OrganizePdfClient from "@/app/organize-pdf/client"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
+import { HowToSchema } from "@/components/seo/howto-schema"
+import { FAQSchema } from "@/components/seo/faq-schema"
+import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { RelatedTools } from "@/components/seo/related-tools"
+import { RelatedUseCases } from "@/components/seo/related-use-cases"
+import { ToolSwapper } from "@/components/tools/tool-swapper"
 import { toolSeoData } from "@/lib/seo-data"
 
 const toolName = "delete-pdf-pages"
@@ -12,7 +17,7 @@ export const metadata: Metadata = {
     title: seoData.title,
     description: seoData.description,
     keywords: seoData.keywords,
-    robots: { index: false, follow: true },
+    robots: { index: true, follow: true },
     alternates: {
         canonical: `https://convertify.work/${toolName}`,
     },
@@ -34,34 +39,53 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <div className="flex flex-col items-center">
-            
             {/* Structured Data Schemas */}
             <BreadcrumbSchema 
                 items={[
                     { name: "Home", url: "/" },
                     { name: "All Tools", url: "/all-tools" },
-                    { name: "Delete Pdf Pages", url: "/delete-pdf-pages" }
+                    { name: "Delete PDF Pages", url: "/delete-pdf-pages" }
                 ]}
             />
             <SoftwareApplicationSchema
-                toolName="PDF Page Deleter"
+                toolName="Convertify PDF Page Deleter"
                 toolSlug="delete-pdf-pages"
                 description={seoData.description}
             />
             
-<section className="w-full py-8 bg-gradient-to-b from-slate-50 to-white">
-                <div className="max-w-4xl mx-auto px-4 text-center mb-8">
-                    <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
+            <section className="w-full py-8 bg-gradient-to-b from-blue-50/50 via-white to-white">
+                <div className="max-w-4xl mx-auto px-4 text-center mb-6">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-50 border border-indigo-200/60 rounded-full text-xs font-semibold text-indigo-700 mb-4 shadow-sm">
+                        Free Online Tool • No Limits
+                    </span>
+                    <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 tracking-tight">
                         {seoData.h1}
                     </h1>
-                    <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                    <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
                         {seoData.description}
                     </p>
                 </div>
-                {/* Reusing OrganizePdfClient as it handles deletion and reordering */}
+                <ToolSwapper />
                 <OrganizePdfClient />
             </section>
 
+            {seoData.howToSteps && (
+                <HowToSchema
+                    toolName="Delete PDF Pages"
+                    description="Learn how to delete specific pages from PDF files online with Convertify."
+                    steps={seoData.howToSteps}
+                />
+            )}
+
+            {seoData.faqs && (
+                <FAQSchema
+                    toolName="Delete PDF Pages"
+                    faqs={seoData.faqs}
+                />
+            )}
+
+            <ToolDeepGuide toolSlug="delete-pdf-pages" toolName="Delete PDF Pages Online" />
+            <RelatedUseCases toolHref="/delete-pdf-pages" />
             <RelatedTools currentTool={`/${toolName}`} />
         </div>
     )

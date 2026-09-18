@@ -4,6 +4,9 @@ import { Metadata } from "next"
 export const metadata: Metadata = {
     title: "Terms of Service | Convertify",
     description: "Terms of Service for Convertify. Please read these terms carefully before using our PDF tools and services.",
+    alternates: {
+        canonical: 'https://convertify.work/terms',
+    },
 }
 
 export default function TermsPage() {

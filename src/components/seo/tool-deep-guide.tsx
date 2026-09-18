@@ -2,7 +2,7 @@ import { toolDeepGuides } from "@/lib/tool-deep-guides"
 
 interface ToolDeepGuideProps {
     toolSlug: string
-    toolName: string
+    toolName?: string
 }
 
 // Renders the long-form per-tool guide. Designed to add 1000-1500 words of
@@ -13,6 +13,7 @@ export function ToolDeepGuide({ toolSlug, toolName }: ToolDeepGuideProps) {
     const guide = toolDeepGuides[toolSlug]
     if (!guide) return null
 
+    const resolvedToolName = toolName || toolSlug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")
     const { intro, steps, scenarios, troubleshooting, comparison, lastUpdated } = guide
     const updatedHuman = new Date(lastUpdated).toLocaleDateString("en-US", {
         year: "numeric",
@@ -24,7 +25,7 @@ export function ToolDeepGuide({ toolSlug, toolName }: ToolDeepGuideProps) {
     const howToSchema = {
         "@context": "https://schema.org",
         "@type": "HowTo",
-        name: `How to use Convertify ${toolName}`,
+        name: `How to use Convertify ${resolvedToolName}`,
         totalTime: "PT2M",
         supply: [{ "@type": "HowToSupply", name: "A modern web browser" }],
         tool: [{ "@type": "HowToTool", name: "Convertify (free, in-browser)" }],
@@ -60,7 +61,7 @@ export function ToolDeepGuide({ toolSlug, toolName }: ToolDeepGuideProps) {
             <div className="max-w-4xl mx-auto">
                 <div className="flex items-baseline justify-between mb-2">
                     <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
-                        The complete guide to {toolName}
+                        The complete guide to {resolvedToolName}
                     </h2>
                     <span className="text-xs text-slate-500">Last updated {updatedHuman}</span>
                 </div>
@@ -74,14 +75,14 @@ export function ToolDeepGuide({ toolSlug, toolName }: ToolDeepGuideProps) {
                 {/* Comparison table — adds factual, structured content that
                     differentiates from generic "free PDF tool" pages. */}
                 <h3 className="text-xl font-bold text-slate-900 mt-12 mb-4">
-                    How {toolName} on Convertify compares
+                    How {resolvedToolName} on Convertify compares
                 </h3>
                 <div className="overflow-x-auto bg-white rounded-xl border border-slate-200">
                     <table className="w-full text-sm">
                         <thead>
                             <tr className="bg-slate-100 text-left">
                                 <th className="px-4 py-3 font-semibold">Feature</th>
-                                <th className="px-4 py-3 font-semibold text-indigo-700">Convertify</th>
+                                <th className="px-4 py-3 font-semibold text-[#026EFF]">Convertify</th>
                                 <th className="px-4 py-3 font-semibold text-slate-500">Typical online tool</th>
                             </tr>
                         </thead>
@@ -99,7 +100,7 @@ export function ToolDeepGuide({ toolSlug, toolName }: ToolDeepGuideProps) {
 
                 {/* Steps — rendered with section ids that the HowTo schema points to */}
                 <h3 className="text-xl font-bold text-slate-900 mt-12 mb-4">
-                    Step-by-step: how to use {toolName}
+                    Step-by-step: how to use {resolvedToolName}
                 </h3>
                 <ol className="tool-guide-steps space-y-5">
                     {steps.map((s, i) => (
@@ -108,7 +109,7 @@ export function ToolDeepGuide({ toolSlug, toolName }: ToolDeepGuideProps) {
                             id={`step-${i + 1}`}
                             className="flex gap-4 bg-white rounded-xl border border-slate-200 p-5"
                         >
-                            <span className="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-bold">
+                            <span className="flex-shrink-0 w-8 h-8 rounded-full bg-[#026EFF] text-white flex items-center justify-center text-sm font-bold">
                                 {i + 1}
                             </span>
                             <div>

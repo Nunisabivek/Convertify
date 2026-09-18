@@ -40,11 +40,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Antigravity Skills
-.agent/skills
-.claude/skills
-.gemini/skills
-.cursor/skills
+# IDE & Agent data
+.agent/
+.claude/
+.gemini/
+.cursor/
 
 # Android build artifacts
 android/build/

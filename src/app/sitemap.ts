@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { INDEXABLE_BLOG_SITEMAP_ENTRIES } from '@/lib/blog-sitemap-entries'
+import { useCases } from '@/lib/use-cases-data'
 
 export const dynamic = 'force-static'
 
@@ -7,9 +8,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://convertify.work'
 
     // QUALITY-FIRST STRATEGY: Only include pages with substantial unique
-    // content. Use-case pages are noindexed (templated thin content that
-    // was suppressing domain-wide rankings). Blog posts only included if
-    // they pass the 350-word minimum quality threshold.
+    // content. Use-case pages marked indexable: true in use-cases-data.ts
+    // have 800+ words of unique content and target high-value long-tail
+    // keywords. Blog posts only included if they pass the 350-word minimum.
     //
     // Blog URLs come from blog-sitemap-entries.ts (slug + date only). Do
     // not import blog-data.ts here — that module ships full post bodies
@@ -29,6 +30,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
         'html-to-pdf', 'markdown-to-pdf',
         'tiff-to-pdf',
         'autocad-pdf-editor',
+        'sign-pdf',
+        'crop-pdf',
+        'redact-pdf',
+        'repair-pdf',
+        'pdf-to-excel',
+        'delete-pdf-pages',
+        'reorder-pdf',
+        'unlock-pdf',
+        'protect-pdf',
+        'edit-pdf',
+        'compare-pdf',
+        'ocr-pdf',
+        'pdf-to-powerpoint',
+        'powerpoint-to-pdf',
+        'pdf-to-pdfa',
     ]
 
     // Working first-class tools with unique pages (not Android-only).
@@ -51,12 +67,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const staticPages: { path: string; priority: number; lastModified?: string }[] = [
         { path: 'all-tools', priority: 0.8 },
         { path: 'blog', priority: 0.7 },
-        { path: 'privacy', priority: 0.3, lastModified: '2026-09-16' },
+        { path: 'pricing', priority: 0.6 },
+        { path: 'contact', priority: 0.4 },
+        { path: 'security', priority: 0.4 },
         { path: 'about', priority: 0.4 },
+        { path: 'privacy', priority: 0.3, lastModified: '2026-09-16' },
+        { path: 'terms', priority: 0.3 },
     ]
 
-    const lastUpdated = '2026-07-26'
-    const recrawlToday = '2026-08-27'
+    const lastUpdated = '2026-09-18'
+    const recrawlToday = '2026-09-18'
     const uniqueToolsUpdated = recrawlToday
     const toolLastModified: Record<string, string> = {
         'png-to-pdf': recrawlToday,
@@ -102,9 +122,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly' as const,
             priority: 0.6,
         })),
-        // USE-CASE PAGES OMITTED — templated thin content, noindexed on
-        // purpose. Placeholder tools (edit-pdf, sign-pdf, ocr-pdf, …)
-        // stay out of the sitemap until they ship a real client.
+        // High-intent use-case landing pages with custom FAQs, HowTo schemas & working tools
+        ...useCases.filter(uc => uc.indexable !== false).map(uc => ({
+            url: `${baseUrl}/use-cases/${uc.slug}`,
+            lastModified: lastUpdated,
+            changeFrequency: 'weekly' as const,
+            priority: 0.6,
+        })),
     ]
 
     const seen = new Set<string>()

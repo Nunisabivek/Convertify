@@ -7,31 +7,39 @@ import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react'
 // first URLs in the payload. Lead with the GSC "Crawled - currently not
 // indexed" set so re-crawl prioritizes the pages we just upgraded.
 const TOP_PAGES = [
-    // Crawled-not-indexed list from GSC (these were fixed: dup-H1 removed,
-    // tool-specific benefit cards, hreflang, faster delays)
-    '/compress-pdf',
-    '/png-to-pdf',
-    '/pdf-to-jpg',
-    '/pdf-to-png',
-    '/merge-pdf',
-    '/word-to-pdf',
-    '/text-to-pdf',
-    '/pdf-to-text',
-    '/powerpoint-to-pdf',
-    '/all-tools',
-    '/pricing',
-    '/blog/split-pdf-into-separate-pages',
-    // Other high-priority tool pages
+    // Primary core tools & new functional utilities
     '/',
+    '/all-tools',
+    '/merge-pdf',
+    '/compress-pdf',
     '/split-pdf',
-    '/pdf-to-word',
-    '/jpg-to-pdf',
-    '/rotate-pdf',
-    '/watermark-pdf',
+    '/edit-pdf',
+    '/sign-pdf',
     '/protect-pdf',
     '/unlock-pdf',
+    '/ocr-pdf',
+    '/compare-pdf',
+    '/crop-pdf',
+    '/redact-pdf',
+    '/repair-pdf',
+    '/pdf-to-word',
+    '/word-to-pdf',
+    '/pdf-to-excel',
     '/excel-to-pdf',
-    '/html-to-pdf',
+    '/pdf-to-powerpoint',
+    '/powerpoint-to-pdf',
+    '/pdf-to-pdfa',
+    '/pdf-to-jpg',
+    '/jpg-to-pdf',
+    '/pdf-to-png',
+    '/png-to-pdf',
+    '/pdf-to-text',
+    '/text-to-pdf',
+    '/rotate-pdf',
+    '/watermark-pdf',
+    '/organize-pdf',
+    '/pricing',
+    '/security',
 ]
 
 export default function IndexNowAdmin() {
@@ -82,7 +90,7 @@ export default function IndexNowAdmin() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-indigo-50 to-white py-12 px-4">
+        <div className="min-h-screen bg-gradient-to-b from-blue-50/50 to-white py-12 px-4">
             <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-8">
                     <h1 className="text-4xl font-bold text-slate-900 mb-3">
@@ -94,17 +102,17 @@ export default function IndexNowAdmin() {
                 </div>
 
                 {/* Quick Submit Top Pages */}
-                <div className="bg-white rounded-xl shadow-lg p-8 mb-6">
+                <div className="bg-white rounded-xl shadow-lg p-8 mb-6 border border-slate-100">
                     <h2 className="text-2xl font-bold text-slate-900 mb-4">
-                        Quick Submit - Top 15 Pages
+                        Quick Submit - Core Tools & Updates
                     </h2>
                     <p className="text-slate-600 mb-6">
-                        Submit your most important pages (homepage + top tools) instantly to IndexNow via server-side proxy (bypasses CORS).
+                        Submit all active core tools, newly functional utilities, and landing pages instantly to IndexNow via server-side proxy.
                     </p>
                     <button
                         onClick={submitTopPages}
                         disabled={loading}
-                        className="w-full py-4 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 disabled:bg-indigo-300 transition-colors flex items-center justify-center gap-2"
+                        className="w-full py-4 bg-[#026EFF] text-white rounded-lg font-semibold hover:bg-[#0058cc] disabled:bg-blue-300 transition-colors flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
                     >
                         {loading ? (
                             <>

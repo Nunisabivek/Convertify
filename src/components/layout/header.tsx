@@ -27,21 +27,21 @@ export function Header() {
                 <nav className="hidden md:flex items-center gap-6">
                     <Link
                         href="/all-tools"
-                        className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-indigo-600 transition-colors"
+                        className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-[#026EFF] transition-colors"
                     >
                         <Grid3x3 className="w-4 h-4" />
                         All Tools
                     </Link>
                     <Link
                         href="/blog"
-                        className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-indigo-600 transition-colors"
+                        className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-[#026EFF] transition-colors"
                     >
                         <BookOpen className="w-4 h-4" />
                         Blog
                     </Link>
                     <Link
                         href="/security"
-                        className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-indigo-600 transition-colors"
+                        className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-[#026EFF] transition-colors"
                     >
                         <Shield className="w-4 h-4" />
                         Security
@@ -71,10 +71,10 @@ export function Header() {
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors"
                         >
-                            <Grid3x3 className="w-5 h-5 text-indigo-600" />
+                            <Grid3x3 className="w-5 h-5 text-[#026EFF]" />
                             <div>
                                 <span className="font-medium text-slate-900">All Tools</span>
-                                <p className="text-xs text-slate-500">Browse all 29 PDF tools</p>
+                                <p className="text-xs text-slate-500">Browse all 40+ free PDF tools</p>
                             </div>
                         </Link>
                         <Link
@@ -82,7 +82,7 @@ export function Header() {
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors"
                         >
-                            <BookOpen className="w-5 h-5 text-indigo-600" />
+                            <BookOpen className="w-5 h-5 text-[#026EFF]" />
                             <div>
                                 <span className="font-medium text-slate-900">Blog & Guides</span>
                                 <p className="text-xs text-slate-500">PDF tips and tutorials</p>
@@ -93,7 +93,7 @@ export function Header() {
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors"
                         >
-                            <Shield className="w-5 h-5 text-indigo-600" />
+                            <Shield className="w-5 h-5 text-[#026EFF]" />
                             <div>
                                 <span className="font-medium text-slate-900">Security</span>
                                 <p className="text-xs text-slate-500">How we protect your files</p>
@@ -105,7 +105,7 @@ export function Header() {
                                 <Link
                                     href="/merge-pdf"
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className="p-2 text-sm text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded"
+                                    className="p-2 text-sm text-slate-700 hover:text-[#026EFF] hover:bg-slate-50 rounded"
                                 >
                                     Merge PDF
                                 </Link>

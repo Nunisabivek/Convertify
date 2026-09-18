@@ -15,6 +15,8 @@ const FOOTER_AD_REVISIT_HOURS = 4
 
 interface AdBannerProps {
     variant?: "footer" | "rectangle" | "native" | "skyscraper" | "responsive" | "mobile-banner"
+    slot?: string
+    className?: string
 }
 
 // ── Adsterra ad-key configuration ─────────────────────────────────────────────
@@ -211,10 +213,11 @@ function AdSenseUnit({
     )
 }
 
-export function AdBanner({ variant = "footer" }: AdBannerProps) {
+export function AdBanner({ variant, slot, className }: AdBannerProps) {
+    const effectiveVariant = variant ?? (slot ? "responsive" : "footer")
     const isMobile = useIsMobile()
     const hasMounted = useIsClient()
-    const [isDismissed, setIsDismissed] = useState(() => readFooterDismissed(variant))
+    const [isDismissed, setIsDismissed] = useState(() => readFooterDismissed(effectiveVariant))
 
     const dismissFooter = () => {
         setIsDismissed(true)
@@ -235,19 +238,19 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
     let adHeight = 250
 
     if (adsenseClient) {
-        if (variant === "rectangle" || variant === "responsive" || variant === "native") {
+        if (effectiveVariant === "rectangle" || effectiveVariant === "responsive" || effectiveVariant === "native") {
             adsenseSlot = process.env.NEXT_PUBLIC_ADSENSE_SLOT_RECTANGLE
             adWidth = 300
             adHeight = 250
-        } else if (variant === "mobile-banner") {
+        } else if (effectiveVariant === "mobile-banner") {
             adsenseSlot = process.env.NEXT_PUBLIC_ADSENSE_SLOT_MOBILE
             adWidth = 320
             adHeight = 50
-        } else if (variant === "skyscraper") {
+        } else if (effectiveVariant === "skyscraper") {
             adsenseSlot = process.env.NEXT_PUBLIC_ADSENSE_SLOT_SKYSCRAPER
             adWidth = 160
             adHeight = 600
-        } else if (variant === "footer") {
+        } else if (effectiveVariant === "footer") {
             adsenseSlot = isMobile 
                 ? process.env.NEXT_PUBLIC_ADSENSE_SLOT_MOBILE 
                 : process.env.NEXT_PUBLIC_ADSENSE_SLOT_LEADERBOARD
@@ -255,16 +258,16 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
             adHeight = isMobile ? 50 : 90
         }
     } else {
-        if (variant === "rectangle" || variant === "responsive" || variant === "native") {
+        if (effectiveVariant === "rectangle" || effectiveVariant === "responsive" || effectiveVariant === "native") {
             adWidth = 300
             adHeight = 250
-        } else if (variant === "mobile-banner") {
+        } else if (effectiveVariant === "mobile-banner") {
             adWidth = 320
             adHeight = 50
-        } else if (variant === "skyscraper") {
+        } else if (effectiveVariant === "skyscraper") {
             adWidth = 160
             adHeight = 300 // Match the user's 160x300 Adsterra unit
-        } else if (variant === "footer") {
+        } else if (effectiveVariant === "footer") {
             adWidth = isMobile ? 320 : 728
             adHeight = isMobile ? 50 : 90
         }
@@ -279,20 +282,20 @@ export function AdBanner({ variant = "footer" }: AdBannerProps) {
 
     // Pick the right ad config for the variant (Adsterra Fallback).
     let conf: AdConfig = ADSTERRA_KEYS.rectangle300x250
-    if (variant === "rectangle" || variant === "responsive" || variant === "native") {
+    if (effectiveVariant === "rectangle" || effectiveVariant === "responsive" || effectiveVariant === "native") {
         conf = ADSTERRA_KEYS.rectangle300x250
-    } else if (variant === "mobile-banner") {
+    } else if (effectiveVariant === "mobile-banner") {
         conf = ADSTERRA_KEYS.mobileBanner320x50
-    } else if (variant === "footer") {
+    } else if (effectiveVariant === "footer") {
         conf = isMobile ? ADSTERRA_KEYS.mobileBanner320x50 : ADSTERRA_KEYS.leaderboard728x90
-    } else if (variant === "skyscraper") {
+    } else if (effectiveVariant === "skyscraper") {
         conf = ADSTERRA_KEYS.skyscraper160x600
     }
 
-    const shouldRender = hasMounted && !(variant === "footer" && isDismissed)
+    const shouldRender = hasMounted && !(effectiveVariant === "footer" && isDismissed)
     const containerRef = useLazyAdSlot(conf, shouldRender && !adsenseClient)
 
-    if (variant === "rectangle" || variant === "responsive" || variant === "native") {
+    if (effectiveVariant === "rectangle" || effectiveVariant === "responsive" || effectiveVariant === "native") {
         return (
             <div className="w-full flex items-center justify-center py-4">
                 <div

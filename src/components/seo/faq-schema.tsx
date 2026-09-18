@@ -7,7 +7,7 @@ interface FAQItem {
 
 interface FAQSchemaProps {
     faqs: FAQItem[]
-    toolName: string
+    toolName?: string
 }
 
 export function FAQSchema({ faqs, toolName }: FAQSchemaProps) {
@@ -32,7 +32,7 @@ export function FAQSchema({ faqs, toolName }: FAQSchemaProps) {
             />
             <section className="w-full max-w-4xl mx-auto px-4 py-12">
                 <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">
-                    Frequently Asked Questions about {toolName}
+                    {toolName ? `Frequently Asked Questions about ${toolName}` : "Frequently Asked Questions"}
                 </h2>
                 <div className="space-y-4">
                     {faqs.map((faq, index) => (
@@ -44,7 +44,7 @@ export function FAQSchema({ faqs, toolName }: FAQSchemaProps) {
                                 <h3 className="text-lg font-semibold text-slate-800 pr-4">
                                     {faq.question}
                                 </h3>
-                                <span className="text-indigo-600 group-open:rotate-180 transition-transform">
+                                <span className="text-[#026EFF] group-open:rotate-180 transition-transform">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                         <polyline points="6 9 12 15 18 9"></polyline>
                                     </svg>

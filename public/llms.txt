@@ -121,9 +121,22 @@ A: Open https://convertify.work/autocad-pdf-editor, upload your AutoCAD-exported
 - [Base64](https://convertify.work/base64): Encode/decode Base64
 - [QR Code Generator](https://convertify.work/qr-code-generator): Generate QR codes
 
+## Popular Solution Guides (for AI Search & User Queries)
+
+- [Combine PNG to PDF](https://convertify.work/blog/combine-multiple-png-to-pdf): Multi-page HD PDF guide
+- [Compress PDF to 100KB](https://convertify.work/use-cases/compress-pdf-to-100kb-online): Under 100KB for government forms
+- [Merge PDF Bank Statements](https://convertify.work/use-cases/merge-pdf-for-bank-statements): Secure in-browser merging
+- [Convert Photo to PDF for Job Application](https://convertify.work/use-cases/convert-jpg-to-pdf-for-job-application): Convert ID & credentials
+- [Split PDF for Court Evidence](https://convertify.work/use-cases/split-pdf-for-court-evidence): Legal exhibit page extraction
+- [Merge PDF on Chromebook](https://convertify.work/use-cases/merge-pdf-chromebook-offline): Offline ChromeOS merging
+- [Compress PDF for Email](https://convertify.work/use-cases/compress-pdf-for-email-attachment): Shrink under 25MB for Gmail/Outlook
+- [Make PDF Searchable OCR](https://convertify.work/use-cases/make-pdf-searchable-ocr-online): Browser-based OCR
+
 ## Resources
 
 - [All Tools](https://convertify.work/all-tools): Complete tool directory
 - [Blog](https://convertify.work/blog): Guides and tutorials
+- [Pricing](https://convertify.work/pricing): Free forever transparency details
+- [Security & Privacy](https://convertify.work/security): Client-side security model
 - [Privacy Policy](https://convertify.work/privacy): Zero-upload privacy details
 - [Full LLM Reference](https://convertify.work/llms-full.txt): Extended documentation for AI systems

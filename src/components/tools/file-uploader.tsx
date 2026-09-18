@@ -14,6 +14,9 @@ interface FileUploaderProps {
     multiple?: boolean
     fileTypeLabel?: string
     iconType?: "pdf" | "image" | "word" | "excel" | "powerpoint" | "text"
+    maxFiles?: number
+    title?: string
+    description?: string
 }
 
 const ICON_MAP = {
@@ -72,15 +75,19 @@ function shortChooseLabel(fileTypeLabel: string): string {
 export function FileUploader({
     onFilesSelected,
     accept = { "application/pdf": [".pdf"] },
-    multiple = true,
+    multiple,
     fileTypeLabel = "PDF files",
-    iconType = "pdf"
+    iconType = "pdf",
+    maxFiles,
+    title,
+    description,
 }: FileUploaderProps) {
     const picking = useRef(false)
+    const effectiveMultiple = multiple !== undefined ? multiple : (maxFiles !== undefined ? maxFiles > 1 : true)
 
     const deliver = useCallback(async (files: File[]) => {
         const MAX_SIZE = 200 * 1024 * 1024
-        const valid = files.filter((file) => {
+        let valid = files.filter((file) => {
             if (file.size > MAX_SIZE) {
                 alert(`"${file.name}" is too large. Pick a file under 200 MB.`)
                 return false
@@ -92,9 +99,12 @@ export function FileUploader({
             return
         }
         if (valid.length === 0) return
+        if (maxFiles && valid.length > maxFiles) {
+            valid = valid.slice(0, maxFiles)
+        }
         const persisted = await persistPickedFiles(valid)
         onFilesSelected(persisted)
-    }, [accept, fileTypeLabel, onFilesSelected])
+    }, [accept, fileTypeLabel, maxFiles, onFilesSelected])
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
         void deliver(acceptedFiles)
@@ -102,7 +112,7 @@ export function FileUploader({
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
-        multiple,
+        multiple: effectiveMultiple,
         useFsAccessApi: false,
         noClick: IS_MOBILE_BUILD,
     })
@@ -113,7 +123,7 @@ export function FileUploader({
         try {
             if (await isNativeAndroid()) {
                 const files = await pickFilesNative({
-                    multiple,
+                    multiple: effectiveMultiple,
                     mimeTypes: mimeTypesFromAccept(accept),
                 })
                 await deliver(files)
@@ -165,9 +175,9 @@ export function FileUploader({
         <div
             {...getRootProps()}
             className={`
-        border-4 border-dashed rounded-3xl p-10 text-center cursor-pointer transition-colors
+        border-4 border-dashed rounded-3xl p-10 text-center cursor-pointer transition-all duration-200
         flex flex-col items-center justify-center gap-6 bg-slate-50
-        ${isDragActive ? "border-indigo-500 bg-indigo-50" : "border-slate-300 hover:border-indigo-400 hover:bg-slate-100"}
+        ${isDragActive ? "border-[#026EFF] bg-blue-50/50 scale-[1.01]" : "border-slate-300 hover:border-[#026EFF] hover:bg-blue-50/20"}
       `}
         >
             <input
@@ -175,18 +185,18 @@ export function FileUploader({
                 accept={acceptAttribute(accept)}
                 capture={undefined}
             />
-            <div className={`p-6 rounded-full ${isDragActive ? "bg-indigo-100 text-indigo-600" : "bg-white text-slate-400 shadow-sm"}`}>
+            <div className={`p-6 rounded-full transition-colors ${isDragActive ? "bg-blue-100 text-[#026EFF]" : "bg-white text-slate-400 shadow-sm border border-slate-100"}`}>
                 <IconComponent className="w-12 h-12" />
             </div>
             <div className="space-y-2">
-                <h3 className="text-2xl font-bold text-slate-700">
-                    {isDragActive ? "Drop files here" : `Drop your ${fileTypeLabel} here`}
+                <h3 className="text-2xl font-bold text-slate-800">
+                    {isDragActive ? "Drop files here" : (title || `Drop your ${fileTypeLabel} here`)}
                 </h3>
-                <p className="text-slate-500 text-lg">
-                    or click to browse
+                <p className="text-slate-500 text-base max-w-md mx-auto">
+                    {description || "or click to browse from your device"}
                 </p>
             </div>
-            <Button size="xl" className="text-lg px-8 py-6 h-auto mt-4 rounded-xl" type="button">
+            <Button size="xl" className="bg-[#026EFF] hover:bg-[#0058cc] text-white text-lg font-semibold px-8 py-6 h-auto mt-2 rounded-xl shadow-md hover:shadow-lg transition-all" type="button">
                 Select {fileTypeLabel}
             </Button>
         </div>

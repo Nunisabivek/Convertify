@@ -6,6 +6,9 @@ export const metadata: Metadata = {
     title: "Security & Privacy | Convertify",
     description: "Your files are secure with Convertify. All PDF processing happens in your browser - files never leave your device. No account required, no data stored. Learn about our security practices.",
     keywords: ["convertify security", "pdf converter privacy", "secure pdf tools", "safe file converter", "no data storage pdf", "browser-based pdf tools", "gdpr compliant pdf converter"],
+    alternates: {
+        canonical: 'https://convertify.work/security',
+    },
 };
 
 export default function SecurityPage() {

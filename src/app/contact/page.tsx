@@ -4,6 +4,9 @@ import { Metadata } from "next"
 export const metadata: Metadata = {
     title: "Contact Us | Convertify",
     description: "Get in touch with the Convertify team. We are here to help with your PDF conversion needs and questions.",
+    alternates: {
+        canonical: 'https://convertify.work/contact',
+    },
 }
 
 export default function ContactPage() {

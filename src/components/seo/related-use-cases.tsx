@@ -13,7 +13,9 @@ interface RelatedUseCasesProps {
 // it builds the topical cluster Google rewards: tool page → 5-8 specific
 // use-case pages → back to tool page.
 export function RelatedUseCases({ toolHref, title }: RelatedUseCasesProps) {
-    const matches = useCases.filter((uc) => uc.toolHref === toolHref)
+    const matches = useCases
+        .filter((uc) => uc.toolHref === toolHref)
+        .sort((a, b) => (b.indexable ? 1 : 0) - (a.indexable ? 1 : 0))
 
     if (matches.length === 0) return null
 

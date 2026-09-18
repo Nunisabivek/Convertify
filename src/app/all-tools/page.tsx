@@ -80,15 +80,30 @@ const tools: { category: string; items: Tool[] }[] = [
             { title: "Merge PDF", description: "Combine multiple PDFs into one unified document.", icon: FileStack, href: "/merge-pdf", color: "text-red-600 bg-red-50" },
             { title: "Split PDF", description: "Extract pages or split your PDF into multiple files.", icon: Scissors, href: "/split-pdf", color: "text-blue-600 bg-blue-50" },
             { title: "Organize PDF", description: "Reorder, rotate, and organize PDF pages.", icon: Grid3x3, href: "/organize-pdf", color: "text-violet-600 bg-violet-50" },
+            { title: "Reorder PDF", description: "Rearrange pages in any sequence with drag and drop.", icon: Grid3x3, href: "/reorder-pdf", color: "text-indigo-600 bg-indigo-50" },
+            { title: "Delete PDF Pages", description: "Remove unwanted or blank pages permanently.", icon: FileMinus2, href: "/delete-pdf-pages", color: "text-rose-600 bg-rose-50" },
+            { title: "Crop PDF", description: "Trim margins and remove excess white space.", icon: Crop, href: "/crop-pdf", color: "text-lime-600 bg-lime-50" },
             { title: "Rotate PDF", description: "Rotate your PDF pages as needed.", icon: RotateCw, href: "/rotate-pdf", color: "text-pink-600 bg-pink-50" },
             { title: "Add Page Numbers", description: "Insert page numbers into your PDF.", icon: Hash, href: "/add-page-numbers", color: "text-fuchsia-600 bg-fuchsia-50" },
             { title: "Watermark PDF", description: "Stamp text or an image across every page.", icon: Droplet, href: "/watermark-pdf", color: "text-sky-600 bg-sky-50" },
+            { title: "Edit PDF", description: "Add text, freehand notes, highlights, and stamps to PDF.", icon: FilePenLine, href: "/edit-pdf", color: "text-purple-600 bg-purple-50" },
+            { title: "Compare PDF", description: "Find visual and text differences between two PDF versions.", icon: FileSearch, href: "/compare-pdf", color: "text-cyan-600 bg-cyan-50" },
         ]
     },
     {
-        category: "Optimize",
+        category: "Security & Signature",
+        items: [
+            { title: "Protect PDF", description: "Add AES-256 password protection and permissions to your PDF.", icon: Lock, href: "/protect-pdf", color: "text-blue-600 bg-blue-50" },
+            { title: "Sign PDF", description: "Draw, type, or upload digital signatures onto PDFs.", icon: Signature, href: "/sign-pdf", color: "text-indigo-600 bg-indigo-50" },
+            { title: "Unlock PDF", description: "Remove password security and printing restrictions.", icon: LockOpen, href: "/unlock-pdf", color: "text-emerald-600 bg-emerald-50" },
+            { title: "Redact PDF", description: "Permanently blackout sensitive text, data, and SSNs.", icon: FileMinus2, href: "/redact-pdf", color: "text-slate-900 bg-slate-100" },
+        ]
+    },
+    {
+        category: "Optimize & Repair",
         items: [
             { title: "Compress PDF", description: "100KB, 200KB, 10MB, or Gmail’s 25MB cap.", icon: Minimize2, href: "/compress-pdf", color: "text-green-600 bg-green-50" },
+            { title: "Repair PDF", description: "Rebuild corrupted XRef tables and damaged files.", icon: WandSparkles, href: "/repair-pdf", color: "text-amber-600 bg-amber-50" },
             { title: "Compress Image", description: "Shrink JPG and PNG files without visible loss.", icon: Shrink, href: "/image-compressor", color: "text-lime-600 bg-lime-50" },
             { title: "Resize Image", description: "Change image dimensions to an exact size.", icon: Ruler, href: "/resize-image", color: "text-amber-600 bg-amber-50" },
         ]
@@ -97,6 +112,10 @@ const tools: { category: string; items: Tool[] }[] = [
         category: "Convert from PDF",
         items: [
             { title: "PDF to Word", description: "Pull the text out of a PDF into an editable DOCX.", icon: FileText, href: "/pdf-to-word", color: "text-blue-600 bg-blue-50" },
+            { title: "PDF to Excel", description: "Extract tables from PDF into an Excel spreadsheet.", icon: Sheet, href: "/pdf-to-excel", color: "text-emerald-600 bg-emerald-50" },
+            { title: "PDF to PowerPoint", description: "Convert PDF pages into widescreen presentation slides (.pptx).", icon: Presentation, href: "/pdf-to-powerpoint", color: "text-orange-600 bg-orange-50" },
+            { title: "PDF to PDF/A", description: "Convert documents to ISO 19005 archival preservation format.", icon: FileCheck, href: "/pdf-to-pdfa", color: "text-emerald-600 bg-emerald-50" },
+            { title: "OCR PDF", description: "Extract selectable text from scanned PDFs and document images.", icon: ScanLine, href: "/ocr-pdf", color: "text-teal-600 bg-teal-50" },
             { title: "PDF to JPG", description: "Convert PDF pages to JPG images.", icon: ImageIcon, href: "/pdf-to-jpg", color: "text-yellow-600 bg-yellow-50" },
             { title: "PDF to PNG", description: "Convert PDF pages to PNG images.", icon: ImageIcon, href: "/pdf-to-png", color: "text-cyan-600 bg-cyan-50" },
             { title: "PDF to Text", description: "Extract plain text content from a PDF.", icon: FileText, href: "/pdf-to-text", color: "text-gray-600 bg-gray-50" },
@@ -107,6 +126,7 @@ const tools: { category: string; items: Tool[] }[] = [
         items: [
             { title: "Word to PDF", description: "Convert DOCX to PDF.", icon: FileText, href: "/word-to-pdf", color: "text-indigo-600 bg-indigo-50" },
             { title: "Excel to PDF", description: "Convert XLS and XLSX spreadsheets to PDF.", icon: Sheet, href: "/excel-to-pdf", color: "text-green-600 bg-green-50" },
+            { title: "PowerPoint to PDF", description: "Convert PPTX and PPT presentations to landscape PDF.", icon: Presentation, href: "/powerpoint-to-pdf", color: "text-orange-600 bg-orange-50" },
             { title: "JPG to PDF", description: "Convert JPG images to PDF.", icon: ImageIcon, href: "/jpg-to-pdf", color: "text-purple-600 bg-purple-50" },
             { title: "PNG to PDF", description: "Convert PNG images to PDF.", icon: ImageIcon, href: "/png-to-pdf", color: "text-emerald-600 bg-emerald-50" },
             { title: "Text to PDF", description: "Convert TXT files to PDF.", icon: FileText, href: "/text-to-pdf", color: "text-slate-600 bg-slate-50" },
@@ -136,24 +156,6 @@ const tools: { category: string; items: Tool[] }[] = [
             { title: "Base64", description: "Encode and decode Base64 text and images.", icon: Code, href: "/base64", color: "text-slate-600 bg-slate-50" },
             { title: "QR Code Generator", description: "Generate a QR code for any link or text.", icon: QrCode, href: "/qr-code-generator", color: "text-neutral-700 bg-neutral-100" },
             { title: "AutoCAD PDF Editor", description: "Edit SHX vector text inside CAD PDFs.", icon: PenLine, href: "/autocad-pdf-editor", color: "text-amber-600 bg-amber-50" },
-        ]
-    },
-    {
-        category: "In Development",
-        items: [
-            { title: "Edit PDF", description: "Add text, images and annotations to PDF.", icon: FilePenLine, href: "/edit-pdf", color: "text-purple-600 bg-purple-50", comingSoon: true },
-            { title: "Sign PDF", description: "Add electronic signatures to your PDF.", icon: Signature, href: "/sign-pdf", color: "text-indigo-600 bg-indigo-50", comingSoon: true },
-            { title: "OCR PDF", description: "Recognize text inside scanned PDFs.", icon: ScanLine, href: "/ocr-pdf", color: "text-teal-600 bg-teal-50", comingSoon: true },
-            { title: "Protect PDF", description: "Add password protection to your PDF.", icon: Lock, href: "/protect-pdf", color: "text-red-600 bg-red-50", comingSoon: true },
-            { title: "Unlock PDF", description: "Remove the password from a protected PDF.", icon: LockOpen, href: "/unlock-pdf", color: "text-green-600 bg-green-50", comingSoon: true },
-            { title: "Redact PDF", description: "Permanently remove sensitive information.", icon: FileMinus2, href: "/redact-pdf", color: "text-yellow-600 bg-yellow-50", comingSoon: true },
-            { title: "Crop PDF", description: "Trim and crop PDF page margins.", icon: Crop, href: "/crop-pdf", color: "text-lime-600 bg-lime-50", comingSoon: true },
-            { title: "Repair PDF", description: "Rebuild corrupted PDF files.", icon: WandSparkles, href: "/repair-pdf", color: "text-amber-600 bg-amber-50", comingSoon: true },
-            { title: "Compare PDF", description: "Find differences between two PDFs.", icon: FileSearch, href: "/compare-pdf", color: "text-cyan-600 bg-cyan-50", comingSoon: true },
-            { title: "PDF to Excel", description: "Extract PDF tables into a spreadsheet.", icon: Sheet, href: "/pdf-to-excel", color: "text-green-600 bg-green-50", comingSoon: true },
-            { title: "PDF to PowerPoint", description: "Convert PDF pages into slides.", icon: Presentation, href: "/pdf-to-powerpoint", color: "text-orange-600 bg-orange-50", comingSoon: true },
-            { title: "PowerPoint to PDF", description: "Convert PPTX presentations to PDF.", icon: Presentation, href: "/powerpoint-to-pdf", color: "text-orange-600 bg-orange-50", comingSoon: true },
-            { title: "PDF to PDF/A", description: "Convert to the PDF/A archival format.", icon: FileCheck, href: "/pdf-to-pdfa", color: "text-emerald-600 bg-emerald-50", comingSoon: true },
         ]
     }
 ]
