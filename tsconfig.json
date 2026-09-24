@@ -39,6 +39,7 @@
   ],
   "exclude": [
     "node_modules",
-    "shannon-tools"
+    "shannon-tools",
+    "ui-ux-pro-max-skill"
   ]
 }

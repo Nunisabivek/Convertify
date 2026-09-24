@@ -117,6 +117,9 @@ export default function NativeResultSheet() {
                 })
                 setOutput(stored)
                 setResultSheetOpen(true)
+                if (typeof window !== 'undefined') {
+                    window.dispatchEvent(new CustomEvent('convertify:close-tool-sheet'))
+                }
                 void import('@/lib/native-ads')
                     .then((m) => {
                         m.holdNativeAds('sheet')
@@ -126,6 +129,9 @@ export default function NativeResultSheet() {
             } catch {
                 setError('Could not save that file. Try again.')
                 setResultSheetOpen(true)
+                if (typeof window !== 'undefined') {
+                    window.dispatchEvent(new CustomEvent('convertify:close-tool-sheet'))
+                }
             } finally {
                 setBusy(false)
             }
@@ -145,6 +151,9 @@ export default function NativeResultSheet() {
                 })
                 setOutput(stored)
                 setResultSheetOpen(true)
+                if (typeof window !== 'undefined') {
+                    window.dispatchEvent(new CustomEvent('convertify:close-tool-sheet'))
+                }
                 void import('@/lib/native-ads')
                     .then((m) => {
                         m.holdNativeAds('sheet')
@@ -154,6 +163,9 @@ export default function NativeResultSheet() {
             } catch {
                 setError('Could not save that file. Try again.')
                 setResultSheetOpen(true)
+                if (typeof window !== 'undefined') {
+                    window.dispatchEvent(new CustomEvent('convertify:close-tool-sheet'))
+                }
             } finally {
                 setBusy(false)
             }
@@ -222,8 +234,9 @@ export default function NativeResultSheet() {
     return (
         <div className="mobile-result-sheet" role="dialog" aria-label="Save or share">
             <div className="mobile-result-card">
+                <div style={{ width: 36, height: 5, borderRadius: 3, background: 'rgba(60, 60, 67, 0.25)', margin: '0 auto 16px' }} aria-hidden />
                 <div className={`mobile-result-check${warn ? ' is-warn' : ''}`}>
-                    {warn ? <AlertTriangle size={28} /> : <Check size={28} />}
+                    {warn ? <AlertTriangle size={26} /> : <Check size={26} />}
                 </div>
                 <h2>{title}</h2>
                 {thumb ? (

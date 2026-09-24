@@ -47,7 +47,7 @@ export default function PdfToTextPage() {
                     <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto text-gray-600 mb-4">
                         <FileText className="w-10 h-10" />
                     </div>
-                    <h1 className="text-3xl font-bold">Text Extracted!</h1>
+                    <h2 className="text-3xl font-bold">Text Extracted!</h2>
                 </div>
 
                 <div className="bg-white p-6 rounded-xl border shadow-sm relative">

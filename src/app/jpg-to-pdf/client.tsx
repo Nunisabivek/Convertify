@@ -95,7 +95,7 @@ export default function JpgToPdfPage() {
                 <div className="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto text-purple-600">
                     <Download className="w-12 h-12" />
                 </div>
-                <h1 className="text-4xl font-bold">PDF Created Successfully!</h1>
+                <h2 className="text-4xl font-bold">PDF Created Successfully!</h2>
                 <div className="flex flex-col gap-4">
                     <Button size="xl" asChild className="w-full">
                         <a href={processedPdfUrl} download={outputName}>

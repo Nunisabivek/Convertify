@@ -147,7 +147,7 @@ export default function ExcelToPdfClient() {
                 <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto text-green-600">
                     <Download className="w-12 h-12" />
                 </div>
-                <h1 className="text-4xl font-bold">PDF Created!</h1>
+                <h2 className="text-4xl font-bold">PDF Created!</h2>
                 <p className="text-slate-500">Your Excel spreadsheet has been converted to PDF.</p>
                 <Button size="xl" asChild className="bg-green-600 hover:bg-green-700">
                     <a href={downloadUrl} download={file?.name.replace(/\.(xlsx?|xls)$/i, ".pdf")}>

@@ -28,13 +28,6 @@ export function SoftwareApplicationSchema({
             "availability": "https://schema.org/InStock",
             "priceValidUntil": "2030-12-31"
         },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "ratingCount": "2847",
-            "bestRating": "5",
-            "worstRating": "1"
-        },
         "softwareVersion": "2.1",
         "datePublished": "2024-01-01",
         "dateModified": "2026-07-01",

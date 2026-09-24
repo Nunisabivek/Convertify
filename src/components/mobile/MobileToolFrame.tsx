@@ -26,7 +26,7 @@ const LEADS: Record<string, string> = {
     'excel-to-pdf': 'Turn a spreadsheet into a PDF.',
     'image-compressor': 'Type a target size. Quality first, then a smaller photo only if needed.',
     'resize-image': "Change a photo's width and height.",
-    'heic-to-jpg': 'Turn iPhone photos into JPG so any phone can open them.',
+    'heic-to-jpg': 'Convert HEIC photos into JPG so any phone can open them.',
     'webp-converter': 'Convert WebP pictures to JPG or PNG.',
     'watermark-pdf': 'Stamp text on every page.',
     'add-page-numbers': 'Add page numbers to a PDF.',

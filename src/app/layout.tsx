@@ -103,9 +103,6 @@ export const metadata: Metadata = {
     images: ["https://convertify.work/images/og-banner.png"],
     creator: "@convertify",
   },
-  alternates: {
-    canonical: 'https://convertify.work',
-  },
   verification: {
     google: "ghwXtP5nTeKojcTtLh5jNBXQOHfhcwBGfwiLLO0_4Yc",
   },
@@ -140,29 +137,12 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
         {/* Google Fonts loaded as link tags (non-render-blocking) instead of CSS @import */}
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
           </>
         )}
 
         {/* Sitemap Link for Search Engines */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-
-        {/* Do not advertise /llms.txt as text/plain alternate on every page.
-            Crawlers that prefer text/plain (including some policy checkers)
-            followed that link from /privacy and treated the SEO dump as the
-            privacy policy. Homepage metadata in src/app/page.tsx still
-            advertises llms.txt. */}
-
-        {/* hreflang signals — site is English-only but we want Google to
-            understand it serves all major English markets so US/CA/UK/AU
-            queries surface this domain. x-default points to the canonical. */}
-        <link rel="alternate" hrefLang="en" href="https://convertify.work" />
-        <link rel="alternate" hrefLang="en-US" href="https://convertify.work" />
-        <link rel="alternate" hrefLang="en-GB" href="https://convertify.work" />
-        <link rel="alternate" hrefLang="en-CA" href="https://convertify.work" />
-        <link rel="alternate" hrefLang="en-AU" href="https://convertify.work" />
-        <link rel="alternate" hrefLang="x-default" href="https://convertify.work" />
 
         {/* Structured Data - Website */}
         <script
@@ -187,9 +167,9 @@ export default function RootLayout({
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '${GA_MEASUREMENT_ID}', {
-            'send_page_view': true,
-            'anonymize_ip': true
+          gtag('config', '${GA_MEASUREMENT_ID}', {\
+            'send_page_view': true,\
+            'anonymize_ip': true\
           });
         `}
       </Script>

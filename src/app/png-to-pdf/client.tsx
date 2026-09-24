@@ -65,7 +65,7 @@ export default function PngToPdfPage() {
                 <div className="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center mx-auto text-emerald-600">
                     <Download className="w-12 h-12" />
                 </div>
-                <h1 className="text-4xl font-bold">PDF Ready!</h1>
+                <h2 className="text-4xl font-bold">PDF Ready!</h2>
                 <div className="flex flex-col gap-4">
                     <Button size="xl" asChild className="w-full">
                         <a href={processedPdfUrl} download={outputName}>Download PDF</a>

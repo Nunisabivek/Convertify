@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, useEffect, useSyncExternalStore } from 'react'
+import { ReactNode, useEffect, useState, useSyncExternalStore } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { AppIcon } from '@/components/mobile/AppIcon'
@@ -12,6 +12,8 @@ import { abortConvertWorker } from '@/lib/jobs/media'
 import { isConverting, subscribeConverting } from '@/lib/jobs/session'
 import { closeResultSheet, isResultSheetOpen } from '@/lib/result-sheet'
 import { mobileRouteTitle } from '@/lib/document-title'
+import MobileToolSheet from '@/components/mobile/MobileToolSheet'
+import { ToolSheetProvider, useToolSheet } from '@/components/mobile/ToolSheetContext'
 
 interface MobileLayoutProps {
     children: ReactNode
@@ -73,9 +75,39 @@ function isRootTab(pathname: string): boolean {
 }
 
 export default function MobileLayout({ children }: MobileLayoutProps) {
+    return (
+        <ToolSheetProvider>
+            <MobileLayoutInner>{children}</MobileLayoutInner>
+        </ToolSheetProvider>
+    )
+}
+
+function MobileLayoutInner({ children }: MobileLayoutProps) {
     const pathname = usePathname() || '/'
     const router = useRouter()
+    const { isOpen: isSheetOpen, closeTool: closeSheet, openTool } = useToolSheet()
     const converting = useSyncExternalStore(subscribeConverting, isConverting, () => false)
+    const [isDesktop, setIsDesktop] = useState(false)
+    const [showFrame, setShowFrame] = useState(true)
+
+    useEffect(() => {
+        const checkDesktop = async () => {
+            try {
+                const { Capacitor } = await import('@capacitor/core')
+                if (!Capacitor.isNativePlatform() && window.innerWidth >= 860) {
+                    setIsDesktop(true)
+                }
+            } catch {
+                if (window.innerWidth >= 860) setIsDesktop(true)
+            }
+        }
+        void checkDesktop()
+        const onResize = () => {
+            setIsDesktop(window.innerWidth >= 860)
+        }
+        window.addEventListener('resize', onResize)
+        return () => window.removeEventListener('resize', onResize)
+    }, [])
 
     useEffect(() => {
         rememberTab(pathname)
@@ -146,6 +178,10 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
                 const { App } = await import('@capacitor/app')
                 handle = await App.addListener('backButton', ({ canGoBack }) => {
                     if (closeResultSheet()) return
+                    if (isSheetOpen) {
+                        closeSheet()
+                        return
+                    }
                     const path = normalizePath(window.location.pathname)
                     if (path === '/about' || path === '/privacy') {
                         router.push(lastTab())
@@ -170,7 +206,7 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
             cancelled = true
             void handle?.remove()
         }
-    }, [router])
+    }, [router, isSheetOpen, closeSheet])
 
     const path = normalizePath(pathname)
     const isTab = isRootTab(path) || path === '/about' || path === '/privacy'
@@ -187,6 +223,10 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
     const goBack = () => {
         void tapHaptic()
         if (closeResultSheet()) return
+        if (isSheetOpen) {
+            closeSheet()
+            return
+        }
         if (typeof window !== 'undefined' && window.history.length > 1) {
             router.back()
             return
@@ -194,13 +234,14 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
         router.push(lastTab())
     }
 
-    return (
+    const appContent = (
         <div className="mobile-app is-native">
             <NativeResultSheet />
+            <MobileToolSheet />
             <header className="mobile-top-bar">
                 {showBack ? (
                     <button type="button" className="mobile-icon-btn" aria-label="Back" onClick={goBack}>
-                        <AppIcon name="ChevronLeft" size={24} />
+                        <AppIcon name="ChevronLeft" size={22} />
                     </button>
                 ) : (
                     <div className="mobile-top-bar-brand" aria-hidden>
@@ -210,7 +251,7 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
                 <div className="mobile-top-bar-title">
                     <span className="mobile-top-bar-text">{heading}</span>
                 </div>
-                <span className="mobile-icon-btn" aria-hidden />
+                <span className="mobile-icon-btn" style={{ opacity: 0, pointerEvents: 'none' }} aria-hidden />
             </header>
 
             <main className="mobile-content">
@@ -242,4 +283,77 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
             </nav>
         </div>
     )
+
+    if (isDesktop && showFrame) {
+        return (
+            <div className="mobile-simulator-wrapper">
+                <div className="mobile-simulator-container">
+                    {/* Modern Android Flagship Frame */}
+                    <div className="mobile-android-frame">
+                        <div className="mobile-android-punchhole" />
+                        <div className="mobile-android-screen">
+                            <div className="mobile-simulator-statusbar">
+                                <span className="mobile-statusbar-time">10:30</span>
+                                <div className="mobile-statusbar-icons">
+                                    <span>5G</span>
+                                    <span>98%</span>
+                                </div>
+                            </div>
+                            {appContent}
+                            <div className="mobile-home-indicator" />
+                        </div>
+                    </div>
+
+                    {/* Side-by-Side Inspector Dock */}
+                    <aside className="mobile-preview-dock">
+                        <div className="mobile-dock-header">
+                            <div className="mobile-dock-logo">C</div>
+                            <div>
+                                <div className="mobile-dock-title">Convertify Android</div>
+                                <div className="mobile-dock-subtitle">App Preview (Clean UX)</div>
+                            </div>
+                        </div>
+
+                        <div className="mobile-dock-section">
+                            <span className="mobile-dock-section-title">Quick Screens</span>
+                            <Link href="/" className={`mobile-dock-btn${path === '/' ? ' is-active' : ''}`}>
+                                <span>Home Screen</span>
+                                <span className="mobile-dock-badge">Home</span>
+                            </Link>
+                            <Link href="/all-tools" className={`mobile-dock-btn${path === '/all-tools' ? ' is-active' : ''}`}>
+                                <span>Tools Dashboard</span>
+                                <span className="mobile-dock-badge">40+ Tools</span>
+                            </Link>
+                            <button
+                                type="button"
+                                className="mobile-dock-btn"
+                                onClick={() => openTool('compress-pdf')}
+                            >
+                                <span>Compress PDF Sheet</span>
+                                <span className="mobile-dock-badge">UPI Sheet</span>
+                            </button>
+                            <Link href="/about" className={`mobile-dock-btn${path === '/about' ? ' is-active' : ''}`}>
+                                <span>About & Privacy</span>
+                                <span className="mobile-dock-badge">Info</span>
+                            </Link>
+                        </div>
+
+                        <div className="mobile-dock-section">
+                            <span className="mobile-dock-section-title">Preview Mode</span>
+                            <button
+                                type="button"
+                                className="mobile-dock-btn"
+                                onClick={() => setShowFrame(false)}
+                            >
+                                <span>Switch to Full Window</span>
+                                <span className="mobile-dock-badge">View</span>
+                            </button>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        )
+    }
+
+    return appContent
 }

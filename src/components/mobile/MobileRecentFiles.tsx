@@ -41,20 +41,23 @@ export default function MobileRecentFiles() {
     return (
         <div className="mobile-section">
             <div className="mobile-section-header">
-                <h2 className="mobile-section-title">Recent files</h2>
+                <h2 className="mobile-section-title">Recent Files</h2>
                 {recentFiles.length > 0 && (
                     <button
                         type="button"
                         className="mobile-section-action"
                         onClick={clearRecentFiles}
                     >
-                        Clear
+                        Clear All
                     </button>
                 )}
             </div>
 
             {recentFiles.length === 0 ? (
-                <p className="mobile-empty-line">Nothing here yet. Convert a file and it will show up.</p>
+                <div className="mobile-empty-line" style={{ borderRadius: 20, textAlign: 'center', padding: '24px 16px' }}>
+                    <p style={{ margin: 0, fontWeight: 600, color: '#000000', fontSize: 15 }}>No Recent Files</p>
+                    <p style={{ margin: '4px 0 0', fontSize: 13, color: '#6c6c70' }}>Files you convert or edit on this phone will appear here.</p>
+                </div>
             ) : (
                 <div className="mobile-file-list">
                     {recentFiles.map((file) => (
@@ -62,11 +65,11 @@ export default function MobileRecentFiles() {
                             type="button"
                             key={file.id}
                             className="mobile-file-item"
-                            whileTap={reduceMotion ? undefined : { scale: 0.97 }}
+                            whileTap={reduceMotion ? undefined : { scale: 0.98 }}
                             onClick={() => onOpen(file)}
                         >
                             <div className="mobile-file-icon">
-                                <AppIcon name="FileText" size={22} />
+                                <AppIcon name="FileText" size={20} />
                             </div>
                             <div className="mobile-file-info">
                                 <div className="mobile-file-name">{file.name}</div>
@@ -74,7 +77,7 @@ export default function MobileRecentFiles() {
                                     {formatRecentTime(file.timestamp)} · {formatFileSize(file.size)}
                                 </div>
                             </div>
-                            <AppIcon name="ChevronRight" className="mobile-file-chevron" size={18} />
+                            <AppIcon name="ChevronRight" className="mobile-file-chevron" size={16} />
                         </motion.button>
                     ))}
                 </div>

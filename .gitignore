@@ -45,6 +45,9 @@ next-env.d.ts
 .claude/
 .gemini/
 .cursor/
+ui-ux-pro-max*/
+.skills/
+
 
 # Android build artifacts
 android/build/

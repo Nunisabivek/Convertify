@@ -137,7 +137,7 @@ export default function OrganizePdfClient() {
                 <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto text-green-600">
                     <Download className="w-12 h-12" />
                 </div>
-                <h1 className="text-4xl font-bold">PDF Organized Successfully!</h1>
+                <h2 className="text-4xl font-bold">PDF Organized Successfully!</h2>
                 <div className="flex flex-col gap-4">
                     <Button size="xl" asChild className="w-full">
                         <a href={processedPdfUrl} download={`organized-${file.name}`}>

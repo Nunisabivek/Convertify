@@ -309,7 +309,7 @@ export default function CompressPdfPage() {
                 <div className={`w-24 h-24 rounded-full flex items-center justify-center mx-auto ${isSmaller ? 'bg-green-100 text-green-600' : 'bg-orange-100 text-orange-600'}`}>
                     {isSmaller ? <Download className="w-12 h-12" /> : <Minimize2 className="w-12 h-12" />}
                 </div>
-                <h1 className="text-4xl font-bold">{isSmaller ? "Compression Complete!" : "Optimization Complete"}</h1>
+                <h2 className="text-4xl font-bold">{isSmaller ? "Compression Complete!" : "Optimization Complete"}</h2>
 
                 <div className="bg-slate-50 p-6 rounded-xl border">
                     <p className="text-slate-500 mb-2">File size change:</p>

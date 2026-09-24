@@ -1,15 +1,14 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next'
 
 export const dynamic = 'force-static'
 
 export default function robots(): MetadataRoute.Robots {
-    // Disallow paths that should never be indexed (static assets, admin,
-    // Next.js internals). Allow AI/LLM bots — they cite us in answers, which
-    // is the GEO play.
+    // Disallow paths that should never be crawled or indexed (admin, private, api).
+    // Note: NEVER disallow /_next/ because Googlebot and other crawlers need
+    // to fetch CSS, JS, and font chunks to render the page correctly.
     const sharedDisallow = [
         '/admin/',
         '/private/',
-        '/_next/',
         '/api/',
     ]
 

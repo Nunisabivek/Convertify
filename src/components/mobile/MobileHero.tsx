@@ -1,12 +1,17 @@
 'use client'
 
+import { ShieldCheck } from 'lucide-react'
+
 export default function MobileHero() {
     return (
         <div className="mobile-hero">
-            <p className="mobile-hero-kicker">On this phone</p>
-            <h1 className="mobile-hero-title">PDF & photo tools</h1>
+            <div className="mobile-hero-badge">
+                <ShieldCheck size={14} strokeWidth={2.4} color="#026EFF" />
+                <span>On-Device • 100% Private</span>
+            </div>
+            <h1 className="mobile-hero-title">Convertify</h1>
             <p className="mobile-hero-subtitle">
-                Shrink a file for a form, merge PDFs, or make a passport photo. Nothing leaves this phone.
+                Compress, convert, and edit documents & photos instantly. Files never leave this device.
             </p>
         </div>
     )

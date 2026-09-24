@@ -96,7 +96,7 @@ export default function PdfToPngPage() {
                 <div className="w-24 h-24 bg-cyan-100 rounded-full flex items-center justify-center mx-auto text-cyan-600">
                     <Download className="w-12 h-12" />
                 </div>
-                <h1 className="text-4xl font-bold">{isZip ? 'Images Ready!' : 'Image Ready!'}</h1>
+                <h2 className="text-4xl font-bold">{isZip ? 'Images Ready!' : 'Image Ready!'}</h2>
                 <p className="text-slate-500">
                     {isZip ? 'Your images are ready to download.' : 'Your image is ready to download.'}
                 </p>

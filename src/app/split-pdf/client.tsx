@@ -158,7 +158,7 @@ export default function SplitPdfPage() {
                 <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto text-green-600">
                     <Scissors className="w-12 h-12" />
                 </div>
-                <h1 className="text-4xl font-bold">Pages Extracted Successfully!</h1>
+                <h2 className="text-4xl font-bold">Pages Extracted Successfully!</h2>
                 <p className="text-slate-500">
                     {splitMode === "all"
                         ? "Your download should have started automatically."

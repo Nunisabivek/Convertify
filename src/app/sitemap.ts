@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next'
 import { INDEXABLE_BLOG_SITEMAP_ENTRIES } from '@/lib/blog-sitemap-entries'
 import { useCases } from '@/lib/use-cases-data'
 
@@ -118,23 +118,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
         })),
         ...INDEXABLE_BLOG_SITEMAP_ENTRIES.map(post => ({
             url: `${baseUrl}/blog/${post.slug}`,
-            lastModified: post.date || lastUpdated,
+            lastModified: post.date,
             changeFrequency: 'monthly' as const,
-            priority: 0.6,
+            priority: 0.7,
         })),
-        // High-intent use-case landing pages with custom FAQs, HowTo schemas & working tools
-        ...useCases.filter(uc => uc.indexable !== false).map(uc => ({
-            url: `${baseUrl}/use-cases/${uc.slug}`,
-            lastModified: lastUpdated,
-            changeFrequency: 'weekly' as const,
-            priority: 0.6,
-        })),
+        ...useCases
+            .filter(uc => uc.indexable !== false)
+            .map(useCase => ({
+                url: `${baseUrl}/${useCase.slug}`,
+                lastModified: lastUpdated,
+                changeFrequency: 'monthly' as const,
+                priority: 0.8,
+            })),
     ]
 
-    const seen = new Set<string>()
-    return entries.filter((item) => {
-        if (seen.has(item.url)) return false
-        seen.add(item.url)
-        return true
-    })
+    return entries
 }

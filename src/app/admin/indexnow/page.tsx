@@ -4,14 +4,17 @@ import { useState } from 'react'
 import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react'
 
 // Pages to push to IndexNow. Order matters — Bing/Yandex prioritize the
-// first URLs in the payload. Lead with the GSC "Crawled - currently not
-// indexed" set so re-crawl prioritizes the pages we just upgraded.
+// first URLs in the payload. Lead with the top tools so re-crawl prioritizes
+// the highest value search targets.
 const TOP_PAGES = [
-    // Primary core tools & new functional utilities
+    // Primary core tools & high-traffic unique utilities
     '/',
     '/all-tools',
-    '/merge-pdf',
     '/compress-pdf',
+    '/passport-photo',
+    '/fit-to-size',
+    '/remove-background',
+    '/merge-pdf',
     '/split-pdf',
     '/edit-pdf',
     '/sign-pdf',
@@ -101,111 +104,75 @@ export default function IndexNowAdmin() {
                     </p>
                 </div>
 
-                {/* Quick Submit Top Pages */}
-                <div className="bg-white rounded-xl shadow-lg p-8 mb-6 border border-slate-100">
-                    <h2 className="text-2xl font-bold text-slate-900 mb-4">
-                        Quick Submit - Core Tools & Updates
-                    </h2>
-                    <p className="text-slate-600 mb-6">
-                        Submit all active core tools, newly functional utilities, and landing pages instantly to IndexNow via server-side proxy.
-                    </p>
-                    <button
-                        onClick={submitTopPages}
-                        disabled={loading}
-                        className="w-full py-4 bg-[#026EFF] text-white rounded-lg font-semibold hover:bg-[#0058cc] disabled:bg-blue-300 transition-colors flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
-                    >
-                        {loading ? (
-                            <>
-                                <Loader2 className="w-5 h-5 animate-spin" />
-                                Submitting...
-                            </>
-                        ) : (
-                            <>
-                                <Send className="w-5 h-5" />
-                                Submit Top Pages Now
-                            </>
-                        )}
-                    </button>
-                </div>
+                <div className="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-6 md:p-8 space-y-6">
+                    <div>
+                        <label className="block text-sm font-semibold text-slate-700 mb-2">
+                            Quick Actions
+                        </label>
+                        <button
+                            onClick={submitTopPages}
+                            disabled={loading}
+                            className="inline-flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition-colors disabled:opacity-50"
+                        >
+                            {loading ? (
+                                <Loader2 className="w-4 h-4 animate-spin" />
+                            ) : (
+                                <Send className="w-4 h-4" />
+                            )}
+                            Submit Top Pages ({TOP_PAGES.length} URLs)
+                        </button>
+                    </div>
 
-                {/* Custom URL Submission */}
-                <div className="bg-white rounded-xl shadow-lg p-8 mb-6">
-                    <h2 className="text-2xl font-bold text-slate-900 mb-4">
-                        Submit Custom URLs
-                    </h2>
-                    <p className="text-slate-600 mb-4">
-                        Enter URLs (one per line) to submit to IndexNow:
-                    </p>
-                    <textarea
-                        value={urls}
-                        onChange={(e) => setUrls(e.target.value)}
-                        placeholder="/merge-pdf&#10;/compress-pdf&#10;/pdf-to-word"
-                        rows={10}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 font-mono text-sm mb-4"
-                    />
+                    <div>
+                        <label className="block text-sm font-semibold text-slate-700 mb-2">
+                            Custom URLs (one per line)
+                        </label>
+                        <textarea
+                            value={urls}
+                            onChange={(e) => setUrls(e.target.value)}
+                            rows={8}
+                            placeholder={`/\n/merge-pdf\n/compress-pdf\n/blog/how-to-compress-pdf`}
+                            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-mono text-sm"
+                        />
+                    </div>
+
                     <button
                         onClick={submitUrls}
                         disabled={loading || !urls.trim()}
-                        className="w-full py-4 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 disabled:bg-green-300 transition-colors flex items-center justify-center gap-2"
+                        className="inline-flex items-center gap-2 px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-xl transition-colors disabled:opacity-50"
                     >
                         {loading ? (
-                            <>
-                                <Loader2 className="w-5 h-5 animate-spin" />
-                                Submitting...
-                            </>
+                            <Loader2 className="w-4 h-4 animate-spin" />
                         ) : (
-                            <>
-                                <Send className="w-5 h-5" />
-                                Submit URLs
-                            </>
+                            <Send className="w-4 h-4" />
                         )}
+                        Submit Custom URLs
                     </button>
-                </div>
 
-                {/* Results */}
-                {result && (
-                    <div className="bg-green-50 border border-green-200 rounded-xl p-6">
-                        <div className="flex items-center gap-2 mb-4">
-                            <CheckCircle2 className="w-6 h-6 text-green-600" />
-                            <h3 className="text-xl font-bold text-green-900">
-                                Submission Successful!
-                            </h3>
-                        </div>
-                        <p className="text-green-800 mb-4">
-                            Submitted {result.urlsSubmitted} URLs to IndexNow endpoints
-                        </p>
-                        <div className="space-y-2">
-                            {result.results?.map((r: any, i: number) => (
-                                <div
-                                    key={i}
-                                    className={`p-3 rounded-lg ${r.success ? 'bg-green-100' : 'bg-red-100'
-                                        }`}
-                                >
-                                    <div className="flex items-center justify-between">
-                                        <span className="font-medium">
-                                            {r.endpoint.replace('https://', '').split('/')[0]}
-                                        </span>
-                                        <span className={r.success ? 'text-green-700' : 'text-red-700'}>
-                                            {r.success ? '✓ Success' : '✗ Failed'} {r.status > 0 ? `(HTTP ${r.status})` : ''}
-                                            {r.error && <span className="text-xs block text-red-600">{r.error}</span>}
-                                        </span>
+                    {/* Results */}
+                    {result && (
+                        <div className="p-4 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-800 space-y-2">
+                            <div className="flex items-center gap-2 font-medium">
+                                <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+                                Submitted {result.submitted} URLs successfully
+                            </div>
+                            <div className="text-xs text-emerald-700 font-mono space-y-1">
+                                {result.results?.map((r: any, i: number) => (
+                                    <div key={i}>
+                                        {r.endpoint}: {r.success ? 'OK (200)' : `Status ${r.status}`}
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
 
-                {/* Error */}
-                {error && (
-                    <div className="bg-red-50 border border-red-200 rounded-xl p-6">
-                        <div className="flex items-center gap-2">
-                            <AlertCircle className="w-6 h-6 text-red-600" />
-                            <h3 className="text-xl font-bold text-red-900">Error</h3>
+                    {error && (
+                        <div className="p-4 bg-red-50 rounded-xl border border-red-200 text-red-800 flex items-center gap-2">
+                            <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
+                            <span>{error}</span>
                         </div>
-                        <p className="text-red-800 mt-2">{error}</p>
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
         </div>
     )

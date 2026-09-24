@@ -138,7 +138,7 @@ const tools: { category: string; items: Tool[] }[] = [
     {
         category: "Image Tools",
         items: [
-            { title: "HEIC to JPG", description: "Convert iPhone HEIC photos to JPG.", icon: ImageIcon, href: "/heic-to-jpg", color: "text-teal-600 bg-teal-50" },
+            { title: "HEIC to JPG", description: "Convert HEIC photos to JPG.", icon: ImageIcon, href: "/heic-to-jpg", color: "text-teal-600 bg-teal-50" },
             { title: "WebP Converter", description: "Convert WebP to and from JPG and PNG.", icon: ImageIcon, href: "/webp-converter", color: "text-sky-600 bg-sky-50" },
             { title: "JPG to PNG", description: "Convert JPG images to PNG.", icon: FileImage, href: "/jpg-to-png", color: "text-indigo-600 bg-indigo-50" },
             { title: "PNG to JPG", description: "Convert PNG images to JPG.", icon: FileImage, href: "/png-to-jpg", color: "text-red-600 bg-red-50" },

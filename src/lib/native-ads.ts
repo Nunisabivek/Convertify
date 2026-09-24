@@ -163,12 +163,8 @@ async function applyHolds(): Promise<void> {
     const plugin = admob
     if (!plugin || !bannerLaidOut) return
     try {
-        if (holds.size > 0) {
-            await plugin.AdMob.hideBanner()
-            setBannerInset(lastBannerHeight)
-        } else {
-            await plugin.AdMob.resumeBanner()
-        }
+        // Banner stays visible everytime below per user requirement
+        await plugin.AdMob.resumeBanner()
     } catch {
         // fail silently
     }
@@ -246,7 +242,6 @@ function tryShowInterstitial(): void {
     const plugin = admob
     if (!plugin) return
     if (!interstitialReady || interstitialShowing) return
-    if (holds.has('job')) return
 
     interstitialShowing = true
     interstitialReady = false
@@ -268,9 +263,8 @@ function tryShowInterstitial(): void {
 /**
  * After a file is ready to share/save. Never on cold start, back, picker, or tap.
  * At most once every 3 conversions and 3 minutes (whichever is stricter).
- * Only queues if an interstitial is already loaded - never waits and never
- * blocks Share/Save on the Done sheet. Actual show happens in
- * `flushQueuedInterstitial` after the sheet closes.
+ * Shows interstitial immediately if loaded when conversion is complete,
+ * with flushQueuedInterstitial as fallback after sheet closes.
  */
 export function noteSuccessfulConversion(): void {
     if (!adsAllowed()) return
@@ -291,6 +285,7 @@ export function noteSuccessfulConversion(): void {
     if (!shouldOfferInterstitial(gate, now)) return
     if (!interstitialReady || interstitialShowing) return
     interstitialQueued = true
+    tryShowInterstitial()
 }
 
 /**
