@@ -118,7 +118,9 @@ function pruneOut(outDir) {
 function run(cmd, args) {
   const resolved = process.platform === 'win32' && cmd === 'npx' ? 'npx.cmd' : cmd
   const result = spawnSync(resolved, args, { cwd: root, stdio: 'inherit', env: process.env, shell: process.platform === 'win32' })
-  if (result.status !== 0) process.exit(result.status ?? 1)
+  // Throw, never process.exit: exit skips the `finally` that restores the stashed
+  // middleware and API routes, so a failed build used to delete them from src/.
+  if (result.status !== 0) throw new Error(`${cmd} ${args.join(' ')} failed (exit ${result.status})`)
 }
 
 mkdirSync(tmp, { recursive: true })
@@ -126,6 +128,9 @@ const stashed = [stash('src/middleware.ts'), stash('src/app/api')]
 
 try {
   copyWorker()
+  // Route type validators left by `next dev` or a web build still import
+  // src/app/api, which is stashed above, so the typecheck fails. They regenerate.
+  for (const dir of ['.next/types', '.next/dev/types']) rmSync(join(root, dir), { recursive: true, force: true })
   run('npx', ['next', 'build'])
   const outDir = join(root, 'out')
   if (existsSync(outDir)) {

@@ -2,7 +2,7 @@
 
 import React, { ComponentType } from 'react'
 import dynamic from 'next/dynamic'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useDragControls } from 'framer-motion'
 import { X, ShieldCheck, ArrowLeftRight } from 'lucide-react'
 import { useToolSheet } from './ToolSheetContext'
 import { ToolGlyph } from './ToolGlyph'
@@ -112,6 +112,7 @@ const TOOL_COMPONENTS: Record<string, ComponentType<any>> = {
 
 export default function MobileToolSheet() {
     const { isOpen, activeToolId, openTool, closeTool } = useToolSheet()
+    const dragControls = useDragControls()
 
     if (!isOpen && !activeToolId) return null
 
@@ -139,96 +140,100 @@ export default function MobileToolSheet() {
                         }}
                     />
 
-                    {/* Half-screen to 80% Bottom Sheet */}
+                    {/* Bottom sheet. The outer layer slides with `transform`, which
+                        framer-motion runs on the compositor (WAAPI), so the slide stays
+                        smooth while the tool's JS chunk loads. `y` runs on the main
+                        thread and stuttered. The inner sheet drags down to close from
+                        the handle only, so the tool body keeps native scrolling. */}
                     <motion.div
-                        className="mobile-tool-sheet"
-                        initial={{ y: '100%' }}
-                        animate={{ y: 0 }}
-                        exit={{ y: '100%' }}
-                        transition={{
-                            type: 'spring',
-                            damping: 30,
-                            stiffness: 350,
-                            mass: 0.8,
-                        }}
-                        drag="y"
-                        dragConstraints={{ top: 0 }}
-                        dragElastic={0.2}
-                        onDragEnd={(_, { offset, velocity }) => {
-                            if (offset.y > 80 || velocity.y > 400) {
-                                void tapHaptic()
-                                closeTool()
-                            }
-                        }}
+                        className="mobile-tool-sheet-slide"
+                        initial={{ transform: 'translateY(100%)' }}
+                        animate={{ transform: 'translateY(0%)' }}
+                        exit={{ transform: 'translateY(100%)' }}
+                        transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
                     >
-                        {/* Drag Pill Handle */}
-                        <div className="mobile-sheet-handle-bar">
-                            <div className="mobile-sheet-handle-pill" />
-                        </div>
-
-                        {/* Sheet Header */}
-                        <div className="mobile-sheet-header">
-                            <div className="mobile-sheet-header-left">
-                                {activeToolId && (
-                                    <div className="mobile-sheet-tool-icon">
-                                        <ToolGlyph toolId={activeToolId} size={24} />
-                                    </div>
-                                )}
-                                <div>
-                                    <h3 className="mobile-sheet-title">{title}</h3>
-                                    <div className="mobile-sheet-badge">
-                                        <ShieldCheck size={12} className="text-[#026EFF]" />
-                                        <span>On-Device • 100% Private</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button
-                                type="button"
-                                className="mobile-sheet-close-btn"
-                                aria-label="Close"
-                                onClick={() => {
+                        <motion.div
+                            className="mobile-tool-sheet"
+                            drag="y"
+                            dragListener={false}
+                            dragControls={dragControls}
+                            dragConstraints={{ top: 0, bottom: 0 }}
+                            dragElastic={{ top: 0, bottom: 1 }}
+                            onDragEnd={(_, { offset, velocity }) => {
+                                if (offset.y > 80 || velocity.y > 400) {
                                     void tapHaptic()
                                     closeTool()
-                                }}
-                            >
-                                <X size={18} strokeWidth={2.2} />
-                            </button>
-                        </div>
+                                }
+                            }}
+                        >
+                            <div className="mobile-sheet-handle-bar" onPointerDown={(e) => dragControls.start(e)}>
+                                <div className="mobile-sheet-handle-pill" />
+                            </div>
 
-                        {/* Direction & Tool Swap Affordance */}
-                        {showSwap && swap && (
-                            <div className="mobile-sheet-swap-bar">
-                                {direction ? (
-                                    <div className="mobile-dir-chips" aria-hidden>
-                                        <span className="mobile-dir-chip">{direction.from}</span>
-                                        <span className="mobile-dir-arrow" aria-hidden>→</span>
-                                        <span className="mobile-dir-chip is-out">{direction.to}</span>
+                            {/* Sheet Header */}
+                            <div className="mobile-sheet-header">
+                                <div className="mobile-sheet-header-left">
+                                    {activeToolId && (
+                                        <div className="mobile-sheet-tool-icon">
+                                            <ToolGlyph toolId={activeToolId} size={24} />
+                                        </div>
+                                    )}
+                                    <div>
+                                        <h3 className="mobile-sheet-title">{title}</h3>
+                                        <div className="mobile-sheet-badge">
+                                            <ShieldCheck size={12} className="text-[#026EFF]" />
+                                            <span>On-Device • 100% Private</span>
+                                        </div>
                                     </div>
-                                ) : <div />}
+                                </div>
                                 <button
                                     type="button"
-                                    className="mobile-sheet-swap-btn"
+                                    className="mobile-sheet-close-btn"
+                                    aria-label="Close"
                                     onClick={() => {
                                         void tapHaptic()
-                                        openTool(swap.target)
+                                        closeTool()
                                     }}
                                 >
-                                    <ArrowLeftRight size={14} strokeWidth={2.2} aria-hidden />
-                                    <span>Swap to {swap.targetDirection}</span>
+                                    <X size={18} strokeWidth={2.2} />
                                 </button>
                             </div>
-                        )}
 
-                        {/* Sheet Body (Tool Workspace) */}
-                        <div className="mobile-sheet-body">
-                            {ActiveComponent ? (
-                                <ActiveComponent />
-                            ) : (
-                                <div className="p-8 text-center text-slate-500">
-                                    <p>Loading tool options...</p>
+                            {/* Direction & Tool Swap Affordance */}
+                            {showSwap && swap && (
+                                <div className="mobile-sheet-swap-bar">
+                                    {direction ? (
+                                        <div className="mobile-dir-chips" aria-hidden>
+                                            <span className="mobile-dir-chip">{direction.from}</span>
+                                            <span className="mobile-dir-arrow" aria-hidden>→</span>
+                                            <span className="mobile-dir-chip is-out">{direction.to}</span>
+                                        </div>
+                                    ) : <div />}
+                                    <button
+                                        type="button"
+                                        className="mobile-sheet-swap-btn"
+                                        onClick={() => {
+                                            void tapHaptic()
+                                            openTool(swap.target)
+                                        }}
+                                    >
+                                        <ArrowLeftRight size={14} strokeWidth={2.2} aria-hidden />
+                                        <span>Swap to {swap.targetDirection}</span>
+                                    </button>
                                 </div>
                             )}
-                        </div>
+
+                            {/* Sheet Body (Tool Workspace) */}
+                            <div className="mobile-sheet-body">
+                                {ActiveComponent ? (
+                                    <ActiveComponent />
+                                ) : (
+                                    <div className="p-8 text-center text-slate-500">
+                                        <p>Loading tool options...</p>
+                                    </div>
+                                )}
+                            </div>
+                        </motion.div>
                     </motion.div>
                 </div>
             )}

@@ -140,7 +140,10 @@ async function showBanner(plugin: AdMobModule): Promise<void> {
     await plugin.AdMob.addListener(plugin.BannerAdPluginEvents.SizeChanged, (size) => {
         onBannerSize(size?.height ?? 0)
     })
-    await plugin.AdMob.addListener(plugin.BannerAdPluginEvents.FailedToLoad, () => {
+    await plugin.AdMob.addListener(plugin.BannerAdPluginEvents.FailedToLoad, (err) => {
+        // Visible in `adb logcat` (Capacitor/Console). Code 3 = no fill: the AdMob
+        // app/account is not approved yet, app-ads.txt is missing, or low demand.
+        console.warn('[AdMob] banner failed to load', err?.code, err?.message)
         if (holds.size === 0) setBannerInset(0)
     })
     // Typical phone adaptive-banner row until SizeChanged reports the real height.
@@ -209,7 +212,8 @@ async function startNativeAdsInternal(): Promise<void> {
         interstitialReady = false
         void prepareInterstitial(plugin)
     })
-    await plugin.AdMob.addListener(plugin.InterstitialAdPluginEvents.FailedToLoad, () => {
+    await plugin.AdMob.addListener(plugin.InterstitialAdPluginEvents.FailedToLoad, (err) => {
+        console.warn('[AdMob] interstitial failed to load', err?.code, err?.message)
         interstitialReady = false
     })
     await plugin.AdMob.addListener(plugin.InterstitialAdPluginEvents.Loaded, () => {
