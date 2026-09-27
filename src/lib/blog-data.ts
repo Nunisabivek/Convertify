@@ -3022,7 +3022,7 @@ A: Most email providers limit attachments to:
 - **Outlook:** 20MB
 - **Yahoo:** 25MB
 
-If your PDF is larger, compress it first or use our guidance in [How to Compress PDF for Email](/compress-pdf-for-email-attachment).
+If your PDF is larger, compress it first or use our guidance in [How to Compress PDF for Email](/blog/compress-pdf-for-email-attachment).
 
 **Q: Can I compress multiple PDFs at once?**
 
@@ -3044,7 +3044,7 @@ A: Scanned PDFs are usually already compressed. For best results:
 
 Depending on your specific needs, you might also find these tools helpful:
 
-- **[Compress PDF for Email](/compress-pdf-for-email-attachment)** - Specialized compression to meet email attachment limits
+- **[Compress PDF for Email](/blog/compress-pdf-for-email-attachment)** - Specialized compression to meet email attachment limits
 - **[Compress PDF for WhatsApp](/compress-pdf-for-whatsapp-sharing)** - Optimize PDFs for mobile messaging apps
 - **[Split PDF](/split-pdf)** - Extract specific pages instead of compressing entire document
 - **[Merge PDF](/merge-pdf)** - Combine multiple compressed PDFs into one file

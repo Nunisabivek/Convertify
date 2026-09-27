@@ -1,5 +1,6 @@
 "use client"
 
+import { loadPdfjs } from "@/lib/pdfjs"
 import { useState } from "react"
 import * as XLSX from "xlsx"
 import { FileUploader } from "@/components/tools/file-uploader"
@@ -36,8 +37,7 @@ export default function PdfToExcelClient() {
     const convertPdfToExcel = async (pdfFile: File) => {
         setIsConverting(true)
         try {
-            const pdfjsLib = await import("pdfjs-dist")
-            pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
+            const pdfjsLib = await loadPdfjs()
 
             const buffer = await pdfFile.arrayBuffer()
             const pdf = await pdfjsLib.getDocument(buffer).promise

@@ -1,4 +1,5 @@
 "use client"
+import { loadPdfjs } from "@/lib/pdfjs"
 import { useState } from "react"
 import { PDFDocument, degrees } from "pdf-lib"
 import { FileUploader } from "@/components/tools/file-uploader"
@@ -32,8 +33,7 @@ export default function OrganizePdfClient() {
         setIsProcessing(true)
         try {
             // Dynamically import pdfjs-dist to avoid SSR issues
-            const pdfjsLib = await import("pdfjs-dist")
-            pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
+            const pdfjsLib = await loadPdfjs()
 
             const arrayBuffer = await file.arrayBuffer()
             const pdf = await pdfjsLib.getDocument(arrayBuffer).promise

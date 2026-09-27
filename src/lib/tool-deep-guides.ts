@@ -1033,13 +1033,13 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
     "redact-pdf": {
         intro: [
             "Redacting a PDF permanently removes sensitive information — names, addresses, account numbers, medical identifiers — from the document, leaving black bars where the content was. Proper redaction is essential for GDPR compliance, legal discovery, FOIA responses, and any situation where you need to share a document publicly after stripping private data.",
-            "Convertify's Redact PDF tool performs true content redaction: the selected text and image data is removed from the PDF data structure, not just covered with a black box. Covering text with a black rectangle — a common mistake — leaves the underlying text in the file, extractable by anyone who copies the 'blacked-out' area. True redaction deletes it.",
+            "Convertify's Redact PDF tool performs true redaction: every page you draw a box on is flattened into an image with the boxes burned in, so that page's original text and images are removed from the file, not just covered with a black box. Covering text with a black rectangle — a common mistake — leaves the underlying text in the file, extractable by anyone who copies the 'blacked-out' area. True redaction deletes it.",
             "After redacting, the tool also strips PDF metadata (document title, author, creation tool) that might contain identifiable information not visible in the rendered view.",
         ],
         steps: [
             { title: "Upload the PDF", body: "Drag or click to upload. Pages render in the redaction editor." },
-            { title: "Select content to redact", body: "Click and drag to draw redaction boxes over text or images you want to remove. Selected areas show a red overlay preview. You can also use Find & Redact to highlight all instances of a specific word or number." },
-            { title: "Apply redactions", body: "Click Apply. This step is permanent — the selected content is removed from the file, not just visually covered." },
+            { title: "Select content to redact", body: "Click and drag (or drag a finger on a touch screen) to draw boxes over the text or images you want to remove. Each box shows exactly where the bar will go." },
+            { title: "Apply redactions", body: "Click Apply Redactions. Every page with a box is flattened into an image with the boxes burned in; pages without boxes are copied unchanged." },
             { title: "Download the redacted PDF", body: "The clean PDF downloads with redacted areas shown as solid black boxes and underlying content permanently removed." },
         ],
         scenarios: [
@@ -1049,14 +1049,13 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
             { title: "Sharing financial documents with identifiers removed", body: "Finance teams sharing vendor invoices or bank statements with auditors or board members redact account numbers, routing numbers, and vendor addresses that aren't relevant to the specific inquiry." },
         ],
         troubleshooting: [
-            { question: "I can still see the text when I copy from the 'redacted' area.", answer: "You may have only covered text with an opaque box rather than truly redacting it. Undo and use the Redact tool's selection method, then click 'Apply Redactions' — this removes the content, it doesn't just overlay it." },
-            { question: "How do I redact all occurrences of a name throughout the document?", answer: "Use the Find & Redact option: type the name or number to redact, and the tool marks all instances across all pages simultaneously. One click applies them all." },
-            { question: "The redacted PDF shows white boxes instead of black.", answer: "Redaction marks are conventionally black. If you're seeing white, check that the redaction appearance setting is set to 'fill with black' rather than 'remove only'. White areas over white backgrounds are invisible but the content is still removed." },
+            { question: "I can still see the text when I copy from the 'redacted' area.", answer: "That happens with editors that only draw a box on top. In Convertify, every page with a box is converted to an image, so none of its text can be selected or copied. Text on pages you didn't redact stays selectable." },
+            { question: "Why can't I select text on a redacted page anymore?", answer: "That is how the hidden text is removed: the page is rebuilt as an image with the boxes burned in. Only pages that carry a box are flattened; every other page keeps its selectable text." },
+            { question: "The redacted PDF shows white boxes instead of black.", answer: "You picked Whiteout Box. It removes the content the same way, it just blends into white pages. Choose Blackout Box before drawing if you want the conventional black bars." },
         ],
         comparison: [
             { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
             { feature: "True redaction (content deleted)", convertify: "Yes", typical: "Sometimes (vs. black box)" },
-            { feature: "Find & Redact by keyword", convertify: "Yes", typical: "Sometimes" },
             { feature: "Metadata stripping", convertify: "Yes", typical: "Rarely" },
             { feature: "Daily limit", convertify: "Unlimited", typical: "3 per day" },
         ],

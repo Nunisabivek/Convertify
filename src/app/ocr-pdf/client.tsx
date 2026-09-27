@@ -1,5 +1,6 @@
 "use client"
 
+import { loadPdfjs } from "@/lib/pdfjs"
 import { useState, useRef, useEffect } from "react"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
@@ -51,8 +52,7 @@ export default function OcrPdfClient() {
 
         try {
             const buffer = await selected.arrayBuffer()
-            const pdfjsLib = await import("pdfjs-dist")
-            pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
+            const pdfjsLib = await loadPdfjs()
 
             const loadingTask = pdfjsLib.getDocument({ data: buffer })
             const pdf = await loadingTask.promise

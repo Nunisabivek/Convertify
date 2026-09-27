@@ -1,5 +1,6 @@
 "use client"
 
+import { loadPdfjs } from "@/lib/pdfjs"
 import { useState, useRef, useEffect } from "react"
 import { PDFDocument } from "pdf-lib"
 import { FileUploader } from "@/components/tools/file-uploader"
@@ -74,8 +75,7 @@ export default function SignPdfClient() {
     const loadPdfDocument = async (fileToLoad: File) => {
         setIsRendering(true)
         try {
-            const pdfjsLib = await import("pdfjs-dist")
-            pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
+            const pdfjsLib = await loadPdfjs()
 
             const buffer = await fileToLoad.arrayBuffer()
             const pdf = await pdfjsLib.getDocument(buffer).promise
@@ -91,7 +91,7 @@ export default function SignPdfClient() {
 
     const renderPagePreview = async (pdfDocInstance?: any, pageNum: number = currentPage) => {
         try {
-            const pdfjsLib = await import("pdfjs-dist")
+            const pdfjsLib = await loadPdfjs()
             let pdf = pdfDocInstance
             if (!pdf && file) {
                 const buffer = await file.arrayBuffer()

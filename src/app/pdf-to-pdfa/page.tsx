@@ -16,7 +16,8 @@ export const metadata: Metadata = {
     title: seoData.title,
     description: seoData.description,
     keywords: seoData.keywords,
-    robots: { index: true, follow: true },
+    // Noindex until the tool does what the query wants: output has no OutputIntent or pdfaid XMP, so it is not real PDF/A.
+    robots: { index: false, follow: true },
     alternates: {
         canonical: "https://convertify.work/pdf-to-pdfa",
     },

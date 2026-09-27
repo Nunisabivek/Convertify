@@ -1,5 +1,6 @@
 "use client"
 
+import { loadPdfjs } from "@/lib/pdfjs"
 import { useState, useRef, useEffect } from "react"
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib"
 import { FileUploader } from "@/components/tools/file-uploader"
@@ -81,8 +82,7 @@ export default function EditPdfClient() {
 
         try {
             const buffer = await selected.arrayBuffer()
-            const pdfjsLib = await import("pdfjs-dist")
-            pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
+            const pdfjsLib = await loadPdfjs()
 
             const loadingTask = pdfjsLib.getDocument({ data: buffer })
             const doc = await loadingTask.promise

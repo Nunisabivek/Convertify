@@ -1,5 +1,6 @@
 "use client"
 
+import { loadPdfjs } from "@/lib/pdfjs"
 import { useState } from "react"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
@@ -16,8 +17,7 @@ export default function PdfToTextPage() {
         if (!file) return
         setIsProcessing(true)
         try {
-            const pdfjsLib = await import("pdfjs-dist")
-            pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`
+            const pdfjsLib = await loadPdfjs()
 
             const pdf = await pdfjsLib.getDocument(await file.arrayBuffer()).promise
             let text = ""

@@ -813,7 +813,7 @@ export const toolSeoData = {
         faqs: [
             {
                 question: "Is the black box removable by others later?",
-                answer: "No. Convertify burns the opaque blackout rectangle permanently into the PDF's content stream, ensuring that redacted text cannot be selected, copied, or recovered by any PDF viewer."
+                answer: "No. Every page you redact is rebuilt as an image with the boxes burned in, so the text underneath is removed from the file. It can't be selected, copied, or recovered. Pages without boxes are left exactly as they were."
             },
             {
                 question: "Can I choose between blackout or whiteout redaction?",
@@ -864,7 +864,7 @@ export const toolSeoData = {
         ]
     },
     "sign-pdf": {
-        title: "Sign PDF Free Online — Draw, Type or Stamp Digital Signatures",
+        title: "Sign PDF Free Online — Draw, Type or Stamp Your Signature",
         description: "Electronically sign PDF documents online for free. Draw your signature, type cursive signatures, or stamp image signatures on any page.",
         keywords: [
             "convertify sign pdf", "sign pdf", "e-sign pdf", "digital signature", "sign pdf online free", "electronic signature pdf", "add signature to pdf",
@@ -1030,26 +1030,26 @@ export const toolSeoData = {
         ]
     },
     "delete-pdf-pages": {
-        title: "Delete PDF Pages — Coming Soon",
-        description: "A dedicated page-remover is still in development. Our Organize PDF tool already lets you delete pages from a PDF today.",
+        title: "Delete PDF Pages Online Free — Remove Pages, No Upload",
+        description: "Remove unwanted pages from a PDF in your browser. See every page as a thumbnail, delete the ones you don't need, download the new file. Free, no upload.",
         keywords: [
             "delete pdf pages", "remove pages from pdf", "pdf page remover", "cut pdf pages online free",
             "remove unwanted pdf pages", "delete blank pages from pdf", "secure pdf page deletion",
             "reduce pdf size by deleting pages", "remove confidential pages from pdf online"
         ],
-        h1: "Delete PDF Pages — Coming Soon",
+        h1: "Delete Pages from a PDF",
         faqs: [
             {
                 question: "Is the content of deleted pages permanently gone?",
-                answer: "Yes. Unlike tools that just hide a page, Convertify performs an 'Object Purge' that physically removes the page stream and its associated images from the file's code, ensuring the data is unrecoverable."
+                answer: "Yes. The new file is built only from the pages you keep, so deleted pages and their content are not in the downloaded PDF."
             },
             {
                 question: "Will deleting pages mess up the remaining document's formatting?",
-                answer: "No. Our tool intelligently re-indexes the page tree and cross-reference table, ensuring your remaining pages, fonts, and images stay perfectly intact."
+                answer: "No. The pages you keep are copied as they are, with their text, fonts and images unchanged."
             },
             {
                 question: "Can I delete multiple pages at once?",
-                answer: "Absolutely. You can select specific page numbers, a range (e.g., 5-10), or simply click 'X' on the thumbnails in our visual grid view."
+                answer: "Yes. Click Delete on every page you want gone in the thumbnail grid, then download once."
             }
         ],
         howToSteps: [
@@ -1059,22 +1059,22 @@ export const toolSeoData = {
         ]
     },
     "reorder-pdf": {
-        title: "Reorder PDF Pages — Coming Soon",
-        description: "A dedicated page-reordering tool is still in development. Our Organize PDF tool already lets you drag PDF pages into any order today.",
+        title: "Reorder PDF Pages Online Free — Rearrange Pages, No Upload",
+        description: "Change the page order of a PDF in your browser. Move pages left or right, rotate or delete them, then download the rearranged file. Free, no upload.",
         keywords: [
             "reorder pdf pages", "rearrange pdf pages", "change pdf page order", "pdf page sorter online free",
             "move pdf pages around", "organize pdf pages online", "fix out of order pdf scans",
             "reorder multiple pdf files into one", "visual pdf page organizer"
         ],
-        h1: "Reorder PDF Pages — Coming Soon",
+        h1: "Reorder PDF Pages",
         faqs: [
             {
                 question: "Will my document's Table of Contents still work after reordering?",
-                answer: "Yes! Convertify's 'Logic-Relinking' engine identifies internal destinations and updates them to point to their new page positions, keeping your navigation functional."
+                answer: "Not always. Pages are copied into a new file in your chosen order, so bookmarks and internal links from the original may not carry over. Page content itself is unchanged."
             },
             {
                 question: "How do I move a page across a large 200-page document?",
-                answer: "We recommend using our 'Page Zoom' feature to see more thumbnails at once, allowing you to drag and drop pages across large sections of the document seamlessly."
+                answer: "Use the arrow buttons under each thumbnail to move a page one step at a time. For big moves, split the PDF into parts and merge them back in the order you need."
             }
         ],
         howToSteps: [

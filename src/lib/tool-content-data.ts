@@ -370,13 +370,13 @@ export const toolContentData: Record<string, {
         keywords: ["add page numbers to pdf", "bates numbering tool", "pdf pagination free", "sequential page numbering"]
     },
     "redact-pdf": {
-        description: "Permanently scrub sensitive information from your documents with Convertify's secure redaction tool. Unlike standard editors that only add a black overlay, our 'Data-Level Sanitization' strips the underlying text characters and metadata from the file's code. Once redacted, your SSNs, financial figures, and private names are physically unrecoverable by any PDF reader.",
+        description: "Permanently scrub sensitive information from your documents with Convertify's secure redaction tool. Unlike editors that only draw a black box on top, Convertify flattens every page you redact into an image with the boxes burned in, so the text underneath is removed from the file along with the document's metadata. SSNs, account numbers and names under a box can't be copied or recovered, and pages you don't touch stay exactly as they were.",
         features: [
-            "Permanent Sanitization: Strips text data, not just covering it",
+            "Real Redaction: Redacted pages are flattened, so covered text is gone, not hidden",
             "Metadata Scrubbing: Removes hidden author and property info",
-            "Search & Redact: Automatically find and blackout keywords",
+            "Blackout or Whiteout: Solid black bars, or white boxes that blend into the page",
             "Image Redaction: Excise specific areas of photos and diagrams",
-            "PCI/HIPAA Compliant: Meets professional data privacy standards",
+            "Touch Friendly: Draw boxes with a mouse or a finger",
             "100% Private: All sanitization happens locally in your browser"
         ],
         useCases: [

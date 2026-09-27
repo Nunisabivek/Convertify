@@ -24,12 +24,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: useCase.title,
         description: useCase.description,
         keywords: useCase.keywords,
-        // All 83 use case pages now have comprehensive, tool-specific FAQs,
-        // HowTo schemas, and links to fully active client-side tools.
-        // Index by default to resolve the GSC "Excluded by 'noindex' tag" warning.
-        robots: useCase.indexable !== false
-            ? { index: true, follow: true, googleBot: { index: true, follow: true } }
-            : { index: false, follow: true, googleBot: { index: false, follow: true } },
+        // Noindex on purpose. These 83 pages share one template (the parent
+        // tool's steps plus a generic pitch) and compete with the tool pages
+        // and blog posts. While they were indexed in July, Google indexed only
+        // 16 of 161 URLs sitewide. GSC's "Excluded by 'noindex' tag" for them
+        // is expected, not an error. Index one only after it gets real unique
+        // content and its own internal links.
+        robots: { index: false, follow: true, googleBot: { index: false, follow: true } },
         alternates: {
             canonical: `https://convertify.work/use-cases/${useCase.slug}`,
         },

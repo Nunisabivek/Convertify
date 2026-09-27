@@ -1,5 +1,6 @@
 "use client"
 
+import { loadPdfjs } from "@/lib/pdfjs"
 import { useState, useRef } from "react"
 import { PDFDocument } from "pdf-lib"
 import { FileUploader } from "@/components/tools/file-uploader"
@@ -47,8 +48,7 @@ export default function CropPdfClient() {
     const loadPdf = async (pdfFile: File) => {
         setIsRendering(true)
         try {
-            const pdfjsLib = await import("pdfjs-dist")
-            pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
+            const pdfjsLib = await loadPdfjs()
 
             const buffer = await pdfFile.arrayBuffer()
             const pdf = await pdfjsLib.getDocument(buffer).promise
@@ -64,7 +64,7 @@ export default function CropPdfClient() {
 
     const renderPage = async (pdfDocInstance?: any, pageNum: number = currentPage) => {
         try {
-            const pdfjsLib = await import("pdfjs-dist")
+            const pdfjsLib = await loadPdfjs()
             let pdf = pdfDocInstance
             if (!pdf && file) {
                 const buffer = await file.arrayBuffer()

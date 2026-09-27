@@ -1,7 +1,8 @@
 "use client"
 
+import { loadPdfjs } from "@/lib/pdfjs"
+import { buildRedactedPdf, type FlatPage } from "@/lib/redact-pdf"
 import { useState, useRef } from "react"
-import { PDFDocument, rgb } from "pdf-lib"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { ProcessingWait } from "@/components/tools/processing-wait"
@@ -60,8 +61,7 @@ export default function RedactPdfClient() {
     const loadPdf = async (pdfFile: File) => {
         setIsRendering(true)
         try {
-            const pdfjsLib = await import("pdfjs-dist")
-            pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
+            const pdfjsLib = await loadPdfjs()
 
             const buffer = await pdfFile.arrayBuffer()
             const pdf = await pdfjsLib.getDocument(buffer).promise
@@ -77,7 +77,7 @@ export default function RedactPdfClient() {
 
     const renderPage = async (pdfDocInstance?: any, pageNum: number = currentPage) => {
         try {
-            const pdfjsLib = await import("pdfjs-dist")
+            const pdfjsLib = await loadPdfjs()
             let pdf = pdfDocInstance
             if (!pdf && file) {
                 const buffer = await file.arrayBuffer()
@@ -112,7 +112,7 @@ export default function RedactPdfClient() {
     }
 
     // Canvas drawing for redaction box
-    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    const handleMouseDown = (e: React.PointerEvent<HTMLDivElement>) => {
         if (!canvasContainerRef.current) return
         const rect = canvasContainerRef.current.getBoundingClientRect()
         const x = ((e.clientX - rect.left) / rect.width) * 100
@@ -123,7 +123,7 @@ export default function RedactPdfClient() {
         setCurrentBox({ x, y, width: 0, height: 0 })
     }
 
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const handleMouseMove = (e: React.PointerEvent<HTMLDivElement>) => {
         if (!isDrawing || !canvasContainerRef.current) return
         const rect = canvasContainerRef.current.getBoundingClientRect()
         const currentX = ((e.clientX - rect.left) / rect.width) * 100
@@ -169,34 +169,44 @@ export default function RedactPdfClient() {
 
         setIsProcessing(true)
         try {
+            // A box drawn over text only hides it; the text stays in the file.
+            // Pages with boxes are rendered to images with the boxes burned in,
+            // then swapped in by buildRedactedPdf.
             const buffer = await file.arrayBuffer()
-            const pdfDoc = await PDFDocument.load(buffer)
-            const pages = pdfDoc.getPages()
+            const pdfjsLib = await loadPdfjs()
+            // pdf.js transfers the buffer to its worker, so give it a copy.
+            const pdf = await pdfjsLib.getDocument(buffer.slice(0)).promise
+            const flat = new Map<number, FlatPage>()
 
-            for (const r of redactions) {
-                const pageIdx = r.pageNumber - 1
-                if (pageIdx < 0 || pageIdx >= pages.length) continue
+            for (const pageNumber of new Set(redactions.map(r => r.pageNumber))) {
+                const page = await pdf.getPage(pageNumber)
+                const size = page.getViewport({ scale: 1 })
+                // About 144 dpi, capped so large pages fit mobile canvas limits.
+                const viewport = page.getViewport({ scale: Math.min(2, 4096 / Math.max(size.width, size.height)) })
+                const canvas = document.createElement("canvas")
+                canvas.width = Math.round(viewport.width)
+                canvas.height = Math.round(viewport.height)
+                const ctx = canvas.getContext("2d")
+                if (!ctx) throw new Error("Canvas unavailable")
+                await page.render({ canvasContext: ctx, viewport, canvas } as any).promise
 
-                const page = pages[pageIdx]
-                const { width: pageWidth, height: pageHeight } = page.getSize()
+                for (const r of redactions) {
+                    if (r.pageNumber !== pageNumber) continue
+                    ctx.fillStyle = r.color === "black" ? "#000000" : "#FFFFFF"
+                    ctx.fillRect(
+                        (r.x / 100) * canvas.width,
+                        (r.y / 100) * canvas.height,
+                        (r.width / 100) * canvas.width,
+                        (r.height / 100) * canvas.height,
+                    )
+                }
 
-                const rectWidth = (r.width / 100) * pageWidth
-                const rectHeight = (r.height / 100) * pageHeight
-                const rectX = (r.x / 100) * pageWidth
-                const rectY = pageHeight - ((r.y / 100) * pageHeight) - rectHeight
-
-                const fillColor = r.color === "black" ? rgb(0, 0, 0) : rgb(1, 1, 1)
-
-                page.drawRectangle({
-                    x: rectX,
-                    y: Math.max(0, rectY),
-                    width: rectWidth,
-                    height: rectHeight,
-                    color: fillColor,
-                })
+                const png = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, "image/png"))
+                if (!png) throw new Error(`Could not render page ${pageNumber}`)
+                flat.set(pageNumber - 1, { png: new Uint8Array(await png.arrayBuffer()), width: size.width, height: size.height })
             }
 
-            const redactedBytes = await pdfDoc.save()
+            const redactedBytes = await buildRedactedPdf(buffer, flat)
             const blob = new Blob([redactedBytes as any], { type: "application/pdf" })
             const url = URL.createObjectURL(blob)
 
@@ -212,7 +222,7 @@ export default function RedactPdfClient() {
     }
 
     if (isProcessing) {
-        return <ProcessingWait progress={85} title="Permanently Redacting & Obfuscating..." />
+        return <ProcessingWait progress={85} title="Flattening redacted pages..." />
     }
 
     // Success Screen
@@ -227,7 +237,7 @@ export default function RedactPdfClient() {
                         PDF Redacted Successfully!
                     </h2>
                     <p className="text-slate-600 text-sm">
-                        Sensitive text and areas have been permanently covered. Zero files left your device.
+                        Pages with boxes were flattened to images, so the covered text is removed from the file, not just hidden. Other pages are unchanged. Nothing left your device.
                     </p>
                 </div>
 
@@ -381,7 +391,7 @@ export default function RedactPdfClient() {
 
                             <p className="text-[11px] text-slate-500 flex items-center gap-1">
                                 <Shield className="w-3.5 h-3.5 text-indigo-600" />
-                                Redactions are permanently applied directly to the document stream.
+                                Pages you redact become images, so covered text can't be selected or recovered. Other pages stay unchanged.
                             </p>
                         </div>
 
@@ -417,11 +427,11 @@ export default function RedactPdfClient() {
                             <div className="relative bg-slate-100 rounded-xl overflow-hidden shadow-inner border border-slate-200 flex justify-center p-4 select-none">
                                 <div
                                     ref={canvasContainerRef}
-                                    onMouseDown={handleMouseDown}
-                                    onMouseMove={handleMouseMove}
-                                    onMouseUp={handleMouseUp}
-                                    onMouseLeave={handleMouseUp}
-                                    className="relative inline-block max-w-full shadow-lg rounded bg-white overflow-hidden cursor-crosshair"
+                                    onPointerDown={handleMouseDown}
+                                    onPointerMove={handleMouseMove}
+                                    onPointerUp={handleMouseUp}
+                                    onPointerLeave={handleMouseUp}
+                                    className="relative inline-block max-w-full shadow-lg rounded bg-white overflow-hidden cursor-crosshair touch-none"
                                 >
                                     <canvas
                                         ref={pagePreviewCanvasRef}

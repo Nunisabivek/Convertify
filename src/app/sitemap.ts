@@ -1,6 +1,5 @@
 import type { MetadataRoute } from 'next'
 import { INDEXABLE_BLOG_SITEMAP_ENTRIES } from '@/lib/blog-sitemap-entries'
-import { useCases } from '@/lib/use-cases-data'
 
 export const dynamic = 'force-static'
 
@@ -8,9 +7,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://convertify.work'
 
     // QUALITY-FIRST STRATEGY: Only include pages with substantial unique
-    // content. Use-case pages marked indexable: true in use-cases-data.ts
-    // have 800+ words of unique content and target high-value long-tail
-    // keywords. Blog posts only included if they pass the 350-word minimum.
+    // content. Blog posts only included if they pass the 350-word minimum.
+    // /use-cases/* stay out: they are noindexed templated pages (see
+    // use-cases/[slug]/page.tsx). Listing them here also 404'd, because
+    // they were emitted without the /use-cases/ prefix.
     //
     // Blog URLs come from blog-sitemap-entries.ts (slug + date only). Do
     // not import blog-data.ts here — that module ships full post bodies
@@ -41,10 +41,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         'protect-pdf',
         'edit-pdf',
         'compare-pdf',
-        'ocr-pdf',
         'pdf-to-powerpoint',
         'powerpoint-to-pdf',
-        'pdf-to-pdfa',
     ]
 
     // Working first-class tools with unique pages (not Android-only).
@@ -122,14 +120,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly' as const,
             priority: 0.7,
         })),
-        ...useCases
-            .filter(uc => uc.indexable !== false)
-            .map(useCase => ({
-                url: `${baseUrl}/${useCase.slug}`,
-                lastModified: lastUpdated,
-                changeFrequency: 'monthly' as const,
-                priority: 0.8,
-            })),
     ]
 
     return entries

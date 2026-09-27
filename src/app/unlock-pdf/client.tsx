@@ -1,5 +1,6 @@
 "use client"
 
+import { loadPdfjs } from "@/lib/pdfjs"
 import { useState } from "react"
 import { PDFDocument } from "pdf-lib"
 import { FileUploader } from "@/components/tools/file-uploader"
@@ -48,8 +49,7 @@ export default function UnlockPdfClient() {
             const rawBuffer = await pdfFile.arrayBuffer()
 
             // Step 1: Check with pdfjs-dist
-            const pdfjsLib = await import("pdfjs-dist")
-            pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
+            const pdfjsLib = await loadPdfjs()
 
             let isEncrypted = false
             let pdfDoc: any = null
