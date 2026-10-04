@@ -5,7 +5,24 @@ import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { Loader2, Copy, Download, CheckCircle, AlertCircle, Upload } from "lucide-react"
 
+// Exports from European Excel use semicolons, others use tabs or pipes. Count
+// each candidate in the header line (outside quotes) and use the most common.
+function detectDelimiter(text: string): string {
+    const firstLine = text.split(/\r?\n/, 1)[0] ?? ""
+    const candidates = [",", ";", "\t", "|"]
+    const counts = new Map(candidates.map(c => [c, 0]))
+    let inQuotes = false
+    for (const ch of firstLine) {
+        if (ch === '"') inQuotes = !inQuotes
+        else if (!inQuotes && counts.has(ch)) counts.set(ch, (counts.get(ch) ?? 0) + 1)
+    }
+    let best = ","
+    for (const c of candidates) if ((counts.get(c) ?? 0) > (counts.get(best) ?? 0)) best = c
+    return best
+}
+
 function parseCSV(text: string): Record<string, string>[] {
+    const delimiter = detectDelimiter(text)
     const lines: string[] = []
     let current = ""
     let inQuotes = false
@@ -45,7 +62,7 @@ function parseCSV(text: string): Record<string, string>[] {
                 } else {
                     insideQuotes = !insideQuotes
                 }
-            } else if (ch === "," && !insideQuotes) {
+            } else if (ch === delimiter && !insideQuotes) {
                 fields.push(field.trim())
                 field = ""
             } else {

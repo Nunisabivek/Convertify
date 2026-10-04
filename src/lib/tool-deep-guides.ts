@@ -84,9 +84,9 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
         ],
         troubleshooting: [
             { question: "I set a target of 100 KB and got 130 KB — why?", answer: "Auto-tuning gets close on most files but can't always hit aggressive targets without making text unreadable. Open Advanced and drop quality to 30-40% and resolution scale to 0.7×. If the source PDF is mostly photos (a passport scan) you can usually go to 100 KB; if it's a 10-page text document, 100 KB requires very aggressive settings." },
-            { question: "The compressed PDF text is no longer selectable.", answer: "Convertify's compressor rasterizes pages — each page becomes a JPEG embedded in a new PDF — so text is no longer searchable. This is the trade-off for hitting tight size targets. If you need selectable text, use a less aggressive setting and accept a larger output, or run OCR after compression with the OCR PDF tool." },
+            { question: "The compressed PDF text is no longer selectable.", answer: "Convertify's compressor rasterizes pages — each page becomes a JPEG embedded in a new PDF — so text in a compressed file is no longer selectable or searchable. That is the trade-off for hitting tight size targets. Keep your original for anything that needs copyable text and send the compressed copy only where a size limit demands it. If your PDF is already under the target, it is returned unchanged with its text intact." },
             { question: "My scan is unreadable after compression.", answer: "Scans of small text (e.g. ID cards) are particularly sensitive. Try 60% quality with 1.0× resolution first — that usually preserves legibility while still cutting size by 40-60%." },
-            { question: "Why does compressing a small PDF make it bigger?", answer: "If your source PDF is already optimized (e.g. a digitally generated text-only PDF under 200 KB), the rasterize-and-re-encode flow can produce a larger file because it's now an image-based PDF. The result screen warns you when this happens; in that case the original is already as small as it'll get." },
+            { question: "Why does compressing a small PDF make it bigger?", answer: "It doesn't. Compressing re-encodes each page as an image, which can inflate small or text-only PDFs, so when the result would not be smaller Convertify returns your original file unchanged and tells you so. A PDF that is already under your size target is also returned as-is, with its text intact." },
         ],
         comparison: [
             { feature: "Hit exact KB target", convertify: "Yes (preset + custom)", typical: "Vague \"low/medium/high\"" },
@@ -1308,20 +1308,20 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
     "gif-to-png": {
         intro: [
             "Converting a GIF to PNG makes sense when you want a static, high-quality version of a single frame — for use in design projects, documentation, or platforms that don't support GIF animation. PNG supports a larger color palette (16 million colors vs GIF's 256), no dithering artifacts, and lossless compression, producing a noticeably cleaner static image.",
-            "Important: PNG does not support animation. Converting an animated GIF to PNG produces only the first frame (or a chosen frame). If you need a modern animated format, convert GIF to WebP (which supports animation) or MP4 instead.",
+            "Important: PNG does not support animation. Converting an animated GIF to PNG produces still images, not an animation: either the first frame or one PNG per frame. If you need to keep the animation, use a dedicated GIF-to-MP4 or animated-WebP converter instead.",
         ],
         steps: [
             { title: "Upload the GIF", body: "Drop one or many .gif files onto the upload zone." },
-            { title: "Choose frame (for animated GIFs)", body: "For animated GIFs, select which frame to extract as the PNG — frame 1 is the default. Use the frame slider to preview and pick the desired frame." },
+            { title: "Choose frames (for animated GIFs)", body: "For animated GIFs, leave \"First frame only\" selected to get a single PNG, or choose \"Every frame\" to get one numbered PNG per frame." },
             { title: "Convert and download", body: "PNG files download. For batches, a ZIP is provided." },
         ],
         scenarios: [
-            { title: "Extracting a still frame from an animated GIF", body: "Animated GIFs used in tutorials or UI demos often have a key frame worth using as a static thumbnail or documentation screenshot. Extract that frame as a clean PNG." },
+            { title: "Extracting a still frame from an animated GIF", body: "Animated GIFs used in tutorials or UI demos often have a key frame worth using as a static thumbnail or documentation screenshot. Export every frame, then keep the one you want." },
             { title: "Logo and icon conversion", body: "Older web assets were often distributed as GIF logos (with 256-color limitations). Converting to PNG preserves the image but removes color banding artifacts from GIF's limited palette." },
             { title: "Design asset preparation", body: "Design tools work better with PNG than GIF. Converting a GIF graphic to PNG before bringing it into Figma, Photoshop, or Canva gives you a cleaner source with full color depth." },
         ],
         troubleshooting: [
-            { question: "I want to keep the animation — not just one frame.", answer: "GIF to PNG is for static frames. To keep animation, use GIF to WebP (which supports animation natively) or use an online GIF-to-MP4 converter." },
+            { question: "I want to keep the animation — not just one frame.", answer: "GIF to PNG produces still images. To keep the animation, use a GIF-to-MP4 or animated-WebP converter." },
             { question: "The PNG shows a white background where the GIF had transparency.", answer: "GIF supports 1-bit transparency (a color is either fully transparent or fully opaque). PNG preserves this transparency correctly. If you see white, your downstream tool may not be rendering the transparent PNG correctly — check your viewer or application's transparency support." },
         ],
         comparison: [
@@ -1367,7 +1367,7 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
     "qr-code-generator": {
         intro: [
             "A QR code packs text into a scannable 2D matrix. Convertify's generator takes a URL or any text up to 4,000 characters and gives you back a PNG at 256, 400, 512 or 1024 pixels — no sign-up, no account, no daily limit, and no tracking redirect in the middle. What you encode is what gets scanned.",
-            "One thing to be aware of before you paste anything sensitive: unlike our PDF and image tools, which do all their work inside your browser, this generator renders the QR image through the third-party goqr.me API. The text you encode is sent to that service. For a public URL that's fine. For a password or private data, it isn't — so don't use it for those.",
+            "One thing to be aware of before you paste anything sensitive: the QR code is generated in your browser, so what you type is not sent to a server. But anyone who scans the code can read what is inside it, so a URL is fine, while a password or private data is not something to put in a QR code you will share.",
         ],
         steps: [
             { title: "Enter the content", body: "Type or paste a URL or any text up to 4,000 characters. For URLs, include the full address with https:// so scanners open it directly instead of treating it as plain text." },

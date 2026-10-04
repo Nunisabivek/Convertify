@@ -16,9 +16,9 @@ export interface Benefit {
 
 export const toolBenefits: Record<string, Benefit[]> = {
     "merge-pdf": [
-        { icon: "zap", title: "Drag-Drop Reorder", description: "Set the exact page sequence before merging" },
+        { icon: "zap", title: "Drag to Reorder", description: "Drag files into order, or use the arrows on a phone" },
         { icon: "shield", title: "No Server Upload", description: "Files merged in-browser via PDF-Lib" },
-        { icon: "fileCheck", title: "Zero-Bloat Output", description: "Avoids font duplication that inflates merged PDFs" },
+        { icon: "fileCheck", title: "Pages Copied As-Is", description: "Text and images are copied across, not re-rendered" },
         { icon: "globe", title: "Mix PDF + Images", description: "Combine PDFs with JPG and PNG into one file" },
     ],
     "split-pdf": [
@@ -77,9 +77,9 @@ export const toolBenefits: Record<string, Benefit[]> = {
     ],
     "pdf-to-text": [
         { icon: "zap", title: "Instant Extraction", description: "Pulls every text run from a PDF in seconds" },
-        { icon: "fileCheck", title: "Preserves Order", description: "Reading order matches the original PDF" },
+        { icon: "fileCheck", title: "Page by Page", description: "Text is returned in page order" },
         { icon: "shield", title: "No OCR Upload", description: "Embedded text extracted locally" },
-        { icon: "globe", title: "Copy or Download", description: "Save as .txt or copy directly to clipboard" },
+        { icon: "globe", title: "Copy or Download", description: "Copy to the clipboard or save as a .txt file" },
     ],
     "text-to-pdf": [
         { icon: "zap", title: ".txt to PDF", description: "Turn plain notes into shareable PDFs" },
@@ -99,29 +99,17 @@ export const toolBenefits: Record<string, Benefit[]> = {
         { icon: "shield", title: "Local Rotation", description: "No server upload needed for fixes" },
         { icon: "globe", title: "Mobile-Friendly", description: "Rotate scans straight from your phone" },
     ],
-    "protect-pdf": [
-        { icon: "shield", title: "Coming Soon", description: "Real client-side PDF encryption is in development" },
-        { icon: "fileCheck", title: "No Upload, Ever", description: "Will run entirely in your browser when live" },
-        { icon: "zap", title: "In the Meantime", description: "Explore our other working PDF tools" },
-        { icon: "globe", title: "Check Back Soon", description: "This tool isn't ready yet" },
-    ],
-    "unlock-pdf": [
-        { icon: "shield", title: "Coming Soon", description: "Real client-side PDF unlocking is in development" },
-        { icon: "fileCheck", title: "No Upload, Ever", description: "Will run entirely in your browser when live" },
-        { icon: "zap", title: "In the Meantime", description: "Explore our other working PDF tools" },
-        { icon: "globe", title: "Check Back Soon", description: "This tool isn't ready yet" },
-    ],
     "watermark-pdf": [
-        { icon: "fileCheck", title: "Text or Image", description: "Stamp custom text or upload your logo" },
-        { icon: "zap", title: "Position Control", description: "Tile, center, header or footer placement" },
+        { icon: "fileCheck", title: "Your Own Text", description: "Any wording, with font size and color you choose" },
+        { icon: "zap", title: "Diagonal on Every Page", description: "The stamp runs across all pages in one pass" },
         { icon: "shield", title: "Drafts Stay Private", description: "Watermarking happens on your device" },
         { icon: "globe", title: "Opacity Slider", description: "From subtle to bold with a single drag" },
     ],
     "add-page-numbers": [
-        { icon: "fileCheck", title: "Position Control", description: "Top, bottom, left, center, right" },
-        { icon: "zap", title: "Custom Format", description: "1, 2, 3 or Page X of Y styles" },
+        { icon: "fileCheck", title: "Position Control", description: "Top or bottom, left, center or right" },
+        { icon: "zap", title: "Start From Any Number", description: "Begin at 1, or continue from a previous section" },
         { icon: "shield", title: "Browser-Side", description: "Numbers stamped without uploading" },
-        { icon: "globe", title: "Range Skip", description: "Skip cover pages or appendix pages" },
+        { icon: "globe", title: "Text Stays Selectable", description: "Pages are numbered in place, not flattened to images" },
     ],
     "delete-pdf-pages": [
         { icon: "fileCheck", title: "Visual Picker", description: "Click thumbnails to remove pages" },
@@ -139,7 +127,7 @@ export const toolBenefits: Record<string, Benefit[]> = {
         { icon: "fileCheck", title: "Reorder + Rotate", description: "Fix layout and order in one step" },
         { icon: "zap", title: "Delete Pages", description: "Strip cover sheets or duplicates" },
         { icon: "shield", title: "Browser-Only", description: "All organization happens locally" },
-        { icon: "globe", title: "Keeps Form Fields", description: "Preserves fillable form data" },
+        { icon: "globe", title: "Pages Copied, Not Redrawn", description: "Text and images stay exactly as they were" },
     ],
     "image-compressor": [
         { icon: "fileCheck", title: "Target Size in KB", description: "Hit exact size for upload portals" },
@@ -178,10 +166,10 @@ export const toolBenefits: Record<string, Benefit[]> = {
         { icon: "globe", title: "Designer-Friendly", description: "Ideal prep for web image pipelines" },
     ],
     "qr-code-generator": [
-        { icon: "zap", title: "Instant QR", description: "Type a link or text — get a QR in seconds" },
-        { icon: "fileCheck", title: "PNG / SVG Export", description: "Vector or raster, your call" },
+        { icon: "zap", title: "Instant QR", description: "Type a link or text and get a QR code in seconds" },
+        { icon: "fileCheck", title: "Three PNG Sizes", description: "256, 400 or 512 px, ready to print or share" },
         { icon: "shield", title: "Nothing Logged", description: "No server saves your QR contents" },
-        { icon: "globe", title: "WiFi + Vcard", description: "Generate QRs for WiFi, contacts, and URLs" },
+        { icon: "globe", title: "Any Text", description: "Links, plain text, even WiFi or contact codes you format yourself" },
     ],
     "html-to-pdf": [
         { icon: "fileCheck", title: "Paste HTML", description: "Paste raw HTML source code directly" },
@@ -197,15 +185,15 @@ export const toolBenefits: Record<string, Benefit[]> = {
     ],
     "csv-to-json": [
         { icon: "zap", title: "Auto-Detect Headers", description: "First-row keys turn into JSON fields" },
-        { icon: "fileCheck", title: "Pretty / Minified", description: "Choose readable or compact output" },
+        { icon: "fileCheck", title: "Delimiter Detection", description: "Commas, semicolons, tabs or pipes are picked up automatically" },
         { icon: "shield", title: "Local Parse", description: "Spreadsheet data stays on your device" },
-        { icon: "globe", title: "Big-File Friendly", description: "Streams large CSVs without crashing" },
+        { icon: "globe", title: "Quoted Fields", description: "Commas and quotes inside quoted cells parse correctly" },
     ],
     "json-to-csv": [
-        { icon: "zap", title: "Nested Flatten", description: "Flattens nested keys into columns" },
-        { icon: "fileCheck", title: "Custom Delimiter", description: "Comma, tab, semicolon — your call" },
+        { icon: "zap", title: "Nested Flatten", description: "Flattens nested keys into columns like user.city" },
+        { icon: "fileCheck", title: "Choose the Separator", description: "Comma, semicolon, tab (TSV) or pipe" },
         { icon: "shield", title: "Stays On Device", description: "API payloads never re-uploaded" },
-        { icon: "globe", title: "Excel-Ready", description: "Output opens cleanly in Excel and Sheets" },
+        { icon: "globe", title: "Every Key a Column", description: "Rows with different keys still line up" },
     ],
     "xml-to-json": [
         { icon: "zap", title: "Element Mapping", description: "Tags become JSON keys with attributes preserved" },
@@ -232,10 +220,10 @@ export const toolBenefits: Record<string, Benefit[]> = {
         { icon: "globe", title: "Batch Mode", description: "Convert many BMPs into a ZIP" },
     ],
     "gif-to-png": [
-        { icon: "fileCheck", title: "First or All Frames", description: "Pick one frame or extract them all" },
-        { icon: "zap", title: "Animated GIFs", description: "Splits each animation frame as PNG" },
+        { icon: "fileCheck", title: "First or Every Frame", description: "One PNG per GIF, or every animation frame as numbered PNGs" },
+        { icon: "zap", title: "Frames Done Right", description: "Each frame is composited like a browser plays it, not a half-empty patch" },
         { icon: "shield", title: "Local Decode", description: "GIFs decoded right in your browser" },
-        { icon: "globe", title: "ZIP Output", description: "Multi-frame extracts come bundled" },
+        { icon: "globe", title: "ZIP Output", description: "Several PNGs download together as one ZIP" },
     ],
     "svg-to-png": [
         { icon: "fileCheck", title: "Pick PNG Size", description: "Set custom width/height for raster output" },

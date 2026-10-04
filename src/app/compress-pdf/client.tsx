@@ -15,6 +15,9 @@ export default function CompressPdfPage() {
     const [processedFileUrl, setProcessedFileUrl] = useState<string | null>(null)
     const [compressionStats, setCompressionStats] = useState<{ original: number, compressed: number } | null>(null)
     const [progress, setProgress] = useState(0)
+    // True when compressing would not have made the file smaller, so the
+    // original is returned untouched instead of a larger, rasterised copy.
+    const [keptOriginal, setKeptOriginal] = useState(false)
 
     // Settings
     const [quality, setQuality] = useState(0.6)
@@ -56,6 +59,7 @@ export default function CompressPdfPage() {
             setSizeUnit("KB")
             setProcessedFileUrl(null)
             setCompressionStats(null)
+            setKeptOriginal(false)
         }
     }
 
@@ -132,11 +136,37 @@ export default function CompressPdfPage() {
 
     const handleCompress = async () => {
         if (!file) return
+        const source = file
         setIsProcessing(true)
         setProgress(0)
+        setKeptOriginal(false)
+
+        // Never hand back something bigger than what the user uploaded: the
+        // compressor re-encodes pages as JPEGs, which inflates small or
+        // already-optimised files and turns their text into pictures.
+        const showResult = (blob: Blob) => {
+            if (blob.size >= source.size) {
+                setKeptOriginal(true)
+                setProcessedFileUrl(URL.createObjectURL(source))
+                setCompressionStats({ original: source.size, compressed: source.size })
+                return
+            }
+            setProcessedFileUrl(URL.createObjectURL(blob))
+            setCompressionStats({ original: source.size, compressed: blob.size })
+        }
 
         try {
             const targetBytes = getTargetBytes()
+
+            // Already under the target: nothing to do, and leaving the file
+            // alone keeps full quality (and selectable text in a PDF).
+            if (targetBytes > 0 && source.size <= targetBytes) {
+                setKeptOriginal(true)
+                setProgress(100)
+                setProcessedFileUrl(URL.createObjectURL(source))
+                setCompressionStats({ original: source.size, compressed: source.size })
+                return
+            }
 
             if (isPdf) {
                 // PDF Compression with iterative target-seeking
@@ -209,9 +239,7 @@ export default function CompressPdfPage() {
                     }
 
                     setProgress(100)
-                    const url = URL.createObjectURL(bestBlob!)
-                    setProcessedFileUrl(url)
-                    setCompressionStats({ original: file.size, compressed: bestBlob!.size })
+                    showResult(bestBlob!)
 
                 } else {
                     // No target size — single-pass with user settings
@@ -219,9 +247,7 @@ export default function CompressPdfPage() {
                         srcPdf, numPages, resolutionScale, quality,
                         (pg) => setProgress(Math.round((pg / numPages) * 100))
                     )
-                    const url = URL.createObjectURL(blob)
-                    setProcessedFileUrl(url)
-                    setCompressionStats({ original: file.size, compressed: blob.size })
+                    showResult(blob)
                 }
 
             } else {
@@ -275,16 +301,12 @@ export default function CompressPdfPage() {
                     }
 
                     setProgress(100)
-                    const url = URL.createObjectURL(bestBlob!)
-                    setProcessedFileUrl(url)
-                    setCompressionStats({ original: file.size, compressed: bestBlob!.size })
+                    showResult(bestBlob!)
 
                 } else {
                     // No target — single pass
                     const blob = await compressImageAtSettings(file, resolutionScale, quality)
-                    const url = URL.createObjectURL(blob)
-                    setProcessedFileUrl(url)
-                    setCompressionStats({ original: file.size, compressed: blob.size })
+                    showResult(blob)
                     setProgress(100)
                 }
             }
@@ -309,7 +331,9 @@ export default function CompressPdfPage() {
                 <div className={`w-24 h-24 rounded-full flex items-center justify-center mx-auto ${isSmaller ? 'bg-green-100 text-green-600' : 'bg-orange-100 text-orange-600'}`}>
                     {isSmaller ? <Download className="w-12 h-12" /> : <Minimize2 className="w-12 h-12" />}
                 </div>
-                <h2 className="text-4xl font-bold">{isSmaller ? "Compression Complete!" : "Optimization Complete"}</h2>
+                <h2 className="text-4xl font-bold">
+                    {isSmaller ? "Compression Complete!" : hitTarget ? "Already Small Enough" : "Optimization Complete"}
+                </h2>
 
                 <div className="bg-slate-50 p-6 rounded-xl border">
                     <p className="text-slate-500 mb-2">File size change:</p>
@@ -339,19 +363,23 @@ export default function CompressPdfPage() {
                         </div>
                     )}
 
-                    {!isSmaller && (
-                        <div className="mt-2 text-sm text-orange-600 bg-orange-100 p-2 rounded">
-                            <p className="font-bold">File size increased.</p>
-                            <p>This happens when the file is already optimized. Try lowering the settings.</p>
+                    {!isSmaller && keptOriginal && (
+                        <div className="mt-4 text-sm text-slate-700 bg-slate-100 p-3 rounded-lg">
+                            <p className="font-bold">We kept your original file.</p>
+                            <p>
+                                {hitTarget
+                                    ? "It is already under your target, so compressing it would only lower the quality."
+                                    : "Re-compressing it would have made it larger, so nothing was changed."}
+                            </p>
                         </div>
                     )}
                 </div>
 
                 <div className="flex flex-col gap-4">
                     <Button size="xl" asChild className="w-full bg-green-600 hover:bg-green-700">
-                        <a href={processedFileUrl} download={`compressed-${file!.name.split('.')[0]}.${isPdf ? 'pdf' : 'jpg'}`}>
+                        <a href={processedFileUrl} download={isSmaller ? `compressed-${file!.name.split('.')[0]}.${isPdf ? 'pdf' : 'jpg'}` : file!.name}>
                             <Download className="mr-2 w-5 h-5" />
-                            Download Compressed {isPdf ? 'PDF' : 'Image'}
+                            {isSmaller ? 'Download Compressed' : 'Download'} {isPdf ? 'PDF' : 'Image'}
                         </a>
                     </Button>
                     <AdBanner variant="rectangle" />
@@ -359,6 +387,7 @@ export default function CompressPdfPage() {
                         setFile(null)
                         setProcessedFileUrl(null)
                         setCompressionStats(null)
+                        setKeptOriginal(false)
                         setTargetSize("200")
                     }}>
                         Compress Another File

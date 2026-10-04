@@ -1,4 +1,13 @@
 
+/**
+ * Whether /use-cases/* pages are indexable. They are templated (parent tool
+ * steps + a generic pitch), so they stay noindex until each gets unique
+ * content. Both the page's robots meta and every internal link to these
+ * pages read this flag: linking from indexable pages into noindex pages
+ * sends crawl budget and link equity into dead ends.
+ */
+export const USE_CASE_PAGES_INDEXED = false;
+
 export interface UseCase {
     slug: string;
     title: string;

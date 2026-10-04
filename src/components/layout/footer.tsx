@@ -1,79 +1,125 @@
 import Link from "next/link"
 
+// Every indexable tool page is linked from here, so every page on the site
+// passes link equity to every tool. ocr-pdf and pdf-to-pdfa are deliberately
+// absent: they are noindex until they do what their queries promise.
+const toolColumns: { title: string; links: { href: string; label: string }[] }[] = [
+    {
+        title: "Organize PDF",
+        links: [
+            { href: "/merge-pdf", label: "Merge PDF" },
+            { href: "/split-pdf", label: "Split PDF" },
+            { href: "/organize-pdf", label: "Organize PDF" },
+            { href: "/reorder-pdf", label: "Reorder Pages" },
+            { href: "/delete-pdf-pages", label: "Delete Pages" },
+            { href: "/rotate-pdf", label: "Rotate PDF" },
+            { href: "/crop-pdf", label: "Crop PDF" },
+            { href: "/add-page-numbers", label: "Add Page Numbers" },
+        ],
+    },
+    {
+        title: "Edit & Secure PDF",
+        links: [
+            { href: "/edit-pdf", label: "Edit PDF" },
+            { href: "/sign-pdf", label: "Sign PDF" },
+            { href: "/redact-pdf", label: "Redact PDF" },
+            { href: "/watermark-pdf", label: "Watermark PDF" },
+            { href: "/protect-pdf", label: "Protect PDF" },
+            { href: "/unlock-pdf", label: "Unlock PDF" },
+            { href: "/compare-pdf", label: "Compare PDF" },
+            { href: "/repair-pdf", label: "Repair PDF" },
+            { href: "/autocad-pdf-editor", label: "AutoCAD PDF Editor" },
+        ],
+    },
+    {
+        title: "Compress & Resize",
+        links: [
+            { href: "/compress-pdf", label: "Compress PDF" },
+            { href: "/fit-to-size", label: "Fit to Exact KB/MB" },
+            { href: "/image-compressor", label: "Compress Image" },
+            { href: "/resize-image", label: "Resize Image" },
+            { href: "/passport-photo", label: "Passport Photo" },
+            { href: "/remove-background", label: "White Background" },
+        ],
+    },
+    {
+        title: "Convert from PDF",
+        links: [
+            { href: "/pdf-to-word", label: "PDF to Word" },
+            { href: "/pdf-to-excel", label: "PDF to Excel" },
+            { href: "/pdf-to-powerpoint", label: "PDF to PowerPoint" },
+            { href: "/pdf-to-jpg", label: "PDF to JPG" },
+            { href: "/pdf-to-png", label: "PDF to PNG" },
+            { href: "/pdf-to-text", label: "PDF to Text" },
+        ],
+    },
+    {
+        title: "Convert to PDF",
+        links: [
+            { href: "/word-to-pdf", label: "Word to PDF" },
+            { href: "/excel-to-pdf", label: "Excel to PDF" },
+            { href: "/jpg-to-pdf", label: "JPG to PDF" },
+            { href: "/png-to-pdf", label: "PNG to PDF" },
+            { href: "/tiff-to-pdf", label: "TIFF to PDF" },
+            { href: "/text-to-pdf", label: "Text to PDF" },
+            { href: "/html-to-pdf", label: "HTML to PDF" },
+            { href: "/markdown-to-pdf", label: "Markdown to PDF" },
+        ],
+    },
+    {
+        title: "Images & Data",
+        links: [
+            { href: "/heic-to-jpg", label: "HEIC to JPG" },
+            { href: "/jpg-to-png", label: "JPG to PNG" },
+            { href: "/png-to-jpg", label: "PNG to JPG" },
+            { href: "/webp-converter", label: "WebP Converter" },
+            { href: "/svg-to-png", label: "SVG to PNG" },
+            { href: "/bmp-to-jpg", label: "BMP to JPG" },
+            { href: "/gif-to-png", label: "GIF to PNG" },
+            { href: "/csv-to-json", label: "CSV to JSON" },
+            { href: "/json-to-csv", label: "JSON to CSV" },
+            { href: "/xml-to-json", label: "XML to JSON" },
+            { href: "/base64", label: "Base64" },
+            { href: "/qr-code-generator", label: "QR Code Generator" },
+        ],
+    },
+]
+
+const toolCount = toolColumns.reduce((n, col) => n + col.links.length, 0)
+
+const linkClass = "hover:text-indigo-600 transition-colors"
+
 export function Footer() {
     return (
         <footer className="w-full border-t bg-slate-50 border-slate-200">
             {/* Primary Footer - Tool Categories for SEO Internal Linking */}
             <div className="container py-12 px-4 md:px-6">
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 mb-12">
-                    {/* Organize PDF */}
-                    <div>
-                        <h4 className="font-semibold text-slate-900 mb-3 text-sm">Organize PDF</h4>
-                        <ul className="space-y-2 text-sm text-slate-600">
-                            <li><Link href="/merge-pdf" className="hover:text-indigo-600 transition-colors">Merge PDF</Link></li>
-                            <li><Link href="/split-pdf" className="hover:text-indigo-600 transition-colors">Split PDF</Link></li>
-                            <li><Link href="/organize-pdf" className="hover:text-indigo-600 transition-colors">Organize PDF</Link></li>
-                            <li><Link href="/rotate-pdf" className="hover:text-indigo-600 transition-colors">Rotate PDF</Link></li>
-                            <li><Link href="/add-page-numbers" className="hover:text-indigo-600 transition-colors">Add Page Numbers</Link></li>
-                        </ul>
-                    </div>
-
-                    {/* Optimize PDF */}
-                    <div>
-                        <h4 className="font-semibold text-slate-900 mb-3 text-sm">Optimize PDF</h4>
-                        <ul className="space-y-2 text-sm text-slate-600">
-                            <li><Link href="/compress-pdf" className="hover:text-indigo-600 transition-colors">Compress PDF</Link></li>
-                            <li><Link href="/watermark-pdf" className="hover:text-indigo-600 transition-colors">Watermark PDF</Link></li>
-                            <li><Link href="/image-compressor" className="hover:text-indigo-600 transition-colors">Compress Image</Link></li>
-                            <li><Link href="/resize-image" className="hover:text-indigo-600 transition-colors">Resize Image</Link></li>
-                        </ul>
-                    </div>
-
-                    {/* Convert from PDF */}
-                    <div>
-                        <h4 className="font-semibold text-slate-900 mb-3 text-sm">Convert from PDF</h4>
-                        <ul className="space-y-2 text-sm text-slate-600">
-                            <li><Link href="/pdf-to-word" className="hover:text-indigo-600 transition-colors">PDF to Word</Link></li>
-                            <li><Link href="/pdf-to-jpg" className="hover:text-indigo-600 transition-colors">PDF to JPG</Link></li>
-                            <li><Link href="/pdf-to-png" className="hover:text-indigo-600 transition-colors">PDF to PNG</Link></li>
-                            <li><Link href="/pdf-to-text" className="hover:text-indigo-600 transition-colors">PDF to Text</Link></li>
-                        </ul>
-                    </div>
-
-                    {/* Convert to PDF */}
-                    <div>
-                        <h4 className="font-semibold text-slate-900 mb-3 text-sm">Convert to PDF</h4>
-                        <ul className="space-y-2 text-sm text-slate-600">
-                            <li><Link href="/word-to-pdf" className="hover:text-indigo-600 transition-colors">Word to PDF</Link></li>
-                            <li><Link href="/jpg-to-pdf" className="hover:text-indigo-600 transition-colors">JPG to PDF</Link></li>
-                            <li><Link href="/png-to-pdf" className="hover:text-indigo-600 transition-colors">PNG to PDF</Link></li>
-                            <li><Link href="/excel-to-pdf" className="hover:text-indigo-600 transition-colors">Excel to PDF</Link></li>
-                            <li><Link href="/html-to-pdf" className="hover:text-indigo-600 transition-colors">HTML to PDF</Link></li>
-                        </ul>
-                    </div>
-
-                    {/* Images & Data */}
-                    <div>
-                        <h4 className="font-semibold text-slate-900 mb-3 text-sm">Images & Data</h4>
-                        <ul className="space-y-2 text-sm text-slate-600">
-                            <li><Link href="/heic-to-jpg" className="hover:text-indigo-600 transition-colors">HEIC to JPG</Link></li>
-                            <li><Link href="/webp-converter" className="hover:text-indigo-600 transition-colors">WebP Converter</Link></li>
-                            <li><Link href="/svg-to-png" className="hover:text-indigo-600 transition-colors">SVG to PNG</Link></li>
-                            <li><Link href="/csv-to-json" className="hover:text-indigo-600 transition-colors">CSV to JSON</Link></li>
-                            <li><Link href="/qr-code-generator" className="hover:text-indigo-600 transition-colors">QR Code Generator</Link></li>
-                        </ul>
-                    </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-6 mb-12">
+                    {toolColumns.map((col) => (
+                        <div key={col.title}>
+                            <h4 className="font-semibold text-slate-900 mb-3 text-sm">{col.title}</h4>
+                            <ul className="space-y-2 text-sm text-slate-600">
+                                {col.links.map((link) => (
+                                    <li key={link.href}>
+                                        <Link href={link.href} className={linkClass}>{link.label}</Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
 
                     {/* Resources */}
                     <div>
                         <h4 className="font-semibold text-slate-900 mb-3 text-sm">Resources</h4>
                         <ul className="space-y-2 text-sm text-slate-600">
-                            <li><Link href="/all-tools" className="hover:text-indigo-600 transition-colors font-medium">All Tools</Link></li>
-                            <li><Link href="/blog" className="hover:text-indigo-600 transition-colors">Blog & Guides</Link></li>
-                            <li><Link href="/security" className="hover:text-indigo-600 transition-colors">Security</Link></li>
-                            <li><Link href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link></li>
-                            <li><Link href="/terms" className="hover:text-indigo-600 transition-colors">Terms</Link></li>
-                            <li><Link href="/contact" className="hover:text-indigo-600 transition-colors">Contact Us</Link></li>
+                            <li><Link href="/all-tools" className={`${linkClass} font-medium`}>All Tools</Link></li>
+                            <li><Link href="/blog" className={linkClass}>Blog & Guides</Link></li>
+                            <li><Link href="/about" className={linkClass}>About</Link></li>
+                            <li><Link href="/pricing" className={linkClass}>Pricing</Link></li>
+                            <li><Link href="/security" className={linkClass}>Security</Link></li>
+                            <li><Link href="/privacy" className={linkClass}>Privacy Policy</Link></li>
+                            <li><Link href="/terms" className={linkClass}>Terms</Link></li>
+                            <li><Link href="/contact" className={linkClass}>Contact Us</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -89,7 +135,7 @@ export function Footer() {
                             © 2026 Convertify. All rights reserved. Made with ❤️ for everyone.
                         </p>
                         <div className="flex items-center gap-4 text-sm text-slate-500">
-                            <span>34 Tools</span>
+                            <span>{toolCount} Tools</span>
                             <span>•</span>
                             <span>100% Free</span>
                             <span>•</span>

@@ -11,11 +11,22 @@ import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import { finishConvert } from "@/lib/native-file"
 import { nameFromSources } from "@/lib/human-filename"
 
+// PDFs, plus JPG and PNG pictures that become one page each.
+const MERGE_ACCEPT = {
+    "application/pdf": [".pdf"],
+    "image/jpeg": [".jpg", ".jpeg"],
+    "image/png": [".png"],
+}
+
+const isPdfFile = (file: File) => file.type === "application/pdf" || /\.pdf$/i.test(file.name)
+const isPngFile = (file: File) => file.type === "image/png" || /\.png$/i.test(file.name)
+
 export default function MergePdfPage() {
     const [files, setFiles] = useState<File[]>([])
     const [isProcessing, setIsProcessing] = useState(false)
     const [processedPdfUrl, setProcessedPdfUrl] = useState<string | null>(null)
     const [outputName, setOutputName] = useState("merged.pdf")
+    const [dragIndex, setDragIndex] = useState<number | null>(null)
 
     const handleFilesSelected = (newFiles: File[]) => {
         setFiles((prev) => [...prev, ...newFiles])
@@ -37,6 +48,19 @@ export default function MergePdfPage() {
         setFiles(newFiles)
     }
 
+    // Drag a row onto another row to move it there (the arrows still work, and are
+    // what touch screens use).
+    const dropOn = (target: number) => {
+        if (dragIndex === null || dragIndex === target) return
+        setFiles((prev) => {
+            const next = [...prev]
+            const [moved] = next.splice(dragIndex, 1)
+            next.splice(target, 0, moved)
+            return next
+        })
+        setDragIndex(null)
+    }
+
     const handleMerge = async () => {
         setIsProcessing(true)
         try {
@@ -44,9 +68,27 @@ export default function MergePdfPage() {
 
             for (const file of files) {
                 const fileBuffer = await file.arrayBuffer()
-                const pdf = await PDFDocument.load(fileBuffer)
-                const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices())
-                copiedPages.forEach((page) => mergedPdf.addPage(page))
+                try {
+                    if (isPdfFile(file)) {
+                        const pdf = await PDFDocument.load(fileBuffer)
+                        const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices())
+                        copiedPages.forEach((page) => mergedPdf.addPage(page))
+                    } else {
+                        // A picture becomes one page sized to the picture.
+                        const image = isPngFile(file)
+                            ? await mergedPdf.embedPng(fileBuffer)
+                            : await mergedPdf.embedJpg(fileBuffer)
+                        mergedPdf.addPage([image.width, image.height]).drawImage(image, {
+                            x: 0,
+                            y: 0,
+                            width: image.width,
+                            height: image.height,
+                        })
+                    }
+                } catch (fileError) {
+                    console.error(`Could not read ${file.name}:`, fileError)
+                    throw new Error(file.name)
+                }
             }
 
             const pdfBytes = await mergedPdf.save()
@@ -61,7 +103,8 @@ export default function MergePdfPage() {
             }
         } catch (error) {
             console.error("Error merging PDFs:", error)
-            alert("Could not open that PDF. Try another file.")
+            const name = error instanceof Error && error.message ? `"${error.message}"` : "one of the files"
+            alert(`Could not open ${name}. Remove it or try another file.`)
         } finally {
             setIsProcessing(false)
         }
@@ -101,12 +144,20 @@ export default function MergePdfPage() {
     return (
         <div className="container mx-auto py-8 max-w-4xl px-4">
             {files.length === 0 ? (
-                <FileUploader onFilesSelected={handleFilesSelected} />
+                <FileUploader onFilesSelected={handleFilesSelected} accept={MERGE_ACCEPT} fileTypeLabel="PDF files or JPG/PNG images" />
             ) : (
                 <div className="space-y-8">
                     <div className="bg-white rounded-2xl shadow-sm border p-6 space-y-4">
                         {files.map((file, index) => (
-                            <div key={`${file.name}-${index}`} className="flex items-center justify-between p-4 bg-slate-50 rounded-xl border">
+                            <div
+                                key={`${file.name}-${index}`}
+                                draggable
+                                onDragStart={() => setDragIndex(index)}
+                                onDragEnd={() => setDragIndex(null)}
+                                onDragOver={(e) => e.preventDefault()}
+                                onDrop={() => dropOn(index)}
+                                className={`flex items-center justify-between p-4 bg-slate-50 rounded-xl border cursor-grab ${dragIndex === index ? "opacity-50" : ""}`}
+                            >
                                 <div className="flex items-center gap-4 overflow-hidden">
                                     <div className="p-3 bg-red-100 rounded-lg text-red-600">
                                         <FileText className="w-6 h-6" />
@@ -142,7 +193,7 @@ export default function MergePdfPage() {
                     <AdBanner variant="rectangle" />
 
                     <div className="text-center mt-4">
-                        <FileUploader onFilesSelected={handleFilesSelected} />
+                        <FileUploader onFilesSelected={handleFilesSelected} accept={MERGE_ACCEPT} fileTypeLabel="PDF files or JPG/PNG images" />
                     </div>
                 </div>
             )}

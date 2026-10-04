@@ -20,18 +20,25 @@ function flattenObject(obj: Record<string, unknown>, prefix = ""): Record<string
     return result
 }
 
-function jsonToCsv(data: unknown[]): string {
+const DELIMITERS = [
+    { id: "comma", label: "Comma (CSV)", char: ",", ext: "csv" },
+    { id: "semicolon", label: "Semicolon", char: ";", ext: "csv" },
+    { id: "tab", label: "Tab (TSV)", char: "\t", ext: "tsv" },
+    { id: "pipe", label: "Pipe", char: "|", ext: "csv" },
+] as const
+
+function jsonToCsv(data: unknown[], delimiter = ","): string {
     if (!Array.isArray(data) || data.length === 0) return ""
     const flattened = data.map(item => flattenObject(item as Record<string, unknown>))
     const headers = [...new Set(flattened.flatMap(row => Object.keys(row)))]
     const escapeCell = (val: string) => {
-        if (val.includes(",") || val.includes('"') || val.includes("\n")) {
+        if (val.includes(delimiter) || val.includes('"') || val.includes("\n") || val.includes("\r")) {
             return `"${val.replace(/"/g, '""')}"`
         }
         return val
     }
-    const rows = flattened.map(row => headers.map(h => escapeCell(row[h] || "")).join(","))
-    return [headers.map(escapeCell).join(","), ...rows].join("\n")
+    const rows = flattened.map(row => headers.map(h => escapeCell(row[h] || "")).join(delimiter))
+    return [headers.map(escapeCell).join(delimiter), ...rows].join("\n")
 }
 
 export default function JsonToCsvClient() {
@@ -39,6 +46,8 @@ export default function JsonToCsvClient() {
     const [output, setOutput] = useState("")
     const [copied, setCopied] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const [delimiterId, setDelimiterId] = useState<(typeof DELIMITERS)[number]["id"]>("comma")
+    const delimiter = DELIMITERS.find(d => d.id === delimiterId) ?? DELIMITERS[0]
     const fileRef = useRef<HTMLInputElement>(null)
 
     const handleConvert = () => {
@@ -46,7 +55,7 @@ export default function JsonToCsvClient() {
         try {
             const parsed = JSON.parse(input)
             const data = Array.isArray(parsed) ? parsed : [parsed]
-            const csv = jsonToCsv(data)
+            const csv = jsonToCsv(data, delimiter.char)
             if (!csv) throw new Error("No data to convert")
             setOutput(csv)
         } catch (e) {
@@ -69,10 +78,10 @@ export default function JsonToCsvClient() {
     }
 
     const downloadCsv = () => {
-        const blob = new Blob([output], { type: "text/csv" })
+        const blob = new Blob([output], { type: delimiter.ext === "tsv" ? "text/tab-separated-values" : "text/csv" })
         const a = document.createElement("a")
         a.href = URL.createObjectURL(blob)
-        a.download = "output.csv"
+        a.download = `output.${delimiter.ext}`
         a.click()
     }
 
@@ -103,6 +112,17 @@ export default function JsonToCsvClient() {
                 </div>
             </div>
             {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+            <div className="flex items-center gap-2 mt-4 text-sm text-slate-700">
+                <label htmlFor="csv-delimiter" className="font-medium">Separator</label>
+                <select
+                    id="csv-delimiter"
+                    value={delimiterId}
+                    onChange={e => { setDelimiterId(e.target.value as typeof delimiterId); setOutput("") }}
+                    className="border rounded-md px-2 py-1 bg-white"
+                >
+                    {DELIMITERS.map(d => <option key={d.id} value={d.id}>{d.label}</option>)}
+                </select>
+            </div>
             <div className="flex gap-3 mt-4">
                 <Button onClick={handleConvert} disabled={!input.trim()} className="flex-1">Convert to CSV</Button>
                 {output && (

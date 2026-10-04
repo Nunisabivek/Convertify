@@ -131,6 +131,9 @@ export default function MarkdownToPdfClient() {
             <Button onClick={downloadPdf} disabled={!input.trim() || isProcessing} className="w-full mt-4">
                 {isProcessing ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Generating...</> : <><Download className="w-4 h-4 mr-2" />Download PDF</>}
             </Button>
+            <p className="text-center text-xs text-slate-500 mt-2">
+                Your browser&apos;s print window opens. Choose &ldquo;Save as PDF&rdquo; as the destination.
+            </p>
         </div>
     )
 }

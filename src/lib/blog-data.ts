@@ -1263,138 +1263,6 @@ Ready to combine your PDF files? [Open the Merge PDF tool](/merge-pdf) and merge
     ]
   },
 
-  // ===== POST 12 =====
-  {
-    slug: "compress-pdf-for-whatsapp",
-    title: "How to Compress PDF for WhatsApp - Send Large Documents Easily",
-    excerpt: "WhatsApp has a 16MB file limit. Learn how to compress your PDFs to share documents on WhatsApp without losing quality.",
-    date: "2026-01-08",
-    category: "how-to",
-    relatedTool: "/compress-pdf",
-    readingTime: 4,
-    keywords: ["compress pdf for whatsapp", "pdf too big for whatsapp", "whatsapp pdf size limit", "reduce pdf size whatsapp", "send pdf on whatsapp"],
-    content: `
-## WhatsApp PDF Size Limit Explained
-
-WhatsApp allows you to send documents up to **16MB** in size. If your PDF is larger, you'll see an error message and won't be able to send it.
-
-**But don't worry - with PDF compression, you can easily reduce your file size and share it on WhatsApp.**
-
-## Why PDFs Are Often Too Large for WhatsApp
-
-PDFs become large due to:
-* **High-resolution images** embedded in documents
-* **Scanned pages** at high DPI
-* **Multiple pages** with graphics
-* **Fonts** embedded in the file
-
-## The Quick Solution: PDF Compression
-
-[Convertify's PDF Compressor](/compress-pdf) can reduce your PDF by up to 90%, easily fitting within WhatsApp's 16MB limit.
-
-### Step-by-Step: Compress PDF for WhatsApp
-
-#### Step 1: Check Your Current File Size
-On your phone:
-* **iPhone:** Files app > Info
-* **Android:** File Manager > Details
-
-#### Step 2: Open Convertify
-Go to [convertify.work/compress-pdf](/compress-pdf) in your phone's browser (Safari or Chrome).
-
-#### Step 3: Upload Your PDF
-Tap "Select File" and choose your PDF from Files or Downloads.
-
-#### Step 4: Choose Compression Level
-* **For PDFs under 30MB:** Use Medium compression
-* **For PDFs over 50MB:** Use High compression
-* **For very large files:** Use Maximum compression
-
-#### Step 5: Download and Share
-Download the compressed PDF, then share directly to WhatsApp!
-
-## Real Compression Examples
-
-| Original Size | After Compression | WhatsApp Compatible? |
-|--------------|-------------------|---------------------|
-| 50 MB | 5 MB | ✅ Yes |
-| 25 MB | 3 MB | ✅ Yes |
-| 10 MB | 1.2 MB | ✅ Yes |
-| 5 MB | 600 KB | ✅ Yes |
-
-## Compression on Android vs iPhone
-
-### On Android:
-1. Open Chrome browser
-2. Go to [convertify.work/compress-pdf](/compress-pdf)
-3. Upload, compress, download
-4. Share via WhatsApp directly from Downloads
-
-### On iPhone:
-1. Open Safari browser
-2. Go to [convertify.work/compress-pdf](/compress-pdf)
-3. Upload, compress, download to Files
-4. Share via WhatsApp from Files app
-
-## Alternative: Split Large PDFs
-
-If your PDF is very large (say 100MB+), consider:
-1. [Split the PDF](/split-pdf) into smaller sections
-2. Send multiple smaller files on WhatsApp
-3. Or combine after with [Merge PDF](/merge-pdf)
-
-## Pro Tips for WhatsApp PDF Sharing
-
-1. **Compress before sharing** - Make it a habit
-2. **Use Medium compression** for documents with text
-3. **Use High compression** for image-heavy PDFs
-4. **Keep original files** as backup
-
-## Related Tools
-
-* [Compress PDF](/compress-pdf) - Reduce file size for WhatsApp
-* [JPG to PDF](/jpg-to-pdf) - Convert photos before sharing
-* [Split PDF](/split-pdf) - Break large documents into parts
-* [Merge PDF](/merge-pdf) - Combine multiple PDFs after receiving
-
-## Other Messaging Apps Limits
-
-| App | Document Size Limit |
-|-----|-------------------|
-| WhatsApp | 16 MB |
-| Telegram | 2000 MB |
-| Signal | 100 MB |
-| iMessage | 100 MB |
-| Facebook Messenger | 25 MB |
-
-**Tip:** For Telegram users, you rarely need to compress. But for WhatsApp and Messenger, compression is essential!
-
-## Frequently Asked Questions
-
-**Q: Will compression reduce PDF quality?**
-For text documents, no visible quality loss. For image-heavy PDFs, slight reduction at high compression.
-
-**Q: Can I compress on my phone?**
-Yes! Convertify works perfectly on iPhone and Android browsers.
-
-**Q: What if compression isn't enough?**
-Try splitting the PDF into smaller parts using our [Split PDF tool](/split-pdf).
-
-**Q: Does WhatsApp compress PDFs automatically?**
-No. WhatsApp sends documents at original size, which is why you need to compress first.
-
-## Compress Your PDF Now
-
-Ready to share on WhatsApp? [Compress your PDF now](/compress-pdf) and send it instantly!
-
-**Note:** If compression alone isn't enough for valid reasons (like a 100MB+ file), try [Splitting the PDF](/split-pdf) into two 16MB chunks instead.
-`,
-    faqs: [
-      { question: "What is WhatsApp's file size limit?", answer: "WhatsApp allows documents up to 16MB. Use compression to fit larger files within this limit." },
-      { question: "Will my PDF look blurry after compression?", answer: "Text remains perfectly sharp. Image-heavy PDFs may have slight quality reduction at maximum compression." },
-    ]
-  },
-
   // ===== POST 13 =====
   {
     slug: "split-pdf-into-separate-pages",
@@ -1687,7 +1555,6 @@ Need to convert many Word files?
 
 * [Word to PDF](/word-to-pdf) - Convert documents
 * [Excel to PDF](/excel-to-pdf) - Convert spreadsheets
-* [PowerPoint to PDF](/powerpoint-to-pdf) - Convert presentations
 * [JPG to PDF](/jpg-to-pdf) - Convert images
 
 ## Frequently Asked Questions
@@ -3045,7 +2912,7 @@ A: Scanned PDFs are usually already compressed. For best results:
 Depending on your specific needs, you might also find these tools helpful:
 
 - **[Compress PDF for Email](/blog/compress-pdf-for-email-attachment)** - Specialized compression to meet email attachment limits
-- **[Compress PDF for WhatsApp](/compress-pdf-for-whatsapp-sharing)** - Optimize PDFs for mobile messaging apps
+- **[Compress PDF for WhatsApp](/blog/compress-pdf-for-whatsapp-sharing)** - Optimize PDFs for mobile messaging apps
 - **[Split PDF](/split-pdf)** - Extract specific pages instead of compressing entire document
 - **[Merge PDF](/merge-pdf)** - Combine multiple compressed PDFs into one file
 - **[JPG to PDF](/jpg-to-pdf)** - Convert images to optimized PDFs from the start
@@ -3067,7 +2934,7 @@ Whether you need **lossless PDF compression** for professional documents or **ba
 
 ---
 
-**Still have questions?** Check out our complete guide on [How to Compress PDF to Under 100KB](/compress-pdf-reduce-file-size) or learn about [compressing PDFs for specific platforms](/compress-pdf-for-whatsapp-sharing).
+**Still have questions?** Check out our complete guide on [How to Compress PDF to Under 100KB](/blog/compress-pdf-reduce-file-size) or learn about [compressing PDFs for specific platforms](/blog/compress-pdf-for-whatsapp-sharing).
 `,
     faqs: [
       { question: "Is it really possible to compress PDF without losing quality?", answer: "Yes! True lossless compression reduces file size by 20-40% by optimizing PDF structure without altering content. Our 'High Quality' mode achieves near-lossless results (minimal perceptible quality loss) with 30-50% reduction." },

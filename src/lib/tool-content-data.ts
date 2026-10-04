@@ -13,8 +13,8 @@ export const toolContentData: Record<string, {
             "No file size limits on merged documents",
             "No watermarks added to your documents",
             "No sign-up or registration required",
-            "Drag-and-drop to reorder pages precisely",
-            "Zero-Bloat technology prevents file size explosion",
+            "Drag files (or use the arrows) to set the exact order",
+            "Pages are copied across as they are, not re-rendered",
             "Mix PDFs with JPG/PNG images seamlessly",
             "100% private - files processed locally in browser"
         ],
@@ -659,13 +659,13 @@ export const toolContentData: Record<string, {
             "Lossless Conversion: Zero quality degradation during format change",
             "Full Color Depth: Upgrade from 256 colors to 16.7 million colors",
             "Alpha Transparency: Convert GIF transparency to proper PNG alpha",
-            "Frame Extraction: Pull individual frames from animated GIFs",
+            "Frame Extraction: Export every frame of an animated GIF as a numbered PNG",
             "Batch Mode: Convert multiple GIF files to PNG simultaneously",
             "File Size Optimization: Smart compression for smaller PNG output"
         ],
         useCases: [
             "Upgrading legacy GIF logos to high-quality PNG for branding",
-            "Extracting specific frames from animated GIFs as still images",
+            "Extracting every frame of an animated GIF as still images",
             "Converting GIF icons to PNG for modern web applications",
             "Improving image quality for GIF graphics used in presentations",
             "Replacing GIF website assets with optimized PNG versions"
@@ -810,7 +810,7 @@ export const toolContentData: Record<string, {
             "Live preview before you download",
             "Download as PNG, ready for print or screen",
             "Free with no sign-up and no usage limit",
-            "Note: QR images are rendered by the third-party goqr.me API, so unlike our PDF tools the text you encode does leave your device. Colour customisation, centre logos, error-correction control and SVG export are not supported.",
+            "Note: the QR code is generated in your browser, so what you type never leaves your device. Colour customisation, centre logos, error-correction control and SVG export are not supported.",
         ],
         useCases: [
             "Creating QR codes for business cards and marketing materials",

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import AppShell from "@/components/layout/AppShell";
@@ -8,14 +8,14 @@ import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build";
 // Google Analytics Measurement ID
 const GA_MEASUREMENT_ID = "G-57C0PG4LK6";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Inter is self-hosted by next/font, so there is no render-blocking request to
+// fonts.googleapis.com and the fallback is size-adjusted to avoid layout shift.
+// (The old setup preloaded two Geist fonts nothing used AND blocked rendering on
+// a Google Fonts stylesheet for Inter.)
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 // Website Schema
@@ -130,17 +130,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {!IS_MOBILE_BUILD && (
-          <>
-        {/* Preconnect to critical domains for faster loading */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
-        {/* Google Fonts loaded as link tags (non-render-blocking) instead of CSS @import */}
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-          </>
-        )}
-
         {/* Sitemap Link for Search Engines */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
@@ -186,7 +175,7 @@ export default function RootLayout({
         </>
       )}
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col ${IS_MOBILE_BUILD ? "mobile-root" : "bg-slate-50"}`}
+        className={`${IS_MOBILE_BUILD ? "" : inter.variable} antialiased min-h-screen flex flex-col ${IS_MOBILE_BUILD ? "mobile-root" : "bg-slate-50"}`}
       >
         <AppShell>
           {children}
