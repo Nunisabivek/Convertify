@@ -122,7 +122,6 @@ const tools: { category: string; items: Tool[] }[] = [
         items: [
             { title: "Word to PDF", description: "Convert DOCX to PDF.", icon: FileText, href: "/word-to-pdf", color: "text-indigo-600 bg-indigo-50" },
             { title: "Excel to PDF", description: "Convert XLS and XLSX spreadsheets to PDF.", icon: Sheet, href: "/excel-to-pdf", color: "text-green-600 bg-green-50" },
-            { title: "PowerPoint to PDF", description: "Convert PPTX and PPT presentations to landscape PDF.", icon: Presentation, href: "/powerpoint-to-pdf", color: "text-orange-600 bg-orange-50" },
             { title: "JPG to PDF", description: "Convert JPG images to PDF.", icon: ImageIcon, href: "/jpg-to-pdf", color: "text-purple-600 bg-purple-50" },
             { title: "PNG to PDF", description: "Convert PNG images to PDF.", icon: ImageIcon, href: "/png-to-pdf", color: "text-emerald-600 bg-emerald-50" },
             { title: "Text to PDF", description: "Convert TXT files to PDF.", icon: FileText, href: "/text-to-pdf", color: "text-slate-600 bg-slate-50" },

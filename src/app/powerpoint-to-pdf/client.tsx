@@ -187,11 +187,10 @@ export default function PowerpointToPdfClient() {
                         onFilesSelected={handleFilesSelected}
                         accept={{
                             "application/vnd.openxmlformats-officedocument.presentationml.presentation": [".pptx"],
-                            "application/vnd.ms-powerpoint": [".ppt"],
                         }}
                         maxFiles={1}
-                        title="Upload PowerPoint to Convert to PDF"
-                        description="Convert PPTX and PPT presentation decks into high-quality landscape PDF documents"
+                        title="Upload a .pptx to extract its slide text"
+                        description="Puts the text of each slide on its own landscape PDF page. Images, layouts and fonts are not carried over."
                     />
 
                     {/* Trust Badges */}

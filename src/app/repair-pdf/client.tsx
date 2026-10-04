@@ -1,7 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { PDFDocument } from "pdf-lib"
+import { repairPdf } from "@/lib/repair-pdf"
+import { rasterizePdfDocument, type RasterizableDocument } from "@/lib/pdf-rasterize"
+import { loadPdfjs } from "@/lib/pdfjs"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { ProcessingWait } from "@/components/tools/processing-wait"
@@ -19,10 +21,12 @@ import {
 export default function RepairPdfClient() {
     const [file, setFile] = useState<File | null>(null)
     const [isRepairing, setIsRepairing] = useState<boolean>(false)
-    const [repairStats, setRepairStats] = useState<{ pagesRecovered: number; originalSize: number; repairedSize: number } | null>(null)
+    const [repairStats, setRepairStats] = useState<{ pagesRecovered: number; pagesTotal: number; originalSize: number; repairedSize: number } | null>(null)
     const [repairedPdfUrl, setRepairedPdfUrl] = useState<string | null>(null)
     const [repairedFileName, setRepairedFileName] = useState<string>("")
     const [repairError, setRepairError] = useState<string | null>(null)
+    // True when only a picture-per-page rebuild was possible (text no longer selectable).
+    const [savedAsImages, setSavedAsImages] = useState<boolean>(false)
 
     const handleFilesSelected = async (files: File[]) => {
         if (!files || files.length === 0) return
@@ -40,56 +44,33 @@ export default function RepairPdfClient() {
 
         try {
             const rawBuffer = await targetFile.arrayBuffer()
-            let pdfDoc: PDFDocument | null = null
-
-            // Pass 1: Standard load with ignoreEncryption
+            setSavedAsImages(false)
+            let result: { bytes: Uint8Array; pagesRecovered: number; pagesTotal: number }
             try {
-                pdfDoc = await PDFDocument.load(rawBuffer, { ignoreEncryption: true })
-            } catch (e1) {
-                console.warn("Pass 1 direct load failed, attempting stream reconstruction...", e1)
-
-                // Pass 2: Clean up byte offsets (remove pre-header/post-EOF junk)
-                const uint8 = new Uint8Array(rawBuffer)
-                
-                // Convert to text prefix check
-                let startOffset = 0
-                for (let i = 0; i < Math.min(1024, uint8.length - 4); i++) {
-                    if (uint8[i] === 0x25 && uint8[i+1] === 0x50 && uint8[i+2] === 0x44 && uint8[i+3] === 0x46) { // %PDF
-                        startOffset = i
-                        break
-                    }
-                }
-
-                const cleanedBuffer = rawBuffer.slice(startOffset)
-                pdfDoc = await PDFDocument.load(cleanedBuffer, { ignoreEncryption: true })
+                // Keeps text, fonts and images: rebuild the broken structure and copy the pages.
+                result = await repairPdf(rawBuffer.slice(0))
+            } catch (structuralError) {
+                console.warn("Structural repair failed, trying pdf.js recovery:", structuralError)
+                // pdf.js recovers more kinds of damage (compressed object streams, broken
+                // xref streams), but all it can give back is what it can draw.
+                const pdfjsLib = await loadPdfjs()
+                const doc = await pdfjsLib.getDocument({ data: new Uint8Array(rawBuffer.slice(0)) }).promise
+                result = await rasterizePdfDocument(doc as unknown as RasterizableDocument)
+                setSavedAsImages(true)
             }
+            const { bytes, pagesRecovered, pagesTotal } = result
 
-            if (!pdfDoc) {
-                throw new Error("Unable to parse valid PDF structures.")
-            }
-
-            // Create a completely clean new document and transfer pages
-            const cleanDoc = await PDFDocument.create()
-            const totalPages = pdfDoc.getPageCount()
-            
-            const pageIndices = Array.from({ length: totalPages }, (_, i) => i)
-            const copiedPages = await cleanDoc.copyPages(pdfDoc, pageIndices)
-            
-            for (const p of copiedPages) {
-                cleanDoc.addPage(p)
-            }
-
-            const repairedBytes = await cleanDoc.save()
-            const blob = new Blob([repairedBytes as any], { type: "application/pdf" })
+            const blob = new Blob([bytes as any], { type: "application/pdf" })
             const url = URL.createObjectURL(blob)
 
             const baseName = targetFile.name.replace(/\.pdf$/i, "")
             setRepairedFileName(`${baseName}-repaired.pdf`)
             setRepairedPdfUrl(url)
             setRepairStats({
-                pagesRecovered: totalPages,
+                pagesRecovered,
+                pagesTotal,
                 originalSize: targetFile.size,
-                repairedSize: repairedBytes.byteLength,
+                repairedSize: bytes.byteLength,
             })
         } catch (err: any) {
             console.error("Repair failed:", err)
@@ -124,12 +105,25 @@ export default function RepairPdfClient() {
                     <p className="text-slate-600 text-sm">
                         Corrupted XRef tables and object references have been rebuilt cleanly.
                     </p>
+                    {savedAsImages && (
+                        <p className="mt-3 text-sm text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-3">
+                            This file was too damaged to repair in place, so each readable page was saved as an image. It opens normally, but its text is no longer selectable or searchable.
+                        </p>
+                    )}
+                    {repairStats.pagesRecovered < repairStats.pagesTotal && (
+                        <p className="mt-3 text-sm text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-3">
+                            {repairStats.pagesTotal - repairStats.pagesRecovered} page(s) were too damaged to recover and are not in the repaired file.
+                        </p>
+                    )}
                 </div>
 
                 <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 grid grid-cols-3 gap-4 text-center">
                     <div>
                         <span className="text-xs text-slate-500 block">Pages Recovered</span>
-                        <span className="text-lg font-bold text-slate-900">{repairStats.pagesRecovered}</span>
+                        <span className="text-lg font-bold text-slate-900">
+                            {repairStats.pagesRecovered}
+                            {repairStats.pagesRecovered < repairStats.pagesTotal ? ` of ${repairStats.pagesTotal}` : ""}
+                        </span>
                     </div>
                     <div>
                         <span className="text-xs text-slate-500 block">Original Size</span>
@@ -157,6 +151,7 @@ export default function RepairPdfClient() {
                         size="lg"
                         onClick={() => {
                             setFile(null)
+                            setSavedAsImages(false)
                             setRepairedPdfUrl(null)
                             setRepairStats(null)
                         }}

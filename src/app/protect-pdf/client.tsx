@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { PDFDocument } from "pdf-lib"
+import * as pdfLib from "pdf-lib"
 import { configure, lock } from "pdf-lib-encrypt"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
@@ -21,8 +21,12 @@ import {
     RefreshCw
 } from "lucide-react"
 
-// Initialize pdf-lib-encrypt with pdf-lib
-configure(PDFDocument as any)
+const { PDFDocument } = pdfLib
+
+// pdf-lib-encrypt needs the whole pdf-lib module (it calls PDFDocument.load on
+// it). Passing the PDFDocument class instead made every click on "Protect PDF"
+// fail with "Cannot read properties of undefined (reading 'load')".
+configure(pdfLib)
 
 export default function ProtectPdfClient() {
     const [file, setFile] = useState<File | null>(null)

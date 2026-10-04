@@ -5,6 +5,8 @@ import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { Download, Loader2, X } from "lucide-react"
 import { PDFDocument } from "pdf-lib"
+import { iterateTiffPages } from "@/lib/tiff-pages"
+import { nameFromSources } from "@/lib/human-filename"
 
 interface ConvertedFile {
     name: string
@@ -16,6 +18,8 @@ export default function TiffToPdfClient() {
     const [converted, setConverted] = useState<ConvertedFile[]>([])
     const [isProcessing, setIsProcessing] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    // Several TIFFs become one multi-page PDF by default; untick for one PDF each.
+    const [combine, setCombine] = useState(true)
 
     const handleFilesSelected = (newFiles: File[]) => {
         setFiles(prev => [...prev, ...newFiles])
@@ -27,42 +31,60 @@ export default function TiffToPdfClient() {
         setFiles(prev => prev.filter((_, i) => i !== index))
     }
 
+    // Draw one decoded TIFF page onto a canvas and return it as PNG bytes
+    // (lossless, so scans keep their original quality).
+    const pageToPng = async (page: { width: number; height: number; rgba: Uint8Array }) => {
+        const canvas = document.createElement("canvas")
+        canvas.width = page.width
+        canvas.height = page.height
+        const ctx = canvas.getContext("2d")
+        if (!ctx) throw new Error("Your browser could not create a drawing surface.")
+        const pixels = ctx.createImageData(page.width, page.height)
+        pixels.data.set(page.rgba)
+        ctx.putImageData(pixels, 0, 0)
+        const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/png"))
+        if (!blob) throw new Error("Could not encode a TIFF page.")
+        return new Uint8Array(await blob.arrayBuffer())
+    }
+
+    // Append every page of one TIFF to a PDF document.
+    const addTiffToPdf = async (pdfDoc: PDFDocument, file: File) => {
+        // TIFF is decoded in JS: Chrome, Edge and Firefox cannot show TIFF in an <img>.
+        const buffer = await file.arrayBuffer()
+        try {
+            for (const page of iterateTiffPages(buffer)) {
+                const png = await pdfDoc.embedPng(await pageToPng(page))
+                const pdfPage = pdfDoc.addPage([page.pageWidthPt, page.pageHeightPt])
+                pdfPage.drawImage(png, { x: 0, y: 0, width: page.pageWidthPt, height: page.pageHeightPt })
+            }
+        } catch (e) {
+            const reason = e instanceof Error ? e.message : "unknown error"
+            throw new Error(`Could not read ${file.name}: ${reason}`)
+        }
+    }
+
+    const savePdf = async (pdfDoc: PDFDocument, name: string): Promise<ConvertedFile> => {
+        const pdfBytes = await pdfDoc.save()
+        const blob = new Blob([new Uint8Array(pdfBytes)], { type: "application/pdf" })
+        return { name, url: URL.createObjectURL(blob) }
+    }
+
     const convertFiles = async () => {
         setIsProcessing(true)
         setError(null)
         const results: ConvertedFile[] = []
 
         try {
-            for (const file of files) {
-                // Load TIFF as image via canvas
-                const url = URL.createObjectURL(file)
-                const img = new Image()
-                await new Promise<void>((resolve, reject) => {
-                    img.onload = () => resolve()
-                    img.onerror = () => reject(new Error(`Failed to load ${file.name}`))
-                    img.src = url
-                })
-
-                const canvas = document.createElement("canvas")
-                canvas.width = img.naturalWidth
-                canvas.height = img.naturalHeight
-                const ctx = canvas.getContext("2d")!
-                ctx.drawImage(img, 0, 0)
-                URL.revokeObjectURL(url)
-
-                // Convert canvas to PNG bytes then embed in PDF
-                const pngDataUrl = canvas.toDataURL("image/png")
-                const pngBytes = Uint8Array.from(atob(pngDataUrl.split(",")[1]), c => c.charCodeAt(0))
-
+            if (combine && files.length > 1) {
                 const pdfDoc = await PDFDocument.create()
-                const pngImage = await pdfDoc.embedPng(pngBytes)
-                const page = pdfDoc.addPage([pngImage.width, pngImage.height])
-                page.drawImage(pngImage, { x: 0, y: 0, width: pngImage.width, height: pngImage.height })
-
-                const pdfBytes = await pdfDoc.save()
-                const blob = new Blob([new Uint8Array(pdfBytes)], { type: "application/pdf" })
-                const pdfName = file.name.replace(/\.tiff?$/i, ".pdf")
-                results.push({ name: pdfName, url: URL.createObjectURL(blob) })
+                for (const file of files) await addTiffToPdf(pdfDoc, file)
+                results.push(await savePdf(pdfDoc, nameFromSources(files, "pdf")))
+            } else {
+                for (const file of files) {
+                    const pdfDoc = await PDFDocument.create()
+                    await addTiffToPdf(pdfDoc, file)
+                    results.push(await savePdf(pdfDoc, file.name.replace(/\.tiff?$/i, ".pdf")))
+                }
             }
             setConverted(results)
         } catch (e) {
@@ -83,7 +105,7 @@ export default function TiffToPdfClient() {
         <div className="max-w-4xl mx-auto px-4 py-6">
             {converted.length === 0 ? (
                 <>
-                    <FileUploader onFilesSelected={handleFilesSelected} accept={{ "image/tiff": [".tiff", ".tif"] }} multiple={true} />
+                    <FileUploader onFilesSelected={handleFilesSelected} accept={{ "image/tiff": [".tiff", ".tif"] }} multiple={true} fileTypeLabel="TIFF images" iconType="image" />
                     {files.length > 0 && (
                         <div className="mt-4 space-y-2">
                             {files.map((file, i) => (
@@ -92,8 +114,14 @@ export default function TiffToPdfClient() {
                                     <button onClick={() => removeFile(i)} className="text-slate-400 hover:text-red-500"><X className="w-4 h-4" /></button>
                                 </div>
                             ))}
+                            {files.length > 1 && (
+                                <label className="flex items-center gap-2 pt-2 text-sm text-slate-700">
+                                    <input type="checkbox" checked={combine} onChange={(e) => setCombine(e.target.checked)} />
+                                    Combine all files into one PDF (in the order shown)
+                                </label>
+                            )}
                             <Button onClick={convertFiles} disabled={isProcessing} className="w-full mt-4">
-                                {isProcessing ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Converting...</> : `Convert ${files.length} file${files.length > 1 ? "s" : ""} to PDF`}
+                                {isProcessing ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Converting...</> : files.length > 1 && combine ? `Combine ${files.length} files into one PDF` : `Convert ${files.length} file${files.length > 1 ? "s" : ""} to PDF`}
                             </Button>
                         </div>
                     )}

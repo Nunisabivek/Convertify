@@ -16,7 +16,9 @@ export const metadata: Metadata = {
     title: seoData.title,
     description: seoData.description,
     keywords: seoData.keywords,
-    robots: { index: true, follow: true },
+    // Noindex until slides are actually rendered: the tool copies each slide's text onto a plain
+    // PDF page and drops images, layout and fonts, which is not what "PowerPoint to PDF" searchers want.
+    robots: { index: false, follow: true },
     alternates: {
         canonical: "https://convertify.work/powerpoint-to-pdf",
     },

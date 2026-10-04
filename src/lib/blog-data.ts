@@ -1555,7 +1555,6 @@ Need to convert many Word files?
 
 * [Word to PDF](/word-to-pdf) - Convert documents
 * [Excel to PDF](/excel-to-pdf) - Convert spreadsheets
-* [PowerPoint to PDF](/powerpoint-to-pdf) - Convert presentations
 * [JPG to PDF](/jpg-to-pdf) - Convert images
 
 ## Frequently Asked Questions

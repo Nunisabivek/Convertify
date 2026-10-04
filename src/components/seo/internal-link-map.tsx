@@ -91,7 +91,6 @@ const allToolLinks: ToolLink[] = [
 
     // Convert to PDF
     { title: "Word to PDF", href: "/word-to-pdf", icon: FileText, color: "text-indigo-600", description: "DOCX to PDF" },
-    { title: "PowerPoint to PDF", href: "/powerpoint-to-pdf", icon: Presentation, color: "text-orange-500", description: "Slides to PDF" },
     { title: "Excel to PDF", href: "/excel-to-pdf", icon: Sheet, color: "text-green-600", description: "Spreadsheet to PDF" },
     { title: "JPG to PDF", href: "/jpg-to-pdf", icon: ImageIcon, color: "text-purple-500", description: "Images to PDF" },
     { title: "PNG to PDF", href: "/png-to-pdf", icon: ImageIcon, color: "text-emerald-500", description: "PNG images to PDF" },

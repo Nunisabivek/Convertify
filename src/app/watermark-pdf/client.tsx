@@ -10,7 +10,8 @@ export default function WatermarkPdfClient() {
     const [file, setFile] = useState<File | null>(null)
     const [isProcessing, setIsProcessing] = useState(false)
     const [error, setError] = useState<string | null>(null)
-    const [watermarkType, setWatermarkType] = useState<"text" | "image">("text")
+    // Only text watermarks are supported (image watermarks are not implemented).
+    const watermarkType: "text" | "image" = "text"
     const [watermarkText, setWatermarkText] = useState("CONFIDENTIAL")
     const [opacity, setOpacity] = useState(0.3)
     const [fontSize, setFontSize] = useState(48)
@@ -93,35 +94,6 @@ export default function WatermarkPdfClient() {
                     <h3 className="text-lg font-semibold text-slate-900 mb-4">Watermark Settings</h3>
 
                     {/* Watermark Type */}
-                    <div className="mb-6">
-                        <label className="block text-sm font-medium text-slate-700 mb-2">
-                            Watermark Type
-                        </label>
-                        <div className="grid grid-cols-2 gap-2">
-                            <button
-                                onClick={() => setWatermarkType("text")}
-                                className={`py-3 px-4 rounded-lg border-2 font-semibold transition-all flex items-center justify-center gap-2 ${watermarkType === "text"
-                                        ? "border-sky-600 bg-sky-50 text-sky-600"
-                                        : "border-slate-200 hover:border-sky-300"
-                                    }`}
-                            >
-                                <Type className="w-5 h-5" />
-                                Text
-                            </button>
-                            <button
-                                onClick={() => setWatermarkType("image")}
-                                className={`py-3 px-4 rounded-lg border-2 font-semibold transition-all flex items-center justify-center gap-2 ${watermarkType === "image"
-                                        ? "border-sky-600 bg-sky-50 text-sky-600"
-                                        : "border-slate-200 hover:border-sky-300"
-                                    }`}
-                                disabled
-                            >
-                                <ImageIcon className="w-5 h-5" />
-                                Image (Coming Soon)
-                            </button>
-                        </div>
-                    </div>
-
                     {/* Text Input */}
                     {watermarkType === "text" && (
                         <>

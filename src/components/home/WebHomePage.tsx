@@ -173,13 +173,6 @@ const toolCategories = [
                 href: "/excel-to-pdf",
             },
             {
-                title: "PowerPoint to PDF",
-                description: "Convert PPT and PPTX presentations to PDF.",
-                icon: Presentation,
-                color: "bg-orange-100 text-orange-600",
-                href: "/powerpoint-to-pdf",
-            },
-            {
                 title: "JPG to PDF",
                 description: "Turn your JPG images into PDF.",
                 icon: ImageIcon,

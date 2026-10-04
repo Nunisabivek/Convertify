@@ -2,7 +2,8 @@
 
 import { loadPdfjs } from "@/lib/pdfjs"
 import { useState } from "react"
-import { PDFDocument } from "pdf-lib"
+import * as pdfLib from "pdf-lib"
+import { configure, unlockInPlace } from "pdf-lib-encrypt"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { ProcessingWait } from "@/components/tools/processing-wait"
@@ -19,6 +20,9 @@ import {
     EyeOff
 } from "lucide-react"
 
+const { PDFDocument } = pdfLib
+configure(pdfLib)
+
 export default function UnlockPdfClient() {
     const [file, setFile] = useState<File | null>(null)
     const [isChecking, setIsChecking] = useState<boolean>(false)
@@ -28,6 +32,9 @@ export default function UnlockPdfClient() {
     const [showPassword, setShowPassword] = useState<boolean>(false)
     const [unlockedPdfUrl, setUnlockedPdfUrl] = useState<string | null>(null)
     const [unlockedFileName, setUnlockedFileName] = useState<string>("")
+    // True when the file's encryption could not be removed in place and the pages
+    // were re-drawn as images instead (text is no longer selectable).
+    const [savedAsImages, setSavedAsImages] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
     const handleFilesSelected = async (files: File[]) => {
@@ -35,6 +42,7 @@ export default function UnlockPdfClient() {
         const selected = files[0]
         setFile(selected)
         setUnlockedPdfUrl(null)
+        setSavedAsImages(false)
         setErrorMessage(null)
         setPassword("")
         setNeedsPassword(false)
@@ -55,8 +63,10 @@ export default function UnlockPdfClient() {
             let pdfDoc: any = null
 
             try {
+                // pdf.js transfers the buffer to its worker, which detaches it.
+                // Hand it a copy so rawBuffer is still readable for the unlock below.
                 const loadingTask = pdfjsLib.getDocument({
-                    data: rawBuffer,
+                    data: new Uint8Array(rawBuffer.slice(0)),
                     password: userPass,
                 })
                 pdfDoc = await loadingTask.promise
@@ -76,21 +86,23 @@ export default function UnlockPdfClient() {
             // If we are here, the document is accessible (either unencrypted, permissions-only, or password matched)
             setIsUnlocking(true)
 
-            // Try direct pdf-lib unlock (re-saves without encryption dict)
+            // Preferred path: decrypt in place with the password pdf.js just
+            // accepted. Text, fonts, images and links are all kept and the file
+            // stays about the same size. unlockInPlace returns false for a file
+            // with no encryption (we just re-save it) and throws for encryption
+            // it cannot handle (AES-128, encrypted object streams, ...).
             let unlockedBytes: Uint8Array | null = null
+            let usedImageFallback = false
             try {
-                const doc = await PDFDocument.load(rawBuffer, { ignoreEncryption: true })
-                const newDoc = await PDFDocument.create()
-                const pageCount = doc.getPageCount()
-                const pageIndices = Array.from({ length: pageCount }, (_, i) => i)
-                const pages = await newDoc.copyPages(doc, pageIndices)
-                for (const p of pages) {
-                    newDoc.addPage(p)
-                }
-                unlockedBytes = await newDoc.save()
-            } catch (pdfLibErr) {
-                // If user password was required, render pages using pdfjs-dist and assemble
+                const doc = await PDFDocument.load(rawBuffer, { ignoreEncryption: true, updateMetadata: false })
+                await unlockInPlace(doc, userPass)
+                unlockedBytes = await doc.save()
+            } catch (decryptErr) {
+                console.warn("In-place unlock not possible, falling back to page images:", decryptErr)
+                // Fallback: pdf.js can read the file, so redraw each page as an
+                // image. This always works but loses selectable text.
                 if (pdfDoc) {
+                    usedImageFallback = true
                     const newDoc = await PDFDocument.create()
                     const numPages = pdfDoc.numPages
 
@@ -122,6 +134,7 @@ export default function UnlockPdfClient() {
                     unlockedBytes = await newDoc.save()
                 }
             }
+            setSavedAsImages(usedImageFallback)
 
             if (!unlockedBytes) {
                 throw new Error("Could not decrypt document.")
@@ -166,6 +179,11 @@ export default function UnlockPdfClient() {
                     <p className="text-slate-600 text-sm">
                         All passwords, printing restrictions, and editing blocks have been permanently removed.
                     </p>
+                    {savedAsImages && (
+                        <p className="mt-3 text-sm text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-3">
+                            This file used an encryption type that cannot be removed in place, so each page was saved as an image. It opens without a password, but its text is no longer selectable or searchable.
+                        </p>
+                    )}
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">

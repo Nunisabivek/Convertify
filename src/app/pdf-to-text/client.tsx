@@ -6,7 +6,7 @@ import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
 import { ProcessingWait } from "@/components/tools/processing-wait"
-import { FileText, Copy } from "lucide-react"
+import { FileText, Copy, Download } from "lucide-react"
 
 export default function PdfToTextPage() {
     const [file, setFile] = useState<File | null>(null)
@@ -38,6 +38,17 @@ export default function PdfToTextPage() {
         }
     }
 
+    const downloadTxt = () => {
+        if (!extractedText) return
+        const blob = new Blob([extractedText], { type: "text/plain;charset=utf-8" })
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement("a")
+        a.href = url
+        a.download = `${(file?.name ?? "document").replace(/\.pdf$/i, "")}.txt`
+        a.click()
+        URL.revokeObjectURL(url)
+    }
+
     if (isProcessing) return <ProcessingWait progress={70} title="Extracting Text..." />
 
     if (extractedText) {
@@ -51,14 +62,14 @@ export default function PdfToTextPage() {
                 </div>
 
                 <div className="bg-white p-6 rounded-xl border shadow-sm relative">
-                    <Button
-                        size="sm"
-                        variant="outline"
-                        className="absolute top-4 right-4"
-                        onClick={() => navigator.clipboard.writeText(extractedText)}
-                    >
-                        <Copy className="w-4 h-4 mr-2" /> Copy
-                    </Button>
+                    <div className="absolute top-4 right-4 flex gap-2">
+                        <Button size="sm" variant="outline" onClick={() => navigator.clipboard.writeText(extractedText)}>
+                            <Copy className="w-4 h-4 mr-2" /> Copy
+                        </Button>
+                        <Button size="sm" variant="outline" onClick={downloadTxt}>
+                            <Download className="w-4 h-4 mr-2" /> Download .txt
+                        </Button>
+                    </div>
                     <pre className="whitespace-pre-wrap font-mono text-sm text-slate-700 max-h-[500px] overflow-y-auto">
                         {extractedText}
                     </pre>

@@ -57,7 +57,6 @@ const toolColumns: { title: string; links: { href: string; label: string }[] }[]
         title: "Convert to PDF",
         links: [
             { href: "/word-to-pdf", label: "Word to PDF" },
-            { href: "/powerpoint-to-pdf", label: "PowerPoint to PDF" },
             { href: "/excel-to-pdf", label: "Excel to PDF" },
             { href: "/jpg-to-pdf", label: "JPG to PDF" },
             { href: "/png-to-pdf", label: "PNG to PDF" },

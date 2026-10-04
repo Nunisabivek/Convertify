@@ -969,8 +969,8 @@ export const toolSeoData = {
         ]
     },
     "watermark-pdf": {
-        title: "Watermark PDF Free — Add a Text or Image Stamp",
-        description: "Stamp text or an image across every page of a PDF. Control opacity, size and position. Free, no sign-up, and your file never leaves your browser.",
+        title: "Watermark PDF Free — Add a Text Watermark to Every Page",
+        description: "Stamp text diagonally across every page of a PDF. Choose the wording, size, color and opacity. Free, no sign-up, and your file never leaves your browser.",
         keywords: [
             "watermark pdf", "add watermark to pdf", "pdf watermark online", "stamp pdf", "pdf branding",
             "confidential stamp pdf", "draft watermark pdf", "opacity control pdf watermark", "permanent pdf watermark",
@@ -1163,7 +1163,7 @@ export const toolSeoData = {
         faqs: [
             {
                 question: "Can I extract individual frames from an animated GIF?",
-                answer: "Yes! Upload your animated GIF and Convertify will display all frames as a filmstrip. Select specific frames or extract all of them as separate PNG files."
+                answer: "Yes. Upload your animated GIF and choose \"Every frame\": each frame is exported as its own numbered PNG and the set downloads as a ZIP. Leave it on \"First frame only\" to get a single PNG."
             },
             {
                 question: "Is the PNG output lossless compared to the GIF?",
@@ -1176,7 +1176,7 @@ export const toolSeoData = {
         ],
         howToSteps: [
             { name: "Upload GIF", text: "Select your GIF file — static or animated." },
-            { name: "Choose Frames", text: "Pick individual frames to extract or convert the entire image." },
+            { name: "Choose Frames", text: "For animated GIFs, pick First frame only or Every frame." },
             { name: "Download PNG", text: "Save your lossless PNG files instantly." }
         ]
     },
@@ -1198,7 +1198,7 @@ export const toolSeoData = {
             },
             {
                 question: "Can I combine multiple separate TIFF files into one PDF?",
-                answer: "Absolutely. Upload several TIFF files, arrange them in your preferred order, and export them all as a single, multi-page PDF document."
+                answer: "Yes. Upload several TIFF files and leave \"Combine all files into one PDF\" ticked. They are joined in the order shown. Untick it to get a separate PDF for each file."
             },
             {
                 question: "Will the image quality be reduced during conversion?",
@@ -1414,7 +1414,7 @@ export const toolSeoData = {
             },
             {
                 question: "Is this one processed in my browser like your PDF tools?",
-                answer: "No. The QR image is rendered by the third-party goqr.me API, so the text you encode is sent to that service. Don't put anything sensitive in it. Our PDF and image tools are the ones that run fully offline in your browser."
+                answer: "Yes. The QR code is generated in your browser, so the text you encode is not sent to any server. Keep in mind that anyone who scans the code can read what is inside it, so don't encode anything you wouldn't want them to see."
             }
         ],
         howToSteps: [
