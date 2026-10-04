@@ -23,6 +23,17 @@ import {
     Gauge,
     UserRound,
     Eraser,
+    PenTool,
+    FileSignature,
+    Lock,
+    Unlock,
+    EyeOff,
+    Crop,
+    FileSearch,
+    WandSparkles,
+    Presentation,
+    Trash2,
+    ArrowUpDown,
     LucideIcon,
 } from "lucide-react"
 
@@ -34,13 +45,10 @@ interface ToolLink {
     description: string
 }
 
-// Only tools that actually work and are in the sitemap. The 13 "coming
-// soon" placeholder tools that used to be listed here (edit-pdf, ocr-pdf,
-// protect-pdf, unlock-pdf, sign-pdf, redact-pdf, crop-pdf, compare-pdf,
-// repair-pdf, pdf-to-excel, pdf-to-powerpoint, powerpoint-to-pdf,
-// pdf-to-pdfa) are all noindex — linking them from the homepage sent both
-// crawlers and real users into dead ends. Add an entry back here only when
-// its tool ships and rejoins the sitemap.
+// Only tools that actually work and are in the sitemap. ocr-pdf and
+// pdf-to-pdfa are left out on purpose: they are noindex until they do what
+// their queries promise (no OCR engine; output is not PDF/A). Every other
+// tool is listed so no indexable tool page is left with a single inbound link.
 const allToolLinks: ToolLink[] = [
     // Forms & KYC (indexed unique tools — not placeholders)
     { title: "Fit to size", href: "/fit-to-size", icon: Gauge, color: "text-blue-500", description: "Hit an exact KB or MB window" },
@@ -55,6 +63,19 @@ const allToolLinks: ToolLink[] = [
     { title: "Add Page Numbers", href: "/add-page-numbers", icon: Hash, color: "text-fuchsia-500", description: "Number PDF pages" },
     { title: "Watermark PDF", href: "/watermark-pdf", icon: Droplet, color: "text-sky-500", description: "Add a watermark" },
 
+    { title: "Reorder Pages", href: "/reorder-pdf", icon: ArrowUpDown, color: "text-violet-600", description: "Drag pages into a new order" },
+    { title: "Delete Pages", href: "/delete-pdf-pages", icon: Trash2, color: "text-red-500", description: "Remove unwanted pages" },
+    { title: "Crop PDF", href: "/crop-pdf", icon: Crop, color: "text-teal-500", description: "Trim margins and borders" },
+
+    // Edit & secure
+    { title: "Edit PDF", href: "/edit-pdf", icon: PenTool, color: "text-blue-600", description: "Add text, draw and annotate" },
+    { title: "Sign PDF", href: "/sign-pdf", icon: FileSignature, color: "text-indigo-600", description: "Draw, type or stamp a signature" },
+    { title: "Redact PDF", href: "/redact-pdf", icon: EyeOff, color: "text-slate-700", description: "Permanently black out text" },
+    { title: "Protect PDF", href: "/protect-pdf", icon: Lock, color: "text-emerald-600", description: "Add a password" },
+    { title: "Unlock PDF", href: "/unlock-pdf", icon: Unlock, color: "text-orange-500", description: "Remove a known password" },
+    { title: "Compare PDF", href: "/compare-pdf", icon: FileSearch, color: "text-cyan-600", description: "Spot differences between two PDFs" },
+    { title: "Repair PDF", href: "/repair-pdf", icon: WandSparkles, color: "text-amber-600", description: "Recover damaged files" },
+
     // Optimize
     { title: "Compress PDF", href: "/compress-pdf", icon: Minimize2, color: "text-green-500", description: "Reduce PDF file size" },
     { title: "Compress Image", href: "/image-compressor", icon: Shrink, color: "text-lime-600", description: "Shrink JPG & PNG files" },
@@ -63,11 +84,14 @@ const allToolLinks: ToolLink[] = [
     // Convert from PDF
     { title: "PDF to Word", href: "/pdf-to-word", icon: FileText, color: "text-blue-600", description: "Extract PDF text to DOCX" },
     { title: "PDF to JPG", href: "/pdf-to-jpg", icon: FileImage, color: "text-yellow-500", description: "Convert PDF pages to images" },
+    { title: "PDF to Excel", href: "/pdf-to-excel", icon: Sheet, color: "text-emerald-600", description: "Tables to XLSX" },
+    { title: "PDF to PowerPoint", href: "/pdf-to-powerpoint", icon: Presentation, color: "text-orange-600", description: "Pages to PPTX slides" },
     { title: "PDF to PNG", href: "/pdf-to-png", icon: FileImage, color: "text-cyan-500", description: "High-quality PNG images" },
     { title: "PDF to Text", href: "/pdf-to-text", icon: FileText, color: "text-slate-500", description: "Extract text content" },
 
     // Convert to PDF
     { title: "Word to PDF", href: "/word-to-pdf", icon: FileText, color: "text-indigo-600", description: "DOCX to PDF" },
+    { title: "PowerPoint to PDF", href: "/powerpoint-to-pdf", icon: Presentation, color: "text-orange-500", description: "Slides to PDF" },
     { title: "Excel to PDF", href: "/excel-to-pdf", icon: Sheet, color: "text-green-600", description: "Spreadsheet to PDF" },
     { title: "JPG to PDF", href: "/jpg-to-pdf", icon: ImageIcon, color: "text-purple-500", description: "Images to PDF" },
     { title: "PNG to PDF", href: "/png-to-pdf", icon: ImageIcon, color: "text-emerald-500", description: "PNG images to PDF" },

@@ -3,6 +3,7 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { allBlogPosts, indexableBlogSlugs, allIndexableBlogPosts } from "@/lib/blog-data"
 import { AdBanner } from "@/components/ads/banner"
+import { BlogMarkdown } from "@/components/blog/blog-markdown"
 import { Button } from "@/components/ui/button"
 import { BlogPostSchema } from "@/components/seo/blog-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -71,74 +72,6 @@ export async function generateStaticParams() {
     return allBlogPosts.map((post) => ({
         slug: post.slug,
     }))
-}
-
-// Markdown-like rendering
-function renderContent(content: string) {
-    return content.split('\n').map((line, i) => {
-        const trimmed = line.trim()
-
-        // Headers
-        if (trimmed.startsWith('## ')) {
-            return <h2 key={i} className="text-2xl font-bold mt-10 mb-4 text-slate-900">{trimmed.replace('## ', '')}</h2>
-        }
-        if (trimmed.startsWith('### ')) {
-            return <h3 key={i} className="text-xl font-semibold mt-8 mb-3 text-slate-800">{trimmed.replace('### ', '')}</h3>
-        }
-
-        // Lists
-        if (trimmed.startsWith('* ')) {
-            return <li key={i} className="list-disc ml-6 mb-2 text-slate-700">{trimmed.replace('* ', '')}</li>
-        }
-        if (trimmed.match(/^\d+\./)) {
-            return <li key={i} className="list-decimal ml-6 mb-2 text-slate-700">{trimmed.replace(/^\d+\.\s*/, '')}</li>
-        }
-
-        // Empty lines
-        if (trimmed === '') return <div key={i} className="h-4" />
-
-        // Checkmarks
-        if (trimmed.startsWith('\u2705') || trimmed.startsWith('\u274C')) {
-            return <p key={i} className="mb-2 text-slate-700">{trimmed}</p>
-        }
-
-        // Tables (simple detection)
-        if (trimmed.startsWith('|')) {
-            return <p key={i} className="font-mono text-sm bg-slate-50 px-2 py-1 mb-1">{trimmed}</p>
-        }
-
-        // Bold text handling
-        if (trimmed.includes('**')) {
-            const parts = trimmed.split(/\*\*(.*?)\*\*/g)
-            return (
-                <p key={i} className="mb-4 text-slate-700 leading-relaxed">
-                    {parts.map((part, idx) =>
-                        idx % 2 === 1 ? <strong key={idx} className="font-semibold text-slate-900">{part}</strong> : part
-                    )}
-                </p>
-            )
-        }
-
-        // Links
-        if (trimmed.includes('](')) {
-            const parts = trimmed.split(/\[(.*?)\]\((.*?)\)/g)
-            return (
-                <p key={i} className="mb-4 text-slate-700 leading-relaxed">
-                    {parts.map((part, idx) => {
-                        if (idx % 3 === 1) {
-                            const url = parts[idx + 1]
-                            return <Link key={idx} href={url} className="text-indigo-600 hover:text-indigo-700 underline font-medium">{part}</Link>
-                        }
-                        if (idx % 3 === 2) return null
-                        return part
-                    })}
-                </p>
-            )
-        }
-
-        // Default paragraph
-        return <p key={i} className="mb-4 text-slate-700 leading-relaxed">{trimmed}</p>
-    })
 }
 
 export default async function BlogPostPage({ params }: Props) {
@@ -213,7 +146,7 @@ export default async function BlogPostPage({ params }: Props) {
                     "ads above content"). First ad is in-article via the
                     component below, which keeps revenue without hurting CWV. */}
                 <article className="prose prose-slate lg:prose-lg max-w-none">
-                    {renderContent(post.content)}
+                    <BlogMarkdown content={post.content} />
                 </article>
 
                 {/* FAQ Section */}

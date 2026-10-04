@@ -26,7 +26,6 @@ export const INDEXABLE_BLOG_SITEMAP_ENTRIES: SitemapBlogEntry[] = [
   { slug: 'compress-image-for-website-speed', date: '2026-05-07' },
   { slug: 'compress-pdf-for-email-attachment', date: '2026-01-01' },
   { slug: 'compress-pdf-for-visa-application', date: '2026-05-11' },
-  { slug: 'compress-pdf-for-whatsapp', date: '2026-01-08' },
   { slug: 'compress-pdf-for-whatsapp-sharing', date: '2026-01-14' },
   { slug: 'compress-pdf-reduce-file-size', date: '2026-01-05' },
   { slug: 'compress-pdf-to-500kb', date: '2026-05-04' },

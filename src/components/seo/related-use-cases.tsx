@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import { useCases } from "@/lib/use-cases-data"
+import { useCases, USE_CASE_PAGES_INDEXED } from "@/lib/use-cases-data"
 
 interface RelatedUseCasesProps {
     /** Tool href like "/merge-pdf" — finds matching use cases. */
@@ -13,6 +13,9 @@ interface RelatedUseCasesProps {
 // it builds the topical cluster Google rewards: tool page → 5-8 specific
 // use-case pages → back to tool page.
 export function RelatedUseCases({ toolHref, title }: RelatedUseCasesProps) {
+    // Use-case pages are noindex; do not link indexable tool pages into them.
+    if (!USE_CASE_PAGES_INDEXED) return null
+
     const matches = useCases
         .filter((uc) => uc.toolHref === toolHref)
         .sort((a, b) => (b.indexable ? 1 : 0) - (a.indexable ? 1 : 0))

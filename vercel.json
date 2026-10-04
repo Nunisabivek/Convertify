@@ -7,6 +7,11 @@
             "permanent": true
         },
         {
+            "source": "/blog/compress-pdf-for-whatsapp",
+            "destination": "/blog/compress-pdf-for-whatsapp-sharing",
+            "permanent": true
+        },
+        {
             "source": "/extract-pdf",
             "destination": "/split-pdf",
             "permanent": true

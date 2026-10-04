@@ -73,8 +73,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: 'terms', priority: 0.3 },
     ]
 
-    const lastUpdated = '2026-09-18'
-    const recrawlToday = '2026-09-18'
+    const lastUpdated = '2026-10-04'
+    const recrawlToday = '2026-10-04'
     const uniqueToolsUpdated = recrawlToday
     const toolLastModified: Record<string, string> = {
         'png-to-pdf': recrawlToday,

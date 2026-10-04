@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { useCases } from '@/lib/use-cases-data';
+import { useCases, USE_CASE_PAGES_INDEXED } from '@/lib/use-cases-data';
 import { toolSeoData } from '@/lib/seo-data';
 import { toolContentData } from '@/lib/tool-content-data';
 import { ArrowRight, Lock, Zap, Shield, FileCheck, Sparkles, CheckCircle2 } from 'lucide-react';
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         // 16 of 161 URLs sitewide. GSC's "Excluded by 'noindex' tag" for them
         // is expected, not an error. Index one only after it gets real unique
         // content and its own internal links.
-        robots: { index: false, follow: true, googleBot: { index: false, follow: true } },
+        robots: { index: USE_CASE_PAGES_INDEXED, follow: true, googleBot: { index: USE_CASE_PAGES_INDEXED, follow: true } },
         alternates: {
             canonical: `https://convertify.work/use-cases/${useCase.slug}`,
         },

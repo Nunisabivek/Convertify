@@ -26,9 +26,7 @@ import {
     Eraser,
     Signature,
     LockOpen,
-    FileCheck,
     FileSearch,
-    ScanLine,
     Presentation,
     WandSparkles,
     Crop,
@@ -346,13 +344,6 @@ const toolCategories = [
                 href: "/compare-pdf",
             },
             {
-                title: "OCR PDF",
-                description: "Extract selectable text from scanned PDF pages.",
-                icon: ScanLine,
-                color: "bg-teal-100 text-teal-600",
-                href: "/ocr-pdf",
-            },
-            {
                 title: "PDF to Excel",
                 description: "Extract tables into editable XLSX spreadsheets.",
                 icon: Sheet,
@@ -365,13 +356,6 @@ const toolCategories = [
                 icon: Presentation,
                 color: "bg-orange-100 text-orange-600",
                 href: "/pdf-to-powerpoint",
-            },
-            {
-                title: "PDF to PDF/A",
-                description: "Convert documents to ISO 19005 archival format.",
-                icon: FileCheck,
-                color: "bg-emerald-100 text-emerald-600",
-                href: "/pdf-to-pdfa",
             },
             {
                 title: "Repair PDF",
