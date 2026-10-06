@@ -1,12 +1,13 @@
-'use client'
+﻿'use client'
 
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
-import { motion, useReducedMotion } from 'framer-motion'
 import { AppIcon } from '@/components/mobile/AppIcon'
 import { ToolGlyph } from '@/components/mobile/ToolGlyph'
 import MobileSearch from '@/components/mobile/MobileSearch'
 import { tapHaptic } from '@/lib/haptics'
+import { toolAccent } from '@/lib/tool-accent'
+import { preloadTool } from '@/components/mobile/tool-loaders'
 import {
     getAndroidV1Categories,
     searchAndroidV1Tools,
@@ -88,7 +89,7 @@ export default function MobileToolsDashboard() {
                         {results.length === 0 ? (
                             <div className="mobile-empty-line" style={{ borderRadius: 20, textAlign: 'center', padding: '24px 16px' }}>
                                 <p style={{ margin: 0, fontWeight: 600, color: '#000000', fontSize: 15 }}>No Matching Tools</p>
-                                <p style={{ margin: '4px 0 0', fontSize: 13, color: '#6c6c70' }}>Try searching “merge”, “compress”, or “passport”.</p>
+                                <p style={{ margin: '4px 0 0', fontSize: 13, color: '#6c6c70' }}>Try searching â€œmergeâ€, â€œcompressâ€, or â€œpassportâ€.</p>
                             </div>
                         ) : (
                             results.map((tool) => (
@@ -141,13 +142,13 @@ function ToolRow({
     description: string
     color: string
 }) {
-    const reduceMotion = useReducedMotion()
     const { openTool } = useToolSheet()
     return (
-        <motion.div whileTap={reduceMotion ? undefined : { scale: 0.98 }}>
+        <>
             <a
                 href={`/${href}`}
-                className="mobile-tool-list-item"
+                className={`mobile-tool-list-item accent-${toolAccent(id)}`}
+                onPointerDown={() => preloadTool(id)}
                 onClick={(e) => {
                     e.preventDefault()
                     openTool(id)
@@ -162,6 +163,6 @@ function ToolRow({
                 </div>
                 <AppIcon name="ChevronRight" className="mobile-tool-list-arrow" size={16} />
             </a>
-        </motion.div>
+        </>
     )
 }

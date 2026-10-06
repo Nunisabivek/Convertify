@@ -16,6 +16,7 @@ import {
     UserRound,
     Eraser,
     Shrink,
+    ScanLine,
     type LucideIcon,
 } from 'lucide-react'
 import { parseConvertDirection } from '@/lib/tool-swap'
@@ -35,13 +36,14 @@ const ACTION_ICONS: Record<string, LucideIcon> = {
     'add-page-numbers': Hash,
     'qr-code-generator': QrCode,
     'autocad-pdf-editor': FilePenLine,
+    'ocr-pdf': ScanLine,
 }
 
 function ConvertBadgeGlyph({ from, to }: { from: string; to: string }) {
     return (
         <span className="mobile-convert-glyph" aria-hidden>
             <span className="mobile-convert-from">{from}</span>
-            <span className="mobile-convert-arrow">↓</span>
+            <span className="mobile-convert-arrow">â†“</span>
             <span className="mobile-convert-to">{to}</span>
         </span>
     )
@@ -67,7 +69,6 @@ export function ToolGlyph({
             className={className}
             size={size}
             strokeWidth={2.4}
-            color="#026EFF"
             aria-hidden
         />
     )

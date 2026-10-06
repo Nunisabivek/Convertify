@@ -76,12 +76,6 @@ export default function NativeResultSheet() {
             return null
         })
         setResultSheetOpen(false)
-        void import('@/lib/native-ads')
-            .then((m) => {
-                m.releaseNativeAds('sheet')
-                m.flushQueuedInterstitial()
-            })
-            .catch(() => {})
     }, [])
 
     useEffect(() => {
@@ -111,21 +105,27 @@ export default function NativeResultSheet() {
                 const response = await fetch(href)
                 const blob = await response.blob()
                 const stored = await storeOutput(blob, filename)
+
+                // Close tool sheet first so background is clean
+                if (typeof window !== 'undefined') {
+                    window.dispatchEvent(new CustomEvent('convertify:close-tool-sheet'))
+                }
+
+                // Show interstitial ad immediately after conversion (if ready & allowed)
+                try {
+                    const ads = await import('@/lib/native-ads')
+                    await ads.showInterstitialAfterConversion()
+                } catch {
+                    // fail open
+                }
+
+                // Now reveal the saved result sheet
                 setThumb((prev) => {
                     if (prev) URL.revokeObjectURL(prev)
                     return previewUrlFor(blob, filename)
                 })
                 setOutput(stored)
                 setResultSheetOpen(true)
-                if (typeof window !== 'undefined') {
-                    window.dispatchEvent(new CustomEvent('convertify:close-tool-sheet'))
-                }
-                void import('@/lib/native-ads')
-                    .then((m) => {
-                        m.holdNativeAds('sheet')
-                        m.noteSuccessfulConversion()
-                    })
-                    .catch(() => {})
             } catch {
                 setError('Could not save that file. Try again.')
                 setResultSheetOpen(true)
@@ -145,21 +145,27 @@ export default function NativeResultSheet() {
             setBusy(true)
             try {
                 const stored = await storeOutput(blob, filename)
+
+                // Close tool sheet first so background is clean
+                if (typeof window !== 'undefined') {
+                    window.dispatchEvent(new CustomEvent('convertify:close-tool-sheet'))
+                }
+
+                // Show interstitial ad immediately after conversion (if ready & allowed)
+                try {
+                    const ads = await import('@/lib/native-ads')
+                    await ads.showInterstitialAfterConversion()
+                } catch {
+                    // fail open
+                }
+
+                // Now reveal the saved result sheet
                 setThumb((prev) => {
                     if (prev) URL.revokeObjectURL(prev)
                     return previewUrlFor(blob, filename)
                 })
                 setOutput(stored)
                 setResultSheetOpen(true)
-                if (typeof window !== 'undefined') {
-                    window.dispatchEvent(new CustomEvent('convertify:close-tool-sheet'))
-                }
-                void import('@/lib/native-ads')
-                    .then((m) => {
-                        m.holdNativeAds('sheet')
-                        m.noteSuccessfulConversion()
-                    })
-                    .catch(() => {})
             } catch {
                 setError('Could not save that file. Try again.')
                 setResultSheetOpen(true)
@@ -235,8 +241,18 @@ export default function NativeResultSheet() {
         <div className="mobile-result-sheet" role="dialog" aria-label="Save or share">
             <div className="mobile-result-card">
                 <div style={{ width: 36, height: 5, borderRadius: 3, background: 'rgba(60, 60, 67, 0.25)', margin: '0 auto 16px' }} aria-hidden />
-                <div className={`mobile-result-check${warn ? ' is-warn' : ''}`}>
-                    {warn ? <AlertTriangle size={26} /> : <Check size={26} />}
+                <div className="mobile-result-badge-wrap">
+                    <div className={`mobile-result-check${warn ? ' is-warn' : ''}`}>
+                        {warn ? <AlertTriangle size={26} /> : <Check size={28} strokeWidth={3} />}
+                    </div>
+                    {!warn && (
+                        <div className="mobile-result-sparkles" aria-hidden="true">
+                            <span className="sparkle s1" />
+                            <span className="sparkle s2" />
+                            <span className="sparkle s3" />
+                            <span className="sparkle s4" />
+                        </div>
+                    )}
                 </div>
                 <h2>{title}</h2>
                 {thumb ? (

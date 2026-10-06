@@ -1,7 +1,6 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
 import { AppIcon } from '@/components/mobile/AppIcon'
 import {
     loadRecentFiles,
@@ -27,8 +26,6 @@ export default function MobileRecentFiles() {
             window.removeEventListener('storage', onChange)
         }
     }, [])
-
-    const reduceMotion = useReducedMotion()
 
     const onOpen = async (file: RecentFile) => {
         try {
@@ -61,11 +58,10 @@ export default function MobileRecentFiles() {
             ) : (
                 <div className="mobile-file-list">
                     {recentFiles.map((file) => (
-                        <motion.button
+                        <button
                             type="button"
                             key={file.id}
                             className="mobile-file-item"
-                            whileTap={reduceMotion ? undefined : { scale: 0.98 }}
                             onClick={() => onOpen(file)}
                         >
                             <div className="mobile-file-icon">
@@ -74,11 +70,11 @@ export default function MobileRecentFiles() {
                             <div className="mobile-file-info">
                                 <div className="mobile-file-name">{file.name}</div>
                                 <div className="mobile-file-meta">
-                                    {formatRecentTime(file.timestamp)} · {formatFileSize(file.size)}
+                                    {formatRecentTime(file.timestamp)} Â· {formatFileSize(file.size)}
                                 </div>
                             </div>
                             <AppIcon name="ChevronRight" className="mobile-file-chevron" size={16} />
-                        </motion.button>
+                        </button>
                     ))}
                 </div>
             )}

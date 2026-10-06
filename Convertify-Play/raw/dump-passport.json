@@ -1,0 +1,221 @@
+﻿{
+  "href": "https://localhost/passport-photo",
+  "title": "Convertify ΓÇö Free Online PDF Tools, No Upload",
+  "dpr": 1.5,
+  "inner": [
+    1280,
+    720
+  ],
+  "body": "Passport photo\nPDF & photo tools\n\nFit a file to the size a form asks for. Compress, merge, or make a passport photo. Files stay on this phone.\n\nQuick tools\nAll tools\nFit to size\nPassport photo\nCompress PDF\nJPG ΓåÆ PDF\nBackground\nMerge\nRecent files\nClear\nimages-convertify.pdf\n1 hour ago ┬╖ 547.9 KB\nsample-compressed.pdf\n1 hour ago ┬╖ 65.3 KB\nportrait-man-fit.jpg\n1 hour ago ┬╖ 70.2 KB\nportrait-woman-bg.jpg\n2 hours ago ┬╖ 756.1 KB\nus-passport-photo.jpg\n2 hours ago ┬╖ 102.1 KB\npassport-photo.jpg\n2 hours ago ┬╖ 137.4 KB\npassport-1787910669534.jpg\n3 hours ago ┬╖ 34.7 KB\nHome\nTools\nAbout",
+  "items": [
+    {
+      "tag": "A",
+      "text": "Back",
+      "href": "/",
+      "x": 51,
+      "y": 92,
+      "t": 59,
+      "l": 18,
+      "h": 66,
+      "w": 66
+    },
+    {
+      "tag": "A",
+      "text": "All tools",
+      "href": "/all-tools",
+      "x": 1847,
+      "y": 307,
+      "t": 280,
+      "l": 1804,
+      "h": 54,
+      "w": 87
+    },
+    {
+      "tag": "A",
+      "text": "Fit to size",
+      "href": "/fit-to-size",
+      "x": 488,
+      "y": 436,
+      "t": 352,
+      "l": 24,
+      "h": 168,
+      "w": 927
+    },
+    {
+      "tag": "A",
+      "text": "Passport photo",
+      "href": "/passport-photo",
+      "x": 1433,
+      "y": 436,
+      "t": 352,
+      "l": 969,
+      "h": 168,
+      "w": 927
+    },
+    {
+      "tag": "A",
+      "text": "Compress PDF",
+      "href": "/compress-pdf",
+      "x": 488,
+      "y": 622,
+      "t": 538,
+      "l": 24,
+      "h": 168,
+      "w": 927
+    },
+    {
+      "tag": "A",
+      "text": "JPG ΓåÆ PDF",
+      "href": "/jpg-to-pdf",
+      "x": 1433,
+      "y": 622,
+      "t": 538,
+      "l": 969,
+      "h": 168,
+      "w": 927
+    },
+    {
+      "tag": "A",
+      "text": "Background",
+      "href": "/remove-background",
+      "x": 488,
+      "y": 808,
+      "t": 724,
+      "l": 24,
+      "h": 168,
+      "w": 927
+    },
+    {
+      "tag": "A",
+      "text": "Merge",
+      "href": "/merge-pdf",
+      "x": 1433,
+      "y": 808,
+      "t": 724,
+      "l": 969,
+      "h": 168,
+      "w": 927
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Clear",
+      "href": null,
+      "x": 1862,
+      "y": 964,
+      "t": 928,
+      "l": 1835,
+      "h": 72,
+      "w": 55
+    },
+    {
+      "tag": "BUTTON",
+      "text": "images-convertify.pdf\n1 hour ago ┬╖ 547.9 KB",
+      "href": null,
+      "x": 960,
+      "y": 1068,
+      "t": 1018,
+      "l": 24,
+      "h": 101,
+      "w": 1872
+    },
+    {
+      "tag": "BUTTON",
+      "text": "sample-compressed.pdf\n1 hour ago ┬╖ 65.3 KB",
+      "href": null,
+      "x": 960,
+      "y": 1181,
+      "t": 1131,
+      "l": 24,
+      "h": 101,
+      "w": 1872
+    },
+    {
+      "tag": "BUTTON",
+      "text": "portrait-man-fit.jpg\n1 hour ago ┬╖ 70.2 KB",
+      "href": null,
+      "x": 960,
+      "y": 1294,
+      "t": 1244,
+      "l": 24,
+      "h": 101,
+      "w": 1872
+    },
+    {
+      "tag": "BUTTON",
+      "text": "portrait-woman-bg.jpg\n2 hours ago ┬╖ 756.1 KB",
+      "href": null,
+      "x": 960,
+      "y": 1407,
+      "t": 1357,
+      "l": 24,
+      "h": 101,
+      "w": 1872
+    },
+    {
+      "tag": "BUTTON",
+      "text": "us-passport-photo.jpg\n2 hours ago ┬╖ 102.1 KB",
+      "href": null,
+      "x": 960,
+      "y": 1520,
+      "t": 1470,
+      "l": 24,
+      "h": 101,
+      "w": 1872
+    },
+    {
+      "tag": "BUTTON",
+      "text": "passport-photo.jpg\n2 hours ago ┬╖ 137.4 KB",
+      "href": null,
+      "x": 960,
+      "y": 1633,
+      "t": 1583,
+      "l": 24,
+      "h": 101,
+      "w": 1872
+    },
+    {
+      "tag": "BUTTON",
+      "text": "passport-1787910669534.jpg\n3 hours ago ┬╖ 34.7 KB",
+      "href": null,
+      "x": 960,
+      "y": 1746,
+      "t": 1696,
+      "l": 24,
+      "h": 101,
+      "w": 1872
+    },
+    {
+      "tag": "A",
+      "text": "Home",
+      "href": "/",
+      "x": 320,
+      "y": 1032,
+      "t": 984,
+      "l": 0,
+      "h": 96,
+      "w": 640
+    },
+    {
+      "tag": "A",
+      "text": "Tools",
+      "href": "/all-tools",
+      "x": 960,
+      "y": 1032,
+      "t": 984,
+      "l": 640,
+      "h": 96,
+      "w": 640
+    },
+    {
+      "tag": "A",
+      "text": "About",
+      "href": "/about",
+      "x": 1600,
+      "y": 1032,
+      "t": 984,
+      "l": 1280,
+      "h": 96,
+      "w": 640
+    }
+  ]
+}

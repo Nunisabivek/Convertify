@@ -44,6 +44,7 @@ export const WORKING_CLIENT_IDS = new Set<string>([
     'base64',
     'autocad-pdf-editor',
     'organize-pdf',
+    'ocr-pdf',
 ])
 
 /** Short labels on Swap chips and convert glyphs. */

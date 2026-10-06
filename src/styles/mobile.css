@@ -1,5 +1,5 @@
 /**
- * Convertify Android app — simple light utility chrome.
+ * Convertify Android app â€” simple light utility chrome.
  * Website layout is unchanged; these rules only apply inside `.mobile-app`.
  */
 
@@ -15,7 +15,7 @@ body:has(.mobile-app),
 .mobile-app {
   --md-paper: #ffffff;
   --md-primary: #026eff;
-  --md-primary-container: rgba(2, 110, 255, 0.08);
+  --md-primary-container: rgba(var(--md-primary-rgb), 0.08);
   --md-on-primary: #ffffff;
   --md-surface: #ffffff;
   --md-surface-dim: #f2f2f7; /* iOS grouped background */
@@ -27,7 +27,7 @@ body:has(.mobile-app),
   --md-radius: 20px; /* iOS continuous squircle */
   --md-tap: 52px;
   --nav-h: 60px;
-  --ad-banner-h: 0px;
+  --ad-banner-h: 50px;
   --md-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
   /* Android WebView does not implement env(safe-area-inset-*). Capacitor and
      ConvertifyFiles.getSafeAreaInsets set these CSS variables on <html>. */
@@ -133,7 +133,7 @@ body:has(.mobile-app),
   justify-content: center;
   border-radius: 999px;
   color: var(--md-primary);
-  background: rgba(2, 110, 255, 0.08);
+  background: rgba(var(--md-primary-rgb), 0.08);
   border: none;
   flex-shrink: 0;
   transition: transform 0.15s ease, background-color 0.15s ease;
@@ -141,7 +141,7 @@ body:has(.mobile-app),
 
 .mobile-icon-btn:active {
   transform: scale(0.92);
-  background: rgba(2, 110, 255, 0.16);
+  background: rgba(var(--md-primary-rgb), 0.16);
 }
 
 .mobile-mark {
@@ -155,7 +155,7 @@ body:has(.mobile-app),
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(2, 110, 255, 0.25);
+  box-shadow: 0 2px 6px rgba(var(--md-primary-rgb), 0.25);
 }
 
 .mobile-top-bar-title {
@@ -181,8 +181,8 @@ body:has(.mobile-app),
   gap: 6px;
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(2, 110, 255, 0.08);
-  border: 1px solid rgba(2, 110, 255, 0.12);
+  background: rgba(var(--md-primary-rgb), 0.08);
+  border: 1px solid rgba(var(--md-primary-rgb), 0.12);
   color: var(--md-primary);
   font-size: 12px;
   font-weight: 600;
@@ -263,18 +263,20 @@ body:has(.mobile-app),
   min-height: 136px;
   padding: 18px 12px 16px;
   background: var(--md-surface);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 3.5px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
   border-radius: var(--md-radius);
   color: var(--md-on-surface);
   text-align: center;
   touch-action: manipulation;
-  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.15s ease;
+  transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1), border-bottom-width 0.12s ease, box-shadow 0.12s ease;
 }
 
 .mobile-tool-card:active {
-  transform: scale(0.96);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transform: translateY(2.5px);
+  border-bottom-width: 1px;
+  box-shadow: none;
 }
 
 .mobile-tool-icon {
@@ -285,8 +287,8 @@ body:has(.mobile-app),
   align-items: center;
   justify-content: center;
   color: var(--md-primary);
-  background: rgba(2, 110, 255, 0.08);
-  border: 1px solid rgba(2, 110, 255, 0.12);
+  background: rgba(var(--md-primary-rgb), 0.08);
+  border: 1px solid rgba(var(--md-primary-rgb), 0.12);
 }
 
 .mobile-tool-glyph {
@@ -357,9 +359,9 @@ body:has(.mobile-app),
 .mobile-app .mobile-tool-icon,
 .mobile-app .mobile-tool-list-icon,
 .mobile-app .mobile-tool-hero-icon {
-  background: rgba(2, 110, 255, 0.08);
-  color: #026EFF;
-  border: 1px solid rgba(2, 110, 255, 0.12);
+  background: rgba(var(--md-primary-rgb), 0.08);
+  color: var(--md-primary);
+  border: 1px solid rgba(var(--md-primary-rgb), 0.12);
   box-shadow: none;
 }
 
@@ -462,7 +464,7 @@ body:has(.mobile-app),
   width: 38px;
   height: 38px;
   border-radius: 10px;
-  background: rgba(2, 110, 255, 0.08);
+  background: rgba(var(--md-primary-rgb), 0.08);
   color: var(--md-primary);
   display: flex;
   align-items: center;
@@ -695,8 +697,8 @@ body:has(.mobile-app),
   align-items: center;
   justify-content: center;
   color: var(--md-primary);
-  background: rgba(2, 110, 255, 0.08);
-  border: 1px solid rgba(2, 110, 255, 0.12);
+  background: rgba(var(--md-primary-rgb), 0.08);
+  border: 1px solid rgba(var(--md-primary-rgb), 0.12);
   flex-shrink: 0;
 }
 
@@ -884,9 +886,9 @@ body:has(.mobile-app),
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #EFF6FF;
-  border: 1px solid rgba(2, 110, 255, 0.12);
-  color: #026EFF;
+  background: var(--md-primary-soft);
+  border: 1px solid rgba(var(--md-primary-rgb), 0.12);
+  color: var(--md-primary);
   flex-shrink: 0;
 }
 
@@ -964,7 +966,7 @@ body:has(.mobile-app),
   font-size: 14px;
   font-weight: 800;
   touch-action: manipulation;
-  box-shadow: 0 4px 10px rgba(2, 110, 255, 0.1);
+  box-shadow: 0 4px 10px rgba(var(--md-primary-rgb), 0.1);
 }
 
 .mobile-swap-btn:active {
@@ -1003,7 +1005,7 @@ body:has(.mobile-app),
   font-size: 18px;
   font-weight: 700;
   touch-action: manipulation;
-  box-shadow: 0 8px 18px rgba(2, 110, 255, 0.18);
+  box-shadow: 0 8px 18px rgba(var(--md-primary-rgb), 0.18);
 }
 
 .mobile-app .mobile-choose-btn:disabled,
@@ -1043,7 +1045,7 @@ body:has(.mobile-app),
   top: 0;
   left: 0;
   right: 0;
-  bottom: var(--chrome-bottom);
+  bottom: var(--ad-banner-h);
   z-index: 100;
   background: rgba(15, 23, 42, 0.4);
   display: flex;
@@ -1173,13 +1175,28 @@ body:has(.mobile-app),
 .mobile-result-primary {
   background: var(--md-primary);
   color: var(--md-on-primary);
-  border: 0;
+  border: none;
+  border-bottom: 3.5px solid #0050BD;
+  box-shadow: 0 4px 12px rgba(var(--md-primary-rgb), 0.22);
+  transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1), border-bottom-width 0.12s ease;
+}
+
+.mobile-result-primary:active {
+  transform: translateY(2.5px);
+  border-bottom-width: 1px;
 }
 
 .mobile-result-secondary {
-  background: var(--md-surface);
-  color: var(--md-on-surface);
-  border: 2px solid var(--md-outline);
+  background: #F1F5F9;
+  color: #0F172A;
+  border: 1px solid #CBD5E1;
+  border-bottom: 3.5px solid #94A3B8;
+  transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1), border-bottom-width 0.12s ease;
+}
+
+.mobile-result-secondary:active {
+  transform: translateY(2.5px);
+  border-bottom-width: 1px;
 }
 
 .mobile-result-ghost {
@@ -1716,14 +1733,14 @@ body:has(.mobile-app),
 }
 
 .mobile-app .mobile-job-advanced summary::after {
-  content: "▾";
+  content: "â–¾";
   margin-left: auto;
   color: var(--md-on-surface-variant);
   font-weight: 500;
 }
 
 .mobile-app .mobile-job-advanced[open] summary::after {
-  content: "▴";
+  content: "â–´";
 }
 
 .mobile-app .mobile-job-advanced[open] summary {
@@ -1796,9 +1813,9 @@ html.is-converting .mobile-work-track-bar {
   margin: 0 0 16px;
   padding: 16px;
   border-radius: 22px;
-  border: 1px solid color-mix(in srgb, #026EFF 12%, #e8eef8);
+  border: 1px solid color-mix(in srgb, var(--md-primary) 12%, #e8eef8);
   background:
-    linear-gradient(180deg, color-mix(in srgb, #026EFF 7%, #ffffff) 0%, #ffffff 72%);
+    linear-gradient(180deg, color-mix(in srgb, var(--md-primary) 7%, #ffffff) 0%, #ffffff 72%);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.9) inset,
     0 10px 28px rgba(15, 23, 42, 0.05);
@@ -1808,8 +1825,8 @@ html.is-converting .mobile-work-track-bar {
   width: 64px;
   height: 64px;
   border-radius: 20px;
-  border: 1.5px solid color-mix(in srgb, #026EFF 20%, #ffffff);
-  box-shadow: 0 6px 14px rgba(2, 110, 255, 0.1);
+  border: 1.5px solid color-mix(in srgb, var(--md-primary) 20%, #ffffff);
+  box-shadow: 0 6px 14px rgba(var(--md-primary-rgb), 0.1);
 }
 
 .mobile-tool-eyebrow {
@@ -1818,7 +1835,7 @@ html.is-converting .mobile-work-track-bar {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: color-mix(in srgb, #026EFF 70%, #64748b);
+  color: color-mix(in srgb, var(--md-primary) 70%, #64748b);
 }
 
 .mobile-tool-title {
@@ -1863,7 +1880,7 @@ html.is-converting .mobile-work-track-bar {
   min-height: 54px;
   font-size: 17px;
   letter-spacing: -0.01em;
-  box-shadow: 0 10px 22px rgba(2, 110, 255, 0.2);
+  box-shadow: 0 10px 22px rgba(var(--md-primary-rgb), 0.2);
 }
 
 .mobile-app .mobile-tool-body .mobile-range-chips {
@@ -2046,14 +2063,14 @@ html.is-converting .mobile-work-track-bar {
     width: 38px;
     height: 38px;
     border-radius: 10px;
-    background: #026eff;
+    background: var(--md-primary);
     color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 800;
     font-size: 18px;
-    box-shadow: 0 4px 12px rgba(2, 110, 255, 0.35);
+    box-shadow: 0 4px 12px rgba(var(--md-primary-rgb), 0.35);
   }
 
   .mobile-dock-title {
@@ -2099,17 +2116,17 @@ html.is-converting .mobile-work-track-bar {
   }
 
   .mobile-dock-btn:hover {
-    background: rgba(2, 110, 255, 0.15);
-    border-color: rgba(2, 110, 255, 0.3);
+    background: rgba(var(--md-primary-rgb), 0.15);
+    border-color: rgba(var(--md-primary-rgb), 0.3);
     color: #ffffff;
   }
 
   .mobile-dock-btn.is-active {
-    background: #026eff;
-    border-color: #026eff;
+    background: var(--md-primary);
+    border-color: var(--md-primary);
     color: #ffffff;
     font-weight: 600;
-    box-shadow: 0 4px 12px rgba(2, 110, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(var(--md-primary-rgb), 0.3);
   }
 
   .mobile-dock-badge {
@@ -2136,23 +2153,64 @@ html.is-converting .mobile-work-track-bar {
   pointer-events: auto;
 }
 
+/* Scrim: opacity only (no blur). It sits over the whole screen, so anything
+   fancier is re-composited every frame on low-end GPUs. */
 .mobile-sheet-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(15, 23, 42, 0.65);
+  background: rgba(15, 23, 42, 0.5);
   cursor: pointer;
+  animation: sheet-scrim-in 220ms ease-out backwards;
 }
 
-/* Fixed height (not min/max): a content-sized sheet jumped taller when the
-   tool mounted inside it, mid-slide. */
+.mobile-sheet-overlay-root.is-closing .mobile-sheet-backdrop {
+  animation: sheet-scrim-out 180ms ease-in forwards;
+  pointer-events: none;
+}
+
+/* Half-screen, like a payment sheet. Height is a share of the APP area, not
+   the browser window, so it stays half on every device and in the desktop
+   preview frame. The tool body scrolls inside; growing the sheet when a file
+   is picked would re-layout mid-interaction and jank, so it stays fixed. */
 .mobile-tool-sheet-slide {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 61;
-  height: 85vh;
+  height: 54%;
+  min-height: min(370px, 54%);
+  max-height: 56%;
+  contain: layout paint style;
   will-change: transform;
+  /* backwards: the enter keyframes must not stay applied after they finish,
+     or they would override the inline transform used while dragging. */
+  animation: sheet-up 260ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.mobile-sheet-overlay-root.is-closing .mobile-tool-sheet-slide {
+  animation: sheet-down 220ms cubic-bezier(0.4, 0, 1, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes sheet-up {
+  from { transform: translate3d(0, 100%, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes sheet-down {
+  from { transform: translate3d(0, var(--drag-y, 0px), 0); }
+  to { transform: translate3d(0, 100%, 0); }
+}
+
+@keyframes sheet-scrim-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes sheet-scrim-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
 .mobile-tool-sheet {
@@ -2160,12 +2218,37 @@ html.is-converting .mobile-work-track-bar {
   background: #F8FAFC;
   border-top-left-radius: 28px;
   border-top-right-radius: 28px;
-  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.18);
+  /* Static, blur-free edge instead of a large soft shadow. */
+  box-shadow: 0 -2px 0 rgba(15, 23, 42, 0.06);
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
+.mobile-sheet-grab {
+  touch-action: none; /* drag-to-close is handled in JS */
+  background: #FFFFFF;
+  cursor: grab;
+  flex-shrink: 0;
+}
+
+.mobile-sheet-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mobile-sheet-skeleton-card {
+  height: 150px;
+  border-radius: 20px;
+  background: #EEF2F7;
+}
+
+.mobile-sheet-skeleton-bar {
+  height: 48px;
+  border-radius: 14px;
+  background: #E6ECF4;
+}
 .mobile-sheet-handle-bar {
   padding-top: 10px;
   padding-bottom: 6px;
@@ -2202,9 +2285,9 @@ html.is-converting .mobile-work-track-bar {
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  background: #EFF6FF;
-  border: 1px solid rgba(2, 110, 255, 0.12);
-  color: #026EFF;
+  background: var(--md-primary-soft);
+  border: 1px solid rgba(var(--md-primary-rgb), 0.12);
+  color: var(--md-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2268,7 +2351,7 @@ html.is-converting .mobile-work-track-bar {
   gap: 6px;
   background: #FFFFFF;
   border: 1px solid #CBD5E1;
-  color: #026EFF;
+  color: var(--md-primary);
   font-size: 12px;
   font-weight: 600;
   padding: 6px 12px;
@@ -2279,8 +2362,8 @@ html.is-converting .mobile-work-track-bar {
 }
 
 .mobile-sheet-swap-btn:hover {
-  background: #EFF6FF;
-  border-color: #026EFF;
+  background: var(--md-primary-soft);
+  border-color: var(--md-primary);
 }
 
 .mobile-sheet-swap-btn:active {
@@ -2310,7 +2393,7 @@ html.is-converting .mobile-work-track-bar {
 /* Modern Dashed File Drop/Select Area */
 .mobile-choose {
   background: #FFFFFF;
-  border: 2px dashed #BFDBFE;
+  border: 2px dashed var(--md-primary-line);
   border-radius: 20px;
   padding: 22px 16px;
   text-align: center;
@@ -2323,34 +2406,37 @@ html.is-converting .mobile-work-track-bar {
 }
 
 .mobile-choose:hover {
-  border-color: #026EFF;
+  border-color: var(--md-primary);
   background: #F8FAFC;
 }
 
 .mobile-choose-btn {
   width: 100%;
-  min-height: 48px !important;
+  min-height: 50px !important;
   max-width: 280px;
-  border-radius: 14px !important;
-  background: #026EFF !important;
+  border-radius: 16px !important;
+  background: var(--md-primary) !important;
   color: #FFFFFF !important;
-  font-size: 15px !important;
-  font-weight: 600 !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
   border: none;
+  border-bottom: 4px solid #0050BD !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 14px rgba(2, 110, 255, 0.25) !important;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(var(--md-primary-rgb), 0.25) !important;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1), border-bottom-width 0.12s ease;
 }
 
 .mobile-choose-btn:hover {
-  filter: brightness(1.06);
+  filter: brightness(1.05);
 }
 
 .mobile-choose-btn:active {
-  transform: scale(0.97);
+  transform: translateY(3px) !important;
+  border-bottom-width: 1px !important;
 }
 
 .mobile-choose-hint {
@@ -2390,9 +2476,9 @@ html.is-converting .mobile-work-track-bar {
 }
 
 .mobile-text-btn {
-  background: #EFF6FF !important;
+  background: var(--md-primary-soft) !important;
   border: none !important;
-  color: #026EFF !important;
+  color: var(--md-primary) !important;
   font-size: 12px !important;
   font-weight: 600 !important;
   padding: 6px 14px !important;
@@ -2410,11 +2496,11 @@ html.is-converting .mobile-work-track-bar {
 .mobile-live-size {
   font-size: 14px !important;
   font-weight: 700 !important;
-  color: #026EFF !important;
+  color: var(--md-primary) !important;
   text-align: center !important;
   margin: 8px 0 !important;
-  background: #EFF6FF !important;
-  border: 1px solid rgba(2, 110, 255, 0.12) !important;
+  background: var(--md-primary-soft) !important;
+  border: 1px solid rgba(var(--md-primary-rgb), 0.12) !important;
   padding: 8px 14px !important;
   border-radius: 12px !important;
   display: block !important;
@@ -2465,16 +2551,16 @@ html.is-converting .mobile-work-track-bar {
 }
 
 .mobile-size-chip.is-selected {
-  border-color: #026EFF !important;
-  background: #EFF6FF !important;
+  border-color: var(--md-primary) !important;
+  background: var(--md-primary-soft) !important;
 }
 
 .mobile-size-chip.is-selected strong {
-  color: #026EFF !important;
+  color: var(--md-primary) !important;
 }
 
 .mobile-size-chip.is-selected span {
-  color: #026EFF !important;
+  color: var(--md-primary) !important;
   opacity: 0.85;
 }
 
@@ -2519,7 +2605,7 @@ html.is-converting .mobile-work-track-bar {
 
 .mobile-size-field input:focus {
   outline: none;
-  border-color: #026EFF;
+  border-color: var(--md-primary);
   background: #FFFFFF;
 }
 
@@ -2543,7 +2629,7 @@ html.is-converting .mobile-work-track-bar {
 
 .mobile-unit-toggle button.is-on {
   background: #FFFFFF;
-  color: #026EFF;
+  color: var(--md-primary);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
@@ -2588,4 +2674,431 @@ html.is-converting .mobile-work-track-bar {
   font-size: 13px !important;
   line-height: 1.4 !important;
   color: #64748B !important;
+}
+
+
+/* ==========================================================================
+   Tool Accent Color Families (Vibrant, Distinct Competitor Colors)
+   ========================================================================== */
+
+.accent-coral {
+  --tool-accent: #EF4444;
+  --tool-accent-bg: #FEF2F2;
+  --tool-accent-border: #FECACA;
+  --tool-accent-edge: #DC2626;
+  --tool-accent-shadow: rgba(239, 68, 68, 0.2);
+}
+
+.accent-green {
+  --tool-accent: #10B981;
+  --tool-accent-bg: #ECFDF5;
+  --tool-accent-border: #A7F3D0;
+  --tool-accent-edge: #059669;
+  --tool-accent-shadow: rgba(16, 185, 129, 0.2);
+}
+
+.accent-blue {
+  --tool-accent: #026EFF;
+  --tool-accent-bg: #EFF6FF;
+  --tool-accent-border: #BFDBFE;
+  --tool-accent-edge: #0050BD;
+  --tool-accent-shadow: rgba(2, 110, 255, 0.2);
+}
+
+.accent-violet {
+  --tool-accent: #8B5CF6;
+  --tool-accent-bg: #F5F3FF;
+  --tool-accent-border: #DDD6FE;
+  --tool-accent-edge: #7C3AED;
+  --tool-accent-shadow: rgba(139, 92, 246, 0.2);
+}
+
+.accent-teal {
+  --tool-accent: #0D9488;
+  --tool-accent-bg: #F0FDFA;
+  --tool-accent-border: #99F6E4;
+  --tool-accent-edge: #0F766E;
+  --tool-accent-shadow: rgba(13, 148, 136, 0.2);
+}
+
+.accent-amber {
+  --tool-accent: #F59E0B;
+  --tool-accent-bg: #FFFBEB;
+  --tool-accent-border: #FDE68A;
+  --tool-accent-edge: #D97706;
+  --tool-accent-shadow: rgba(245, 158, 11, 0.2);
+}
+
+.accent-pink {
+  --tool-accent: #EC4899;
+  --tool-accent-bg: #FDF2F8;
+  --tool-accent-border: #FBCFE8;
+  --tool-accent-edge: #DB2777;
+  --tool-accent-shadow: rgba(236, 72, 153, 0.2);
+}
+
+/* Consume tool accents on icons across grid, lists, and sheets */
+.mobile-app .mobile-tool-card.accent-coral .mobile-tool-icon,
+.mobile-app .mobile-tool-list-item.accent-coral .mobile-tool-list-icon,
+.mobile-sheet-tool-icon.accent-coral {
+  background: #FEF2F2 !important;
+  color: #EF4444 !important;
+  border-color: #FECACA !important;
+}
+
+.mobile-app .mobile-tool-card.accent-green .mobile-tool-icon,
+.mobile-app .mobile-tool-list-item.accent-green .mobile-tool-list-icon,
+.mobile-sheet-tool-icon.accent-green {
+  background: #ECFDF5 !important;
+  color: #10B981 !important;
+  border-color: #A7F3D0 !important;
+}
+
+.mobile-app .mobile-tool-card.accent-blue .mobile-tool-icon,
+.mobile-app .mobile-tool-list-item.accent-blue .mobile-tool-list-icon,
+.mobile-sheet-tool-icon.accent-blue {
+  background: #EFF6FF !important;
+  color: #026EFF !important;
+  border-color: #BFDBFE !important;
+}
+
+.mobile-app .mobile-tool-card.accent-violet .mobile-tool-icon,
+.mobile-app .mobile-tool-list-item.accent-violet .mobile-tool-list-icon,
+.mobile-sheet-tool-icon.accent-violet {
+  background: #F5F3FF !important;
+  color: #8B5CF6 !important;
+  border-color: #DDD6FE !important;
+}
+
+.mobile-app .mobile-tool-card.accent-teal .mobile-tool-icon,
+.mobile-app .mobile-tool-list-item.accent-teal .mobile-tool-list-icon,
+.mobile-sheet-tool-icon.accent-teal {
+  background: #F0FDFA !important;
+  color: #0D9488 !important;
+  border-color: #99F6E4 !important;
+}
+
+.mobile-app .mobile-tool-card.accent-amber .mobile-tool-icon,
+.mobile-app .mobile-tool-list-item.accent-amber .mobile-tool-list-icon,
+.mobile-sheet-tool-icon.accent-amber {
+  background: #FFFBEB !important;
+  color: #D97706 !important;
+  border-color: #FDE68A !important;
+}
+
+.mobile-app .mobile-tool-card.accent-pink .mobile-tool-icon,
+.mobile-app .mobile-tool-list-item.accent-pink .mobile-tool-list-icon,
+.mobile-sheet-tool-icon.accent-pink {
+  background: #FDF2F8 !important;
+  color: #EC4899 !important;
+  border-color: #FBCFE8 !important;
+}
+
+/* Badge glyphs per accent */
+.accent-coral .mobile-convert-from { background: #EF4444 !important; color: #fff !important; }
+.accent-coral .mobile-convert-arrow { color: #EF4444 !important; }
+.accent-coral .mobile-convert-to { background: #fff !important; color: #EF4444 !important; border: 1.5px solid #EF4444 !important; }
+
+.accent-green .mobile-convert-from { background: #10B981 !important; color: #fff !important; }
+.accent-green .mobile-convert-arrow { color: #10B981 !important; }
+.accent-green .mobile-convert-to { background: #fff !important; color: #10B981 !important; border: 1.5px solid #10B981 !important; }
+
+.accent-violet .mobile-convert-from { background: #8B5CF6 !important; color: #fff !important; }
+.accent-violet .mobile-convert-arrow { color: #8B5CF6 !important; }
+.accent-violet .mobile-convert-to { background: #fff !important; color: #8B5CF6 !important; border: 1.5px solid #8B5CF6 !important; }
+
+.accent-teal .mobile-convert-from { background: #0D9488 !important; color: #fff !important; }
+.accent-teal .mobile-convert-arrow { color: #0D9488 !important; }
+.accent-teal .mobile-convert-to { background: #fff !important; color: #0D9488 !important; border: 1.5px solid #0D9488 !important; }
+
+.accent-amber .mobile-convert-from { background: #F59E0B !important; color: #fff !important; }
+.accent-amber .mobile-convert-arrow { color: #F59E0B !important; }
+.accent-amber .mobile-convert-to { background: #fff !important; color: #F59E0B !important; border: 1.5px solid #F59E0B !important; }
+
+.accent-pink .mobile-convert-from { background: #EC4899 !important; color: #fff !important; }
+.accent-pink .mobile-convert-arrow { color: #EC4899 !important; }
+.accent-pink .mobile-convert-to { background: #fff !important; color: #EC4899 !important; border: 1.5px solid #EC4899 !important; }
+
+.accent-blue .mobile-convert-from { background: #026EFF !important; color: #fff !important; }
+.accent-blue .mobile-convert-arrow { color: #026EFF !important; }
+.accent-blue .mobile-convert-to { background: #fff !important; color: #026EFF !important; border: 1.5px solid #026EFF !important; }
+
+/* Subtle card bottom border accent on active/hover */
+.mobile-app .mobile-tool-card.accent-coral { border-bottom-color: rgba(239, 68, 68, 0.28); }
+.mobile-app .mobile-tool-card.accent-green { border-bottom-color: rgba(16, 185, 129, 0.28); }
+.mobile-app .mobile-tool-card.accent-blue  { border-bottom-color: rgba(2, 110, 255, 0.28); }
+.mobile-app .mobile-tool-card.accent-violet{ border-bottom-color: rgba(139, 92, 246, 0.28); }
+.mobile-app .mobile-tool-card.accent-teal  { border-bottom-color: rgba(13, 148, 136, 0.28); }
+.mobile-app .mobile-tool-card.accent-amber { border-bottom-color: rgba(245, 158, 11, 0.28); }
+.mobile-app .mobile-tool-card.accent-pink  { border-bottom-color: rgba(236, 72, 153, 0.28); }
+
+/* ==========================================================================
+   Duolingo-Inspired Celebratory Result Micro-Interactions
+   ========================================================================== */
+
+.mobile-result-badge-wrap {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-result-badge-wrap .mobile-result-check {
+  width: 58px;
+  height: 58px;
+  margin: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--md-ok) 18%, var(--md-paper));
+  color: var(--md-ok);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: duolingo-check-pop 360ms cubic-bezier(0.22, 1.35, 0.36, 1);
+  box-shadow: 0 4px 14px rgba(52, 199, 89, 0.25);
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes duolingo-check-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-15deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.18) rotate(4deg);
+  }
+  80% {
+    transform: scale(0.92) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.mobile-result-sparkles {
+  position: absolute;
+  inset: -14px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mobile-result-sparkles .sparkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  animation: sparkle-burst 540ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.mobile-result-sparkles .sparkle.s1 {
+  background: #EF4444; /* coral */
+  top: 2px;
+  left: 6px;
+  --dx: -10px;
+  --dy: -10px;
+  animation-delay: 50ms;
+}
+
+.mobile-result-sparkles .sparkle.s2 {
+  background: #026EFF; /* blue */
+  top: 4px;
+  right: 6px;
+  --dx: 10px;
+  --dy: -10px;
+  animation-delay: 90ms;
+}
+
+.mobile-result-sparkles .sparkle.s3 {
+  background: #F59E0B; /* amber */
+  bottom: 6px;
+  left: 4px;
+  --dx: -10px;
+  --dy: 10px;
+  animation-delay: 130ms;
+}
+
+.mobile-result-sparkles .sparkle.s4 {
+  background: #10B981; /* emerald */
+  bottom: 4px;
+  right: 4px;
+  --dx: 10px;
+  --dy: 10px;
+  animation-delay: 110ms;
+}
+
+@keyframes sparkle-burst {
+  0% {
+    opacity: 0;
+    transform: scale(0.2) translate(0, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) translate(calc(var(--dx) * 0.6), calc(var(--dy) * 0.6));
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3) translate(var(--dx), var(--dy));
+  }
+}
+
+/* ==========================================================================
+   Duolingo-Inspired App Launch Splash
+   ========================================================================== */
+
+.mobile-launch-splash {
+  position: absolute;
+  inset: 0;
+  z-index: 999;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  contain: strict;
+  animation: launch-fade-in 180ms ease-out;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.mobile-launch-splash.is-leaving {
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 260ms cubic-bezier(0.4, 0, 0.2, 1), transform 260ms cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+@keyframes launch-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.mobile-launch-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 300px;
+  text-align: center;
+}
+
+.mobile-launch-mascot-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mobile-launch-mascot {
+  width: 82px;
+  height: 82px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #026EFF 0%, #0050BD 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(2, 110, 255, 0.35), 0 3px 0 #003E99;
+  animation: launch-bounce 700ms cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate;
+}
+
+.mobile-launch-letter {
+  font-size: 46px;
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.mobile-launch-spark {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: #F59E0B;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+  border: 2px solid #FFFFFF;
+}
+
+.mobile-launch-shadow {
+  width: 58px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.12);
+  margin-top: 10px;
+  animation: launch-shadow-pulse 700ms ease-in-out infinite alternate;
+}
+
+@keyframes launch-bounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+@keyframes launch-shadow-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(0.75); opacity: 0.35; }
+}
+
+.mobile-launch-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.mobile-launch-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #0F172A;
+}
+
+.mobile-launch-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #F1F5F9;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid #E2E8F0;
+}
+
+.mobile-launch-loader {
+  width: 130px;
+  height: 6px;
+  border-radius: 999px;
+  background: #E2E8F0;
+  overflow: hidden;
+  margin-top: 6px;
+}
+
+.mobile-launch-progress {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #026EFF, #10B981);
+  animation: launch-fill 560ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes launch-fill {
+  0% { width: 0%; }
+  60% { width: 75%; }
+  100% { width: 100%; }
 }

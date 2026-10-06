@@ -1,0 +1,32 @@
+﻿Convertify emu UX (ff2224f) — 16 Sep 2026 ~5:15 PM IST
+Persona: non-tech, wants passport photo / smaller for email / photo to PDF.
+
+Swap pairs on Android v1 (both sides working, no stubs):
+- jpg-to-pdf <-> pdf-to-jpg
+- png-to-pdf <-> pdf-to-png
+- word-to-pdf <-> pdf-to-word
+- merge-pdf <-> split-pdf
+Website also: jpg-to-png <-> png-to-jpg, csv-to-json <-> json-to-csv, pdf-to-text <-> text-to-pdf
+NOT swapped: excel-to-pdf (pdf-to-excel is Coming Soon), PowerPoint, protect/unlock.
+
+What felt good
+- Home: Passport photo is first-row. JPG->PDF says "Photos into one PDF". Fit to size / Compress PDF for size. Convert tiles use JPG/PDF/DOC badges (white + #026EFF).
+- Tools search placeholder Try "20kb" or "passport".
+- Passport page: India/US/Visa chips, big Choose photos, files-stay-on-phone copy.
+- JPG->PDF page: direction chips + "Swap to PDF -> JPG" pill, hero badges, primary CTA.
+- Empty recents: "Nothing here yet. Convert a file and it will show up."
+- Banner sits below nav. No crash in logcat.
+
+What confused / bugs
+- Home now has 8 quick tools; last row (Background, Word->PDF) starts under the tab bar until you scroll. Recents is below the fold.
+- "JPG -> PDF" still uses format names; the hint saves it. "DOC" badge for Word may puzzle some people.
+- Compress PDF last row on Tools is clipped by nav until scroll (padding exists, first paint feels tight).
+- KB jargon on Fit to size / passport ("hit the KB").
+- "make this smaller for email" with a *photo* still more likely to hit Compress PDF (PDF) than Shrink photo (not on Home). Fit to size can do photos.
+- AdMob shows Test Ad on emulator (SDK treats emulator as test device). Live IDs are in the app.
+- Did not complete a convert so Share/Save sheet was not re-tested this pass.
+
+Screenshots
+C:\Users\nunis\Downloads\Convertify-Play\emu-ux-live\
+  20-home-swap-icons.png  21-home-scrolled.png  22-jpg-to-pdf-swap.png (passport)
+  23-jpg-to-pdf-page.png  25-tools-glyphs.png

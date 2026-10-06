@@ -42,6 +42,8 @@ const KEEP_ROUTES = new Set([
   'add-page-numbers',
   'qr-code-generator',
   'autocad-pdf-editor',
+  'ocr-pdf',
+  'scan-document',
   'convert-worker.js',
   '_next',
   'pdf.worker.min.mjs',

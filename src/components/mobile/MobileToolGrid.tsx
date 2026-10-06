@@ -1,16 +1,24 @@
 'use client'
 
+import { useEffect } from 'react'
 import Link from 'next/link'
-import { motion, useReducedMotion } from 'framer-motion'
 import { ToolGlyph } from '@/components/mobile/ToolGlyph'
 import { getAndroidQuickTools, shortToolName, ANDROID_QUICK_HINTS } from '@/lib/mobile-tools'
+import { toolAccent } from '@/lib/tool-accent'
 import { tapHaptic } from '@/lib/haptics'
 import { useToolSheet } from '@/components/mobile/ToolSheetContext'
+import { preloadTool, preloadToolsWhenIdle } from '@/components/mobile/tool-loaders'
 
 export default function MobileToolGrid() {
     const tools = getAndroidQuickTools()
-    const reduceMotion = useReducedMotion()
     const { openTool } = useToolSheet()
+
+    // Warm the tool chunks in the background once Home is on screen, so the
+    // first tap never waits on JS being downloaded and evaluated.
+    useEffect(() => {
+        preloadToolsWhenIdle(tools.map((t) => t.id))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div className="mobile-section">
@@ -28,27 +36,24 @@ export default function MobileToolGrid() {
             </div>
 
             <div className="mobile-tool-grid">
-                {tools.map((tool) => (
-                    <motion.div
+                {tools.map((tool, index) => (
+                    <a
                         key={tool.id}
-                        whileTap={reduceMotion ? undefined : { scale: 0.96 }}
-                        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                        href={`/${tool.href}`}
+                        className={`mobile-tool-card accent-${toolAccent(tool.id)}`}
+                        style={{ ['--i' as string]: index }}
+                        onPointerDown={() => preloadTool(tool.id)}
+                        onClick={(e) => {
+                            e.preventDefault()
+                            openTool(tool.id)
+                        }}
                     >
-                        <a
-                            href={`/${tool.href}`}
-                            className="mobile-tool-card"
-                            onClick={(e) => {
-                                e.preventDefault()
-                                openTool(tool.id)
-                            }}
-                        >
-                            <div className="mobile-tool-icon">
-                                <ToolGlyph toolId={tool.id} size={30} />
-                            </div>
-                            <span className="mobile-tool-name">{shortToolName(tool)}</span>
-                            <span className="mobile-tool-hint">{ANDROID_QUICK_HINTS[tool.id] ?? shortToolName(tool)}</span>
-                        </a>
-                    </motion.div>
+                        <div className="mobile-tool-icon">
+                            <ToolGlyph toolId={tool.id} size={30} />
+                        </div>
+                        <span className="mobile-tool-name">{shortToolName(tool)}</span>
+                        <span className="mobile-tool-hint">{ANDROID_QUICK_HINTS[tool.id] ?? shortToolName(tool)}</span>
+                    </a>
                 ))}
             </div>
         </div>

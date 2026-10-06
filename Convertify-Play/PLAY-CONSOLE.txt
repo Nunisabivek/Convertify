@@ -1,0 +1,92 @@
+CONVERTIFY — GOOGLE PLAY CONSOLE PACK
+Folder: C:\Users\nunis\Downloads\Convertify-Play
+Package name: com.convertify.work
+Privacy policy URL (paste this): https://convertify.work/privacy
+Website: https://convertify.work
+Support email: support@convertify.work
+
+========================================
+FILES TO UPLOAD
+========================================
+High-res icon (512 x 512 PNG):
+  C:\Users\nunis\Downloads\Convertify-Play\play-icon-512.png
+
+Feature graphic (1024 x 500):
+  C:\Users\nunis\Downloads\Convertify-Play\play-feature-1024x500.png
+  (JPG copy also there if Console prefers JPG)
+
+Phone screenshots (need at least 2; upload all 6):
+  C:\Users\nunis\Downloads\Convertify-Play\01-home.png
+  C:\Users\nunis\Downloads\Convertify-Play\02-tools.png
+  C:\Users\nunis\Downloads\Convertify-Play\03-fit-to-size.png
+  C:\Users\nunis\Downloads\Convertify-Play\04-passport.png
+  C:\Users\nunis\Downloads\Convertify-Play\05-compress-pdf.png
+  C:\Users\nunis\Downloads\Convertify-Play\06-about.png
+These are 1080 x 2160, 24-bit PNG, no transparency. Phone listing only is enough. Skip tablet/TV.
+
+App bundle (.aab) for upload:
+  C:\Users\nunis\Downloads\Convertify-Play\Convertify-1.2.1.aab
+  (signed release bundle; Version: 1.2.1 / VersionCode: 6; package com.convertify.work; CONTAINS AdMob ads)
+
+========================================
+STORE LISTING TEXT (paste)
+========================================
+App name:
+Convertify
+
+Short description (80 characters):
+PDF tools on your phone. Fit form size, compress, convert. Files stay on device.
+
+Full description:
+Convertify is a free PDF and photo toolbox that runs on your phone. Files stay on the device. They are not uploaded to Convertify servers.
+
+Use it when a government form, bank, job portal, or college site asks for an exact file size or photo size.
+
+What you can do
+• Fit to size — type the exact KB a form asks for, or pick a range
+• Passport photo, bank photo, and signature size presets
+• Compress a PDF to a target size such as 100 KB or 200 KB
+• Merge PDFs, convert JPG to PDF, and other everyday PDF tools
+• Remove a photo background for form uploads
+
+How it works
+1. Choose a file
+2. Convert
+3. Save or share
+
+No account. No watermark. The app contains ads (AdMob banner + interstitial).
+
+Default language: English
+App category: Productivity (or Tools if Productivity is not listed)
+Contact email: support@convertify.work
+Marketing / website: https://convertify.work
+Privacy policy: https://convertify.work/privacy
+
+========================================
+DATA SAFETY (current app, CONTAINS ads)
+========================================
+Does the app collect or share user data? No.
+(Files are processed on the device. Convertify does not collect them.)
+
+Advertising / advertising ID: Yes — app CONTAINS ads (AdMob banner + interstitial)
+AdMob App ID: ca-app-pub-4814181825408625~1021995058
+Banner: ca-app-pub-4814181825408625/7919857158
+Interstitial: ca-app-pub-4814181825408625/4065381782
+Analytics in the app: No
+Account / login: No
+Camera: Used on-device only for Document Scanner (no photos ever leave device)
+Location, contacts, microphone, SMS: No
+
+========================================
+IMPORTANT GOOGLE RULES
+========================================
+1. First upload is Closed testing, not Production.
+2. You need 12 testers who opt in and use the app for 14 days, then you can apply for production.
+3. Upload the .aab, not the debug APK.
+4. Do not round the store icon yourself. Play rounds it.
+
+========================================
+DO NOT GIVE TO CHATGPT
+========================================
+C:\Users\nunis\Convertify-play-signing\
+That folder is the app signing key. If it is lost, you can never update Convertify on Play. Do not upload it, do not paste the password into chat.

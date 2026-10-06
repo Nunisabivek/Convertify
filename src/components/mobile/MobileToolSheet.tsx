@@ -1,242 +1,232 @@
 'use client'
 
-import React, { ComponentType } from 'react'
-import dynamic from 'next/dynamic'
-import { motion, AnimatePresence, useDragControls } from 'framer-motion'
+import React, { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { X, ShieldCheck, ArrowLeftRight } from 'lucide-react'
 import { useToolSheet } from './ToolSheetContext'
 import { ToolGlyph } from './ToolGlyph'
+import { TOOL_LOADERS } from './tool-loaders'
 import { getToolById } from '@/lib/tools-registry'
 import { ANDROID_SHORT_NAMES, isAndroidV1Tool } from '@/lib/mobile-tools'
 import { getSwapInfo, parseConvertDirection } from '@/lib/tool-swap'
 import { tapHaptic } from '@/lib/haptics'
+import { toolAccent } from '@/lib/tool-accent'
 
-const ToolLoading = () => (
-    <div className="p-6 space-y-4 animate-pulse">
-        <div className="h-32 bg-slate-100 rounded-2xl" />
-        <div className="h-10 bg-slate-100 rounded-xl w-3/4 mx-auto" />
-        <div className="h-12 bg-blue-50/50 rounded-xl" />
-    </div>
-)
-
-const TOOL_COMPONENTS: Record<string, ComponentType<any>> = {
-    'compress-pdf': dynamic(() => import('@/app/compress-pdf/mobile-client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'fit-to-size': dynamic(() => import('@/app/fit-to-size/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'passport-photo': dynamic(() => import('@/app/passport-photo/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'remove-background': dynamic(() => import('@/app/remove-background/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'merge-pdf': dynamic(() => import('@/app/merge-pdf/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'split-pdf': dynamic(() => import('@/app/split-pdf/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'rotate-pdf': dynamic(() => import('@/app/rotate-pdf/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'jpg-to-pdf': dynamic(() => import('@/app/jpg-to-pdf/mobile-client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'png-to-pdf': dynamic(() => import('@/app/png-to-pdf/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'pdf-to-jpg': dynamic(() => import('@/app/pdf-to-jpg/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'pdf-to-png': dynamic(() => import('@/app/pdf-to-png/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'word-to-pdf': dynamic(() => import('@/app/word-to-pdf/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'pdf-to-word': dynamic(() => import('@/app/pdf-to-word/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'excel-to-pdf': dynamic(() => import('@/app/excel-to-pdf/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'image-compressor': dynamic(() => import('@/app/image-compressor/mobile-client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'resize-image': dynamic(() => import('@/app/resize-image/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'heic-to-jpg': dynamic(() => import('@/app/heic-to-jpg/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'webp-converter': dynamic(() => import('@/app/webp-converter/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'watermark-pdf': dynamic(() => import('@/app/watermark-pdf/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'add-page-numbers': dynamic(() => import('@/app/add-page-numbers/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'qr-code-generator': dynamic(() => import('@/app/qr-code-generator/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
-    'autocad-pdf-editor': dynamic(() => import('@/app/autocad-pdf-editor/client'), {
-        loading: ToolLoading,
-        ssr: false,
-    }),
+/** Static placeholder shown while the slide-up runs. No animation, no layout work. */
+function ToolSkeleton() {
+    return (
+        <div className="mobile-sheet-skeleton" aria-hidden>
+            <div className="mobile-sheet-skeleton-card" />
+            <div className="mobile-sheet-skeleton-bar" />
+        </div>
+    )
 }
+
+// lazy() wraps the same loader that preloadTool() warms, so a preloaded tool
+// resolves on the next tick instead of downloading mid-animation.
+const TOOL_COMPONENTS = Object.fromEntries(
+    Object.entries(TOOL_LOADERS).map(([id, load]) => [id, lazy(load)]),
+) as Record<string, React.LazyExoticComponent<React.ComponentType<any>>>
+
+const SLIDE_FALLBACK_MS = 340
+const DRAG_CLOSE_PX = 90
+const DRAG_CLOSE_VELOCITY = 0.6 // px per ms
 
 export default function MobileToolSheet() {
     const { isOpen, activeToolId, openTool, closeTool } = useToolSheet()
-    const dragControls = useDragControls()
 
-    if (!isOpen && !activeToolId) return null
+    const slideRef = useRef<HTMLDivElement>(null)
+    const slideDoneRef = useRef(false)
+    const drag = useRef({ active: false, startY: 0, lastY: 0, lastT: 0, velocity: 0 })
+
+    // The tool body mounts only after the sheet has finished sliding. Mounting a
+    // big client (and evaluating its chunk) mid-slide steals frames on low-end
+    // phones; a static skeleton keeps the sheet stable until then.
+    const [readyId, setReadyId] = useState<string | null>(null)
+
+    const markSlideDone = useCallback(() => {
+        slideDoneRef.current = true
+        setReadyId(activeToolId)
+    }, [activeToolId])
+
+    useEffect(() => {
+        if (!activeToolId) {
+            slideDoneRef.current = false
+            setReadyId(null)
+            return
+        }
+        // Closing: keep the body as-is so it doesn't flicker during the exit.
+        if (!isOpen) {
+            slideDoneRef.current = false
+            return
+        }
+        // Swapping tools inside an open sheet: no slide to wait for.
+        if (slideDoneRef.current) {
+            setReadyId(activeToolId)
+            return
+        }
+        // Fallback for reduced motion or an animationend that never fires.
+        const timer = window.setTimeout(() => {
+            slideDoneRef.current = true
+            setReadyId(activeToolId)
+        }, SLIDE_FALLBACK_MS)
+        return () => window.clearTimeout(timer)
+    }, [isOpen, activeToolId])
+
+    const onGrabDown = (e: React.PointerEvent<HTMLDivElement>) => {
+        if (!isOpen || (e.target as Element).closest('button')) return
+        const now = performance.now()
+        drag.current = { active: true, startY: e.clientY, lastY: e.clientY, lastT: now, velocity: 0 }
+        e.currentTarget.setPointerCapture(e.pointerId)
+        const el = slideRef.current
+        if (el) el.style.transition = 'none'
+    }
+
+    const onGrabMove = (e: React.PointerEvent<HTMLDivElement>) => {
+        const d = drag.current
+        if (!d.active) return
+        const now = performance.now()
+        const dy = Math.max(0, e.clientY - d.startY)
+        const dt = Math.max(1, now - d.lastT)
+        d.velocity = (e.clientY - d.lastY) / dt
+        d.lastY = e.clientY
+        d.lastT = now
+        const el = slideRef.current
+        // Direct style write: no React state, no re-render per pointer move.
+        if (el) el.style.transform = `translate3d(0, ${dy}px, 0)`
+    }
+
+    const onGrabUp = (e: React.PointerEvent<HTMLDivElement>) => {
+        const d = drag.current
+        if (!d.active) return
+        d.active = false
+        const el = slideRef.current
+        const dy = Math.max(0, e.clientY - d.startY)
+        if (!el) return
+        if (dy > DRAG_CLOSE_PX || d.velocity > DRAG_CLOSE_VELOCITY) {
+            el.style.setProperty('--drag-y', `${dy}px`)
+            el.style.transition = ''
+            el.style.transform = ''
+            void tapHaptic()
+            closeTool()
+        } else {
+            el.style.transition = 'transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1)'
+            el.style.transform = ''
+            window.setTimeout(() => {
+                if (el) el.style.transition = ''
+            }, 220)
+        }
+    }
 
     const tool = activeToolId ? getToolById(activeToolId) : null
     const title = activeToolId ? (ANDROID_SHORT_NAMES[activeToolId] ?? tool?.name ?? 'Tool') : 'Tool'
-    const ActiveComponent = activeToolId ? TOOL_COMPONENTS[activeToolId] : null
+    const ActiveComponent = readyId && readyId === activeToolId ? TOOL_COMPONENTS[readyId] : null
     const direction = activeToolId ? parseConvertDirection(activeToolId) : null
     const swap = activeToolId ? getSwapInfo(activeToolId) : null
     const showSwap = Boolean(swap && isAndroidV1Tool(swap.target))
 
-    return (
-        <AnimatePresence>
-            {isOpen && (
-                <div className="mobile-sheet-overlay-root">
-                    {/* Backdrop Scrim */}
-                    <motion.div
-                        className="mobile-sheet-backdrop"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        onClick={() => {
-                            void tapHaptic()
-                            closeTool()
-                        }}
-                    />
+    const body = useMemo(
+        () =>
+            ActiveComponent ? (
+                <Suspense fallback={<ToolSkeleton />}>
+                    <ActiveComponent />
+                </Suspense>
+            ) : (
+                <ToolSkeleton />
+            ),
+        [ActiveComponent],
+    )
 
-                    {/* Bottom sheet. The outer layer slides with `transform`, which
-                        framer-motion runs on the compositor (WAAPI), so the slide stays
-                        smooth while the tool's JS chunk loads. `y` runs on the main
-                        thread and stuttered. The inner sheet drags down to close from
-                        the handle only, so the tool body keeps native scrolling. */}
-                    <motion.div
-                        className="mobile-tool-sheet-slide"
-                        initial={{ transform: 'translateY(100%)' }}
-                        animate={{ transform: 'translateY(0%)' }}
-                        exit={{ transform: 'translateY(100%)' }}
-                        transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
+    // Stay mounted through the exit animation; the context clears activeToolId
+    // once it has played.
+    if (!activeToolId) return null
+
+    return (
+        <div className={`mobile-sheet-overlay-root${isOpen ? '' : ' is-closing'}`}>
+            <div
+                className="mobile-sheet-backdrop"
+                onClick={() => {
+                    void tapHaptic()
+                    closeTool()
+                }}
+            />
+
+            <div
+                ref={slideRef}
+                className={`mobile-tool-sheet-slide accent-${toolAccent(activeToolId)}`}
+                role="dialog"
+                aria-modal="true"
+                aria-label={title}
+                onAnimationEnd={(e) => {
+                    if (e.target === e.currentTarget && isOpen) markSlideDone()
+                }}
+            >
+                <div className="mobile-tool-sheet">
+                    <div
+                        className="mobile-sheet-grab"
+                        onPointerDown={onGrabDown}
+                        onPointerMove={onGrabMove}
+                        onPointerUp={onGrabUp}
+                        onPointerCancel={onGrabUp}
                     >
-                        <motion.div
-                            className="mobile-tool-sheet"
-                            drag="y"
-                            dragListener={false}
-                            dragControls={dragControls}
-                            dragConstraints={{ top: 0, bottom: 0 }}
-                            dragElastic={{ top: 0, bottom: 1 }}
-                            onDragEnd={(_, { offset, velocity }) => {
-                                if (offset.y > 80 || velocity.y > 400) {
+                        <div className="mobile-sheet-handle-bar">
+                            <div className="mobile-sheet-handle-pill" />
+                        </div>
+
+                        <div className="mobile-sheet-header">
+                            <div className="mobile-sheet-header-left">
+                                <div className={`mobile-sheet-tool-icon accent-${toolAccent(activeToolId)}`}>
+                                    <ToolGlyph toolId={activeToolId} size={24} />
+                                </div>
+                                <div>
+                                    <h3 className="mobile-sheet-title">{title}</h3>
+                                    <div className="mobile-sheet-badge">
+                                        <ShieldCheck size={12} aria-hidden />
+                                        <span>On-Device • 100% Private</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button
+                                type="button"
+                                className="mobile-sheet-close-btn"
+                                aria-label="Close"
+                                onClick={() => {
                                     void tapHaptic()
                                     closeTool()
-                                }
-                            }}
-                        >
-                            <div className="mobile-sheet-handle-bar" onPointerDown={(e) => dragControls.start(e)}>
-                                <div className="mobile-sheet-handle-pill" />
-                            </div>
+                                }}
+                            >
+                                <X size={18} strokeWidth={2.2} />
+                            </button>
+                        </div>
+                    </div>
 
-                            {/* Sheet Header */}
-                            <div className="mobile-sheet-header">
-                                <div className="mobile-sheet-header-left">
-                                    {activeToolId && (
-                                        <div className="mobile-sheet-tool-icon">
-                                            <ToolGlyph toolId={activeToolId} size={24} />
-                                        </div>
-                                    )}
-                                    <div>
-                                        <h3 className="mobile-sheet-title">{title}</h3>
-                                        <div className="mobile-sheet-badge">
-                                            <ShieldCheck size={12} className="text-[#026EFF]" />
-                                            <span>On-Device • 100% Private</span>
-                                        </div>
-                                    </div>
+                    {showSwap && swap && (
+                        <div className="mobile-sheet-swap-bar">
+                            {direction ? (
+                                <div className="mobile-dir-chips" aria-hidden>
+                                    <span className="mobile-dir-chip">{direction.from}</span>
+                                    <span className="mobile-dir-arrow" aria-hidden>→</span>
+                                    <span className="mobile-dir-chip is-out">{direction.to}</span>
                                 </div>
-                                <button
-                                    type="button"
-                                    className="mobile-sheet-close-btn"
-                                    aria-label="Close"
-                                    onClick={() => {
-                                        void tapHaptic()
-                                        closeTool()
-                                    }}
-                                >
-                                    <X size={18} strokeWidth={2.2} />
-                                </button>
-                            </div>
-
-                            {/* Direction & Tool Swap Affordance */}
-                            {showSwap && swap && (
-                                <div className="mobile-sheet-swap-bar">
-                                    {direction ? (
-                                        <div className="mobile-dir-chips" aria-hidden>
-                                            <span className="mobile-dir-chip">{direction.from}</span>
-                                            <span className="mobile-dir-arrow" aria-hidden>→</span>
-                                            <span className="mobile-dir-chip is-out">{direction.to}</span>
-                                        </div>
-                                    ) : <div />}
-                                    <button
-                                        type="button"
-                                        className="mobile-sheet-swap-btn"
-                                        onClick={() => {
-                                            void tapHaptic()
-                                            openTool(swap.target)
-                                        }}
-                                    >
-                                        <ArrowLeftRight size={14} strokeWidth={2.2} aria-hidden />
-                                        <span>Swap to {swap.targetDirection}</span>
-                                    </button>
-                                </div>
+                            ) : (
+                                <div />
                             )}
+                            <button
+                                type="button"
+                                className="mobile-sheet-swap-btn"
+                                onClick={() => {
+                                    void tapHaptic()
+                                    openTool(swap.target)
+                                }}
+                            >
+                                <ArrowLeftRight size={14} strokeWidth={2.2} aria-hidden />
+                                <span>Swap to {swap.targetDirection}</span>
+                            </button>
+                        </div>
+                    )}
 
-                            {/* Sheet Body (Tool Workspace) */}
-                            <div className="mobile-sheet-body">
-                                {ActiveComponent ? (
-                                    <ActiveComponent />
-                                ) : (
-                                    <div className="p-8 text-center text-slate-500">
-                                        <p>Loading tool options...</p>
-                                    </div>
-                                )}
-                            </div>
-                        </motion.div>
-                    </motion.div>
+                    <div className="mobile-sheet-body">{body}</div>
                 </div>
-            )}
-        </AnimatePresence>
+            </div>
+        </div>
     )
 }

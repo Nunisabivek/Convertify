@@ -13,6 +13,7 @@ import { isConverting, subscribeConverting } from '@/lib/jobs/session'
 import { closeResultSheet, isResultSheetOpen } from '@/lib/result-sheet'
 import { mobileRouteTitle } from '@/lib/document-title'
 import MobileToolSheet from '@/components/mobile/MobileToolSheet'
+import MobileLaunchSplash from '@/components/mobile/MobileLaunchSplash'
 import { ToolSheetProvider, useToolSheet } from '@/components/mobile/ToolSheetContext'
 
 interface MobileLayoutProps {
@@ -236,6 +237,7 @@ function MobileLayoutInner({ children }: MobileLayoutProps) {
 
     const appContent = (
         <div className="mobile-app is-native">
+            <MobileLaunchSplash />
             <NativeResultSheet />
             <MobileToolSheet />
             <header className="mobile-top-bar">

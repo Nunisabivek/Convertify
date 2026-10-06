@@ -1,0 +1,53 @@
+﻿[ {
+   "description": "{\"attached\":true,\"empty\":false,\"height\":168,\"never_attached\":false,\"screenX\":0,\"screenY\":2232,\"visible\":true,\"width\":1078}",
+   "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@ce0f328d1efe65e6be766d7219387fff567ffdf5/inspector.html?ws=127.0.0.1:9222/devtools/page/49B580AFF17B2EC8E1CAE823D8B86A7F",
+   "faviconUrl": "https://googleads.g.doubleclick.net/favicon.ico",
+   "id": "49B580AFF17B2EC8E1CAE823D8B86A7F",
+   "title": "about:blank",
+   "type": "page",
+   "url": "about:blank",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/49B580AFF17B2EC8E1CAE823D8B86A7F"
+}, {
+   "description": "{\"attached\":true,\"empty\":false,\"height\":2400,\"never_attached\":false,\"screenX\":0,\"screenY\":0,\"visible\":true,\"width\":1080}",
+   "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@ce0f328d1efe65e6be766d7219387fff567ffdf5/inspector.html?ws=127.0.0.1:9222/devtools/page/0F872A4296F6E83052A84D1B8CF04F2D",
+   "id": "0F872A4296F6E83052A84D1B8CF04F2D",
+   "title": "Passport Photo: US 2├ù2, 630├ù810 &amp; Visa Sizes",
+   "type": "page",
+   "url": "https://localhost/passport-photo",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/0F872A4296F6E83052A84D1B8CF04F2D"
+}, {
+   "description": "{\"attached\":false,\"empty\":true,\"never_attached\":true,\"screenX\":0,\"screenY\":0,\"visible\":true}",
+   "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@ce0f328d1efe65e6be766d7219387fff567ffdf5/inspector.html?ws=127.0.0.1:9222/devtools/page/A391989F1A5E799E88557A019EEF2D53",
+   "faviconUrl": "https://googleads.g.doubleclick.net/favicon.ico",
+   "id": "A391989F1A5E799E88557A019EEF2D53",
+   "title": "googleads.g.doubleclick.net/mads/static/sdk/native/sdk-core-v40.html",
+   "type": "page",
+   "url": "https://googleads.g.doubleclick.net/mads/static/sdk/native/sdk-core-v40.html",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/A391989F1A5E799E88557A019EEF2D53"
+}, {
+   "description": "{\"attached\":false,\"empty\":true,\"never_attached\":true,\"screenX\":0,\"screenY\":0,\"visible\":true}",
+   "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@ce0f328d1efe65e6be766d7219387fff567ffdf5/inspector.html?ws=127.0.0.1:9222/devtools/page/5F84728F030781DF51296C16D90EB123",
+   "faviconUrl": "https://googleads.g.doubleclick.net/favicon.ico",
+   "id": "5F84728F030781DF51296C16D90EB123",
+   "title": "about:blank",
+   "type": "page",
+   "url": "about:blank",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/5F84728F030781DF51296C16D90EB123"
+}, {
+   "description": "{\"attached\":false,\"empty\":true,\"never_attached\":true,\"screenX\":0,\"screenY\":0,\"visible\":true}",
+   "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@ce0f328d1efe65e6be766d7219387fff567ffdf5/inspector.html?ws=127.0.0.1:9222/devtools/page/BE3F042FC51AD5143DA748EA0895301D",
+   "faviconUrl": "https://googleads.g.doubleclick.net/favicon.ico",
+   "id": "BE3F042FC51AD5143DA748EA0895301D",
+   "title": "googleads.g.doubleclick.net/mads/static/sdk/native/sdk-core-v40.html",
+   "type": "page",
+   "url": "https://googleads.g.doubleclick.net/mads/static/sdk/native/sdk-core-v40.html",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/BE3F042FC51AD5143DA748EA0895301D"
+}, {
+   "description": "",
+   "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@ce0f328d1efe65e6be766d7219387fff567ffdf5/inspector.html?ws=127.0.0.1:9222/devtools/page/C532FE12E2861078DDB7D346C34DE4D4",
+   "id": "C532FE12E2861078DDB7D346C34DE4D4",
+   "title": "",
+   "type": "worker",
+   "url": "",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/C532FE12E2861078DDB7D346C34DE4D4"
+} ]

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from 'next/link'
 import { ShieldCheck, WifiOff, Lock, ChevronRight } from 'lucide-react'
@@ -13,7 +13,7 @@ export default function MobileAboutPage() {
 
             <section className="mobile-about-card">
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-                    <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(2, 110, 255, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#026EFF' }}>
+                    <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(var(--md-primary-rgb), 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--md-primary)' }}>
                         <ShieldCheck size={18} strokeWidth={2.4} />
                     </div>
                     <h2 style={{ margin: 0, fontSize: 16, fontWeight: 600 }}>Your Files Stay Private</h2>
@@ -45,7 +45,7 @@ export default function MobileAboutPage() {
                 <p>
                     We respect your privacy. No account required, no sign-up, and zero tracking of your document contents.
                 </p>
-                <Link href="/privacy" className="mobile-about-link" style={{ display: 'inline-flex', alignItems: 'center', gap: 4, marginTop: 12, color: '#026EFF', fontWeight: 600, fontSize: 14 }}>
+                <Link href="/privacy" className="mobile-about-link" style={{ display: 'inline-flex', alignItems: 'center', gap: 4, marginTop: 12, color: 'var(--md-primary)', fontWeight: 600, fontSize: 14 }}>
                     <span>Read Privacy Policy</span>
                     <ChevronRight size={16} />
                 </Link>

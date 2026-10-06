@@ -56,6 +56,7 @@ android/.kotlin/
 android/app/build/
 *.apk
 *.aab
+!Convertify-Play/*.aab
 *.log
 build_log.txt
 

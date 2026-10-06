@@ -1,0 +1,4 @@
+Convertify Fiverr closed-test retest notes
+Build: main 85725ba; rebuilt mobile+assembleDebug; installed com.convertify.work
+AVD: ConvertifyTest / emulator-5554 API 16
+Assets: /sdcard/Pictures/portrait-man.jpg PRESENT; /sdcard/Download/sample.pdf PRESENT

@@ -32,6 +32,7 @@ export const ANDROID_V1_TOOL_IDS = [
     'add-page-numbers',
     'qr-code-generator',
     'autocad-pdf-editor',
+    'ocr-pdf',
 ] as const
 
 export type AndroidV1ToolId = (typeof ANDROID_V1_TOOL_IDS)[number]
@@ -42,12 +43,14 @@ const ANDROID_V1_SET = new Set<string>(ANDROID_V1_TOOL_IDS)
 export const ANDROID_QUICK_TOOL_IDS = [
     'fit-to-size',
     'passport-photo',
+    'ocr-pdf',
     'compress-pdf',
     'jpg-to-pdf',
     'pdf-to-jpg',
     'merge-pdf',
     'remove-background',
     'word-to-pdf',
+    'image-compressor',
 ] as const
 
 /** Extra phrases a non-technical person would type. */
@@ -95,6 +98,10 @@ const SEARCH_ALIASES: Record<string, string[]> = {
     'autocad-pdf-editor': [
         'edit pdf', 'fix pdf text', 'autocad', 'cad pdf', 'shx', 'label',
         'dimension', 'blueprint text', 'correct text', 'change text',
+    ],
+    'ocr-pdf': [
+        'scan', 'scanner', 'xerox', 'zerox', 'camscanner', 'ocr', 'camera to pdf',
+        'extract text', 'document scan', 'photocopy', 'filter',
     ],
 }
 
@@ -162,11 +169,14 @@ export const ANDROID_SHORT_NAMES: Record<string, string> = {
     'add-page-numbers': 'Page numbers',
     'qr-code-generator': 'QR code',
     'autocad-pdf-editor': 'Edit PDF text',
+    'ocr-pdf': 'Scan Document',
+    'scan-document': 'Scan Document',
 }
 
 export const ANDROID_QUICK_HINTS: Record<string, string> = {
     'fit-to-size': 'Hit the size a form wants',
     'passport-photo': 'US, India, visa, bank',
+    'ocr-pdf': 'Xerox filters, OCR & PDF',
     'compress-pdf': 'Small enough to upload',
     'jpg-to-pdf': 'Photos into one PDF',
     'pdf-to-jpg': 'Each page as a photo',
@@ -203,6 +213,7 @@ export const ANDROID_SHORT_DESCRIPTIONS: Record<string, string> = {
     'add-page-numbers': 'Add page numbers to a PDF.',
     'qr-code-generator': 'Make a QR code from a link or some text.',
     'autocad-pdf-editor': 'Correct labels and notes on AutoCAD-exported PDFs.',
+    'ocr-pdf': 'Scan camera photos to PDF with Xerox photocopy filters & OCR.',
 }
 
 export function shortToolDescription(tool: Tool): string {

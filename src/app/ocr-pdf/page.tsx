@@ -16,8 +16,6 @@ export const metadata: Metadata = {
     title: seoData.title,
     description: seoData.description,
     keywords: seoData.keywords,
-    // Noindex until the tool does what the query wants: there is no OCR engine, so scanned PDFs (the main intent) fail.
-    robots: { index: false, follow: true },
     alternates: {
         canonical: "https://convertify.work/ocr-pdf",
     },

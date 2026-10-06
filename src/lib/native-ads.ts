@@ -144,7 +144,8 @@ async function showBanner(plugin: AdMobModule): Promise<void> {
         // Visible in `adb logcat` (Capacitor/Console). Code 3 = no fill: the AdMob
         // app/account is not approved yet, app-ads.txt is missing, or low demand.
         console.warn('[AdMob] banner failed to load', err?.code, err?.message)
-        if (holds.size === 0) setBannerInset(0)
+        // Keep reserved space so UI never jumps or shifts
+        setBannerInset(lastBannerHeight)
     })
     // Typical phone adaptive-banner row until SizeChanged reports the real height.
     setBannerInset(lastBannerHeight)
@@ -156,10 +157,6 @@ async function showBanner(plugin: AdMobModule): Promise<void> {
         isTesting: false,
     })
     bannerLaidOut = true
-    if (holds.size > 0) {
-        await plugin.AdMob.hideBanner().catch(() => {})
-        setBannerInset(lastBannerHeight)
-    }
 }
 
 async function applyHolds(): Promise<void> {
@@ -262,6 +259,80 @@ function tryShowInterstitial(): void {
             interstitialReady = false
             if (admob) void prepareInterstitial(admob)
         })
+}
+
+/**
+ * Show interstitial ad immediately after conversion succeeds (if ready & allowed).
+ * Resolves when the user closes the ad (or if failed/not loaded), so the result
+ * screen showing where the file is saved can be revealed smoothly afterwards.
+ */
+export async function showInterstitialAfterConversion(): Promise<void> {
+    if (!adsAllowed()) return
+    const plugin = await loadPlugin()
+    if (!plugin) return
+
+    const now = Date.now()
+    if (now - lastNoteAt < NOTE_DEBOUNCE_MS) return
+    lastNoteAt = now
+
+    const gate = readGate()
+    gate.conversions += 1
+    writeGate(gate)
+
+    if (!shouldOfferInterstitial(gate, now)) return
+    if (!interstitialReady || interstitialShowing) return
+
+    return new Promise<void>((resolve) => {
+        let settled = false
+        const done = () => {
+            if (settled) return
+            settled = true
+            resolve()
+        }
+
+        const timer = setTimeout(done, 10000)
+
+        const subDismiss = plugin.AdMob.addListener(
+            plugin.InterstitialAdPluginEvents.Dismissed,
+            () => {
+                cleanup()
+                void plugin.AdMob.resumeBanner().catch(() => {})
+                done()
+            },
+        )
+        const subFail = plugin.AdMob.addListener(
+            plugin.InterstitialAdPluginEvents.FailedToShow,
+            () => {
+                cleanup()
+                void plugin.AdMob.resumeBanner().catch(() => {})
+                done()
+            },
+        )
+
+        const cleanup = () => {
+            clearTimeout(timer)
+            subDismiss.then((h) => h.remove()).catch(() => {})
+            subFail.then((h) => h.remove()).catch(() => {})
+        }
+
+        interstitialShowing = true
+        interstitialReady = false
+
+        plugin.AdMob.showInterstitial()
+            .then(() => {
+                const shown = readGate()
+                shown.lastShownAt = Date.now()
+                shown.conversionsAtLastShow = shown.conversions
+                writeGate(shown)
+            })
+            .catch(() => {
+                interstitialShowing = false
+                interstitialReady = false
+                cleanup()
+                done()
+                if (admob) void prepareInterstitial(admob)
+            })
+    })
 }
 
 /**

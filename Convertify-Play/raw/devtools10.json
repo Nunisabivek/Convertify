@@ -1,0 +1,46 @@
+﻿[ {
+   "description": "{\"attached\":true,\"empty\":false,\"height\":180,\"never_attached\":false,\"screenX\":0,\"screenY\":1260,\"visible\":true,\"width\":2560}",
+   "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@ce0f328d1efe65e6be766d7219387fff567ffdf5/inspector.html?ws=127.0.0.1:9222/devtools/page/49A8F09CA4632B453AFB2EAF248C851F",
+   "faviconUrl": "https://googleads.g.doubleclick.net/favicon.ico",
+   "id": "49A8F09CA4632B453AFB2EAF248C851F",
+   "title": "about:blank",
+   "type": "page",
+   "url": "about:blank",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/49A8F09CA4632B453AFB2EAF248C851F"
+}, {
+   "description": "{\"attached\":false,\"empty\":true,\"never_attached\":true,\"screenX\":0,\"screenY\":0,\"visible\":true}",
+   "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@ce0f328d1efe65e6be766d7219387fff567ffdf5/inspector.html?ws=127.0.0.1:9222/devtools/page/B50EC3D8D907B7276956FFCD020A854B",
+   "faviconUrl": "https://googleads.g.doubleclick.net/favicon.ico",
+   "id": "B50EC3D8D907B7276956FFCD020A854B",
+   "title": "about:blank",
+   "type": "page",
+   "url": "about:blank",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/B50EC3D8D907B7276956FFCD020A854B"
+}, {
+   "description": "{\"attached\":false,\"empty\":true,\"never_attached\":true,\"screenX\":0,\"screenY\":0,\"visible\":true}",
+   "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@ce0f328d1efe65e6be766d7219387fff567ffdf5/inspector.html?ws=127.0.0.1:9222/devtools/page/290E5DCB6595ED5A73E55034B6DDF6C5",
+   "faviconUrl": "https://googleads.g.doubleclick.net/favicon.ico",
+   "id": "290E5DCB6595ED5A73E55034B6DDF6C5",
+   "title": "googleads.g.doubleclick.net/mads/static/sdk/native/sdk-core-v40.html",
+   "type": "page",
+   "url": "https://googleads.g.doubleclick.net/mads/static/sdk/native/sdk-core-v40.html",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/290E5DCB6595ED5A73E55034B6DDF6C5"
+}, {
+   "description": "{\"attached\":false,\"empty\":true,\"never_attached\":true,\"screenX\":0,\"screenY\":0,\"visible\":true}",
+   "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@ce0f328d1efe65e6be766d7219387fff567ffdf5/inspector.html?ws=127.0.0.1:9222/devtools/page/3E1B70BD20981605A7B8185A872AAC81",
+   "faviconUrl": "https://googleads.g.doubleclick.net/favicon.ico",
+   "id": "3E1B70BD20981605A7B8185A872AAC81",
+   "title": "googleads.g.doubleclick.net/mads/static/sdk/native/sdk-core-v40.html",
+   "type": "page",
+   "url": "https://googleads.g.doubleclick.net/mads/static/sdk/native/sdk-core-v40.html",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/3E1B70BD20981605A7B8185A872AAC81"
+}, {
+   "description": "{\"attached\":true,\"empty\":false,\"height\":1440,\"never_attached\":false,\"screenX\":0,\"screenY\":0,\"visible\":true,\"width\":2560}",
+   "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@ce0f328d1efe65e6be766d7219387fff567ffdf5/inspector.html?ws=127.0.0.1:9222/devtools/page/F7A910846947E68752DAE10DC3426A13",
+   "id": "F7A910846947E68752DAE10DC3426A13",
+   "title": "Convertify — Free Online PDF Tools, No Upload",
+   "type": "page",
+   "url": "https://localhost/",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/F7A910846947E68752DAE10DC3426A13"
+} ]
+
