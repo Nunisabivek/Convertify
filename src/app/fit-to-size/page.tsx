@@ -14,6 +14,7 @@ import { uniqueToolSeo } from '@/lib/unique-tools-seo'
 import { allIndexableBlogPosts } from '@/lib/blog-data'
 import { getBlogPostsForTool } from '@/lib/tool-blog-mapping'
 import { toolDocumentTitle } from '@/lib/document-title'
+import { InToolPlayStoreCallout, ToolFrontPlayBadge } from '@/components/ui/google-play-badge'
 
 const webTitle = 'Fit Photo or PDF to 20–50KB or Any Exact Size'
 const description =
@@ -102,6 +103,7 @@ export default function Page() {
                         Set a minimum and a maximum; Convertify compresses until the file
                         lands inside that window. Nothing is uploaded.
                     </p>
+                    <ToolFrontPlayBadge toolName="Fit to Size" />
                 </div>
                 <AnswerBlock
                     question="How do I make a photo or PDF land between 20–50 KB or 100–200 KB?"
@@ -109,6 +111,10 @@ export default function Page() {
                 />
                 <FitToSizeClient />
             </section>
+
+            <div className="w-full max-w-4xl px-4 mx-auto">
+                <InToolPlayStoreCallout toolName="Fit to Size" />
+            </div>
 
             <section className="w-full max-w-3xl mx-auto px-4 py-10 text-slate-700 leading-relaxed space-y-4">
                 <h2 className="text-2xl font-bold text-slate-900">When a compressor overshoots the floor</h2>

@@ -1,6 +1,7 @@
 
 import { Metadata } from "next"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
+import { ToolFrontPlayBadge } from "@/components/ui/google-play-badge"
 import MergePdfClient from "./client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import MobileToolFrame from "@/components/mobile/MobileToolFrame"
@@ -106,6 +107,7 @@ export default function Page() {
                             Drag, Drop &amp; Combine PDFs Instantly
                         </div>
                     </div>
+                    <ToolFrontPlayBadge toolName="PDF Merger" />
                 </div>
                 <ToolSwapper />
                 <MergePdfClient />

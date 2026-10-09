@@ -36,7 +36,7 @@ import {
 import { InternalLinkMap } from "@/components/seo/internal-link-map";
 import { AdBanner } from "@/components/ads/banner";
 import { blogPosts } from "@/lib/blog-data";
-import { GooglePlayButton } from "@/components/ui/google-play-badge";
+import { GooglePlayButton, InToolPlayStoreCallout } from "@/components/ui/google-play-badge";
 
 // Organized tool categories like ilovePDF
 const toolCategories = [
@@ -462,6 +462,11 @@ export default function WebHomePage() {
                     </Link>
                 </div>
             </section>
+
+            {/* In-Page Google Play Promotion */}
+            <div className="w-full max-w-7xl px-4 mx-auto my-4">
+                <InToolPlayStoreCallout />
+            </div>
 
             {/* Latest Guides Section - NEW for SEO */}
             <section className="w-full max-w-6xl px-4 py-16">

@@ -1,5 +1,6 @@
 ﻿import { Metadata } from "next"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
+import { InToolPlayStoreCallout } from "@/components/ui/google-play-badge"
 import WebpConverterClient from "./client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import MobileToolFrame from "@/components/mobile/MobileToolFrame"
@@ -45,6 +46,10 @@ export default function Page() {
                 <ToolSwapper />
                 <WebpConverterClient />
             </section>
+
+            <div className="w-full max-w-4xl px-4 mx-auto">
+                <InToolPlayStoreCallout />
+            </div>
 
             <HowToSchema
                 toolName="Convert Images to/from WebP"

@@ -14,6 +14,7 @@ import { uniqueToolSeo } from '@/lib/unique-tools-seo'
 import { allIndexableBlogPosts } from '@/lib/blog-data'
 import { getBlogPostsForTool } from '@/lib/tool-blog-mapping'
 import { toolDocumentTitle } from '@/lib/document-title'
+import { InToolPlayStoreCallout } from '@/components/ui/google-play-badge'
 
 const webTitle = 'Remove Photo Background for Passport & ID — Free'
 const description =
@@ -105,6 +106,10 @@ export default function Page() {
                 />
                 <RemoveBackgroundClient />
             </section>
+
+            <div className="w-full max-w-4xl px-4 mx-auto">
+                <InToolPlayStoreCallout toolName="Background Replacer" />
+            </div>
 
             <section className="w-full max-w-3xl mx-auto px-4 py-10 text-slate-700 leading-relaxed space-y-4">
                 <h2 className="text-2xl font-bold text-slate-900">What it does — and what it does not</h2>

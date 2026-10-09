@@ -59,18 +59,31 @@ export function Header() {
                     </a>
                 </nav>
 
-                {/* Mobile Menu Button */}
-                <button
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
-                    aria-label="Toggle menu"
-                >
-                    {isMobileMenuOpen ? (
-                        <X className="w-6 h-6 text-slate-700" />
-                    ) : (
-                        <Menu className="w-6 h-6 text-slate-700" />
-                    )}
-                </button>
+                {/* Mobile Right Controls: Google Play Badge + Menu Toggle */}
+                <div className="flex md:hidden items-center gap-2">
+                    <a
+                        href={PLAY_STORE_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950 hover:bg-slate-900 active:scale-95 text-white text-xs font-bold shadow-xs transition-all border border-slate-800"
+                        aria-label="Get Convertify on Google Play"
+                    >
+                        <GooglePlayIcon className="w-4 h-4 shrink-0" />
+                        <span>Play Store</span>
+                    </a>
+
+                    <button
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+                        aria-label="Toggle menu"
+                    >
+                        {isMobileMenuOpen ? (
+                            <X className="w-6 h-6 text-slate-700" />
+                        ) : (
+                            <Menu className="w-6 h-6 text-slate-700" />
+                        )}
+                    </button>
+                </div>
             </div>
 
             {/* Mobile Navigation Dropdown */}

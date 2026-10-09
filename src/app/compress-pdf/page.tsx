@@ -19,6 +19,7 @@ import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 import { allIndexableBlogPosts } from "@/lib/blog-data"
 import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
+import { ToolFrontPlayBadge } from "@/components/ui/google-play-badge"
 
 const seoData = toolSeoData["compress-pdf"]
 const contentData = toolContentData["compress-pdf"]
@@ -85,6 +86,7 @@ export default function Page() {
                         Hit <b>100KB or 200KB</b> for form uploads, or stay under <b>10MB / Gmail’s 25MB</b> for email.
                         Multi-pass compression runs in this browser — the file is never uploaded.
                     </p>
+                    <ToolFrontPlayBadge toolName="PDF Compressor" />
                 </div>
                 <AnswerBlock
                     question="How do I compress a PDF to 100KB, 200KB, or a size Gmail will accept?"

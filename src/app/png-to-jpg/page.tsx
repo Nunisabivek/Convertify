@@ -1,5 +1,6 @@
 ﻿import { Metadata } from "next"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
+import { InToolPlayStoreCallout } from "@/components/ui/google-play-badge"
 import PngToJpgClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { HowToSchema } from "@/components/seo/howto-schema"
@@ -34,6 +35,10 @@ export default function Page() {
                 <ToolSwapper />
                 <PngToJpgClient />
             </section>
+
+            <div className="w-full max-w-4xl px-4 mx-auto">
+                <InToolPlayStoreCallout />
+            </div>
 
             <HowToSchema
                 toolName="Convert PNG to JPG"

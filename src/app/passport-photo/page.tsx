@@ -14,6 +14,7 @@ import { uniqueToolSeo } from '@/lib/unique-tools-seo'
 import { allIndexableBlogPosts } from '@/lib/blog-data'
 import { getBlogPostsForTool } from '@/lib/tool-blog-mapping'
 import { toolDocumentTitle } from '@/lib/document-title'
+import { InToolPlayStoreCallout, ToolFrontPlayBadge } from '@/components/ui/google-play-badge'
 
 const webTitle = 'Passport Photo: US 2×2, 630×810 & Visa Sizes'
 const description =
@@ -100,6 +101,7 @@ export default function Page() {
                         land inside the KB cap. Output is a JPEG on your device — not an official
                         pose check.
                     </p>
+                    <ToolFrontPlayBadge toolName="Passport Photo Maker" />
                 </div>
                 <AnswerBlock
                     question="What size is a US 2×2 passport photo versus India 630×810?"
@@ -107,6 +109,10 @@ export default function Page() {
                 />
                 <PassportPhotoClient />
             </section>
+
+            <div className="w-full max-w-4xl px-4 mx-auto">
+                <InToolPlayStoreCallout toolName="Passport Photo Maker" />
+            </div>
 
             <section className="w-full max-w-3xl mx-auto px-4 py-10 text-slate-700 leading-relaxed space-y-4">
                 <h2 className="text-2xl font-bold text-slate-900">Presets this tool actually outputs</h2>

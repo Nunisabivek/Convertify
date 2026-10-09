@@ -1,5 +1,6 @@
 ﻿import { Metadata } from "next"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
+import { InToolPlayStoreCallout } from "@/components/ui/google-play-badge"
 import ImageCompressorClient from "./client"
 import ImageCompressMobile from "./mobile-client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
@@ -46,6 +47,10 @@ export default function Page() {
                 <ToolSwapper />
                 <ImageCompressorClient />
             </section>
+
+            <div className="w-full max-w-4xl px-4 mx-auto">
+                <InToolPlayStoreCallout />
+            </div>
 
             <HowToSchema
                 toolName="Compress Images"

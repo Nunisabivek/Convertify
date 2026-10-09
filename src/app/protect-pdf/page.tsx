@@ -8,6 +8,7 @@ import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { RelatedTools } from "@/components/seo/related-tools"
 import { RelatedUseCases } from "@/components/seo/related-use-cases"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
+import { InToolPlayStoreCallout } from "@/components/ui/google-play-badge"
 import { toolSeoData } from "@/lib/seo-data"
 
 const seoData = toolSeoData["protect-pdf"]
@@ -67,6 +68,10 @@ export default function Page() {
                 <ToolSwapper />
                 <ProtectPdfClient />
             </section>
+
+            <div className="w-full max-w-4xl px-4 mx-auto">
+                <InToolPlayStoreCallout />
+            </div>
 
             {seoData.howToSteps && (
                 <HowToSchema

@@ -9,6 +9,7 @@ import { RelatedTools } from "@/components/seo/related-tools"
 import { RelatedUseCases } from "@/components/seo/related-use-cases"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import { toolSeoData } from "@/lib/seo-data"
+import { InToolPlayStoreCallout, ToolFrontPlayBadge } from "@/components/ui/google-play-badge"
 
 const seoData = toolSeoData["ocr-pdf"]
 
@@ -62,10 +63,15 @@ export default function Page() {
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
                         {seoData.description}
                     </p>
+                    <ToolFrontPlayBadge toolName="OCR & Scanner" />
                 </div>
                 <ToolSwapper />
                 <OcrPdfClient />
             </section>
+
+            <div className="w-full max-w-4xl px-4 mx-auto">
+                <InToolPlayStoreCallout toolName="OCR & Scanner" />
+            </div>
 
             {seoData.howToSteps && (
                 <HowToSchema

@@ -1,6 +1,7 @@
 import { CheckCircle, Shield, Zap, Globe, FileCheck } from 'lucide-react';
 import { TonicNativeBanner } from '@/components/ads/banner';
 import { toolBenefits } from '@/lib/tool-benefits';
+import { InToolPlayStoreCallout } from '@/components/ui/google-play-badge';
 
 interface ToolContentProps {
     toolName: string;
@@ -31,6 +32,9 @@ export function ToolSeoContent({
     return (
         <section className="w-full bg-white py-12 px-4">
             <div className="max-w-4xl mx-auto">
+                {/* Google Play In-Tool Promotion */}
+                <InToolPlayStoreCallout toolName={toolName} className="mb-12" />
+
                 {/* Rich Description Section */}
                 <div className="mb-12">
                     <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">

@@ -40,6 +40,7 @@ import { Metadata } from "next"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import { MobileToolsDashboard } from "@/components/mobile"
 import { appDocumentTitle, MOBILE_TOOLS_TITLE } from "@/lib/document-title"
+import { InToolPlayStoreCallout } from "@/components/ui/google-play-badge"
 
 export const metadata: Metadata = {
     title: appDocumentTitle("All Free PDF Tools | Convertify - No Pricing, No Download, 100% Free", MOBILE_TOOLS_TITLE),
@@ -226,6 +227,9 @@ export default function AllToolsPage() {
                     </div>
                 ))}
             </div>
+
+            {/* In-Page Google Play Promotion */}
+            <InToolPlayStoreCallout className="my-10" />
 
             {/* SEO Content Section - Combat thin content */}
             <section className="mt-16 bg-gradient-to-br from-slate-50 to-indigo-50 rounded-2xl p-8 md:p-12">
