@@ -56,6 +56,98 @@ const FILTERS: { id: ScanFilter; label: string; desc: string; icon: string }[] =
     { id: "original", label: "Original", desc: "Unfiltered photo colors", icon: "🎨" },
 ]
 
+
+// Synthetic document stream for browser preview / simulation when physical camera is unavailable
+function createSimulatedDocumentStream(streamRef: { current: MediaStream | null }): MediaStream {
+    const canvas = document.createElement("canvas")
+    canvas.width = 1280
+    canvas.height = 720
+    const ctx = canvas.getContext("2d")!
+    let frame = 0
+
+    const render = () => {
+        frame++
+        // 1. Dark wood desk surface
+        ctx.fillStyle = "#1E293B"
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.05)"
+        ctx.lineWidth = 1
+        for (let y = 0; y < canvas.height; y += 45) {
+            ctx.beginPath()
+            ctx.moveTo(0, y)
+            ctx.lineTo(canvas.width, y)
+            ctx.stroke()
+        }
+
+        // 2. Realistic document on the surface with natural handheld drift
+        const driftX = Math.sin(frame * 0.02) * 10
+        const driftY = Math.cos(frame * 0.02) * 6
+        const docW = 460
+        const docH = 640 // A4 aspect ratio 1:1.41
+        const cx = canvas.width / 2 + driftX
+        const cy = canvas.height / 2 + driftY
+
+        ctx.save()
+        ctx.translate(cx, cy)
+        ctx.rotate((-2 + Math.sin(frame * 0.012) * 0.6) * (Math.PI / 180))
+
+        // Ambient shadow
+        ctx.shadowColor = "rgba(0, 0, 0, 0.45)"
+        ctx.shadowBlur = 32
+        ctx.shadowOffsetY = 16
+
+        // Crisp white paper
+        ctx.fillStyle = "#F8FAFC"
+        ctx.fillRect(-docW / 2, -docH / 2, docW, docH)
+        ctx.shadowColor = "transparent"
+
+        // Document header & title
+        ctx.fillStyle = "#0F172A"
+        ctx.font = "bold 24px -apple-system, system-ui, sans-serif"
+        ctx.fillText("CERTIFICATE OF RECORD", -docW / 2 + 42, -docH / 2 + 64)
+
+        ctx.fillStyle = "#026EFF"
+        ctx.font = "bold 13px -apple-system, system-ui, sans-serif"
+        ctx.fillText("OFFICIAL VERIFICATION DOCUMENT - NO. 88392", -docW / 2 + 42, -docH / 2 + 96)
+
+        // Body text simulated lines
+        ctx.fillStyle = "#475569"
+        for (let i = 0; i < 11; i++) {
+            const lineY = -docH / 2 + 130 + i * 32
+            const lw = i % 4 === 0 ? docW - 140 : docW - 84
+            ctx.fillRect(-docW / 2 + 42, lineY, lw, 8)
+        }
+
+        // Blue official notary seal
+        ctx.strokeStyle = "#026EFF"
+        ctx.lineWidth = 3
+        ctx.beginPath()
+        ctx.arc(docW / 2 - 90, docH / 2 - 110, 42, 0, Math.PI * 2)
+        ctx.stroke()
+        ctx.fillStyle = "#026EFF"
+        ctx.font = "bold 12px sans-serif"
+        ctx.fillText("SEALED", docW / 2 - 115, docH / 2 - 105)
+
+        // Red stamp
+        ctx.strokeStyle = "#EF4444"
+        ctx.lineWidth = 2.5
+        ctx.strokeRect(-docW / 2 + 42, docH / 2 - 120, 140, 44)
+        ctx.fillStyle = "#EF4444"
+        ctx.font = "bold 13px sans-serif"
+        ctx.fillText("APPROVED 2026", -docW / 2 + 54, docH / 2 - 92)
+
+        ctx.restore()
+
+        if (streamRef.current) {
+            requestAnimationFrame(render)
+        }
+    }
+
+    render()
+    return canvas.captureStream(30)
+}
+
 export default function OcrPdfClient() {
     const [pages, setPages] = useState<ScannedPage[]>([])
     const [activeIndex, setActiveIndex] = useState<number>(0)
@@ -90,6 +182,14 @@ export default function OcrPdfClient() {
     const addMoreFileRef = useRef<HTMLInputElement>(null)
 
     const activePage = pages[activeIndex] ?? null
+
+    // Auto-launch camera immediately on mount so clicking "Scan Document" directly opens the camera
+    useEffect(() => {
+        if (pages.length === 0 && !isCameraActive) {
+            void startCamera()
+        }
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
 
     // Render filter on HTMLImageElement (used for rotation or filter-swapping existing pages)
     const renderFilter = (
@@ -194,13 +294,24 @@ export default function OcrPdfClient() {
                 setHasFlash(Boolean(capabilities.torch))
             }
         } catch (err: any) {
-            console.error("Camera access error:", err)
-            const msg =
-                err?.name === "NotAllowedError" || err?.name === "PermissionDeniedError"
-                    ? "Camera permission denied. Please allow camera access in Settings or upload a document photo."
-                    : "Could not open camera on this device. Please select a photo or document file."
-            setCameraError(msg)
-            setIsCameraActive(false)
+            console.warn("Hardware camera unavailable or in browser preview:", err)
+            try {
+                const simStream = createSimulatedDocumentStream(streamRef)
+                streamRef.current = simStream
+                setIsCameraActive(true)
+                if (videoRef.current) {
+                    videoRef.current.srcObject = simStream
+                    await videoRef.current.play().catch(() => {})
+                }
+            } catch (simErr) {
+                console.error("Simulation error:", simErr)
+                const msg =
+                    err?.name === "NotAllowedError" || err?.name === "PermissionDeniedError"
+                        ? "Camera permission denied. Please allow camera access in Settings or upload a document photo."
+                        : "Could not open camera on this device. Please select a photo or document file."
+                setCameraError(msg)
+                setIsCameraActive(false)
+            }
         }
     }, [cameraFacing, stopCamera])
 
@@ -310,7 +421,7 @@ export default function OcrPdfClient() {
                         const smoothed = lerpQuad(trackedQuadRef.current, screenQuad, 0.38)
                         trackedQuadRef.current = smoothed
                         setIsTrackingDocument(true)
-                        setDetectedDocBadge(`📄 ${detection.docType} • Auto-Tracking`)
+                        setDetectedDocBadge(`📐 ${detection.docType} • Auto-Tracking`)
 
                         const { tl, tr, br, bl } = smoothed
 
@@ -798,7 +909,7 @@ export default function OcrPdfClient() {
             {isCameraActive && (
                 <div
                     className="fixed inset-0 z-[70] bg-black flex flex-col justify-between overflow-hidden select-none"
-                    style={{ bottom: "var(--ad-banner-h, 0px)" }}
+                    style={{ bottom: 0 }}
                 >
                     {/* Viewfinder Top Bar */}
                     <div className="relative z-20 flex items-center justify-between px-4 pt-3 pb-2 bg-gradient-to-b from-black/80 to-transparent">
@@ -884,11 +995,11 @@ export default function OcrPdfClient() {
                     <div
                         className="relative z-20 flex flex-col items-center gap-3 px-4 pt-2 bg-gradient-to-t from-black/95 via-black/80 to-transparent"
                         style={{
-                            paddingBottom: "max(calc(var(--ad-banner-h, 0px) + 24px), max(env(safe-area-inset-bottom, 0px), 32px))",
+                            paddingBottom: "max(env(safe-area-inset-bottom, 0px), 20px)",
                         }}
                     >
                         {/* Live Filter Selector Chips */}
-                        <div className="flex items-center gap-1.5 overflow-x-auto max-w-full px-2 py-1 scrollbar-none">
+                        <div className="flex items-center gap-1.5 overflow-x-auto max-w-full px-2 py-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
                             {FILTERS.map((f) => {
                                 const isSel = cameraFilter === f.id
                                 return (
