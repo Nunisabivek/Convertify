@@ -25,8 +25,8 @@ Phone screenshots (need at least 2; upload all 6):
 These are 1080 x 2160, 24-bit PNG, no transparency. Phone listing only is enough. Skip tablet/TV.
 
 App bundle (.aab) for upload:
-  C:\Users\nunis\Downloads\Convertify-Play\Convertify-1.2.1.aab
-  (signed release bundle; Version: 1.2.1 / VersionCode: 6; package com.convertify.work; CONTAINS AdMob ads)
+  C:\Users\nunis\Downloads\Convertify-Play\Convertify-1.2.2.aab
+  (signed release bundle; Version: 1.2.2 / VersionCode: 7; package com.convertify.work; CONTAINS AdMob ads)
 
 ========================================
 STORE LISTING TEXT (paste)

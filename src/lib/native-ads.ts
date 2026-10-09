@@ -36,7 +36,14 @@ let lastBannerHeight = 50
 let bannerLaidOut = false
 
 function adsAllowed(): boolean {
-    return IS_MOBILE_BUILD && typeof window !== 'undefined'
+    if (typeof window === 'undefined') return false
+    if (IS_MOBILE_BUILD) return true
+    try {
+        const cap = (window as unknown as { Capacitor?: { isNativePlatform?: () => boolean } }).Capacitor
+        return typeof cap?.isNativePlatform === 'function' && cap.isNativePlatform()
+    } catch {
+        return false
+    }
 }
 
 function readGate(): InterstitialGate {
@@ -110,53 +117,124 @@ function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
     })
 }
 
-async function maybeRequestConsent(plugin: AdMobModule): Promise<boolean> {
+async function maybeRequestConsent(plugin: AdMobModule): Promise<void> {
     try {
-        let info = await withTimeout(plugin.AdMob.requestConsentInfo(), 5000)
-        if (info.isConsentFormAvailable && info.status === plugin.AdmobConsentStatus.REQUIRED) {
-            info = await withTimeout(plugin.AdMob.showConsentForm(), 15000)
+        const info = await withTimeout(plugin.AdMob.requestConsentInfo(), 6000)
+        if (info?.status === plugin.AdmobConsentStatus.REQUIRED || info?.isConsentFormAvailable) {
+            await withTimeout(plugin.AdMob.showConsentForm(), 15000)
         }
-        return info.canRequestAds !== false
-    } catch {
-        // UMP missing or slow - never block the shell. Fail open for ads.
-        return true
+    } catch (err) {
+        // UMP optional / missing / outside EEA. Fail open: never block ad initialization.
+        console.warn('[AdMob] UMP consent completed or bypassed:', err)
     }
 }
 
+let interstitialRetryTimer: ReturnType<typeof setTimeout> | null = null
+let interstitialRetryCount = 0
+const MAX_INTERSTITIAL_RETRIES = 12
+
+function scheduleInterstitialRetry(plugin: AdMobModule): void {
+    if (interstitialRetryTimer || interstitialReady || interstitialShowing) return
+    if (interstitialRetryCount >= MAX_INTERSTITIAL_RETRIES) return
+    interstitialRetryCount++
+    const delayMs = Math.min(60000, 20000 * Math.pow(1.4, interstitialRetryCount - 1))
+    interstitialRetryTimer = setTimeout(() => {
+        interstitialRetryTimer = null
+        void prepareInterstitial(plugin)
+    }, delayMs)
+}
+
 async function prepareInterstitial(plugin: AdMobModule): Promise<void> {
-    interstitialReady = false
+    if (interstitialReady || interstitialShowing) return
     try {
         await plugin.AdMob.prepareInterstitial({
             adId: INTERSTITIAL_AD_UNIT_ID,
             isTesting: false,
         })
         interstitialReady = true
-    } catch {
+        interstitialRetryCount = 0
+        if (interstitialRetryTimer) {
+            clearTimeout(interstitialRetryTimer)
+            interstitialRetryTimer = null
+        }
+    } catch (err) {
         interstitialReady = false
+        console.warn('[AdMob] prepareInterstitial failed (will auto-retry):', err)
+        scheduleInterstitialRetry(plugin)
     }
 }
 
+let bannerRetryTimer: ReturnType<typeof setTimeout> | null = null
+let bannerRetryCount = 0
+const MAX_BANNER_RETRIES = 12
+
+function scheduleBannerRetry(plugin: AdMobModule): void {
+    if (bannerRetryTimer) return
+    if (bannerRetryCount >= MAX_BANNER_RETRIES) return
+    bannerRetryCount++
+    const delayMs = Math.min(60000, 15000 * Math.pow(1.4, bannerRetryCount - 1))
+    console.log(`[AdMob] scheduling banner retry #${bannerRetryCount} in ${Math.round(delayMs / 1000)}s`)
+    bannerRetryTimer = setTimeout(async () => {
+        bannerRetryTimer = null
+        try {
+            await plugin.AdMob.showBanner({
+                adId: BANNER_AD_UNIT_ID,
+                adSize: plugin.BannerAdSize.ADAPTIVE_BANNER,
+                position: plugin.BannerAdPosition.BOTTOM_CENTER,
+                margin: 0,
+                isTesting: false,
+            })
+            bannerLaidOut = true
+            bannerRetryCount = 0
+        } catch {
+            scheduleBannerRetry(plugin)
+        }
+    }, delayMs)
+}
+
 async function showBanner(plugin: AdMobModule): Promise<void> {
-    await plugin.AdMob.addListener(plugin.BannerAdPluginEvents.SizeChanged, (size) => {
-        onBannerSize(size?.height ?? 0)
-    })
-    await plugin.AdMob.addListener(plugin.BannerAdPluginEvents.FailedToLoad, (err) => {
-        // Visible in `adb logcat` (Capacitor/Console). Code 3 = no fill: the AdMob
-        // app/account is not approved yet, app-ads.txt is missing, or low demand.
-        console.warn('[AdMob] banner failed to load', err?.code, err?.message)
-        // Keep reserved space so UI never jumps or shifts
+    await plugin.AdMob.addListener(plugin.BannerAdPluginEvents.Loaded, () => {
+        bannerLaidOut = true
+        bannerRetryCount = 0
+        if (bannerRetryTimer) {
+            clearTimeout(bannerRetryTimer)
+            bannerRetryTimer = null
+        }
         setBannerInset(lastBannerHeight)
     })
-    // Typical phone adaptive-banner row until SizeChanged reports the real height.
-    setBannerInset(lastBannerHeight)
-    await plugin.AdMob.showBanner({
-        adId: BANNER_AD_UNIT_ID,
-        adSize: plugin.BannerAdSize.ADAPTIVE_BANNER,
-        position: plugin.BannerAdPosition.BOTTOM_CENTER,
-        margin: 0,
-        isTesting: false,
+    await plugin.AdMob.addListener(plugin.BannerAdPluginEvents.SizeChanged, (size) => {
+        const h = size?.height ?? 0
+        if (h > 0) {
+            bannerLaidOut = true
+            bannerRetryCount = 0
+        }
+        onBannerSize(h)
     })
-    bannerLaidOut = true
+    await plugin.AdMob.addListener(plugin.BannerAdPluginEvents.FailedToLoad, (err) => {
+        // Visible in logcat. Code 3 = no fill: pending review, app-ads.txt crawling, or low demand.
+        console.warn('[AdMob] banner failed to load (will auto-retry)', err?.code, err?.message)
+        bannerLaidOut = false
+        // When not loaded, collapse empty space so UI doesn't have an empty gap
+        setBannerInset(0)
+        scheduleBannerRetry(plugin)
+    })
+    // Start with typical phone adaptive-banner row until size or failure resolves
+    setBannerInset(lastBannerHeight)
+    try {
+        await plugin.AdMob.showBanner({
+            adId: BANNER_AD_UNIT_ID,
+            adSize: plugin.BannerAdSize.ADAPTIVE_BANNER,
+            position: plugin.BannerAdPosition.BOTTOM_CENTER,
+            margin: 0,
+            isTesting: false,
+        })
+        bannerLaidOut = true
+    } catch (err) {
+        console.warn('[AdMob] initial showBanner call failed:', err)
+        bannerLaidOut = false
+        setBannerInset(0)
+        scheduleBannerRetry(plugin)
+    }
 }
 
 async function applyHolds(): Promise<void> {
@@ -192,13 +270,16 @@ async function startNativeAdsInternal(): Promise<void> {
     const plugin = await loadPlugin()
     if (!plugin) return
 
+    // 1. Gather consent if required (fail-open, non-blocking)
+    await maybeRequestConsent(plugin)
+
+    // 2. Initialize AdMob SDK
     await plugin.AdMob.initialize({
         // Production/Play: never register test devices or force test creatives.
         initializeForTesting: false,
     })
-    const canRequest = await maybeRequestConsent(plugin)
-    if (!canRequest) return
 
+    // 3. Setup interstitial event listeners
     await plugin.AdMob.addListener(plugin.InterstitialAdPluginEvents.Dismissed, () => {
         interstitialShowing = false
         interstitialReady = false
@@ -210,21 +291,23 @@ async function startNativeAdsInternal(): Promise<void> {
         void prepareInterstitial(plugin)
     })
     await plugin.AdMob.addListener(plugin.InterstitialAdPluginEvents.FailedToLoad, (err) => {
-        console.warn('[AdMob] interstitial failed to load', err?.code, err?.message)
+        console.warn('[AdMob] interstitial failed to load (will auto-retry)', err?.code, err?.message)
         interstitialReady = false
+        scheduleInterstitialRetry(plugin)
     })
     await plugin.AdMob.addListener(plugin.InterstitialAdPluginEvents.Loaded, () => {
         interstitialReady = true
+        interstitialRetryCount = 0
+        if (interstitialRetryTimer) {
+            clearTimeout(interstitialRetryTimer)
+            interstitialRetryTimer = null
+        }
     })
 
-    try {
-        await showBanner(plugin)
-    } catch {
-        setBannerInset(0)
-        bannerLaidOut = false
-    }
+    // 4. Request banner
+    await showBanner(plugin)
 
-    // Prefetch in the background so a later convert can show without waiting.
+    // 5. Prefetch interstitial in the background
     void prepareInterstitial(plugin)
 }
 
@@ -280,7 +363,11 @@ export async function showInterstitialAfterConversion(): Promise<void> {
     writeGate(gate)
 
     if (!shouldOfferInterstitial(gate, now)) return
-    if (!interstitialReady || interstitialShowing) return
+    if (!interstitialReady || interstitialShowing) {
+        // Interstitial was not ready yet; prefetch now so subsequent conversions have one ready
+        void prepareInterstitial(plugin)
+        return
+    }
 
     return new Promise<void>((resolve) => {
         let settled = false
@@ -290,7 +377,8 @@ export async function showInterstitialAfterConversion(): Promise<void> {
             resolve()
         }
 
-        const timer = setTimeout(done, 10000)
+        // 35s safety timer to accommodate 15-30s video interstitials
+        const timer = setTimeout(done, 35000)
 
         const subDismiss = plugin.AdMob.addListener(
             plugin.InterstitialAdPluginEvents.Dismissed,
@@ -358,7 +446,10 @@ export function noteSuccessfulConversion(): void {
         return
     }
     if (!shouldOfferInterstitial(gate, now)) return
-    if (!interstitialReady || interstitialShowing) return
+    if (!interstitialReady || interstitialShowing) {
+        void prepareInterstitial(plugin)
+        return
+    }
     interstitialQueued = true
     tryShowInterstitial()
 }
