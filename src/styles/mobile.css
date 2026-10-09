@@ -1984,6 +1984,8 @@ html.is-converting .mobile-work-track-bar {
     background: #f2f2f7;
     display: flex;
     flex-direction: column;
+    transform: translateZ(0);
+    contain: paint;
   }
 
   .mobile-android-screen .mobile-app {
