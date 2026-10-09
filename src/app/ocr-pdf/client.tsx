@@ -180,9 +180,11 @@ export default function OcrPdfClient() {
             }
 
             streamRef.current = stream
+            setIsCameraActive(true)
+
             if (videoRef.current) {
                 videoRef.current.srcObject = stream
-                await videoRef.current.play()
+                await videoRef.current.play().catch(() => {})
             }
 
             // Check torch / flash capability
@@ -191,8 +193,6 @@ export default function OcrPdfClient() {
                 const capabilities = (videoTrack.getCapabilities?.() || {}) as any
                 setHasFlash(Boolean(capabilities.torch))
             }
-
-            setIsCameraActive(true)
         } catch (err: any) {
             console.error("Camera access error:", err)
             const msg =
@@ -203,6 +203,14 @@ export default function OcrPdfClient() {
             setIsCameraActive(false)
         }
     }, [cameraFacing, stopCamera])
+
+    // Ensure video element receives stream immediately when viewfinder mounts
+    useEffect(() => {
+        if (isCameraActive && videoRef.current && streamRef.current) {
+            videoRef.current.srcObject = streamRef.current
+            void videoRef.current.play().catch(() => {})
+        }
+    }, [isCameraActive])
 
     // Toggle camera torch / flash
     const toggleFlash = async () => {
@@ -441,7 +449,7 @@ export default function OcrPdfClient() {
 
     // Capture current frame, perspective-warp the tracked document, apply filter, and add page
     const handleCaptureFrame = async () => {
-        if (!videoRef.current || videoRef.current.readyState < 2) return
+        if (!videoRef.current) return
 
         void tapHaptic("medium")
 
@@ -788,7 +796,10 @@ export default function OcrPdfClient() {
                 1. LIVE CAMERA VIEWFINDER WITH REAL-TIME EDGE AUTO-TRACKING
                ========================================================================= */}
             {isCameraActive && (
-                <div className="fixed inset-0 z-50 bg-black flex flex-col justify-between overflow-hidden select-none" style={{ bottom: "var(--ad-banner-h, 0px)" }}>
+                <div
+                    className="fixed inset-0 z-[70] bg-black flex flex-col justify-between overflow-hidden select-none"
+                    style={{ bottom: "var(--ad-banner-h, 0px)" }}
+                >
                     {/* Viewfinder Top Bar */}
                     <div className="relative z-20 flex items-center justify-between px-4 pt-3 pb-2 bg-gradient-to-b from-black/80 to-transparent">
                         <button
@@ -844,7 +855,13 @@ export default function OcrPdfClient() {
                     {/* Viewfinder Video Stream & Real-time Canvas Tracking Overlay */}
                     <div className="relative flex-1 w-full h-full flex items-center justify-center overflow-hidden bg-black">
                         <video
-                            ref={videoRef}
+                            ref={(el) => {
+                                videoRef.current = el
+                                if (el && streamRef.current && el.srcObject !== streamRef.current) {
+                                    el.srcObject = streamRef.current
+                                    void el.play().catch(() => {})
+                                }
+                            }}
                             playsInline
                             muted
                             autoPlay
@@ -864,7 +881,12 @@ export default function OcrPdfClient() {
                     </div>
 
                     {/* Viewfinder Bottom Controls */}
-                    <div className="relative z-20 flex flex-col items-center gap-3 px-4 pt-2 pb-4 bg-gradient-to-t from-black/90 via-black/70 to-transparent">
+                    <div
+                        className="relative z-20 flex flex-col items-center gap-3 px-4 pt-2 bg-gradient-to-t from-black/95 via-black/80 to-transparent"
+                        style={{
+                            paddingBottom: "max(calc(var(--ad-banner-h, 0px) + 24px), max(env(safe-area-inset-bottom, 0px), 32px))",
+                        }}
+                    >
                         {/* Live Filter Selector Chips */}
                         <div className="flex items-center gap-1.5 overflow-x-auto max-w-full px-2 py-1 scrollbar-none">
                             {FILTERS.map((f) => {
@@ -898,7 +920,7 @@ export default function OcrPdfClient() {
                                 onClick={() => fileInputRef.current?.click()}
                                 className="flex flex-col items-center gap-1 text-white/80 active:scale-90 transition cursor-pointer text-[11px] font-medium"
                             >
-                                <div className="p-3 rounded-full bg-white/15 backdrop-blur-md">
+                                <div className="p-3 rounded-full bg-white/15 backdrop-blur-md hover:bg-white/25 transition">
                                     <Upload className="w-5 h-5 text-white" />
                                 </div>
                                 <span>Upload</span>
@@ -908,7 +930,7 @@ export default function OcrPdfClient() {
                             <button
                                 type="button"
                                 onClick={handleCaptureFrame}
-                                className="relative flex items-center justify-center w-20 h-20 rounded-full bg-white/20 p-1.5 active:scale-95 transition cursor-pointer shadow-2xl"
+                                className="relative flex items-center justify-center w-20 h-20 rounded-full bg-white/20 p-1.5 active:scale-90 transition-transform duration-100 cursor-pointer shadow-2xl hover:bg-white/30"
                                 aria-label="Capture Document"
                             >
                                 <div className="w-full h-full rounded-full bg-white border-4 border-emerald-500 flex items-center justify-center shadow-inner">
