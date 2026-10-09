@@ -37,6 +37,7 @@ const ACTION_ICONS: Record<string, LucideIcon> = {
     'qr-code-generator': QrCode,
     'autocad-pdf-editor': FilePenLine,
     'ocr-pdf': ScanLine,
+    'scan-document': ScanLine,
 }
 
 function ConvertBadgeGlyph({ from, to }: { from: string; to: string }) {

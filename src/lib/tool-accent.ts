@@ -47,6 +47,7 @@ const ACCENTS: Record<string, ToolAccent> = {
     'pdf-to-word': 'blue',
     'qr-code-generator': 'pink',
     'ocr-pdf': 'teal',
+    'scan-document': 'teal',
 }
 
 export function toolAccent(toolId: string): ToolAccent {
