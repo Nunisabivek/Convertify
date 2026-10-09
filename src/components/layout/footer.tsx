@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { GooglePlayButton } from "@/components/ui/google-play-badge"
 
 // Every indexable tool page is linked from here, so every page on the site
 // passes link equity to every tool. ocr-pdf and pdf-to-pdfa are deliberately
@@ -114,6 +115,17 @@ export function Footer() {
                         <ul className="space-y-2 text-sm text-slate-600">
                             <li><Link href="/all-tools" className={`${linkClass} font-medium`}>All Tools</Link></li>
                             <li><Link href="/blog" className={linkClass}>Blog & Guides</Link></li>
+                            <li>
+                                <a
+                                    href="https://play.google.com/store/apps/details?id=com.convertify.work"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={`${linkClass} font-semibold text-emerald-600 flex items-center gap-1.5`}
+                                >
+                                    <span>Android App</span>
+                                    <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-emerald-100 text-emerald-800 font-bold">Google Play</span>
+                                </a>
+                            </li>
                             <li><Link href="/about" className={linkClass}>About</Link></li>
                             <li><Link href="/pricing" className={linkClass}>Pricing</Link></li>
                             <li><Link href="/security" className={linkClass}>Security</Link></li>
@@ -130,6 +142,9 @@ export function Footer() {
                         <div className="flex items-center gap-3">
                             <span className="text-xl font-bold text-indigo-950">Convertify</span>
                             <span className="text-sm text-slate-500">Free PDF Tools</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                            <GooglePlayButton size="sm" />
                         </div>
                         <p className="text-center text-sm text-slate-500">
                             © 2026 Convertify. All rights reserved. Made with ❤️ for everyone.

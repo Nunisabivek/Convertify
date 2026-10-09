@@ -36,6 +36,7 @@ import {
 import { InternalLinkMap } from "@/components/seo/internal-link-map";
 import { AdBanner } from "@/components/ads/banner";
 import { blogPosts } from "@/lib/blog-data";
+import { GooglePlayButton } from "@/components/ui/google-play-badge";
 
 // Organized tool categories like ilovePDF
 const toolCategories = [
@@ -390,6 +391,14 @@ export default function WebHomePage() {
                         <FileStack className="w-4 h-4" />
                         No Watermarks
                     </div>
+                </div>
+
+                {/* Official Google Play Store Button */}
+                <div className="flex flex-col items-center justify-center mt-6">
+                    <GooglePlayButton size="default" className="shadow-lg hover:shadow-blue-500/10" />
+                    <span className="text-xs text-slate-500 mt-2 font-medium">
+                        Also available on Android • 100% Free & Private
+                    </span>
                 </div>
             </section>
 

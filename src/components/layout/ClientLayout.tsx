@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { AdBanner } from "@/components/ads/banner";
 import { JsonLd } from "@/components/seo/json-ld";
+import { PlayStoreBanner } from "@/components/ui/google-play-badge";
 import { usePathname } from "next/navigation";
 
 const FULL_WIDTH_ROUTES = ["/autocad-pdf-editor"];
@@ -31,6 +32,10 @@ export default function ClientLayout({
 
                 <main className="flex-1 min-w-0 pb-16 md:pb-20">
                     {children}
+
+                    <div className="container max-w-5xl mx-auto px-4 mt-12 mb-4">
+                        <PlayStoreBanner />
+                    </div>
                 </main>
 
                 {!isFullWidth && (

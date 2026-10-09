@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
 import { Menu, X, Grid3x3, BookOpen, Shield } from "lucide-react"
+import { GooglePlayIcon, PLAY_STORE_URL } from "@/components/ui/google-play-badge"
 
 export function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -46,6 +47,16 @@ export function Header() {
                         <Shield className="w-4 h-4" />
                         Security
                     </Link>
+                    <a
+                        href={PLAY_STORE_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-950 hover:bg-slate-900 active:scale-95 text-white text-xs font-semibold shadow-xs transition-all border border-slate-800"
+                        aria-label="Convertify on Google Play Store"
+                    >
+                        <GooglePlayIcon className="w-4 h-4" />
+                        <span>Google Play</span>
+                    </a>
                 </nav>
 
                 {/* Mobile Menu Button */}
@@ -99,6 +110,19 @@ export function Header() {
                                 <p className="text-xs text-slate-500">How we protect your files</p>
                             </div>
                         </Link>
+                        <a
+                            href={PLAY_STORE_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="flex items-center gap-3 p-3 rounded-xl bg-slate-950 text-white transition-colors shadow-sm"
+                        >
+                            <GooglePlayIcon className="w-5 h-5 shrink-0" />
+                            <div>
+                                <span className="font-bold text-sm text-white">Convertify on Google Play</span>
+                                <p className="text-xs text-slate-300">Free Android app with offline scanner</p>
+                            </div>
+                        </a>
                         <div className="border-t mt-2 pt-4">
                             <p className="text-xs text-slate-500 px-3">Popular Tools</p>
                             <div className="grid grid-cols-2 gap-2 mt-2">
