@@ -44,7 +44,7 @@ function ConvertBadgeGlyph({ from, to }: { from: string; to: string }) {
     return (
         <span className="mobile-convert-glyph" aria-hidden>
             <span className="mobile-convert-from">{from}</span>
-            <span className="mobile-convert-arrow">â†“</span>
+            <span className="mobile-convert-arrow">↓</span>
             <span className="mobile-convert-to">{to}</span>
         </span>
     )

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
@@ -89,7 +89,7 @@ export default function MobileToolsDashboard() {
                         {results.length === 0 ? (
                             <div className="mobile-empty-line" style={{ borderRadius: 20, textAlign: 'center', padding: '24px 16px' }}>
                                 <p style={{ margin: 0, fontWeight: 600, color: '#000000', fontSize: 15 }}>No Matching Tools</p>
-                                <p style={{ margin: '4px 0 0', fontSize: 13, color: '#6c6c70' }}>Try searching â€œmergeâ€, â€œcompressâ€, or â€œpassportâ€.</p>
+                                <p style={{ margin: '4px 0 0', fontSize: 13, color: '#6c6c70' }}>Try searching &ldquo;merge&rdquo;, &ldquo;compress&rdquo;, or &ldquo;passport&rdquo;.</p>
                             </div>
                         ) : (
                             results.map((tool) => (

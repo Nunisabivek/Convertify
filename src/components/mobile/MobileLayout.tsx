@@ -90,24 +90,34 @@ function MobileLayoutInner({ children }: MobileLayoutProps) {
     const converting = useSyncExternalStore(subscribeConverting, isConverting, () => false)
     const [isDesktop, setIsDesktop] = useState(false)
     const [showFrame, setShowFrame] = useState(true)
+    const [isNative, setIsNative] = useState(false)
+    const [simulatedInterstitialOpen, setSimulatedInterstitialOpen] = useState(false)
 
     useEffect(() => {
-        const checkDesktop = async () => {
+        const checkPlatform = async () => {
             try {
                 const { Capacitor } = await import('@capacitor/core')
-                if (!Capacitor.isNativePlatform() && window.innerWidth >= 860) {
+                const native = Capacitor.isNativePlatform()
+                setIsNative(native)
+                if (!native && window.innerWidth >= 860) {
                     setIsDesktop(true)
                 }
             } catch {
                 if (window.innerWidth >= 860) setIsDesktop(true)
             }
         }
-        void checkDesktop()
+        void checkPlatform()
         const onResize = () => {
             setIsDesktop(window.innerWidth >= 860)
         }
         window.addEventListener('resize', onResize)
         return () => window.removeEventListener('resize', onResize)
+    }, [])
+
+    useEffect(() => {
+        const handleSimulatedInterstitial = () => setSimulatedInterstitialOpen(true)
+        window.addEventListener('simulated-interstitial-show', handleSimulatedInterstitial)
+        return () => window.removeEventListener('simulated-interstitial-show', handleSimulatedInterstitial)
     }, [])
 
     useEffect(() => {
@@ -283,6 +293,82 @@ function MobileLayoutInner({ children }: MobileLayoutProps) {
                     )
                 })}
             </nav>
+
+            {/* Simulated Native AdMob Banner for local browser & E2E verification */}
+            {!isNative && (
+                <div
+                    className="mobile-simulated-admob-banner"
+                    style={{
+                        position: 'fixed',
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        height: 'var(--ad-banner-h, 50px)',
+                        background: '#F8FAFC',
+                        borderTop: '0.5px solid rgba(0, 0, 0, 0.1)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        zIndex: 35,
+                        userSelect: 'none',
+                    }}
+                >
+                    <div className="flex items-center gap-2 px-3 py-1 rounded bg-white border border-slate-200/90 shadow-2xs">
+                        <span className="text-[10px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300">
+                            Ad
+                        </span>
+                        <span className="text-[11px] font-bold text-slate-700">
+                            Google AdMob Banner • 320×50
+                        </span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    </div>
+                </div>
+            )}
+
+            {/* Simulated Full-screen Interstitial Ad Modal for verification */}
+            {simulatedInterstitialOpen && (
+                <div
+                    className="fixed inset-0 z-[100] bg-slate-950 flex flex-col justify-between p-6 text-white animate-in fade-in duration-200 select-none"
+                    style={{ contain: 'paint' }}
+                >
+                    <div className="flex items-center justify-between pt-2">
+                        <span className="px-2 py-0.5 rounded bg-white/15 text-xs font-bold uppercase tracking-wider text-slate-300">
+                            Ad • Interstitial Preview
+                        </span>
+                        <button
+                            type="button"
+                            onClick={() => setSimulatedInterstitialOpen(false)}
+                            className="px-3 py-1.5 rounded-full bg-white/20 hover:bg-white/30 text-xs font-bold transition cursor-pointer flex items-center gap-1"
+                        >
+                            <span>Close</span>
+                            <span>✕</span>
+                        </button>
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center text-center space-y-4 my-auto">
+                        <div className="w-20 h-20 rounded-3xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center shadow-xl">
+                            <span className="text-3xl font-black text-white">Ad</span>
+                        </div>
+                        <div className="space-y-1">
+                            <h3 className="text-lg font-black text-white">Google AdMob Interstitial</h3>
+                            <p className="text-xs text-white/70 max-w-xs">
+                                Displays automatically after file conversions & downloads before showing the result sheet.
+                            </p>
+                        </div>
+                        <button
+                            type="button"
+                            onClick={() => setSimulatedInterstitialOpen(false)}
+                            className="px-6 py-2.5 rounded-2xl bg-white text-slate-950 font-bold text-xs shadow-lg active:scale-95 transition cursor-pointer"
+                        >
+                            Return to Convertify
+                        </button>
+                    </div>
+
+                    <div className="text-center text-[10px] text-white/40 pb-2">
+                        Unit: ca-app-pub-4814181825408625/8929949749
+                    </div>
+                </div>
+            )}
         </div>
     )
 
@@ -338,6 +424,22 @@ function MobileLayoutInner({ children }: MobileLayoutProps) {
                                 <span>About & Privacy</span>
                                 <span className="mobile-dock-badge">Info</span>
                             </Link>
+                        </div>
+
+                        <div className="mobile-dock-section">
+                            <span className="mobile-dock-section-title">AdMob Live Verification</span>
+                            <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-slate-800/80 border border-slate-700/60 text-xs">
+                                <span className="text-slate-300 font-medium">Bottom Banner</span>
+                                <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold text-[10px]">Active (320×50)</span>
+                            </div>
+                            <button
+                                type="button"
+                                className="mobile-dock-btn"
+                                onClick={() => setSimulatedInterstitialOpen(true)}
+                            >
+                                <span>Trigger Interstitial Ad</span>
+                                <span className="mobile-dock-badge">Test Ad</span>
+                            </button>
                         </div>
 
                         <div className="mobile-dock-section">

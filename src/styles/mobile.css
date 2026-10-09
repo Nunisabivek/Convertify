@@ -1,5 +1,5 @@
 /**
- * Convertify Android app â€” simple light utility chrome.
+ * Convertify Android app — simple light utility chrome.
  * Website layout is unchanged; these rules only apply inside `.mobile-app`.
  */
 
@@ -1733,14 +1733,14 @@ body:has(.mobile-app),
 }
 
 .mobile-app .mobile-job-advanced summary::after {
-  content: "â–¾";
+  content: "▾";
   margin-left: auto;
   color: var(--md-on-surface-variant);
   font-weight: 500;
 }
 
 .mobile-app .mobile-job-advanced[open] summary::after {
-  content: "â–´";
+  content: "▴";
 }
 
 .mobile-app .mobile-job-advanced[open] summary {
