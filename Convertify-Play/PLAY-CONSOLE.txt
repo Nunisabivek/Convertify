@@ -15,18 +15,21 @@ Feature graphic (1024 x 500):
   C:\Users\nunis\Downloads\Convertify-Play\play-feature-1024x500.png
   (JPG copy also there if Console prefers JPG)
 
-Phone screenshots (need at least 2; upload all 6):
+Phone screenshots (need at least 2; upload all 8, in order):
   C:\Users\nunis\Downloads\Convertify-Play\01-home.png
   C:\Users\nunis\Downloads\Convertify-Play\02-tools.png
   C:\Users\nunis\Downloads\Convertify-Play\03-fit-to-size.png
   C:\Users\nunis\Downloads\Convertify-Play\04-passport.png
   C:\Users\nunis\Downloads\Convertify-Play\05-compress-pdf.png
   C:\Users\nunis\Downloads\Convertify-Play\06-about.png
-These are 1080 x 2160, 24-bit PNG, no transparency. Phone listing only is enough. Skip tablet/TV.
+  C:\Users\nunis\Downloads\Convertify-Play\07-scan-document.png
+  C:\Users\nunis\Downloads\Convertify-Play\08-done.png
+These are 1080 x 1920, 24-bit PNG, no transparency (v1.2.4 UI).
+Optional tablet shots, same folder: tablet-7-*.png (1920 x 1080) and tablet-10-*.png (2560 x 1440).
 
 App bundle (.aab) for upload:
-  C:\Users\nunis\Downloads\Convertify-Play\Convertify-1.2.2.aab
-  (signed release bundle; Version: 1.2.2 / VersionCode: 7; package com.convertify.work; CONTAINS AdMob ads)
+  C:\Users\nunis\Downloads\Convertify-Play\Convertify-1.2.4.aab
+  (signed release bundle; Version: 1.2.4 / VersionCode: 9; package com.convertify.work; CONTAINS AdMob ads)
 
 ========================================
 STORE LISTING TEXT (paste)
