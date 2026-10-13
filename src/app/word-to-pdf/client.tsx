@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
 import { FileText, Download, Loader2, ArrowLeft, AlertCircle } from "lucide-react"
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
+import { finishConvert } from "@/lib/native-file"
 
 async function buildPdfFromText(rawText: string): Promise<Blob> {
     const pdfDoc = await PDFDocument.create()
@@ -84,6 +86,10 @@ export default function WordToPdfPage() {
             ])
 
             const blob = await buildPdfFromText(textResult.value)
+            if (IS_MOBILE_BUILD) {
+                await finishConvert(blob, file.name.replace(/\.docx$/i, "") + ".pdf")
+                return
+            }
             setPdfUrl(URL.createObjectURL(blob))
             setHtmlPreview(htmlResult.value)
         } catch (err) {

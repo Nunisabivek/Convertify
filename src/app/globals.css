@@ -8,12 +8,15 @@ html {
   font-display: swap;
 }
 
-/* Prevent layout shifts */
-img,
-video,
-svg {
-  max-width: 100%;
-  height: auto;
+/* Prevent layout shifts. In the base layer so height utilities (h-full on the
+   scanner video, thumbnails) still win; unlayered, it silently overrode them. */
+@layer base {
+  img,
+  video,
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 /* Ensure fonts don't cause CLS */

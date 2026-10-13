@@ -4,6 +4,8 @@ import { useState, useEffect } from "react"
 import { PDFDocument } from "pdf-lib"
 import JSZip from "jszip"
 import { saveAs } from "file-saver"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
+import { finishConvert } from "@/lib/native-file"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
@@ -135,6 +137,11 @@ export default function SplitPdfPage() {
                     ? `${file.name.replace('.pdf', '')}-page-${pagesToExtract[0]}.pdf`
                     : `${file.name.replace('.pdf', '')}-extracted-${pagesToExtract.length}-pages.pdf`
 
+                if (IS_MOBILE_BUILD) {
+                    URL.revokeObjectURL(url)
+                    await finishConvert(blob, fileName)
+                    return
+                }
                 setDownloadUrl(url)
                 setDownloadName(fileName)
             }

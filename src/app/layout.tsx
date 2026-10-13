@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Rubik } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import AppShell from "@/components/layout/AppShell";
@@ -17,6 +17,20 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
 });
+
+// Android app face: rounded-corner geometric, chunky at 800. Not preloaded
+// (loader options must be literals); the app splash loads it explicitly, and
+// the website never references it, so it never downloads there.
+const rubik = Rubik({
+  variable: "--font-app",
+  subsets: ["latin"],
+  display: "swap",
+  preload: false,
+});
+
+// Runs before first paint: a relaunch within the same session skips the intro,
+// so the splash never flashes on reload.
+const LAUNCH_GUARD = "try{if(sessionStorage.getItem('convertify_splash_shown'))document.documentElement.setAttribute('data-launched','')}catch(e){}";
 
 // Website Schema
 const websiteSchema = {
@@ -128,8 +142,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={IS_MOBILE_BUILD}>
       <head>
+        {IS_MOBILE_BUILD && <script dangerouslySetInnerHTML={{ __html: LAUNCH_GUARD }} />}
         {/* Sitemap Link for Search Engines */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
@@ -175,7 +190,7 @@ export default function RootLayout({
         </>
       )}
       <body
-        className={`${IS_MOBILE_BUILD ? "" : inter.variable} antialiased min-h-screen flex flex-col ${IS_MOBILE_BUILD ? "mobile-root" : "bg-slate-50"}`}
+        className={`${IS_MOBILE_BUILD ? rubik.variable : inter.variable} antialiased min-h-screen flex flex-col ${IS_MOBILE_BUILD ? "mobile-root" : "bg-slate-50"}`}
       >
         <AppShell>
           {children}

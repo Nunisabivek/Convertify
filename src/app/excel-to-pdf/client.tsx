@@ -8,6 +8,8 @@ import { ProcessingWait } from "@/components/tools/processing-wait"
 import { Sheet, Download, Loader2, FileText } from "lucide-react"
 import * as XLSX from "xlsx"
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
+import { finishConvert } from "@/lib/native-file"
 
 export default function ExcelToPdfClient() {
     const [file, setFile] = useState<File | null>(null)
@@ -127,6 +129,10 @@ export default function ExcelToPdfClient() {
 
             const pdfBytes = await pdfDoc.save()
             const blob = new Blob([pdfBytes as BlobPart], { type: "application/pdf" })
+            if (IS_MOBILE_BUILD) {
+                await finishConvert(blob, (file?.name ?? "sheet.xlsx").replace(/\.(xlsx?|xls)$/i, ".pdf"))
+                return
+            }
             const url = URL.createObjectURL(blob)
             setDownloadUrl(url)
         } catch (e) {

@@ -57,7 +57,16 @@ const FILTERS: { id: ScanFilter; label: string; desc: string; icon: string }[] =
 ]
 
 
-// Synthetic document stream for browser preview / simulation when physical camera is unavailable
+/** Frames the edge outline survives without a detection, so it doesn't flicker. */
+const TRACK_GRACE_FRAMES = 8
+
+/** `object-fit: cover` mapping between video pixels and the element box. */
+function coverFit(vw: number, vh: number, ew: number, eh: number) {
+    const s = Math.max(ew / vw, eh / vh)
+    return { s, ox: (ew - vw * s) / 2, oy: (eh - vh * s) / 2 }
+}
+
+// Synthetic document stream for desktop previews with no webcam. Development only.
 function createSimulatedDocumentStream(streamRef: { current: MediaStream | null }): MediaStream {
     const canvas = document.createElement("canvas")
     canvas.width = 1280
@@ -165,7 +174,7 @@ export default function OcrPdfClient() {
     const [cameraError, setCameraError] = useState<string | null>(null)
     const [cameraFilter, setCameraFilter] = useState<ScanFilter>("xerox")
     const [shutterFlashing, setShutterFlashing] = useState<boolean>(false)
-    const [detectedDocBadge, setDetectedDocBadge] = useState<string>("Align document in frame")
+    const [detectedDocBadge, setDetectedDocBadge] = useState<string>("Fit the page inside the frame")
     const [isTrackingDocument, setIsTrackingDocument] = useState<boolean>(false)
 
     // Camera refs
@@ -294,8 +303,10 @@ export default function OcrPdfClient() {
                 setHasFlash(Boolean(capabilities.torch))
             }
         } catch (err: any) {
-            console.warn("Hardware camera unavailable or in browser preview:", err)
-            try {
+            const denied = err?.name === "NotAllowedError" || err?.name === "PermissionDeniedError"
+            // Never in a shipped build: someone who denied the camera must not get
+            // a fake document in the viewfinder that they can "scan" into a PDF.
+            if (!denied && process.env.NODE_ENV === "development") {
                 const simStream = createSimulatedDocumentStream(streamRef)
                 streamRef.current = simStream
                 setIsCameraActive(true)
@@ -303,15 +314,14 @@ export default function OcrPdfClient() {
                     videoRef.current.srcObject = simStream
                     await videoRef.current.play().catch(() => {})
                 }
-            } catch (simErr) {
-                console.error("Simulation error:", simErr)
-                const msg =
-                    err?.name === "NotAllowedError" || err?.name === "PermissionDeniedError"
-                        ? "Camera permission denied. Please allow camera access in Settings or upload a document photo."
-                        : "Could not open camera on this device. Please select a photo or document file."
-                setCameraError(msg)
-                setIsCameraActive(false)
+                return
             }
+            setCameraError(
+                denied
+                    ? "Camera access is off. Allow it in Settings, or upload a photo of the document."
+                    : "The camera couldn't be opened. Upload a photo or PDF instead."
+            )
+            setIsCameraActive(false)
         }
     }, [cameraFacing, stopCamera])
 
@@ -379,6 +389,14 @@ export default function OcrPdfClient() {
 
         let scanBeamPos = 0
         let scanBeamDir = 1
+        let misses = 0
+        let shownTracking = false
+        let shownBadge = ""
+        // Only touch React state when the value changes; this loop runs every frame.
+        const show = (tracking: boolean, badge: string) => {
+            if (tracking !== shownTracking) setIsTrackingDocument((shownTracking = tracking))
+            if (badge !== shownBadge) setDetectedDocBadge((shownBadge = badge))
+        }
 
         const loop = () => {
             if (!running) return
@@ -386,17 +404,23 @@ export default function OcrPdfClient() {
             const video = videoRef.current
             const overlay = overlayCanvasRef.current
 
-            if (video && overlay && video.readyState >= 2 && downCtx) {
-                // Ensure overlay canvas dimensions match video element rendered bounds
+            if (video && overlay && video.readyState >= 2 && video.videoWidth > 0 && downCtx) {
+                // Backing store at device pixels so the outline is sharp; draw in CSS px.
                 const rect = video.getBoundingClientRect()
-                if (overlay.width !== rect.width || overlay.height !== rect.height) {
-                    overlay.width = rect.width
-                    overlay.height = rect.height
+                const ew = rect.width
+                const eh = rect.height
+                const dpr = window.devicePixelRatio || 1
+                const bw = Math.round(ew * dpr)
+                const bh = Math.round(eh * dpr)
+                if (overlay.width !== bw || overlay.height !== bh) {
+                    overlay.width = bw
+                    overlay.height = bh
                 }
 
                 const oCtx = overlay.getContext("2d")
                 if (oCtx) {
-                    oCtx.clearRect(0, 0, overlay.width, overlay.height)
+                    oCtx.setTransform(dpr, 0, 0, dpr, 0, 0)
+                    oCtx.clearRect(0, 0, ew, eh)
 
                     // Draw video to downscaled canvas for edge analysis
                     downCtx.drawImage(video, 0, 0, DOWNSCALE_W, DOWNSCALE_H)
@@ -405,31 +429,40 @@ export default function OcrPdfClient() {
                     // Detect document quad in real time
                     const detection = detectDocumentQuad(imgData, DOWNSCALE_W, DOWNSCALE_H)
 
-                    const scaleX = overlay.width / DOWNSCALE_W
-                    const scaleY = overlay.height / DOWNSCALE_H
+                    // The video is shown with object-fit: cover, so map through the crop.
+                    const vw = video.videoWidth
+                    const vh = video.videoHeight
+                    const fit = coverFit(vw, vh, ew, eh)
+                    const toScreen = (pt: { x: number; y: number }) => ({
+                        x: ((pt.x * vw) / DOWNSCALE_W) * fit.s + fit.ox,
+                        y: ((pt.y * vh) / DOWNSCALE_H) * fit.s + fit.oy,
+                    })
 
                     if (detection) {
+                        misses = 0
                         latestDetectionRef.current = detection
                         const screenQuad: Quad = {
-                            tl: { x: detection.quad.tl.x * scaleX, y: detection.quad.tl.y * scaleY },
-                            tr: { x: detection.quad.tr.x * scaleX, y: detection.quad.tr.y * scaleY },
-                            br: { x: detection.quad.br.x * scaleX, y: detection.quad.br.y * scaleY },
-                            bl: { x: detection.quad.bl.x * scaleX, y: detection.quad.bl.y * scaleY },
+                            tl: toScreen(detection.quad.tl),
+                            tr: toScreen(detection.quad.tr),
+                            br: toScreen(detection.quad.br),
+                            bl: toScreen(detection.quad.bl),
                         }
+                        trackedQuadRef.current = lerpQuad(trackedQuadRef.current, screenQuad, 0.38)
+                        show(true, `${detection.docType} found`)
+                    } else if (++misses > TRACK_GRACE_FRAMES) {
+                        trackedQuadRef.current = null
+                        latestDetectionRef.current = null
+                    }
 
-                        // Apply LERP smoothing for smooth bounding box
-                        const smoothed = lerpQuad(trackedQuadRef.current, screenQuad, 0.38)
-                        trackedQuadRef.current = smoothed
-                        setIsTrackingDocument(true)
-                        setDetectedDocBadge(`📐 ${detection.docType} • Auto-Tracking`)
-
+                    const smoothed = trackedQuadRef.current
+                    if (smoothed) {
                         const { tl, tr, br, bl } = smoothed
 
                         // 1. Semi-transparent backdrop outside the tracked document
                         oCtx.save()
                         oCtx.fillStyle = "rgba(15, 23, 42, 0.42)"
                         oCtx.beginPath()
-                        oCtx.rect(0, 0, overlay.width, overlay.height)
+                        oCtx.rect(0, 0, ew, eh)
                         oCtx.moveTo(tl.x, tl.y)
                         oCtx.lineTo(bl.x, bl.y)
                         oCtx.lineTo(br.x, br.y)
@@ -519,19 +552,18 @@ export default function OcrPdfClient() {
                         oCtx.restore()
                     } else {
                         // Relax towards default guide frame
-                        setIsTrackingDocument(false)
-                        setDetectedDocBadge("Align document within frame")
+                        show(false, "Fit the page inside the frame")
 
-                        const padX = overlay.width * 0.12
-                        const padY = overlay.height * 0.12
-                        const gw = overlay.width - padX * 2
-                        const gh = overlay.height - padY * 2
+                        const padX = ew * 0.12
+                        const padY = eh * 0.12
+                        const gw = ew - padX * 2
+                        const gh = eh - padY * 2
 
                         // Subtle darkened mask outside guide area
                         oCtx.save()
                         oCtx.fillStyle = "rgba(15, 23, 42, 0.28)"
                         oCtx.beginPath()
-                        oCtx.rect(0, 0, overlay.width, overlay.height)
+                        oCtx.rect(0, 0, ew, eh)
                         oCtx.rect(padX, padY, gw, gh)
                         oCtx.fill("evenodd")
                         oCtx.restore()
@@ -586,12 +618,18 @@ export default function OcrPdfClient() {
                 bl: { x: det.quad.bl.x * sx, y: det.quad.bl.y * sy },
             }
         } else {
-            // Default 10% guide frame mapped to full video resolution
+            // No paper found: capture exactly the dashed guide the user sees,
+            // mapped back through the object-fit: cover crop.
+            const r = video.getBoundingClientRect()
+            const fit = coverFit(vw, vh, r.width, r.height)
+            const toVideo = (x: number, y: number) => ({ x: (x - fit.ox) / fit.s, y: (y - fit.oy) / fit.s })
+            const px = r.width * 0.12
+            const py = r.height * 0.12
             srcQuad = {
-                tl: { x: vw * 0.1, y: vh * 0.1 },
-                tr: { x: vw * 0.9, y: vh * 0.1 },
-                br: { x: vw * 0.9, y: vh * 0.9 },
-                bl: { x: vw * 0.1, y: vh * 0.9 },
+                tl: toVideo(px, py),
+                tr: toVideo(r.width - px, py),
+                br: toVideo(r.width - px, r.height - py),
+                bl: toVideo(px, r.height - py),
             }
         }
 
@@ -912,7 +950,10 @@ export default function OcrPdfClient() {
                     style={{ bottom: 0 }}
                 >
                     {/* Viewfinder Top Bar */}
-                    <div className="relative z-20 flex items-center justify-between px-4 pt-3 pb-2 bg-gradient-to-b from-black/80 to-transparent">
+                    <div
+                        className="relative z-20 flex items-center justify-between px-4 pb-2 bg-gradient-to-b from-black/80 to-transparent"
+                        style={{ paddingTop: "max(12px, var(--safe-area-inset-top, 0px))" }}
+                    >
                         <button
                             type="button"
                             onClick={() => {
@@ -995,7 +1036,7 @@ export default function OcrPdfClient() {
                     <div
                         className="relative z-20 flex flex-col items-center gap-3 px-4 pt-2 bg-gradient-to-t from-black/95 via-black/80 to-transparent"
                         style={{
-                            paddingBottom: "max(env(safe-area-inset-bottom, 0px), 20px)",
+                            paddingBottom: "max(var(--safe-area-inset-bottom, 0px), 20px)",
                         }}
                     >
                         {/* Live Filter Selector Chips */}
@@ -1010,7 +1051,7 @@ export default function OcrPdfClient() {
                                             void tapHaptic("light")
                                             setCameraFilter(f.id)
                                         }}
-                                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer backdrop-blur-md ${
+                                        className={`flex shrink-0 items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition cursor-pointer backdrop-blur-md ${
                                             isSel
                                                 ? "bg-white text-slate-950 shadow-md ring-2 ring-emerald-400 scale-105"
                                                 : "bg-black/40 text-white/80 border border-white/20 hover:bg-black/60"
@@ -1128,15 +1169,15 @@ export default function OcrPdfClient() {
                     <div className="grid grid-cols-3 gap-2 w-full max-w-md pt-3 border-t border-slate-100 text-left">
                         <div className="p-2">
                             <span className="text-xs font-bold text-emerald-700 block">📐 Auto-Edge Quad</span>
-                            <span className="text-[11px] text-slate-500">Tracks paper boundaries live</span>
+                            <span className="block text-[11px] leading-snug text-slate-500">Tracks paper boundaries live</span>
                         </div>
                         <div className="p-2">
                             <span className="text-xs font-bold text-teal-700 block">📄 Xerox Photocopy</span>
-                            <span className="text-[11px] text-slate-500">Crisp ink, removes shadows</span>
+                            <span className="block text-[11px] leading-snug text-slate-500">Crisp ink, removes shadows</span>
                         </div>
                         <div className="p-2">
                             <span className="text-xs font-bold text-blue-700 block">✨ Magic Color</span>
-                            <span className="text-[11px] text-slate-500">Retains blue ink & seals</span>
+                            <span className="block text-[11px] leading-snug text-slate-500">Retains blue ink & seals</span>
                         </div>
                     </div>
                 </div>
@@ -1301,14 +1342,16 @@ export default function OcrPdfClient() {
                                 <span>Save as PDF ({pages.length} {pages.length === 1 ? "page" : "pages"})</span>
                             </button>
 
+                            {pages.some((p) => p.extractedText) && (
                             <button
                                 type="button"
                                 onClick={handleExtractText}
                                 className="flex items-center justify-center gap-1.5 py-3 px-5 rounded-2xl bg-teal-50 hover:bg-teal-100 text-teal-900 font-bold text-sm border border-teal-200 border-b-[2.5px] border-b-teal-300 transition cursor-pointer"
                             >
                                 <ScanLine className="w-4 h-4 text-teal-600" />
-                                <span>Extract Text (OCR)</span>
+                                <span>Copy text</span>
                             </button>
+                            )}
                         </div>
                     </div>
 

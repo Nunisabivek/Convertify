@@ -257,7 +257,10 @@ function MobileLayoutInner({ children }: MobileLayoutProps) {
                     </button>
                 ) : (
                     <div className="mobile-top-bar-brand" aria-hidden>
-                        <span className="mobile-mark">C</span>
+                        <span className="mobile-mark">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src="/brand-c.webp" alt="" draggable={false} />
+                        </span>
                     </div>
                 )}
                 <div className="mobile-top-bar-title">
@@ -287,7 +290,9 @@ function MobileLayoutInner({ children }: MobileLayoutProps) {
                                 if (isResultSheetOpen()) closeResultSheet()
                             }}
                         >
-                            <AppIcon name={item.icon} className="mobile-nav-icon" size={22} />
+                            <span className="mobile-nav-pill">
+                                <AppIcon name={item.icon} className="mobile-nav-icon" size={22} />
+                            </span>
                             <span className="mobile-nav-label">{item.label}</span>
                         </Link>
                     )

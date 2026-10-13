@@ -5,6 +5,7 @@ import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { Globe, Download, Loader2, X } from "lucide-react"
 import JSZip from "jszip"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 
 type OutputFormat = 'webp' | 'jpg' | 'png'
 
@@ -42,7 +43,7 @@ export default function WebpConverterClient() {
             try {
                 const img = new window.Image()
                 img.src = URL.createObjectURL(file)
-                await new Promise((resolve) => { img.onload = resolve })
+                await new Promise((resolve, reject) => { img.onload = resolve; img.onerror = reject })
                 
                 const canvas = document.createElement('canvas')
                 canvas.width = img.width
@@ -90,18 +91,19 @@ export default function WebpConverterClient() {
         }
 
         setConverted(results)
+        if (IS_MOBILE_BUILD && results.length > 0) void downloadAll(results)
         setIsProcessing(false)
     }
 
-    const downloadAll = async () => {
-        if (converted.length === 1) {
+    const downloadAll = async (items = converted) => {
+        if (items.length === 1) {
             const a = document.createElement('a')
-            a.href = converted[0].url
-            a.download = converted[0].name
+            a.href = items[0].url
+            a.download = items[0].name
             a.click()
-        } else if (converted.length > 1) {
+        } else if (items.length > 1) {
             const zip = new JSZip()
-            for (const item of converted) {
+            for (const item of items) {
                 const response = await fetch(item.url)
                 const blob = await response.blob()
                 zip.file(item.name, blob)
@@ -123,7 +125,7 @@ export default function WebpConverterClient() {
                 </div>
                 <h2 className="text-2xl font-bold mb-4">Conversion Complete!</h2>
                 <p className="text-slate-500 mb-6">{converted.length} image{converted.length > 1 ? 's' : ''} converted to {outputFormat.toUpperCase()}</p>
-                <Button size="xl" onClick={downloadAll} className="bg-teal-600 hover:bg-teal-700 mb-4">
+                <Button size="xl" onClick={() => downloadAll()} className="bg-teal-600 hover:bg-teal-700 mb-4">
                     <Download className="mr-2 w-5 h-5" />
                     Download {converted.length > 1 ? 'All (ZIP)' : 'Image'}
                 </Button>

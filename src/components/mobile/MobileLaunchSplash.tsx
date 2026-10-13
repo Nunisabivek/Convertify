@@ -1,89 +1,132 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { Zap, ShieldCheck } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 
 const SPLASH_STORAGE_KEY = 'convertify_splash_shown'
+const WORD = 'Convertify'
+const CHIPS = ['PDF', 'JPG', 'DOC'] as const
 
+/** Intro length from the moment it starts playing. Matches the CSS timeline. */
+const HOLD_MS = 1620
+const HOLD_REDUCED_MS = 450
+const EXIT_MS = 440
+/** Never let a slow font hold the intro back for longer than this. */
+const FONT_WAIT_MS = 300
+
+type Phase = 'idle' | 'play' | 'leave' | 'done'
+
+/**
+ * First frame is the Android system splash (blue circle, white C, centred),
+ * so the native -> web handoff has no visible seam. Then: the circle squashes
+ * into the app tile, hops, lands, file chips pop out and get swallowed, the
+ * wordmark bounces in, and the tile flies into the top-bar logo.
+ * Rendered in the static HTML; `data-launched` (set before paint in layout)
+ * hides it on same-session reloads.
+ */
 export default function MobileLaunchSplash() {
-    const [mounted, setMounted] = useState(false)
-    const [isExiting, setIsExiting] = useState(false)
+    const [phase, setPhase] = useState<Phase>('idle')
+    const rootRef = useRef<HTMLDivElement>(null)
+    const flyRef = useRef<HTMLDivElement>(null)
+    const timers = useRef<number[]>([])
+
+    const later = (fn: () => void, ms: number) => {
+        timers.current.push(window.setTimeout(fn, ms))
+    }
+
+    const leave = () => {
+        timers.current.forEach(window.clearTimeout)
+        timers.current = []
+        try {
+            sessionStorage.setItem(SPLASH_STORAGE_KEY, 'true')
+        } catch {
+            // ignore
+        }
+        const root = rootRef.current
+        const fly = flyRef.current
+        const mark = document.querySelector('.mobile-top-bar .mobile-mark')
+        if (root && fly && mark) {
+            const a = fly.getBoundingClientRect()
+            const b = mark.getBoundingClientRect()
+            root.style.setProperty('--fly-x', `${b.left + b.width / 2 - (a.left + a.width / 2)}px`)
+            root.style.setProperty('--fly-y', `${b.top + b.height / 2 - (a.top + a.height / 2)}px`)
+            root.style.setProperty('--fly-s', `${b.width / a.width}`)
+        }
+        setPhase('leave')
+        later(() => setPhase('done'), EXIT_MS)
+    }
 
     useEffect(() => {
-        // Only run once per session so navigating tabs doesn't replay the intro
+        let seen = document.documentElement.hasAttribute('data-launched')
         try {
-            if (sessionStorage.getItem(SPLASH_STORAGE_KEY)) {
-                return
-            }
+            seen ||= Boolean(sessionStorage.getItem(SPLASH_STORAGE_KEY))
         } catch {
-            // ignore storage access errors
+            // ignore
+        }
+        if (seen) {
+            setPhase('done')
+            return
         }
 
-        setMounted(true)
-
-        // Begin smooth exit at 620ms
-        const exitTimer = window.setTimeout(() => {
-            setIsExiting(true)
-        }, 620)
-
-        // Fully unmount from DOM at 900ms
-        const unmountTimer = window.setTimeout(() => {
-            try {
-                sessionStorage.setItem(SPLASH_STORAGE_KEY, 'true')
-            } catch {
-                // ignore
-            }
-            setMounted(false)
-        }, 900)
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        let started = false
+        let cancelled = false
+        const start = () => {
+            if (started || cancelled) return
+            started = true
+            setPhase('play')
+            later(leave, reduced ? HOLD_REDUCED_MS : HOLD_MS)
+        }
+        // Wordmark letters bounce in; a font swap mid-bounce would jitter them.
+        const family = getComputedStyle(document.body).getPropertyValue('--font-app').trim()
+        if (family && document.fonts) {
+            document.fonts.load(`800 38px ${family}`).then(start, start)
+        } else {
+            start()
+        }
+        later(start, FONT_WAIT_MS)
 
         return () => {
-            window.clearTimeout(exitTimer)
-            window.clearTimeout(unmountTimer)
+            cancelled = true
+            timers.current.forEach(window.clearTimeout)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    if (!mounted) return null
-
-    const handleSkip = () => {
-        setIsExiting(true)
-        window.setTimeout(() => {
-            try {
-                sessionStorage.setItem(SPLASH_STORAGE_KEY, 'true')
-            } catch {
-                // ignore
-            }
-            setMounted(false)
-        }, 150)
-    }
+    if (phase === 'done') return null
 
     return (
         <div
-            className={`mobile-launch-splash${isExiting ? ' is-leaving' : ''}`}
-            onClick={handleSkip}
+            ref={rootRef}
+            className={`mobile-launch-splash${phase === 'idle' ? '' : ' is-playing'}${phase === 'leave' ? ' is-leaving' : ''}`}
+            onClick={() => phase === 'play' && leave()}
             role="presentation"
             aria-hidden="true"
         >
-            <div className="mobile-launch-content">
-                <div className="mobile-launch-mascot-wrapper">
-                    <div className="mobile-launch-mascot">
-                        <span className="mobile-launch-letter">C</span>
-                        <div className="mobile-launch-spark">
-                            <Zap size={14} strokeWidth={2.6} />
-                        </div>
-                    </div>
-                    <div className="mobile-launch-shadow" />
+            <div className="launch-bg" />
+            <div className="launch-scene">
+                <div className="launch-shadow" />
+                <div className="launch-chips">
+                    {CHIPS.map((label) => (
+                        <span key={label} className={`launch-chip is-${label.toLowerCase()}`}>
+                            <span className="launch-chip-tag">{label}</span>
+                        </span>
+                    ))}
                 </div>
-
-                <div className="mobile-launch-text">
-                    <h1 className="mobile-launch-title">Convertify</h1>
-                    <div className="mobile-launch-badge">
-                        <ShieldCheck size={13} strokeWidth={2.4} />
-                        <span>Fast • 100% Private • Offline</span>
-                    </div>
+                <div className="launch-word">
+                    {WORD.split('').map((ch, i) => (
+                        <span key={i} style={{ ['--i' as string]: i }}>
+                            {ch}
+                        </span>
+                    ))}
                 </div>
-
-                <div className="mobile-launch-loader">
-                    <div className="mobile-launch-progress" />
+                <p className="launch-tagline">Your files never leave this phone</p>
+            </div>
+            <div ref={flyRef} className="launch-fly">
+                <div className="launch-tile">
+                    <div className="launch-face">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img className="launch-c" src="/brand-c.webp" alt="" draggable={false} />
+                    </div>
                 </div>
             </div>
         </div>

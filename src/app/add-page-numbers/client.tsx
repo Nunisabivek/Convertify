@@ -2,6 +2,8 @@
 
 import { useState } from "react"
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
+import { finishConvert } from "@/lib/native-file"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
@@ -89,6 +91,10 @@ export default function AddPageNumbersClient() {
 
             const pdfBytes = await pdfDoc.save()
             const blob = new Blob([pdfBytes as any], { type: "application/pdf" })
+            if (IS_MOBILE_BUILD) {
+                await finishConvert(blob, `numbered-${files[0].name}`)
+                return
+            }
             const url = URL.createObjectURL(blob)
             setProcessedPdfUrl(url)
 

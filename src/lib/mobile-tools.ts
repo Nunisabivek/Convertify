@@ -176,7 +176,7 @@ export const ANDROID_SHORT_NAMES: Record<string, string> = {
 export const ANDROID_QUICK_HINTS: Record<string, string> = {
     'fit-to-size': 'Hit the size a form wants',
     'passport-photo': 'US, India, visa, bank',
-    'ocr-pdf': 'Xerox filters, OCR & PDF',
+    'ocr-pdf': 'Camera to clean PDF',
     'compress-pdf': 'Small enough to upload',
     'jpg-to-pdf': 'Photos into one PDF',
     'pdf-to-jpg': 'Each page as a photo',
@@ -213,7 +213,7 @@ export const ANDROID_SHORT_DESCRIPTIONS: Record<string, string> = {
     'add-page-numbers': 'Add page numbers to a PDF.',
     'qr-code-generator': 'Make a QR code from a link or some text.',
     'autocad-pdf-editor': 'Correct labels and notes on AutoCAD-exported PDFs.',
-    'ocr-pdf': 'Scan camera photos to PDF with Xerox photocopy filters & OCR.',
+    'ocr-pdf': 'Scan paper with the camera into a clean, photocopy-style PDF.',
 }
 
 export function shortToolDescription(tool: Tool): string {

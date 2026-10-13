@@ -31,6 +31,11 @@
         <item name="android:windowBackground">@color/convertify_surface</item>
         <item name="android:statusBarColor">@color/convertify_surface</item>
         <item name="android:windowLightStatusBar">true</item>
+        <!-- Explicit (the library default is the generic Android icon): adaptive
+             launcher icon = blue circle, white C, on white. The web splash's
+             first frame copies this exactly. -->
+        <item name="windowSplashScreenBackground">@color/convertify_surface</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
         <item name="postSplashScreenTheme">@style/AppTheme.NoActionBar</item>
     </style>
 </resources>

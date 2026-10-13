@@ -5,6 +5,8 @@ import { Download, Loader2, AlertCircle, Upload } from "lucide-react"
 import JSZip from "jszip"
 import { AdBanner } from "@/components/ads/banner"
 import { FileUploader } from "@/components/tools/file-uploader"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
+import { finishConvert } from "@/lib/native-file"
 
 function escapeXml(text: string) {
     return text
@@ -98,6 +100,10 @@ export default function PdfToWordClient() {
             }
 
             const blob = await buildDocx(pages)
+            if (IS_MOBILE_BUILD) {
+                await finishConvert(blob, file.name.replace(/\.pdf$/i, "") + ".docx")
+                return
+            }
             const url = URL.createObjectURL(blob)
             setConvertedUrl(url)
         } catch (err) {

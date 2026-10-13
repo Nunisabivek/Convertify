@@ -47,6 +47,7 @@ const KEEP_ROUTES = new Set([
   'convert-worker.js',
   '_next',
   'pdf.worker.min.mjs',
+  'brand-c.webp',
   'file.svg',
   'vercel.svg',
   'window.svg',

@@ -153,6 +153,7 @@ export default function MobileToolSheet() {
             <div
                 ref={slideRef}
                 className={`mobile-tool-sheet-slide accent-${toolAccent(activeToolId)}`}
+                data-tool={activeToolId}
                 role="dialog"
                 aria-modal="true"
                 aria-label={title}

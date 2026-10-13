@@ -5,6 +5,7 @@ import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { Smartphone, Download, Loader2, X } from "lucide-react"
 import JSZip from "jszip"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 
 interface ConvertedFile {
     original: File
@@ -42,7 +43,8 @@ export default function HeicToJpgClient() {
             for (let i = 0; i < files.length; i++) {
                 const file = files[i]
                 try {
-                    const result = await heic2any({
+                    // The picker allows any photo; an already-JPEG one needs no conversion.
+                    const result = file.type === "image/jpeg" ? file : await heic2any({
                         blob: file,
                         toType: "image/jpeg",
                         quality: 0.9
@@ -52,7 +54,7 @@ export default function HeicToJpgClient() {
                     results.push({
                         original: file,
                         url,
-                        name: file.name.replace(/\.heic$/i, '.jpg')
+                        name: file.name.replace(/\.hei[cf]$/i, '.jpg')
                     })
                 } catch (e) {
                     console.error('Error converting', file.name, e)
@@ -64,6 +66,7 @@ export default function HeicToJpgClient() {
                 setError("Could not convert files. Make sure they are valid HEIC images.")
             }
             setConverted(results)
+            if (IS_MOBILE_BUILD && results.length > 0) void downloadAll(results)
         } catch (e) {
             console.error('Library load error', e)
             setError("Failed to load converter. Please try again.")
@@ -71,15 +74,15 @@ export default function HeicToJpgClient() {
         setIsProcessing(false)
     }
 
-    const downloadAll = async () => {
-        if (converted.length === 1) {
+    const downloadAll = async (items = converted) => {
+        if (items.length === 1) {
             const a = document.createElement('a')
-            a.href = converted[0].url
-            a.download = converted[0].name
+            a.href = items[0].url
+            a.download = items[0].name
             a.click()
-        } else if (converted.length > 1) {
+        } else if (items.length > 1) {
             const zip = new JSZip()
-            for (const item of converted) {
+            for (const item of items) {
                 const response = await fetch(item.url)
                 const blob = await response.blob()
                 zip.file(item.name, blob)
@@ -101,7 +104,7 @@ export default function HeicToJpgClient() {
                 </div>
                 <h2 className="text-2xl font-bold mb-4">Conversion Complete!</h2>
                 <p className="text-slate-500 mb-6">{converted.length} photo{converted.length > 1 ? 's' : ''} converted to JPG</p>
-                <Button size="xl" onClick={downloadAll} className="bg-blue-600 hover:bg-blue-700 mb-4">
+                <Button size="xl" onClick={() => downloadAll()} className="bg-blue-600 hover:bg-blue-700 mb-4">
                     <Download className="mr-2 w-5 h-5" />
                     Download {converted.length > 1 ? 'All (ZIP)' : 'JPG'}
                 </Button>

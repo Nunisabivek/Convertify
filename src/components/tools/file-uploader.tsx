@@ -76,7 +76,8 @@ export function FileUploader({
     onFilesSelected,
     accept = { "application/pdf": [".pdf"] },
     multiple,
-    fileTypeLabel = "PDF files",
+    // Image-only uploaders that omit a label used to say "Choose PDF".
+    fileTypeLabel = Object.keys(accept).every((m) => m.startsWith("image/")) ? "photos" : "PDF files",
     iconType = "pdf",
     maxFiles,
     title,

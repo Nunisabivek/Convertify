@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button"
 import { FileImage, Download, Loader2 } from "lucide-react"
 import JSZip from "jszip"
 import { saveAs } from "file-saver"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
+import { finishConvert } from "@/lib/native-file"
 
 export default function PdfToJpgPage() {
     const [file, setFile] = useState<File | null>(null)
@@ -53,6 +55,10 @@ export default function PdfToJpgPage() {
 
                     canvas.toBlob((blob) => {
                         if (blob) {
+                            if (IS_MOBILE_BUILD) {
+                                void finishConvert(blob, `${file.name.replace('.pdf', '')}.jpg`)
+                                return
+                            }
                             const url = URL.createObjectURL(blob)
                             setDownloadUrl(url)
                             setDownloadName(`${file.name.replace('.pdf', '')}.jpg`)
@@ -88,6 +94,10 @@ export default function PdfToJpgPage() {
                 }
 
                 const content = await zip.generateAsync({ type: "blob" })
+                if (IS_MOBILE_BUILD) {
+                    await finishConvert(content, `${file.name.replace('.pdf', '')}-images.zip`)
+                    return
+                }
                 const url = URL.createObjectURL(content)
                 setDownloadUrl(url)
                 setDownloadName(`${file.name.replace('.pdf', '')}-images.zip`)

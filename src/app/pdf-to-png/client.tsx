@@ -8,6 +8,8 @@ import { ProcessingWait } from "@/components/tools/processing-wait"
 import { FileImage, Download, Loader2 } from "lucide-react"
 import JSZip from "jszip"
 import { saveAs } from "file-saver"
+import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
+import { finishConvert } from "@/lib/native-file"
 
 export default function PdfToPngPage() {
     const [file, setFile] = useState<File | null>(null)
@@ -44,6 +46,10 @@ export default function PdfToPngPage() {
                     await page.render({ canvasContext: ctx, viewport } as any).promise
                     canvas.toBlob((blob) => {
                         if (blob) {
+                            if (IS_MOBILE_BUILD) {
+                                void finishConvert(blob, `${file.name.replace('.pdf', '')}.png`)
+                                return
+                            }
                             const url = URL.createObjectURL(blob)
                             setDownloadUrl(url)
                             setDownloadName(`${file.name.replace('.pdf', '')}.png`)
@@ -54,8 +60,6 @@ export default function PdfToPngPage() {
                 }
                 setProgress(1)
             } else {
-                await new Promise(resolve => setTimeout(resolve, 2000))
-
                 const zip = new JSZip()
 
                 for (let i = 1; i <= numPages; i++) {
@@ -74,6 +78,10 @@ export default function PdfToPngPage() {
                 }
 
                 const content = await zip.generateAsync({ type: "blob" })
+                if (IS_MOBILE_BUILD) {
+                    await finishConvert(content, `${file.name.replace('.pdf', '')}-images.zip`)
+                    return
+                }
                 const url = URL.createObjectURL(content)
                 setDownloadUrl(url)
                 setDownloadName(`${file.name.replace('.pdf', '')}-images.zip`)
