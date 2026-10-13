@@ -17,11 +17,6 @@ const config: CapacitorConfig = {
       showSpinner: false,
       launchAutoHide: true,
     },
-    StatusBar: {
-      overlaysWebView: false,
-      style: 'LIGHT',
-      backgroundColor: '#FFFFFF',
-    },
   },
   android: {
     buildOptions: {

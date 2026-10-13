@@ -24,12 +24,12 @@ Phone screenshots (need at least 2; upload all 8, in order):
   C:\Users\nunis\Downloads\Convertify-Play\06-about.png
   C:\Users\nunis\Downloads\Convertify-Play\07-scan-document.png
   C:\Users\nunis\Downloads\Convertify-Play\08-done.png
-These are 1080 x 1920, 24-bit PNG, no transparency (v1.2.4 UI).
+These are 1080 x 1920, 24-bit PNG, no transparency (v1.2.4 UI, unchanged in 1.2.5).
 Optional tablet shots, same folder: tablet-7-*.png (1920 x 1080) and tablet-10-*.png (2560 x 1440).
 
 App bundle (.aab) for upload:
-  C:\Users\nunis\Downloads\Convertify-Play\Convertify-1.2.4.aab
-  (signed release bundle; Version: 1.2.4 / VersionCode: 9; package com.convertify.work; CONTAINS AdMob ads)
+  C:\Users\nunis\Downloads\Convertify-Play\Convertify-1.2.5.aab
+  (signed release bundle; Version: 1.2.5 / VersionCode: 10; package com.convertify.work; CONTAINS AdMob ads)
 
 ========================================
 STORE LISTING TEXT (paste)

@@ -153,13 +153,11 @@ function MobileLayoutInner({ children }: MobileLayoutProps) {
             try {
                 const { Capacitor } = await import('@capacitor/core')
                 if (!Capacitor.isNativePlatform() || cancelled) return
-                const { StatusBar, Style } = await import('@capacitor/status-bar')
-                await StatusBar.setOverlaysWebView({ overlay: false })
-                await StatusBar.setBackgroundColor({ color: '#FFFFFF' })
-                await StatusBar.setStyle({ style: Style.Light })
+                // Status/nav bar colours come from the Android theme (styles.xml); the
+                // status-bar plugin only repeated them through APIs deprecated in Android 15.
                 await applySafeArea()
             } catch {
-                // StatusBar plugin may be missing in web preview
+                // Web preview has no native platform
             }
         })()
         window.addEventListener('resize', applySafeArea)
