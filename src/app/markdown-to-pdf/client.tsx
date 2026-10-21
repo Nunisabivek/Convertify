@@ -5,7 +5,11 @@ import { Button } from "@/components/ui/button"
 import { Download, Loader2 } from "lucide-react"
 
 function markdownToHtml(md: string): string {
+    // Escape first: the preview uses dangerouslySetInnerHTML, so raw HTML in the input must not run.
     let html = md
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
         // Code blocks (must come before inline code)
         .replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>')
         // Headings
@@ -22,18 +26,20 @@ function markdownToHtml(md: string): string {
         // Inline code
         .replace(/`([^`]+)`/g, '<code style="background:#f1f5f9;padding:2px 6px;border-radius:3px;font-size:0.9em">$1</code>')
         // Links
-        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#4F46E5">$1</a>')
-        // Blockquotes
-        .replace(/^>\s+(.+)$/gm, '<blockquote style="border-left:3px solid #cbd5e1;padding-left:12px;color:#64748b;margin:8px 0">$1</blockquote>')
+        .replace(/\[([^\]]+)\]\(((?:https?:|mailto:|\/|#)[^)\s"]*)\)/g, '<a href="$2" style="color:#4F46E5">$1</a>')
+        // Blockquotes (">" is already escaped)
+        .replace(/^&gt;\s+(.+)$/gm, '<blockquote style="border-left:3px solid #cbd5e1;padding-left:12px;color:#64748b;margin:8px 0">$1</blockquote>')
         // Horizontal rules
         .replace(/^---$/gm, '<hr style="border:none;border-top:1px solid #e2e8f0;margin:16px 0">')
         // Unordered lists
         .replace(/^[-*]\s+(.+)$/gm, '<li>$1</li>')
-        // Ordered lists
-        .replace(/^\d+\.\s+(.+)$/gm, '<li>$1</li>')
+        // Ordered lists (marked apart from bullets so they get <ol> and keep their numbers)
+        .replace(/^\d+\.\s+(.+)$/gm, '<li data-ol>$1</li>')
 
-    // Wrap consecutive <li> in <ul>
+    // Wrap consecutive items in <ol> / <ul>
+    // Bullets first: once numbered items lose their marker they'd match the <ul> pattern too.
     html = html.replace(/(<li>.*<\/li>\n?)+/g, (match) => `<ul style="margin:8px 0;padding-left:24px">${match}</ul>`)
+    html = html.replace(/(<li data-ol>.*<\/li>\n?)+/g, (match) => `<ol style="margin:8px 0;padding-left:24px">${match.replace(/<li data-ol>/g, '<li>')}</ol>`)
 
     // Paragraphs for remaining text
     html = html.split('\n\n').map(block => {

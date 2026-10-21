@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { Scaling, Download, Loader2, X, Lock, Unlock } from "lucide-react"
@@ -41,17 +41,16 @@ export default function ResizeImageClient() {
         }
     }
 
-    useEffect(() => {
-        if (lockAspect && aspectRatio > 0) {
-            setHeight(Math.round(width / aspectRatio))
-        }
-    }, [width, lockAspect, aspectRatio])
-
-    useEffect(() => {
-        if (lockAspect && aspectRatio > 0) {
-            setWidth(Math.round(height * aspectRatio))
-        }
-    }, [height, lockAspect, aspectRatio])
+    // Aspect sync happens in the input handlers. Two effects that each rewrote the other
+    // dimension fought each other and silently changed preset sizes.
+    const changeWidth = (w: number) => {
+        setWidth(w)
+        if (lockAspect && aspectRatio > 0) setHeight(Math.round(w / aspectRatio))
+    }
+    const changeHeight = (h: number) => {
+        setHeight(h)
+        if (lockAspect && aspectRatio > 0) setWidth(Math.round(h * aspectRatio))
+    }
 
     const removeFile = (index: number) => {
         setFiles(prev => prev.filter((_, i) => i !== index))
@@ -75,16 +74,23 @@ export default function ResizeImageClient() {
                 canvas.height = height
                 const ctx = canvas.getContext('2d')
                 if (ctx) {
+                    // Keep the input's format: a resized JPEG saved as PNG came out several times larger.
+                    const mime = file.type === 'image/jpeg' || file.type === 'image/webp' ? file.type : 'image/png'
+                    if (mime === 'image/jpeg') {
+                        ctx.fillStyle = '#fff'
+                        ctx.fillRect(0, 0, width, height)
+                    }
                     ctx.drawImage(img, 0, 0, width, height)
                     const blob = await new Promise<Blob>((resolve) => {
-                        canvas.toBlob((b) => resolve(b!), 'image/png')
+                        canvas.toBlob((b) => resolve(b!), mime, 0.92)
                     })
                     const url = URL.createObjectURL(blob)
-                    const ext = file.name.split('.').pop()?.toLowerCase() || 'png'
+                    // Name by what the browser actually wrote (Safari can't encode WebP and returns PNG).
+                    const ext = blob.type === 'image/jpeg' ? 'jpg' : blob.type === 'image/webp' ? 'webp' : 'png'
                     results.push({
                         original: file,
                         url,
-                        name: file.name.replace(/\.[^.]+$/, `-resized-${width}x${height}.png`),
+                        name: file.name.replace(/\.[^.]+$/, `-resized-${width}x${height}.${ext}`),
                         width,
                         height
                     })
@@ -179,7 +185,7 @@ export default function ResizeImageClient() {
                                 <input
                                     type="number"
                                     value={width}
-                                    onChange={(e) => setWidth(parseInt(e.target.value) || 0)}
+                                    onChange={(e) => changeWidth(parseInt(e.target.value) || 0)}
                                     className="w-full h-10 px-3 border rounded-lg"
                                 />
                             </div>
@@ -188,7 +194,7 @@ export default function ResizeImageClient() {
                                 <input
                                     type="number"
                                     value={height}
-                                    onChange={(e) => setHeight(parseInt(e.target.value) || 0)}
+                                    onChange={(e) => changeHeight(parseInt(e.target.value) || 0)}
                                     className="w-full h-10 px-3 border rounded-lg"
                                 />
                             </div>
@@ -211,7 +217,7 @@ export default function ResizeImageClient() {
                                     key={p.label}
                                     variant="outline"
                                     size="sm"
-                                    onClick={() => { setWidth(p.w); setHeight(p.h) }}
+                                    onClick={() => { setLockAspect(false); setWidth(p.w); setHeight(p.h) }}
                                 >
                                     {p.label}
                                 </Button>

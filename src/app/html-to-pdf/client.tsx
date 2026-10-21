@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Code, FileDown, Loader2, AlertCircle } from "lucide-react"
-import { PDFDocument, rgb, StandardFonts } from "pdf-lib"
+import { htmlToText, textToPdf } from "@/lib/text-pdf"
 import { AdBanner } from "@/components/ads/banner"
 
 export default function HtmlToPdfClient() {
@@ -20,55 +20,9 @@ export default function HtmlToPdfClient() {
         setError(null)
 
         try {
-            // Create a new PDF document
-            const pdfDoc = await PDFDocument.create()
-            let page = pdfDoc.addPage([595, 842]) // A4 size
-            const { width, height } = page.getSize()
-            const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
-            const fontSize = 12
-
-            // Remove HTML tags for simple text rendering (simplified version)
-            const plainText = htmlContent.replace(/<(style|script)[^>]*>[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
-
-            // Split text into lines that fit the page width
-            const maxWidth = width - 100
-            const words = plainText.split(' ')
-            const lines: string[] = []
-            let currentLine = ''
-
-            for (const word of words) {
-                const testLine = currentLine + (currentLine ? ' ' : '') + word
-                const testWidth = font.widthOfTextAtSize(testLine, fontSize)
-
-                if (testWidth > maxWidth && currentLine) {
-                    lines.push(currentLine)
-                    currentLine = word
-                } else {
-                    currentLine = testLine
-                }
-            }
-            if (currentLine) lines.push(currentLine)
-
-            // Draw text on page
-            let yPosition = height - 50
-            for (const line of lines) {
-                if (yPosition < 50) {
-                    // Continue on a new page; later lines must land there too, not back on page 1
-                    page = pdfDoc.addPage([595, 842])
-                    yPosition = page.getHeight() - 50
-                }
-                page.drawText(line, {
-                    x: 50,
-                    y: yPosition,
-                    size: fontSize,
-                    font,
-                    color: rgb(0, 0, 0),
-                })
-                yPosition -= fontSize + 4
-            }
-
-            // Save PDF
-            const pdfBytes = await pdfDoc.save()
+            // Plain text with paragraph breaks; DOMParser decodes entities and never runs scripts.
+            const text = htmlToText(htmlContent, (h) => new DOMParser().parseFromString(h, "text/html").body.textContent ?? "")
+            const pdfBytes = await textToPdf(text)
             const blob = new Blob([pdfBytes as any], { type: "application/pdf" })
             const downloadUrl = URL.createObjectURL(blob)
 

@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { PDFDocument } from "pdf-lib"
+import { PDFDocument, degrees } from "pdf-lib"
+import { jpegOrientation, uprightPlacement } from "@/lib/jpeg-orientation"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
@@ -49,20 +50,25 @@ export default function JpgToPdfPage() {
             for (const file of files) {
                 const imageBytes = await file.arrayBuffer()
                 let image
+                let orientation = 1
                 if (isJpegFile(file)) {
                     image = await pdfDoc.embedJpg(imageBytes)
+                    orientation = jpegOrientation(imageBytes)
                 } else if (isPngFile(file)) {
                     image = await pdfDoc.embedPng(imageBytes)
                 } else {
                     continue // Skip unsupported
                 }
 
-                const page = pdfDoc.addPage([image.width, image.height])
+                // Phone photos are often stored sideways with an EXIF flag; turn the page, not the pixels.
+                const place = uprightPlacement(orientation, image.width, image.height)
+                const page = pdfDoc.addPage([...place.page])
                 page.drawImage(image, {
-                    x: 0,
-                    y: 0,
+                    x: place.x,
+                    y: place.y,
                     width: image.width,
                     height: image.height,
+                    rotate: degrees(place.rotate),
                 })
             }
 

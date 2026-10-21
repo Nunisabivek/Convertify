@@ -30,7 +30,7 @@ export default function RotatePdfClient() {
                 // Rotate all pages
                 for (let i = 0; i < numPages; i++) {
                     const page = pdfDoc.getPage(i)
-                    page.setRotation(degrees(rotation % 360 as any))
+                    page.setRotation(degrees((page.getRotation().angle + rotation) % 360))
                 }
             } else {
                 // Parse specific pages (e.g., "1,3,5-7")
@@ -38,7 +38,7 @@ export default function RotatePdfClient() {
                 for (const pageNum of pageNumbers) {
                     if (pageNum > 0 && pageNum <= numPages) {
                         const page = pdfDoc.getPage(pageNum - 1)
-                        page.setRotation(degrees(rotation % 360 as any))
+                        page.setRotation(degrees((page.getRotation().angle + rotation) % 360))
                     }
                 }
             }

@@ -203,8 +203,16 @@ export default function SignPdfClient() {
         if (!file) return
         const reader = new FileReader()
         reader.onload = (event) => {
-            const dataUrl = event.target?.result as string
-            setActiveSignatureDataUrl(dataUrl)
+            // Normalise any image (JPG, WebP, GIF...) to PNG: the export embeds PNG only, and PNG keeps transparency.
+            const img = new window.Image()
+            img.onload = () => {
+                const canvas = document.createElement("canvas")
+                canvas.width = img.naturalWidth
+                canvas.height = img.naturalHeight
+                canvas.getContext("2d")?.drawImage(img, 0, 0)
+                setActiveSignatureDataUrl(canvas.toDataURL("image/png"))
+            }
+            img.src = event.target?.result as string
         }
         reader.readAsDataURL(file)
     }
@@ -281,10 +289,14 @@ export default function SignPdfClient() {
                 const sigImageBytes = await fetch(sig.dataUrl).then(r => r.arrayBuffer())
                 const sigImage = await pdfDoc.embedPng(sigImageBytes)
 
-                const pdfWidth = (sig.width / 100) * pageWidth
-                const pdfHeight = (sig.height / 100) * pageHeight
-                const pdfX = (sig.x / 100) * pageWidth
-                const pdfY = pageHeight - ((sig.y / 100) * pageHeight) - pdfHeight
+                // Same as the preview (object-contain, centred): fit the signature in its box without stretching.
+                const boxW = (sig.width / 100) * pageWidth
+                const boxH = (sig.height / 100) * pageHeight
+                const scale = Math.min(boxW / sigImage.width, boxH / sigImage.height)
+                const pdfWidth = sigImage.width * scale
+                const pdfHeight = sigImage.height * scale
+                const pdfX = (sig.x / 100) * pageWidth + (boxW - pdfWidth) / 2
+                const pdfY = pageHeight - ((sig.y / 100) * pageHeight) - boxH + (boxH - pdfHeight) / 2
 
                 page.drawImage(sigImage, {
                     x: pdfX,
@@ -638,9 +650,9 @@ export default function SignPdfClient() {
 
                             <div
                                 ref={previewContainerRef}
-                                onMouseMove={handleMouseMoveContainer}
-                                onMouseUp={handleMouseUpContainer}
-                                onMouseLeave={handleMouseUpContainer}
+                                onPointerMove={handleMouseMoveContainer}
+                                onPointerUp={handleMouseUpContainer}
+                                onPointerLeave={handleMouseUpContainer}
                                 className="relative bg-slate-100 rounded-xl overflow-hidden shadow-inner border border-slate-200 flex justify-center p-2 sm:p-4 select-none"
                             >
                                 <div className="relative inline-block max-w-full shadow-lg rounded bg-white">
@@ -655,8 +667,9 @@ export default function SignPdfClient() {
                                         .map(sig => (
                                             <div
                                                 key={sig.originalIndex}
-                                                onMouseDown={(e) => handleMouseDownOnSig(sig.originalIndex, e)}
+                                                onPointerDown={(e) => handleMouseDownOnSig(sig.originalIndex, e)}
                                                 style={{
+                                                    touchAction: "none",
                                                     left: `${sig.x}%`,
                                                     top: `${sig.y}%`,
                                                     width: `${sig.width}%`,

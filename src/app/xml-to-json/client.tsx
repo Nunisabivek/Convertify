@@ -6,6 +6,7 @@ import { Download, Copy, Check } from "lucide-react"
 
 function xmlToJson(node: Element): unknown {
     const obj: Record<string, unknown> = {}
+    const texts: string[] = []
 
     // Handle attributes
     if (node.attributes.length > 0) {
@@ -23,7 +24,8 @@ function xmlToJson(node: Element): unknown {
             const key = childElement.tagName
             const value = xmlToJson(childElement)
 
-            if (obj[key]) {
+            // `in`, not truthiness: empty elements convert to "" and repeated ones must still become an array.
+            if (key in obj) {
                 if (!Array.isArray(obj[key])) {
                     obj[key] = [obj[key]]
                 }
@@ -33,14 +35,15 @@ function xmlToJson(node: Element): unknown {
             }
         } else if (child.nodeType === Node.TEXT_NODE || child.nodeType === Node.CDATA_SECTION_NODE) {
             const text = (child.textContent || "").trim()
-            if (text) {
-                if (Object.keys(obj).length === 0) return text
-                obj["#text"] = text
-            }
+            // Collect instead of returning early: text before a child element used to drop every child after it.
+            if (text) texts.push(text)
         }
     }
 
-    return Object.keys(obj).length === 0 ? "" : obj
+    const text = texts.join(" ")
+    if (Object.keys(obj).length === 0) return text
+    if (text) obj["#text"] = text
+    return obj
 }
 
 export default function XmlToJsonClient() {

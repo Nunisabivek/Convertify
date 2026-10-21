@@ -129,6 +129,14 @@ ${presRels}</Relationships>`
     for (let i = 0; i < images.length; i++) {
         const slideIdx = i + 1
         const img = images[i]
+        // Letterbox the page on the 16:9 slide instead of stretching it (A4 pages came out distorted).
+        const scale = Math.min(emuWidth / img.width, emuHeight / img.height)
+        const fit = {
+            cx: Math.round(img.width * scale),
+            cy: Math.round(img.height * scale),
+            x: Math.round((emuWidth - img.width * scale) / 2),
+            y: Math.round((emuHeight - img.height * scale) / 2),
+        }
 
         // Add media image
         const imgBytes = await img.blob.arrayBuffer()
@@ -168,8 +176,8 @@ ${presRels}</Relationships>`
         </p:blipFill>
         <p:spPr>
           <a:xfrm>
-            <a:off x="0" y="0"/>
-            <a:ext cx="${emuWidth}" cy="${emuHeight}"/>
+            <a:off x="${fit.x}" y="${fit.y}"/>
+            <a:ext cx="${fit.cx}" cy="${fit.cy}"/>
           </a:xfrm>
           <a:prstGeom prst="rect">
             <a:avLst/>

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { PDFDocument, StandardFonts, rgb } from "pdf-lib"
+import { textToPdf } from "@/lib/text-pdf"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
@@ -19,34 +19,7 @@ export default function TextToPdfPage() {
         try {
             const text = await file.text()
 
-            const pdfDoc = await PDFDocument.create()
-            const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
-            const fontSize = 12
-
-            let page = pdfDoc.addPage()
-            const { width, height } = page.getSize()
-            const margin = 50
-            let y = height - margin
-
-            const lines = text.split('\n')
-
-            for (const line of lines) {
-                if (y < margin) {
-                    page = pdfDoc.addPage()
-                    y = height - margin
-                }
-                // Very basic text wrapping/rendering
-                page.drawText(line.substring(0, 90), { // Truncate for simplicity in this basic version
-                    x: margin,
-                    y,
-                    size: fontSize,
-                    font,
-                    color: rgb(0, 0, 0),
-                })
-                y -= fontSize + 5
-            }
-
-            const pdfBytes = await pdfDoc.save()
+            const pdfBytes = await textToPdf(text)
             const blob = new Blob([pdfBytes as any], { type: 'application/pdf' })
             setProcessedUrl(URL.createObjectURL(blob))
         } catch (e) {

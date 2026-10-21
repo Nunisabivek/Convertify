@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { rgb, StandardFonts } from "pdf-lib"
+import { degrees, rgb, StandardFonts } from "pdf-lib"
+import { visualFrame } from "@/lib/page-frame"
 import { loadPdf } from "@/lib/pdf-password"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import { finishConvert } from "@/lib/native-file"
@@ -44,7 +45,9 @@ export default function AddPageNumbersClient() {
             const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
 
             pages.forEach((page, index) => {
-                const { width, height } = page.getSize()
+                // Positions are on the page as displayed (rotated scans included), then mapped to PDF space.
+                const frame = visualFrame(page.getRotation().angle, page.getCropBox())
+                const { width, height } = frame
                 const pageNumber = index + startFrom
                 const text = `${pageNumber}`
                 const fontSize = 12
@@ -81,9 +84,11 @@ export default function AddPageNumbersClient() {
                         break
                 }
 
+                const at = frame.toPage(x, y)
                 page.drawText(text, {
-                    x,
-                    y,
+                    x: at.x,
+                    y: at.y,
+                    rotate: degrees(frame.rotate),
                     size: fontSize,
                     font,
                     color: rgb(0, 0, 0),

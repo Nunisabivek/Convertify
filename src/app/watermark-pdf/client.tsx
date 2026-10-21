@@ -2,8 +2,9 @@
 
 import { useState } from "react"
 import { Droplet, Download, Loader2, AlertCircle, Type, Image as ImageIcon } from "lucide-react"
-import { rgb, degrees } from "pdf-lib"
+import { rgb, degrees, StandardFonts } from "pdf-lib"
 import { loadPdf } from "@/lib/pdf-password"
+import { toWinAnsi } from "@/lib/sheet-layout"
 import { AdBanner } from "@/components/ads/banner"
 import { FileUploader } from "@/components/tools/file-uploader"
 
@@ -34,17 +35,25 @@ export default function WatermarkPdfClient() {
             const g = parseInt(color.slice(3, 5), 16) / 255
             const b = parseInt(color.slice(5, 7), 16) / 255
 
+            const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
+            const text = toWinAnsi(watermarkText).replace(/\n/g, " ")
+            const textWidth = font.widthOfTextAtSize(text, fontSize)
+            const textHeight = font.heightAtSize(fontSize, { descender: false })
+            const angle = (-45 * Math.PI) / 180
+
             for (let i = 0; i < numPages; i++) {
                 const page = pdfDoc.getPage(i)
-                const { width, height } = page.getSize()
+                const { x: ox, y: oy, width, height } = page.getMediaBox()
 
                 if (watermarkType === "text") {
-                    // Add text watermark diagonally across the page
-                    const textWidth = watermarkText.length * fontSize * 0.5
-
-                    page.drawText(watermarkText, {
-                        x: width / 2 - textWidth / 2,
-                        y: height / 2,
+                    // drawText rotates around the baseline start, so step back half the text along
+                    // the slant (and half its height across it) to centre the stamp on the page.
+                    const cx = ox + width / 2
+                    const cy = oy + height / 2
+                    page.drawText(text, {
+                        x: cx - (textWidth / 2) * Math.cos(angle) + (textHeight / 2) * Math.sin(angle),
+                        y: cy - (textWidth / 2) * Math.sin(angle) - (textHeight / 2) * Math.cos(angle),
+                        font,
                         size: fontSize,
                         color: rgb(r, g, b),
                         opacity: opacity,

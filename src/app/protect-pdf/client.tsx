@@ -3,6 +3,7 @@
 import { useState } from "react"
 import * as pdfLib from "pdf-lib"
 import { configure, lock } from "pdf-lib-encrypt"
+import { loadPdf } from "@/lib/pdf-password"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { ProcessingWait } from "@/components/tools/processing-wait"
@@ -21,7 +22,6 @@ import {
     RefreshCw
 } from "lucide-react"
 
-const { PDFDocument } = pdfLib
 
 // pdf-lib-encrypt needs the whole pdf-lib module (it calls PDFDocument.load on
 // it). Passing the PDFDocument class instead made every click on "Protect PDF"
@@ -82,7 +82,8 @@ export default function ProtectPdfClient() {
             const rawBytes = await file.arrayBuffer()
 
             // Load and save cleanly first to ensure standard object streams
-            const pdfDoc = await PDFDocument.load(rawBytes, { ignoreEncryption: true })
+            // Decrypts an already-protected input first (asks for its password); re-locking still-encrypted streams broke the file.
+            const pdfDoc = await loadPdf(rawBytes, file.name)
             const plainBytes = await pdfDoc.save()
 
             // Permissions bitmask: standard PDF permissions flags

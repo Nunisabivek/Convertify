@@ -5,57 +5,13 @@ import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
 import { FileText, Download, Loader2, ArrowLeft, AlertCircle } from "lucide-react"
-import { PDFDocument, rgb, StandardFonts } from "pdf-lib"
+import { textToPdf } from "@/lib/text-pdf"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import { finishConvert } from "@/lib/native-file"
 
 async function buildPdfFromText(rawText: string): Promise<Blob> {
-    const pdfDoc = await PDFDocument.create()
-    const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
-    const fontSize = 12
-    const pageWidth = 595
-    const pageHeight = 842
-    const margin = 50
-    const maxWidth = pageWidth - margin * 2
-
-    let page = pdfDoc.addPage([pageWidth, pageHeight])
-    let y = pageHeight - margin
-
-    const newPage = () => {
-        page = pdfDoc.addPage([pageWidth, pageHeight])
-        y = pageHeight - margin
-    }
-
-    const paragraphs = rawText.split(/\n+/)
-    for (const paragraph of paragraphs) {
-        const words = paragraph.split(/\s+/).filter(Boolean)
-        if (words.length === 0) {
-            y -= fontSize + 6
-            if (y < margin) newPage()
-            continue
-        }
-
-        let line = ""
-        for (const word of words) {
-            const testLine = line ? `${line} ${word}` : word
-            if (font.widthOfTextAtSize(testLine, fontSize) > maxWidth && line) {
-                if (y < margin) newPage()
-                page.drawText(line, { x: margin, y, size: fontSize, font, color: rgb(0, 0, 0) })
-                y -= fontSize + 4
-                line = word
-            } else {
-                line = testLine
-            }
-        }
-        if (line) {
-            if (y < margin) newPage()
-            page.drawText(line, { x: margin, y, size: fontSize, font, color: rgb(0, 0, 0) })
-            y -= fontSize + 4
-        }
-        y -= 8 // paragraph spacing
-    }
-
-    const bytes = await pdfDoc.save()
+    // Paragraphs keep one blank line between them; runs of empty paragraphs collapse.
+    const bytes = await textToPdf(rawText.replace(/\n{3,}/g, "\n\n"))
     return new Blob([bytes as any], { type: "application/pdf" })
 }
 

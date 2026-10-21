@@ -3,6 +3,7 @@
 import { loadPdfjs } from "@/lib/pdfjs"
 import { useState, useRef } from "react"
 import { loadPdf as openPdfForEdit } from "@/lib/pdf-password"
+import { visualFrame, visualRectToPage } from "@/lib/page-frame"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { ProcessingWait } from "@/components/tools/processing-wait"
@@ -122,15 +123,17 @@ export default function CropPdfClient() {
             const pages = pdfDoc.getPages()
 
             for (const page of pages) {
-                const { width, height } = page.getSize()
+                // Margins are as the reader sees the page (rotated pages included), inside the current visible box.
+                const frame = visualFrame(page.getRotation().angle, page.getCropBox())
+                const { width, height } = frame
 
                 const left = (marginLeft / 100) * width
                 const bottom = (marginBottom / 100) * height
                 const cropWidth = Math.max(50, width - left - ((marginRight / 100) * width))
                 const cropHeight = Math.max(50, height - bottom - ((marginTop / 100) * height))
 
-                // Set PDF cropbox
-                page.setCropBox(left, bottom, cropWidth, cropHeight)
+                const box = visualRectToPage(frame, left, bottom, cropWidth, cropHeight)
+                page.setCropBox(box.x, box.y, box.width, box.height)
             }
 
             const croppedBytes = await pdfDoc.save()

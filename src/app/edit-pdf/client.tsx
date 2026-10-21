@@ -2,7 +2,9 @@
 
 import { loadPdfjs } from "@/lib/pdfjs"
 import { useState, useRef, useEffect } from "react"
-import { PDFDocument, rgb, StandardFonts } from "pdf-lib"
+import { rgb, StandardFonts } from "pdf-lib"
+import { loadPdf } from "@/lib/pdf-password"
+import { toWinAnsi } from "@/lib/sheet-layout"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { ProcessingWait } from "@/components/tools/processing-wait"
@@ -171,7 +173,7 @@ export default function EditPdfClient() {
             } else if (ann.type === "stamp") {
                 ctx.fillStyle = ann.color
                 ctx.font = "bold 20px Inter, sans-serif"
-                ctx.fillText(ann.text || "✓ APPROVED", ann.x, ann.y)
+                ctx.fillText(ann.text || "APPROVED", ann.x, ann.y)
             }
             ctx.restore()
         }
@@ -230,7 +232,7 @@ export default function EditPdfClient() {
                 type: "stamp",
                 x,
                 y,
-                text: "✓ VERIFIED",
+                text: "VERIFIED",
                 color: "#10B981",
             }
             setAnnotations((prev) => [...prev, newAnn])
@@ -298,7 +300,7 @@ export default function EditPdfClient() {
 
         try {
             const rawBytes = await file.arrayBuffer()
-            const pdfDoc = await PDFDocument.load(rawBytes, { ignoreEncryption: true })
+            const pdfDoc = await loadPdf(rawBytes, file.name)
             const helvetica = await pdfDoc.embedFont(StandardFonts.Helvetica)
             const helveticaBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold)
 
@@ -327,7 +329,7 @@ export default function EditPdfClient() {
 
                 if (ann.type === "text" && ann.text) {
                     const pdfFontSize = (ann.fontSize || 16) * scaleY
-                    page.drawText(ann.text, {
+                    page.drawText(toWinAnsi(ann.text), {
                         x: pdfX,
                         y: pdfY - pdfFontSize * 0.8,
                         size: pdfFontSize,
@@ -362,7 +364,7 @@ export default function EditPdfClient() {
                         y: pdfY - hlH,
                         width: hlW,
                         height: hlH,
-                        color: rgb(1, 0.9, 0.2),
+                        color: colorRgb,
                         opacity: 0.35,
                     })
                 } else if (ann.type === "draw" && ann.points && ann.points.length > 1) {
@@ -607,7 +609,7 @@ export default function EditPdfClient() {
                         {activeTool === "draw" && "Click and drag to sketch or write notes on the page."}
                         {activeTool === "highlight" && "Click anywhere to place a yellow/color highlighter box."}
                         {activeTool === "box" && "Click anywhere to place an outline rectangle."}
-                        {activeTool === "stamp" && "Click anywhere to place a green '✓ VERIFIED' stamp."}
+                        {activeTool === "stamp" && "Click anywhere to place a green 'VERIFIED' stamp."}
                     </p>
 
                     {/* Canvas Container */}
@@ -616,9 +618,10 @@ export default function EditPdfClient() {
                             <canvas ref={canvasRef} className="block pointer-events-none" />
                             <canvas
                                 ref={overlayCanvasRef}
-                                onMouseDown={handleMouseDown}
-                                onMouseMove={handleMouseMove}
-                                onMouseUp={handleMouseUp}
+                                onPointerDown={handleMouseDown}
+                                onPointerMove={handleMouseMove}
+                                onPointerUp={handleMouseUp}
+                                style={{ touchAction: "none" }}
                                 className="absolute inset-0 cursor-crosshair"
                             />
                         </div>
