@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test:tools": "python scripts/tool-smoke/fixtures.py && node scripts/tool-smoke/smoke.cjs && python scripts/tool-smoke/check.py",
     "test:unit": "node --experimental-strip-types src/lib/human-filename.test.ts && node --experimental-strip-types src/lib/native-ads.test.ts && node --experimental-strip-types src/lib/session-notes.test.ts && node --experimental-strip-types src/lib/document-title.test.ts && node --experimental-strip-types src/lib/tool-swap.test.ts && node --experimental-strip-types src/lib/redact-pdf.test.ts && node --experimental-strip-types src/lib/repair-pdf.test.ts && node --experimental-strip-types src/lib/tiff-pages.test.ts && node --experimental-strip-types src/lib/gif-frames.test.ts && node --experimental-strip-types src/lib/document-scanner.test.ts && node --experimental-strip-types src/lib/blog-sitemap.test.ts && node --experimental-strip-types src/lib/sheet-layout.test.ts && node --experimental-strip-types src/lib/pdf-password.test.ts && node --experimental-strip-types src/lib/pdf-table.test.ts && node --experimental-strip-types src/lib/text-pdf.test.ts && node --experimental-strip-types src/lib/jpeg-orientation.test.ts && node --experimental-strip-types src/lib/page-frame.test.ts",
     "seo:ping": "node scripts/ping-google.js",
     "dev:mobile": "cross-env NEXT_PUBLIC_MOBILE_BUILD=true next dev -H 0.0.0.0 --port 3000",
@@ -63,6 +64,7 @@
     "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "16.0.10",
+    "playwright-core": "1.48.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
