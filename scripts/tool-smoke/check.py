@@ -167,8 +167,8 @@ def _(f, r):
 # Ads (src/lib/monetag.ts): none while the visitor works, both zones once their file is saved.
 for tid, r in rep.items():
     if r.get('file') and 'adsAfter' in r:
-        if r.get('adsBefore'): results[tid + ' (ads)'] = f"{r['adsBefore']} ad script(s) loaded before the download"
-        elif r['adsAfter'] != 2: results[tid + ' (ads)'] = f"{r['adsAfter']} ad zones after the download, expected 2"
+        if r.get('adsBefore'): results[tid + ' (ads)'] = f"ads loaded before the download: {r['adsBefore']}"
+        elif r['adsAfter'] != '12092107,12092189': results[tid + ' (ads)'] = f"zones after the download: {r['adsAfter'] or 'none'}, expected strong push 12092107 + vignette 12092189"
         else: results[tid + ' (ads)'] = None
 
 smoke_failed = [k for k, r in rep.items() if not r.get('ok')]

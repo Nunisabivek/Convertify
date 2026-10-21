@@ -199,8 +199,8 @@ function browserPath() {
       await p.waitForTimeout(2500)
       if (!NO_UPLOAD.has(base)) await p.locator('input[type=file]').first().setInputFiles(files.map((f) => path.join(FX, f)), { timeout: 10000 })
       await p.waitForTimeout(2500)
-      const adScripts = () => p.evaluate(() => document.querySelectorAll('script[data-zone]').length)
-      r.adsBefore = await adScripts() // must be 0: no ads while the visitor is working
+      const adScripts = () => p.evaluate(() => [...document.querySelectorAll('script[data-zone]')].map((s) => s.dataset.zone).sort().join(','))
+      r.adsBefore = await adScripts() // must be empty: no ads while the visitor is working
       const dlPromise = p.waitForEvent('download', { timeout: 60000 }).catch(() => null)
       if (STEPS[base]) {
         r.clicked = 'steps'
@@ -232,7 +232,7 @@ function browserPath() {
         Object.assign(r, { file: name, bytes: buf.length, kind: kindOf(buf, name) })
         r.ok = buf.length > 0 && expect.includes(r.kind)
         await p.waitForTimeout(2500)
-        r.adsAfter = await adScripts() // both Monetag zones once the file is saved
+        r.adsAfter = await adScripts() // strong In-Page Push + Vignette once the file is saved
         if (!r.ok) r.fail = `unexpected output: ${r.kind}`
       } else if (expect.includes('text')) {
         const out = await p.evaluate(() => [...document.querySelectorAll('main textarea, main pre, main code')].map((e) => e.value ?? e.innerText)).catch(() => [])
