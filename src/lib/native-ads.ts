@@ -6,7 +6,7 @@
  *     (AndroidManifest `APPLICATION_ID` meta reads that string - do not duplicate)
  *   this file -> `BANNER_AD_UNIT_ID` + `INTERSTITIAL_AD_UNIT_ID`
  *
- * convertify.work never calls this module. Adsterra stays website-only.
+ * convertify.work never calls this module. Monetag stays website-only.
  * Ad failures are silent. Share/Save on the Done sheet never waits for an ad.
  */
 import { IS_MOBILE_BUILD } from '@/lib/is-mobile-build'

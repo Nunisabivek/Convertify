@@ -177,7 +177,8 @@ function browserPath() {
   if (!fs.existsSync(FX)) throw new Error(`No fixtures in ${FX}. Run: python scripts/tool-smoke/fixtures.py`)
   const browser = await chromium.launch({ executablePath: browserPath(), headless: true })
   const ctx = await browser.newContext({ viewport: { width: 1366, height: 900 }, acceptDownloads: true })
-  await ctx.route(/tonicgoverness|3nbf4|googletagmanager|google-analytics|googlesyndication|doubleclick/, (r) => r.abort())
+  // Ad and analytics hosts are blocked; ad <script> tags still appear, which is how the ad timing is checked.
+  await ctx.route(/nap5k|rtmark|jhnwr|3nbf4|googletagmanager|google-analytics|googlesyndication|doubleclick/, (r) => r.abort())
   const report = {}
   for (const [id, files, expect] of T) {
     if (ONLY && !ONLY.includes(id)) continue
@@ -198,6 +199,8 @@ function browserPath() {
       await p.waitForTimeout(2500)
       if (!NO_UPLOAD.has(base)) await p.locator('input[type=file]').first().setInputFiles(files.map((f) => path.join(FX, f)), { timeout: 10000 })
       await p.waitForTimeout(2500)
+      const adScripts = () => p.evaluate(() => document.querySelectorAll('script[data-zone]').length)
+      r.adsBefore = await adScripts() // must be 0: no ads while the visitor is working
       const dlPromise = p.waitForEvent('download', { timeout: 60000 }).catch(() => null)
       if (STEPS[base]) {
         r.clicked = 'steps'
@@ -228,6 +231,8 @@ function browserPath() {
         const buf = fs.readFileSync(dest)
         Object.assign(r, { file: name, bytes: buf.length, kind: kindOf(buf, name) })
         r.ok = buf.length > 0 && expect.includes(r.kind)
+        await p.waitForTimeout(2500)
+        r.adsAfter = await adScripts() // both Monetag zones once the file is saved
         if (!r.ok) r.fail = `unexpected output: ${r.kind}`
       } else if (expect.includes('text')) {
         const out = await p.evaluate(() => [...document.querySelectorAll('main textarea, main pre, main code')].map((e) => e.value ?? e.innerText)).catch(() => [])

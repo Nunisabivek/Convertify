@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Loader2 } from "lucide-react"
-import { AdBanner } from "@/components/ads/banner"
+import { AdBanner, AD_SLOTS_ON } from "@/components/ads/banner"
 import { Progress } from "@/components/ui/progress"
 
 interface ProcessingWaitProps {
@@ -53,10 +53,11 @@ export function ProcessingWait({ progress, title = "Working…", status, descrip
                 </div>
             </div>
 
-            <div className="flex justify-center border-t border-b py-8 bg-slate-50/50">
-                {/* This is the key revenue driver - displayed during the wait */}
-                <AdBanner variant="rectangle" />
-            </div>
+            {AD_SLOTS_ON && (
+                <div className="flex justify-center border-t border-b py-8 bg-slate-50/50">
+                    <AdBanner variant="rectangle" />
+                </div>
+            )}
 
             <p className="text-center text-xs text-slate-400">
                 Your file is being processed securely 100% in your browser. No files uploaded.

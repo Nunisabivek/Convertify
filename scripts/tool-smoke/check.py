@@ -164,6 +164,13 @@ def _(f, r):
     if fitz.open(f)[0].get_text().strip(): return 'text still extractable on the redacted page'
 
 
+# Ads (src/lib/monetag.ts): none while the visitor works, both zones once their file is saved.
+for tid, r in rep.items():
+    if r.get('file') and 'adsAfter' in r:
+        if r.get('adsBefore'): results[tid + ' (ads)'] = f"{r['adsBefore']} ad script(s) loaded before the download"
+        elif r['adsAfter'] != 2: results[tid + ' (ads)'] = f"{r['adsAfter']} ad zones after the download, expected 2"
+        else: results[tid + ' (ads)'] = None
+
 smoke_failed = [k for k, r in rep.items() if not r.get('ok')]
 bad = {k: v for k, v in results.items() if v}
 for k, v in results.items():

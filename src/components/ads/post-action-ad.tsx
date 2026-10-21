@@ -1,6 +1,6 @@
 "use client"
 
-import { AdBanner } from "./banner"
+import { AdBanner, AD_SLOTS_ON } from "./banner"
 
 /**
  * Post-Action Ad — shows after a user completes their primary task
@@ -16,6 +16,7 @@ import { AdBanner } from "./banner"
  * Both are lazy-loaded via IntersectionObserver so they don't hurt LCP.
  */
 export function PostActionAd() {
+    if (!AD_SLOTS_ON) return null
     return (
         <div className="w-full py-6 flex justify-center" aria-hidden="true">
             <div className="max-w-4xl mx-auto px-4 w-full">

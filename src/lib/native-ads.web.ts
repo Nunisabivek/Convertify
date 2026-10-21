@@ -1,6 +1,6 @@
 /**
- * Website stub. convertify.work never loads AdMob; Adsterra stays in
- * src/components/ads/banner.tsx. The real module is src/lib/native-ads.ts
+ * Website stub. convertify.work never loads AdMob; website ads are Monetag,
+ * see src/lib/monetag.ts. The real module is src/lib/native-ads.ts
  * and is used only when NEXT_PUBLIC_MOBILE_BUILD=true.
  */
 export function startNativeAds(): Promise<void> {

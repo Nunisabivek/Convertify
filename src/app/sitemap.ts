@@ -69,7 +69,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: 'contact', priority: 0.4 },
         { path: 'security', priority: 0.4 },
         { path: 'about', priority: 0.4 },
-        { path: 'privacy', priority: 0.3, lastModified: '2026-09-16' },
+        { path: 'privacy', priority: 0.3, lastModified: '2026-10-22' },
         { path: 'terms', priority: 0.3 },
     ]
 

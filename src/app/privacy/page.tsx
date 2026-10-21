@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
 };
 
-const LAST_UPDATED = "16 September 2026";
+const LAST_UPDATED = "22 October 2026";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -139,8 +139,10 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-xl font-semibold text-slate-900">4. Advertising</h2>
             <p className="mt-3">
               <strong>Website (current).</strong> The website shows third-party display
-              ads from Adsterra. Those ads may use cookies and similar technologies
-              to serve and measure ads. We do not control how Adsterra sets cookies.
+              ads from Monetag. They load only after you have saved a converted file
+              (and on blog and information pages after a few seconds), and may use
+              cookies and similar technologies to serve and measure ads. We do not
+              control how Monetag sets cookies.
             </p>
             <p className="mt-3">
               <strong>Android app (current version).</strong> The Android app shows
@@ -169,7 +171,7 @@ export default function PrivacyPolicyPage() {
             </p>
             <p className="mt-3">
               <strong>Cookies on the website.</strong> The website may set cookies or
-              allow third parties (Google Analytics and Adsterra) to set cookies or
+              allow third parties (Google Analytics and Monetag) to set cookies or
               similar storage. You can block or delete cookies in your browser
               settings. Doing so may affect ads or measurement on the website.
             </p>

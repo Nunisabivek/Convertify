@@ -1,5 +1,5 @@
 import { CheckCircle, Shield, Zap, Globe, FileCheck } from 'lucide-react';
-import { TonicNativeBanner } from '@/components/ads/banner';
+import { AdBanner } from '@/components/ads/banner';
 import { toolBenefits } from '@/lib/tool-benefits';
 import { InToolPlayStoreCallout } from '@/components/ui/google-play-badge';
 
@@ -94,7 +94,7 @@ export function ToolSeoContent({
                 </div>
 
                 {/* Native Ad — between content and trust signal */}
-                <TonicNativeBanner />
+                <AdBanner variant="rectangle" />
 
                 {/* Trust Signal */}
                 <div className="text-sm text-slate-500 leading-relaxed border-t border-slate-100 pt-6">
