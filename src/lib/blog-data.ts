@@ -3214,9 +3214,43 @@ Don't rely on the built-in "Print to PDF" function, which can sometimes break yo
 // so the two can never disagree again.
 const MIN_INDEXABLE_WORDS = 350
 
+// Oct 2026: GSC showed 87 of 88 posts stuck in "Discovered - currently not
+// indexed" on a domain with 2 backlinks. Google won't spend crawl budget on
+// dozens of overlapping posts, and they dilute the site's quality signal.
+// Only these distinct, specific posts stay indexed; the rest remain live for
+// readers but are noindex, out of the sitemap and out of every listing.
+// Dropped on purpose: posts that duplicate a tool page's own query
+// (combine-multiple-png-to-pdf vs /png-to-pdf, xls-to-pdf-converter-free vs
+// /excel-to-pdf), brand-stuffed titles, "2025" roundups, and posts pointing
+// at noindexed tools (OCR, PDF/A). Add a slug here AND in
+// blog-sitemap-entries.ts; blog-sitemap.test.ts fails if they drift.
+export const INDEXED_BLOG_SLUGS = new Set([
+  'passport-photo-size-us-india-uk',
+  'compress-pdf-under-100kb-government-forms',
+  'compress-pdf-to-500kb',
+  'compress-pdf-for-visa-application',
+  'compress-pdf-for-whatsapp-sharing',
+  'reduce-pdf-size-without-losing-quality',
+  'combine-scanned-documents-into-one-pdf',
+  'combine-receipts-into-one-pdf',
+  'merge-pdf-android-phone-free',
+  'merge-pdf-on-chromebook',
+  'merge-pdf-windows-10-without-software',
+  'scan-documents-iphone-to-pdf',
+  'heic-to-jpg-on-windows',
+  'webp-to-jpg-windows',
+  'copy-text-from-pdf-that-wont-let-you',
+  'split-pdf-bank-statement-by-month',
+  'extract-one-page-from-pdf',
+  'rotate-scanned-pdf-sideways',
+  'add-page-numbers-thesis-dissertation',
+  'png-to-pdf-without-white-borders',
+  'compress-image-for-website-speed',
+])
+
 export function isBlogPostIndexable(post: BlogPost): boolean {
   const words = post.content.trim().split(/\s+/).filter(Boolean).length
-  return words >= MIN_INDEXABLE_WORDS
+  return INDEXED_BLOG_SLUGS.has(post.slug) && words >= MIN_INDEXABLE_WORDS
 }
 
 // Long-tail posts live in their own file to keep this one navigable, but they
@@ -3323,5 +3357,5 @@ export const allIndexableBlogPosts = [
   ...indexableBlogPosts.map(({ slug, title, excerpt, date, category, readingTime, relatedTool }) => ({
     slug, title, excerpt, date, category, readingTime, relatedTool,
   })),
-  ...staticBlogPosts,
+  ...staticBlogPosts.filter((p) => INDEXED_BLOG_SLUGS.has(p.slug)),
 ]

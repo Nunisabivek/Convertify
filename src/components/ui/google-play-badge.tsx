@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Smartphone, ShieldCheck, Sparkles, Star } from "lucide-react"
+import { Smartphone, ShieldCheck, Sparkles } from "lucide-react"
 
 export const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=com.convertify.work"
 
@@ -111,10 +111,6 @@ export function PlayStoreBanner({ className = "" }: { className?: string }) {
                                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                                 Official Android App
                             </span>
-                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold border border-amber-500/30">
-                                <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                                5.0 on Play Store
-                            </span>
                         </div>
 
                         <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
@@ -205,10 +201,6 @@ export function InToolPlayStoreCallout({
                                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                                 Official Google Play App
                             </span>
-                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-[11px] font-semibold border border-amber-500/30">
-                                <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                                5.0 Rating
-                            </span>
                         </div>
 
                         <h3 className="text-lg sm:text-xl md:text-2xl font-black text-white tracking-tight">
@@ -280,10 +272,6 @@ export function ToolFrontPlayBadge({
                         Google Play
                     </span>
                 </div>
-                <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-amber-400 ml-1 pl-2 border-l border-slate-700">
-                    <Star className="w-3 h-3 fill-amber-400" />
-                    5.0
-                </span>
             </a>
 
             <div className="flex items-center gap-2 text-xs text-slate-600 font-medium text-center">

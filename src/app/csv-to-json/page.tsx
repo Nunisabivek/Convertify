@@ -16,7 +16,7 @@ import { toolContentData } from "@/lib/tool-content-data"
 const contentData = toolContentData["csv-to-json"]
 
 export const metadata: Metadata = {
-    title: "CSV to JSON Converter - Convert CSV Files to JSON Free | Convertify",
+    title: "CSV to JSON Converter — Free, Runs in Your Browser",
     description: "Convert CSV data to JSON format online for free. Smart parsing handles quoted fields, custom delimiters, and large files. No sign-up required, 100% private.",
     keywords: ["csv to json", "convert csv to json", "csv to json converter", "csv to json online", "csv to json free", "csv parser", "spreadsheet to json"],
     alternates: { canonical: "https://convertify.work/csv-to-json" },

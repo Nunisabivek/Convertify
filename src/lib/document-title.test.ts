@@ -20,7 +20,7 @@ const homeSrc = readFileSync(join(root, 'src/app/page.tsx'), 'utf8')
 assert.match(homeSrc, /appDocumentTitle\('Convertify — Free Online PDF Tools, No Upload', MOBILE_HOME_TITLE\)/)
 
 const toolsSrc = readFileSync(join(root, 'src/app/all-tools/page.tsx'), 'utf8')
-assert.match(toolsSrc, /appDocumentTitle\("All Free PDF Tools \| Convertify - No Pricing, No Download, 100% Free", MOBILE_TOOLS_TITLE\)/)
+assert.match(toolsSrc, /appDocumentTitle\("All Free PDF & Image Tools — No Sign-Up, No Download", MOBILE_TOOLS_TITLE\)/)
 
 const css = readFileSync(join(root, 'src/styles/mobile.css'), 'utf8')
 assert.match(css, /--chrome-bottom:\s*calc\(var\(--nav-h\) \+ var\(--inset-bottom\) \+ var\(--ad-banner-h\)\)/)

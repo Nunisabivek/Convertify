@@ -1,20 +1,16 @@
 "use client"
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react"
-import { X } from "lucide-react"
+import { useEffect, useRef, useSyncExternalStore } from "react"
 import { usePathname } from "next/navigation"
 
 // Build-time flag: true when building the Capacitor Android app (npm run build:mobile)
 // All ad components return null so zero ad code is bundled into the app.
 const IS_MOBILE_BUILD = process.env.NEXT_PUBLIC_MOBILE_BUILD === 'true'
 
-// LocalStorage key used to remember the user dismissed the floating footer ad.
-// Re-shows after FOOTER_AD_REVISIT_HOURS so revenue isn't permanently zeroed.
-const FOOTER_AD_DISMISS_KEY = "convertify:footerAdDismissedAt"
-const FOOTER_AD_REVISIT_HOURS = 4
-
+// No fixed/sticky bottom ad: it covered the tool's drop zone and is the kind
+// of overlay Google's page-experience and ads-quality signals penalize.
 interface AdBannerProps {
-    variant?: "footer" | "rectangle" | "native" | "skyscraper" | "responsive" | "mobile-banner"
+    variant?: "rectangle" | "native" | "skyscraper" | "responsive" | "mobile-banner"
     slot?: string
     className?: string
 }
@@ -65,20 +61,6 @@ function useIsClient() {
     return useSyncExternalStore(
         noopSubscribe,
         () => true,
-        () => false,
-    )
-}
-
-function subscribeResize(callback: () => void) {
-    window.addEventListener("resize", callback)
-    return () => window.removeEventListener("resize", callback)
-}
-
-// Tracks the < 768px breakpoint, re-reading on resize. SSR default is false.
-function useIsMobile() {
-    return useSyncExternalStore(
-        subscribeResize,
-        () => window.innerWidth < 768,
         () => false,
     )
 }
@@ -151,22 +133,6 @@ function useLazyAdSlot(conf: AdConfig, enabled: boolean) {
     return containerRef
 }
 
-// Reads the persisted footer-ad dismissal from localStorage. SSR-safe: returns
-// false when there's no window. Used as a lazy useState initializer so we avoid
-// a setState-in-effect. Safe against hydration mismatch because the footer ad
-// only renders once hasMounted is true (i.e. after hydration).
-function readFooterDismissed(variant: AdBannerProps["variant"]) {
-    if (typeof window === "undefined" || IS_MOBILE_BUILD || variant !== "footer") return false
-    try {
-        const ts = localStorage.getItem(FOOTER_AD_DISMISS_KEY)
-        if (!ts) return false
-        const hoursSince = (Date.now() - parseInt(ts, 10)) / (1000 * 60 * 60)
-        return hoursSince < FOOTER_AD_REVISIT_HOURS
-    } catch {
-        return false
-    }
-}
-
 // Component to render a Google AdSense ad unit dynamically
 function AdSenseUnit({
     client,
@@ -214,19 +180,8 @@ function AdSenseUnit({
 }
 
 export function AdBanner({ variant, slot, className }: AdBannerProps) {
-    const effectiveVariant = variant ?? (slot ? "responsive" : "footer")
-    const isMobile = useIsMobile()
+    const effectiveVariant = variant ?? "responsive"
     const hasMounted = useIsClient()
-    const [isDismissed, setIsDismissed] = useState(() => readFooterDismissed(effectiveVariant))
-
-    const dismissFooter = () => {
-        setIsDismissed(true)
-        try {
-            localStorage.setItem(FOOTER_AD_DISMISS_KEY, Date.now().toString())
-        } catch {
-            // ignore
-        }
-    }
 
     if (IS_MOBILE_BUILD) return null
 
@@ -250,12 +205,6 @@ export function AdBanner({ variant, slot, className }: AdBannerProps) {
             adsenseSlot = process.env.NEXT_PUBLIC_ADSENSE_SLOT_SKYSCRAPER
             adWidth = 160
             adHeight = 600
-        } else if (effectiveVariant === "footer") {
-            adsenseSlot = isMobile 
-                ? process.env.NEXT_PUBLIC_ADSENSE_SLOT_MOBILE 
-                : process.env.NEXT_PUBLIC_ADSENSE_SLOT_LEADERBOARD
-            adWidth = isMobile ? 320 : 728
-            adHeight = isMobile ? 50 : 90
         }
     } else {
         if (effectiveVariant === "rectangle" || effectiveVariant === "responsive" || effectiveVariant === "native") {
@@ -267,9 +216,6 @@ export function AdBanner({ variant, slot, className }: AdBannerProps) {
         } else if (effectiveVariant === "skyscraper") {
             adWidth = 160
             adHeight = 300 // Match the user's 160x300 Adsterra unit
-        } else if (effectiveVariant === "footer") {
-            adWidth = isMobile ? 320 : 728
-            adHeight = isMobile ? 50 : 90
         }
     }
 
@@ -286,14 +232,11 @@ export function AdBanner({ variant, slot, className }: AdBannerProps) {
         conf = ADSTERRA_KEYS.rectangle300x250
     } else if (effectiveVariant === "mobile-banner") {
         conf = ADSTERRA_KEYS.mobileBanner320x50
-    } else if (effectiveVariant === "footer") {
-        conf = isMobile ? ADSTERRA_KEYS.mobileBanner320x50 : ADSTERRA_KEYS.leaderboard728x90
     } else if (effectiveVariant === "skyscraper") {
         conf = ADSTERRA_KEYS.skyscraper160x600
     }
 
-    const shouldRender = hasMounted && !(effectiveVariant === "footer" && isDismissed)
-    const containerRef = useLazyAdSlot(conf, shouldRender && !adsenseClient)
+    const containerRef = useLazyAdSlot(conf, hasMounted && !adsenseClient)
 
     if (effectiveVariant === "rectangle" || effectiveVariant === "responsive" || effectiveVariant === "native") {
         return (
@@ -355,35 +298,7 @@ export function AdBanner({ variant, slot, className }: AdBannerProps) {
         )
     }
 
-    // Footer Ad — fixed bottom, dismissible, hidden until mount (no SSR flash)
-    if (!hasMounted || isDismissed) return null
-
-    return (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 border-t backdrop-blur supports-[backdrop-filter]:bg-white/60 shadow-lg flex justify-center overflow-hidden">
-            <div className={isMobile ? "py-1 relative" : "py-2 relative"}>
-                <button
-                    type="button"
-                    onClick={dismissFooter}
-                    aria-label="Dismiss advertisement"
-                    className="absolute top-0 right-0 z-10 p-1 rounded-bl bg-white/80 hover:bg-white text-slate-500 hover:text-slate-900 transition-colors"
-                >
-                    <X className="w-3.5 h-3.5" />
-                </button>
-                <span className="absolute top-0 left-1 text-[9px] text-slate-400 uppercase tracking-wider z-10 pointer-events-none">
-                    Ad
-                </span>
-                {adsenseClient ? (
-                    <AdSenseUnit client={adsenseClient} slot={adsenseSlot} width={adWidth} height={adHeight} />
-                ) : (
-                    <div
-                        ref={containerRef}
-                        className="flex items-center justify-center overflow-hidden"
-                        style={{ width: adWidth, height: adHeight }}
-                    />
-                )}
-            </div>
-        </div>
-    )
+    return null
 }
 
 // In-content responsive ad for blog posts

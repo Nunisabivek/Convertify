@@ -25,6 +25,8 @@ export const metadata: Metadata = {
         "excel to pdf converter",
         "convert excel to pdf free",
     ],
+    // Not in INDEXED_BLOG_SLUGS (blog-data.ts): live for readers, kept out of the index.
+    robots: { index: false, follow: true },
     alternates: {
         canonical: "https://convertify.work/blog/xls-to-pdf-converter-free",
     },

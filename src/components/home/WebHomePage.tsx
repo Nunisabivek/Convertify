@@ -35,7 +35,7 @@ import {
 } from "lucide-react";
 import { InternalLinkMap } from "@/components/seo/internal-link-map";
 import { AdBanner } from "@/components/ads/banner";
-import { blogPosts } from "@/lib/blog-data";
+import { allIndexableBlogPosts } from "@/lib/blog-data";
 import { GooglePlayButton, InToolPlayStoreCallout } from "@/components/ui/google-play-badge";
 
 // Organized tool categories like ilovePDF
@@ -480,7 +480,7 @@ export default function WebHomePage() {
                     </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                    {blogPosts.slice(0, 6).map((post) => (
+                    {allIndexableBlogPosts.slice(0, 6).map((post) => (
                         <Link
                             key={post.slug}
                             href={`/blog/${post.slug}`}

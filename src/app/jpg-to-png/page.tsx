@@ -10,7 +10,7 @@ import { RelatedTools } from "@/components/seo/related-tools"
 import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 
 export const metadata: Metadata = {
-    title: "JPG to PNG Converter - Convert JPEG to PNG Free Online | Convertify",
+    title: "JPG to PNG Converter — Convert JPEG to PNG Free Online",
     description: "Convert JPG and JPEG images to PNG format with transparency support. Free online JPG to PNG converter - no sign-up, no watermarks. Works on all devices.",
     keywords: ["jpg to png", "jpeg to png", "convert jpg to png", "image converter", "transparent png", "free jpg converter"],
     alternates: { canonical: "https://convertify.work/jpg-to-png" },

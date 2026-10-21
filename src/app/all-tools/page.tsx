@@ -43,7 +43,7 @@ import { appDocumentTitle, MOBILE_TOOLS_TITLE } from "@/lib/document-title"
 import { InToolPlayStoreCallout } from "@/components/ui/google-play-badge"
 
 export const metadata: Metadata = {
-    title: appDocumentTitle("All Free PDF Tools | Convertify - No Pricing, No Download, 100% Free", MOBILE_TOOLS_TITLE),
+    title: appDocumentTitle("All Free PDF & Image Tools — No Sign-Up, No Download", MOBILE_TOOLS_TITLE),
     description: "Browse 30+ free PDF tools from Convertify. Merge, split, compress, convert PDF to Word and images online. No download, no registration, and no file limits.",
     keywords: ["convertify tools", "free pdf tools", "pdf tools list", "all pdf converters", "online pdf editor", "pdf to images converter online"],
     alternates: {

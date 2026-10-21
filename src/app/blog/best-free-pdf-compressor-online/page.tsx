@@ -17,6 +17,8 @@ export const metadata: Metadata = {
         "online pdf compressor no watermark",
         "best pdf compression tool"
     ],
+    // Not in INDEXED_BLOG_SLUGS (blog-data.ts): live for readers, kept out of the index.
+    robots: { index: false, follow: true },
     alternates: {
         canonical: "https://convertify.work/blog/best-free-pdf-compressor-online",
     },

@@ -7,7 +7,7 @@ import { appDocumentTitle, MOBILE_ABOUT_TITLE } from "@/lib/document-title"
 
 export const metadata: Metadata = {
     title: appDocumentTitle("About Convertify — Privacy-First, Browser-Based PDF Tools", MOBILE_ABOUT_TITLE),
-    description: "Convertify is a privacy-first online PDF and file converter built by engineers who got tired of uploading sensitive documents to unknown servers. Every tool runs 100% in your browser. Meet the team and methodology behind 40+ tools used by millions.",
+    description: "Convertify is a privacy-first PDF and file converter. Every tool runs in your browser, so your files never leave your device. How the tools are built and tested.",
     alternates: { canonical: "https://convertify.work/about" },
     openGraph: {
         title: "About Convertify — Privacy-First File Tools",
@@ -87,7 +87,7 @@ export default function AboutPage() {
                     </p>
                     <p className="text-lg text-slate-600 mb-8">
                         With 40+ tools covering PDF manipulation, image conversion, and data format transformation,
-                        Convertify serves millions of users who need reliable file tools without the privacy trade-offs.
+                        Convertify is for anyone who needs reliable file tools without the privacy trade-offs.
                     </p>
                 </div>
 

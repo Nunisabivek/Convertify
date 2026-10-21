@@ -81,8 +81,8 @@ Check the size in your file manager. Some portals measure in different units (50
 
   {
     slug: "compress-pdf-for-visa-application",
-    title: "Compressing PDFs for a Visa Application: Size Limits and What Not to Break",
-    excerpt: "Visa portals have some of the strictest upload limits on the internet, and the worst error messages. Here's how to hit the size without damaging the documents an officer has to read.",
+    title: "Compress a PDF for a Visa Application: Size Limits & Pitfalls",
+    excerpt: "Visa portals have strict upload limits and vague errors. How to hit the size cap without damaging documents an officer has to read.",
     date: "2026-05-11",
     category: "how-to",
     readingTime: 7,
@@ -497,7 +497,7 @@ That single test tells you which of the three problems you have and saves trying
 
   {
     slug: "png-to-pdf-without-white-borders",
-    title: "Why Your PNG-to-PDF Conversion Has White Borders (And How to Stop It)",
+    title: "Why PNG to PDF Adds White Borders (And How to Remove Them)",
     excerpt: "You converted an image to PDF and got a thick white margin around it. Here's why that happens, and how to get a PDF page that matches your image exactly.",
     date: "2026-06-22",
     category: "how-to",
@@ -932,7 +932,7 @@ The reliable route: open the statement in a PDF viewer, enter the password, then
 
   {
     slug: "compress-image-for-website-speed",
-    title: "How Much Should You Compress Images for a Website? A Practical Answer",
+    title: "How Much to Compress Images for a Website: A Practical Answer",
     excerpt: "Images are usually the largest thing on a page and the easiest to fix. Here are the target sizes that actually matter, and where compression stops helping.",
     date: "2026-05-07",
     category: "tips",

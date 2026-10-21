@@ -14,9 +14,9 @@ type Props = {
     params: Promise<{ slug: string }>
 }
 
-// Indexability is decided by content length in blog-data.ts (single source
-// of truth, also consumed by sitemap.ts). Thin posts stay noindex AND out of
-// the sitemap so the two signals can never contradict each other.
+// Indexability is decided by INDEXED_BLOG_SLUGS in blog-data.ts (single source
+// of truth, mirrored in blog-sitemap-entries.ts). Everything else stays noindex
+// AND out of the sitemap so the two signals can never contradict each other.
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params

@@ -4,7 +4,7 @@ import { Shield, Lock, Server, Eye, Trash2, Globe, CheckCircle2 } from "lucide-r
 
 export const metadata: Metadata = {
     title: "Security & Privacy | Convertify",
-    description: "Your files are secure with Convertify. All PDF processing happens in your browser - files never leave your device. No account required, no data stored. Learn about our security practices.",
+    description: "All Convertify PDF processing happens in your browser, so files never leave your device. No account, no stored data. How our security works.",
     keywords: ["convertify security", "pdf converter privacy", "secure pdf tools", "safe file converter", "no data storage pdf", "browser-based pdf tools", "gdpr compliant pdf converter"],
     alternates: {
         canonical: 'https://convertify.work/security',

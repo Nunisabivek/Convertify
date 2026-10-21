@@ -17,6 +17,8 @@ export const metadata: Metadata = {
         "online pdf to word converter free",
         "convert pdf to word document free"
     ],
+    // Not in INDEXED_BLOG_SLUGS (blog-data.ts): live for readers, kept out of the index.
+    robots: { index: false, follow: true },
     alternates: {
         canonical: "https://convertify.work/blog/how-to-convert-pdf-to-word-without-software",
     },

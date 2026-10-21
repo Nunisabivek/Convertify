@@ -17,6 +17,8 @@ export const metadata: Metadata = {
         "pdf workflow automation",
         "business pdf solutions"
     ],
+    // Not in INDEXED_BLOG_SLUGS (blog-data.ts): live for readers, kept out of the index.
+    robots: { index: false, follow: true },
     alternates: {
         canonical: "https://convertify.work/blog/pdf-tools-for-small-business",
     },
