@@ -24,6 +24,9 @@ export interface DetectionResult {
     confidence: number
 }
 
+/** Smallest brightness step across a side (paper vs. desk, 0-255) accepted as a page edge. */
+const MIN_CONTRAST = 10
+
 function distance(p1: Point, p2: Point): number {
     const dx = p1.x - p2.x
     const dy = p1.y - p2.y
@@ -34,181 +37,320 @@ function crossProduct(o: Point, a: Point, b: Point): number {
     return (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x)
 }
 
-/**
- * Fit a 2D line (y = mx + c or x = my + c) through points using linear regression.
- */
-function fitLine(
-    points: Point[],
-    isVertical = false
-): { m: number; c: number; isVertical: boolean } | null {
-    if (points.length < 2) return null
-    let sumX = 0
-    let sumY = 0
-    let sumXY = 0
-    let sumX2 = 0
-    const n = points.length
-
-    for (const p of points) {
-        const u = isVertical ? p.y : p.x
-        const v = isVertical ? p.x : p.y
-        sumX += u
-        sumY += v
-        sumXY += u * v
-        sumX2 += u * u
+function polygonArea(poly: Point[]): number {
+    let a = 0
+    for (let i = 0; i < poly.length; i++) {
+        const p = poly[i]
+        const q = poly[(i + 1) % poly.length]
+        a += p.x * q.y - q.x * p.y
     }
+    return Math.abs(a) / 2
+}
 
-    const denom = n * sumX2 - sumX * sumX
-    if (Math.abs(denom) < 1e-5) {
-        return { m: 0, c: sumY / n, isVertical }
+/** 3x3 box blur: keeps sensor noise out of the gradient without smearing edges. */
+function blur3(src: Float32Array, w: number, h: number): Float32Array {
+    const tmp = new Float32Array(src.length)
+    const out = new Float32Array(src.length)
+    for (let y = 0; y < h; y++) {
+        const row = y * w
+        for (let x = 0; x < w; x++) {
+            tmp[row + x] = (src[row + Math.max(0, x - 1)] + src[row + x] + src[row + Math.min(w - 1, x + 1)]) / 3
+        }
     }
-    const m = (n * sumXY - sumX * sumY) / denom
-    const c = (sumY - m * sumX) / n
-    return { m, c, isVertical }
+    for (let y = 0; y < h; y++) {
+        const up = Math.max(0, y - 1) * w
+        const row = y * w
+        const down = Math.min(h - 1, y + 1) * w
+        for (let x = 0; x < w; x++) out[row + x] = (tmp[up + x] + tmp[row + x] + tmp[down + x]) / 3
+    }
+    return out
+}
+
+/** Andrew's monotone chain. */
+function convexHull(pts: Point[]): Point[] {
+    const p = pts.slice().sort((a, b) => a.x - b.x || a.y - b.y)
+    const lower: Point[] = []
+    for (const q of p) {
+        while (lower.length >= 2 && crossProduct(lower[lower.length - 2], lower[lower.length - 1], q) <= 0) lower.pop()
+        lower.push(q)
+    }
+    const upper: Point[] = []
+    for (let i = p.length - 1; i >= 0; i--) {
+        const q = p[i]
+        while (upper.length >= 2 && crossProduct(upper[upper.length - 2], upper[upper.length - 1], q) <= 0) upper.pop()
+        upper.push(q)
+    }
+    return lower.slice(0, -1).concat(upper.slice(0, -1))
+}
+
+interface Line {
+    px: number
+    py: number
+    dx: number
+    dy: number
+}
+
+/** Total least squares: works for any edge angle, unlike y = mx + c. */
+function fitLine(pts: Point[]): Line {
+    let mx = 0
+    let my = 0
+    for (const p of pts) {
+        mx += p.x
+        my += p.y
+    }
+    mx /= pts.length
+    my /= pts.length
+    let sxx = 0
+    let sxy = 0
+    let syy = 0
+    for (const p of pts) {
+        const dx = p.x - mx
+        const dy = p.y - my
+        sxx += dx * dx
+        sxy += dx * dy
+        syy += dy * dy
+    }
+    const th = 0.5 * Math.atan2(2 * sxy, sxx - syy)
+    return { px: mx, py: my, dx: Math.cos(th), dy: Math.sin(th) }
+}
+
+function lineDistance(l: Line, p: Point): number {
+    return Math.abs((p.x - l.px) * l.dy - (p.y - l.py) * l.dx)
+}
+
+function intersect(a: Line, b: Line): Point | null {
+    const den = a.dx * b.dy - a.dy * b.dx
+    if (Math.abs(den) < 1e-6) return null
+    const s = ((b.px - a.px) * b.dy - (b.py - a.py) * b.dx) / den
+    return { x: a.px + s * a.dx, y: a.py + s * a.dy }
 }
 
 /**
- * Intersect two lines. Line 1: y = m1 * x + c1 (or x = m1 * y + c1).
+ * Refit the side a->b through the outline points along its middle, ignoring
+ * the ends (rounded or dog-eared corners) and anything off the line (a finger).
  */
-function intersectLines(
-    l1: { m: number; c: number; isVertical: boolean },
-    l2: { m: number; c: number; isVertical: boolean }
-): Point | null {
-    // Both horizontal (y = mx + c)
-    if (!l1.isVertical && !l2.isVertical) {
-        if (Math.abs(l1.m - l2.m) < 1e-4) return null
-        const x = (l2.c - l1.c) / (l1.m - l2.m)
-        const y = l1.m * x + l1.c
-        return { x, y }
+function refineSide(outline: Point[], a: Point, b: Point): Line {
+    const len = Math.hypot(b.x - a.x, b.y - a.y)
+    const ux = (b.x - a.x) / len
+    const uy = (b.y - a.y) / len
+    const hull: Line = { px: a.x, py: a.y, dx: ux, dy: uy }
+    // Loose first: a soft corner can leave the hull vertex several pixels off.
+    let near = outline.filter((p) => {
+        const t = ((p.x - a.x) * ux + (p.y - a.y) * uy) / len
+        return t > 0.1 && t < 0.9 && lineDistance(hull, p) < Math.max(3, len * 0.08)
+    })
+    if (near.length < 6) return hull
+    let line = fitLine(near)
+    for (const tol of [2.5, 1.2]) {
+        const kept = near.filter((p) => lineDistance(line, p) < tol)
+        if (kept.length < 6) break
+        near = kept
+        line = fitLine(near)
     }
-    // Both vertical (x = my + c)
-    if (l1.isVertical && l2.isVertical) {
-        if (Math.abs(l1.m - l2.m) < 1e-4) return null
-        const y = (l2.c - l1.c) / (l1.m - l2.m)
-        const x = l1.m * y + l1.c
-        return { x, y }
+    return line
+}
+
+/** Four corners of the blob in `mask`, or null if it isn't a page-like quad. */
+function quadFromMask(mask: Uint8Array, w: number, h: number): Quad | null {
+    // Outline: the outermost blob pixel on every row and column. Holes (print) don't matter.
+    const outline: Point[] = []
+    for (let y = 0; y < h; y++) {
+        let x0 = -1
+        let x1 = -1
+        for (let x = 0; x < w; x++) {
+            if (mask[y * w + x]) {
+                if (x0 < 0) x0 = x
+                x1 = x
+            }
+        }
+        if (x0 >= 0) outline.push({ x: x0, y: y + 0.5 }, { x: x1 + 1, y: y + 0.5 })
     }
-    // One horizontal, one vertical
-    const horiz = l1.isVertical ? l2 : l1
-    const vert = l1.isVertical ? l1 : l2
-    // horiz: y = m_h * x + c_h; vert: x = m_v * y + c_v
-    const denom = 1 - horiz.m * vert.m
-    if (Math.abs(denom) < 1e-4) return null
-    const y = (horiz.m * vert.c + horiz.c) / denom
-    const x = vert.m * y + vert.c
-    return { x, y }
+    for (let x = 0; x < w; x++) {
+        let y0 = -1
+        let y1 = -1
+        for (let y = 0; y < h; y++) {
+            if (mask[y * w + x]) {
+                if (y0 < 0) y0 = y
+                y1 = y
+            }
+        }
+        if (y0 >= 0) outline.push({ x: x + 0.5, y: y0 }, { x: x + 0.5, y: y1 + 1 })
+    }
+    if (outline.length < 16) return null
+
+    const hull = convexHull(outline)
+    if (hull.length < 4) return null
+    const hullArea = polygonArea(hull)
+
+    // Simplify the hull: drop the vertex that adds least area, then any vertex
+    // where the outline barely turns.
+    const poly = hull.slice()
+    const at = (i: number) => poly[(i + poly.length) % poly.length]
+    const removeMin = (score: (i: number) => number, limit: number) => {
+        let min = Infinity
+        let idx = -1
+        for (let i = 0; i < poly.length; i++) {
+            const s = score(i)
+            if (s < min) {
+                min = s
+                idx = i
+            }
+        }
+        if (min >= limit) return false
+        poly.splice(idx, 1)
+        return true
+    }
+    while (poly.length > 8) removeMin((i) => Math.abs(crossProduct(at(i - 1), at(i), at(i + 1))), Infinity)
+    const turn = (i: number) => {
+        const ux = at(i).x - at(i - 1).x
+        const uy = at(i).y - at(i - 1).y
+        const vx = at(i + 1).x - at(i).x
+        const vy = at(i + 1).y - at(i).y
+        return Math.abs(Math.atan2(ux * vy - uy * vx, ux * vx + uy * vy))
+    }
+    while (poly.length > 4 && removeMin(turn, 0.45)) {
+        // keep merging near-straight vertices
+    }
+
+    // A thumb or a dog-ear cuts a corner into a short extra edge; the four longest edges are the sides.
+    let edges = poly.map((a, i) => ({ a, b: at(i + 1), len: distance(a, at(i + 1)) }))
+    if (edges.length > 4) {
+        const longest = edges.slice().sort((e, f) => f.len - e.len).slice(0, 4)
+        edges = edges.filter((e) => longest.includes(e))
+    }
+    const sides = edges.map((e) => refineSide(outline, e.a, e.b))
+    const corners: Point[] = []
+    for (let i = 0; i < 4; i++) {
+        const c = intersect(sides[(i + 3) % 4], sides[i])
+        if (!c) return null
+        corners.push(c)
+    }
+
+    // A blob that isn't four-sided (a hand, a mug) loses or gains area as a quad.
+    const ratio = polygonArea(corners) / Math.max(1, hullArea)
+    if (ratio < 0.9 || ratio > 1.1) return null
+
+    // tl has the smallest x + y; the rest follow clockwise on screen.
+    const cx = corners.reduce((s, p) => s + p.x, 0) / 4
+    const cy = corners.reduce((s, p) => s + p.y, 0) / 4
+    corners.sort((p, q) => Math.atan2(p.y - cy, p.x - cx) - Math.atan2(q.y - cy, q.x - cx))
+    let first = 0
+    for (let i = 1; i < 4; i++) {
+        if (corners[i].x + corners[i].y < corners[first].x + corners[first].y) first = i
+    }
+    const [tl, tr, br, bl] = [0, 1, 2, 3].map((i) => corners[(first + i) % 4])
+    return { tl, tr, br, bl }
 }
 
 /**
- * Detects document quad and size in a downscaled camera frame (e.g., 320x240).
+ * Finds the page in a small camera frame (about 320px on the long side).
+ *
+ * Marker watershed on gradient strength: the page floods out from the frame
+ * centre and the surface floods in from the frame border, both through the
+ * flattest pixels first, so they meet on the strongest edge between them:
+ * the paper's outline. Shadows and uneven desk lighting are smooth, print sits
+ * inside the page, so neither moves that line. The page blob's outline is
+ * then reduced to four corners.
  */
 export function detectDocumentQuad(
     imgData: ImageData,
     w: number,
     h: number
 ): DetectionResult | null {
+    const n = w * h
     const d = imgData.data
+    const raw = new Float32Array(n)
+    for (let i = 0, j = 0; i < n; i++, j += 4) raw[i] = 0.299 * d[j] + 0.587 * d[j + 1] + 0.114 * d[j + 2]
+    const lum = blur3(raw, w, h)
 
-    const getLum = (x: number, y: number): number => {
-        const idx = (Math.max(0, Math.min(h - 1, Math.floor(y))) * w + Math.max(0, Math.min(w - 1, Math.floor(x)))) * 4
-        return 0.299 * d[idx] + 0.587 * d[idx + 1] + 0.114 * d[idx + 2]
-    }
-
-    // Sample border brightness to estimate background surface
-    let borderLum = 0
-    let borderCount = 0
-    for (let x = 0; x < w; x += 10) {
-        borderLum += getLum(x, 4) + getLum(x, h - 5)
-        borderCount += 2
-    }
-    for (let y = 0; y < h; y += 10) {
-        borderLum += getLum(4, y) + getLum(w - 5, y)
-        borderCount += 2
-    }
-    const bgLum = borderLum / Math.max(1, borderCount)
-
-    const topPoints: Point[] = []
-    const bottomPoints: Point[] = []
-    const leftPoints: Point[] = []
-    const rightPoints: Point[] = []
-
-    const GRAD_THRESH = 24
-
-    // Scan vertical rays from top and bottom
-    const numVertRays = 16
-    for (let i = 1; i < numVertRays; i++) {
-        const x = Math.floor((w * i) / numVertRays)
-        // Top ray moving down
-        for (let y = 8; y < h * 0.45; y += 2) {
-            const l1 = getLum(x, y - 2)
-            const l2 = getLum(x, y + 2)
-            const grad = Math.abs(l2 - l1)
-            const diffBg = Math.abs(l2 - bgLum)
-            if (grad > GRAD_THRESH && diffBg > 18) {
-                topPoints.push({ x, y })
-                break
-            }
-        }
-        // Bottom ray moving up
-        for (let y = h - 9; y > h * 0.55; y -= 2) {
-            const l1 = getLum(x, y + 2)
-            const l2 = getLum(x, y - 2)
-            const grad = Math.abs(l2 - l1)
-            const diffBg = Math.abs(l2 - bgLum)
-            if (grad > GRAD_THRESH && diffBg > 18) {
-                bottomPoints.push({ x, y })
-                break
-            }
+    const grad = new Uint8Array(n)
+    for (let y = 1; y < h - 1; y++) {
+        for (let x = 1; x < w - 1; x++) {
+            const i = y * w + x
+            grad[i] = Math.min(255, Math.abs(lum[i + 1] - lum[i - 1]) + Math.abs(lum[i + w] - lum[i - w]))
         }
     }
 
-    // Scan horizontal rays from left and right
-    const numHorizRays = 14
-    for (let j = 1; j < numHorizRays; j++) {
-        const y = Math.floor((h * j) / numHorizRays)
-        // Left ray moving right
-        for (let x = 8; x < w * 0.45; x += 2) {
-            const l1 = getLum(x - 2, y)
-            const l2 = getLum(x + 2, y)
-            const grad = Math.abs(l2 - l1)
-            const diffBg = Math.abs(l2 - bgLum)
-            if (grad > GRAD_THRESH && diffBg > 18) {
-                leftPoints.push({ x, y })
-                break
-            }
-        }
-        // Right ray moving left
-        for (let x = w - 9; x > w * 0.55; x -= 2) {
-            const l1 = getLum(x + 2, y)
-            const l2 = getLum(x - 2, y)
-            const grad = Math.abs(l2 - l1)
-            const diffBg = Math.abs(l2 - bgLum)
-            if (grad > GRAD_THRESH && diffBg > 18) {
-                rightPoints.push({ x, y })
-                break
-            }
+    // Labels: 1 = page, 2 = surface. Each pixel is queued once, at the level it was reached.
+    const PAGE = 1
+    const label = new Uint8Array(n)
+    const buckets: number[][] = Array.from({ length: 256 }, () => [])
+    const heads = new Uint32Array(256)
+    const seed = (i: number, l: number) => {
+        label[i] = l
+        buckets[0].push(i)
+    }
+    for (let y = Math.floor(h * 0.45); y < Math.ceil(h * 0.55); y++) {
+        for (let x = Math.floor(w * 0.45); x < Math.ceil(w * 0.55); x++) seed(y * w + x, PAGE)
+    }
+    for (let x = 0; x < w; x++) {
+        seed(x, 2)
+        seed(n - w + x, 2)
+    }
+    for (let y = 1; y < h - 1; y++) {
+        seed(y * w, 2)
+        seed(y * w + w - 1, 2)
+    }
+    const visit = (j: number, l: number, level: number) => {
+        if (label[j]) return
+        label[j] = l
+        buckets[Math.max(level, grad[j])].push(j)
+    }
+    for (let level = 0; level < 256; level++) {
+        const q = buckets[level]
+        while (heads[level] < q.length) {
+            const i = q[heads[level]++]
+            const l = label[i]
+            const x = i % w
+            if (x > 0) visit(i - 1, l, level)
+            if (x < w - 1) visit(i + 1, l, level)
+            if (i >= w) visit(i - w, l, level)
+            if (i < n - w) visit(i + w, l, level)
         }
     }
 
-    if (topPoints.length < 3 || bottomPoints.length < 3 || leftPoints.length < 3 || rightPoints.length < 3) {
-        return null
-    }
+    const mask = new Uint8Array(n)
+    for (let i = 0; i < n; i++) mask[i] = label[i] === PAGE ? 1 : 0
+    const quad = quadFromMask(mask, w, h)
+    if (!quad) return null
 
-    const topLine = fitLine(topPoints, false)
-    const bottomLine = fitLine(bottomPoints, false)
-    const leftLine = fitLine(leftPoints, true)
-    const rightLine = fitLine(rightPoints, true)
+    // A sheet is brighter (or darker) than what it lies on all the way round.
+    // A blob that leaked into the desk, or a page running off the frame, has a
+    // side with no step across it, or sides that disagree.
+    const corners = [quad.tl, quad.tr, quad.br, quad.bl]
+    const cx = (quad.tl.x + quad.tr.x + quad.br.x + quad.bl.x) / 4
+    const cy = (quad.tl.y + quad.tr.y + quad.br.y + quad.bl.y) / 4
+    const at = (x: number, y: number) =>
+        lum[Math.min(h - 1, Math.max(0, Math.floor(y))) * w + Math.min(w - 1, Math.max(0, Math.floor(x)))]
+    const contrast = corners.map((a, k) => {
+        const b = corners[(k + 1) % 4]
+        const len = Math.max(1, distance(a, b))
+        let nx = (b.y - a.y) / len
+        let ny = (a.x - b.x) / len
+        if ((cx - (a.x + b.x) / 2) * nx + (cy - (a.y + b.y) / 2) * ny < 0) {
+            nx = -nx
+            ny = -ny
+        }
+        const steps: number[] = []
+        for (let s = 2; s < 15; s++) {
+            const x = a.x + ((b.x - a.x) * s) / 16
+            const y = a.y + ((b.y - a.y) * s) / 16
+            steps.push(at(x + nx * 3, y + ny * 3) - at(x - nx * 3, y - ny * 3))
+        }
+        steps.sort((p, q) => p - q)
+        return steps[steps.length >> 1]
+    })
+    const sign = Math.sign(contrast[0])
+    if (contrast.some((c) => Math.sign(c) !== sign || Math.abs(c) < MIN_CONTRAST)) return null
 
-    if (!topLine || !bottomLine || !leftLine || !rightLine) return null
+    return describe(quad, w, h)
+}
 
-    const tl = intersectLines(topLine, leftLine)
-    const tr = intersectLines(topLine, rightLine)
-    const br = intersectLines(bottomLine, rightLine)
-    const bl = intersectLines(bottomLine, leftLine)
+function describe(quad: Quad, w: number, h: number): DetectionResult | null {
+    const { tl, tr, br, bl } = quad
 
-    if (!tl || !tr || !br || !bl) return null
-
-    // Boundary sanity checks (-10% to 110% of frame)
-    const validPoint = (p: Point) => p.x >= -w * 0.1 && p.x <= w * 1.1 && p.y >= -h * 0.1 && p.y <= h * 1.1
+    // Boundary sanity checks (-5% to 105% of frame)
+    const validPoint = (p: Point) => p.x >= -w * 0.05 && p.x <= w * 1.05 && p.y >= -h * 0.05 && p.y <= h * 1.05
     if (!validPoint(tl) || !validPoint(tr) || !validPoint(br) || !validPoint(bl)) return null
 
     // Convexity check
@@ -229,8 +371,8 @@ export function detectDocumentQuad(
     const avgHeight = (heightLeft + heightRight) / 2
     const area = avgWidth * avgHeight
 
-    // Minimum area: at least 15% of frame
-    if (area < w * h * 0.15) return null
+    // Minimum area: an ID card held at arm's length is about a tenth of the frame
+    if (area < w * h * 0.08) return null
 
     // Aspect ratio
     const ratio = Math.max(avgWidth, avgHeight) / Math.max(1, Math.min(avgWidth, avgHeight))
@@ -349,6 +491,8 @@ export function warpQuadToCanvas(
     canvas.width = targetWidth
     canvas.height = targetHeight
 
+    // CPU canvas on purpose: Android WebView encodes a GPU canvas's toBlob in
+    // main-thread idle time, which a live viewfinder never leaves (~4s per page).
     const ctx = canvas.getContext('2d', { willReadFrequently: true })
     if (!ctx) return canvas
 

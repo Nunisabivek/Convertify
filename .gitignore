@@ -72,3 +72,6 @@ CRITICAL_SEO_ISSUES_FOUND.md
 seo-audit-results.json
 /tasks/
 /marketing/
+
+# Playwright MCP scratch logs
+.playwright-mcp/

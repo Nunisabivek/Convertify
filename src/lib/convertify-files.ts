@@ -29,6 +29,8 @@ export interface ConvertifyFilesPlugin {
     fileExists(options: { appPath: string }): Promise<{ exists: boolean }>
     getSafeAreaInsets(): Promise<SafeAreaInsets>
     shareFile(options: { appPath: string; mime?: string }): Promise<{ ok: boolean }>
+    /** Drops the Android system splash; the web splash under it starts on the same frame. */
+    splashReady(): Promise<void>
 }
 
 const ConvertifyFiles = registerPlugin<ConvertifyFilesPlugin>('ConvertifyFiles')

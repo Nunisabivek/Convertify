@@ -57,8 +57,32 @@ const FILTERS: { id: ScanFilter; label: string; desc: string; icon: string }[] =
 ]
 
 
-/** Frames the edge outline survives without a detection, so it doesn't flicker. */
+/** Detections the edge outline survives without a page, so it doesn't flicker. */
 const TRACK_GRACE_FRAMES = 8
+
+/** Long side of the frame the page finder analyses. */
+const DETECT_SIZE = 256
+
+/** Rough live look of each filter in the viewfinder; the real filter runs on capture. */
+const FILTER_PREVIEW: Record<ScanFilter, string> = {
+    xerox: "grayscale(1) contrast(1.9) brightness(1.1)",
+    magic: "contrast(1.3) brightness(1.08) saturate(1.25)",
+    grayscale: "grayscale(1) contrast(1.15)",
+    original: "none",
+}
+
+function mapQuad(q: Quad, f: (p: { x: number; y: number }) => { x: number; y: number }): Quad {
+    return { tl: f(q.tl), tr: f(q.tr), br: f(q.br), bl: f(q.bl) }
+}
+
+/** Ease the outline toward the newest detection: glide over jitter, catch up on real movement. */
+function followQuad(prev: Quad | null, next: Quad): Quad {
+    if (!prev) return next
+    const jump = Math.max(
+        ...(["tl", "tr", "br", "bl"] as const).map((k) => Math.hypot(prev[k].x - next[k].x, prev[k].y - next[k].y))
+    )
+    return lerpQuad(prev, next, jump > 24 ? 0.6 : 0.25)
+}
 
 /** `object-fit: cover` mapping between video pixels and the element box. */
 function coverFit(vw: number, vh: number, ew: number, eh: number) {
@@ -174,6 +198,9 @@ export default function OcrPdfClient() {
     const [cameraError, setCameraError] = useState<string | null>(null)
     const [cameraFilter, setCameraFilter] = useState<ScanFilter>("xerox")
     const [shutterFlashing, setShutterFlashing] = useState<boolean>(false)
+    // Captures still being cropped and encoded; the counter includes them so it moves on tap.
+    const [pendingShots, setPendingShots] = useState<number>(0)
+    const shots = pages.length + pendingShots
     const [detectedDocBadge, setDetectedDocBadge] = useState<string>("Fit the page inside the frame")
     const [isTrackingDocument, setIsTrackingDocument] = useState<boolean>(false)
 
@@ -375,14 +402,9 @@ export default function OcrPdfClient() {
         if (!isCameraActive) return
 
         let running = true
-        const DOWNSCALE_W = 320
-        const DOWNSCALE_H = 240
 
         if (!downscaleCanvasRef.current) {
-            const cvs = document.createElement("canvas")
-            cvs.width = DOWNSCALE_W
-            cvs.height = DOWNSCALE_H
-            downscaleCanvasRef.current = cvs
+            downscaleCanvasRef.current = document.createElement("canvas")
         }
         const downCanvas = downscaleCanvasRef.current
         const downCtx = downCanvas.getContext("2d", { willReadFrequently: true })
@@ -390,6 +412,8 @@ export default function OcrPdfClient() {
         let scanBeamPos = 0
         let scanBeamDir = 1
         let misses = 0
+        let frame = 0
+        let target: Quad | null = null
         let shownTracking = false
         let shownBadge = ""
         // Only touch React state when the value changes; this loop runs every frame.
@@ -409,7 +433,7 @@ export default function OcrPdfClient() {
                 const rect = video.getBoundingClientRect()
                 const ew = rect.width
                 const eh = rect.height
-                const dpr = window.devicePixelRatio || 1
+                const dpr = Math.min(2, window.devicePixelRatio || 1)
                 const bw = Math.round(ew * dpr)
                 const bh = Math.round(eh * dpr)
                 if (overlay.width !== bw || overlay.height !== bh) {
@@ -422,37 +446,38 @@ export default function OcrPdfClient() {
                     oCtx.setTransform(dpr, 0, 0, dpr, 0, 0)
                     oCtx.clearRect(0, 0, ew, eh)
 
-                    // Draw video to downscaled canvas for edge analysis
-                    downCtx.drawImage(video, 0, 0, DOWNSCALE_W, DOWNSCALE_H)
-                    const imgData = downCtx.getImageData(0, 0, DOWNSCALE_W, DOWNSCALE_H)
-
-                    // Detect document quad in real time
-                    const detection = detectDocumentQuad(imgData, DOWNSCALE_W, DOWNSCALE_H)
-
-                    // The video is shown with object-fit: cover, so map through the crop.
-                    const vw = video.videoWidth
-                    const vh = video.videoHeight
-                    const fit = coverFit(vw, vh, ew, eh)
-                    const toScreen = (pt: { x: number; y: number }) => ({
-                        x: ((pt.x * vw) / DOWNSCALE_W) * fit.s + fit.ox,
-                        y: ((pt.y * vh) / DOWNSCALE_H) * fit.s + fit.oy,
-                    })
-
-                    if (detection) {
-                        misses = 0
-                        latestDetectionRef.current = detection
-                        const screenQuad: Quad = {
-                            tl: toScreen(detection.quad.tl),
-                            tr: toScreen(detection.quad.tr),
-                            br: toScreen(detection.quad.br),
-                            bl: toScreen(detection.quad.bl),
+                    // The camera delivers ~30fps, so look for the page every other
+                    // frame and spend the rest easing the outline toward it.
+                    if (frame++ % 2 === 0) {
+                        // Same aspect as the video, so the page isn't squashed.
+                        const vw = video.videoWidth
+                        const vh = video.videoHeight
+                        const k = DETECT_SIZE / Math.max(vw, vh)
+                        const dw = Math.round(vw * k)
+                        const dh = Math.round(vh * k)
+                        if (downCanvas.width !== dw || downCanvas.height !== dh) {
+                            downCanvas.width = dw
+                            downCanvas.height = dh
                         }
-                        trackedQuadRef.current = lerpQuad(trackedQuadRef.current, screenQuad, 0.38)
-                        show(true, `${detection.docType} found`)
-                    } else if (++misses > TRACK_GRACE_FRAMES) {
-                        trackedQuadRef.current = null
-                        latestDetectionRef.current = null
+                        downCtx.drawImage(video, 0, 0, dw, dh)
+                        const detection = detectDocumentQuad(downCtx.getImageData(0, 0, dw, dh), dw, dh)
+
+                        if (detection) {
+                            misses = 0
+                            // Video pixels for the capture; screen pixels (through the
+                            // object-fit: cover crop) for the outline.
+                            const inVideo = mapQuad(detection.quad, (p) => ({ x: p.x / k, y: p.y / k }))
+                            latestDetectionRef.current = { ...detection, quad: inVideo }
+                            const fit = coverFit(vw, vh, ew, eh)
+                            target = mapQuad(inVideo, (p) => ({ x: p.x * fit.s + fit.ox, y: p.y * fit.s + fit.oy }))
+                            show(true, `${detection.docType} found`)
+                        } else if (++misses > TRACK_GRACE_FRAMES) {
+                            target = null
+                            trackedQuadRef.current = null
+                            latestDetectionRef.current = null
+                        }
                     }
+                    if (target) trackedQuadRef.current = followQuad(trackedQuadRef.current, target)
 
                     const smoothed = trackedQuadRef.current
                     if (smoothed) {
@@ -471,18 +496,20 @@ export default function OcrPdfClient() {
                         oCtx.fill("evenodd")
                         oCtx.restore()
 
-                        // 2. Glowing high-contrast emerald edge outline
+                        // 2. Emerald edge outline; a wide faint stroke under it stands in
+                        // for shadowBlur, which is too slow to run every frame.
                         oCtx.save()
-                        oCtx.strokeStyle = "#10B981"
-                        oCtx.lineWidth = 3
-                        oCtx.shadowColor = "#10B981"
-                        oCtx.shadowBlur = 10
                         oCtx.beginPath()
                         oCtx.moveTo(tl.x, tl.y)
                         oCtx.lineTo(tr.x, tr.y)
                         oCtx.lineTo(br.x, br.y)
                         oCtx.lineTo(bl.x, bl.y)
                         oCtx.closePath()
+                        oCtx.strokeStyle = "rgba(16, 185, 129, 0.35)"
+                        oCtx.lineWidth = 9
+                        oCtx.stroke()
+                        oCtx.strokeStyle = "#10B981"
+                        oCtx.lineWidth = 3
                         oCtx.stroke()
                         oCtx.restore()
 
@@ -592,7 +619,8 @@ export default function OcrPdfClient() {
 
     // Capture current frame, perspective-warp the tracked document, apply filter, and add page
     const handleCaptureFrame = async () => {
-        if (!videoRef.current) return
+        const video = videoRef.current
+        if (!video || !video.videoWidth) return
 
         void tapHaptic("medium")
 
@@ -600,64 +628,73 @@ export default function OcrPdfClient() {
         setShutterFlashing(true)
         setTimeout(() => setShutterFlashing(false), 220)
 
-        const video = videoRef.current
-        const vw = video.videoWidth || 1920
-        const vh = video.videoHeight || 1080
+        const vw = video.videoWidth
+        const vh = video.videoHeight
 
-        let srcQuad: Quad
+        // Copy this exact frame once; the warp reads it 32 times, and reading the
+        // live video that often is what made each capture stall.
+        const frame = document.createElement("canvas")
+        frame.width = vw
+        frame.height = vh
+        frame.getContext("2d")?.drawImage(video, 0, 0)
         const det = latestDetectionRef.current
 
-        if (det && det.quad) {
-            // Map downscaled detection quad (320x240) to full video resolution
-            const sx = vw / 320
-            const sy = vh / 240
-            srcQuad = {
-                tl: { x: det.quad.tl.x * sx, y: det.quad.tl.y * sy },
-                tr: { x: det.quad.tr.x * sx, y: det.quad.tr.y * sy },
-                br: { x: det.quad.br.x * sx, y: det.quad.br.y * sy },
-                bl: { x: det.quad.bl.x * sx, y: det.quad.bl.y * sy },
+        setPendingShots((n) => n + 1)
+        try {
+            // Let the counter and flash paint before the crop work runs.
+            await new Promise((r) => requestAnimationFrame(() => setTimeout(r)))
+
+            let srcQuad: Quad
+
+            if (det) {
+                // Already in video pixels
+                srcQuad = det.quad
+            } else {
+                // No paper found: capture exactly the dashed guide the user sees,
+                // mapped back through the object-fit: cover crop.
+                const r = video.getBoundingClientRect()
+                const fit = coverFit(vw, vh, r.width, r.height)
+                const toVideo = (x: number, y: number) => ({ x: (x - fit.ox) / fit.s, y: (y - fit.oy) / fit.s })
+                const px = r.width * 0.12
+                const py = r.height * 0.12
+                srcQuad = {
+                    tl: toVideo(px, py),
+                    tr: toVideo(r.width - px, py),
+                    br: toVideo(r.width - px, r.height - py),
+                    bl: toVideo(px, r.height - py),
+                }
             }
-        } else {
-            // No paper found: capture exactly the dashed guide the user sees,
-            // mapped back through the object-fit: cover crop.
-            const r = video.getBoundingClientRect()
-            const fit = coverFit(vw, vh, r.width, r.height)
-            const toVideo = (x: number, y: number) => ({ x: (x - fit.ox) / fit.s, y: (y - fit.oy) / fit.s })
-            const px = r.width * 0.12
-            const py = r.height * 0.12
-            srcQuad = {
-                tl: toVideo(px, py),
-                tr: toVideo(r.width - px, py),
-                br: toVideo(r.width - px, r.height - py),
-                bl: toVideo(px, r.height - py),
+
+            // Perspective warp into flat, de-skewed document canvas (1200px wide for high resolution)
+            const warpedCanvas = warpQuadToCanvas(frame, srcQuad, vw, vh, 1200)
+
+            const toJpeg = () =>
+                new Promise<Blob>((resolve) => {
+                    warpedCanvas.toBlob((b) => resolve(b || new Blob()), "image/jpeg", 0.92)
+                })
+            // toBlob copies the canvas when called, so this is the unfiltered page.
+            // Filter changes on the review screen start from it, not from the B&W copy.
+            const original = toJpeg()
+            applyDocumentFilter(warpedCanvas, cameraFilter)
+            const filtered = cameraFilter === "original" ? original : toJpeg()
+            const [originalBlob, blob] = await Promise.all([original, filtered])
+
+            const newPage: ScannedPage = {
+                id: `${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+                sourceName: "",
+                originalUrl: URL.createObjectURL(originalBlob),
+                filteredBlob: blob,
+                filteredUrl: URL.createObjectURL(blob),
+                filter: cameraFilter,
+                rotation: 0,
+                width: warpedCanvas.width,
+                height: warpedCanvas.height,
             }
+
+            setPages((prev) => [...prev, { ...newPage, sourceName: `Scan Page ${prev.length + 1}` }])
+        } finally {
+            setPendingShots((n) => n - 1)
         }
-
-        // Perspective warp into flat, de-skewed document canvas (1200px wide for high resolution)
-        const warpedCanvas = warpQuadToCanvas(video, srcQuad, vw, vh, 1200)
-
-        // Apply selected scan filter (Xerox B&W, Magic Color, Grayscale, or Original)
-        applyDocumentFilter(warpedCanvas, cameraFilter)
-
-        const blob = await new Promise<Blob>((resolve) => {
-            warpedCanvas.toBlob((b) => resolve(b || new Blob()), "image/jpeg", 0.92)
-        })
-
-        const pageUrl = URL.createObjectURL(blob)
-        const newPage: ScannedPage = {
-            id: `${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
-            sourceName: `Scan Page ${pages.length + 1}`,
-            originalUrl: pageUrl,
-            filteredBlob: blob,
-            filteredUrl: pageUrl,
-            filter: cameraFilter,
-            rotation: 0,
-            width: warpedCanvas.width,
-            height: warpedCanvas.height,
-        }
-
-        setPages((prev) => [...prev, newPage])
-        setActiveIndex(pages.length)
     }
 
     // Process a loaded image URL to create a ScannedPage
@@ -961,7 +998,7 @@ export default function OcrPdfClient() {
                                 stopCamera()
                                 setIsCameraActive(false)
                             }}
-                            className="p-2.5 rounded-full bg-black/40 text-white backdrop-blur-md active:scale-90 transition cursor-pointer"
+                            className="p-2.5 rounded-full bg-black/40 text-white active:scale-90 transition cursor-pointer"
                             aria-label="Close Camera"
                         >
                             <X className="w-5 h-5" />
@@ -969,7 +1006,7 @@ export default function OcrPdfClient() {
 
                         {/* Real-time document detection pill badge */}
                         <div
-                            className={`px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5 transition-all backdrop-blur-md ${
+                            className={`px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5 transition-all ${
                                 isTrackingDocument
                                     ? "bg-emerald-600/90 text-white shadow-lg ring-1 ring-emerald-300 animate-pulse"
                                     : "bg-black/50 text-slate-300 border border-white/20"
@@ -984,7 +1021,7 @@ export default function OcrPdfClient() {
                                 <button
                                     type="button"
                                     onClick={toggleFlash}
-                                    className={`p-2.5 rounded-full backdrop-blur-md active:scale-90 transition cursor-pointer ${
+                                    className={`p-2.5 rounded-full active:scale-90 transition cursor-pointer ${
                                         flashOn ? "bg-amber-400 text-slate-900" : "bg-black/40 text-white"
                                     }`}
                                     aria-label="Toggle Flash"
@@ -996,7 +1033,7 @@ export default function OcrPdfClient() {
                             <button
                                 type="button"
                                 onClick={switchCamera}
-                                className="p-2.5 rounded-full bg-black/40 text-white backdrop-blur-md active:scale-90 transition cursor-pointer"
+                                className="p-2.5 rounded-full bg-black/40 text-white active:scale-90 transition cursor-pointer"
                                 aria-label="Switch Camera"
                             >
                                 <SwitchCamera className="w-5 h-5" />
@@ -1018,6 +1055,7 @@ export default function OcrPdfClient() {
                             muted
                             autoPlay
                             className="absolute inset-0 w-full h-full object-cover"
+                            style={{ filter: FILTER_PREVIEW[cameraFilter] }}
                         />
 
                         {/* Real-time Edge Tracking Overlay Canvas */}
@@ -1051,7 +1089,7 @@ export default function OcrPdfClient() {
                                             void tapHaptic("light")
                                             setCameraFilter(f.id)
                                         }}
-                                        className={`flex shrink-0 items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition cursor-pointer backdrop-blur-md ${
+                                        className={`flex shrink-0 items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition cursor-pointer ${
                                             isSel
                                                 ? "bg-white text-slate-950 shadow-md ring-2 ring-emerald-400 scale-105"
                                                 : "bg-black/40 text-white/80 border border-white/20 hover:bg-black/60"
@@ -1072,7 +1110,7 @@ export default function OcrPdfClient() {
                                 onClick={() => fileInputRef.current?.click()}
                                 className="flex flex-col items-center gap-1 text-white/80 active:scale-90 transition cursor-pointer text-[11px] font-medium"
                             >
-                                <div className="p-3 rounded-full bg-white/15 backdrop-blur-md hover:bg-white/25 transition">
+                                <div className="p-3 rounded-full bg-white/15 hover:bg-white/25 transition">
                                     <Upload className="w-5 h-5 text-white" />
                                 </div>
                                 <span>Upload</span>
@@ -1091,23 +1129,25 @@ export default function OcrPdfClient() {
                             </button>
 
                             {/* Right: Review Pages / Done */}
-                            {pages.length > 0 ? (
+                            {shots > 0 ? (
                                 <button
                                     type="button"
                                     onClick={() => {
                                         void tapHaptic("light")
                                         stopCamera()
                                         setIsCameraActive(false)
+                                        // Review opens on the newest page (shown once its encode lands).
+                                        setActiveIndex(shots - 1)
                                     }}
                                     className="flex flex-col items-center gap-1 text-white active:scale-90 transition cursor-pointer text-[11px] font-bold"
                                 >
                                     <div className="relative p-3 rounded-full bg-emerald-600 text-white shadow-lg">
                                         <Check className="w-5 h-5 stroke-[2.8]" />
                                         <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-white text-emerald-900 text-[10px] font-black flex items-center justify-center shadow-md">
-                                            {pages.length}
+                                            {shots}
                                         </span>
                                     </div>
-                                    <span>Done ({pages.length})</span>
+                                    <span>Done ({shots})</span>
                                 </button>
                             ) : (
                                 <div className="w-12" />
@@ -1120,7 +1160,7 @@ export default function OcrPdfClient() {
             {/* =========================================================================
                 2. EMPTY STATE: INITIAL SCAN / UPLOAD HUB
                ========================================================================= */}
-            {!isCameraActive && pages.length === 0 && (
+            {!isCameraActive && shots === 0 && (
                 <div className="flex flex-col items-center justify-center py-8 px-4 text-center bg-white rounded-3xl border border-slate-200/80 shadow-xs space-y-5">
                     <div className="w-20 h-20 rounded-2xl bg-teal-50 border border-teal-200/80 text-teal-600 flex items-center justify-center shadow-xs">
                         <ScanLine className="w-10 h-10 animate-pulse text-teal-600" />

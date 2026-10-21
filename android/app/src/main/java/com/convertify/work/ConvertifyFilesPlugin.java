@@ -153,6 +153,15 @@ public class ConvertifyFilesPlugin extends Plugin {
         call.resolve(ret);
     }
 
+    /** The web launch splash has painted its first frame; drop the system splash over it. */
+    @PluginMethod
+    public void splashReady(PluginCall call) {
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).releaseSplash();
+        }
+        call.resolve();
+    }
+
     /**
      * Android 15+ draws the WebView edge-to-edge. env(safe-area-inset-*) is 0
      * in the WebView; Capacitor sets --safe-area-inset-* CSS variables instead.

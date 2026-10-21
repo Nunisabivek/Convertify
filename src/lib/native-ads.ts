@@ -34,6 +34,7 @@ const NOTE_DEBOUNCE_MS = 2000
 const holds = new Set<string>()
 let lastBannerHeight = 50
 let bannerLaidOut = false
+let keyboardOpen = false
 
 function adsAllowed(): boolean {
     if (typeof window === 'undefined') return false
@@ -194,6 +195,7 @@ function scheduleBannerRetry(plugin: AdMobModule): void {
 
 async function showBanner(plugin: AdMobModule): Promise<void> {
     await plugin.AdMob.addListener(plugin.BannerAdPluginEvents.Loaded, () => {
+        if (keyboardOpen) void plugin.AdMob.hideBanner().catch(() => {})
         bannerLaidOut = true
         bannerRetryCount = 0
         if (bannerRetryTimer) {
@@ -237,9 +239,34 @@ async function showBanner(plugin: AdMobModule): Promise<void> {
     }
 }
 
+/**
+ * The banner is a native view pinned to the bottom of the activity, and
+ * adjustResize shrinks the activity to sit above the keyboard, so the banner
+ * rode on top of the keyboard while typing. Hide it while the keyboard is up.
+ * The WebView shrinks with the activity, so a much shorter window = keyboard.
+ */
+function hideBannerWithKeyboard(plugin: AdMobModule): void {
+    let width = window.innerWidth
+    let tallest = window.innerHeight
+    const check = () => {
+        // Rotation changes height too; start over when the width changes.
+        if (window.innerWidth !== width) {
+            width = window.innerWidth
+            tallest = 0
+        }
+        tallest = Math.max(tallest, window.innerHeight)
+        const open = window.innerHeight < tallest * 0.8
+        if (open === keyboardOpen) return
+        keyboardOpen = open
+        // hideBanner reports size 0, so --ad-banner-h drops and nothing reserves space above the keys.
+        if (bannerLaidOut) void (open ? plugin.AdMob.hideBanner() : plugin.AdMob.resumeBanner()).catch(() => {})
+    }
+    window.addEventListener('resize', check)
+}
+
 async function applyHolds(): Promise<void> {
     const plugin = admob
-    if (!plugin || !bannerLaidOut) return
+    if (!plugin || !bannerLaidOut || keyboardOpen) return
     try {
         // Banner stays visible everytime below per user requirement
         await plugin.AdMob.resumeBanner()
@@ -305,6 +332,7 @@ async function startNativeAdsInternal(): Promise<void> {
     })
 
     // 4. Request banner
+    hideBannerWithKeyboard(plugin)
     await showBanner(plugin)
 
     // 5. Prefetch interstitial in the background

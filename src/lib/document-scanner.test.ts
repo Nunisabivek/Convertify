@@ -71,4 +71,45 @@ assert.ok(res.quad.br.x >= 270 && res.quad.br.x <= 285, `BR X was ${res.quad.br.
 assert.ok(res.quad.br.y >= 200 && res.quad.br.y <= 215, `BR Y was ${res.quad.br.y}`)
 assert.ok(res.docType.length > 0)
 
+// Test 4: Rotated printed page on a striped desk, light falling off across the
+// frame and a shadow across the page. Desk stripes are stronger edges than the
+// page's shaded side, which used to pull the outline onto the desk.
+{
+    const W2 = 256
+    const H2 = 144
+    const page = [
+        { x: 92, y: 18 },
+        { x: 178, y: 30 },
+        { x: 164, y: 128 },
+        { x: 78, y: 116 },
+    ]
+    const inside = (x: number, y: number) =>
+        page.every((a, k) => {
+            const b = page[(k + 1) % 4]
+            return (b.x - a.x) * (y - a.y) - (b.y - a.y) * (x - a.x) >= 0
+        })
+    const px = new Uint8ClampedArray(W2 * H2 * 4)
+    for (let y = 0; y < H2; y++) {
+        for (let x = 0; x < W2; x++) {
+            let l: number
+            if (inside(x + 0.5, y + 0.5)) {
+                l = 235 - (x - 78) * 0.6 // shadow toward the right edge
+                if (y % 7 < 2 && x > 100 && x < 150) l = 50 // print
+            } else {
+                l = (110 + 30 * Math.sin(x * 0.7 + y * 0.2)) * (0.8 + (0.4 * x) / W2)
+            }
+            const i = (y * W2 + x) * 4
+            px[i] = px[i + 1] = px[i + 2] = l
+            px[i + 3] = 255
+        }
+    }
+    const det = detectDocumentQuad({ data: px, width: W2, height: H2 } as ImageData, W2, H2)
+    assert.ok(det, 'Should find the shaded page on a striped desk')
+    const found = [det.quad.tl, det.quad.tr, det.quad.br, det.quad.bl]
+    found.forEach((p, k) => {
+        const err = Math.hypot(p.x - page[k].x, p.y - page[k].y)
+        assert.ok(err < 3, `corner ${k} off by ${err.toFixed(1)}px`)
+    })
+}
+
 console.log('Document scanner unit test passed! Detected:', res.docType, 'Ratio:', res.ratio)

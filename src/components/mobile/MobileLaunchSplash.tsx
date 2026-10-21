@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import ConvertifyFiles from '@/lib/convertify-files'
 
 const SPLASH_STORAGE_KEY = 'convertify_splash_shown'
 const WORD = 'Convertify'
@@ -15,9 +16,14 @@ const FONT_WAIT_MS = 300
 
 type Phase = 'idle' | 'play' | 'leave' | 'done'
 
+/** Drop the Android system splash. No-op (rejects, caught) outside the app shell. */
+const releaseNativeSplash = () => ConvertifyFiles.splashReady().catch(() => {})
+
 /**
- * First frame is the Android system splash (blue circle, white C, centred),
- * so the native -> web handoff has no visible seam. Then: the circle squashes
+ * First frame is the Android system splash (blue circle, white C, centred).
+ * The system splash stays up until this has painted and is ready to play, then
+ * cuts away on the frame the animation starts, so the logo moves straight into
+ * the hop instead of fading out and popping back. Then: the circle squashes
  * into the app tile, hops, lands, file chips pop out and get swallowed, the
  * wordmark bounces in, and the tile flies into the top-bar logo.
  * Rendered in the static HTML; `data-launched` (set before paint in layout)
@@ -63,6 +69,7 @@ export default function MobileLaunchSplash() {
             // ignore
         }
         if (seen) {
+            void releaseNativeSplash()
             setPhase('done')
             return
         }
@@ -73,8 +80,11 @@ export default function MobileLaunchSplash() {
         const start = () => {
             if (started || cancelled) return
             started = true
-            setPhase('play')
-            later(leave, reduced ? HOLD_REDUCED_MS : HOLD_MS)
+            void releaseNativeSplash().then(() => {
+                if (cancelled) return
+                setPhase('play')
+                later(leave, reduced ? HOLD_REDUCED_MS : HOLD_MS)
+            })
         }
         // Wordmark letters bounce in; a font swap mid-bounce would jitter them.
         const family = getComputedStyle(document.body).getPropertyValue('--font-app').trim()
