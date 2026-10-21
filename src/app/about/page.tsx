@@ -202,7 +202,7 @@ export default function AboutPage() {
                             <p>
                                 Every tool is tested on real artifacts before it ships: actual government forms (visa, passport, EPF),
                                 large scanned PDFs, design exports from Figma and Sketch, and source code files. We don&apos;t just test the
-                                happy path — we test 100MB PDFs, multi-language OCR, password-protected files, and broken inputs.
+                                happy path — we test 100MB PDFs, password-protected files, and broken inputs.
                             </p>
                         </div>
                     </div>

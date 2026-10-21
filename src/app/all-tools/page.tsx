@@ -44,7 +44,7 @@ import { InToolPlayStoreCallout } from "@/components/ui/google-play-badge"
 
 export const metadata: Metadata = {
     title: appDocumentTitle("All Free PDF & Image Tools — No Sign-Up, No Download", MOBILE_TOOLS_TITLE),
-    description: "Browse 30+ free PDF tools from Convertify. Merge, split, compress, convert PDF to Word and images online. No download, no registration, and no file limits.",
+    description: "Browse 30+ free PDF tools from Convertify. Merge, split, compress, convert PDF to Word and images online. No download, no registration, and no watermarks.",
     keywords: ["convertify tools", "free pdf tools", "pdf tools list", "all pdf converters", "online pdf editor", "pdf to images converter online"],
     alternates: {
         canonical: "https://convertify.work/all-tools",
@@ -84,7 +84,7 @@ const tools: { category: string; items: Tool[] }[] = [
             { title: "Crop PDF", description: "Trim margins and remove excess white space.", icon: Crop, href: "/crop-pdf", color: "text-lime-600 bg-lime-50" },
             { title: "Rotate PDF", description: "Rotate your PDF pages as needed.", icon: RotateCw, href: "/rotate-pdf", color: "text-pink-600 bg-pink-50" },
             { title: "Add Page Numbers", description: "Insert page numbers into your PDF.", icon: Hash, href: "/add-page-numbers", color: "text-fuchsia-600 bg-fuchsia-50" },
-            { title: "Watermark PDF", description: "Stamp text or an image across every page.", icon: Droplet, href: "/watermark-pdf", color: "text-sky-600 bg-sky-50" },
+            { title: "Watermark PDF", description: "Stamp a text watermark across every page.", icon: Droplet, href: "/watermark-pdf", color: "text-sky-600 bg-sky-50" },
             { title: "Edit PDF", description: "Add text, freehand notes, highlights, and stamps to PDF.", icon: FilePenLine, href: "/edit-pdf", color: "text-purple-600 bg-purple-50" },
             { title: "Compare PDF", description: "Find visual and text differences between two PDF versions.", icon: FileSearch, href: "/compare-pdf", color: "text-cyan-600 bg-cyan-50" },
         ]
@@ -93,7 +93,7 @@ const tools: { category: string; items: Tool[] }[] = [
         category: "Security & Signature",
         items: [
             { title: "Protect PDF", description: "Add AES-256 password protection and permissions to your PDF.", icon: Lock, href: "/protect-pdf", color: "text-blue-600 bg-blue-50" },
-            { title: "Sign PDF", description: "Draw, type, or upload digital signatures onto PDFs.", icon: Signature, href: "/sign-pdf", color: "text-indigo-600 bg-indigo-50" },
+            { title: "Sign PDF", description: "Draw, type, or upload a signature onto PDFs.", icon: Signature, href: "/sign-pdf", color: "text-indigo-600 bg-indigo-50" },
             { title: "Unlock PDF", description: "Remove password security and printing restrictions.", icon: LockOpen, href: "/unlock-pdf", color: "text-emerald-600 bg-emerald-50" },
             { title: "Redact PDF", description: "Permanently blackout sensitive text, data, and SSNs.", icon: FileMinus2, href: "/redact-pdf", color: "text-slate-900 bg-slate-100" },
         ]
@@ -103,7 +103,7 @@ const tools: { category: string; items: Tool[] }[] = [
         items: [
             { title: "Compress PDF", description: "100KB, 200KB, 10MB, or Gmail’s 25MB cap.", icon: Minimize2, href: "/compress-pdf", color: "text-green-600 bg-green-50" },
             { title: "Repair PDF", description: "Rebuild corrupted XRef tables and damaged files.", icon: WandSparkles, href: "/repair-pdf", color: "text-amber-600 bg-amber-50" },
-            { title: "Compress Image", description: "Shrink JPG and PNG files without visible loss.", icon: Shrink, href: "/image-compressor", color: "text-lime-600 bg-lime-50" },
+            { title: "Compress Image", description: "Shrink JPG, PNG and WebP into smaller JPGs.", icon: Shrink, href: "/image-compressor", color: "text-lime-600 bg-lime-50" },
             { title: "Resize Image", description: "Change image dimensions to an exact size.", icon: Ruler, href: "/resize-image", color: "text-amber-600 bg-amber-50" },
         ]
     },
@@ -111,7 +111,7 @@ const tools: { category: string; items: Tool[] }[] = [
         category: "Convert from PDF",
         items: [
             { title: "PDF to Word", description: "Pull the text out of a PDF into an editable DOCX.", icon: FileText, href: "/pdf-to-word", color: "text-blue-600 bg-blue-50" },
-            { title: "PDF to Excel", description: "Extract tables from PDF into an Excel spreadsheet.", icon: Sheet, href: "/pdf-to-excel", color: "text-emerald-600 bg-emerald-50" },
+            { title: "PDF to Excel", description: "Pull PDF text into Excel rows, one sheet per page.", icon: Sheet, href: "/pdf-to-excel", color: "text-emerald-600 bg-emerald-50" },
             { title: "PDF to PowerPoint", description: "Convert PDF pages into widescreen presentation slides (.pptx).", icon: Presentation, href: "/pdf-to-powerpoint", color: "text-orange-600 bg-orange-50" },
             { title: "PDF to JPG", description: "Convert PDF pages to JPG images.", icon: ImageIcon, href: "/pdf-to-jpg", color: "text-yellow-600 bg-yellow-50" },
             { title: "PDF to PNG", description: "Convert PDF pages to PNG images.", icon: ImageIcon, href: "/pdf-to-png", color: "text-cyan-600 bg-cyan-50" },
@@ -140,7 +140,7 @@ const tools: { category: string; items: Tool[] }[] = [
             { title: "PNG to JPG", description: "Convert PNG images to JPG.", icon: FileImage, href: "/png-to-jpg", color: "text-red-600 bg-red-50" },
             { title: "BMP to JPG", description: "Convert and shrink old bitmap files.", icon: FileImage, href: "/bmp-to-jpg", color: "text-violet-600 bg-violet-50" },
             { title: "GIF to PNG", description: "Extract GIF frames as PNG images.", icon: FileImage, href: "/gif-to-png", color: "text-pink-600 bg-pink-50" },
-            { title: "SVG to PNG", description: "Rasterize vector art at any resolution.", icon: FileImage, href: "/svg-to-png", color: "text-emerald-600 bg-emerald-50" },
+            { title: "SVG to PNG", description: "Rasterize vector art up to 8192 px wide.", icon: FileImage, href: "/svg-to-png", color: "text-emerald-600 bg-emerald-50" },
         ]
     },
     {

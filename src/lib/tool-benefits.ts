@@ -130,8 +130,8 @@ export const toolBenefits: Record<string, Benefit[]> = {
         { icon: "globe", title: "Pages Copied, Not Redrawn", description: "Text and images stay exactly as they were" },
     ],
     "image-compressor": [
-        { icon: "fileCheck", title: "Target Size in KB", description: "Hit exact size for upload portals" },
-        { icon: "zap", title: "JPG / PNG / WebP", description: "Compresses every common image format" },
+        { icon: "fileCheck", title: "Quality Slider", description: "Pick 30–95% JPEG quality" },
+        { icon: "zap", title: "JPG / PNG / WebP", description: "Accepts all three; saves smaller JPGs" },
         { icon: "shield", title: "Photos Stay Local", description: "Originals never leave your device" },
         { icon: "globe", title: "Phone-Friendly", description: "Drag in shots from your camera roll" },
     ],
@@ -143,7 +143,7 @@ export const toolBenefits: Record<string, Benefit[]> = {
     ],
     "heic-to-jpg": [
         { icon: "zap", title: "iPhone-Native", description: "Decodes Apple HEIC photos in any browser" },
-        { icon: "fileCheck", title: "Quality Slider", description: "Pick file size vs visual quality" },
+        { icon: "fileCheck", title: "High-Quality JPG", description: "Saved at 90% JPEG quality" },
         { icon: "shield", title: "Photos Stay Private", description: "Camera-roll images never uploaded" },
         { icon: "globe", title: "Batch Convert", description: "Drop many HEICs and grab a ZIP" },
     ],

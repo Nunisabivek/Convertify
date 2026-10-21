@@ -3,6 +3,7 @@
 import Link from "next/link"
 import {
     FileStack,
+    ScanLine,
     Scissors,
     Minimize2,
     Image as ImageIcon,
@@ -45,14 +46,15 @@ interface ToolLink {
     description: string
 }
 
-// Only tools that actually work and are in the sitemap. ocr-pdf and
-// pdf-to-pdfa are left out on purpose: they are noindex until they do what
-// their queries promise (no OCR engine; output is not PDF/A). Every other
+// Only tools that actually work and are in the sitemap. pdf-to-pdfa is left
+// out on purpose: it is noindex until its output is real PDF/A. /ocr-pdf is
+// listed as the document scanner it is (there is no OCR engine). Every other
 // tool is listed so no indexable tool page is left with a single inbound link.
 const allToolLinks: ToolLink[] = [
     // Forms & KYC (indexed unique tools — not placeholders)
     { title: "Fit to size", href: "/fit-to-size", icon: Gauge, color: "text-blue-500", description: "Hit an exact KB or MB window" },
     { title: "Passport photo", href: "/passport-photo", icon: UserRound, color: "text-indigo-500", description: "US 2×2, 630×810, visa sizes" },
+    { title: "Scan to PDF", href: "/ocr-pdf", icon: ScanLine, color: "text-teal-500", description: "Camera scanner, edge crop, filters" },
     { title: "White background", href: "/remove-background", icon: Eraser, color: "text-sky-500", description: "Passport, KYC, LinkedIn headshot" },
 
     // Organize PDF

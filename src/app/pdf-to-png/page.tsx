@@ -64,7 +64,7 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Convert PDF pages to high-quality PNG images with transparency support.
+                        Convert every PDF page to a lossless PNG image. Multi-page files download as a ZIP.
                     </p>
                 </div>
                 <ToolSwapper />

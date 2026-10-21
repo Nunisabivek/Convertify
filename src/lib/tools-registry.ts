@@ -169,7 +169,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
             {
                 id: 'compress-pdf',
                 name: 'Compress PDF',
-                description: 'Reduce file size while maintaining quality.',
+                description: 'Shrink a PDF to a target like 100 KB or 200 KB.',
                 icon: { lucide: 'Minimize2', material: 'compress' },
                 href: 'compress-pdf',
                 color: { text: 'text-green-600', bg: 'bg-green-50', hex: '#16A34A' },
@@ -220,8 +220,8 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
             },
             {
                 id: 'ocr-pdf',
-                name: 'Scan Document (OCR)',
-                description: 'Scan camera photos to PDF with Xerox filters & extract text.',
+                name: 'Scan Document',
+                description: 'Scan paper to PDF with your camera: auto-crop and Xerox filters.',
                 icon: { lucide: 'ScanLine', material: 'document_scanner' },
                 href: 'ocr-pdf',
                 color: { text: 'text-teal-600', bg: 'bg-teal-50', hex: '#0D9488' },
@@ -280,7 +280,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
             {
                 id: 'pdf-to-excel',
                 name: 'PDF to Excel',
-                description: 'Convert PDF tables to Excel spreadsheets.',
+                description: 'Pull PDF text into Excel rows.',
                 icon: { lucide: 'Sheet', material: 'table_chart' },
                 href: 'pdf-to-excel',
                 color: { text: 'text-green-600', bg: 'bg-green-50', hex: '#16A34A' },
@@ -391,7 +391,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
             {
                 id: 'html-to-pdf',
                 name: 'HTML to PDF',
-                description: 'Convert web pages and HTML to PDF.',
+                description: 'Turn pasted HTML into a plain-text PDF.',
                 icon: { lucide: 'Code', material: 'code' },
                 href: 'html-to-pdf',
                 color: { text: 'text-rose-600', bg: 'bg-rose-50', hex: '#E11D48' },
@@ -411,7 +411,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
             {
                 id: 'jpg-to-png',
                 name: 'JPG to PNG',
-                description: 'Convert JPG images to PNG with transparency.',
+                description: 'Convert JPG images to PNG format.',
                 icon: { lucide: 'Image', material: 'image' },
                 href: 'jpg-to-png',
                 color: { text: 'text-purple-600', bg: 'bg-purple-50', hex: '#9333EA' },
@@ -463,7 +463,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
             {
                 id: 'image-compressor',
                 name: 'Image Compressor',
-                description: 'Compress images without losing quality.',
+                description: 'Compress images into smaller JPGs.',
                 icon: { lucide: 'Minimize2', material: 'compress' },
                 href: 'image-compressor',
                 color: { text: 'text-green-600', bg: 'bg-green-50', hex: '#16A34A' },
@@ -548,7 +548,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
             {
                 id: 'edit-pdf',
                 name: 'Edit PDF',
-                description: 'Add text, images and annotations to PDF.',
+                description: 'Add text, drawings, highlights and stamps to PDF.',
                 icon: { lucide: 'FilePenLine', material: 'edit_document' },
                 href: 'edit-pdf',
                 color: { text: 'text-purple-600', bg: 'bg-purple-50', hex: '#9333EA' },
@@ -587,7 +587,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
             {
                 id: 'watermark-pdf',
                 name: 'Watermark PDF',
-                description: 'Add text or image watermarks to PDF.',
+                description: 'Add a text watermark to every PDF page.',
                 icon: { lucide: 'Droplet', material: 'water_drop' },
                 href: 'watermark-pdf',
                 color: { text: 'text-blue-600', bg: 'bg-blue-50', hex: '#2563EB' },

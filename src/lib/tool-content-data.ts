@@ -8,9 +8,9 @@ export const toolContentData: Record<string, {
     keywords: string[];
 }> = {
     "merge-pdf": {
-        description: "Merge PDF files online for free. Combine multiple PDFs into one document with drag-and-drop reordering. No watermarks, no sign-up, no file size limits. Mix PDFs with JPG/PNG images. 100% private — files never leave your browser.",
+        description: "Merge PDF files online for free. Combine multiple PDFs into one document with drag-and-drop reordering. No watermarks, no sign-up, no limit on the number of files. Mix PDFs with JPG/PNG images. 100% private — files never leave your browser.",
         features: [
-            "No file size limits on merged documents",
+            "No limit on the number of files (up to 200 MB each)",
             "No watermarks added to your documents",
             "No sign-up or registration required",
             "Drag files (or use the arrows) to set the exact order",
@@ -34,7 +34,7 @@ export const toolContentData: Record<string, {
             "Extract distinct pages or custom ID ranges (e.g., 2-5)",
             "Split entire PDF into individual pages instantly",
             "Remove unwanted or sensitive pages securely",
-            "Preview pages before extracting",
+            "Pick pages by number or type a range",
             "100% private - files never leave your device"
         ],
         useCases: [
@@ -240,7 +240,7 @@ export const toolContentData: Record<string, {
             "Drag-and-drop to set the exact page order before converting",
             "Preserves PNG transparency and alpha channels",
             "Works on iPhone, Android, Windows & Mac browsers",
-            "Batch process 100+ images in a single PDF",
+            "No fixed image count; large batches are limited by device memory",
             "100% private — files never uploaded to any server",
             "No sign-up, no watermarks, no daily limits"
         ],
@@ -255,20 +255,20 @@ export const toolContentData: Record<string, {
         keywords: ["combine png to pdf", "merge png to pdf", "multiple png to pdf", "png to pdf hd", "png to pdf high quality", "combine pngs into pdf", "combine multiple png into one pdf", "save png as pdf", "convert png to pdf online free", "how to combine png files into one pdf"]
     },
     "pdf-to-png": {
-        description: "Extract sharp, high-resolution PNG images from your PDF documents with Convertify. We support 'Alpha-Channel Preservation', allowing you to export pages with transparent backgrounds—perfect for logos, signatures, and design assets. Choose resolutions up to 300 DPI for professional social media and print-ready image extraction.",
+        description: "Convert every page of a PDF to a PNG image with Convertify. Pages are rendered at 2× their native size (about 144 DPI on a letter-size page) on a white background and saved losslessly, so text and line art have no JPG artifacts. Multi-page files download as a ZIP.",
         features: [
-            "Alpha Support: Preserves transparent backgrounds for design",
-            "High-Res Export: Up to 300 DPI for professional print quality",
-            "Asset Extractor: Pull individual photos or logos from any page",
-            "Batch ZIP: Convert 100+ pages into sharp PNG images instantly",
-            "No Aliasing: Vector-to-pixel engine ensures smooth text edges",
+            "One PNG per page, rendered at 2× page size",
+            "Lossless PNG: no JPG artifacts on text or line art",
+            "Whole pages only: embedded images are not extracted separately",
+            "Multi-page PDFs download as a ZIP",
+            "No watermark, no sign-up",
             "Privacy First: All image extraction happens in your local browser"
         ],
         useCases: [
-            "Extracting logos and graphics from PDF brand guides",
+            "Saving a page of a PDF brand guide as an image",
             "Converting PDF pages into sharp social media posts",
-            "Saving document pages as transparent PNGs for overlays",
-            "Creating high-quality image assets for web development",
+            "Putting document pages into slides or web pages",
+            "Creating page images for web development",
             "Archiving design components as lossless PNG files"
         ],
         keywords: ["pdf to png converter free online", "convert pdf to high quality png", "extract pdf pages as images", "pdf to png no watermark"]
@@ -332,23 +332,23 @@ export const toolContentData: Record<string, {
         keywords: ["edit pdf online free", "annotate pdf", "pdf markup tool", "flatten pdf"]
     },
     "ocr-pdf": {
-        description: "Transform static scans into searchable, editable documents with Convertify's high-accuracy OCR (Optical Character Recognition). Our engine achieves 99.8% precision and preserves complex formatting like tables, bold text, and column layouts. Whether it's an old archive or a blurry photo, our AI-powered recognition makes your content accessible in 100+ languages—all processed securely in your browser.",
+        description: "Scan paper documents to PDF with your phone or webcam. Convertify's scanner finds the page edges live, crops and straightens each capture, and applies a Xerox B&W, Magic Color, Grayscale or Original filter. Pages are saved as images in one PDF; there is no OCR, so the text is not searchable. Everything is processed in your browser.",
         features: [
-            "99.8% Accuracy: High-precision text recognition for all fonts",
-            "Format Preservation: Maintains bold, italics, tables, and columns",
-            "Multi-Language: Supports recognition for 100+ global languages",
-            "Searchable Layer: Creates a Ctrl+F searchable layer over scans",
-            "Denoising Filter: Improves extraction from low-quality/blurry scans",
+            "Live Edge Detection: Outlines the page in the camera view",
+            "Auto Crop & Straighten: Corrects the perspective of each capture",
+            "Scan Filters: Xerox B&W, Magic Color, Grayscale or Original",
+            "Multi-Page: Scan many pages and save them as one PDF",
+            "Add Files: Import photos or PDF pages alongside camera scans",
             "100% Secure: Files are processed locally, never uploaded to a cloud"
         ],
         useCases: [
-            "Digitizing old paper archives into searchable PDF libraries",
-            "Extracting editable text from scanned legal contracts",
-            "Making photographed textbook pages searchable for students",
-            "Converting image-only PDF reports into structured data",
-            "Translating scanned documents by first extracting the text"
+            "Scanning receipts into one PDF for an expense claim",
+            "Sending a signed paper form back by email",
+            "Capturing handwritten notes or handouts as a PDF",
+            "Turning a phone photo of a letter into a clean B&W page",
+            "Preparing paper documents for online application portals"
         ],
-        keywords: ["ocr pdf online free", "scanned pdf to searchable text", "high accuracy ocr", "extract text from image pdf"]
+        keywords: ["document scanner online", "scan document to pdf", "camera to pdf", "photo to scanned pdf"]
     },
     "add-page-numbers": {
         description: "Add professional pagination or Bates numbering to your PDF documents with Convertify. Our tool gives you 'Logical Sequencing' control—letting you skip cover pages, start numbering from any index, and even number multiple files as one continuous set. Perfect for legal professionals, students, and businesses who need precise document organization.",
@@ -505,15 +505,15 @@ export const toolContentData: Record<string, {
             "Reads the PDF's real embedded text layer, not a placeholder",
             "Instant, local extraction with no upload",
             "Copy to clipboard or download as .txt",
-            "No file size limits",
+            "PDFs up to 200 MB",
             "Privacy First: Files never leave your local browser session"
         ],
         useCases: [
             "Converting multi-column academic journals to plain text",
-            "Extracting data from scanned receipts and invoices",
+            "Pulling the text out of digital invoices and statements",
             "Repurposing legacy PDF content for new blog posts or books",
             "Preparing text for advanced AI analysis or sentiment tools",
-            "Unlocking selectable text from 'image-only' legal archives"
+            "Copying clauses out of contracts exported as PDF"
         ],
         keywords: ["pdf to text", "extract text from pdf", "ocr pdf to text", "convert pdf to txt"]
     },
@@ -803,10 +803,10 @@ export const toolContentData: Record<string, {
         keywords: ["base64 encoder", "base64 decoder", "base64 encode", "base64 decode", "base64 converter", "base64 to text", "text to base64", "base64 online", "base64 encode online", "base64 decode online", "image to base64", "base64 to image"]
     },
     "qr-code-generator": {
-        description: "Generate a scannable QR code for any URL or text and download it as a PNG. Pick the output size — 256, 400, 512 or 1024 pixels — and save it straight to your device. No sign-up, no account, and no limit on how many you make.",
+        description: "Generate a scannable QR code for any URL or text and download it as a PNG. Pick the output size — 256, 400 or 512 pixels — and save it straight to your device. No sign-up, no account, and no limit on how many you make.",
         features: [
             "Encode any URL or text, up to 4000 characters",
-            "Choose an output size from 256px up to 1024px",
+            "Choose an output size of 256, 400 or 512px",
             "Live preview before you download",
             "Download as PNG, ready for print or screen",
             "Free with no sign-up and no usage limit",

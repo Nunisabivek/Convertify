@@ -66,7 +66,7 @@ export default function Page() {
                 faqs={[
                     { question: "What is HEIC format?", answer: "HEIC (High Efficiency Image Container) is Apple's default photo format on iPhones. It offers better compression than JPG but isn't compatible with all devices." },
                     { question: "Why convert HEIC to JPG?", answer: "JPG is universally compatible. Convert HEIC to view iPhone photos on Windows, Android, older devices, or to share with others." },
-                    { question: "Is this HEIC converter free?", answer: "Yes, Convertify's HEIC to JPG converter is completely free with no file limits, watermarks, or sign-up required." },
+                    { question: "Is this HEIC converter free?", answer: "Yes, Convertify's HEIC to JPG converter is completely free with no limit on the number of photos, no watermarks, and no sign-up required." },
                     { question: "Will I lose quality converting HEIC to JPG?", answer: "Minimal quality loss may occur due to re-compression, but our converter maintains high quality output." },
                 ]}
             />

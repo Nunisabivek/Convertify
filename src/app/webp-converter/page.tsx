@@ -68,7 +68,7 @@ export default function Page() {
                     { question: "What is WebP format?", answer: "WebP is a modern image format developed by Google that provides superior compression. WebP images are 25-35% smaller than JPG/PNG at equivalent quality." },
                     { question: "Why convert to WebP?", answer: "WebP offers smaller file sizes for faster websites. It supports both lossy and lossless compression, plus transparency." },
                     { question: "Why convert from WebP?", answer: "Some older software and devices don't support WebP. Converting to JPG or PNG ensures compatibility everywhere." },
-                    { question: "Is this WebP converter free?", answer: "Yes, Convertify's WebP converter is completely free with no file limits, watermarks, or sign-up required." },
+                    { question: "Is this WebP converter free?", answer: "Yes, Convertify's WebP converter is completely free with no limit on the number of files, no watermarks, and no sign-up required." },
                 ]}
             />
 

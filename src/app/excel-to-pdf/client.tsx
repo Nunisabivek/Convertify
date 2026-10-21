@@ -10,6 +10,7 @@ import * as XLSX from "xlsx"
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import { finishConvert } from "@/lib/native-file"
+import { CELL_PADDING, layoutSheet, toWinAnsi } from "@/lib/sheet-layout"
 
 export default function ExcelToPdfClient() {
     const [file, setFile] = useState<File | null>(null)
@@ -43,7 +44,7 @@ export default function ExcelToPdfClient() {
 
     const showPreview = (workbook: XLSX.WorkBook, sheetName: string) => {
         const sheet = workbook.Sheets[sheetName]
-        const json = XLSX.utils.sheet_to_json(sheet, { header: 1 }) as string[][]
+        const json = XLSX.utils.sheet_to_json(sheet, { header: 1, raw: false }) as string[][]
         setPreview(json.slice(0, 10))
     }
 
@@ -64,67 +65,80 @@ export default function ExcelToPdfClient() {
             const data = await file.arrayBuffer()
             const workbook = XLSX.read(data, { type: "array" })
             const sheet = workbook.Sheets[selectedSheet]
-            const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 }) as string[][]
+            const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1, raw: false }) as string[][]
+
+            // Empty rows are skipped; text is made Helvetica-safe so non-Latin cells can't crash the export.
+            const rows = jsonData.filter((r) => r && r.length > 0).map((r) => Array.from(r, (v) => toWinAnsi(String(v ?? ""))))
 
             const pdfDoc = await PDFDocument.create()
             const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
             const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold)
-            
+
             const pageWidth = 800
             const pageHeight = 600
             const margin = 40
-            const rowHeight = 18
-            const colWidth = 100
-            
+            const pad = CELL_PADDING
+
+            // Every column and every wrapped line is kept; see src/lib/sheet-layout.ts.
+            const { fontSize, colWidths, chunks, lines } = layoutSheet(rows, pageWidth - 2 * margin,
+                (text, bold) => (bold ? boldFont : font).widthOfTextAtSize(text, 1))
+            const lineHeight = fontSize * 1.3
+            // Row heights use all columns, so column chunks paginate identically.
+            const rowLines = lines.map((cells) => Math.max(1, ...cells.map((l) => l.length)))
+            // The header row repeats on each page unless it's too tall to leave room for data.
+            const repeatHeader = rows.length > 1 && rowLines[0] * lineHeight + 2 * pad < (pageHeight - 2 * margin) / 3
+            const title = toWinAnsi(file.name.replace(/\.(xlsx?|xls)$/i, ""))
+
             let page = pdfDoc.addPage([pageWidth, pageHeight])
-            let y = pageHeight - margin
+            let y = 0
+            let fresh = true
 
-            const title = file.name.replace(/\.(xlsx?|xls)$/i, "")
-            page.drawText(title, {
-                x: margin,
-                y,
-                size: 16,
-                font: boldFont,
-                color: rgb(0.1, 0.1, 0.1),
-            })
-            y -= 30
-
-            const maxCols = Math.floor((pageWidth - 2 * margin) / colWidth)
-
-            for (let rowIndex = 0; rowIndex < jsonData.length; rowIndex++) {
-                if (y < margin + rowHeight) {
-                    page = pdfDoc.addPage([pageWidth, pageHeight])
-                    y = pageHeight - margin
+            // Draws lines [from, to) of row r for the given columns, top edge at y.
+            const drawRow = (r: number, cols: number[], from: number, to: number) => {
+                const h = (to - from) * lineHeight + 2 * pad
+                const width = cols.reduce((s, c) => s + colWidths[c], 0)
+                if (r === 0) {
+                    page.drawRectangle({ x: margin, y: y - h, width, height: h, color: rgb(0.9, 0.95, 0.9) })
                 }
-
-                const row = jsonData[rowIndex] as string[]
-                if (!row || row.length === 0) continue
-
-                const fontToUse = rowIndex === 0 ? boldFont : font
-                const fontSize = rowIndex === 0 ? 10 : 9
-
-                if (rowIndex === 0) {
-                    page.drawRectangle({
-                        x: margin,
-                        y: y - rowHeight + 4,
-                        width: pageWidth - 2 * margin,
-                        height: rowHeight,
-                        color: rgb(0.9, 0.95, 0.9),
-                    })
-                }
-
-                for (let colIndex = 0; colIndex < Math.min(row.length, maxCols); colIndex++) {
-                    const cellValue = String(row[colIndex] ?? "")
-                    const truncatedText = cellValue.substring(0, 20)
-                    page.drawText(truncatedText, {
-                        x: margin + colIndex * colWidth,
-                        y,
+                let x = margin
+                for (const c of cols) {
+                    lines[r][c].slice(from, to).forEach((text, i) => page.drawText(text, {
+                        x: x + pad,
+                        y: y - pad - fontSize - i * lineHeight,
                         size: fontSize,
-                        font: fontToUse,
+                        font: r === 0 ? boldFont : font,
                         color: rgb(0.1, 0.1, 0.1),
-                    })
+                    }))
+                    x += colWidths[c]
                 }
-                y -= rowHeight
+                page.drawLine({ start: { x: margin, y: y - h }, end: { x: margin + width, y: y - h }, thickness: 0.5, color: rgb(0.85, 0.85, 0.85) })
+                y -= h
+            }
+
+            // Columns that don't fit the page go to further pages (Excel's "down, then over").
+            for (const [chunkIndex, cols] of (chunks.length ? chunks : [[]]).entries()) {
+                const newPage = (first: boolean) => {
+                    if (chunkIndex > 0 || !first) page = pdfDoc.addPage([pageWidth, pageHeight])
+                    y = pageHeight - margin
+                    if (first) {
+                        page.drawText(title, { x: margin, y, size: 16, font: boldFont, color: rgb(0.1, 0.1, 0.1) })
+                        y -= 30
+                    }
+                    if (repeatHeader) drawRow(0, cols, 0, rowLines[0])
+                    fresh = true
+                }
+                newPage(true)
+                for (let r = repeatHeader ? 1 : 0; r < rows.length; r++) {
+                    // A row taller than a whole page is split across pages, never cut off.
+                    for (let from = 0; from < rowLines[r];) {
+                        const fit = Math.floor((y - margin - 2 * pad) / lineHeight)
+                        if (fit < rowLines[r] - from && !fresh) { newPage(false); continue }
+                        const to = Math.min(rowLines[r], from + Math.max(1, fit))
+                        drawRow(r, cols, from, to)
+                        fresh = false
+                        from = to
+                    }
+                }
             }
 
             const pdfBytes = await pdfDoc.save()

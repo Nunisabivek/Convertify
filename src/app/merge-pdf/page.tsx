@@ -81,7 +81,7 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
-                        Use the Convertify PDF Merger to combine multiple PDF files into one document. Free, no watermarks, no file limits — no download needed.
+                        Use the Convertify PDF Merger to combine multiple PDF files into one document. Free, no watermarks, no limit on the number of files — no download needed.
                     </p>
 
                     {/* Visual Preview / Trust Signal */}

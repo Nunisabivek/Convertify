@@ -18,12 +18,12 @@ import { toolDocumentTitle } from "@/lib/document-title"
 
 export const metadata: Metadata = {
     title: toolDocumentTitle("image-compressor", "Image Compressor - Compress Images Online Free | Convertify"),
-    description: "Compress JPG, PNG, and WebP images online for free. Reduce file size by up to 80% without losing quality. No sign-up, no watermarks.",
+    description: "Compress JPG, PNG, and WebP images online for free. Each image is re-saved as a JPG at the quality you pick. No sign-up, no watermarks.",
     keywords: ["image compressor", "compress images", "reduce image size", "optimize images", "compress jpg", "compress png", "free image compression"],
     alternates: { canonical: "https://convertify.work/image-compressor" },
     openGraph: {
         title: "Image Compressor - Free Online | Convertify",
-        description: "Compress images without losing quality. Free, fast, and secure.",
+        description: "Compress images to smaller JPGs in your browser. Free, fast, and private.",
         url: "/image-compressor",
     },
 }
@@ -42,7 +42,7 @@ export default function Page() {
             <section className="w-full py-8 bg-gradient-to-b from-green-50 to-white">
                 <div className="max-w-4xl mx-auto px-4 text-center mb-8">
                     <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">Image Compressor</h1>
-                    <p className="text-lg text-slate-600 max-w-2xl mx-auto">Compress JPG, PNG, and WebP images. Reduce file size by up to 80% while maintaining quality.</p>
+                    <p className="text-lg text-slate-600 max-w-2xl mx-auto">Compress JPG, PNG, and WebP images into smaller JPGs. Pick the quality and see how much you saved.</p>
                 </div>
                 <ToolSwapper />
                 <ImageCompressorClient />
@@ -66,9 +66,9 @@ export default function Page() {
             <FAQSchema
                 toolName="Image Compression"
                 faqs={[
-                    { question: "How does image compression work?", answer: "Our tool uses smart compression algorithms to reduce file size while preserving visual quality. It removes unnecessary metadata and optimizes encoding." },
-                    { question: "Will compression affect image quality?", answer: "Minimal quality loss occurs with our smart compression. You can adjust the quality slider to find the perfect balance between size and quality." },
-                    { question: "Is this image compressor free?", answer: "Yes, Convertify's image compressor is completely free with no file limits, watermarks, or sign-up required." },
+                    { question: "How does image compression work?", answer: "Each image is redrawn in your browser and saved as a JPEG at the quality you pick; lower quality means a smaller file. Metadata such as EXIF is dropped in the process." },
+                    { question: "Will compression affect image quality?", answer: "JPEG is lossy, so some detail is lost; at 70–85% it is rarely visible in photos. Use the quality slider (30–95%) to balance size and quality. PNG and WebP files come out as JPG, so transparency is not kept." },
+                    { question: "Is this image compressor free?", answer: "Yes, Convertify's image compressor is completely free with no limit on the number of images, no watermarks, and no sign-up required." },
                 ]}
             />
 

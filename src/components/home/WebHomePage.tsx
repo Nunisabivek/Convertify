@@ -141,7 +141,7 @@ const toolCategories = [
             },
             {
                 title: "PDF to PNG",
-                description: "Get high-quality PNG images from PDF.",
+                description: "Convert each PDF page to a PNG image.",
                 icon: FileImage,
                 color: "bg-cyan-100 text-cyan-600",
                 href: "/pdf-to-png",
@@ -161,7 +161,7 @@ const toolCategories = [
         tools: [
             {
                 title: "Word to PDF",
-                description: "Convert DOC and DOCX to PDF format.",
+                description: "Convert DOCX Word files to PDF.",
                 icon: FileText,
                 color: "bg-indigo-100 text-indigo-600",
                 href: "/word-to-pdf",
@@ -196,7 +196,7 @@ const toolCategories = [
             },
             {
                 title: "HTML to PDF",
-                description: "Convert web pages and HTML to PDF.",
+                description: "Turn pasted HTML into a plain-text PDF.",
                 icon: Code,
                 color: "bg-rose-100 text-rose-600",
                 href: "/html-to-pdf",
@@ -230,7 +230,7 @@ const toolCategories = [
             },
             {
                 title: "Image Compressor",
-                description: "Compress images without losing quality.",
+                description: "Compress images into smaller JPGs.",
                 icon: Minimize2,
                 color: "bg-green-100 text-green-600",
                 href: "/image-compressor",
@@ -278,7 +278,7 @@ const toolCategories = [
             },
             {
                 title: "Watermark PDF",
-                description: "Add text or image watermarks to PDF.",
+                description: "Stamp a text watermark on every PDF page.",
                 icon: Droplet,
                 color: "bg-sky-100 text-sky-600",
                 href: "/watermark-pdf",
@@ -339,7 +339,7 @@ const toolCategories = [
             },
             {
                 title: "PDF to Excel",
-                description: "Extract tables into editable XLSX spreadsheets.",
+                description: "Pull PDF text into XLSX rows, one sheet per page.",
                 icon: Sheet,
                 color: "bg-emerald-100 text-emerald-600",
                 href: "/pdf-to-excel",

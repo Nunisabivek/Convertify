@@ -18,7 +18,7 @@ import { InToolPlayStoreCallout, ToolFrontPlayBadge } from '@/components/ui/goog
 
 const webTitle = 'Passport Photo: US 2×2, 630×810 & Visa Sizes'
 const description =
-    'Make a US 2×2 inch (600×600), India 630×810, visa 35×45, UPSC, bank, or signature JPEG with a white background and the KB cap the form lists. No upload.'
+    'Make a US 2×2 inch (600×600), India 630×810, visa 35×45, UPSC, bank, or signature JPEG at the exact pixels and KB cap the form lists. No upload.'
 const seo = uniqueToolSeo['passport-photo']
 
 export const metadata: Metadata = {
@@ -97,8 +97,8 @@ export default function Page() {
                         Passport photo sized for US 2×2, India 630×810, and visa forms
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Crop to the pixels the portal asks for, fill a white background, and
-                        land inside the KB cap. Output is a JPEG on your device — not an official
+                        Crop to the pixels the portal asks for and land inside the KB cap. Your
+                        background is kept as shot. Output is a JPEG on your device — not an official
                         pose check.
                     </p>
                     <ToolFrontPlayBadge toolName="Passport Photo Maker" />
@@ -118,13 +118,13 @@ export default function Page() {
                 <h2 className="text-2xl font-bold text-slate-900">Presets this tool actually outputs</h2>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>
-                        <strong>US 2×2</strong> — 600×600 JPEG, about 50–240 KB, white background.
+                        <strong>US 2×2</strong> — 600×600 JPEG, about 50–240 KB (the photo itself needs a white background).
                         That is the usual digital size for a 2-inch square at 300 DPI (DS-160 / many
                         USCIS photo uploads).
                     </li>
                     <li>
-                        <strong>India 630×810</strong> — JPEG, 10–250 KB, white background
-                        (Passport Seva / ICAO-style digital upload).
+                        <strong>India 630×810</strong> — JPEG, 10–250 KB, for a photo shot against
+                        a white background (Passport Seva / ICAO-style digital upload).
                     </li>
                     <li>
                         <strong>Visa 35×45</strong> — 600×750 JPEG, 50–240 KB. Common digital size

@@ -43,11 +43,11 @@ export default function Page() {
                 items={[
                     { name: "Home", url: "/" },
                     { name: "All Tools", url: "/all-tools" },
-                    { name: "OCR PDF", url: "/ocr-pdf" }
+                    { name: "Document Scanner", url: "/ocr-pdf" }
                 ]}
             />
             <SoftwareApplicationSchema
-                toolName="Convertify OCR PDF Tool"
+                toolName="Convertify Document Scanner"
                 toolSlug="ocr-pdf"
                 description={seoData.description}
             />
@@ -63,20 +63,20 @@ export default function Page() {
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
                         {seoData.description}
                     </p>
-                    <ToolFrontPlayBadge toolName="OCR & Scanner" />
+                    <ToolFrontPlayBadge toolName="Document Scanner" />
                 </div>
                 <ToolSwapper />
                 <OcrPdfClient />
             </section>
 
             <div className="w-full max-w-4xl px-4 mx-auto">
-                <InToolPlayStoreCallout toolName="OCR & Scanner" />
+                <InToolPlayStoreCallout toolName="Document Scanner" />
             </div>
 
             {seoData.howToSteps && (
                 <HowToSchema
-                    toolName="OCR PDF"
-                    description="Learn how to extract text from scanned PDFs and document images online with Convertify."
+                    toolName="Scan Documents to PDF"
+                    description="Learn how to scan paper documents to PDF with your phone or webcam using Convertify."
                     steps={seoData.howToSteps}
                 />
             )}

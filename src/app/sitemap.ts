@@ -51,6 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         'fit-to-size',
         'passport-photo',
         'remove-background',
+        'ocr-pdf', // camera document scanner; the URL predates the rename
     ]
 
     const secondaryTools = [

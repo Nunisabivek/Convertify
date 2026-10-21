@@ -38,17 +38,17 @@ export const uniqueToolSeo = {
     "passport-photo": {
         howToSteps: [
             { name: "Pick the preset the form names", text: "Choose US 2×2 (600×600), India passport 630×810, UK/visa 35×45 at 600×750, UPSC 3.5×4.5 cm, bank 200×230, signature, or thumb." },
-            { name: "Crop the face, then make the JPEG", text: "Drag and zoom so the head sits in the guide. The tool fills a white (or light) background and compresses into the preset’s KB window." },
+            { name: "Crop the face, then make the JPEG", text: "Drag and zoom so the head sits in the guide. The tool crops to the preset’s exact pixels and compresses into its KB window. It does not change your background." },
             { name: "Download the JPEG", text: "Output is always a JPEG on your device. If the wall behind you is busy, run Remove background first, then crop here." },
         ],
         faqs: [
             {
                 question: "Can I make a US passport photo at 2×2 inches (600×600)?",
-                answer: "Yes. The US 2×2 preset crops to 600×600 pixels — the usual digital size for a 2-inch square at 300 DPI — and aims for about 50–240 KB as a JPEG with a white background. Always check the form you are filing; some USCIS/CEAC uploads cap supporting images at 240 KB.",
+                answer: "Yes. The US 2×2 preset crops to 600×600 pixels — the usual digital size for a 2-inch square at 300 DPI — and aims for about 50–240 KB as a JPEG. Your background is kept as shot, so it should already be white. Always check the form you are filing; some USCIS/CEAC uploads cap supporting images at 240 KB.",
             },
             {
                 question: "What size is the India digital passport photo?",
-                answer: "The Passport preset on this page is 630×810 JPEG, 10–250 KB, white background — the common Passport Seva / ICAO-style digital upload. It is not an official MEA check of pose, glasses, or lighting.",
+                answer: "The India preset on this page is 630×810 JPEG, 10–250 KB, for a photo taken against a white background — the common Passport Seva / ICAO-style digital upload. It is not an official MEA check of pose, glasses, or lighting.",
             },
             {
                 question: "Does UPSC 3.5×4.5 cm, bank 200×230, and signature 140×60 work here?",
@@ -56,7 +56,7 @@ export const uniqueToolSeo = {
             },
             {
                 question: "What about UK or Schengen visa photos?",
-                answer: "The Visa 35×45 preset outputs 600×750 pixels (the common digital size for a 35×45 mm / 3.5×4.5 cm frame) as a JPEG in a 50–240 KB window with a white fill. Many Schengen and visa portals accept that. UK online passport photos officially want a cream or light-grey backdrop, not pure white — retake against a cream wall if that portal rejects a white background. We do not invent a cream fill we cannot match.",
+                answer: "The Visa 35×45 preset outputs 600×750 pixels (the common digital size for a 35×45 mm / 3.5×4.5 cm frame) as a JPEG in a 50–240 KB window. Many Schengen and visa portals accept that. UK online passport photos officially want a cream or light-grey backdrop, not pure white — retake against a cream wall if that portal rejects a white background. This tool does not repaint backgrounds.",
             },
             {
                 question: "JPEG or PNG? The portal rejected my file.",

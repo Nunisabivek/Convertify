@@ -22,13 +22,13 @@ export default function HtmlToPdfClient() {
         try {
             // Create a new PDF document
             const pdfDoc = await PDFDocument.create()
-            const page = pdfDoc.addPage([595, 842]) // A4 size
+            let page = pdfDoc.addPage([595, 842]) // A4 size
             const { width, height } = page.getSize()
             const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
             const fontSize = 12
 
             // Remove HTML tags for simple text rendering (simplified version)
-            const plainText = htmlContent.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+            const plainText = htmlContent.replace(/<(style|script)[^>]*>[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
 
             // Split text into lines that fit the page width
             const maxWidth = width - 100
@@ -53,25 +53,17 @@ export default function HtmlToPdfClient() {
             let yPosition = height - 50
             for (const line of lines) {
                 if (yPosition < 50) {
-                    // Add new page if needed
-                    const newPage = pdfDoc.addPage([595, 842])
-                    yPosition = newPage.getHeight() - 50
-                    newPage.drawText(line, {
-                        x: 50,
-                        y: yPosition,
-                        size: fontSize,
-                        font,
-                        color: rgb(0, 0, 0),
-                    })
-                } else {
-                    page.drawText(line, {
-                        x: 50,
-                        y: yPosition,
-                        size: fontSize,
-                        font,
-                        color: rgb(0, 0, 0),
-                    })
+                    // Continue on a new page; later lines must land there too, not back on page 1
+                    page = pdfDoc.addPage([595, 842])
+                    yPosition = page.getHeight() - 50
                 }
+                page.drawText(line, {
+                    x: 50,
+                    y: yPosition,
+                    size: fontSize,
+                    font,
+                    color: rgb(0, 0, 0),
+                })
                 yPosition -= fontSize + 4
             }
 

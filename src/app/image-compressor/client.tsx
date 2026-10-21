@@ -49,6 +49,9 @@ export default function ImageCompressorClient() {
                 canvas.height = img.height
                 const ctx = canvas.getContext('2d')
                 if (ctx) {
+                    // JPEG has no alpha: without a fill, transparent PNG/WebP areas turn black
+                    ctx.fillStyle = '#fff'
+                    ctx.fillRect(0, 0, canvas.width, canvas.height)
                     ctx.drawImage(img, 0, 0)
                     const blob = await new Promise<Blob>((resolve) => {
                         canvas.toBlob((b) => resolve(b!), 'image/jpeg', quality / 100)

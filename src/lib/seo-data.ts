@@ -18,7 +18,7 @@ export const toolSeoData = {
         faqs: [
             {
                 question: "Is this PDF merger really free with no limits?",
-                answer: "Yes! Unlike other tools, Convertify lets you merge unlimited PDF files with no file size limits, no watermarks added, and no sign-up required. It's completely free."
+                answer: "Yes. There is no limit on the number of files, no watermark, and no sign-up. Each file can be up to 200 MB; very large merges are limited by your device's memory."
             },
             {
                 question: "Can I reorder the files after uploading?",
@@ -30,7 +30,7 @@ export const toolSeoData = {
             },
             {
                 question: "Will the merged file be too large to email?",
-                answer: "We use 'Zero-Bloat' merging technology that avoids duplicating fonts and metadata, keeping your final file size as small as possible for email attachments."
+                answer: "Pages are copied across as they are, without re-compressing, so the merged PDF is roughly the size of your files combined. If it is too big to email, run it through Compress PDF."
             },
             {
                 question: "Is it safe for confidential documents?",
@@ -73,7 +73,7 @@ export const toolSeoData = {
             },
             {
                 question: "Does it work on password-protected PDFs?",
-                answer: "Yes, you can split protected files by entering the password first to unlock editing permissions."
+                answer: "No. Password-protected PDFs can't be opened here. Remove the password with Unlock PDF first, then split the unlocked copy."
             }
         ],
         howToSteps: [
@@ -111,7 +111,7 @@ export const toolSeoData = {
             },
             {
                 question: "The file is still too large after compression. What now?",
-                answer: "Open Advanced settings and drop quality, or pick a smaller target. Image-heavy scans shrink more than text PDFs. If you also have a minimum size (too small as well as too large), use Fit to size instead of a single ceiling."
+                answer: "Pick a smaller target, or clear the target box and lower quality yourself under Advanced settings. Image-heavy scans shrink more than text PDFs. If you also have a minimum size (too small as well as too large), use Fit to size instead of a single ceiling."
             },
             {
                 question: "Will the text stay selectable?",
@@ -297,7 +297,7 @@ export const toolSeoData = {
             },
             {
                 question: "Can I combine 50 or 100 PNGs into a single PDF?",
-                answer: "Yes — there’s no hard file count limit. We’ve tested 100+ PNGs in one go. Because everything runs in your browser, performance depends on your device’s memory; for very large batches we recommend Chrome or Edge on a desktop."
+                answer: "Yes — there’s no hard file count limit. Because everything runs in your browser, performance depends on your device’s memory; for very large batches we recommend Chrome or Edge on a desktop."
             },
             {
                 question: "Does combining PNG to PDF work on iPhone and Android?",
@@ -305,7 +305,7 @@ export const toolSeoData = {
             },
             {
                 question: "Will the combined PDF be small enough to email?",
-                answer: "Usually yes. We use efficient image embedding instead of duplicating each PNG’s data, so a typical 10-image batch lands well under email limits. If you need a smaller file, run the result through our PDF compressor."
+                answer: "It depends on your PNGs. Each image is embedded without recompression, so the PDF is roughly the size of the PNGs combined. If it is too big to email, run the result through our PDF compressor."
             },
             {
                 question: "Is it safe to upload sensitive PNGs (IDs, scans, screenshots)?",
@@ -313,38 +313,38 @@ export const toolSeoData = {
             }
         ],
         howToSteps: [
-            { name: "Upload your PNG images", text: "Drag and drop, or tap to select, all the PNG files you want to combine. You can add more at any time before converting." },
+            { name: "Upload your PNG images", text: "Drag and drop, or tap to select, all the PNG files you want to combine in one go." },
             { name: "Reorder the pages", text: "Drag the thumbnails to set the exact page order in the final PDF." },
             { name: "Click Convert and download", text: "Hit Convert. Your single multi-page PDF downloads instantly — no watermark, no sign-up, nothing uploaded." }
         ]
     },
     "pdf-to-png": {
-        title: "PDF to PNG Free — High-Res Page Extraction",
-        description: "Convert PDF pages to sharp PNG images at 300 DPI with transparency support. Free, no sign-up, and your file never leaves your device.",
+        title: "PDF to PNG Free — Convert Each Page to PNG",
+        description: "Convert every PDF page to a lossless PNG at 2× page size (about 144 DPI). Multi-page files download as a ZIP. Free, and nothing is uploaded.",
         keywords: [
             "pdf to png", "convert pdf to transparent png", "extract pdf as hq png", "pdf page to png 300 dpi",
             "high resolution pdf to png online", "save pdf as transparent image", "pdf to png for design",
             "batch convert pdf to png zip", "extract graphics from pdf as png"
         ],
-        h1: "PDF to PNG - High-Res Transparent Extraction",
+        h1: "PDF to PNG — Convert PDF Pages to PNG Images",
         faqs: [
             {
                 question: "Does it support transparent backgrounds (Alpha Channel)?",
-                answer: "Yes! If your PDF has no background layer, our engine will export it as a transparent PNG, making it perfect for logos, signatures, and design assets."
+                answer: "No. Pages are rendered onto a white background, so the PNGs are opaque. If you need a transparent logo or signature, cut it out afterwards in an image editor."
             },
             {
                 question: "Can I batch convert multiple documents at once?",
-                answer: "Absolutely. You can upload dozens of files and our engine will process them in parallel, providing a single ZIP file with all your high-res PNGs."
+                answer: "No — one PDF at a time. Every page of that PDF is converted, and two or more pages download together as a single ZIP."
             },
             {
                 question: "Will the text be sharp enough for websites?",
-                answer: "We use vector-to-pixel rendering at high DPI, ensuring that even small text remains perfectly legible and aliasing-free in the resulting PNG."
+                answer: "Pages are rendered at 2× the PDF’s native size (about 144 DPI on a letter-size page) and PNG adds no compression artifacts, so text is crisp on screens. There is no DPI picker."
             }
         ],
         howToSteps: [
-            { name: "Upload", text: "Select your PDF document(s)." },
-            { name: "Select Mode", text: "Choose resolution and transparency settings." },
-            { name: "Download", text: "Save your sharp PNG images instantly." }
+            { name: "Upload", text: "Select your PDF document." },
+            { name: "Convert", text: "Each page is rendered in your browser and saved as a PNG." },
+            { name: "Download", text: "One page downloads as a PNG; two or more pages download as a ZIP." }
         ]
     },
     "text-to-pdf": {
@@ -392,7 +392,7 @@ export const toolSeoData = {
             },
             {
                 question: "Does it work with scanned receipts and faded documents?",
-                answer: "No — this tool reads the text layer already embedded in a PDF. Scanned or image-only PDFs have no text layer, so nothing will be extracted. Run the OCR PDF tool first to add a text layer, then extract."
+                answer: "No — this tool reads the text layer already embedded in a PDF. Scanned or image-only PDFs have no text layer, so nothing will be extracted. Convertify has no OCR, so a scan needs a separate OCR tool first."
             },
             {
                 question: "Can I extract data from tables into a text format?",
@@ -459,7 +459,7 @@ export const toolSeoData = {
             },
             {
                 question: "Does it work on scanned PDFs?",
-                answer: "No — this tool reads the text layer already embedded in a PDF. Scanned or image-only PDFs have no text layer, so nothing will be extracted. Run the OCR PDF tool first to add a text layer, then convert."
+                answer: "No — this tool reads the text layer already embedded in a PDF. Scanned or image-only PDFs have no text layer, so nothing will be extracted. Convertify has no OCR, so a scan needs a separate OCR tool first."
             }
         ],
         howToSteps: [
@@ -605,33 +605,36 @@ export const toolSeoData = {
         ]
     },
     "ocr-pdf": {
-        title: "OCR PDF Free Online — Extract Text from Scanned PDFs",
-        description: "Extract text from scanned PDFs and document images with optical character recognition. Fast, free, and runs directly in your browser.",
+        title: "Scan Documents to PDF Online — Free Camera Scanner",
+        description: "Scan paper with your phone or webcam. The page edges are found and straightened, a B&W or color filter applied, and every page saved as one PDF.",
         keywords: [
-            "ocr pdf", "pdf to text ocr", "scanned pdf to text", "extract text from scanned pdf online free", "ocr pdf free online",
-            "make pdf searchable", "convert image pdf to text", "pdf ocr converter", "scanned document to text",
-            "optical character recognition pdf", "searchable pdf converter", "high accuracy ocr", "ocr preserves formatting",
-            "extract text from blurry pdf", "ocr for handwritten notes", "legal grade ocr online"
+            "document scanner online", "scan document to pdf", "camera to pdf", "phone scanner pdf", "scan paper to pdf free",
+            "webcam document scanner", "photo to scanned pdf", "black and white scan filter", "multi page scan to pdf",
+            "camscanner alternative", "scan receipts to pdf", "scan without app"
         ],
-        h1: "OCR PDF - Scanned PDF Text Extraction Online",
+        h1: "Document Scanner — Scan Paper to PDF with Your Camera",
         faqs: [
             {
-                question: "How does this OCR tool work?",
-                answer: "Our tool analyzes the document layout, parses visual characters and embedded text blocks page-by-page, and extracts copyable text directly in your browser."
+                question: "How does the document scanner work?",
+                answer: "Point your phone or webcam at a page. The scanner outlines the page edges live; when you tap the shutter it crops and straightens the page, applies the filter you picked, and adds it to your document. Repeat for each page, then save them all as one PDF."
             },
             {
-                question: "Can I copy the extracted text directly to my clipboard?",
-                answer: "Yes! A single click copies the full extracted text, or you can download it as a structured .txt document."
+                question: "Does it recognize the text (OCR)?",
+                answer: "No. Scanned pages are saved as images, so the text in the PDF is not searchable or copyable. If you add a PDF that already has a text layer, Copy text returns that existing text."
+            },
+            {
+                question: "Can I scan photos I already took?",
+                answer: "Yes. Add images or PDF pages from your files, then apply the Xerox B&W, Magic Color, Grayscale or Original filter and rotate pages. Automatic edge cropping only runs on live camera captures."
             },
             {
                 question: "Is my scanned document uploaded to any cloud server?",
-                answer: "No. All processing happens entirely within your web browser. Confidential receipts, medical forms, and contracts remain 100% private on your machine."
+                answer: "No. The camera feed and your pages are processed in your browser. Confidential receipts, medical forms, and contracts stay on your device."
             }
         ],
         howToSteps: [
-            { name: "Upload Scanned PDF", text: "Select your scanned PDF or document file." },
-            { name: "Process Pages", text: "Our client-side engine parses pages and extracts all text content." },
-            { name: "Copy or Download", text: "Copy the recognized text or download it as a plain text file." }
+            { name: "Open the camera", text: "Allow camera access, or add photos or PDF pages from your files." },
+            { name: "Capture pages", text: "Hold the page in view until the edge outline locks on, then tap the shutter. Repeat for each page." },
+            { name: "Save as PDF", text: "Pick a filter, rotate or delete pages, then save every page as one PDF." }
         ]
     },
     "organize-pdf": {
@@ -669,7 +672,7 @@ export const toolSeoData = {
     },
     "pdf-to-excel": {
         title: "PDF to Excel Free — Convert PDF Tables to XLSX Spreadsheet",
-        description: "Extract tabular data from PDF files directly into editable Excel (.xlsx) spreadsheets. Fast, accurate column alignment, and zero file uploads.",
+        description: "Pull the text of a PDF into an Excel (.xlsx) file: each line becomes a row, one sheet per page. Needs selectable text (no OCR). Nothing uploaded.",
         keywords: [
             "convertify pdf to excel", "pdf to excel", "pdf to xlsx", "convert pdf to excel", "extract table from pdf", "pdf to excel converter free",
             "bank statement to excel", "invoice to excel converter", "pdf to excel accurate layout",
@@ -679,21 +682,21 @@ export const toolSeoData = {
         h1: "Convert PDF to Excel Free Online (XLSX)",
         faqs: [
             {
-                question: "How accurate is the table extraction for bank statements?",
-                answer: "Our tool is optimized for financial data, achieving 99%+ accuracy on bank statements and invoices. It identifies rows and columns even in complex, borderless tables."
+                question: "How well does it handle bank statements?",
+                answer: "It reads the PDF's text line by line: each line becomes a row and each separate piece of text on that line becomes a cell. Simple, well-spaced tables usually come out usable, but empty cells aren't detected, so columns can shift and may need tidying in Excel."
             },
             {
                 question: "Does it work on scanned PDF invoices?",
-                answer: "Yes! Our OCR engine specifically detects table structures in scanned images and translates them into clean, structured Excel cells."
+                answer: "No. There is no OCR, so scanned or image-only PDFs have no text to read and give an empty result."
             },
             {
                 question: "Will it merge all pages into one sheet?",
-                answer: "By default, our tool combines all pages into a single continuous sheet, making it easy to run formulas and perform data analysis across the entire document."
+                answer: "No. Each PDF page becomes its own sheet (Page 1, Page 2, …). Copy the sheets together in Excel if you need one continuous table."
             }
         ],
         howToSteps: [
-            { name: "Upload PDF", text: "Select or drag your PDF file containing tables. Works with any PDF type." },
-            { name: "Extract Tables", text: "We automatically detect and extract all tables, preserving the data structure." },
+            { name: "Upload PDF", text: "Select or drag your PDF file. It needs selectable text; scans won't work." },
+            { name: "Extract", text: "Each line of text becomes a row and each piece of text on that line becomes a cell." },
             { name: "Download", text: "Get your XLSX file." }
         ]
     },
@@ -729,7 +732,7 @@ export const toolSeoData = {
             },
             {
                 question: "What's the difference between XLS and XLSX?",
-                answer: "XLS is the older Excel format (pre-2007) and XLSX is the modern one. Both are accepted. Wide sheets only fit about seven columns per page, and long cell text is trimmed so columns stay aligned."
+                answer: "XLS is the older Excel format (pre-2007) and XLSX is the modern one. Both are accepted. Every column is included: wide sheets get a smaller font, and columns that still don't fit continue on the next page. Long cell text wraps instead of being cut off."
             },
             {
                 question: "Is it safe for financial spreadsheets?",
@@ -1387,7 +1390,7 @@ export const toolSeoData = {
     },
     "qr-code-generator": {
         title: "QR Code Generator Free — PNG Download",
-        description: "Generate a QR code for any URL or text and download it as a PNG at up to 1024px. Free, instant, no sign-up and no account needed.",
+        description: "Generate a QR code for any URL or text and download it as a PNG at up to 512px. Free, instant, no sign-up and no account needed.",
         keywords: [
             "qr code generator", "create qr code", "qr code maker free", "qr code generator online",
             "qr code generator free no sign up", "url qr code", "qr code png download",
@@ -1398,11 +1401,11 @@ export const toolSeoData = {
         faqs: [
             {
                 question: "What can I encode in the QR code?",
-                answer: "Any URL or plain text, up to 4000 characters. Paste a link, a Wi-Fi password, a note, or anything else that fits in text form."
+                answer: "Any URL or plain text, up to 4000 characters. Paste a link, a note, or anything else that fits in text form. Wi-Fi and contact codes only work if you type them in the standard WIFI: or vCard text format yourself."
             },
             {
                 question: "What size can I download?",
-                answer: "Pick 256, 400, 512 or 1024 pixels. 1024px is large enough for print; 400px is plenty for a screen or a slide."
+                answer: "Pick 256, 400 or 512 pixels. 400px is plenty for a screen or a slide; use 512px for print."
             },
             {
                 question: "Can I add a logo or change the colours?",
@@ -1419,7 +1422,7 @@ export const toolSeoData = {
         ],
         howToSteps: [
             { name: "Enter your data", text: "Paste the URL or type the text you want the QR code to point to." },
-            { name: "Pick a size", text: "Choose 256, 400, 512 or 1024 pixels depending on where you'll use it." },
+            { name: "Pick a size", text: "Choose 256, 400 or 512 pixels depending on where you'll use it." },
             { name: "Download the PNG", text: "Check the live preview, then download the QR code as a PNG." }
         ]
     },

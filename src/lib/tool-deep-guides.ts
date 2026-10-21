@@ -29,14 +29,14 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
     "merge-pdf": {
         intro: [
             "Merging PDFs sounds like a one-step task until you actually try it on a slow upload page or behind a 5-file daily limit. Convertify's PDF merger combines unlimited PDFs locally in your browser — your file never leaves the device, the merge runs on your CPU, and the output downloads instantly with no watermark and no sign-up.",
-            "Under the hood it uses PDF-Lib, the same open-source library trusted in document workflows at thousands of companies. We add a thin layer that handles drag-to-reorder, mixed JPG/PNG inputs, and a font-deduplication pass we call Zero-Bloat — the merged file is typically 10-20% smaller than what you'd get by simply concatenating bytes, because identical fonts and metadata blocks are merged once instead of once per source PDF.",
+            "Under the hood it uses PDF-Lib, the same open-source library trusted in document workflows at thousands of companies. We add a thin layer that handles drag-to-reorder and mixed JPG/PNG inputs. Pages are copied across as they are, not re-rendered, so text stays selectable and the merged file is roughly the size of the inputs combined.",
             "If you've previously used Adobe Acrobat, Smallpdf, iLovePDF or PDFsam to combine PDF files, the workflow here will feel familiar — just faster, with no upload bar and no daily quota.",
         ],
         steps: [
-            { title: "Drop your PDFs into the merger", body: "Drag PDF files (and JPG/PNG images, if you want a mixed merge) onto the upload zone, or click to pick from a folder. There's no limit on the number of files. The browser starts reading each file's page count immediately so you see the running total." },
-            { title: "Reorder the files", body: "Drag thumbnails up or down, or use the arrow buttons. The position you set is the position the page appears in the final PDF. For a typical case (e.g. cover letter → resume → portfolio) put the cover first, the resume second, the portfolio last." },
+            { title: "Drop your PDFs into the merger", body: "Drag PDF files (and JPG/PNG images, if you want a mixed merge) onto the upload zone, or click to pick from a folder. There's no limit on the number of files; each one can be up to 200 MB." },
+            { title: "Reorder the files", body: "Drag files up or down the list, or use the arrow buttons. The position you set is the position the page appears in the final PDF. For a typical case (e.g. cover letter → resume → portfolio) put the cover first, the resume second, the portfolio last." },
             { title: "Click Merge", body: "Convertify processes the merge entirely on your device — there's no upload progress bar because nothing is uploaded. For most documents (under ~50 MB combined) this completes in 2-5 seconds. Larger merges scale roughly with file size." },
-            { title: "Download the merged PDF", body: "The result downloads with a default name (`merged-convertify.pdf`); you can rename it during the download. The page-order, internal links, and any form fields from the source PDFs are preserved." },
+            { title: "Download the merged PDF", body: "The result is named after your first file (for example `report-and-2-more-merged.pdf`); you can rename it during the download. Pages keep their content, but bookmarks, internal links and fillable form fields from the source PDFs may not survive the merge." },
         ],
         scenarios: [
             { title: "Tax filing — combining a year of receipts", body: "Self-employed filers often end up with 30-50 separate receipt PDFs from different vendors. Stitching them into one PDF before uploading to a tax portal means one upload instead of 30, and a single file your accountant can scroll through. Use the reorder controls to group by category (rent, utilities, supplies) before merging." },
@@ -45,14 +45,14 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
             { title: "School and university — multi-page assignments", body: "Students assembling a final project from a Word writeup (saved as PDF), a spreadsheet (also PDF), and JPG photos of physical work can do everything in one merge — Convertify accepts JPG and PNG alongside PDFs, so you don't need to convert images first." },
         ],
         troubleshooting: [
-            { question: "Why is my merged PDF much larger than the inputs combined?", answer: "Almost always because one of the source PDFs has high-resolution images that aren't shared across documents. Run the merged file through Compress PDF afterwards — most users see a 50-80% reduction without visible quality loss." },
+            { question: "Why is my merged PDF much larger than the inputs combined?", answer: "Almost always because one of the source PDFs has high-resolution images that aren't shared across documents. Run the merged file through Compress PDF afterwards; note that it turns each page into an image, so text stops being selectable." },
             { question: "The order looks wrong after I merge — what happened?", answer: "PDF-Lib follows the order shown in the file list, top to bottom. If files were dropped in via batch and you didn't reorder, browsers may sort by filename alphabetically. Drag thumbnails to set the exact order before clicking Merge." },
             { question: "Can I merge encrypted (password-protected) PDFs?", answer: "Not directly — protected PDFs need to be unlocked first. Run them through the Unlock PDF tool, then bring the unlocked copies into the merger." },
             { question: "My browser tab froze during a large merge.", answer: "PDF-Lib runs on the main thread, so very large merges (500+ MB combined) can stall the UI. Close other heavy tabs, free up RAM, and retry. For repeated large jobs consider splitting the merge into two passes (merge 1-25 → output A, merge 26-50 → output B, merge A+B)." },
         ],
         comparison: [
             { feature: "Files uploaded to server", convertify: "Never", typical: "Yes" },
-            { feature: "File size limit", convertify: "Browser RAM only", typical: "5–25 MB on free tier" },
+            { feature: "File size limit", convertify: "200 MB per file", typical: "5–25 MB on free tier" },
             { feature: "Files per day", convertify: "Unlimited", typical: "2–3 on free tier" },
             { feature: "Watermark on output", convertify: "None", typical: "Often added" },
             { feature: "Sign-up required", convertify: "No", typical: "Often" },
@@ -66,26 +66,26 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
         intro: [
             "Compressing a PDF to a specific KB target — 100 KB, 200 KB, 500 KB — is one of those small problems that gets surprisingly hard to solve well. Government forms, university applications, and visa portals enforce strict size caps, and most online compressors give you three vague choices (\"low\", \"medium\", \"high\") that rarely hit the number you actually need.",
             "Convertify's PDF compressor takes a target-size-first approach. You type the limit (e.g. 100 KB), and the compressor uses a multi-pass engine to auto-tune both DPI and JPEG quality until the output is at or below your number. It runs entirely in your browser using PDF.js for rendering and PDF-Lib for re-assembly — your document never touches a server.",
-            "If you came here because a portal rejected your upload (\"file must be under 200 KB\"), you're in the right place. The result is a real PDF, not a flattened image, and text remains selectable when the source was a text PDF.",
+            "If you came here because a portal rejected your upload (\"file must be under 200 KB\"), you're in the right place. The result is a standard PDF, but each page is re-encoded as a JPEG image, so text is no longer selectable. A file already under your target is returned unchanged.",
         ],
         steps: [
             { title: "Drop the PDF you want to shrink", body: "Drag a single PDF or any common image (JPG, PNG, WebP) into the upload zone. The current file size is shown so you can see how aggressive a target you'll need." },
             { title: "Pick a size target", body: "Use the preset chips (50 KB, 100 KB, 200 KB, 500 KB, 1 MB, 2 MB, 5 MB, 10 MB) or type a custom number with KB / MB toggle. Convertify warns you if your target is larger than the current file." },
-            { title: "Optional: tune quality manually", body: "Open Advanced Settings to override the auto-picked quality (10–100%) and resolution scale (0.5×–2.0×). This is useful when text sharpness matters more than file size — e.g. compressing a contract you'll print versus compressing a receipt you'll only view on screen." },
+            { title: "Optional: tune quality manually", body: "Clear the target box, then use Advanced Settings to set the quality (10–100%) and resolution scale (0.5×–2.0×) yourself; the sliders apply only when no target is set. This is useful when text sharpness matters more than file size — e.g. compressing a contract you'll print versus compressing a receipt you'll only view on screen." },
             { title: "Click Compress", body: "The compressor renders each page through PDF.js, encodes it as JPEG at the chosen quality, and rebuilds a new PDF with PDF-Lib. For a typical 5–20 MB document this completes in 5–15 seconds. Larger PDFs scale roughly with page count." },
-            { title: "Verify and download", body: "The result screen shows old size → new size and whether the target was hit. If you missed the target, lower the quality slider and re-run; the auto-tuner gets you within 5% on most inputs." },
+            { title: "Verify and download", body: "The result screen shows old size → new size and whether the target was hit. If you missed the target, try a smaller target, or clear it and lower the quality slider by hand." },
         ],
         scenarios: [
             { title: "US visa applications (DS-160, I-130) — under 240 KB", body: "The Department of State's CEAC portal limits supporting document uploads to 240 KB. Set the Convertify target to 200 KB to leave headroom and run your scanned passport, marriage certificate, or financial proof through. Because compression happens locally, your personal documents never leave your device — important when you're handling biometric or financial proof." },
             { title: "Indian government forms (UPSC, SSC, banking exams) — 100/200/500 KB", body: "Indian recruitment portals are notorious for strict size caps: photo under 50 KB, signature under 30 KB, ID proof under 100 KB, education certificate under 500 KB. The presets in Convertify map directly to the common limits, and the exact-target mode means you don't get rejected for being over by a few KB." },
-            { title: "UK passport / NHS forms — under 1 MB", body: "GOV.UK and NHS forms typically cap supporting documents at 1 MB. Compress to 800 KB to leave margin for any portal-side overhead, and keep text mode in advanced settings if the document has fine print that needs to remain readable." },
+            { title: "UK passport / NHS forms — under 1 MB", body: "GOV.UK and NHS forms typically cap supporting documents at 1 MB. Compress to 800 KB to leave margin for any portal-side overhead, and check that any fine print is still readable before you upload." },
             { title: "Email attachments — under Gmail's 25 MB limit", body: "Gmail rejects attachments over 25 MB. For a 35-50 MB scanned brief or design deck, set the target to 20 MB and let the compressor reduce DPI on image-heavy pages. The final PDF still opens cleanly in any reader." },
             { title: "WhatsApp / Telegram sharing — under 16 MB", body: "WhatsApp's document share caps at 100 MB but quality degrades over 16 MB; Telegram is similar. Use the 10 MB or 5 MB preset for fast share-and-forward without quality complaints from recipients." },
         ],
         troubleshooting: [
-            { question: "I set a target of 100 KB and got 130 KB — why?", answer: "Auto-tuning gets close on most files but can't always hit aggressive targets without making text unreadable. Open Advanced and drop quality to 30-40% and resolution scale to 0.7×. If the source PDF is mostly photos (a passport scan) you can usually go to 100 KB; if it's a 10-page text document, 100 KB requires very aggressive settings." },
+            { question: "I set a target of 100 KB and got 130 KB — why?", answer: "Auto-tuning gets close on most files but can't always hit aggressive targets without making text unreadable. Clear the target, open Advanced and set quality to 30-40% and resolution scale to 0.7×. If the source PDF is mostly photos (a passport scan) you can usually go to 100 KB; if it's a 10-page text document, 100 KB requires very aggressive settings." },
             { question: "The compressed PDF text is no longer selectable.", answer: "Convertify's compressor rasterizes pages — each page becomes a JPEG embedded in a new PDF — so text in a compressed file is no longer selectable or searchable. That is the trade-off for hitting tight size targets. Keep your original for anything that needs copyable text and send the compressed copy only where a size limit demands it. If your PDF is already under the target, it is returned unchanged with its text intact." },
-            { question: "My scan is unreadable after compression.", answer: "Scans of small text (e.g. ID cards) are particularly sensitive. Try 60% quality with 1.0× resolution first — that usually preserves legibility while still cutting size by 40-60%." },
+            { question: "My scan is unreadable after compression.", answer: "Scans of small text (e.g. ID cards) are particularly sensitive. Clear the target and try 60% quality with 1.0× resolution first — that usually keeps small text legible." },
             { question: "Why does compressing a small PDF make it bigger?", answer: "It doesn't. Compressing re-encodes each page as an image, which can inflate small or text-only PDFs, so when the result would not be smaller Convertify returns your original file unchanged and tells you so. A PDF that is already under your size target is also returned as-is, with its text intact." },
         ],
         comparison: [
@@ -102,18 +102,18 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
 
     "png-to-pdf": {
         intro: [
-            "Combining PNG screenshots, design exports, or scanned pages into a single PDF is a common task that most online tools handle poorly — they upload your images, add a watermark, and limit you to 5 files at a time. Convertify's PNG to PDF combiner runs entirely in your browser, supports unlimited PNGs, preserves transparency-aware backgrounds, and renders at up to 300 DPI so the output is print-grade.",
+            "Combining PNG screenshots, design exports, or scanned pages into a single PDF is a common task that most online tools handle poorly — they upload your images, add a watermark, and limit you to 5 files at a time. Convertify's PNG to PDF combiner runs entirely in your browser, has no fixed limit on the number of PNGs, and embeds each image at its original pixel size without recompression.",
             "The conversion uses PDF-Lib's native `embedPng` so alpha channels are handled correctly — transparent areas come through without weird black backgrounds (a frequent failure mode in cheap converters that flatten through JPEG first).",
             "If you've used iLovePDF or Smallpdf for the same task, the difference here is that the file size cap is your browser's RAM (so multi-hundred-MB image sets work), and there's no watermark on the result.",
         ],
         steps: [
-            { title: "Drop your PNG images", body: "Click the upload zone or drag and drop. You can add as many PNG files as your machine can hold in memory — typical laptops handle 200+ images without issue." },
+            { title: "Drop your PNG images", body: "Click the upload zone or drag and drop. There is no fixed limit on the number of files; very large batches are limited by your device's memory." },
             { title: "Reorder if needed", body: "Drag thumbnails to set the page order. The first image becomes page 1, the second image page 2, and so on. This is especially important for design portfolios or step-by-step guides where order matters." },
             { title: "Click Convert", body: "PDF-Lib creates a new PDF, embeds each PNG at its original resolution, and adds one page per image sized to the image dimensions. The whole pass happens in JavaScript on your CPU." },
             { title: "Download the PDF", body: "The result is a multi-page PDF (one page per PNG) with no watermark, ready to email, print, or upload to any portal." },
         ],
         scenarios: [
-            { title: "Design portfolios — Figma / Sketch exports", body: "Designers exporting frames as PNG often need a single PDF for client review or job applications. Drop all PNG exports, drag to set the narrative order (intro → research → wireframes → final), and convert. The PDF is print-quality at 300 DPI and ready for resume attachments." },
+            { title: "Design portfolios — Figma / Sketch exports", body: "Designers exporting frames as PNG often need a single PDF for client review or job applications. Drop all PNG exports, drag to set the narrative order (intro → research → wireframes → final), and convert. Each frame keeps its exported pixel size, so the PDF is exactly as sharp as your exports." },
             { title: "Step-by-step guides and tutorials", body: "Internal training docs built from screenshots (annotated with arrows in a tool like Snagit) often live as PNG files. Combining them into a PDF makes sharing simpler than zipping the images, and recipients can scroll through pages naturally." },
             { title: "Scanned book pages and old documents", body: "Cameras and phone scanner apps that output PNG (rather than PDF) leave you with a folder of one-page images. PNG to PDF gives you a single archive-friendly file without re-uploading the scans to a third party — important for genealogy, legal, and personal records." },
             { title: "Receipts and proof-of-purchase bundles", body: "Many e-commerce sites email PNG receipts (or you screenshot them). Bundling them into a single PDF is the easiest way to submit expense claims to HR / accounting tools that expect a PDF rather than a ZIP of images." },
@@ -127,7 +127,7 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
         comparison: [
             { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
             { feature: "Number of PNGs", convertify: "Unlimited", typical: "5–15 on free tier" },
-            { feature: "Output resolution", convertify: "Up to 300 DPI", typical: "72–150 DPI" },
+            { feature: "Output resolution", convertify: "Original pixel size", typical: "Often downscaled" },
             { feature: "Transparency handling", convertify: "Native PNG embed", typical: "JPG flatten" },
             { feature: "Watermark", convertify: "None", typical: "Often added" },
             { feature: "Reorder before convert", convertify: "Drag-and-drop", typical: "Filename order only" },
@@ -172,16 +172,16 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
 
     "pdf-to-png": {
         intro: [
-            "PDF to PNG is the right choice when you need lossless image quality — for line art, technical drawings, screenshots embedded in PDFs, or any case where JPEG compression artifacts would be visible. Convertify renders each page at up to 300 DPI through PDF.js and saves the result as a PNG with no quality loss.",
-            "PNG also preserves transparency-friendly backgrounds, so designers extracting elements from a PDF mockup get clean output suitable for compositing without further processing.",
+            "PDF to PNG is the right choice when you need lossless image quality — for line art, technical drawings, screenshots embedded in PDFs, or any case where JPEG compression artifacts would be visible. Convertify renders each page at 2× its native size (about 144 DPI on a letter-size page) through PDF.js and saves the result as a PNG, with no further compression loss.",
+            "Pages are rendered onto a white background, so the PNGs are opaque. If you need a transparent element from a PDF mockup, cut it out afterwards in an image editor.",
         ],
         steps: [
             { title: "Drop your PDF", body: "Drag and drop a single PDF, or click the upload zone to pick from a folder. The tool reads page count instantly so you know how many PNGs to expect." },
-            { title: "Pick rendering DPI", body: "300 DPI for print and design work, 150 DPI for web and screen use, 72 DPI for thumbnails and small previews." },
+            { title: "Click Convert", body: "PDF.js renders every page at 2× size and encodes it as PNG. There is no DPI or page-range picker; every page is converted." },
             { title: "Convert and download", body: "Single-page PDFs download as a single PNG; multi-page PDFs auto-bundle into a ZIP so you don't click download once per page." },
         ],
         scenarios: [
-            { title: "Technical drawings and CAD exports", body: "Engineering drawings exported as PDF often have fine line art that JPEG compression smears. PNG preserves every line cleanly at 300 DPI, making it the right format for inclusion in technical documentation." },
+            { title: "Technical drawings and CAD exports", body: "Engineering drawings exported as PDF often have fine line art that JPEG compression smears. PNG keeps every line free of compression artifacts, making it the better format for technical documentation." },
             { title: "Design comps and mockups", body: "Designers receiving a PDF mockup who need PNG assets for further compositing benefit from the lossless format — no JPG artifacts to clean up later in Photoshop or Figma." },
             { title: "Screenshots and UI captures", body: "PDFs that contain UI screenshots typically render best as PNG because the source was already pixel-perfect. Converting back to PNG keeps that fidelity." },
         ],
@@ -192,7 +192,7 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
         comparison: [
             { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
             { feature: "Format quality", convertify: "Lossless PNG", typical: "Lossy JPG" },
-            { feature: "Max DPI", convertify: "300 DPI", typical: "150 DPI" },
+            { feature: "Render size", convertify: "2× page (~144 DPI)", typical: "Varies" },
             { feature: "Multi-page batch", convertify: "Auto-ZIP", typical: "Manual" },
         ],
         lastUpdated: "2026-05-08",
@@ -200,21 +200,21 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
 
     "pdf-to-text": {
         intro: [
-            "Extracting text from a PDF is fast when the PDF was generated digitally (e.g. exported from Word) and harder when it's a scanned image. Convertify's PDF to Text tool handles the digital case in milliseconds — pulling every text run, preserving reading order, and outputting clean .txt or copyable plain text.",
-            "If your PDF is a scan (image-only), you'll see no text extracted because there's no embedded text layer. For those cases, use the OCR PDF tool first to add a text layer, then run PDF to Text.",
+            "Extracting text from a PDF is fast when the PDF was generated digitally (e.g. exported from Word) and harder when it's a scanned image. Convertify's PDF to Text tool handles the digital case in milliseconds — pulling every text run in the PDF's internal order and outputting a .txt file or copyable plain text.",
+            "If your PDF is a scan (image-only), you'll see no text extracted because there's no embedded text layer. Convertify has no OCR, so a scan needs a separate OCR tool before its text can be extracted.",
         ],
         steps: [
             { title: "Drop the PDF", body: "Drag or click to upload. PDF.js reads the document structure immediately." },
-            { title: "Convertify extracts the text", body: "Every text run is pulled in document order and joined with newlines between paragraphs. The whole pass is local and finishes near-instantly for typical documents." },
+            { title: "Convertify extracts the text", body: "Every text run is pulled in document order. Runs on a page are joined with spaces and pages are separated by a blank line, so the original line breaks are not kept. The whole pass is local and finishes near-instantly for typical documents." },
             { title: "Copy or download", body: "Copy the text directly to your clipboard for pasting into Word, Notion, or email — or download as a .txt file for archival or scripting." },
         ],
         scenarios: [
-            { title: "Quoting from a contract or paper", body: "When you need to copy a paragraph from a PDF (a quote for an article, a clause for legal review), PDF to Text gives you clean copyable plain text — no weird ligatures, no broken hyphens, no sticky formatting." },
+            { title: "Quoting from a contract or paper", body: "When you need to copy a paragraph from a PDF (a quote for an article, a clause for legal review), PDF to Text gives you plain text with no formatting attached, ready to paste anywhere." },
             { title: "Building a search index", body: "Developers building an internal search over PDF documents can use PDF to Text as the first step in their indexing pipeline. The output is plain UTF-8 ready for Elasticsearch, Algolia, or Meilisearch ingestion." },
             { title: "Translating long documents", body: "Most translation tools handle plain text more reliably than PDF. Extract first, translate, then re-format if needed." },
         ],
         troubleshooting: [
-            { question: "I extracted but got nothing.", answer: "Your PDF is likely a scan with no text layer. Run it through the OCR PDF tool first to add a searchable text layer, then re-extract." },
+            { question: "I extracted but got nothing.", answer: "Your PDF is likely a scan with no text layer. Convertify has no OCR, so the text has to come from a separate OCR tool." },
             { question: "The reading order is wrong.", answer: "Multi-column layouts (academic papers, magazines) sometimes confuse text extractors. PDF.js does its best to follow visual order; for pathological cases, copy column-by-column or use a layout-aware extractor like pdftotext from poppler-utils." },
         ],
         comparison: [
@@ -316,13 +316,13 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
             "If you've previously used Adobe Acrobat or Smallpdf for the same job, the key difference here is that there's no 5-page daily limit and nothing is uploaded — useful for confidential materials like HR records, tax returns, and legal exhibits.",
         ],
         steps: [
-            { title: "Upload the PDF", body: "Click the upload zone or drag a PDF onto it. The tool reads the page count immediately and shows thumbnail previews so you can see what you're working with." },
-            { title: "Select pages to extract", body: "Click individual page thumbnails to toggle them, or type a range (e.g. '3-7, 12, 15-20') in the range field. You can also choose 'Extract all as individual files' to split every page into its own PDF." },
+            { title: "Upload the PDF", body: "Click the upload zone or drag a PDF onto it. The tool reads the page count immediately and shows a numbered button for each page." },
+            { title: "Select pages to extract", body: "Click individual page numbers to toggle them, or type a range (e.g. '3-7, 12, 15-20') in the range field. You can also choose 'Extract all as individual files' to split every page into its own PDF." },
             { title: "Extract", body: "Convertify builds the new PDF from your selected pages using PDF-Lib, entirely in the browser. For typical selections this completes in 1-3 seconds." },
             { title: "Download", body: "Single-page or small multi-page extractions download as one PDF. When you extract all pages as individual files, the result is a ZIP containing page-1.pdf, page-2.pdf, etc." },
         ],
         scenarios: [
-            { title: "Extracting one page from a large document", body: "Legal professionals, accountants, and HR teams frequently need a single page from a 100+ page file — a specific exhibit, one quarterly statement, or a single signature page. Click the thumbnail, extract, done." },
+            { title: "Extracting one page from a large document", body: "Legal professionals, accountants, and HR teams frequently need a single page from a 100+ page file — a specific exhibit, one quarterly statement, or a single signature page. Click the page number, extract, done." },
             { title: "Separating combined invoices", body: "Accounting software often exports a month's invoices as one PDF. Split by page to get individual invoice files that match your filing structure, then rename each by invoice number." },
             { title: "Sharing a chapter from an e-book or report", body: "You want to send a colleague just the appendix of a 300-page report. Extract pages 285-300 and share only what's needed — keeping the rest private." },
             { title: "Removing the cover page before submission", body: "Many PDF templates add a branded cover page. Extract pages 2 through N to get a clean document without the cover, ready for external portals that don't expect branding." },
@@ -331,7 +331,7 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
             { question: "My PDF is password-protected and I can't split it.", answer: "Protected PDFs need to be unlocked before you can modify them. Run the file through Convertify's Unlock PDF tool first, then bring the unlocked copy back to the splitter." },
             { question: "I want to extract non-consecutive pages (e.g. pages 1, 5, 9).", answer: "Use the range syntax: type '1, 5, 9' in the range input and only those pages will be extracted into one PDF." },
             { question: "The ZIP only contains some pages, not all.", answer: "This is almost always a browser memory issue on very large PDFs. Close other heavy tabs and try again. For 500+ page PDFs, split in two passes: first extract pages 1-250, then 251-500." },
-            { question: "Page order is wrong in the extracted PDF.", answer: "Pages are extracted in the order you selected them, not in their original document order. If you clicked thumbnails out of order, the extraction follows click order. Use the range input instead for reliable ordering." },
+            { question: "Can I change the page order while extracting?", answer: "No. Extracted pages always keep their original document order, however you select them. To put pages in a different order, use Reorder PDF on the extracted file." },
         ],
         comparison: [
             { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
@@ -347,7 +347,7 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
     "pdf-to-word": {
         intro: [
             "Converting a PDF to an editable Word document is one of the most-requested file tasks — you receive a contract, a form, or a report as PDF and need to edit the text without retyping everything. Convertify's PDF to Word converter extracts the text layer from digitally-generated PDFs and maps it to a .docx structure your can open in Microsoft Word, Google Docs, or LibreOffice.",
-            "The key distinction that determines quality is whether your PDF is 'digital' (created by exporting from Word, Excel, or a design tool) or 'scanned' (a photo of a physical page). Digital PDFs convert cleanly because they carry an embedded text layer. Scanned PDFs are images — they look like text but the file stores pixels, not characters. Scanned PDFs need OCR first; run them through Convertify's OCR PDF tool to add a text layer, then convert to Word.",
+            "The key distinction that determines quality is whether your PDF is 'digital' (created by exporting from Word, Excel, or a design tool) or 'scanned' (a photo of a physical page). Digital PDFs convert cleanly because they carry an embedded text layer. Scanned PDFs are images — they look like text but the file stores pixels, not characters. Scanned PDFs need OCR first, and Convertify does not include OCR, so run a scan through a separate OCR tool before converting.",
             "Convertify's converter is fully client-side, so confidential PDFs — HR letters, bank statements, legal agreements — never reach a server. The output is a plain .docx with your content reformatted into Word paragraphs, ready to edit.",
         ],
         steps: [
@@ -362,7 +362,7 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
             { title: "Accessibility editing", body: "Screen-reader workflows sometimes need a Word document instead of a PDF. Converting gives you editable text you can reformat with proper heading hierarchy and alt text — something you can't easily do in a PDF." },
         ],
         troubleshooting: [
-            { question: "The converted Word doc shows garbled text or no text at all.", answer: "Your PDF is likely a scan (image-only). Run it through OCR PDF first to add a searchable text layer, then convert." },
+            { question: "The converted Word doc shows garbled text or no text at all.", answer: "Your PDF is likely a scan (image-only). Convertify has no OCR, so a scan needs a separate OCR tool before it can be converted to editable text." },
             { question: "Formatting looks wrong — columns are merged, tables are flat.", answer: "Complex layouts (multi-column academic papers, tables with merged cells) are the hardest to convert perfectly. The text content is correct; you may need to reformat the layout manually in Word." },
             { question: "Some fonts look different in the Word doc.", answer: "PDF fonts are embedded in the PDF and aren't transferred to .docx. Word substitutes the nearest available font. If exact branding matters, update fonts manually after converting." },
             { question: "Images from the PDF are missing.", answer: "The converter extracts text content only — embedded images are not included in the Word output. For a layout-accurate Word file with images intact, you need a more advanced tool like Adobe Acrobat Pro." },
@@ -431,8 +431,8 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
             { title: "Quick print-ready extract", body: "Pull a specific sheet out of a large workbook without sending the whole file, which often carries other tabs you didn't mean to share." },
         ],
         troubleshooting: [
-            { question: "Columns on the right are missing from the PDF.", answer: "The layout fits seven columns per page. Anything beyond the seventh column is not drawn. Trim or reorder your columns in the spreadsheet so the ones that matter fall within the first seven, or split a wide sheet into several narrower ones and convert each." },
-            { question: "My cell text is cut off partway through.", answer: "Each cell is truncated at 20 characters to keep the columns aligned. Long descriptions, URLs and pasted paragraphs will be clipped. Shorten the values before converting if the full text matters." },
+            { question: "My sheet is too wide for one page.", answer: "Every column is included. The text is first shrunk (down to 6 pt) to fit the page width; if the sheet is still too wide, the remaining columns continue on the following pages. Delete columns you don't need before converting to keep everything on one page." },
+            { question: "Will long cell text be cut off?", answer: "No. Long descriptions, URLs and pasted paragraphs wrap onto extra lines inside their cell. Column width is capped so one long cell doesn't push every other column off the page." },
             { question: "My charts and cell colours didn't come across.", answer: "They aren't supported — this is a values-only export. For a formatted, chart-accurate PDF, use Excel's own export, or Google Sheets' File → Download → PDF." },
             { question: "Only one sheet came out.", answer: "One sheet per conversion, by design. Convert each tab in turn and combine the results with our Merge PDF tool." },
             { question: "Formulas show as errors like #REF! or #VALUE!.", answer: "Those errors already exist in your spreadsheet — the converter exports whatever value the cell currently holds. Fix them in Excel first, then convert." },
@@ -451,14 +451,14 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
 
     "pdf-to-excel": {
         intro: [
-            "Extracting tables from a PDF into an editable Excel spreadsheet is one of the most time-consuming manual tasks in data work — copying column by column, fixing misaligned rows, reconstructing formulas. Convertify's PDF to Excel converter identifies table structures in the PDF and exports them as a structured .xlsx file you can immediately open and sort.",
-            "The quality of extraction depends heavily on the source PDF. Digitally-generated PDFs (from accounting software, government databases, financial systems) typically have well-defined table cells that extract cleanly. Scanned PDFs and image-only PDFs require OCR first — run them through Convertify's OCR PDF tool to add a text layer, then convert.",
+            "Extracting tables from a PDF into an editable Excel spreadsheet is one of the most time-consuming manual tasks in data work — copying column by column, fixing misaligned rows, reconstructing formulas. Convertify's PDF to Excel converter reads the PDF's text layer line by line and writes each line as a spreadsheet row, one sheet per page, so you can open it and tidy it in Excel instead of retyping.",
+            "The quality of extraction depends heavily on the source PDF. Digitally-generated PDFs (from accounting software, government databases, financial systems) have a real text layer, and simple, evenly spaced tables come out most cleanly. There is no true table detection: empty cells are skipped, so columns can shift. Scanned PDFs and image-only PDFs require OCR first, which Convertify does not include, so run them through a separate OCR tool before converting.",
             "This tool is especially popular among financial analysts who receive PDF bank statements, government data PDFs, and vendor price lists that they need to work with in Excel — without retyping hundreds of rows.",
         ],
         steps: [
-            { title: "Upload the PDF", body: "Drag or click to upload. Digitally-generated PDFs show a ready indicator; image-only scans prompt you to OCR first." },
-            { title: "Extract tables", body: "The converter scans every page for table structures — rows, columns, merged cells — and maps them to Excel rows and columns." },
-            { title: "Download the .xlsx", body: "Open in Excel or Google Sheets. Each detected table is output to its own sheet or a contiguous block, ready to sort, filter, and build formulas on." },
+            { title: "Upload the PDF", body: "Drag or click to upload. The PDF needs selectable text; a scan produces a sheet with a 'no selectable text found' notice." },
+            { title: "Extract the text", body: "The converter groups the text on every page into lines by position. Each line becomes a row, and each separate piece of text on the line becomes a cell, left to right." },
+            { title: "Download the .xlsx", body: "Open in Excel or Google Sheets. Each PDF page is its own sheet. Check that columns line up before you sort, filter, or build formulas on the data." },
         ],
         scenarios: [
             { title: "Bank statement analysis", body: "Download your monthly bank statement as PDF, convert to Excel, and you have every transaction in a spreadsheet — ready to categorize, sum, and chart without typing a single figure." },
@@ -468,14 +468,14 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
         ],
         troubleshooting: [
             { question: "The extracted data has merged rows or scrambled columns.", answer: "This happens most often with complex multi-level headers (e.g. a table with a 3-level hierarchy) or cells that span multiple columns. Clean up the header rows manually in Excel after extraction — the row data itself is usually correct." },
-            { question: "No data extracted — blank Excel file.", answer: "Your PDF is likely a scan. Run it through OCR PDF first to add a text layer, then re-run the extraction." },
+            { question: "No data extracted — blank Excel file.", answer: "Your PDF is likely a scan. Convertify has no OCR, so a scan needs a separate OCR tool to add a text layer first." },
             { question: "Numbers are being treated as text in Excel.", answer: "Select the column, go to Data → Text to Columns, and complete the wizard — this converts text-formatted numbers to true numeric values. This is a common Excel quirk when data comes from external sources." },
             { question: "Decimal points appear as commas (European format).", answer: "If the source PDF uses European number formatting (1.234,56 instead of 1,234.56), the extracted values need locale conversion. Use Excel's Find & Replace to swap commas to decimals after extraction." },
         ],
         comparison: [
             { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
             { feature: "Output format", convertify: ".xlsx", typical: ".xlsx or .csv" },
-            { feature: "Scanned PDF handling", convertify: "Prompt to OCR first", typical: "Blank output" },
+            { feature: "Scanned PDF handling", convertify: "Not supported (no OCR)", typical: "Blank output" },
             { feature: "Daily limit", convertify: "Unlimited", typical: "1–3 per day" },
             { feature: "Watermark", convertify: "None", typical: "Often added" },
         ],
@@ -811,36 +811,37 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
 
     "ocr-pdf": {
         intro: [
-            "OCR (Optical Character Recognition) turns a scanned, image-only PDF into a searchable document with a real text layer. After OCR, you can Ctrl+F search the content, copy text from it, and use it with tools that expect a text-layer PDF (like PDF to Word or PDF to Text). Convertify's OCR PDF tool processes scanned documents in your browser, adding the invisible text layer while keeping the original scan visually unchanged.",
-            "The most common scenario: you scan a paper document (a contract, a passport, a bank letter) and the resulting PDF is just a photo — it looks like text but the file contains no characters, only pixels. OCR reads those pixels, recognizes the characters, and adds a hidden text layer so you can search and copy.",
-            "Convertify's OCR engine handles English, Spanish, French, German, Portuguese, and other Latin-script languages. Accuracy is highest on clean, well-lit scans with standard fonts (>95% character accuracy). Handwriting and complex scripts have lower accuracy.",
+            "Convertify's document scanner turns your phone or laptop camera into a flatbed-style scanner. Point it at a page and it outlines the paper's edges live; when you tap the shutter, it crops the page out of the background, straightens the perspective so the page is a clean rectangle, and applies a photocopy-style filter. Scan as many pages as you need and save them as one PDF.",
+            "Everything runs in your browser. The camera feed, the cropped pages and the finished PDF never leave your device, which matters for the things people usually scan: receipts, ID paperwork, medical forms, signed contracts.",
+            "One thing it does not do is OCR. The pages are saved as images, so the PDF looks like a scan but its text is not searchable or copyable. If you add a PDF that already contains real text, the Copy text button returns that existing text; photographs and camera scans have none.",
         ],
         steps: [
-            { title: "Upload the scanned PDF", body: "Drag or click to upload. The tool detects whether the PDF is image-only (OCR needed) or already has a text layer." },
-            { title: "Select language", body: "Choose the primary language of the document for best recognition accuracy. Multi-language documents: choose the dominant language." },
-            { title: "Run OCR and download", body: "The OCR engine processes each page, adds an invisible text layer behind the existing image, and outputs a searchable PDF. The visual appearance is unchanged." },
+            { title: "Open the camera or add files", body: "Allow camera access when the browser asks. On a phone the rear camera is used; you can switch cameras and turn on the torch where the device supports it. You can also add photos or PDF pages from your files instead." },
+            { title: "Capture each page", body: "Lay the page on a darker, contrasting surface and hold it in view until the edge outline settles on the paper, then tap the shutter. The page is cropped and straightened from that frame. Repeat for every page; the counter shows how many you have." },
+            { title: "Pick a filter and tidy up", body: "Choose Xerox B&W (clean black-and-white photocopy), Magic Color (bright paper that keeps colored stamps and ink), Grayscale, or Original. Change it per page or apply it to all pages. Rotate or delete pages as needed." },
+            { title: "Save as PDF", body: "Tap Save as PDF. Every page is placed in one PDF in the order you scanned it, and the file downloads straight to your device." },
         ],
         scenarios: [
-            { title: "Making scanned contracts searchable", body: "Legal teams that receive executed contracts as scanned PDFs need to search for clause numbers and defined terms. OCR adds the text layer so Ctrl+F works — you can then jump directly to 'Section 12.4' instead of reading every page." },
-            { title: "Preparing scanned PDFs for PDF to Word conversion", body: "Run OCR first, then PDF to Word. OCR adds the text layer that the Word converter needs to produce editable output. Without OCR, the conversion produces a blank .docx." },
-            { title: "Archiving historical documents", body: "Organizations digitalizing paper archives (government agencies, libraries, law firms) run OCR on every scanned PDF to make them full-text searchable in document management systems." },
-            { title: "Extracting data from printed forms", body: "Survey forms, application forms, and questionnaires received as physical documents get scanned to PDF, then OCR'd so the data can be extracted programmatically or via the PDF to Text tool." },
+            { title: "Receipts and expense claims", body: "Scan a stack of receipts into one PDF for an expense report. The Xerox B&W filter removes the grey paper tint and shadows so thermal-paper receipts stay legible when printed." },
+            { title: "Forms and signed paperwork", body: "Fill in and sign a paper form, scan it, and email it back without a trip to a photocopier. Magic Color keeps blue ink signatures and red stamps visible." },
+            { title: "Notes and handouts", body: "Capture handwritten notes, whiteboard printouts or class handouts as a single PDF you can share or archive." },
+            { title: "Documents for online applications", body: "Many portals want a PDF rather than a phone photo. Scan the page here, then use Compress PDF if the portal has a size limit." },
         ],
         troubleshooting: [
-            { question: "OCR accuracy is low on my document.", answer: "The main factors affecting accuracy: scan resolution (300 DPI minimum for good results — phone camera photos at lower resolution will give worse accuracy), scan straightness (skewed pages reduce accuracy significantly), and font clarity (printed text is nearly perfect; handwriting, faxed documents, and very small fonts are harder)." },
-            { question: "The OCR-ed PDF is much larger than the original scan.", answer: "The OCR text layer adds minimal size to well-encoded PDFs. If size increased dramatically, check that you're not re-encoding the images at higher quality during the OCR pass. Try running the result through Compress PDF afterwards." },
-            { question: "Some pages OCR correctly but others are blank text.", answer: "The blank-result pages are likely rotated or upside down. Use Rotate PDF first to orient all pages correctly, then re-run OCR." },
-            { question: "Numbers are being recognized as letters (e.g. '0' as 'O').", answer: "Enable numeric-mode hints if available in the OCR settings, or accept minor inaccuracies and correct them in the downstream Word/text output. This is most common on old-style printed digits or low-resolution scans." },
+            { question: "The edge outline doesn't find my page.", answer: "Edge detection looks for a brightness step between the paper and what is behind it. Put white paper on a darker surface, make sure all four corners are in the frame, and avoid strong glare across the page." },
+            { question: "Can I search or copy the text in my scanned PDF?", answer: "No. The scanner saves pages as images and does not run OCR, so the text is not searchable. Only PDFs you add that already have a text layer give you text through Copy text." },
+            { question: "My uploaded photo wasn't cropped.", answer: "Automatic cropping and straightening only run on live camera captures. Photos added from your files get the filter and rotation, but keep their original framing." },
+            { question: "The camera doesn't start.", answer: "Check that the browser has camera permission for this site and that no other app is using the camera. Camera access also requires the page to be opened over HTTPS." },
         ],
         comparison: [
-            { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
-            { feature: "Language support", convertify: "20+ languages", typical: "English only" },
-            { feature: "Output type", convertify: "Searchable PDF", typical: "Text file or searchable PDF" },
-            { feature: "Daily limit", convertify: "Unlimited", typical: "3 per day" },
-            { feature: "Watermark", convertify: "None", typical: "Sometimes" },
+            { feature: "Files uploaded", convertify: "Never", typical: "Often, for cloud sync" },
+            { feature: "App install", convertify: "Not needed (browser)", typical: "Usually required" },
+            { feature: "Edge crop + straighten", convertify: "Yes, on camera captures", typical: "Yes" },
+            { feature: "Text recognition (OCR)", convertify: "No", typical: "Often, sometimes paid" },
+            { feature: "Watermark", convertify: "None", typical: "On free tier, sometimes" },
             { feature: "Sign-up", convertify: "No", typical: "Often" },
         ],
-        lastUpdated: "2026-06-01",
+        lastUpdated: "2026-10-21",
     },
 
     "sign-pdf": {
@@ -896,7 +897,7 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
         ],
         troubleshooting: [
             { question: "The comparison shows many false positives on a reformatted document.", answer: "Text-based comparison works best when content is the same but words changed. If the document was entirely reflowed (e.g., font size changed causing different line breaks), almost every line will show as changed even if the words are identical. For reformatted documents, export the text from both PDFs and compare the text files instead." },
-            { question: "Scanned PDFs show no differences detected.", answer: "Scanned PDFs are image-only — there's no text layer to compare. Run both versions through OCR PDF first, then compare the OCR'd outputs." },
+            { question: "Scanned PDFs show no differences detected.", answer: "Scanned PDFs are image-only — there's no text layer to compare. Convertify has no OCR, so both versions need a text layer from a separate OCR tool before they can be compared." },
         ],
         comparison: [
             { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
@@ -957,7 +958,7 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
         ],
         troubleshooting: [
             { question: "The font doesn't match after I edit text.", answer: "Exact font matching is only possible when the original PDF's embedded font is one the browser can access. For near-perfect matching, choose the closest available font in the text toolbar. For major mismatches, add the correction as a white rectangle covering the old text, then a new text box on top in a matching font." },
-            { question: "I can't click on text to select it.", answer: "If the PDF is a scanned image rather than a digital document, there's no text layer to edit. Run OCR PDF first to add a text layer, then open the OCR'd output in the editor." },
+            { question: "I can't click on text to select it.", answer: "If the PDF is a scanned image rather than a digital document, there's no text layer to edit. Convertify has no OCR, but you can still add new text, drawings, boxes and stamps on top of the scan." },
         ],
         comparison: [
             { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
@@ -1094,13 +1095,13 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
 
     "image-compressor": {
         intro: [
-            "Compressing an image for web use, email, or upload portals reduces file size without degrading visible quality — done right, you lose less than you'd notice at any normal viewing distance. Convertify's Image Compressor supports JPG, PNG, WebP, and GIF, runs entirely in your browser, and lets you dial compression with a quality slider or target a specific file size.",
+            "Compressing an image for web use, email, or upload portals reduces file size without degrading visible quality — done right, you lose less than you'd notice at any normal viewing distance. Convertify's Image Compressor accepts JPG, PNG, and WebP, runs entirely in your browser, and saves each image as a JPEG at the quality you set with a slider.",
             "The core tradeoff in image compression is quality vs. size. JPEG compression is lossy — every quality reduction removes some pixel data permanently. PNG compression is lossless — it rearranges pixel data more efficiently but removes nothing. For photos, JPEG at 70-85% quality is visually nearly identical to the original while being 60-80% smaller. For icons, logos, and screenshots with solid colors, PNG lossless stays sharp; convert to WebP for smaller sizes.",
         ],
         steps: [
-            { title: "Upload your images", body: "Drop one or multiple images (JPG, PNG, WebP, GIF) onto the upload zone. Batch mode compresses all at once." },
-            { title: "Set compression level", body: "Drag the quality slider (10-100%) or type a target KB/MB. Lower quality = smaller file. 80% is a good starting point for photos; 90-95% for product images where sharpness matters." },
-            { title: "Compress and download", body: "Compressed images download individually or as a ZIP for batch jobs. The original vs. compressed file size comparison is shown for each image." },
+            { title: "Upload your images", body: "Drop one or multiple images (JPG, PNG, WebP) onto the upload zone. Batch mode compresses all at once." },
+            { title: "Set compression level", body: "Drag the quality slider (30–95%). Lower quality = smaller file. Every image is saved as a JPEG, so PNG transparency is not kept. 80% is a good starting point for photos; 90-95% for product images where sharpness matters." },
+            { title: "Compress and download", body: "A single image downloads directly; several download together as a ZIP. The original vs. compressed file size comparison is shown for each image." },
         ],
         scenarios: [
             { title: "Web page performance optimization", body: "Unoptimized images are the most common cause of slow page load times. A 5 MB hero image compressed to 200 KB loads 25x faster and improves Core Web Vitals scores — directly affecting Google rankings for the page." },
@@ -1110,14 +1111,14 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
         ],
         troubleshooting: [
             { question: "The compressed image looks noticeably different from the original.", answer: "You may have used too low a quality setting. Try 75-85% for photos — the difference between 85% and 100% is virtually invisible, and file size typically drops 50-70% in that range. Only drop below 70% when file size is critically constrained." },
-            { question: "The compressed PNG is bigger than the original.", answer: "This can happen if the original PNG was already well-optimized. PNG compression is lossless — you can't make a lossless file smaller beyond a certain point. Convert the PNG to WebP or JPEG instead for a substantial size reduction." },
-            { question: "I want to compress without any quality loss.", answer: "Use 100% quality mode for JPEG (minimal loss) or lossless mode for PNG/WebP. True no-loss compression of JPEGs only strips metadata (EXIF) and redundant color table entries — the typical saving is 10-20%." },
+            { question: "The compressed image is bigger than the original.", answer: "Every image is re-saved as a JPEG. Small graphics, screenshots and files that were already well optimized can come out larger. Keep the original in that case, or lower the quality." },
+            { question: "I want to compress without any quality loss.", answer: "This tool can't do that: it always re-encodes to JPEG, which is lossy. The highest setting, 95%, is visually near-identical to the original for photos." },
         ],
         comparison: [
             { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
-            { feature: "Formats supported", convertify: "JPG, PNG, WebP, GIF", typical: "JPG only" },
+            { feature: "Formats supported", convertify: "JPG, PNG, WebP in; JPG out", typical: "JPG only" },
             { feature: "Batch compression", convertify: "Yes (ZIP download)", typical: "One at a time" },
-            { feature: "Target size mode", convertify: "Yes", typical: "Quality slider only" },
+            { feature: "Target size mode", convertify: "No (see Fit to size)", typical: "Quality slider only" },
             { feature: "Daily limit", convertify: "Unlimited", typical: "20 images/day" },
             { feature: "Sign-up", convertify: "No", typical: "Often" },
         ],
@@ -1159,11 +1160,11 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
     "heic-to-jpg": {
         intro: [
             "HEIC is Apple's default photo format since iOS 11 — it's 50% smaller than JPEG at equivalent quality, which is why iPhones use it. The problem: Android phones, Windows PCs, and most web platforms can't open HEIC files without additional software. Converting HEIC to JPG makes iPhone photos universally compatible.",
-            "Convertify's HEIC to JPG converter runs entirely in your browser using a WASM-powered HEIC decoder, so your private iPhone photos never leave your device. Batch conversion handles entire album exports — drop a folder of 200 HEIC files and download them all as JPGs in one ZIP.",
+            "Convertify's HEIC to JPG converter runs entirely in your browser using the open-source heic2any decoder, so your private iPhone photos never leave your device. Batch conversion handles album exports — drop many HEIC files at once and download them all as JPGs in one ZIP.",
         ],
         steps: [
             { title: "Upload HEIC files", body: "Drag one or many .heic or .heif files onto the upload zone. iPhone photo exports and AirDrop transfers are the most common source." },
-            { title: "Set quality", body: "Choose output JPEG quality (85% is a good default — barely distinguishable from original HEIC quality, at a predictable file size)." },
+            { title: "Let it convert", body: "Each photo is decoded in your browser and saved as a JPG at 90% quality. There is no quality setting to choose." },
             { title: "Convert and download", body: "Single files download as .jpg directly; batches download as a ZIP containing one .jpg per original .heic file." },
         ],
         scenarios: [
@@ -1174,14 +1175,14 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
         ],
         troubleshooting: [
             { question: "The JPG looks slightly different in color from the original HEIC.", answer: "HEIC uses the Display P3 wide color gamut on modern iPhones; JPG typically uses sRGB. The conversion maps P3 colors to sRGB, which can slightly mute vivid colors. This is a standard limitation of JPEG and sRGB — it's not a converter error." },
-            { question: "EXIF data (location, camera settings) is missing after conversion.", answer: "Convertify preserves EXIF metadata by default. If metadata is missing, check your photo upload source — some iPhone export methods strip EXIF before the file reaches the converter." },
+            { question: "EXIF data (location, camera settings) is missing after conversion.", answer: "That's expected: the converted JPG does not keep EXIF metadata, so location, date and camera details are dropped. Keep the original HEIC if you need them." },
             { question: "The file I'm uploading isn't recognized as HEIC.", answer: "Some HEIC files are named .heif (the container format name). Both extensions are supported. If your file is named something else, check the original iPhone Photos export settings — ensure you're exporting in 'Original Format' mode." },
         ],
         comparison: [
             { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
             { feature: "Batch conversion", convertify: "Yes (ZIP download)", typical: "One at a time" },
-            { feature: "EXIF preservation", convertify: "Yes", typical: "Sometimes" },
-            { feature: "Quality control", convertify: "Yes (slider)", typical: "Fixed quality" },
+            { feature: "EXIF preservation", convertify: "No (stripped)", typical: "Sometimes" },
+            { feature: "Quality control", convertify: "Fixed 90%", typical: "Fixed quality" },
             { feature: "Daily limit", convertify: "Unlimited", typical: "5–10 files/day" },
             { feature: "Sign-up", convertify: "No", typical: "Often" },
         ],
@@ -1249,14 +1250,14 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
 
     "webp-converter": {
         intro: [
-            "WebP is Google's modern image format that delivers 25-35% smaller files than JPEG at equivalent quality, and 26% smaller than PNG for lossless images. It's supported by all modern browsers (Chrome, Firefox, Safari, Edge) and is increasingly required or preferred for web performance. Convertify's WebP Converter converts JPG, PNG, and GIF to WebP, and WebP back to JPG or PNG.",
+            "WebP is Google's modern image format that delivers 25-35% smaller files than JPEG at equivalent quality, and 26% smaller than PNG for lossless images. It's supported by all modern browsers (Chrome, Firefox, Safari, Edge) and is increasingly required or preferred for web performance. Convertify's WebP Converter converts JPG and PNG to WebP, and WebP back to JPG or PNG.",
             "Why you might convert FROM WebP: WebP has limited support in older software (Photoshop pre-22, older Windows image viewers, some CMS platforms). If you receive WebP images you can't open or upload, converting to JPG or PNG restores universal compatibility.",
         ],
         steps: [
-            { title: "Upload the source image", body: "Drop JPG, PNG, GIF, or WebP files onto the upload zone. Batch conversion handles multiple files at once." },
-            { title: "Choose target format", body: "Select WebP for output (converting from other formats), or JPEG/PNG (converting from WebP). For WebP output, choose between lossy (smaller, like JPEG) and lossless (like PNG, but smaller than PNG)." },
-            { title: "Set quality", body: "For lossy WebP, 80% quality produces visually excellent results at typical web viewing sizes. Lossless WebP is quality-level 0-100 (100 = best compression, not quality, unlike JPEG)." },
-            { title: "Convert and download", body: "Results download individually or as a batch ZIP." },
+            { title: "Upload the source image", body: "Drop JPG, PNG, or WebP files onto the upload zone. Batch conversion handles multiple files at once." },
+            { title: "Choose target format", body: "Select WebP for output (converting from other formats), or JPEG/PNG (converting from WebP). Transparency is kept in WebP and PNG output; JPG output gets a white background." },
+            { title: "Set quality", body: "The quality slider (50–100%) applies to WebP and JPG output. Around 80% looks excellent at typical web viewing sizes. PNG output is always lossless." },
+            { title: "Convert and download", body: "A single file downloads directly; several files download together as a ZIP." },
         ],
         scenarios: [
             { title: "Web performance optimization", body: "Serving WebP instead of JPEG or PNG for website images reduces total page weight by 25-35% — a meaningful improvement to Core Web Vitals LCP (Largest Contentful Paint) scores, which affect Google search rankings." },
@@ -1270,7 +1271,7 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
         comparison: [
             { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
             { feature: "Bidirectional conversion", convertify: "To and from WebP", typical: "To WebP only" },
-            { feature: "Lossy + lossless WebP", convertify: "Both", typical: "Lossy only" },
+            { feature: "WebP quality control", convertify: "Slider, 50–100%", typical: "Fixed" },
             { feature: "Batch", convertify: "Yes", typical: "One at a time" },
             { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
         ],
@@ -1366,29 +1367,29 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
 
     "qr-code-generator": {
         intro: [
-            "A QR code packs text into a scannable 2D matrix. Convertify's generator takes a URL or any text up to 4,000 characters and gives you back a PNG at 256, 400, 512 or 1024 pixels — no sign-up, no account, no daily limit, and no tracking redirect in the middle. What you encode is what gets scanned.",
+            "A QR code packs text into a scannable 2D matrix. Convertify's generator takes a URL or any text up to 4,000 characters and gives you back a PNG at 256, 400 or 512 pixels — no sign-up, no account, no daily limit, and no tracking redirect in the middle. What you encode is what gets scanned.",
             "One thing to be aware of before you paste anything sensitive: the QR code is generated in your browser, so what you type is not sent to a server. But anyone who scans the code can read what is inside it, so a URL is fine, while a password or private data is not something to put in a QR code you will share.",
         ],
         steps: [
             { title: "Enter the content", body: "Type or paste a URL or any text up to 4,000 characters. For URLs, include the full address with https:// so scanners open it directly instead of treating it as plain text." },
-            { title: "Pick a size", body: "Choose 256, 400, 512 or 1024 pixels. 400px is comfortable for a slide or a web page; go to 1024px for anything you intend to print." },
+            { title: "Pick a size", body: "Choose 256, 400 or 512 pixels. 400px is comfortable for a slide or a web page; go to 512px for anything you intend to print." },
             { title: "Download the PNG", body: "The preview updates as you type. When it looks right, download the PNG and drop it wherever you need it." },
         ],
         scenarios: [
-            { title: "Restaurant and bar menus", body: "Point a QR code at your online menu or ordering page and print it on table cards and window decals. Use the 1024px download so the code stays crisp at print size." },
-            { title: "Posters, flyers and packaging", body: "A printed URL is something people have to type; a QR code is something they scan. Encode the landing page, download at 1024px, and place it at least 2cm x 2cm on the final artwork." },
+            { title: "Restaurant and bar menus", body: "Point a QR code at your online menu or ordering page and print it on table cards and window decals. Use the 512px download, which prints crisply up to about 4cm across at 300 DPI." },
+            { title: "Posters, flyers and packaging", body: "A printed URL is something people have to type; a QR code is something they scan. Encode the landing page, download at 512px, and place it at least 2cm x 2cm on the final artwork." },
             { title: "Slides and presentations", body: "Put a QR code on your closing slide linking to your deck, signup form or contact page. 400px is plenty at projector resolution and keeps the file small." },
             { title: "Linking print to digital", body: "Product manuals, business cards, event signage — anywhere a reader has a phone in hand and you want to save them typing a long URL." },
         ],
         troubleshooting: [
             { question: "My QR code isn't scanning.", answer: "Usually one of four things: (1) the encoded text is very long, which makes the matrix dense — shorten the URL with a link shortener; (2) the printed code is too small, aim for at least 2cm x 2cm; (3) it's printed on a low-contrast or glossy surface; or (4) it's distorted by being stretched non-proportionally in a layout tool." },
-            { question: "The QR code looks pixelated when printed.", answer: "PNG is resolution-dependent, so pick the 1024px size for anything going to print and don't scale it up further in your layout tool. For a business card, 1024px is comfortably enough." },
+            { question: "The QR code looks pixelated when printed.", answer: "PNG is resolution-dependent and the largest size here is 512px, which prints crisply up to about 4cm across at 300 DPI — plenty for a business card. Printed much larger, the edges soften, though the code usually still scans." },
             { question: "Can I add a logo in the centre or change the colours?", answer: "Not with this tool — it produces a standard black-on-white PNG. Adding a centre logo also requires raising the QR error-correction level to compensate, which this generator doesn't expose. If you need branded codes, use a dedicated QR service." },
-            { question: "Can I encode Wi-Fi credentials or a contact card?", answer: "Only by hand-writing the raw string yourself (for example the WIFI:S:...;P:...;; format), and we'd advise against putting a Wi-Fi password through this tool at all, since the text is sent to a third-party API to render the image." },
+            { question: "Can I encode Wi-Fi credentials or a contact card?", answer: "Only by hand-writing the raw string yourself (for example the WIFI:S:...;P:...;; format), The code is generated in your browser, but anyone who scans it can read the Wi-Fi password, so only share it where that's acceptable." },
         ],
         comparison: [
             { feature: "Output format", convertify: "PNG", typical: "PNG, sometimes SVG" },
-            { feature: "Max size", convertify: "1024px", typical: "Varies" },
+            { feature: "Max size", convertify: "512px", typical: "Varies" },
             { feature: "Colour customisation", convertify: "No (black on white)", typical: "Sometimes" },
             { feature: "Tracking redirect", convertify: "None — data encoded directly", typical: "Often, via a short link" },
             { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
