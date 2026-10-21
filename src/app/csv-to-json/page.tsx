@@ -17,11 +17,11 @@ const contentData = toolContentData["csv-to-json"]
 
 export const metadata: Metadata = {
     title: "CSV to JSON Converter — Free, Runs in Your Browser",
-    description: "Convert CSV data to JSON format online for free. Smart parsing handles quoted fields, custom delimiters, and large files. No sign-up required, 100% private.",
+    description: "Convert CSV data to JSON format online for free. Handles quoted fields and auto-detects comma, semicolon, tab or pipe delimiters. No sign-up, 100% private.",
     keywords: ["csv to json", "convert csv to json", "csv to json converter", "csv to json online", "csv to json free", "csv parser", "spreadsheet to json"],
     alternates: { canonical: "https://convertify.work/csv-to-json" },
     openGraph: {
-        title: "CSV to JSON Converter - Free Online | Convertify",
+        title: "CSV to JSON Converter - Free Online",
         description: "Convert CSV spreadsheet data to structured JSON format instantly. Free, fast, and private.",
         url: "/csv-to-json",
         images: [{ url: "/images/og-banner.png", width: 1200, height: 630, alt: "CSV to JSON - Convertify" }],
@@ -53,7 +53,7 @@ export default function Page() {
                         CSV to JSON Converter
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Transform CSV spreadsheet data into structured JSON format instantly. Handles quoted fields, custom delimiters, and large files.
+                        Transform CSV spreadsheet data into structured JSON format instantly. Handles quoted fields, auto-detected delimiters, and large files.
                     </p>
                 </div>
                 <ToolSwapper />
@@ -87,7 +87,7 @@ export default function Page() {
                 faqs={[
                     { question: "How does CSV to JSON conversion work?", answer: "The converter reads your CSV data, uses the first row as JSON keys (headers), and maps each subsequent row to a JSON object. The result is a JSON array of objects." },
                     { question: "Does it handle quoted CSV fields with commas?", answer: "Yes! Our parser correctly handles quoted fields, so commas inside quotes are preserved as part of the value, not treated as delimiters." },
-                    { question: "Is there a file size limit?", answer: "No strict limit. Processing happens in your browser, so performance depends on your device. Files with thousands of rows work efficiently." },
+                    { question: "Is there a file size limit?", answer: "Uploaded files can be up to 200 MB, and there is no row limit. Processing happens in your browser, so performance depends on your device. Files with thousands of rows work efficiently." },
                     { question: "Is my data safe?", answer: "Absolutely. All conversion happens locally in your browser. Your CSV data is never uploaded to any server." },
                 ]}
             />

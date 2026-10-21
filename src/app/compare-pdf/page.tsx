@@ -76,7 +76,7 @@ export default function Page() {
             {seoData.howToSteps && (
                 <HowToSchema
                     toolName="Compare PDF"
-                    description="Learn how to compare two PDF files side-by-side and highlight differences online with Convertify."
+                    description="Learn how to compare two PDF files side-by-side and list their text differences online with Convertify."
                     steps={seoData.howToSteps}
                 />
             )}

@@ -17,11 +17,11 @@ import { toolDocumentTitle } from "@/lib/document-title"
 
 export const metadata: Metadata = {
     title: toolDocumentTitle("resize-image", "Resize Image - Change Image Dimensions Free Online | Convertify"),
-    description: "Resize images to any dimension online for free. Change width and height, maintain aspect ratio. Works with JPG, PNG, WebP. No sign-up required.",
+    description: "Resize images to any dimension online for free. Change width and height, keep the aspect ratio. Accepts JPG, PNG, WebP and GIF; saves PNG. No sign-up.",
     keywords: ["resize image", "change image size", "image resizer", "resize photo", "image dimensions", "scale image", "free image resizer"],
     alternates: { canonical: "https://convertify.work/resize-image" },
     openGraph: {
-        title: "Resize Image - Free Online | Convertify",
+        title: "Resize Image - Free Online",
         description: "Resize images to any dimension. Free, fast, and secure.",
         url: "/resize-image",
     },
@@ -58,7 +58,7 @@ export default function Page() {
                     { name: "Upload Image", text: "Select or drag your images to upload" },
                     { name: "Set Dimensions", text: "Enter new width and height or use presets" },
                     { name: "Resize", text: "Click resize - images are processed in your browser" },
-                    { name: "Download", text: "Download your resized images instantly" }
+                    { name: "Download", text: "Download your resized images as PNG files (several at once come as a ZIP)" }
                 ]}
             />
 
@@ -67,7 +67,7 @@ export default function Page() {
                 faqs={[
                     { question: "How do I resize an image without losing quality?", answer: "When making images smaller, quality is preserved. For enlarging, our tool uses smooth interpolation to minimize quality loss." },
                     { question: "What is aspect ratio?", answer: "Aspect ratio is the relationship between width and height. Locking it ensures your image doesn't stretch or distort when resized." },
-                    { question: "Is this image resizer free?", answer: "Yes, Convertify's image resizer is completely free with no file limits, watermarks, or sign-up required." },
+                    { question: "Is this image resizer free?", answer: "Yes, Convertify's image resizer is completely free with no watermarks or sign-up. Each file can be up to 200 MB." },
                 ]}
             />
 

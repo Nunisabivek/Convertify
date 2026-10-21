@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     keywords: ["png to jpg", "png to jpeg", "convert png to jpg", "image converter", "compress png", "free png converter"],
     alternates: { canonical: "https://convertify.work/png-to-jpg" },
     openGraph: {
-        title: "PNG to JPG Converter - Free Online | Convertify",
+        title: "PNG to JPG Converter - Free Online",
         description: "Convert PNG images to JPG format. Free, fast, and secure.",
         url: "/png-to-jpg",
     },
@@ -55,7 +55,7 @@ export default function Page() {
                 faqs={[
                     { question: "Why convert PNG to JPG?", answer: "JPG files are smaller than PNG, making them ideal for photos and web images where smaller file size matters more than transparency." },
                     { question: "Will I lose transparency converting PNG to JPG?", answer: "Yes, JPG doesn't support transparency. Transparent areas will be replaced with a white background." },
-                    { question: "Is this PNG to JPG converter free?", answer: "Yes, Convertify's PNG to JPG converter is completely free with no file limits, watermarks, or sign-up required." },
+                    { question: "Is this PNG to JPG converter free?", answer: "Yes, Convertify's PNG to JPG converter is completely free with no watermarks or sign-up. Each file can be up to 200 MB." },
                 ]}
             />
 

@@ -100,7 +100,7 @@ export const toolBenefits: Record<string, Benefit[]> = {
         { icon: "globe", title: "Mobile-Friendly", description: "Rotate scans straight from your phone" },
     ],
     "watermark-pdf": [
-        { icon: "fileCheck", title: "Your Own Text", description: "Any wording, with font size and color you choose" },
+        { icon: "fileCheck", title: "Your Own Text", description: "Your wording, with font size and color you choose" },
         { icon: "zap", title: "Diagonal on Every Page", description: "The stamp runs across all pages in one pass" },
         { icon: "shield", title: "Drafts Stay Private", description: "Watermarking happens on your device" },
         { icon: "globe", title: "Opacity Slider", description: "From subtle to bold with a single drag" },
@@ -114,14 +114,14 @@ export const toolBenefits: Record<string, Benefit[]> = {
     "delete-pdf-pages": [
         { icon: "fileCheck", title: "Visual Picker", description: "Click thumbnails to remove pages" },
         { icon: "shield", title: "Stays On Device", description: "Sensitive pages deleted locally" },
-        { icon: "zap", title: "Bulk Delete", description: "Select multiple pages in one go" },
+        { icon: "zap", title: "Many Pages, One Save", description: "Delete several pages, then download once" },
         { icon: "globe", title: "Preview Before Save", description: "Confirm the cut before downloading" },
     ],
     "reorder-pdf": [
-        { icon: "fileCheck", title: "Drag Thumbnails", description: "Visually rearrange pages by drag-drop" },
+        { icon: "fileCheck", title: "Arrow Controls", description: "Move pages left or right under each thumbnail" },
         { icon: "zap", title: "Live Preview", description: "See the new page order before saving" },
         { icon: "shield", title: "100% Local", description: "Reordering happens in your browser" },
-        { icon: "globe", title: "Any PDF Size", description: "Handles long PDFs with hundreds of pages" },
+        { icon: "globe", title: "Long PDFs OK", description: "No page limit; files up to 200 MB" },
     ],
     "organize-pdf": [
         { icon: "fileCheck", title: "Reorder + Rotate", description: "Fix layout and order in one step" },
@@ -136,7 +136,7 @@ export const toolBenefits: Record<string, Benefit[]> = {
         { icon: "globe", title: "Phone-Friendly", description: "Drag in shots from your camera roll" },
     ],
     "resize-image": [
-        { icon: "fileCheck", title: "Pixel or Percent", description: "Resize by exact dimensions or ratio" },
+        { icon: "fileCheck", title: "Exact Pixels", description: "Resize to the width and height you type" },
         { icon: "zap", title: "Aspect Lock", description: "Optional ratio lock to avoid stretching" },
         { icon: "shield", title: "On-Device", description: "Resizing handled in your browser" },
         { icon: "globe", title: "Common Presets", description: "Profile, banner and thumbnail sizes" },
@@ -154,8 +154,8 @@ export const toolBenefits: Record<string, Benefit[]> = {
         { icon: "globe", title: "Batch Mode", description: "Convert dozens at once into a ZIP" },
     ],
     "jpg-to-png": [
-        { icon: "zap", title: "Lossless PNG", description: "No JPG block artifacts after conversion" },
-        { icon: "fileCheck", title: "Transparency Ready", description: "PNG output ready for design layering" },
+        { icon: "zap", title: "Lossless PNG", description: "No further JPG compression after conversion" },
+        { icon: "fileCheck", title: "Edit-Friendly", description: "Re-save as often as you like without new artifacts" },
         { icon: "shield", title: "Local Process", description: "Photos never reach a server" },
         { icon: "globe", title: "Batch Convert", description: "Bulk JPG → PNG with ZIP download" },
     ],
@@ -181,10 +181,10 @@ export const toolBenefits: Record<string, Benefit[]> = {
         { icon: "fileCheck", title: "Headings + Lists", description: "Markdown rendered as styled PDF" },
         { icon: "zap", title: "Live Preview", description: "See the PDF before downloading" },
         { icon: "shield", title: "Notes Stay Local", description: "Drafts and writeups never uploaded" },
-        { icon: "globe", title: "Tables + Code", description: "Code blocks and tables render correctly" },
+        { icon: "globe", title: "Code Blocks", description: "Fenced code in a monospaced, tinted box" },
     ],
     "csv-to-json": [
-        { icon: "zap", title: "Auto-Detect Headers", description: "First-row keys turn into JSON fields" },
+        { icon: "zap", title: "Header Row to Keys", description: "First-row names turn into JSON fields" },
         { icon: "fileCheck", title: "Delimiter Detection", description: "Commas, semicolons, tabs or pipes are picked up automatically" },
         { icon: "shield", title: "Local Parse", description: "Spreadsheet data stays on your device" },
         { icon: "globe", title: "Quoted Fields", description: "Commas and quotes inside quoted cells parse correctly" },

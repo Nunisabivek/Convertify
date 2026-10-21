@@ -2,7 +2,7 @@
 
 import { loadPdfjs } from "@/lib/pdfjs"
 import { useState, useRef } from "react"
-import { PDFDocument } from "pdf-lib"
+import { loadPdf as openPdfForEdit } from "@/lib/pdf-password"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { ProcessingWait } from "@/components/tools/processing-wait"
@@ -118,7 +118,7 @@ export default function CropPdfClient() {
 
         try {
             const buffer = await file.arrayBuffer()
-            const pdfDoc = await PDFDocument.load(buffer)
+            const pdfDoc = await openPdfForEdit(buffer, file.name)
             const pages = pdfDoc.getPages()
 
             for (const page of pages) {

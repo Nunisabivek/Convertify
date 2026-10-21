@@ -7,7 +7,7 @@ import MobileSizeControl from '@/components/mobile/MobileSizeControl'
 import MobileJobCta from '@/components/mobile/MobileJobCta'
 import { finishConvert, formatFileSize } from '@/lib/native-file'
 import { tapHaptic } from '@/lib/haptics'
-import { abortConvertWorker, workerMakePhoto } from '@/lib/jobs/media'
+import { abortConvertWorker, workerMakePhoto, workerRemoveBackground } from '@/lib/jobs/media'
 import { cropNote, missedBandNote, releaseJob, takeJob } from '@/lib/jobs/session'
 import { TOO_BIG } from '@/lib/brand'
 import { IS_MOBILE_BUILD } from '@/lib/is-mobile-build'
@@ -145,6 +145,8 @@ export default function PassportPhotoClient() {
     const [working, setWorking] = useState(false)
     const [liveSize, setLiveSize] = useState<number | null>(null)
     const [error, setError] = useState<string | null>(null)
+    // Replace a plain wall with the preset's background colour before cropping.
+    const [cleanBackground, setCleanBackground] = useState(false)
     const [customW, setCustomW] = useState(413)
     const [customH, setCustomH] = useState(531)
     const [maxKb, setMaxKb] = useState(PRESETS[0].maxKb)
@@ -238,8 +240,17 @@ export default function PassportPhotoClient() {
         abortRef.current = ac
         await tapHaptic()
         try {
+            let source = file
+            let bgNote: string | null = null
+            if (cleanBackground) {
+                const hex = preset.fill.replace('#', '')
+                const rgb = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16)) as [number, number, number]
+                const bg = await workerRemoveBackground(file, rgb, ac.signal)
+                source = new File([bg.blob], file.name, { type: bg.blob.type })
+                if (bg.likelyBad || bg.busyBackdrop) bgNote = 'The background could not be cleaned well. Retake against a plain wall.'
+            }
             const result = await workerMakePhoto(
-                file,
+                source,
                 {
                     width,
                     height,
@@ -258,7 +269,7 @@ export default function PassportPhotoClient() {
                 setError(note)
                 await finishConvert(result.blob, outputNameForPreset(preset), note, 'warn')
             } else {
-                await finishConvert(result.blob, outputNameForPreset(preset), cropNote(result.shrunk))
+                await finishConvert(result.blob, outputNameForPreset(preset), bgNote ?? cropNote(result.shrunk), bgNote ? 'warn' : undefined)
             }
         } catch (err) {
             if ((err as Error).name === 'AbortError') return
@@ -359,6 +370,10 @@ export default function PassportPhotoClient() {
                             fileSize={file.size}
                         />
                     )}
+                    <label className="mobile-fineprint" style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                        <input type="checkbox" checked={cleanBackground} onChange={(e) => setCleanBackground(e.target.checked)} />
+                        Make the background plain {preset.fill.toUpperCase() === '#FFFFFF' ? 'white' : 'light grey'} (works best against a plain wall)
+                    </label>
                     {IS_MOBILE_BUILD ? null : (
                         <p className="mobile-live-size">
                             {liveSize ? formatFileSize(liveSize) : formatFileSize(file.size)} → {preset.minKb}–{maxKb} KB

@@ -68,7 +68,7 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        The only free editor that can change SHX vector text inside AutoCAD-exported PDFs. No AutoCAD license needed.
+                        A free editor that can change SHX vector text inside AutoCAD-exported PDFs. No AutoCAD license needed.
                     </p>
                 </div>
                 <AutocadPdfEditorClient />

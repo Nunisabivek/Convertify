@@ -46,7 +46,7 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Paste any HTML code and convert it to a PDF document. Perfect for saving snippets, documentation, and generated markup.
+                        Paste any HTML code and get its text as a PDF. Tags, CSS and images are stripped, so the result is plain text on A4 pages.
                     </p>
                 </div>
                 <HtmlToPdfClient />
@@ -67,7 +67,7 @@ export default function Page() {
 
             <HowToSchema
                 toolName="Convert HTML to PDF Online"
-                description="Learn how to convert HTML code and web pages to PDF using Convertify's free converter."
+                description="Learn how to turn pasted HTML code into a plain-text PDF using Convertify's free converter."
                 steps={seoData.howToSteps}
             />
 

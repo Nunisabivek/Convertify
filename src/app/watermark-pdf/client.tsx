@@ -2,7 +2,8 @@
 
 import { useState } from "react"
 import { Droplet, Download, Loader2, AlertCircle, Type, Image as ImageIcon } from "lucide-react"
-import { PDFDocument, rgb, degrees } from "pdf-lib"
+import { rgb, degrees } from "pdf-lib"
+import { loadPdf } from "@/lib/pdf-password"
 import { AdBanner } from "@/components/ads/banner"
 import { FileUploader } from "@/components/tools/file-uploader"
 
@@ -25,7 +26,7 @@ export default function WatermarkPdfClient() {
 
         try {
             const arrayBuffer = await file.arrayBuffer()
-            const pdfDoc = await PDFDocument.load(arrayBuffer)
+            const pdfDoc = await loadPdf(arrayBuffer, file.name)
             const numPages = pdfDoc.getPageCount()
 
             // Parse hex color

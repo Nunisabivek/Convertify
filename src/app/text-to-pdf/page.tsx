@@ -60,7 +60,7 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Convert plain text files to PDF documents with customizable formatting.
+                        Convert plain .txt files to clean, paginated A4 PDF documents.
                     </p>
                 </div>
                 <ToolSwapper />

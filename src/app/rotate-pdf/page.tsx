@@ -56,7 +56,7 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Convertify Rotate PDF — fix page orientation instantly. No download needed, completely free.
+                        Convertify Rotate PDF — fix page orientation instantly. No install needed, completely free.
                     </p>
                 </div>
                 <RotatePdfClient />

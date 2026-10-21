@@ -2,7 +2,7 @@
 
 import { loadPdfjs } from "@/lib/pdfjs"
 import { useState, useRef, useEffect } from "react"
-import { PDFDocument } from "pdf-lib"
+import { loadPdf } from "@/lib/pdf-password"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { ProcessingWait } from "@/components/tools/processing-wait"
@@ -268,7 +268,7 @@ export default function SignPdfClient() {
         setIsSaving(true)
         try {
             const buffer = await file.arrayBuffer()
-            const pdfDoc = await PDFDocument.load(buffer)
+            const pdfDoc = await loadPdf(buffer, file.name)
             const pages = pdfDoc.getPages()
 
             for (const sig of placedSignatures) {

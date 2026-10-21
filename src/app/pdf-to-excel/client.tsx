@@ -1,6 +1,7 @@
 "use client"
 
 import { loadPdfjs } from "@/lib/pdfjs"
+import { pageToRows } from "@/lib/pdf-table"
 import { useState } from "react"
 import * as XLSX from "xlsx"
 import { FileUploader } from "@/components/tools/file-uploader"
@@ -50,39 +51,10 @@ export default function PdfToExcelClient() {
                 const page = await pdf.getPage(pageNum)
                 const textContent = await page.getTextContent()
 
-                // Group text items by vertical Y coordinate with line tolerance (4px)
-                const lineMap = new Map<number, { x: number; text: string }[]>()
-
-                for (const item of textContent.items as any[]) {
-                    if (!item.str || item.str.trim() === "") continue
-
-                    const x = item.transform[4]
-                    const y = Math.round(item.transform[5] / 4) * 4 // round to nearest 4px for line clustering
-
-                    if (!lineMap.has(y)) {
-                        lineMap.set(y, [])
-                    }
-                    lineMap.get(y)!.push({ x, text: item.str })
-                }
-
-                // Sort lines by Y descending (PDF coordinates origin is at bottom)
-                const sortedY = Array.from(lineMap.keys()).sort((a, b) => b - a)
-
-                const pageRows: string[][] = []
-                for (const y of sortedY) {
-                    const items = lineMap.get(y)!
-                    // Sort items horizontally by X
-                    items.sort((a, b) => a.x - b.x)
-
-                    // Combine items or space them into columns
-                    const row: string[] = []
-                    for (const it of items) {
-                        row.push(it.text.trim())
-                    }
-                    if (row.length > 0) {
-                        pageRows.push(row)
-                    }
-                }
+                // Rows by baseline, sentences kept whole, cells aligned into page-wide columns.
+                const pageRows = pageToRows((textContent.items as any[])
+                    .filter((item) => typeof item.str === "string")
+                    .map((item) => ({ x: item.transform[4], y: item.transform[5], width: item.width, height: item.height || 10, str: item.str })))
 
                 if (pageRows.length > 0) {
                     const worksheet = XLSX.utils.aoa_to_sheet(pageRows)
@@ -202,7 +174,7 @@ export default function PdfToExcelClient() {
                     <div>
                         <Table className="w-6 h-6 text-emerald-600 mx-auto mb-2" />
                         <h4 className="font-semibold text-slate-800 text-sm">Table Detection</h4>
-                        <p className="text-xs text-slate-500 mt-1">Automatically clusters row and column alignments.</p>
+                        <p className="text-xs text-slate-500 mt-1">Lines become rows; cells line up in columns.</p>
                     </div>
                     <div>
                         <Sheet className="w-6 h-6 text-emerald-600 mx-auto mb-2" />

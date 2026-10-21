@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { Check, X } from 'lucide-react'
 
 export const metadata: Metadata = {
-    title: 'Pricing — Free PDF Tools, No Sign-Up, No Limits | Convertify',
-    description: 'Convertify is free forever. No credit card, no daily caps, no file size limits, no watermarks. Compare to Smallpdf, iLovePDF, Adobe — and see why everything stays free.',
+    title: 'Pricing — Free PDF Tools, No Sign-Up, No Daily Caps',
+    description: 'Convertify is free. No credit card, no daily caps, no watermarks, files up to 200 MB. Why everything stays free.',
     alternates: {
         canonical: 'https://convertify.work/pricing',
     },
@@ -16,8 +16,8 @@ const pricingFaq = [
         answer: "Most PDF services run conversions on rented cloud servers, so they pass the bandwidth and CPU bill on to you as a subscription. Convertify runs every conversion inside your browser using PDF-Lib and PDF.js. There are no server costs to recoup, so the tools stay free forever. Display ads cover the website hosting cost.",
     },
     {
-        question: "Are there hidden file size limits?",
-        answer: "No. There is no daily cap, no per-file size limit, and no monthly quota. The only practical ceiling is your device's RAM — if you can open the file on your computer, Convertify can process it.",
+        question: "Is there a file size limit?",
+        answer: "Each file can be up to 200 MB. There is no daily cap and no monthly quota. Very large files are also limited by your device's memory, since everything runs in your browser.",
     },
     {
         question: "Will my files be saved on a server?",

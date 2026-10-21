@@ -22,10 +22,12 @@ export default function WebpConverterClient() {
     const [progress, setProgress] = useState(0)
     const [outputFormat, setOutputFormat] = useState<OutputFormat>('webp')
     const [quality, setQuality] = useState(85)
+    const [webpUnsupported, setWebpUnsupported] = useState(false)
 
     const handleFilesSelected = (newFiles: File[]) => {
         setFiles(prev => [...prev, ...newFiles])
         setConverted([])
+        setWebpUnsupported(false)
     }
 
     const removeFile = (index: number) => {
@@ -35,6 +37,7 @@ export default function WebpConverterClient() {
     const convertImages = async () => {
         if (files.length === 0) return
         setIsProcessing(true)
+        setWebpUnsupported(false)
         setProgress(0)
         const results: ConvertedFile[] = []
 
@@ -63,7 +66,9 @@ export default function WebpConverterClient() {
                         blob = await new Promise<Blob>((resolve) => {
                             canvas.toBlob((b) => resolve(b!), 'image/webp', quality / 100)
                         })
-                        ext = 'webp'
+                        // Safari can't encode WebP and silently returns PNG: name the file for what it is.
+                        ext = blob.type === 'image/webp' ? 'webp' : 'png'
+                        if (ext !== 'webp') setWebpUnsupported(true)
                     } else if (outputFormat === 'jpg') {
                         blob = await new Promise<Blob>((resolve) => {
                             canvas.toBlob((b) => resolve(b!), 'image/jpeg', quality / 100)
@@ -124,7 +129,10 @@ export default function WebpConverterClient() {
                     <Globe className="w-12 h-12" />
                 </div>
                 <h2 className="text-2xl font-bold mb-4">Conversion Complete!</h2>
-                <p className="text-slate-500 mb-6">{converted.length} image{converted.length > 1 ? 's' : ''} converted to {outputFormat.toUpperCase()}</p>
+                <p className="text-slate-500 mb-6">{converted.length} image{converted.length > 1 ? 's' : ''} converted to {webpUnsupported ? 'PNG' : outputFormat.toUpperCase()}</p>
+                {webpUnsupported && (
+                    <p className="text-amber-700 text-sm mb-6">This browser can&apos;t save WebP (Safari), so the files were saved as PNG. Use Chrome, Edge or Firefox for WebP.</p>
+                )}
                 <Button size="xl" onClick={() => downloadAll()} className="bg-teal-600 hover:bg-teal-700 mb-4">
                     <Download className="mr-2 w-5 h-5" />
                     Download {converted.length > 1 ? 'All (ZIP)' : 'Image'}

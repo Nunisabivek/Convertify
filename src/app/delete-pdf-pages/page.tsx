@@ -57,7 +57,7 @@ export default function Page() {
             <section className="w-full py-8 bg-gradient-to-b from-blue-50/50 via-white to-white">
                 <div className="max-w-4xl mx-auto px-4 text-center mb-6">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-50 border border-indigo-200/60 rounded-full text-xs font-semibold text-indigo-700 mb-4 shadow-sm">
-                        Free Online Tool • No Limits
+                        Free Online Tool • No Upload
                     </span>
                     <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 tracking-tight">
                         {seoData.h1}

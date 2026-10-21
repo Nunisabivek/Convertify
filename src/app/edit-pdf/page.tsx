@@ -76,7 +76,7 @@ export default function Page() {
             {seoData.howToSteps && (
                 <HowToSchema
                     toolName="Edit PDF"
-                    description="Learn how to edit PDF text, add annotations, draw, and stamp documents online for free with Convertify."
+                    description="Learn how to add text, draw, and highlight on PDF documents online for free with Convertify."
                     steps={seoData.howToSteps}
                 />
             )}

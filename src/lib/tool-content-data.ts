@@ -141,7 +141,7 @@ export const toolContentData: Record<string, {
         features: [
             "Rotate 90°, 180°, or 270° clockwise",
             "Rotate all pages or select specific ones",
-            "Preview changes before saving",
+            "Pick pages by number or range, e.g. 1,3,5-7",
             "Saves rotation permanently to the file",
             "Works with scanned documents",
             "No quality loss during rotation"
@@ -156,21 +156,21 @@ export const toolContentData: Record<string, {
         keywords: ["rotate pdf pages save permanently", "fix sideways pdf free", "change pdf orientation online", "rotate pdf without acrobat"]
     },
     "protect-pdf": {
-        description: "Secure your sensitive PDF files with military-grade AES-256 encryption using Convertify's private protector. Unlike cloud tools, our encryption happens 100% in your browser—your password never touches a server. Set 'Open Passwords' to lock the file or 'Permissions Passwords' to restrict printing, copying, and editing. Ideal for financial statements, legal contracts, and personal IDs.",
+        description: "Secure your sensitive PDF files with AES-256 encryption using Convertify's private protector. Unlike cloud tools, the encryption happens 100% in your browser—your password never touches a server. Set an open password and nobody can read the file without it. Ideal for financial statements, legal contracts, and personal IDs.",
         features: [
             "Financial-Safe: 100% browser-based AES-256 encryption",
-            "Set Open Passwords to prevent unauthorized viewing",
-            "Define Restrictions: Disable printing, copying, or editing",
-            "Military-grade security standard (AES-128 or AES-256)",
+            "Set an open password to prevent unauthorized viewing",
+            "Password strength meter as you type",
+            "AES-256 (PDF 2.0 standard security handler)",
             "Password and data never leave your local device",
-            "Compatible with all standard PDF readers and portals"
+            "Opens in Acrobat, Chrome, Preview and other current PDF readers"
         ],
         useCases: [
             "Securing sensitive financial and tax documents",
             "Protecting legal contracts before email distribution",
-            "locking company internal reports with viewing permissions",
+            "Locking company internal reports before sharing them",
             "Securing personal ID scans and passport copies",
-            "Restricting document printing for draft versions"
+            "Encrypting PDFs before storing them in the cloud"
         ],
         keywords: ["password protect pdf", "encrypt pdf", "secure pdf online", "lock pdf file free"]
     },
@@ -179,8 +179,8 @@ export const toolContentData: Record<string, {
         features: [
             "Remove printing and copying restrictions instantly",
             "Unlock 'Permission Passwords' to enable editing",
-            "Metadata-only operation: 100% original quality preserved",
-            "Works with AES-128 and AES-256 encryption levels",
+            "Decrypts in place: text, fonts and images are kept",
+            "Works with RC4 and AES-256; AES-128 files are unlocked as page images",
             "Secure browser-based unlocking (no cloud upload)",
             "Enables text selection on restricted documents"
         ],
@@ -286,22 +286,22 @@ export const toolContentData: Record<string, {
         ],
         useCases: [
             "Adding 'CONFIDENTIAL' stamps to sensitive reports",
-            "Branding architectural drawings with company logos",
+            "Marking architectural drawings with your company name",
             "Marking draft versions of manuscripts for review",
             "Adding copyright notices to creative portfolios",
-            "Stamping archive documents with Bates numbering or dates"
+            "Stamping archive copies with a fixed date or 'ARCHIVE' label"
         ],
-        keywords: ["add watermark to pdf", "unremovable pdf watermark", "branding pdf online", "pdf stamp free"]
+        keywords: ["add watermark to pdf", "text watermark pdf", "branding pdf online", "pdf stamp free"]
     },
     "sign-pdf": {
-        description: "Sign contracts, NDAs, and agreements with legally valid e-signatures in seconds. Convertify allows you to draw, type, or upload your signature and 'Flatten' it into the PDF to prevent unauthorized moving or tampering. Our mobile-optimized signing engine lets you use your finger for a natural signature, all while keeping your documents 100% private.",
+        description: "Sign contracts, NDAs, and agreements with an electronic signature in seconds. Convertify lets you draw, type, or upload your signature and draws it into the page itself, so it can't be dragged around in a normal PDF viewer. You can draw with your finger on a phone, and your documents stay 100% private.",
         features: [
-            "Secure Flattening: Bakes your signature into the document",
-            "Mobile-Optimized: Draw natural signatures with finger/stylus",
-            "Legally Valid: Compatible with major e-signature standards",
+            "Flattened: Your signature is drawn into the page content",
+            "Touch Drawing: Draw natural signatures with finger/stylus",
+            "Electronic Signature: Fine for everyday agreements (not a certificate-based digital signature)",
             "Multi-Mode: Draw, type (with fonts), or upload signatures",
             "Privacy First: Your signature never touches a cloud server",
-            "Add Dates & Initials: Complete legal forms in one session"
+            "Multiple Placements: Sign several pages in one session"
         ],
         useCases: [
             "Signing employment contracts and NDAs securely",
@@ -313,21 +313,21 @@ export const toolContentData: Record<string, {
         keywords: ["sign pdf online free", "e-sign pdf", "digital signature pdf", "sign document free"]
     },
     "edit-pdf": {
-        description: "Annotate, fill, and markup your PDF documents with Convertify's high-performance editor. Add text, images, shapes, and arrows, then use our 'Flattening' feature to bake your edits into the document layer—making them permanent and professional. Perfect for filling forms or marking up blueprints without the lag of traditional cloud-based editors.",
+        description: "Annotate and mark up your PDF documents with Convertify's in-browser editor. Type new text onto any page, draw freehand, and add highlight and outline boxes; your marks are drawn into the page itself when you save. Handy for typing answers onto forms that have no fillable fields. Existing text can't be edited, and a mouse is needed.",
         features: [
-            "Flatten Edits: Make annotations unselectable and permanent",
-            "High-Speed Engine: Edit large files and blueprints without lag",
-            "Rich Annotations: Add text, shapes, arrows, and highlights",
-            "Insert Images: Place logos or signatures anywhere on the page",
-            "Form Filling: Easily fill out PDF forms and questionnaires",
+            "Flattened Output: Your marks are drawn into the page content",
+            "Add Text: Four sizes and five colours, placed with a click",
+            "Freehand Pen: Sketch or write notes with the mouse",
+            "Highlights and Boxes: Fixed-size highlight and outline rectangles",
+            "Undo and Clear: Remove the last mark or wipe a page",
             "100% Private: All editing happens locally on your device"
         ],
         useCases: [
-            "Filling out PDF application forms and surveys",
-            "Marking up architectural blueprints with notes and arrows",
+            "Typing answers onto PDF forms that have no fillable fields",
+            "Marking up architectural blueprints with notes and freehand marks",
             "Adding comments and peer-review notes to reports",
             "Annotating student assignments for feedback",
-            "Adding branding images or stamps to design mockups"
+            "Boxing and highlighting areas of a design mockup that need changes"
         ],
         keywords: ["edit pdf online free", "annotate pdf", "pdf markup tool", "flatten pdf"]
     },
@@ -351,23 +351,23 @@ export const toolContentData: Record<string, {
         keywords: ["document scanner online", "scan document to pdf", "camera to pdf", "photo to scanned pdf"]
     },
     "add-page-numbers": {
-        description: "Add professional pagination or Bates numbering to your PDF documents with Convertify. Our tool gives you 'Logical Sequencing' control—letting you skip cover pages, start numbering from any index, and even number multiple files as one continuous set. Perfect for legal professionals, students, and businesses who need precise document organization.",
+        description: "Add page numbers to every page of a PDF with Convertify. Pick one of six positions (top or bottom; left, centre or right) and the number to start from, so a document can continue the count from a previous section. Numbers are plain 12 pt black text, added in your browser.",
         features: [
-            "Logical Sequencing: Skip covers and start numbering anywhere",
-            "Bates Stamping: Professional prefix and digit control for legal",
-            "Continuous Numbering: Sync page counts across multiple PDF files",
-            "Formatted Layouts: Choose 'Page X of N', 'X/N', or simple numbers",
-            "Visual Positioning: Place numbers in 6 different zones per page",
-            "Non-Destructive: Numbers are added via an annotation layer"
+            "Six Positions: Top or bottom, left, centre or right",
+            "Any Start Number: Continue the count from an earlier section",
+            "Every Page: Numbers run 1, 2, 3... across the whole document",
+            "Plain and Readable: 12 pt black Helvetica digits",
+            "Non-Destructive: Numbers are drawn on top; your content is untouched",
+            "Private: The file is processed in your browser, never uploaded"
         ],
         useCases: [
-            "Applying Bates numbering for multi-file legal discovery",
-            "Adding page numbers to a thesis after the table of contents",
+            "Numbering a merged bundle of exhibits from 1 to N",
+            "Numbering a thesis chapter that continues from the previous one",
             "Ordering combined reports for professional business binds",
             "Creating sequential handouts for seminars and workshops",
             "Fixing missing page numbers on scanned document sets"
         ],
-        keywords: ["add page numbers to pdf", "bates numbering tool", "pdf pagination free", "sequential page numbering"]
+        keywords: ["add page numbers to pdf", "number pdf pages", "pdf pagination free", "sequential page numbering"]
     },
     "redact-pdf": {
         description: "Permanently scrub sensitive information from your documents with Convertify's secure redaction tool. Unlike editors that only draw a black box on top, Convertify flattens every page you redact into an image with the boxes burned in, so the text underneath is removed from the file along with the document's metadata. SSNs, account numbers and names under a box can't be copied or recovered, and pages you don't touch stay exactly as they were.",
@@ -389,13 +389,13 @@ export const toolContentData: Record<string, {
         keywords: ["redact pdf online free", "blackout text in pdf", "sanitize pdf document", "remove pii from pdf"]
     },
     "organize-pdf": {
-        description: "Reorder, delete, and rotate PDF pages with Convertify's Visual Grid Manager. Our high-density layout allows you to view dozens of pages at once, making it the fastest way to organize 100+ page documents. We even 'Re-bind' your internal bookmarks and hyperlinks, ensuring your navigation stays functional after the reorder.",
+        description: "Reorder, delete, and rotate PDF pages with Convertify's page grid. Every page appears as a thumbnail with its own controls: arrows to move it left or right, a button to rotate it 90°, and one to delete it. When you save, the pages are copied into a new PDF in your order, with text and images unchanged.",
         features: [
-            "High-Density Grid: See and organize 100+ pages effortlessly",
-            "Auto-Rebinding: Maintains bookmarks/links after reordering",
-            "Dual Controls: Rotate or delete pages directly via thumbnails",
-            "Multi-Select: Move or remove entire batches of pages at once",
-            "Zero Lag: Optimized for large legal and academic files",
+            "Thumbnail Grid: See every page before you change anything",
+            "Move Pages: Arrow buttons shift a page one place left or right",
+            "Rotate or Delete: Controls on each thumbnail",
+            "Pages Copied As-Is: Text and images are not re-rendered",
+            "One Save: All changes are applied in a single pass",
             "Privacy First: All organization happens in your browser memory"
         ],
         useCases: [
@@ -408,13 +408,13 @@ export const toolContentData: Record<string, {
         keywords: ["organize pdf pages online free", "reorder pdf pages", "visual pdf manager", "delete pages from pdf"]
     },
     "compare-pdf": {
-        description: "Spot every change between versions with Convertify's side-by-side 'Semantic Diff' engine. We don't just find text changes; we detect shifts in layouts, images, and font styles. Our tool provides a clear change log and high-contrast visual overlays, ensuring you never miss a missing serial number or an extra comma in a high-stakes contract.",
+        description: "Check what changed between two versions of a PDF with Convertify. The tool reads the text on each page, lists lines that were added or removed, and shows both versions side by side or overlaid so you can check layout and images by eye. A plain-text report of the changes is available to download.",
         features: [
-            "Semantic Diff: Detects meaning changes, not just pixel shifts",
-            "Visual Overlay: Shows text, layout, and image changes in sync",
-            "Change Log Summary: High-level overview of all modifications",
-            "Side-by-Side Review: Locked scrolling for easy comparison",
-            "Legal-Grade Precision: Spots even tiny punctuation differences",
+            "Text Diff: Lists added and removed lines, page by page",
+            "Overlay View: Both pages drawn on top of each other at half opacity",
+            "Change Summary: Counts of additions and deletions",
+            "Side-by-Side Review: Page through both versions together",
+            "Text Report: Download the changes as a .txt file",
             "Private Comparison: Files never leave your local browser"
         ],
         useCases: [
@@ -446,33 +446,32 @@ export const toolContentData: Record<string, {
         keywords: ["pdf to pdf/a", "archive pdf format", "iso compliant pdf", "long term preservation"]
     },
     "crop-pdf": {
-        description: "Trim margins and remove unwanted content securely with Convertify's Data-Level Cropper. Unlike basic tools that only mask edges, our 'True Hardware Crop' permanently removes the underlying data outside your selection, ensuring sensitive info hidden in the margins is gone forever. Perfect for fixing scanned alignments or resizing official documents.",
+        description: "Trim margins from every page of a PDF with Convertify. Set the top, bottom, left and right margins (up to 25% each) with sliders or a preset, check them on a live page preview, and download. Cropping hides the area outside the box rather than deleting it, so use Redact PDF for anything sensitive.",
         features: [
-            "Data-Level Crop: Permanently removes data outside the selection",
-            "Auto-Margin Guide: Aligns the crop box to the text block automatically",
-            "Manual Page Control: Set unique crops for different pages",
-            "Secure Extraction: Ensures hidden metadata in margins is deleted",
-            "High Fidelity: Keeps images and text at original high-res",
+            "Margin Sliders: Trim each side by 0-25% of the page",
+            "Quick Presets: Light (5%), Medium (10%) and Wide (15%)",
+            "Live Preview: See the trimmed area on any page before saving",
+            "All Pages at Once: The same crop applies to the whole document",
+            "High Fidelity: Text and images are not re-compressed",
             "Fast & Private: Browser-based trimming with no cloud delay"
         ],
         useCases: [
             "Removing scanner artifacts and dark edges from old scans",
-            "Securely trimming sensitive info from document margins",
-            "Resizing PDFs to fit specific paper sizes (A4, Letter)",
+            "Trimming wide print margins for easier reading on a phone",
             "Cropping out headers and footers for clean presentations",
-            "Fixing misaligned pages in combined PDF sets"
+            "Zooming in on the content area of slides or handouts"
         ],
-        keywords: ["crop pdf online free", "secure pdf cropping", "remove pdf margins", "trim pdf permanent"]
+        keywords: ["crop pdf online free", "trim pdf margins", "remove pdf margins", "crop all pdf pages"]
     },
     "repair-pdf": {
-        description: "Recover contents from broken or damaged files with Convertify's 'Deep-Scan' repair engine. We reconstruct corrupted headers and cross-reference tables (XRefs) that cause files to display 'Corrupt' or 'Invalid' errors. Even if a document was partially downloaded or crashed during saving, our rebuilder attempts to salvage every page and object.",
+        description: "Recover contents from broken or damaged PDFs with Convertify. The repair strips junk before the PDF header, rebuilds a missing or damaged trailer, and copies every page that can still be read into a fresh file. If a document was partially downloaded or crashed during saving, the pages that survived are saved; as a last resort they are saved as images.",
         features: [
-            "Deep-Scan Reconstruction: Rebuilds broken file headers and tables",
-            "XRef Recovery: Fixes errors that prevent PDFs from opening",
-            "Stream Salvage: Attempts to recover images from partial files",
-            "Validation Check: Ensures the repaired file meets PDF specs",
+            "Header Fix: Skips junk bytes in front of the PDF header",
+            "Trailer Rebuild: Fixes cut-off files that end mid-download",
+            "Page Salvage: Copies every readable page into a fresh PDF",
+            "Image Fallback: Saves drawable pages as images when nothing else works",
             "Zero Data Upload: Repair happens safely in your local browser",
-            "Instant Recovery: No waiting for cloud queues or server processing"
+            "Recovery Report: Shows how many pages were recovered"
         ],
         useCases: [
             "Fixing PDFs that won't open after an email attachment error",
@@ -488,7 +487,7 @@ export const toolContentData: Record<string, {
         features: [
             "Instant text-layout conversion from raw HTML",
             "Automatic word-wrap and pagination onto A4 pages",
-            "No file size limits, no sign-up",
+            "No sign-up and no daily limit",
             "Secure & Private: HTML content is processed locally, never uploaded"
         ],
         useCases: [
@@ -518,17 +517,17 @@ export const toolContentData: Record<string, {
         keywords: ["pdf to text", "extract text from pdf", "ocr pdf to text", "convert pdf to txt"]
     },
     "text-to-pdf": {
-        description: "Transform raw text and logs into professional-grade PDF documents with Convertify. Our generator offers customizable fonts, margins, and paper sizes, allowing you to create polished manuscripts or clean developer documentation. Perfect for converting server logs, code snippets, or simple text files into an organized, readable PDF format.",
+        description: "Turn a plain .txt file into a clean PDF with Convertify. Each line of the file becomes a line in the PDF, set in 12 pt Helvetica on A4 pages with automatic page breaks. Lines longer than 90 characters are cut off rather than wrapped, and only Western (Latin) characters are supported, so it suits notes, lists and short-line text.",
         features: [
-            "Professional Layouts: Customizable margins, fonts, and sizes",
-            "Developer Friendly: Monospaced font options for code and logs",
+            "Simple Layout: 12 pt Helvetica on A4 with 50-point margins",
+            "Line for Line: Line breaks and leading spaces are kept",
             "Smart Pagination: Automatically breaks long files into neat pages",
-            "Batch Processing: Convert multiple .txt files simultaneously",
-            "formatting Support: Preserves indentation and line breaks",
+            "Note: Lines over 90 characters are cut off, not wrapped",
+            "Note: Western (Latin) characters only",
             "Local Security: Your text never leaves your device during conversion"
         ],
         useCases: [
-            "Creating readable PDF reports from raw server logs",
+            "Turning short notes and lists into a printable PDF",
             "Saving code snippets as organized PDF references",
             "Formatting simple text manuscripts for professional review",
             "Generating printable documentation from plain text files",
@@ -556,32 +555,32 @@ export const toolContentData: Record<string, {
         keywords: ["powerpoint to pdf converter free", "convert ppt to pdf online", "pptx to pdf no sign up", "presentation to pdf free", "save powerpoint as pdf"]
     },
     "pdf-to-powerpoint": {
-        description: "Convert PDF presentations back to fully editable PowerPoint slides with Convertify. Unlike tools that just export static images, our engine extracts text boxes, identifies font styles, and maps diagrams as editable slide objects. This allows you to update figures, fix typos, and repurpose old PDF content directly in PowerPoint or Google Slides.",
+        description: "Turn a PDF into a PowerPoint deck with Convertify. Each page is rendered as a high-resolution image and placed full-size on its own 16:9 slide, so it looks exactly like the PDF. The page content is a picture, not editable text, but you can present it, reorder slides, and add your own text, notes and animations on top.",
         features: [
-            "Object Mapping: Extracts text and graphics as editable elements",
-            "Font Recognition: Attempts to match and preserve font styles",
-            "Slide Layout: Reconstructs the original slide structure",
-            "Compatible: Works with MS PowerPoint, Google Slides, and Keynote",
-            "High fidelity: Preserves charts, tables, and vector graphics",
+            "One Slide per Page: Every PDF page becomes a slide",
+            "High Resolution: Pages rendered about 1920 pixels wide",
+            "16:9 Slides: Best for PDFs exported from slide decks",
+            "Compatible: Opens in MS PowerPoint and Google Slides",
+            "Looks Like the PDF: Charts, equations and fonts are kept as pictures",
             "Local conversion: Secure processing without server uploads"
         ],
         useCases: [
-            "Editing presentation decks shared as 'static' PDFs",
-            "Updating old speaker notes and slide content",
-            "Repurposing academic lecture PDFs for new presentations",
-            "extracting editable charts and diagrams for new reports",
-            "Converting PDF marketing collateral back to editable PPTX"
+            "Presenting a deck you only received as a PDF",
+            "Adding speaker notes to slides that came as a PDF",
+            "Reusing academic lecture slides inside a new presentation",
+            "Mixing PDF pages into an existing PowerPoint deck",
+            "Adding animations or annotations on top of PDF slides"
         ],
         keywords: ["pdf to powerpoint converter free", "convert pdf to pptx online", "pdf to slides free", "turn pdf into presentation"]
     },
     "delete-pdf-pages": {
-        description: "Securely trim your documents with Convertify's Visual Page Remover. Unlike basic tools that just 'hide' pages, our 'Object Purge' technology physically deletes the page stream and its data from the file's code. This permanently reduces file size and ensures sensitive content is 100% unrecoverable, all while keeping your remaining formatting perfectly intact.",
+        description: "Remove unwanted pages with Convertify's visual page remover. Every page appears as a thumbnail; delete the ones you don't need and download. The new file is built only from the pages you keep, so the deleted pages are not in it, and the remaining pages keep their text, fonts and images unchanged.",
         features: [
-            "Object Purge: Physically deletes data from the file stream",
+            "Rebuilt File: Deleted pages are left out of the new PDF entirely",
             "Visual Grid: Easily identify pages by clear thumbnails",
-            "Batch Delete: Remove ranges or non-sequential pages at once",
-            "File Shrinking: Significant size reduction after page removal",
-            "Formatting Safe: Re-indexes internal page trees automatically",
+            "Several at Once: Delete as many pages as you like before saving",
+            "Smaller File: Content used only by deleted pages is dropped",
+            "Formatting Safe: Kept pages are copied as they are",
             "Zero Cloud: Safe, local browser-based page deletion"
         ],
         useCases: [
@@ -594,12 +593,12 @@ export const toolContentData: Record<string, {
         keywords: ["delete pdf pages free", "remove pages from pdf online", "cut pages from pdf", "pdf page remover free"]
     },
     "reorder-pdf": {
-        description: "Fix out-of-order documents and organize your PDF pages with our intuitive Drag-and-Drop Manager. Convertify uses 'Navigation-Safe' reordering, which means we automatically update your internal bookmarks and hyperlinks to point to their new page positions. Perfect for complex legal discovery sets, academic journals, and portfolios.",
+        description: "Fix out-of-order documents with Convertify's page grid. Every page appears as a thumbnail with arrow buttons that move it one place left or right, so you can put a document back in sequence by eye. Pages are copied into a new file in your order; bookmarks are not carried over.",
         features: [
-            "Drag-and-Drop: Intuitive visual sequencing of all pages",
-            "Navigation-Safe: Updates internal links and bookmarks",
-            "Multi-File Sort: Combine and reorder pages across many files",
-            "Page Zoom: See more thumbnails for easier long-doc sorting",
+            "Arrow Controls: Move any page one place left or right",
+            "Thumbnail Grid: See what's on each page before moving it",
+            "Rotate or Delete: Fix sideways or unwanted pages at the same time",
+            "Pages Copied As-Is: Text and images are not re-rendered",
             "Instant Preview: See your new page sequence immediately",
             "Local Memory: Sorting happens in your browser, no uploads"
         ],
@@ -613,14 +612,14 @@ export const toolContentData: Record<string, {
         keywords: ["reorder pdf pages free", "rearrange pdf online", "organize pdf pages", "change pdf page order"]
     },
     "svg-to-png": {
-        description: "Convert SVG vector graphics to high-resolution PNG images with Convertify. Our rendering engine preserves gradients, filters, and transparency while outputting crisp raster images at custom resolutions up to 4x scale. Perfect for designers who need pixel-perfect exports for web, social media, or print without installing desktop software.",
+        description: "Convert SVG vector graphics to high-resolution PNG images with Convertify. Your browser draws the SVG, gradients, filters and transparency included, at its own size or at a custom width and height up to 8192 pixels. Perfect for designers who need crisp exports for web, social media, or print without installing desktop software.",
         features: [
-            "High-Resolution Export: Render SVGs at 1x, 2x, 3x, or 4x scale",
+            "High-Resolution Export: Any custom size up to 8192 × 8192 px",
             "Transparency Preserved: Maintains alpha channels in PNG output",
             "Gradient & Filter Support: Accurately renders complex SVG effects",
             "Custom Dimensions: Set exact width and height in pixels",
             "Batch Conversion: Process multiple SVG files simultaneously",
-            "Background Options: Export with transparent or custom color backgrounds",
+            "Transparent Background: Areas the SVG leaves empty stay transparent",
             "100% Private: All rendering happens locally in your browser"
         ],
         useCases: [
@@ -636,11 +635,10 @@ export const toolContentData: Record<string, {
         description: "Convert large BMP bitmap files to compact JPG images with Convertify. Reduce file sizes by up to 95% while maintaining excellent visual quality through adjustable compression settings. Ideal for modernizing legacy image archives and preparing bitmap screenshots for web or email sharing.",
         features: [
             "Massive Size Reduction: Compress BMP files by up to 95%",
-            "Adjustable Quality: Fine-tune JPG compression from 1-100%",
-            "Batch Processing: Convert hundreds of BMP files at once",
-            "Color Fidelity: Preserves accurate color reproduction",
-            "EXIF Data Handling: Option to strip or preserve metadata",
-            "Instant Preview: Compare before and after quality visually",
+            "Adjustable Quality: Set JPG quality from 70% to 100%",
+            "Batch Processing: Convert many BMP files at once",
+            "Same Dimensions: Pixel width and height stay unchanged",
+            "ZIP Download: Several converted files download together",
             "Browser-Based: No software installation required"
         ],
         useCases: [
@@ -654,20 +652,20 @@ export const toolContentData: Record<string, {
         keywords: ["bmp to jpg", "convert bmp to jpg", "bmp to jpeg", "bitmap to jpg converter", "bmp to jpg online free", "bmp to jpeg converter", "convert bitmap to jpeg", "bmp file converter", "bmp to jpg no watermark", "compress bmp to jpg"]
     },
     "gif-to-png": {
-        description: "Convert GIF images to high-quality PNG format with Convertify. Upgrade your graphics from the limited 256-color GIF palette to full 24-bit PNG color depth with alpha transparency support. Perfect for extracting individual frames from animated GIFs or converting static GIF logos and icons to a modern lossless format.",
+        description: "Convert GIF images to lossless PNG format with Convertify. Every pixel and the GIF's transparency carry over exactly, in a format design tools and editors handle well. Perfect for extracting individual frames from animated GIFs or converting static GIF logos and icons to a modern lossless format.",
         features: [
             "Lossless Conversion: Zero quality degradation during format change",
-            "Full Color Depth: Upgrade from 256 colors to 16.7 million colors",
+            "Room to Edit: Later edits in PNG aren't limited to 256 colours",
             "Alpha Transparency: Convert GIF transparency to proper PNG alpha",
             "Frame Extraction: Export every frame of an animated GIF as a numbered PNG",
             "Batch Mode: Convert multiple GIF files to PNG simultaneously",
-            "File Size Optimization: Smart compression for smaller PNG output"
+            "Full Frames: Each animation frame is composited the way a browser plays it"
         ],
         useCases: [
             "Upgrading legacy GIF logos to high-quality PNG for branding",
             "Extracting every frame of an animated GIF as still images",
             "Converting GIF icons to PNG for modern web applications",
-            "Improving image quality for GIF graphics used in presentations",
+            "Getting a still image from a GIF for slides and documents",
             "Replacing GIF website assets with optimized PNG versions"
         ],
         keywords: ["gif to png", "convert gif to png", "gif to png converter", "gif to png online free", "animated gif to png", "gif frame extractor", "gif to png transparent", "gif to png high quality", "convert gif to png free", "gif image converter"]
@@ -677,9 +675,9 @@ export const toolContentData: Record<string, {
         features: [
             "Multi-Page Support: Convert multi-page TIFF stacks into one PDF",
             "High Resolution: Preserves original DPI and image clarity",
-            "Color Accuracy: Maintains CMYK, RGB, and grayscale color spaces",
-            "Compression Options: Choose between quality and file size balance",
-            "Page Size Control: Fit to A4, Letter, or original image dimensions",
+            "Lossless: Pages are re-encoded as PNG, never as lossy JPEG",
+            "Real Paper Size: Uses the scan's recorded DPI to size each PDF page",
+            "Combine or Separate: One PDF for all files, or one PDF per file",
             "Batch Conversion: Process multiple TIFF files into separate PDFs",
             "100% Private: Files are processed locally in your browser"
         ],
@@ -697,10 +695,10 @@ export const toolContentData: Record<string, {
         description: "Transform CSV spreadsheet data into structured JSON format with Convertify. Our intelligent parser handles complex CSV files with quoted fields, nested commas, and various delimiters while producing clean, properly formatted JSON output. Essential for developers and data analysts who need to convert tabular data into API-ready JSON structures.",
         features: [
             "Smart Parsing: Handles quoted fields, escaped characters, and edge cases",
-            "Custom Delimiters: Support for commas, tabs, semicolons, and pipes",
-            "Header Detection: Automatically uses first row as JSON keys",
-            "Nested Output: Option to generate nested or flat JSON structures",
-            "Array or Object: Choose between JSON array or keyed object output",
+            "Delimiter Detection: Commas, tabs, semicolons and pipes are picked up automatically",
+            "Header Row: The first row becomes the JSON keys",
+            "Array of Objects: One JSON object per CSV row",
+            "Values as Text: Every value is kept as a string, exactly as written",
             "Pretty Print: Formatted JSON output with proper indentation",
             "Large File Support: Process CSV files with thousands of rows efficiently",
             "100% Private: Data conversion happens entirely in your browser"
@@ -716,12 +714,12 @@ export const toolContentData: Record<string, {
         keywords: ["csv to json", "convert csv to json", "csv to json converter", "csv to json online", "csv to json free", "csv to json parser", "spreadsheet to json", "tabular data to json", "csv to json array", "csv to json online free", "csv file to json"]
     },
     "json-to-csv": {
-        description: "Convert JSON data into clean CSV spreadsheet format with Convertify. Our converter intelligently flattens nested JSON objects and arrays into organized rows and columns, making complex API responses and database exports easy to analyze in Excel or Google Sheets. Handles large JSON files efficiently with smart column mapping.",
+        description: "Convert JSON data into clean CSV spreadsheet format with Convertify. Nested objects are flattened into dot-notation columns such as address.city, and every key found in any record becomes a column, making API responses and database exports easy to analyze in Excel or Google Sheets.",
         features: [
             "Auto-Flattening: Converts nested JSON objects into flat CSV columns",
-            "Array Handling: Intelligently expands JSON arrays into separate rows",
+            "Array Handling: Arrays inside a record are kept in one cell as JSON text",
             "Column Mapping: Automatically detects and organizes all JSON keys",
-            "Custom Delimiters: Output as CSV, TSV, or custom-separated values",
+            "Separator Choice: Comma, semicolon, tab (TSV) or pipe",
             "Header Generation: Creates clean column headers from JSON paths",
             "Large File Support: Efficiently processes JSON files with thousands of records",
             "Excel Compatible: Output opens perfectly in Excel and Google Sheets"
@@ -742,7 +740,7 @@ export const toolContentData: Record<string, {
         features: [
             "Full XML Support: Handles attributes, namespaces, and CDATA sections",
             "Smart Attribute Mapping: Converts XML attributes to JSON properties",
-            "Namespace Handling: Preserves or strips XML namespace prefixes",
+            "Namespace Prefixes: Kept in property names, e.g. ns0:item",
             "Array Detection: Identifies repeating elements as JSON arrays",
             "Pretty Formatting: Outputs clean, indented JSON for readability",
             "Validation: Checks XML well-formedness before conversion",
@@ -762,7 +760,7 @@ export const toolContentData: Record<string, {
     "markdown-to-pdf": {
         description: "Turn a Markdown file or pasted Markdown into a styled PDF. Convertify renders headings, lists, links, bold and italic text, blockquotes, horizontal rules and fenced code blocks with a clean document stylesheet, showing you a live preview as you type. Everything is processed in your browser.",
         features: [
-            "Headings, paragraphs, ordered and unordered lists",
+            "Headings, paragraphs and bullet lists (numbered items print as bullets)",
             "Bold, italic, inline code and fenced code blocks",
             "Links, blockquotes and horizontal rules",
             "Live preview beside the editor as you type",
@@ -785,11 +783,11 @@ export const toolContentData: Record<string, {
         features: [
             "Bidirectional: Encode to Base64 and decode from Base64 instantly",
             "File Support: Encode images, documents, and binary files to Base64",
-            "URL-Safe Mode: Generate URL-safe Base64 strings for web applications",
-            "Real-Time Preview: See encoded or decoded output as you type",
+            "Text Decoding: Turns Base64 back into readable UTF-8 text",
+            "UTF-8 Safe: Accented letters and emoji encode correctly",
             "Large Input Handling: Process large files and strings efficiently",
             "Copy to Clipboard: One-click copy of encoded or decoded results",
-            "Data URI Generation: Create ready-to-use data URIs for HTML and CSS"
+            "Raw Output: Plain Base64, ready to prefix as a data URI"
         ],
         useCases: [
             "Embedding images as Base64 data URIs in HTML and CSS files",
@@ -824,13 +822,14 @@ export const toolContentData: Record<string, {
         keywords: ["qr code generator", "create qr code", "qr code maker", "generate qr code free", "qr code generator online", "custom qr code", "qr code with logo", "qr code creator free", "qr code png", "qr code svg", "free qr code generator", "wifi qr code generator"]
     },
     "autocad-pdf-editor": {
-        description: "Edit text inside AutoCAD-exported PDFs — the one thing every other PDF editor on the internet fails at. AutoCAD draws SHX text as raw vector strokes with no underlying text layer, so Adobe, Smallpdf, and ILovePDF treat the page as uneditable. Convertify scans the vector geometry, groups strokes into editable text regions, and lets you replace them with a CAD-style font so your output looks identical to the original. Fix that forgotten dimension or label without re-opening AutoCAD.",
+        description: "Edit text inside AutoCAD-exported PDFs, which most PDF editors can't do. AutoCAD draws SHX text as raw vector strokes with no underlying text layer, so ordinary editors treat the page as uneditable. Convertify scans the drawing, groups strokes into clickable text regions, and lets you replace or delete them; new text is written in Helvetica at the original position and size. Fix that forgotten dimension or label without re-opening AutoCAD.",
         features: [
             "Detects SHX Vector Text: Finds clickable text regions other editors can't see",
-            "CAD-Style Replacement Font: Output matches AutoCAD's thin-stroke aesthetic",
-            "Position & Size Match: Replacement text sits in the exact original location",
+            "Replace or Delete: Change a label's wording or remove it",
+            "Position & Size Match: Replacement text sits in the original location",
             "Multi-Page Support: Edit any page in a full drawing set",
-            "Auto-Detect TTF vs SHX: Routes TrueType PDFs to the standard editor",
+            "TrueType Text Too: Real text is removed and rewritten in place",
+            "AutoCAD-Friendly Mode: Skips the white cover box for clean PDFIMPORT",
             "100% Browser-Based: Your drawings never leave your device",
             "No AutoCAD License Needed: Works on any device with a browser",
             "Free Forever: No watermarks, sign-up, or download required"

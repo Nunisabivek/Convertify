@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { PDFDocument, rgb, StandardFonts } from "pdf-lib"
+import { rgb, StandardFonts } from "pdf-lib"
+import { loadPdf } from "@/lib/pdf-password"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import { finishConvert } from "@/lib/native-file"
 import { FileUploader } from "@/components/tools/file-uploader"
@@ -38,7 +39,7 @@ export default function AddPageNumbersClient() {
 
         try {
             const fileBuffer = await files[0].arrayBuffer()
-            const pdfDoc = await PDFDocument.load(fileBuffer)
+            const pdfDoc = await loadPdf(fileBuffer, files[0].name)
             const pages = pdfDoc.getPages()
             const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
 

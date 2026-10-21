@@ -98,8 +98,8 @@ export default function Page() {
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
                         Crop to the pixels the portal asks for and land inside the KB cap. Your
-                        background is kept as shot. Output is a JPEG on your device — not an official
-                        pose check.
+                        background is kept as shot, unless you tick the optional step that makes a
+                        plain wall white. Output is a JPEG on your device — not an official pose check.
                     </p>
                     <ToolFrontPlayBadge toolName="Passport Photo Maker" />
                 </div>
@@ -118,7 +118,7 @@ export default function Page() {
                 <h2 className="text-2xl font-bold text-slate-900">Presets this tool actually outputs</h2>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>
-                        <strong>US 2×2</strong> — 600×600 JPEG, about 50–240 KB (the photo itself needs a white background).
+                        <strong>US 2×2</strong> — 600×600 JPEG, about 50–240 KB (needs a white background: shoot against a plain light wall, then tick the background option if it isn't quite white).
                         That is the usual digital size for a 2-inch square at 300 DPI (DS-160 / many
                         USCIS photo uploads).
                     </li>
@@ -148,11 +148,11 @@ export default function Page() {
                 <p>
                     Wrong pixels almost always mean the crop was the wrong shape, not that the
                     file needed more compression. JPEG is required: PNG files blow past a 20–50 KB
-                    or 10–250 KB cap. If the wall behind you is busy, run{' '}
+                    or 10–250 KB cap. If a plain wall behind you isn't quite white, tick the background option above (it uses the same fill as{' '}
                     <a className="text-indigo-600 hover:underline" href="/remove-background">
                         Remove background
                     </a>
-                    {' '}first. If the form only cares about kilobytes, use{' '}
+                    ); a busy backdrop needs a retake. If the form only cares about kilobytes, use{' '}
                     <a className="text-indigo-600 hover:underline" href="/fit-to-size">
                         Fit to size
                     </a>

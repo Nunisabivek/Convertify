@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { PDFDocument } from "pdf-lib"
+import { loadPdf } from "@/lib/pdf-password"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
@@ -70,7 +71,7 @@ export default function MergePdfPage() {
                 const fileBuffer = await file.arrayBuffer()
                 try {
                     if (isPdfFile(file)) {
-                        const pdf = await PDFDocument.load(fileBuffer)
+                        const pdf = await loadPdf(fileBuffer, file.name)
                         const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices())
                         copiedPages.forEach((page) => mergedPdf.addPage(page))
                     } else {

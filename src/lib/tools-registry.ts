@@ -548,7 +548,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
             {
                 id: 'edit-pdf',
                 name: 'Edit PDF',
-                description: 'Add text, drawings, highlights and stamps to PDF.',
+                description: 'Add text, drawings, highlights and boxes to PDF.',
                 icon: { lucide: 'FilePenLine', material: 'edit_document' },
                 href: 'edit-pdf',
                 color: { text: 'text-purple-600', bg: 'bg-purple-50', hex: '#9333EA' },

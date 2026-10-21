@@ -6,12 +6,12 @@ export const uniqueToolSeo = {
         howToSteps: [
             { name: "Upload a PDF or photo", text: "Drop a PDF, JPG, PNG, or WebP. Nothing is uploaded — the file stays in this browser tab." },
             { name: "Set the min and max", text: "Pick a form preset (20–50 KB, 50–200 KB, 100–200 KB) or type any window, including 1–2 MB for job and university portals." },
-            { name: "Fit and download", text: "Convertify compresses until the file is at least the minimum and at most the maximum, then you save it locally." },
+            { name: "Fit and download", text: "Convertify adjusts quality (and, if needed, size) to land the file between the minimum and maximum, warns you if it can't, then you save it locally." },
         ],
         faqs: [
             {
                 question: "Why do some forms reject a file that is too small, not just too large?",
-                answer: "Many KYC, UPSC, EPFO, and bank portals publish a band such as 20–50 KB or 100–200 KB. A normal compressor only has a ceiling, so it can overshoot the floor. Fit to size keeps iterating until the output is inside both limits.",
+                answer: "Many KYC, UPSC, EPFO, and bank portals publish a band such as 20–50 KB or 100–200 KB. A normal compressor only has a ceiling, so it can overshoot the floor. Fit to size makes several passes aiming for the space between both limits, and tells you if the result still misses.",
             },
             {
                 question: "Can I fit a photo to 20–50 KB, 50–200 KB, or 100–200 KB?",
@@ -27,7 +27,7 @@ export const uniqueToolSeo = {
             },
             {
                 question: "JPEG or PNG — what comes out?",
-                answer: "Photos are saved as JPEG, which is what most upload portals expect and the format that can actually hit a 20–50 KB band. PDFs stay PDFs. If a portal insists on PNG, it usually will not also demand a 50 KB ceiling — PNG is the larger format.",
+                answer: "Photos are saved as JPEG, which is what most upload portals expect and the format that can actually hit a 20–50 KB band. PDFs stay PDFs, but their pages are re-drawn as images (up to 40 pages), so the text is no longer selectable. If a portal insists on PNG, it usually will not also demand a 50 KB ceiling — PNG is the larger format.",
             },
             {
                 question: "Does my file leave this device?",
@@ -38,13 +38,13 @@ export const uniqueToolSeo = {
     "passport-photo": {
         howToSteps: [
             { name: "Pick the preset the form names", text: "Choose US 2×2 (600×600), India passport 630×810, UK/visa 35×45 at 600×750, UPSC 3.5×4.5 cm, bank 200×230, signature, or thumb." },
-            { name: "Crop the face, then make the JPEG", text: "Drag and zoom so the head sits in the guide. The tool crops to the preset’s exact pixels and compresses into its KB window. It does not change your background." },
-            { name: "Download the JPEG", text: "Output is always a JPEG on your device. If the wall behind you is busy, run Remove background first, then crop here." },
+            { name: "Crop the face, then make the JPEG", text: "Drag and zoom so the head sits in the guide. Optionally tick the box to make a plain wall behind you white (light grey for the bank preset). The tool crops to the preset’s exact pixels and compresses into its KB window." },
+            { name: "Download the JPEG", text: "Output is always a JPEG on your device. The background clean-up only works against a plain wall; if yours is busy, retake the photo." },
         ],
         faqs: [
             {
                 question: "Can I make a US passport photo at 2×2 inches (600×600)?",
-                answer: "Yes. The US 2×2 preset crops to 600×600 pixels — the usual digital size for a 2-inch square at 300 DPI — and aims for about 50–240 KB as a JPEG. Your background is kept as shot, so it should already be white. Always check the form you are filing; some USCIS/CEAC uploads cap supporting images at 240 KB.",
+                answer: "Yes. The US 2×2 preset crops to 600×600 pixels — the usual digital size for a 2-inch square at 300 DPI — and aims for about 50–240 KB as a JPEG. Your background is kept as shot unless you tick the option to make a plain wall white. That clean-up is a simple fill from the photo's edges, so it works best against a plain, evenly lit wall. Always check the form you are filing; some USCIS/CEAC uploads cap supporting images at 240 KB.",
             },
             {
                 question: "What size is the India digital passport photo?",
@@ -56,7 +56,7 @@ export const uniqueToolSeo = {
             },
             {
                 question: "What about UK or Schengen visa photos?",
-                answer: "The Visa 35×45 preset outputs 600×750 pixels (the common digital size for a 35×45 mm / 3.5×4.5 cm frame) as a JPEG in a 50–240 KB window. Many Schengen and visa portals accept that. UK online passport photos officially want a cream or light-grey backdrop, not pure white — retake against a cream wall if that portal rejects a white background. This tool does not repaint backgrounds.",
+                answer: "The Visa 35×45 preset outputs 600×750 pixels (the common digital size for a 35×45 mm / 3.5×4.5 cm frame) as a JPEG in a 50–240 KB window. Many Schengen and visa portals accept that. UK online passport photos officially want a cream or light-grey backdrop, not pure white — retake against a cream wall if that portal rejects a white background. The optional background clean-up paints white for this preset, not cream.",
             },
             {
                 question: "JPEG or PNG? The portal rejected my file.",
@@ -64,7 +64,7 @@ export const uniqueToolSeo = {
             },
             {
                 question: "The file is too large or too small after I crop.",
-                answer: "Each preset has a min and max KB. Raise or lower the size slider if the form’s cap differs. If you only have a kilobyte rule and no pixel crop, use Fit to size instead. If the photo is already the right pixels but the wall is busy, use Remove background, then crop again.",
+                answer: "Each preset has a min and max KB. Raise or lower the size slider if the form’s cap differs. If you only have a kilobyte rule and no pixel crop, use Fit to size instead. If the wall behind you looks uneven, tick the plain-background option and make the photo again; a busy backdrop needs a retake.",
             },
             {
                 question: "Does the photo leave my phone or computer?",

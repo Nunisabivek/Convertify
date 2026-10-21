@@ -127,9 +127,9 @@ export default function AboutPage() {
                     </div>
                     <div className="p-6 bg-white rounded-xl border border-slate-100 shadow-sm">
                         <Users className="w-8 h-8 text-blue-600 mb-3" />
-                        <h3 className="font-bold text-slate-900 mb-2">No Limits</h3>
+                        <h3 className="font-bold text-slate-900 mb-2">No Caps</h3>
                         <p className="text-slate-600 text-sm">
-                            No file size limits, no daily usage caps, no watermarks on output files.
+                            Files up to 200 MB, no daily usage caps, no watermarks on output files.
                             Use Convertify as much as you need, completely free.
                         </p>
                     </div>

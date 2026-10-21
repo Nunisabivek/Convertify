@@ -56,7 +56,7 @@ export default function Page() {
                         {seoData.h1}
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Protect your documents with custom watermarks. Add text watermarks with full control over appearance.
+                        Stamp a text watermark across every page. Choose the wording, size, colour and opacity.
                     </p>
                 </div>
                 <WatermarkPdfClient />

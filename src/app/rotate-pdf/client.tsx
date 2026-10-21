@@ -2,7 +2,8 @@
 
 import { useState } from "react"
 import { RotateCw, Download, Loader2, AlertCircle } from "lucide-react"
-import { PDFDocument, degrees } from "pdf-lib"
+import { degrees } from "pdf-lib"
+import { loadPdf } from "@/lib/pdf-password"
 import { AdBanner } from "@/components/ads/banner"
 import { FileUploader } from "@/components/tools/file-uploader"
 
@@ -22,7 +23,7 @@ export default function RotatePdfClient() {
 
         try {
             const arrayBuffer = await file.arrayBuffer()
-            const pdfDoc = await PDFDocument.load(arrayBuffer)
+            const pdfDoc = await loadPdf(arrayBuffer, file.name)
             const numPages = pdfDoc.getPageCount()
 
             if (applyToAll) {

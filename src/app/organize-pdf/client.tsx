@@ -2,6 +2,7 @@
 import { loadPdfjs } from "@/lib/pdfjs"
 import { useState } from "react"
 import { PDFDocument, degrees } from "pdf-lib"
+import { loadPdf } from "@/lib/pdf-password"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
@@ -99,7 +100,7 @@ export default function OrganizePdfClient() {
 
         try {
             const fileBuffer = await file.arrayBuffer()
-            const originalPdf = await PDFDocument.load(fileBuffer)
+            const originalPdf = await loadPdf(fileBuffer, file.name)
             const newPdf = await PDFDocument.create()
 
             for (const pageItem of pages) {

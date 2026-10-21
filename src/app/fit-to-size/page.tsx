@@ -100,8 +100,8 @@ export default function Page() {
                     </h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
                         Portals reject files that are too large <em>or</em> too small.
-                        Set a minimum and a maximum; Convertify compresses until the file
-                        lands inside that window. Nothing is uploaded.
+                        Set a minimum and a maximum; Convertify adjusts the file to land inside
+                        that window and warns you if it can't. Nothing is uploaded.
                     </p>
                     <ToolFrontPlayBadge toolName="Fit to Size" />
                 </div>
@@ -127,9 +127,10 @@ export default function Page() {
                 </p>
                 <p>
                     Photo presets cover 10–20, 20–50, 20–100, 20–200, 20–300, 50–200, and
-                    100–200 KB. Larger chips cover 0.5–1 MB, 1–2 MB, and 2–5 MB. PDFs and
-                    photos (JPG, PNG, WebP) both work. Photos download as JPEG because that is
-                    the format that can actually hit a 20–50 KB band.
+                    100–200 KB. Larger chips cover 0.5–1 MB, 1–2 MB, and 2–5 MB. PDFs (up to
+                    40 pages, saved with each page as an image) and photos (JPG, PNG, WebP) both
+                    work, up to 40 MB each. Photos download as JPEG because that is the format that
+                    can actually hit a 20–50 KB band.
                 </p>
                 <p>
                     Need a hard ceiling only — 100 KB for a form, or under 10 MB for email?

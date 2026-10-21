@@ -483,7 +483,8 @@ export default function AutocadPdfEditorClient() {
 
         try {
             const { PDFDocument, rgb, StandardFonts, PDFName, decodePDFRawStream, degrees } = await import("pdf-lib")
-            const pdfDoc = await PDFDocument.load(pdfBytesRef.current.slice(0))
+            const { loadPdf } = await import("@/lib/pdf-password")
+            const pdfDoc = await loadPdf(pdfBytesRef.current.slice(0))
             const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
             const pages = pdfDoc.getPages()
             const ctx = pdfDoc.context

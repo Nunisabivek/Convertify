@@ -569,6 +569,10 @@ export default function CompressPdfPage() {
 
                             {showAdvanced && (
                                 <div className="mt-4 space-y-4 p-4 bg-slate-50 rounded-lg">
+                                    {/* A target size drives quality and resolution itself, so the sliders only apply without one. */}
+                                    <p className="text-xs text-slate-500">
+                                        {targetSize ? "Moving a slider switches to manual mode and clears the target size." : "Manual mode: these settings are used as-is."}
+                                    </p>
                                     <div className="space-y-2">
                                         <div className="flex justify-between">
                                             <label className="text-sm font-medium text-slate-700">{isPdf ? 'Image Quality' : 'Compression Level'}</label>
@@ -578,7 +582,7 @@ export default function CompressPdfPage() {
                                             type="range"
                                             min="0.1" max="1.0" step="0.1"
                                             value={quality}
-                                            onChange={(e) => setQuality(parseFloat(e.target.value))}
+                                            onChange={(e) => { setQuality(parseFloat(e.target.value)); setTargetSize("") }}
                                             className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-orange-500"
                                         />
                                         <p className="text-xs text-slate-400">Lower quality = Smaller file size</p>
@@ -593,7 +597,7 @@ export default function CompressPdfPage() {
                                             type="range"
                                             min="0.5" max="2.0" step="0.1"
                                             value={resolutionScale}
-                                            onChange={(e) => setResolutionScale(parseFloat(e.target.value))}
+                                            onChange={(e) => { setResolutionScale(parseFloat(e.target.value)); setTargetSize("") }}
                                             className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-orange-500"
                                         />
                                         <p className="text-xs text-slate-400">Lower resolution/scale = Smaller file size (may reduce clarity)</p>

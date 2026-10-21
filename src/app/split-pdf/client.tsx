@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { PDFDocument } from "pdf-lib"
+import { loadPdf } from "@/lib/pdf-password"
 import JSZip from "jszip"
 import { saveAs } from "file-saver"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
@@ -33,7 +34,7 @@ export default function SplitPdfPage() {
             // Count pages
             try {
                 const fileBuffer = await selectedFile.arrayBuffer()
-                const pdfDoc = await PDFDocument.load(fileBuffer)
+                const pdfDoc = await loadPdf(fileBuffer, selectedFile.name)
                 const count = pdfDoc.getPageCount()
                 setPageCount(count)
                 // Default: select all pages
@@ -108,7 +109,7 @@ export default function SplitPdfPage() {
         setIsProcessing(true)
         try {
             const fileBuffer = await file.arrayBuffer()
-            const pdfDoc = await PDFDocument.load(fileBuffer)
+            const pdfDoc = await loadPdf(fileBuffer, file.name)
 
             if (splitMode === "all") {
                 // Split into individual pages (original behavior)

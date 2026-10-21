@@ -1,4 +1,5 @@
 import { PDFDocument } from 'pdf-lib'
+import { loadPdf } from './pdf-password.ts'
 
 export type FlatPage = { png: Uint8Array; width: number; height: number }
 
@@ -14,7 +15,7 @@ export type FlatPage = { png: Uint8Array; width: number; height: number }
  * old content across with copyPages.
  */
 export async function buildRedactedPdf(src: ArrayBuffer | Uint8Array, flat: Map<number, FlatPage>) {
-    const srcDoc = await PDFDocument.load(src)
+    const srcDoc = await loadPdf(src)
     const pages = srcDoc.getPages()
     for (const i of flat.keys()) {
         const node = pages[i].node

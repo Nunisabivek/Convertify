@@ -73,7 +73,7 @@ export const toolSeoData = {
             },
             {
                 question: "Does it work on password-protected PDFs?",
-                answer: "No. Password-protected PDFs can't be opened here. Remove the password with Unlock PDF first, then split the unlocked copy."
+                answer: "Yes. A PDF with only permission restrictions opens straight away; if it needs a password to open, you're asked for it once, and the split files are saved without it. PDFs using older AES-128 encryption can't be opened here; run them through Unlock PDF first."
             }
         ],
         howToSteps: [
@@ -349,30 +349,30 @@ export const toolSeoData = {
     },
     "text-to-pdf": {
         title: "Text to PDF Free Online — Convert TXT Files to PDF",
-        description: "Turn TXT files or pasted text into a clean, paginated PDF. Pick the font size, margins and page size. Free, private, no sign-up.",
+        description: "Turn a .txt file into a clean, paginated A4 PDF, one line of text per line of the file. Free, private, no sign-up, nothing uploaded.",
         keywords: [
             "text to pdf", "convert txt to pdf", "make pdf from text", "professional text to pdf online free",
-            "txt to pdf formatting", "save code as pdf", "convert logs to pdf", "text to pdf with custom fonts",
-            "clean document from text file", "batch txt to pdf conversion"
+            "txt to pdf formatting", "save code as pdf", "convert logs to pdf",
+            "clean document from text file"
         ],
         h1: "Text to PDF - Clean & Professional Generation",
         faqs: [
             {
                 question: "Can I customize the font and formatting?",
-                answer: "Yes! Our tool allows you to select professional fonts, adjust line spacing, and set custom margins to make your raw text look like a professionally typeset document."
+                answer: "No. Text is set in 12 pt Helvetica on A4 pages with 50-point margins, one PDF line for each line of your file. There are no font, spacing or margin settings."
             },
             {
                 question: "Is it suitable for saving code or server logs?",
-                answer: "Absolutely. We offer monospaced font options that preserve indentation and column alignment—perfect for developers and IT professionals."
+                answer: "For short lines, yes. Each line is cut off after 90 characters rather than wrapped, and the font is proportional, so column alignment isn't kept. Leading spaces are kept."
             },
             {
                 question: "Does it handle very large text files?",
-                answer: "Yes. Our engine can process thousands of lines of text, automatically paginating the content into standard A4 or Letter sizes without crashing."
+                answer: "Yes. Long files run onto as many A4 pages as needed. One limit: the font covers Western (Latin) characters only, so text containing Chinese, Cyrillic, emoji and similar characters can't be converted."
             }
         ],
         howToSteps: [
-            { name: "Upload or Paste", text: "Add your raw text or upload a .txt file." },
-            { name: "Style", text: "Choose your font, size, and layout settings." },
+            { name: "Upload", text: "Choose a .txt file from your device." },
+            { name: "Convert", text: "Click Convert to PDF; the text is laid out line by line on A4 pages." },
             { name: "Download", text: "Save your clean, paginated PDF document." }
         ]
     },
@@ -455,7 +455,7 @@ export const toolSeoData = {
             },
             {
                 question: "Can I edit the text in the converted Word file?",
-                answer: "Yes. The output is a standard .docx with your PDF's text laid out in paragraphs, ready to edit in Word, Google Docs, or LibreOffice."
+                answer: "Yes. The output is a standard .docx, ready to edit in Word, Google Docs, or LibreOffice. Each line of the PDF becomes its own paragraph, with a page break between PDF pages, so you may want to join lines back into full paragraphs."
             },
             {
                 question: "Does it work on scanned PDFs?",
@@ -472,59 +472,58 @@ export const toolSeoData = {
 
     "add-page-numbers": {
         title: "Add Page Numbers to PDF — Free Online",
-        description: "Insert sequential page numbers into a PDF. Choose position, font size and starting page, and skip cover pages. Free, no sign-up, no watermark.",
+        description: "Insert sequential page numbers into a PDF. Choose one of six positions and the starting number. Free, no sign-up, no watermark, nothing uploaded.",
         keywords: [
             "add page numbers to pdf", "page numbering pdf", "number pdf pages", "pdf page numbers free online",
             "add page numbers to pdf online free", "insert page numbers in pdf", "pdf numbering tool",
-            "bates numbering pdf free", "footer page numbers pdf", "skip cover page numbering",
-            "sequential numbering across pdfs", "legal bates stamping online", "custom pdf pagination"
+            "footer page numbers pdf", "header page numbers pdf", "custom start page number pdf"
         ],
-        h1: "Add Page Numbers - Bates Stamping & Custom Pagination",
+        h1: "Add Page Numbers to PDF - Six Positions, Any Start Number",
         faqs: [
             {
                 question: "Can I skip the cover page and start numbering from page 2?",
-                answer: "Yes! Our 'Logical Sequencing' tool allows you to skip any number of initial pages (like covers or tables of contents) and start your page count exactly where you need it."
+                answer: "Not in one step: every page gets a number. Split off the cover with Split PDF, number the rest (starting at 2 if you like), then merge the cover back with Merge PDF."
             },
             {
                 question: "Can I add numbers to multiple PDFs as one continuous set?",
-                answer: "Absolutely. If you upload multiple files, you can choose to number them sequentially (e.g., File 1 ends at page 10, File 2 starts at page 11)."
+                answer: "Merge them into one PDF first and number that, or number each file separately and set the starting number of the second file to continue from the first (for example, start at 11)."
             },
             {
                 question: "Is this suitable for legal Bates numbering?",
-                answer: "Yes. You can customize the prefix (e.g., 'CASE-') and the number of digits to comply with professional legal filing requirements."
+                answer: "No. The tool adds plain numbers (1, 2, 3...) with no prefix or zero-padding, so it doesn't meet Bates numbering requirements."
             },
             {
                 question: "Will adding numbers mess up my document's text?",
-                answer: "No. Page numbers are added as a new 'Annotation Layer' over the document. This ensures your original layout, images, and text remains untouched."
+                answer: "No. Each number is drawn as a small piece of text on top of the page, 20 points in from the edge. Your original layout, images and text are untouched."
             }
         ],
         howToSteps: [
-            { name: "Upload", text: "Select your PDF file(s)." },
-            { name: "Configure", text: "Set starting page, position, and numbering style (1 of N, Bates, etc.)." },
-            { name: "Apply", text: "Download your professionally paginated document." }
+            { name: "Upload", text: "Select your PDF file." },
+            { name: "Configure", text: "Pick one of six positions and the number to start from." },
+            { name: "Apply", text: "Download your numbered document." }
         ]
     },
     "compare-pdf": {
         title: "Compare PDF Free Online — Find Differences Between Two PDFs",
-        description: "Compare two PDF documents side-by-side. Detect text changes, additions, and deletions with visual diff highlighting. 100% private in-browser.",
+        description: "Compare two PDFs page by page: view them side by side or overlaid, and get a list of added and removed text. 100% private, in your browser.",
         keywords: [
             "compare pdf", "pdf diff", "compare two pdfs", "find changes in pdf", "pdf comparison tool online",
             "side by side pdf comparison", "highlight differences pdf", "compare document versions",
-            "semantic pdf diff", "legal document comparison free", "track changes in pdf online"
+            "legal document comparison free", "pdf text diff"
         ],
         h1: "Compare PDF Documents Free Online",
         faqs: [
             {
                 question: "Does it detect more than just text changes?",
-                answer: "Yes. Our tool detects changes in text lines, wording, and layout. It provides a visual side-by-side view showing exactly where changes occur."
+                answer: "Only text is compared automatically. Layout, image and font changes aren't detected, but the side-by-side and overlay views let you check those by eye, page by page."
             },
             {
                 question: "Can I see a summary of all modifications?",
-                answer: "Yes! After comparison, the tool generates a change log summarizing total additions, deletions, and formatting tweaks found between the two versions."
+                answer: "Yes. After comparison you get counts of additions and deletions, a list of the changed text by page, and a downloadable .txt report."
             },
             {
                 question: "Is it suitable for comparing legal contracts?",
-                answer: "Absolutely. Our diff engine is designed for high-stakes documents, helping you spot even a single missing word or changed figure in multi-page contracts."
+                answer: "As a first pass, yes. A changed word or figure flags the whole line of text it sits in. Pages are compared 1 to 1, 2 to 2 and so on, so text that moved to another page shows as removed and added, and reordering within a page isn't flagged. Read the flagged lines yourself before signing."
             },
             {
                 question: "Will my confidential documents be uploaded?",
@@ -533,8 +532,8 @@ export const toolSeoData = {
         ],
         howToSteps: [
             { name: "Upload Docs", text: "Select the original and the revised PDF files." },
-            { name: "Analyze", text: "Our engine maps both documents and highlights all differences." },
-            { name: "Review & Export", text: "Navigate through changes side-by-side and export the comparison report." }
+            { name: "Analyze", text: "Convertify reads the text on each page and lists the lines that differ." },
+            { name: "Review & Export", text: "Step through the pages side by side and download the text report." }
         ]
     },
     "crop-pdf": {
@@ -543,13 +542,13 @@ export const toolSeoData = {
         keywords: [
             "crop pdf", "trim pdf", "cut pdf pages", "crop pdf online free", "remove pdf margins", "trim pdf borders",
             "pdf cropper online", "resize pdf pages", "cut pdf margins free", "crop pdf pages online",
-            "secure pdf cropping", "remove hidden pdf data", "private margin trimmer", "crop scanned document"
+            "private margin trimmer", "crop scanned document"
         ],
         h1: "Crop PDF Pages Free Online",
         faqs: [
             {
                 question: "Is the content outside the crop box actually trimmed?",
-                answer: "Yes! Convertify applies standard PDF CropBox and MediaBox parameters so viewers display only your chosen content area cleanly."
+                answer: "No, it's hidden rather than deleted. Convertify sets each page's CropBox, so viewers show only your chosen area, but the content outside it stays in the file and can be brought back with a PDF editor. To remove sensitive information for good, use Redact PDF."
             },
             {
                 question: "Can I crop all pages at once?",
@@ -557,7 +556,7 @@ export const toolSeoData = {
             },
             {
                 question: "Does it work well for scanned documents?",
-                answer: "Perfectly. Our tool provides a live visual preview so you can easily align the crop boundaries with the text block of scanned pages."
+                answer: "Yes. The preview shows your margins on the page so you can line them up with the text block. The same margins apply to every page, so scans where the text sits in different places may need a looser crop."
             },
             {
                 question: "Will this reduce the file's visual quality?",
@@ -572,18 +571,18 @@ export const toolSeoData = {
     },
     "edit-pdf": {
         title: "Edit PDF Free Online — Add Text, Annotate & Draw on PDFs",
-        description: "Free browser-based PDF editor. Add text, insert annotations, draw shapes, and fill forms without watermarks or software installation.",
+        description: "Free in-browser PDF annotator. Type text onto pages, draw freehand, and add highlight and outline boxes. No watermark, no install, no upload.",
         keywords: [
             "convertify pdf editor", "edit pdf", "pdf editor online", "add text to pdf", "annotate pdf", "edit pdf online free", "pdf editor free no sign up",
-            "add image to pdf", "write on pdf online", "pdf annotation tool", "free pdf editor no watermark", "modify pdf online",
-            "flatten pdf edits", "fill pdf form free", "markup pdf online", "add comments to blueprint pdf", "free pdf markup tool",
+            "write on pdf online", "pdf annotation tool", "free pdf editor no watermark",
+            "flatten pdf edits", "type on pdf", "markup pdf online", "add comments to blueprint pdf", "free pdf markup tool",
             "convertify edit pdf", "edit pdf free no download"
         ],
-        h1: "Free Online PDF Editor — Edit Documents in Your Browser",
+        h1: "Free Online PDF Editor — Add Text & Annotate in Your Browser",
         faqs: [
             {
                 question: "What editing features are supported?",
-                answer: "You can add text blocks with customizable font size and colors, draw freehand annotations, highlight text passages, and add shapes or stamps directly onto your pages."
+                answer: "You can place new text (four sizes, five colours), draw freehand, and drop fixed-size highlight and outline boxes onto your pages. Text already in the PDF can't be changed, and the editor needs a mouse; touch screens aren't supported yet."
             },
             {
                 question: "What does 'Flatten PDF' mean?",
@@ -600,7 +599,7 @@ export const toolSeoData = {
         ],
         howToSteps: [
             { name: "Upload PDF", text: "Open your PDF in our browser-based editor." },
-            { name: "Add Content", text: "Add custom text, annotations, highlights, or shapes to any page." },
+            { name: "Add Content", text: "Add text, freehand drawings, highlights, or boxes to any page." },
             { name: "Export & Save", text: "Download your completed, edited PDF document instantly." }
         ]
     },
@@ -649,24 +648,24 @@ export const toolSeoData = {
         faqs: [
             {
                 question: "How do I manage a very large PDF with 100+ pages?",
-                answer: "We use a 'High-Density Grid View' that allows you to see dozens of thumbnails at once, making it much easier to drag pages across long distances than in scrolling list tools."
+                answer: "Every page appears as a thumbnail in a grid. Pages move one position at a time with the arrow buttons, so for big moves across a long document it is quicker to split it into parts and merge them back in the order you need."
             },
             {
                 question: "Can I rotate individual pages while organizing?",
-                answer: "Yes! Each page thumbnail has individual controls to rotate, delete, or duplicate, so you can fix orientations while you sort the document."
+                answer: "Yes. Each page thumbnail has its own controls to rotate it 90° or delete it, so you can fix orientations while you sort the document."
             },
             {
                 question: "Is there a limit on how many pages I can reorder?",
-                answer: "No. Since our processing is local, our organizer can handle hundreds of pages without the server lag or timeouts common in other free tools."
+                answer: "There is no page limit; each file can be up to 200 MB. Every page is drawn as a thumbnail when the file opens, so documents with hundreds of pages take a little longer to load."
             },
             {
                 question: "What happens to the page links when I reorder?",
-                answer: "Convertify's engine 're-binds' internal hyperlinks and bookmarks so they point to the correct content even after you move the pages around."
+                answer: "The pages are copied into a new file in your chosen order, so bookmarks are not carried over and internal links may stop working. The content of each page is unchanged."
             }
         ],
         howToSteps: [
             { name: "Upload", text: "Open your document in the visual organizer." },
-            { name: "Sort & Fix", text: "Drag to reorder, click to rotate, or 'X' to remove pages." },
+            { name: "Sort & Fix", text: "Use the arrows to reorder, click to rotate, or delete pages." },
             { name: "Download", text: "Save your perfectly structured PDF." }
         ]
     },
@@ -777,31 +776,31 @@ export const toolSeoData = {
     },
     "pdf-to-powerpoint": {
         title: "PDF to PowerPoint Free — Convert PDF Pages to PPTX Slides",
-        description: "Convert PDF pages into PowerPoint (.pptx) presentation slides. High resolution, 16:9 widescreen layout, compatible with Google Slides.",
+        description: "Turn each PDF page into a full-slide, high-resolution image in a 16:9 PowerPoint (.pptx) file. Opens in PowerPoint and Google Slides. No upload.",
         keywords: [
-            "pdf to powerpoint", "convert pdf to pptx", "pdf to slides", "editable pdf to ppt converter online free",
-            "turn pdf into presentation", "pdf to powerpoint without losing quality", "extract slides from pdf",
-            "convert pdf to editable pptx", "pdf to powerpoint for teachers", "make pdf slides editable"
+            "pdf to powerpoint", "convert pdf to pptx", "pdf to slides", "pdf to ppt converter online free",
+            "turn pdf into presentation", "extract slides from pdf", "pdf to powerpoint for teachers",
+            "present pdf in powerpoint"
         ],
         h1: "Convert PDF to PowerPoint Free Online (PPTX)",
         faqs: [
             {
                 question: "Are the text boxes actually editable after conversion?",
-                answer: "Yes! Unlike basic converters that just create image-based slides, Convertify identifies text paragraphs and font styles, allowing you to edit words and move objects inside PowerPoint."
+                answer: "No. Each PDF page becomes one picture filling the slide, so the text can't be edited in PowerPoint. You can add new text boxes, notes and animations on top, or reorder and delete slides."
             },
             {
-                question: "Does it support math equations and complex charts?",
-                answer: "We use high-fidelity object mapping to preserve the appearance of equations and charts, though complex math may need minor adjustments in some cases."
+                question: "Will equations, charts and images look right?",
+                answer: "Yes, as pictures: each page is rendered at about 1920 pixels wide, so equations and charts look the same as in the PDF. Slides are 16:9, and pages of another shape (such as A4 portrait) are stretched to fill the slide."
             },
             {
                 question: "Can I open the resulting file in Google Slides?",
-                answer: "Absolutely. Our .PPTX files are fully compatible with Microsoft PowerPoint, Google Slides, and Apple Keynote."
+                answer: "Yes. The .pptx opens in Microsoft PowerPoint and Google Slides, and in other apps that read PowerPoint files."
             }
         ],
         howToSteps: [
             { name: "Upload", text: "Select the PDF presentation you want to convert." },
-            { name: "Analyze", text: "Our engine maps PDF layers to PowerPoint slide objects." },
-            { name: "Download", text: "Save as an editable PPTX file." }
+            { name: "Convert", text: "Each page is rendered as a high-resolution image and placed on its own slide." },
+            { name: "Download", text: "Save the PPTX file and open it in PowerPoint or Google Slides." }
         ]
     },
     "redact-pdf": {
@@ -839,7 +838,7 @@ export const toolSeoData = {
     },
     "repair-pdf": {
         title: "Repair PDF Free Online — Fix Damaged or Corrupted PDF Files",
-        description: "Fix corrupt, unreadable, or broken PDF documents. Reconstruct damaged cross-reference (XRef) tables and recover pages directly in your browser.",
+        description: "Fix corrupt, cut-off or broken PDF documents. Rebuilds a damaged file structure and recovers every readable page, right in your browser.",
         keywords: [
             "repair pdf", "fix corrupt pdf", "recover pdf", "repair corrupted pdf file online free", "fix damaged pdf",
             "pdf repair tool", "recover data from pdf", "broken pdf fix", "pdf won't open fix", "corrupted pdf recovery",
@@ -849,11 +848,11 @@ export const toolSeoData = {
         faqs: [
             {
                 question: "Can it fix 'File is not a valid PDF' errors?",
-                answer: "Yes. Many PDF errors are caused by damaged cross-reference tables or broken object streams. Our repair engine scans the binary structure, rebuilds the index table, and generates a valid PDF."
+                answer: "Often. Many of these errors come from a file that was cut off or has a damaged trailer or cross-reference section. Convertify scans for the objects that are still intact, writes a fresh trailer and copies the readable pages into a new PDF. If that fails, it saves each page that can still be drawn as an image."
             },
             {
                 question: "Will it recover my pages and text?",
-                answer: "Yes, our tool salvages all readable stream objects, fonts, and images from the file and re-packages them into an intact, standard-compliant PDF."
+                answer: "It recovers every page it can still read, and tells you how many that was. Usually text, fonts and images come back intact; if the file is too damaged for that, readable pages are saved as images, so their text is no longer selectable. Pages whose data is lost are left out."
             },
             {
                 question: "Is it safe to repair confidential files?",
@@ -862,7 +861,7 @@ export const toolSeoData = {
         ],
         howToSteps: [
             { name: "Upload Damaged PDF", text: "Select the corrupted PDF file that cannot be opened." },
-            { name: "Rebuild Structure", text: "Our client-side engine reconstructs the cross-reference tables and streams." },
+            { name: "Rebuild Structure", text: "Convertify rebuilds the damaged structure and copies every readable page into a fresh PDF." },
             { name: "Download Repaired File", text: "Save your recovered, readable PDF document." }
         ]
     },
@@ -872,18 +871,18 @@ export const toolSeoData = {
         keywords: [
             "convertify sign pdf", "sign pdf", "e-sign pdf", "digital signature", "sign pdf online free", "electronic signature pdf", "add signature to pdf",
             "pdf signature tool", "sign documents online free", "e-signature free", "draw signature on pdf",
-            "legally binding e-sign", "sign real estate contract pdf", "flatten signed pdf", "secure digital signing",
+            "sign real estate contract pdf", "flatten signed pdf",
             "sign on mobile finish on pc", "private electronic signatures", "sign pdf free no download"
         ],
         h1: "Sign PDF Free Online - Electronic Signature Tool",
         faqs: [
             {
                 question: "What signing options are supported?",
-                answer: "You can draw your signature with a mouse, touch, or stylus, type your name using elegant cursive calligraphy fonts, or upload an image of your signature."
+                answer: "You can draw your signature with a mouse, touch, or stylus, type your name in a handwriting-style font, or upload a PNG image of your signature."
             },
             {
                 question: "Can I place the signature on any page?",
-                answer: "Yes! You can select which page to sign, reposition the signature box by dragging, resize it, and apply it with one click."
+                answer: "Yes. Pick the page, place the signature, and drag it into position with a mouse. The signature box has a fixed size, and you can place as many signatures as you need across different pages."
             },
             {
                 question: "Is my signature saved on your servers?",
@@ -902,24 +901,24 @@ export const toolSeoData = {
         keywords: ["convertify rotate pdf", "rotate pdf", "turn pdf pages", "rotate pdf 90 degrees", "flip pdf", "rotate scanned document", "pdf page orientation", "rotate pdf online free", "rotate pdf free no download"],
         h1: "Convertify Rotate PDF - Fix Page Orientation Free",
         faqs: [
-            { question: "Can I rotate specific pages only?", answer: "Yes! You can select individual pages to rotate, or rotate all pages at once. Perfect for fixing scanned documents where some pages are sideways." },
-            { question: "What rotation angles are supported?", answer: "You can rotate pages 90° clockwise, 90° counterclockwise, or 180° to flip them upside down. Multiple rotations can be applied to get any orientation." },
+            { question: "Can I rotate specific pages only?", answer: "Yes. Untick 'Apply to all pages' and type the pages to rotate, such as 1,3,5-7, or rotate every page at once. Perfect for fixing scanned documents where some pages are sideways." },
+            { question: "What rotation angles are supported?", answer: "90°, 180° or 270° clockwise. 270° is the same as 90° counter-clockwise, and 180° flips a page upside down." },
             { question: "Will rotating affect the PDF quality?", answer: "No, rotation is a lossless operation. Your text, images, and formatting remain exactly the same, just oriented differently." },
             { question: "Can I rotate a scanned document?", answer: "Absolutely! Scanned documents often come out sideways. Our tool fixes this instantly without any quality loss." }
         ],
         howToSteps: [
             { name: "Upload Your PDF", text: "Select or drag and drop the PDF file you need to rotate. Works with any PDF, including scanned documents." },
-            { name: "Select Pages & Rotation", text: "Choose which pages to rotate and select the rotation angle: 90° left, 90° right, or 180° flip." },
+            { name: "Select Pages & Rotation", text: "Pick the angle (90°, 180° or 270° clockwise), then rotate all pages or type the page numbers to change." },
             { name: "Download Rotated PDF", text: "Click 'Rotate' and download your correctly oriented PDF instantly. No watermarks!" }
         ]
     },
     "protect-pdf": {
         title: "Protect PDF Free Online — Add Password Encryption to PDF",
-        description: "Protect PDF files with AES-256 password encryption. Restrict unauthorized opening, printing, and copying. 100% private in-browser.",
+        description: "Protect PDF files with AES-256 password encryption. Anyone opening the file must enter your password. 100% private, in your browser.",
         keywords: [
             "convertify protect pdf", "password protect pdf", "encrypt pdf", "secure pdf", "lock pdf", "pdf password", "protect pdf online free",
             "add password to pdf", "pdf encryption", "aes-256 pdf protection", "secure pdf for email",
-            "prevent pdf printing", "disable pdf copying", "lock pdf editing", "bank grade pdf security",
+            "bank grade pdf security",
             "private pdf protector", "client side pdf encryption", "secure financial documents", "protect legal pdfs"
         ],
         h1: "Password Protect PDF Free Online",
@@ -976,14 +975,14 @@ export const toolSeoData = {
         description: "Stamp text diagonally across every page of a PDF. Choose the wording, size, color and opacity. Free, no sign-up, and your file never leaves your browser.",
         keywords: [
             "watermark pdf", "add watermark to pdf", "pdf watermark online", "stamp pdf", "pdf branding",
-            "confidential stamp pdf", "draft watermark pdf", "opacity control pdf watermark", "permanent pdf watermark",
-            "batch watermark pdf free", "unremovable pdf stamp", "add logo to architectural pdf", "soft branding pdf"
+            "confidential stamp pdf", "draft watermark pdf", "opacity control pdf watermark", "text watermark pdf",
+            "diagonal watermark pdf", "soft branding pdf"
         ],
-        h1: "Watermark PDF - Permanent Branding & Stamps",
+        h1: "Watermark PDF - Add a Text Stamp to Every Page",
         faqs: [
             {
                 question: "Can these watermarks be easily deleted by others?",
-                answer: "Unlike basic tools that just add an overlay, Convertify can 'flatten' the watermark into the document's content layer. This makes it significantly harder to remove without specialized professional software."
+                answer: "Yes, by someone with a capable PDF editor. The text is drawn into each page's content, so it survives viewing, forwarding and printing, but it is not locked or encrypted. Treat it as a deterrent and a status mark, not a security control."
             },
             {
                 question: "Can I adjust the transparency (opacity) of the watermark?",
@@ -991,17 +990,17 @@ export const toolSeoData = {
             },
             {
                 question: "Can I upload my own company logo as a watermark?",
-                answer: "Absolutely. You can upload any JPG or PNG logo and position it exactly where you need it across all pages of your PDF."
+                answer: "Not yet. Only text watermarks are supported. You can type your company name as the watermark text instead."
             },
             {
                 question: "Is there a limit on file size for watermarking?",
-                answer: "No. Since we process your documents locally, you can watermark large architectural plans or long legal documents without waiting for slow uploads."
+                answer: "Each file can be up to 200 MB. Because the PDF is processed locally there is no upload wait; very large files are limited by your device's memory."
             }
         ],
         howToSteps: [
-            { name: "Upload", text: "Select the PDF file(s) you want to brand." },
-            { name: "Design", text: "Add text or logo, adjust opacity and rotation." },
-            { name: "Inject", text: "Apply the watermark permanently and download your file." }
+            { name: "Upload", text: "Select the PDF you want to watermark." },
+            { name: "Design", text: "Type your text, then set the font size, colour and opacity." },
+            { name: "Apply", text: "Click Add Watermark and download the stamped PDF." }
         ]
     },
     "html-to-pdf": {
@@ -1067,7 +1066,7 @@ export const toolSeoData = {
         keywords: [
             "reorder pdf pages", "rearrange pdf pages", "change pdf page order", "pdf page sorter online free",
             "move pdf pages around", "organize pdf pages online", "fix out of order pdf scans",
-            "reorder multiple pdf files into one", "visual pdf page organizer"
+            "visual pdf page organizer"
         ],
         h1: "Reorder PDF Pages",
         faqs: [
@@ -1082,13 +1081,13 @@ export const toolSeoData = {
         ],
         howToSteps: [
             { name: "Upload", text: "Select your PDF file and view all pages as thumbnails." },
-            { name: "Rearrange", text: "Drag and drop thumbnails to your preferred sequence." },
+            { name: "Rearrange", text: "Use the arrow buttons under each thumbnail to move pages into sequence." },
             { name: "Download", text: "Save your perfectly ordered PDF document." }
         ]
     },
     "svg-to-png": {
         title: "SVG to PNG Free — High-Quality Vector Export",
-        description: "Rasterize SVG files to PNG at any resolution. Transparency is preserved and you set the exact output size. Free, private, nothing uploaded.",
+        description: "Rasterize SVG files to PNG at their own size or a custom size up to 8192 px. Transparency is preserved. Free, private, nothing uploaded.",
         keywords: [
             "svg to png", "convert svg to png", "svg to png converter", "svg to png online free",
             "svg to png high resolution", "svg to png transparent background", "convert svg to png 1080p",
@@ -1100,7 +1099,7 @@ export const toolSeoData = {
         faqs: [
             {
                 question: "Can I set a custom resolution when converting SVG to PNG?",
-                answer: "Yes! You can specify exact pixel dimensions (width and height) or choose a scale multiplier (2x, 3x, 4x) to produce high-resolution PNG exports perfect for retina displays or print."
+                answer: "Yes. Tick 'Custom output dimensions' and enter a width and height in pixels (up to 8192 each). For a 2x or 3x export, multiply the SVG's size yourself; keep the two numbers in proportion so the drawing isn't squeezed."
             },
             {
                 question: "Will my SVG transparency be preserved in the PNG?",
@@ -1108,12 +1107,12 @@ export const toolSeoData = {
             },
             {
                 question: "Is there a file size or complexity limit for SVGs?",
-                answer: "No. Since conversion happens entirely in your browser, there are no server-imposed limits. Even complex SVGs with gradients, filters, and embedded fonts convert smoothly."
+                answer: "Each file can be up to 200 MB. Gradients and filters render as your browser draws them. An SVG drawn as an image can't load external files, so fonts or images linked by URL fall back or go missing; embed them in the SVG first."
             }
         ],
         howToSteps: [
             { name: "Upload SVG", text: "Select or drag and drop your SVG file into the converter." },
-            { name: "Set Options", text: "Choose your desired resolution, scale, and transparency settings." },
+            { name: "Set Size", text: "Keep the SVG's own size, or set a custom width and height in pixels." },
             { name: "Download PNG", text: "Click convert and save your high-quality PNG image instantly." }
         ]
     },
@@ -1135,7 +1134,7 @@ export const toolSeoData = {
             },
             {
                 question: "Can I control the JPG compression quality?",
-                answer: "Yes. Use the quality slider to balance file size and image clarity. Higher quality (80-100%) keeps more detail, while lower quality (40-60%) produces much smaller files."
+                answer: "Yes. The quality slider runs from 70% to 100%. Higher settings (90-100%) keep more detail; the lower end produces noticeably smaller files."
             },
             {
                 question: "Will the image dimensions change during conversion?",
@@ -1143,7 +1142,7 @@ export const toolSeoData = {
             },
             {
                 question: "Can I convert multiple BMP files at once?",
-                answer: "Yes, Convertify supports batch conversion. Drop all your BMP files at once and download them individually or as a ZIP archive."
+                answer: "Yes, Convertify supports batch conversion. Drop all your BMP files at once; one file downloads as a JPG, several download together as a ZIP archive."
             }
         ],
         howToSteps: [
@@ -1166,11 +1165,11 @@ export const toolSeoData = {
         faqs: [
             {
                 question: "Can I extract individual frames from an animated GIF?",
-                answer: "Yes. Upload your animated GIF and choose \"Every frame\": each frame is exported as its own numbered PNG and the set downloads as a ZIP. Leave it on \"First frame only\" to get a single PNG."
+                answer: "Yes. Upload your animated GIF and choose \"Every frame\": each frame (up to 500) is exported as its own numbered PNG and the set downloads as a ZIP. Leave it on \"First frame only\" to get a single PNG."
             },
             {
                 question: "Is the PNG output lossless compared to the GIF?",
-                answer: "Yes. PNG is a lossless format, so converting from GIF preserves every pixel exactly. You may even get better quality since PNG supports millions of colors versus GIF's 256-color limit."
+                answer: "Yes. PNG is a lossless format, so converting from GIF preserves every pixel exactly. The colours stay the same as in the GIF; conversion doesn't add detail the GIF's 256-colour palette never had."
             },
             {
                 question: "Will transparency be preserved when converting GIF to PNG?",
@@ -1205,7 +1204,7 @@ export const toolSeoData = {
             },
             {
                 question: "Will the image quality be reduced during conversion?",
-                answer: "No. Convertify embeds your TIFF images into the PDF at their original resolution and quality. There is no recompression or downsampling applied by default."
+                answer: "No. Each TIFF page is embedded at its original pixel size and re-encoded losslessly as PNG, so nothing is downsampled. CMYK and 16-bit TIFFs are converted to standard 8-bit RGB along the way."
             },
             {
                 question: "Is this suitable for converting scanned documents?",
@@ -1214,29 +1213,29 @@ export const toolSeoData = {
         ],
         howToSteps: [
             { name: "Upload TIFF", text: "Select one or more TIFF files from your device." },
-            { name: "Arrange Pages", text: "Reorder pages or files if needed using drag and drop." },
+            { name: "Check the List", text: "Files are combined in the order shown; remove any you don't need, or untick Combine for one PDF per file." },
             { name: "Download PDF", text: "Click convert and save your multi-page PDF document." }
         ]
     },
     "csv-to-json": {
         title: "CSV to JSON Free Online — Instant Converter",
-        description: "Convert CSV rows to clean JSON in your browser. Auto-detects the header row and handles quoted fields. Free, instant, nothing uploaded.",
+        description: "Convert CSV rows to clean JSON in your browser. Uses the first row as keys, detects the delimiter and handles quoted fields. Free, nothing uploaded.",
         keywords: [
             "csv to json", "convert csv to json", "csv to json converter", "csv to json online free",
             "csv to json array", "csv to json with headers", "csv file to json format",
             "spreadsheet to json", "csv to json api ready", "bulk csv to json converter",
-            "csv to nested json", "csv to json no upload", "convert csv data to json object",
+            "csv to json no upload", "convert csv data to json object",
             "csv to json formatter", "csv export to json free"
         ],
         h1: "CSV to JSON Converter - Clean Data Transformation Free Online",
         faqs: [
             {
                 question: "How are CSV headers handled in the JSON output?",
-                answer: "Convertify uses the first row of your CSV as JSON property names by default. Each subsequent row becomes a JSON object with those keys, producing a clean array of objects ready for APIs or databases."
+                answer: "Convertify uses the first row of your CSV as JSON property names. Each subsequent row becomes a JSON object with those keys, producing a clean array of objects. Values are kept as strings, exactly as they appear in the CSV."
             },
             {
                 question: "Can I convert CSV without headers?",
-                answer: "Yes. Toggle off the 'First row is headers' option and Convertify will use numeric indices (field_0, field_1, etc.) or let you define custom property names for each column."
+                answer: "Not directly: the first row is always used as the property names. Add a header row to the top of your data (for example name,email,phone) before converting."
             },
             {
                 question: "Does it handle special characters and commas inside fields?",
@@ -1244,12 +1243,12 @@ export const toolSeoData = {
             },
             {
                 question: "Is there a row or file size limit?",
-                answer: "No hard limits. Since processing happens in your browser, you can convert large CSV files with hundreds of thousands of rows. Performance depends on your device's memory."
+                answer: "Uploaded files can be up to 200 MB, and there is no row limit. Since processing happens in your browser, very large files depend on your device's memory."
             }
         ],
         howToSteps: [
             { name: "Upload CSV", text: "Paste your CSV data or upload a .csv file." },
-            { name: "Configure", text: "Set header options, delimiter type, and output format preferences." },
+            { name: "Convert", text: "Click Convert to JSON; the delimiter (comma, semicolon, tab or pipe) is detected automatically." },
             { name: "Download JSON", text: "Copy the JSON output or download it as a .json file." }
         ]
     },
@@ -1271,16 +1270,16 @@ export const toolSeoData = {
             },
             {
                 question: "What JSON structures are supported?",
-                answer: "Convertify handles arrays of objects (most common), single objects, and deeply nested structures. It auto-detects the data shape and produces the most logical tabular layout."
+                answer: "An array of objects (one row per object) or a single object (one row). Nested objects are flattened into dot-notation columns, and an array inside a record is written into one cell as JSON text."
             },
             {
                 question: "Can I choose which fields to include in the CSV?",
-                answer: "Yes. After uploading your JSON, you can select or deselect specific fields to include in the output. This is useful for large JSON files where you only need certain columns."
+                answer: "No. Every key found in any record becomes a column. Delete the columns you don't need in Excel or Google Sheets afterwards."
             }
         ],
         howToSteps: [
             { name: "Upload JSON", text: "Paste your JSON data or upload a .json file." },
-            { name: "Select Fields", text: "Choose which fields to include and set flattening options." },
+            { name: "Choose Separator", text: "Pick comma, semicolon, tab (TSV) or pipe as the separator." },
             { name: "Download CSV", text: "Export your clean CSV file for use in any spreadsheet app." }
         ]
     },
@@ -1298,11 +1297,11 @@ export const toolSeoData = {
         faqs: [
             {
                 question: "How are XML attributes represented in the JSON output?",
-                answer: "XML attributes are converted to JSON properties prefixed with '@' by default (e.g., @id, @class). You can customize this prefix or flatten attributes alongside child elements."
+                answer: "XML attributes become JSON properties prefixed with '@' (e.g., @id, @class), and an element's text sits under '#text' when it also has attributes or children. The convention is fixed."
             },
             {
                 question: "Does it handle XML namespaces correctly?",
-                answer: "Yes. Namespace prefixes are preserved in property names by default. You can also choose to strip namespaces for cleaner output if your use case doesn't require them."
+                answer: "Namespace prefixes are kept as part of the property names (e.g., 'ns0:item'). There is no option to strip them; remove them afterwards if you don't need them."
             },
             {
                 question: "Can I convert large XML files?",
@@ -1315,7 +1314,7 @@ export const toolSeoData = {
         ],
         howToSteps: [
             { name: "Upload XML", text: "Paste your XML content or upload an .xml file." },
-            { name: "Configure", text: "Set options for attribute handling, namespaces, and formatting." },
+            { name: "Convert", text: "Click convert; invalid XML is reported instead of converted." },
             { name: "Download JSON", text: "Copy or download the converted JSON output." }
         ]
     },
@@ -1324,39 +1323,39 @@ export const toolSeoData = {
         description: "Turn Markdown into a styled PDF. Supports headings, lists, links, bold, italic, quotes and code blocks. Free, private, no sign-up needed.",
         keywords: [
             "markdown to pdf", "convert markdown to pdf", "markdown to pdf converter", "md to pdf online free",
-            "markdown to pdf styled", "github markdown to pdf", "markdown to pdf with code highlighting",
-            "md to pdf converter online", "markdown to pdf free", "markdown to pdf custom theme",
-            "convert md file to pdf", "markdown to pdf tables", "markdown export pdf",
-            "markdown to pdf no install", "markdown to pdf syntax highlighting"
+            "markdown to pdf styled", "github markdown to pdf", "readme to pdf",
+            "md to pdf converter online", "markdown to pdf free",
+            "convert md file to pdf", "markdown export pdf",
+            "markdown to pdf no install"
         ],
         h1: "Markdown to PDF Converter - Beautiful Documents Free Online",
         faqs: [
             {
                 question: "Does it support GitHub-Flavored Markdown (GFM)?",
-                answer: "Yes! Convertify fully supports GFM including task lists, tables, strikethrough, autolinks, and fenced code blocks with syntax highlighting for over 100 programming languages."
+                answer: "Only the everyday parts: headings, bold, italic, links, lists, blockquotes, horizontal rules, inline code and fenced code blocks. Tables, task lists, strikethrough and syntax highlighting are not supported, and numbered lists print as bullets."
             },
             {
                 question: "Can I customize the PDF styling?",
-                answer: "Absolutely. Choose from several built-in themes (light, dark, academic, minimal) or adjust fonts, margins, and page size. You can also add custom CSS for full control over the output."
+                answer: "No. There is one clean built-in style. Page size and margins come from your browser's print dialog, which is where the PDF is saved."
             },
             {
                 question: "Are images and diagrams included in the PDF?",
-                answer: "Yes. Inline images, linked images, and even Mermaid diagrams (if supported in your Markdown) are rendered and embedded directly into the PDF output."
+                answer: "No. Image syntax comes out as a link to the image, and Mermaid diagrams appear as plain code blocks. Add images to the PDF afterwards if you need them."
             },
             {
-                question: "Can I add a table of contents to the PDF?",
-                answer: "Yes. Enable the Table of Contents option and Convertify will automatically generate one based on your heading structure (H1, H2, H3, etc.) with clickable page links."
+                question: "How do I save the file as a PDF?",
+                answer: "Click Download PDF. Your browser's print window opens with the styled document; choose 'Save as PDF' as the destination."
             }
         ],
         howToSteps: [
             { name: "Upload Markdown", text: "Paste your Markdown text or upload a .md file." },
-            { name: "Choose Theme", text: "Select a visual theme and adjust page layout settings." },
-            { name: "Download PDF", text: "Export your beautifully formatted PDF document." }
+            { name: "Check Preview", text: "Check the live preview beside the editor." },
+            { name: "Save as PDF", text: "Click Download PDF, then choose 'Save as PDF' in the print window." }
         ]
     },
     "base64": {
         title: "Base64 Encode & Decode Free Online",
-        description: "Encode text or files to Base64 and decode Base64 strings back to the original. Works with text, images and binary files. Free and fully private.",
+        description: "Encode text or any file (images, PDFs, binaries) to Base64, and decode Base64 back to readable text. Free, instant and fully private.",
         keywords: [
             "base64 encoder", "base64 decoder", "base64 encode online", "base64 decode online",
             "base64 converter", "encode to base64", "decode base64 string", "base64 image encoder",
@@ -1385,7 +1384,7 @@ export const toolSeoData = {
         howToSteps: [
             { name: "Input Data", text: "Paste text or upload a file you want to encode or decode." },
             { name: "Choose Mode", text: "Select Encode (to Base64) or Decode (from Base64)." },
-            { name: "Get Result", text: "Copy the output or download the decoded file instantly." }
+            { name: "Get Result", text: "Copy the output with one click." }
         ]
     },
     "qr-code-generator": {
@@ -1446,15 +1445,15 @@ export const toolSeoData = {
             },
             {
                 question: "Will the edited PDF still open correctly when I send it to my boss or client?",
-                answer: "Yes. The output is a standard PDF that opens identically in Adobe Acrobat, Foxit, browser viewers, and re-imports cleanly into AutoCAD via PDFIMPORT. We preserve every other vector element on the page — only the edited text region is replaced."
+                answer: "Yes. The output is a standard PDF that opens in Adobe Acrobat, Foxit and browser viewers. Everything outside the edited text is left as it was. Stroke (SHX) text is hidden under a small white box before the new text is written, so a line passing through that box is covered too. If you plan to re-import into AutoCAD with PDFIMPORT, tick AutoCAD-friendly mode, which skips the white box (old and new text then overlap in normal viewers)."
             },
             {
                 question: "Will the replacement text look exactly like the original SHX strokes?",
-                answer: "Position, size, and placement are matched exactly using the original cluster's bounding box. The visual style is very close — we use a CAD-style font that mimics the thin single-stroke SHX aesthetic. Dimension numbers, labels, and callouts are visually indistinguishable from the original to the naked eye."
+                answer: "Not exactly. Position and size are matched to the original text, but the replacement is set in black Helvetica, not a thin single-stroke CAD font. At normal viewing size a changed dimension or label reads naturally; zoomed in, the different font is visible."
             },
             {
                 question: "What if my PDF was exported using TrueType fonts instead of SHX?",
-                answer: "If your AutoCAD drawing uses TrueType fonts (Arial, Calibri, etc.), the PDF will contain real selectable text that any standard PDF editor can handle. We detect this on upload and direct you to our general PDF editor in that case."
+                answer: "That works too. TrueType text (Arial, Calibri, etc.) is stored as real text, which the editor finds directly. When you replace it, the original text is removed from the page where that can be done safely and the new text is written at the same baseline and size."
             },
             {
                 question: "Does this work for multi-page architectural drawing sets?",
@@ -1468,7 +1467,7 @@ export const toolSeoData = {
         howToSteps: [
             { name: "Upload AutoCAD PDF", text: "Drag and drop your AutoCAD-exported PDF file. We'll automatically detect SHX vector text." },
             { name: "Click to Edit Text", text: "We highlight every editable text region. Click any region to type a replacement." },
-            { name: "Download Updated PDF", text: "Export your edited PDF instantly. The file opens identically in any PDF viewer or AutoCAD." }
+            { name: "Download Updated PDF", text: "Export your edited PDF instantly. Tick AutoCAD-friendly mode first if you'll re-import it into AutoCAD." }
         ]
     }
 }

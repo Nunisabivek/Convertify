@@ -106,7 +106,7 @@ export default function Page() {
 
             <HowToSchema
                 toolName="Convert Word to PDF"
-                description="Learn how to convert Word documents to PDF using Convertify's free online DOC to PDF converter."
+                description="Learn how to convert Word documents to PDF using Convertify's free online DOCX to PDF converter."
                 steps={seoData.howToSteps}
             />
 
