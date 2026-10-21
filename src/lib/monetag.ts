@@ -9,9 +9,16 @@ import { IS_MOBILE_BUILD } from '@/lib/is-mobile-build'
  * card loads after a short read. No popunder, push-notification, interstitial or MultiTag
  * formats: they hijack clicks or cover the page, which costs search traffic.
  */
-const TAG = 'https://nap5k.com/tag.min.js'
-const IN_PAGE_PUSH_ZONE = '12092107'
-const VIGNETTE_ZONE = '12092108'
+// Zones from the Monetag dashboard. In-Page Push comes as a regular ("particular") and a
+// "strong" tag; the Vignette as "happy" and "hot". Hot (zone 12092188, same script) is left out
+// to keep the milder feed; swap it into vignetteHappy's place to try it.
+const IN_PAGE_PUSH = 'https://nap5k.com/tag.min.js'
+const VIGNETTE = 'https://n6wxm.com/vignette.min.js'
+const ZONES = {
+    pushRegular: { zone: '12092108', src: IN_PAGE_PUSH }, // content pages, no work in progress
+    pushStrong: { zone: '12092107', src: IN_PAGE_PUSH }, // after a download: the work is done
+    vignetteHappy: { zone: '12092189', src: VIGNETTE }, // after a download, shows on the next page change
+}
 const CONTENT_PAGE_DELAY_MS = 8000
 // Let the browser's save prompt finish before anything appears.
 const AFTER_DOWNLOAD_DELAY_MS = 1500
@@ -22,19 +29,20 @@ const isContentPage = (path: string) => CONTENT_PAGES.includes(path) || path.sta
 const loaded = new Set<string>()
 let hooked = false
 
-function loadZone(zone: string) {
+function loadZone({ zone, src }: { zone: string; src: string }) {
     if (loaded.has(zone)) return
     loaded.add(zone)
     const s = document.createElement('script')
     s.dataset.zone = zone
-    s.src = TAG
+    s.src = src
     document.body.appendChild(s)
 }
 
 function afterWork() {
     setTimeout(() => {
-        loadZone(IN_PAGE_PUSH_ZONE)
-        loadZone(VIGNETTE_ZONE)
+        // One In-Page Push tag per page: the strong one replaces the regular one, never stacks on it.
+        if (!loaded.has(ZONES.pushRegular.zone)) loadZone(ZONES.pushStrong)
+        loadZone(ZONES.vignetteHappy)
     }, AFTER_DOWNLOAD_DELAY_MS)
 }
 
@@ -68,6 +76,8 @@ export function startMonetag(pathname: string): () => void {
     if (IS_MOBILE_BUILD || typeof window === 'undefined') return () => {}
     watchDownloads()
     if (!isContentPage(pathname)) return () => {}
-    const t = setTimeout(() => loadZone(IN_PAGE_PUSH_ZONE), CONTENT_PAGE_DELAY_MS)
+    const t = setTimeout(() => {
+        if (!loaded.has(ZONES.pushStrong.zone)) loadZone(ZONES.pushRegular)
+    }, CONTENT_PAGE_DELAY_MS)
     return () => clearTimeout(t)
 }

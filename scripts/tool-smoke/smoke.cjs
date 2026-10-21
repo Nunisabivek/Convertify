@@ -178,7 +178,7 @@ function browserPath() {
   const browser = await chromium.launch({ executablePath: browserPath(), headless: true })
   const ctx = await browser.newContext({ viewport: { width: 1366, height: 900 }, acceptDownloads: true })
   // Ad and analytics hosts are blocked; ad <script> tags still appear, which is how the ad timing is checked.
-  await ctx.route(/nap5k|rtmark|jhnwr|3nbf4|googletagmanager|google-analytics|googlesyndication|doubleclick/, (r) => r.abort())
+  await ctx.route(/nap5k|n6wxm|rtmark|jhnwr|3nbf4|googletagmanager|google-analytics|googlesyndication|doubleclick/, (r) => r.abort())
   const report = {}
   for (const [id, files, expect] of T) {
     if (ONLY && !ONLY.includes(id)) continue
