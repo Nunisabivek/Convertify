@@ -2,6 +2,7 @@
 
 import { useEffect } from "react"
 import { usePathname } from "next/navigation"
+import { ADSENSE_CLIENT } from "@/lib/adsense"
 
 // Build-time flag: true when building the Capacitor Android app (npm run build:mobile)
 // All ad components return null so zero ad code is bundled into the app.
@@ -10,9 +11,8 @@ const IS_MOBILE_BUILD = process.env.NEXT_PUBLIC_MOBILE_BUILD === 'true'
 // Website ads are Monetag (src/lib/monetag.ts): formats that need no slot and load only after
 // the visitor's file is saved. These in-page slots therefore render nothing, but stay wired
 // for Google AdSense: set NEXT_PUBLIC_ADSENSE_CLIENT and the slot ids and every slot fills.
-const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT
-/** False while no slot can fill: wrappers that draw a box around a slot should render nothing. */
-export const AD_SLOTS_ON = !IS_MOBILE_BUILD && Boolean(ADSENSE_CLIENT)
+/** False while no slot can fill: wrappers that draw a box around a slot should render nothing. Auto ads need no slots. */
+export const AD_SLOTS_ON = !IS_MOBILE_BUILD && Boolean(process.env.NEXT_PUBLIC_ADSENSE_SLOT_RECTANGLE)
 const SLOTS = {
     rectangle: { slot: process.env.NEXT_PUBLIC_ADSENSE_SLOT_RECTANGLE, width: 300, height: 250 },
     "mobile-banner": { slot: process.env.NEXT_PUBLIC_ADSENSE_SLOT_MOBILE, width: 320, height: 50 },

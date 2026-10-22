@@ -138,11 +138,21 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-xl font-semibold text-slate-900">4. Advertising</h2>
             <p className="mt-3">
-              <strong>Website (current).</strong> The website shows third-party display
-              ads from Monetag. They load only after you have saved a converted file
-              (and on blog and information pages after a few seconds), and may use
-              cookies and similar technologies to serve and measure ads. We do not
-              control how Monetag sets cookies.
+              <strong>Website (current).</strong> The website shows ads from Google
+              AdSense and from Monetag. Monetag ads load only after you have saved a
+              converted file (and on blog and information pages after a few seconds).
+              Both may use cookies and similar technologies to serve and measure ads.
+              We do not control how these vendors set cookies.
+            </p>
+            <p className="mt-3">
+              Third-party vendors, including Google, use cookies to serve ads based on
+              your prior visits to this website or other websites. Google&apos;s use of
+              advertising cookies enables it and its partners to serve ads to you based
+              on your visits to this site and/or other sites on the Internet. You can opt
+              out of personalized advertising in{" "}
+              <a href="https://adssettings.google.com" className="text-blue-600 underline" rel="noopener noreferrer" target="_blank">Google Ads Settings</a>,
+              and out of many third-party vendors&apos; personalized ads at{" "}
+              <a href="https://www.aboutads.info/choices/" className="text-blue-600 underline" rel="noopener noreferrer" target="_blank">aboutads.info</a>.
             </p>
             <p className="mt-3">
               <strong>Android app (current version).</strong> The Android app shows
@@ -171,7 +181,7 @@ export default function PrivacyPolicyPage() {
             </p>
             <p className="mt-3">
               <strong>Cookies on the website.</strong> The website may set cookies or
-              allow third parties (Google Analytics and Monetag) to set cookies or
+              allow third parties (Google Analytics, Google AdSense and Monetag) to set cookies or
               similar storage. You can block or delete cookies in your browser
               settings. Doing so may affect ads or measurement on the website.
             </p>

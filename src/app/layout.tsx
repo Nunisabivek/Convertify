@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import AppShell from "@/components/layout/AppShell";
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build";
+import { ADSENSE_CLIENT } from "@/lib/adsense";
 
 // Google Analytics Measurement ID
 const GA_MEASUREMENT_ID = "G-57C0PG4LK6";
@@ -158,6 +159,15 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
+        {/* Google AdSense (Auto ads). In the server HTML <head>, where AdSense's site review looks for it;
+            a next/script afterInteractive tag only appears after hydration. */}
+        {!IS_MOBILE_BUILD && (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+            crossOrigin="anonymous"
+          />
+        )}
       </head>
       {!IS_MOBILE_BUILD && (
         <>
@@ -177,16 +187,6 @@ export default function RootLayout({
           });
         `}
       </Script>
-      {/* Google AdSense */}
-      {process.env.NEXT_PUBLIC_ADSENSE_CLIENT && (
-        <Script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT}`}
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-          id="google-adsense"
-        />
-      )}
         </>
       )}
       <body
