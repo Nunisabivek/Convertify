@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         url: "https://convertify.work/png-to-pdf",
         siteName: "Convertify",
         type: "website",
-        images: [{ url: "https://convertify.work/images/og-banner.png", width: 1200, height: 630, alt: "PNG to PDF Converter — Combine Multiple, No Upload" }],
+        images: [{ url: "https://convertify.work/images/og-banner.png", width: 1200, height: 630, alt: "PNG to PDF — Combine PNGs into One PDF, Free, No Upload" }],
     },
     twitter: {
         card: "summary_large_image",

@@ -262,8 +262,8 @@ export const toolSeoData = {
         ]
     },
     "png-to-pdf": {
-        title: "PNG to PDF Converter — Combine Multiple, No Upload",
-        description: "Combine multiple PNG images into one PDF. Drag to set the page order, no watermark, nothing uploaded. Free PNG to PDF converter for screenshots and exports.",
+        title: "PNG to PDF — Combine PNGs into One PDF, Free, No Upload",
+        description: "Combine multiple PNG images into one PDF: drag to set the order, keep each page's size or fit to A4. Free, no watermark, nothing uploaded.",
         keywords: [
             "png to pdf", "png to pdf converter", "convert png to pdf", "png to pdf free",
             "combine png to pdf", "merge png to pdf", "multiple png to pdf", "png to pdf hd",
