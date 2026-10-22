@@ -203,7 +203,7 @@ Our **Convertify JPG to PDF converter** is the fastest and easiest way to conver
 ### Why Convertify is the Best Choice:
 * ✅ Converts multiple images at once
 * ✅ Preserves original image quality
-* ✅ No file size limits
+* ✅ Files up to 200 MB
 * ✅ Works on all devices including phones
 * ✅ No watermarks ever
 
@@ -253,7 +253,7 @@ Ready to turn your images into a PDF? [Open the JPG to PDF tool](/jpg-to-pdf) an
 `,
     faqs: [
       { question: "Can I convert PNG images too?", answer: "Yes! Our tool supports JPG, PNG, GIF, BMP, and WebP formats." },
-      { question: "Is there a limit on image file size?", answer: "No, there's no file size limit for individual images or total upload." },
+      { question: "Is there a limit on image file size?", answer: "Each image can be up to 200 MB. Nothing is uploaded; very large batches are limited only by your device's memory." },
     ]
   },
 
@@ -1250,7 +1250,7 @@ Convertify processes files entirely in your browser. Your PDFs never upload to a
 There's no limit - merge as many files as you need.
 
 **Q: What's the maximum file size?**
-There's no file size limit. Large files may take a few seconds longer to process.
+Each file can be up to 200 MB. Large files may take a few seconds longer to process.
 
 ## Start Merging Now
 
@@ -2102,7 +2102,7 @@ Once you've merged your PDFs, you might also need:
 No! Convertify works directly in your phone's browser. No app installation needed.
 
 **Q: Is there a file size limit?**
-No file size limits. You can merge large PDFs without restrictions.
+Each file can be up to 200 MB, and there is no limit on how many files you merge.
 
 **Q: Does it work without internet?**
 You need an internet connection to access the tool, but file processing is fast.
@@ -2238,7 +2238,7 @@ If you already have separate PDF files from scanning:
 
 [Convertify's PDF tools](/merge-pdf) are perfect for handling scanned documents:
 
-✅ **No file size limits** - Combine large scanned files without restrictions
+✅ **Files up to 200 MB each** - large scanned files are fine
 ✅ **Preserve quality** - Scans maintain their original resolution
 ✅ **Unlimited pages** - Merge documents with hundreds of pages
 ✅ **No watermarks** - Professional, clean output
@@ -2760,19 +2760,17 @@ For **lossless or near-lossless compression**, select:
 - Quick email sharing
 - Web publishing where speed matters
 
-## Convertify vs. Other PDF Compressors
+## How Convertify's Compressor Works
 
-| Feature | Convertify | Adobe Acrobat | SmallPDF | iLovePDF |
-|---------|------------|---------------|----------|----------|
-| **Price** | 100% Free | $19.99/mo | Free (2 files/day) | Free (limited) |
-| **Quality Control** | 3 levels | Advanced | Basic | Basic |
-| **Offline Processing** | ✅ Yes | ❌ No | ❌ No | ❌ No |
-| **No File Size Limit** | ✅ Yes | ✅ Yes | ❌ Max 5MB free | ❌ Limited |
-| **Privacy** | 100% (client-side) | High | Medium | Medium |
-| **Batch Processing** | ✅ Yes | ✅ Yes | ❌ Paid only | ❌ Limited |
-| **Speed** | Instant | Fast | Moderate | Moderate |
+| | Convertify |
+|---|---|
+| **Price** | Free, no sign-up, no watermark |
+| **Where the file goes** | Nowhere: it is compressed in your browser |
+| **File size** | Up to 200 MB per file |
+| **Control** | A target size (for example 100 KB or 500 KB), or manual quality and resolution |
+| **Text in the result** | Compressed pages are re-drawn as images, so their text can't be selected |
 
-**Why Convertify wins:** We process everything in your browser using WebAssembly, meaning **zero server uploads**, **unlimited file sizes**, and **instant results** - all completely free.
+**The trade-off to know:** hitting a small target means turning pages into images. If your PDF is already under the target, Convertify gives you the original file back untouched, so you keep selectable text.
 
 ## Advanced Pro Tips to Reduce PDF Size Without Quality Loss
 

@@ -49,7 +49,7 @@ export function SoftwareApplicationSchema({
         },
         "featureList": [
             "100% Free - No sign-up required",
-            "No file size limits",
+            "Files up to 200 MB",
             "No watermarks added",
             "100% client-side processing - files never leave your browser",
             "Works on all devices and browsers",

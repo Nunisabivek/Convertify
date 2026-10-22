@@ -1,6 +1,5 @@
 import { toolDeepGuides } from "@/lib/tool-deep-guides"
-
-const ACRONYMS = new Set(["pdf", "png", "jpg", "jpeg", "html", "heic", "svg", "bmp", "gif", "csv", "json", "xml", "qr", "ocr", "tiff", "webp"])
+import { toolLabel } from "@/lib/tool-label"
 
 interface ToolDeepGuideProps {
     toolSlug: string
@@ -15,10 +14,7 @@ export function ToolDeepGuide({ toolSlug, toolName }: ToolDeepGuideProps) {
     const guide = toolDeepGuides[toolSlug]
     if (!guide) return null
 
-    // "png-to-pdf" -> "PNG to PDF", not "Png To Pdf": format names are acronyms
-    const resolvedToolName = toolName || toolSlug.split("-").map(w =>
-        ACRONYMS.has(w) ? w.toUpperCase() : w === "to" ? w : w.charAt(0).toUpperCase() + w.slice(1)
-    ).join(" ")
+    const resolvedToolName = toolName || toolLabel(toolSlug)
     const { intro, steps, scenarios, troubleshooting, comparison, lastUpdated } = guide
     const updatedHuman = new Date(lastUpdated).toLocaleDateString("en-US", {
         year: "numeric",

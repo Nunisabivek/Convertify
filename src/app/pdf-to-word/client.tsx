@@ -213,7 +213,7 @@ export default function PdfToWordClient() {
                     </li>
                     <li className="flex items-start gap-2">
                         <span className="text-blue-600 font-bold">•</span>
-                        <span>100% free with no file size limits</span>
+                        <span>100% free, files up to 200 MB</span>
                     </li>
                     <li className="flex items-start gap-2">
                         <span className="text-blue-600 font-bold">•</span>

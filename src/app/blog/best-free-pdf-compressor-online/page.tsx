@@ -127,7 +127,7 @@ export default function BlogPost() {
                         <ul className="space-y-2 text-slate-700">
                             <li>✅ <strong>High compression ratio</strong> — 70-90% size reduction</li>
                             <li>✅ <strong>Quality preservation</strong> — Text remains sharp and readable</li>
-                            <li>✅ <strong>No file size limits</strong> — Compress large PDFs without restrictions</li>
+                            <li>✅ <strong>Files up to 200 MB</strong> — large scans and reports are fine</li>
                             <li>✅ <strong>No watermarks</strong> — Clean, professional output</li>
                             <li>✅ <strong>Privacy-focused</strong> — Local browser processing</li>
                             <li>✅ <strong>Custom compression levels</strong> — Control size vs quality trade-off</li>
@@ -145,7 +145,7 @@ export default function BlogPost() {
                     <h3 className="text-xl font-semibold text-slate-800 mt-6 mb-3">Step 1: Upload Your PDF</h3>
                     <p>
                         Go to <a href="/compress-pdf" className="text-indigo-600 hover:underline">convertify.work/compress-pdf</a> and upload your file.
-                        You can drag and drop or click to select. There's no file size limit.
+                        You can drag and drop or click to select. Files can be up to 200 MB.
                     </p>
 
                     <h3 className="text-xl font-semibold text-slate-800 mt-6 mb-3">Step 2: Choose Compression Level</h3>

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { BlogPostSchema } from "@/components/seo/blog-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
 import { AuthorByline } from "@/components/seo/author-byline"
+import { toolLabel } from "@/lib/tool-label"
 import { ArrowLeft, Tag } from "lucide-react"
 
 type Props = {
@@ -186,7 +187,7 @@ export default async function BlogPostPage({ params }: Props) {
                     </p>
                     <Button size="lg" variant="secondary" asChild className="bg-white text-indigo-600 hover:bg-indigo-50">
                         <Link href={post.relatedTool}>
-                            Try {post.relatedTool.replace('/', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())} Tool &rarr;
+                            Try {toolLabel(post.relatedTool)} Tool &rarr;
                         </Link>
                     </Button>
                 </section>
