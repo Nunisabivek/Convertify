@@ -1,8 +1,6 @@
 "use client"
 import { loadPdfjs } from "@/lib/pdfjs"
 import { useState } from "react"
-import { PDFDocument, degrees } from "pdf-lib"
-import { loadPdf } from "@/lib/pdf-password"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
@@ -95,6 +93,9 @@ export default function OrganizePdfClient() {
     }
 
     const savePdf = async () => {
+        // Loaded on use, not with the page: pdf-lib is ~400 KB of JavaScript.
+        const { PDFDocument, degrees } = await import("pdf-lib")
+        const { loadPdf } = await import("@/lib/pdf-password")
         if (!file || pages.length === 0) return
         setIsGenerating(true)
 

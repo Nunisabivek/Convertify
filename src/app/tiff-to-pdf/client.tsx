@@ -1,10 +1,10 @@
 "use client"
 
 import { useState } from "react"
+import type { PDFDocument } from "pdf-lib"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { Download, Loader2, X } from "lucide-react"
-import { PDFDocument } from "pdf-lib"
 import { iterateTiffPages } from "@/lib/tiff-pages"
 import { nameFromSources } from "@/lib/human-filename"
 
@@ -70,6 +70,8 @@ export default function TiffToPdfClient() {
     }
 
     const convertFiles = async () => {
+        // Loaded on use, not with the page: pdf-lib is ~400 KB of JavaScript.
+        const { PDFDocument } = await import("pdf-lib")
         setIsProcessing(true)
         setError(null)
         const results: ConvertedFile[] = []

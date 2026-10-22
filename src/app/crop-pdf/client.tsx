@@ -2,7 +2,6 @@
 
 import { loadPdfjs } from "@/lib/pdfjs"
 import { useState, useRef } from "react"
-import { loadPdf as openPdfForEdit } from "@/lib/pdf-password"
 import { visualFrame, visualRectToPage } from "@/lib/page-frame"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
@@ -119,6 +118,8 @@ export default function CropPdfClient() {
 
         try {
             const buffer = await file.arrayBuffer()
+            // Loaded on use, not with the page: pdf-lib is ~400 KB of JavaScript.
+            const { loadPdf: openPdfForEdit } = await import("@/lib/pdf-password")
             const pdfDoc = await openPdfForEdit(buffer, file.name)
             const pages = pdfDoc.getPages()
 

@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useRef, useEffect, useCallback } from "react"
-import { PDFDocument } from "pdf-lib"
 import { loadPdfjs } from "@/lib/pdfjs"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import { finishConvert } from "@/lib/native-file"
@@ -876,6 +875,8 @@ export default function OcrPdfClient() {
 
     // Generate PDF from all scanned pages
     const handleExportPdf = async () => {
+        // Loaded on use, not with the page: pdf-lib is ~400 KB of JavaScript.
+        const { PDFDocument } = await import("pdf-lib")
         if (pages.length === 0) return
         void tapHaptic("medium")
         setIsProcessing(true)

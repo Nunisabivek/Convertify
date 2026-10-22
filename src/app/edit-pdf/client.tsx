@@ -2,8 +2,6 @@
 
 import { loadPdfjs } from "@/lib/pdfjs"
 import { useState, useRef, useEffect } from "react"
-import { rgb, StandardFonts } from "pdf-lib"
-import { loadPdf } from "@/lib/pdf-password"
 import { toWinAnsi } from "@/lib/sheet-layout"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
@@ -295,6 +293,9 @@ export default function EditPdfClient() {
 
     // Export with pdf-lib
     const handleSaveAndExport = async () => {
+        // Loaded on use, not with the page: pdf-lib is ~400 KB of JavaScript.
+        const { rgb, StandardFonts } = await import("pdf-lib")
+        const { loadPdf } = await import("@/lib/pdf-password")
         if (!file) return
         setIsProcessing(true)
 
