@@ -58,7 +58,7 @@ export default function Page() {
                 items={[
                     { name: "Home", url: "/" },
                     { name: "All Tools", url: "/all-tools" },
-                    { name: "Jpg To Pdf", url: "/jpg-to-pdf" }
+                    { name: "JPG to PDF", url: "/jpg-to-pdf" }
                 ]}
             />
             <SoftwareApplicationSchema

@@ -31,7 +31,7 @@ export default function Page() {
                 items={[
                     { name: "Home", url: "/" },
                     { name: "All Tools", url: "/all-tools" },
-                    { name: "Html To Pdf", url: "/html-to-pdf" }
+                    { name: "HTML to PDF", url: "/html-to-pdf" }
                 ]}
             />
             <SoftwareApplicationSchema

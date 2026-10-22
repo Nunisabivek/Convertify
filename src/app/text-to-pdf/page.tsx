@@ -45,7 +45,7 @@ export default function Page() {
                 items={[
                     { name: "Home", url: "/" },
                     { name: "All Tools", url: "/all-tools" },
-                    { name: "Text To Pdf", url: "/text-to-pdf" }
+                    { name: "Text to PDF", url: "/text-to-pdf" }
                 ]}
             />
             <SoftwareApplicationSchema

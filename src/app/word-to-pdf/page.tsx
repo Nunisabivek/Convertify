@@ -49,7 +49,7 @@ export default function Page() {
                 items={[
                     { name: "Home", url: "/" },
                     { name: "All Tools", url: "/all-tools" },
-                    { name: "Word To Pdf", url: "/word-to-pdf" }
+                    { name: "Word to PDF", url: "/word-to-pdf" }
                 ]}
             />
             <SoftwareApplicationSchema

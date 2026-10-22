@@ -60,7 +60,7 @@ export default function Page() {
                 items={[
                     { name: "Home", url: "/" },
                     { name: "All Tools", url: "/all-tools" },
-                    { name: "Png To Pdf", url: "/png-to-pdf" }
+                    { name: "PNG to PDF", url: "/png-to-pdf" }
                 ]}
             />
             <SoftwareApplicationSchema
