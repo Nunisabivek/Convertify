@@ -2,8 +2,6 @@
 
 import { useState } from "react"
 import { Droplet, Download, Loader2, AlertCircle, Type, Image as ImageIcon } from "lucide-react"
-import { rgb, degrees, StandardFonts } from "pdf-lib"
-import { loadPdf } from "@/lib/pdf-password"
 import { toWinAnsi } from "@/lib/sheet-layout"
 import { AdBanner } from "@/components/ads/banner"
 import { FileUploader } from "@/components/tools/file-uploader"
@@ -20,6 +18,9 @@ export default function WatermarkPdfClient() {
     const [color, setColor] = useState("#000000")
 
     const addWatermark = async () => {
+        // Loaded on use, not with the page: pdf-lib is ~400 KB of JavaScript.
+        const { rgb, degrees, StandardFonts } = await import("pdf-lib")
+        const { loadPdf } = await import("@/lib/pdf-password")
         if (!file) return
 
         setIsProcessing(true)

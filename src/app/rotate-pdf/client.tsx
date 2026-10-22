@@ -2,8 +2,6 @@
 
 import { useState } from "react"
 import { RotateCw, Download, Loader2, AlertCircle } from "lucide-react"
-import { degrees } from "pdf-lib"
-import { loadPdf } from "@/lib/pdf-password"
 import { AdBanner } from "@/components/ads/banner"
 import { FileUploader } from "@/components/tools/file-uploader"
 
@@ -16,6 +14,9 @@ export default function RotatePdfClient() {
     const [specificPages, setSpecificPages] = useState("")
 
     const rotatePdf = async () => {
+        // Loaded on use, not with the page: pdf-lib is ~400 KB of JavaScript.
+        const { degrees } = await import("pdf-lib")
+        const { loadPdf } = await import("@/lib/pdf-password")
         if (!file) return
 
         setIsProcessing(true)

@@ -1,8 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { PDFDocument } from "pdf-lib"
-import { loadPdf } from "@/lib/pdf-password"
 import JSZip from "jszip"
 import { saveAs } from "file-saver"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
@@ -27,6 +25,7 @@ export default function SplitPdfPage() {
     const [downloadName, setDownloadName] = useState("")
 
     const handleFilesSelected = async (files: File[]) => {
+        const { loadPdf } = await import("@/lib/pdf-password")
         if (files.length > 0) {
             const selectedFile = files[0]
             setFile(selectedFile)
@@ -95,6 +94,9 @@ export default function SplitPdfPage() {
     }, [pageRange, splitMode, pageCount])
 
     const handleSplit = async () => {
+        // Loaded on use, not with the page: pdf-lib is ~400 KB of JavaScript.
+        const { PDFDocument } = await import("pdf-lib")
+        const { loadPdf } = await import("@/lib/pdf-password")
         if (!file) return
 
         const pagesToExtract = splitMode === "all"

@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { PDFDocument } from "pdf-lib"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
@@ -106,6 +105,8 @@ export default function CompressPdfPage() {
         q: number,
         onPageDone?: (page: number) => void
     ): Promise<Blob> => {
+        // Loaded on use, not with the page: pdf-lib is ~400 KB of JavaScript.
+        const { PDFDocument } = await import("pdf-lib")
         const newPdf = await PDFDocument.create()
 
         for (let i = 1; i <= numPages; i++) {

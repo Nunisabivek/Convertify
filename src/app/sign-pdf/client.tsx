@@ -2,7 +2,6 @@
 
 import { loadPdfjs } from "@/lib/pdfjs"
 import { useState, useRef, useEffect } from "react"
-import { loadPdf } from "@/lib/pdf-password"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { ProcessingWait } from "@/components/tools/processing-wait"
@@ -268,6 +267,8 @@ export default function SignPdfClient() {
     }
 
     const saveSignedPdf = async () => {
+        // Loaded on use, not with the page: pdf-lib is ~400 KB of JavaScript.
+        const { loadPdf } = await import("@/lib/pdf-password")
         if (!file || placedSignatures.length === 0) {
             alert("Please place at least one signature on the document.")
             return

@@ -1,9 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { degrees, rgb, StandardFonts } from "pdf-lib"
 import { visualFrame } from "@/lib/page-frame"
-import { loadPdf } from "@/lib/pdf-password"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import { finishConvert } from "@/lib/native-file"
 import { FileUploader } from "@/components/tools/file-uploader"
@@ -35,6 +33,9 @@ export default function AddPageNumbersClient() {
     }
 
     const processPdf = async () => {
+        // Loaded on use, not with the page: pdf-lib is ~400 KB of JavaScript.
+        const { degrees, rgb, StandardFonts } = await import("pdf-lib")
+        const { loadPdf } = await import("@/lib/pdf-password")
         if (files.length === 0) return
         setIsProcessing(true)
 
