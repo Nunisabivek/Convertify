@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { PDFDocument } from "pdf-lib"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
@@ -29,6 +28,8 @@ export default function PngToPdfPage() {
     const handleConvert = async () => {
         setIsProcessing(true)
         try {
+            // Loaded on click, not with the page: pdf-lib is ~400 KB of JavaScript a visitor may never use.
+            const { PDFDocument } = await import("pdf-lib")
             const pdfDoc = await PDFDocument.create()
 
             for (const file of files) {

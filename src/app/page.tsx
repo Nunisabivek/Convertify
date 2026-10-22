@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Script from 'next/script';
 import WebHomePage from '@/components/home/WebHomePage';
+import { allIndexableBlogPosts } from '@/lib/blog-data';
 import { MobileHomePage } from '@/components/mobile';
 import { IS_MOBILE_BUILD } from '@/lib/is-mobile-build';
 import { appDocumentTitle, MOBILE_HOME_TITLE } from '@/lib/document-title';
@@ -81,7 +82,9 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
-      <WebHomePage />
+      <WebHomePage
+        latestPosts={allIndexableBlogPosts.slice(0, 6).map(({ slug, title, excerpt, category, readingTime }) => ({ slug, title, excerpt, category, readingTime }))}
+      />
     </>
   );
 }

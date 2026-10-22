@@ -137,3 +137,11 @@ body {
     color: black;
   }
 }
+/* Phones: the tool comes before the Quick answer so a visitor from search sees the tool without
+   scrolling. The answer (and its schema) stays in the page for search and AI answers. Children
+   keep full width, as in normal block flow (mx-auto would otherwise shrink them in a flex column). */
+@media (max-width: 767px) {
+  section:has(> .answer-block-speakable) { display: flex; flex-direction: column; }
+  section:has(> .answer-block-speakable) > * { width: 100%; }
+  section:has(> .answer-block-speakable) > .answer-block-speakable { order: 1; }
+}

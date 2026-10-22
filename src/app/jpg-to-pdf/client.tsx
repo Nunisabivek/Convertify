@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { PDFDocument, degrees } from "pdf-lib"
 import { jpegOrientation, uprightPlacement } from "@/lib/jpeg-orientation"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
@@ -45,6 +44,8 @@ export default function JpgToPdfPage() {
         }, 100)
 
         try {
+            // Loaded on click, not with the page: pdf-lib is ~400 KB of JavaScript a visitor may never use.
+            const { PDFDocument, degrees } = await import("pdf-lib")
             const pdfDoc = await PDFDocument.create()
 
             for (const file of files) {

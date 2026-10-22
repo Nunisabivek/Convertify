@@ -1,4 +1,6 @@
-import ConvertifyFiles, { type PickedNativeFile } from '@/lib/convertify-files'
+import type { PickedNativeFile } from '@/lib/convertify-files'
+// The plugin pulls in @capacitor/core; load it only on the code paths that run inside the app.
+const nativeFiles = () => import('@/lib/convertify-files').then((m) => m.default)
 import { IS_MOBILE_BUILD } from '@/lib/is-mobile-build'
 import { nextHumanFilename } from '@/lib/human-filename'
 
@@ -134,7 +136,7 @@ export async function pickFilesNative(options: {
     multiple?: boolean
     mimeTypes?: string[]
 }): Promise<File[]> {
-    const result = await ConvertifyFiles.pickFiles({
+    const result = await (await nativeFiles()).pickFiles({
         multiple: options.multiple ?? false,
         mimeTypes: options.mimeTypes?.length ? options.mimeTypes : ['*/*'],
     })
@@ -227,7 +229,7 @@ export async function shareStoredOutput(output: StoredOutput): Promise<void> {
         a.click()
         return
     }
-    await ConvertifyFiles.shareFile({
+    await (await nativeFiles()).shareFile({
         appPath: output.appPath,
         mime: output.mime,
     })
@@ -238,7 +240,7 @@ export async function saveStoredOutputToDownloads(output: StoredOutput): Promise
         await shareStoredOutput(output)
         return
     }
-    await ConvertifyFiles.saveToDownloads({
+    await (await nativeFiles()).saveToDownloads({
         appPath: output.appPath,
         filename: output.filename,
         mime: output.mime,
@@ -246,12 +248,12 @@ export async function saveStoredOutputToDownloads(output: StoredOutput): Promise
 }
 
 export async function shareRecentFile(file: RecentFile): Promise<void> {
-    const exists = await ConvertifyFiles.fileExists({ appPath: file.appPath })
+    const exists = await (await nativeFiles()).fileExists({ appPath: file.appPath })
     if (!exists.exists) {
         dropRecentFile(file.id)
         throw new Error('gone')
     }
-    await ConvertifyFiles.shareFile({
+    await (await nativeFiles()).shareFile({
         appPath: file.appPath,
         mime: file.type || mimeFromName(file.name),
     })

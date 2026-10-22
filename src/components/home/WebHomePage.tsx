@@ -35,7 +35,8 @@ import {
 } from "lucide-react";
 import { InternalLinkMap } from "@/components/seo/internal-link-map";
 import { AdBanner } from "@/components/ads/banner";
-import { allIndexableBlogPosts } from "@/lib/blog-data";
+// Card fields only. Importing blog-data here shipped every post body to the browser (~280 KB).
+export type HomeBlogCard = { slug: string; title: string; excerpt: string; category: string; readingTime: number };
 import { GooglePlayButton, InToolPlayStoreCallout } from "@/components/ui/google-play-badge";
 
 // Organized tool categories like ilovePDF
@@ -365,7 +366,7 @@ const toolCategories = [
 // Flatten all tools for the "All Tools" page
 const allTools = toolCategories.flatMap(cat => cat.tools);
 
-export default function WebHomePage() {
+export default function WebHomePage({ latestPosts }: { latestPosts: HomeBlogCard[] }) {
     return (
         <div className="flex flex-col items-center">
             {/* Hero Section */}
@@ -480,7 +481,7 @@ export default function WebHomePage() {
                     </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                    {allIndexableBlogPosts.slice(0, 6).map((post) => (
+                    {latestPosts.map((post) => (
                         <Link
                             key={post.slug}
                             href={`/blog/${post.slug}`}

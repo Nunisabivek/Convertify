@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
 import { ProcessingWait } from "@/components/tools/processing-wait"
 import { Sheet, Download, Loader2, FileText } from "lucide-react"
-import * as XLSX from "xlsx"
-import { PDFDocument, StandardFonts, rgb } from "pdf-lib"
+import type { WorkBook } from "xlsx"
+// xlsx and pdf-lib (~1 MB together) load when a file is picked, not with the page.
+const loadXlsx = () => import("xlsx")
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import { finishConvert } from "@/lib/native-file"
 import { CELL_PADDING, layoutSheet, toWinAnsi } from "@/lib/sheet-layout"
@@ -27,13 +28,14 @@ export default function ExcelToPdfClient() {
         setDownloadUrl(null)
 
         try {
+            const XLSX = await loadXlsx()
             const data = await selectedFile.arrayBuffer()
             const workbook = XLSX.read(data, { type: "array" })
             const names = workbook.SheetNames
             setSheetNames(names)
             if (names.length > 0) {
                 setSelectedSheet(names[0])
-                showPreview(workbook, names[0])
+                await showPreview(workbook, names[0])
             }
         } catch (e) {
             console.error("Error reading Excel file:", e)
@@ -42,7 +44,8 @@ export default function ExcelToPdfClient() {
         }
     }
 
-    const showPreview = (workbook: XLSX.WorkBook, sheetName: string) => {
+    const showPreview = async (workbook: WorkBook, sheetName: string) => {
+        const XLSX = await loadXlsx()
         const sheet = workbook.Sheets[sheetName]
         const json = XLSX.utils.sheet_to_json(sheet, { header: 1, raw: false }) as string[][]
         setPreview(json.slice(0, 10))
@@ -51,9 +54,10 @@ export default function ExcelToPdfClient() {
     const handleSheetChange = async (sheetName: string) => {
         setSelectedSheet(sheetName)
         if (file) {
+            const XLSX = await loadXlsx()
             const data = await file.arrayBuffer()
             const workbook = XLSX.read(data, { type: "array" })
-            showPreview(workbook, sheetName)
+            await showPreview(workbook, sheetName)
         }
     }
 
@@ -62,6 +66,7 @@ export default function ExcelToPdfClient() {
         setIsProcessing(true)
 
         try {
+            const [XLSX, { PDFDocument, StandardFonts, rgb }] = await Promise.all([loadXlsx(), import("pdf-lib")])
             const data = await file.arrayBuffer()
             const workbook = XLSX.read(data, { type: "array" })
             const sheet = workbook.Sheets[selectedSheet]

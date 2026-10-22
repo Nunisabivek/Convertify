@@ -22,7 +22,8 @@ export default function ClientLayout({
     return (
         <>
             <Header />
-            <PlayStoreTopBar />
+            {/* Phones already have the Play Store button in the header; the bar only pushed the tool below the fold. */}
+            <PlayStoreTopBar className="hidden md:block" />
 
             <div className="flex justify-center w-full max-w-[1920px] mx-auto">
                 <main className="flex-1 min-w-0 pb-16 md:pb-20">
