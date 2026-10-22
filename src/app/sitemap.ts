@@ -66,27 +66,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: 'all-tools', priority: 0.8 },
         { path: 'blog', priority: 0.7 },
         { path: 'pricing', priority: 0.6 },
-        { path: 'contact', priority: 0.4 },
+        { path: 'contact', priority: 0.4, lastModified: '2026-10-04' },
         { path: 'security', priority: 0.4 },
         { path: 'about', priority: 0.4 },
         { path: 'privacy', priority: 0.3, lastModified: '2026-10-22' },
-        { path: 'terms', priority: 0.3 },
+        { path: 'terms', priority: 0.3, lastModified: '2026-10-04' },
     ]
 
-    const lastUpdated = '2026-10-04'
-    const recrawlToday = '2026-10-04'
-    const uniqueToolsUpdated = recrawlToday
-    const toolLastModified: Record<string, string> = {
-        'png-to-pdf': recrawlToday,
-        'excel-to-pdf': recrawlToday,
-        'pdf-to-jpg': recrawlToday,
-        'jpg-to-pdf': recrawlToday,
-    }
+    // Keep these honest: Google stops trusting lastmod on sites whose dates don't match real changes.
+    // Every tool page's copy and/or behaviour changed on 2026-10-21/22.
+    const lastUpdated = '2026-10-22'
 
     const entries: MetadataRoute.Sitemap = [
         {
             url: baseUrl,
-            lastModified: recrawlToday,
+            lastModified: lastUpdated,
             changeFrequency: 'weekly',
             priority: 1,
         },
@@ -98,13 +92,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         })),
         ...coreTools.map(tool => ({
             url: `${baseUrl}/${tool}`,
-            lastModified: toolLastModified[tool] ?? lastUpdated,
+            lastModified: lastUpdated,
             changeFrequency: 'weekly' as const,
             priority: 0.9,
         })),
         ...uniqueTools.map(tool => ({
             url: `${baseUrl}/${tool}`,
-            lastModified: uniqueToolsUpdated,
+            lastModified: lastUpdated,
             changeFrequency: 'weekly' as const,
             priority: 0.9,
         })),
