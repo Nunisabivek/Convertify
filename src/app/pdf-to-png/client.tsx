@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react"
+import { RENDER_QUALITIES, renderScale, type RenderQuality } from "@/lib/render-quality"
+import { RenderQualityPicker } from "@/components/tools/render-quality-picker"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
@@ -20,6 +22,7 @@ export default function PdfToPngPage() {
     const [isZip, setIsZip] = useState(false)
     const [progress, setProgress] = useState(0)
     const [total, setTotal] = useState(0)
+    const [quality, setQuality] = useState<RenderQuality>(RENDER_QUALITIES[1])
 
     const handleConvert = async () => {
         if (!file) return
@@ -36,7 +39,8 @@ export default function PdfToPngPage() {
 
             if (numPages === 1) {
                 const page = await pdf.getPage(1)
-                const viewport = page.getViewport({ scale: 2.0 })
+                const base = page.getViewport({ scale: 1 })
+                const viewport = page.getViewport({ scale: renderScale(quality.dpi, base.width, base.height) })
                 const canvas = document.createElement("canvas")
                 const ctx = canvas.getContext("2d")
                 canvas.width = viewport.width
@@ -64,7 +68,8 @@ export default function PdfToPngPage() {
 
                 for (let i = 1; i <= numPages; i++) {
                     const page = await pdf.getPage(i)
-                    const viewport = page.getViewport({ scale: 2.0 })
+                    const base = page.getViewport({ scale: 1 })
+                    const viewport = page.getViewport({ scale: renderScale(quality.dpi, base.width, base.height) })
                     const canvas = document.createElement("canvas")
                     const ctx = canvas.getContext("2d")
                     canvas.width = viewport.width
@@ -137,6 +142,8 @@ export default function PdfToPngPage() {
                             <h3 className="text-2xl font-bold text-slate-800">{file.name}</h3>
                             <p className="text-slate-500">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
                         </div>
+
+                        <RenderQualityPicker value={quality} onChange={setQuality} disabled={isProcessing} />
 
                         <Button size="xl" onClick={handleConvert} disabled={isProcessing} className="bg-cyan-600 hover:bg-cyan-700 w-full md:w-auto px-12 text-white">
                             {isProcessing ? (

@@ -255,9 +255,9 @@ export const toolContentData: Record<string, {
         keywords: ["combine png to pdf", "merge png to pdf", "multiple png to pdf", "png to pdf hd", "png to pdf high quality", "combine pngs into pdf", "combine multiple png into one pdf", "save png as pdf", "convert png to pdf online free", "how to combine png files into one pdf"]
     },
     "pdf-to-png": {
-        description: "Convert every page of a PDF to a PNG image with Convertify. Pages are rendered at 2× their native size (about 144 DPI on a letter-size page) on a white background and saved losslessly, so text and line art have no JPG artifacts. Multi-page files download as a ZIP.",
+        description: "Convert every page of a PDF to a PNG image with Convertify. Pages are rendered at 150, 220 or 300 DPI (your choice) on a white background and saved losslessly, so text and line art have no JPG artifacts. Multi-page files download as a ZIP.",
         features: [
-            "One PNG per page, rendered at 2× page size",
+            "One PNG per page at 150, 220 or 300 DPI",
             "Lossless PNG: no JPG artifacts on text or line art",
             "Whole pages only: embedded images are not extracted separately",
             "Multi-page PDFs download as a ZIP",

@@ -12,12 +12,15 @@ import { friendlyFileError } from "@/lib/file-types"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import { finishConvert } from "@/lib/native-file"
 import { nameFromSources } from "@/lib/human-filename"
+import { placeImage, type PageSize } from "@/lib/image-page"
 
 export default function PngToPdfPage() {
     const [files, setFiles] = useState<File[]>([])
     const [isProcessing, setIsProcessing] = useState(false)
     const [processedPdfUrl, setProcessedPdfUrl] = useState<string | null>(null)
     const [outputName, setOutputName] = useState("photos.pdf")
+    const [pageSize, setPageSize] = useState<PageSize>("original")
+    const [margin, setMargin] = useState(false)
 
     const handleFilesSelected = (newFiles: File[]) => {
         setFiles((prev) => [...prev, ...newFiles])
@@ -31,13 +34,10 @@ export default function PngToPdfPage() {
             for (const file of files) {
                 const imageBytes = await file.arrayBuffer()
                 const image = await pdfDoc.embedPng(imageBytes)
-                const page = pdfDoc.addPage([image.width, image.height])
-                page.drawImage(image, {
-                    x: 0,
-                    y: 0,
-                    width: image.width,
-                    height: image.height,
-                })
+                // The PNG is embedded untouched; only its placement on the page changes.
+                const at = placeImage(image.width, image.height, pageSize, margin ? 28 : 0)
+                const page = pdfDoc.addPage(at.page)
+                page.drawImage(image, { x: at.x, y: at.y, width: at.width, height: at.height })
             }
 
             const pdfBytes = await pdfDoc.save()
@@ -94,9 +94,37 @@ export default function PngToPdfPage() {
                             onReorder={setFiles}
                             onRemove={(index) => setFiles((prev) => prev.filter((_, i) => i !== index))}
                         />
+                        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-slate-700">
+                            <label className="flex items-center gap-2">
+                                Page size
+                                <select
+                                    value={pageSize}
+                                    onChange={(e) => setPageSize(e.target.value as PageSize)}
+                                    className="h-9 rounded-md border border-slate-300 bg-white px-2"
+                                >
+                                    <option value="original">Same as each image (no borders)</option>
+                                    <option value="a4">A4, fitted</option>
+                                    <option value="letter">US Letter, fitted</option>
+                                </select>
+                            </label>
+                            {pageSize !== "original" && (
+                                <label className="flex items-center gap-2">
+                                    <input type="checkbox" checked={margin} onChange={(e) => setMargin(e.target.checked)} />
+                                    White margin
+                                </label>
+                            )}
+                        </div>
                         <Button size="xl" className="w-full" onClick={handleConvert}>Convert to PDF</Button>
                     </div>
                     <AdBanner variant="rectangle" />
+                    <div className="text-center">
+                        <FileUploader
+                            onFilesSelected={handleFilesSelected}
+                            accept={{ "image/png": [".png"] }}
+                            fileTypeLabel="more PNG images"
+                            iconType="image"
+                        />
+                    </div>
                 </div>
             )}
         </div>

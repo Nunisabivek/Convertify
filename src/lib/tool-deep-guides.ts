@@ -121,7 +121,7 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
         troubleshooting: [
             { question: "My PNG had a transparent background — why is the PDF page white?", answer: "PDF pages don't support real transparency; what you're seeing is the default white PDF page color showing through. To preserve a coloured background, fill it in your image editor before converting. The image data itself, including alpha, is still embedded." },
             { question: "The PDF is huge — much bigger than the PNGs combined.", answer: "PNG is lossless; embedding lossless images in a PDF preserves all that data. For a smaller output, run the result through Compress PDF afterwards, or convert PNGs to JPG first if losslessness isn't needed." },
-            { question: "Some pages are landscape and some portrait — can I make them all the same?", answer: "Convertify sizes each page to the source image, so portrait PNGs produce portrait pages and landscape PNGs produce landscape. To force a uniform page size, resize all PNGs to the same dimensions before converting (use the Resize Image tool first)." },
+            { question: "Some pages are landscape and some portrait — can I make them all the same?", answer: "Set Page size to A4 or US Letter. Every image is then fitted onto a page of that size without stretching, centred, with an optional white margin; wide images get a landscape page and tall ones a portrait page. The default, \"Same as each image\", keeps each page exactly the size of its PNG with no borders." },
             { question: "It says it can't read one of my files.", answer: "The most common cause is a file that's actually a JPG renamed to .png. Double-check the original format — Convertify validates magic bytes, not just file extensions, so genuine PNGs always work but mis-labeled files won't." },
         ],
         comparison: [
@@ -139,7 +139,7 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
     "pdf-to-jpg": {
         intro: [
             "Turning a PDF into JPG images is one of the most common conversion tasks — for sharing on social media, embedding pages in slide decks, or sending a contract page without the whole file. Convertify’s PDF to JPG converter renders each page in your browser with PDF.js. Nothing is uploaded.",
-            "The renderer treats PDF as a vector format: text and line art are drawn to a canvas at 2× the page’s native size, then saved as JPEG. That is sharper than photographing the screen, and there is no DPI picker on this page.",
+            "The renderer treats PDF as a vector format: text and line art are drawn to a canvas at the resolution you pick (150, 220 or 300 DPI), then saved as JPEG. That is sharper than photographing the screen; 300 DPI is print quality.",
             "A one-page PDF downloads as a single JPG. Two or more pages download as a ZIP so you are not clicking download on every page.",
         ],
         steps: [
@@ -154,7 +154,7 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
             { title: "Archival and OCR pre-processing", body: "Some OCR engines work better on JPG than on raw PDF (especially when the source is image-only). Converting to JPG first lets you batch-OCR through any image-based pipeline." },
         ],
         troubleshooting: [
-            { question: "The text in my JPG is fuzzy.", answer: "This tool renders at 2× the PDF’s native size. If the source PDF was generated from a low-res scan, no conversion can recover detail that was never there. For line art where JPEG artifacts show, use PDF to PNG instead." },
+            { question: "The text in my JPG is fuzzy.", answer: "Switch the quality to Maximum (300 DPI). If the source PDF was generated from a low-res scan, no conversion can recover detail that was never there. For line art where JPEG artifacts show, use PDF to PNG instead." },
             { question: "I converted a 200-page PDF and only got the first 100 in the ZIP.", answer: "Some browsers (notably mobile Safari) cap memory available to a single tab. For 100+ page conversions, use a desktop browser with at least 8 GB RAM, or split the PDF into 50-page chunks first." },
             { question: "Colors look slightly off.", answer: "JPEG is a lossy format with limited color depth. For pages with subtle gradient or photographic content, use the PDF to PNG tool instead — PNG is lossless and preserves color fidelity." },
             { question: "Is OCR (text extraction) included?", answer: "PDF to JPG only renders pages — it doesn't extract text. For text that is already in the PDF, use PDF to Text." },
@@ -172,12 +172,12 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
 
     "pdf-to-png": {
         intro: [
-            "PDF to PNG is the right choice when you need lossless image quality — for line art, technical drawings, screenshots embedded in PDFs, or any case where JPEG compression artifacts would be visible. Convertify renders each page at 2× its native size (about 144 DPI on a letter-size page) through PDF.js and saves the result as a PNG, with no further compression loss.",
+            "PDF to PNG is the right choice when you need lossless image quality — for line art, technical drawings, screenshots embedded in PDFs, or any case where JPEG compression artifacts would be visible. Convertify renders each page through PDF.js at the resolution you pick (150, 220 or 300 DPI) and saves the result as a PNG, with no further compression loss.",
             "Pages are rendered onto a white background, so the PNGs are opaque. If you need a transparent element from a PDF mockup, cut it out afterwards in an image editor.",
         ],
         steps: [
             { title: "Drop your PDF", body: "Drag and drop a single PDF, or click the upload zone to pick from a folder. The tool reads page count instantly so you know how many PNGs to expect." },
-            { title: "Click Convert", body: "PDF.js renders every page at 2× size and encodes it as PNG. There is no DPI or page-range picker; every page is converted." },
+            { title: "Pick a quality and convert", body: "Choose Standard (150 DPI), High (220 DPI) or Maximum (300 DPI). PDF.js renders every page and encodes it as PNG; there is no page-range picker, so every page is converted." },
             { title: "Convert and download", body: "Single-page PDFs download as a single PNG; multi-page PDFs auto-bundle into a ZIP so you don't click download once per page." },
         ],
         scenarios: [
@@ -192,7 +192,7 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
         comparison: [
             { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
             { feature: "Format quality", convertify: "Lossless PNG", typical: "Lossy JPG" },
-            { feature: "Render size", convertify: "2× page (~144 DPI)", typical: "Varies" },
+            { feature: "Render size", convertify: "150, 220 or 300 DPI", typical: "Varies" },
             { feature: "Multi-page batch", convertify: "Auto-ZIP", typical: "Manual" },
         ],
         lastUpdated: "2026-05-08",

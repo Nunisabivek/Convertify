@@ -120,6 +120,19 @@ def _(f, r):
     if abs(cx / cy - 595 / 842) > 0.02: return f'page aspect {cx / cy:.2f}, A4 is 0.71 (stretched)'
 
 
+@check('png-to-pdf#a4')
+def _(f, r):
+    sizes = {(round(pg.rect.width), round(pg.rect.height)) for pg in fitz.open(f)}
+    if not sizes <= {(595, 842), (842, 595)}: return f'page sizes {sizes}, expected A4'
+
+
+@check('pdf-to-jpg#max')
+def _(f, r):
+    z = zipfile.ZipFile(f)
+    w, h = Image.open(z.open(sorted(z.namelist())[0])).size
+    if abs(w - 2480) > 10: return f'page 1 is {w}x{h}px, expected ~2480 wide (A4 at 300 DPI)'
+
+
 @check('resize-image')
 def _(f, r):
     if r.get('kind') != 'jpg': return f'JPEG input came out as {r.get("kind")}'

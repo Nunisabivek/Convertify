@@ -219,8 +219,8 @@ export const toolSeoData = {
         ]
     },
     "pdf-to-jpg": {
-        title: "PDF to JPG — Extract Pages as Images, No Upload",
-        description: "Turn each PDF page into a JPG on your device. Multi-page files download as a ZIP. Free, no watermark, nothing uploaded.",
+        title: "PDF to JPG — High Quality up to 300 DPI, No Upload",
+        description: "Turn each PDF page into a JPG at 150, 220 or 300 DPI on your device. Multi-page files download as a ZIP. Free, no watermark, nothing uploaded.",
         keywords: [
             "pdf to jpg", "pdf to jpg converter", "convert pdf to jpg", "pdf to jpeg",
             "pdf to jpg free", "pdf to jpg online", "pdf to image", "pdf to jpg converter free",
@@ -244,7 +244,7 @@ export const toolSeoData = {
             },
             {
                 question: "What resolution are the JPGs?",
-                answer: "Pages are rendered at 2× the PDF’s native size (about 144 DPI on a letter-size page). There is no DPI picker on this page. Text and line art stay sharper than a screenshot of the file."
+                answer: "Pick Standard (150 DPI), High (220 DPI, the default) or Maximum (300 DPI, print quality) before converting. Text and line art are drawn from the PDF itself, so they stay sharper than a screenshot of the file. Very large pages are capped at 8,000 pixels on the long side."
             },
             {
                 question: "Are my files uploaded to convert them?",
@@ -284,6 +284,10 @@ export const toolSeoData = {
                 answer: "Drop or select all of your PNG files at once, drag the thumbnails to set the page order, then click Convert. You get a single multi-page PDF with every PNG, in order. No software install and no sign-up."
             },
             {
+                question: "Can I put every PNG on an A4 or Letter page?",
+                answer: "Yes. Set Page size to A4 or US Letter and each image is fitted onto a page of that size without stretching, centred, with an optional white margin. Wide screenshots get a landscape page. The default keeps each page the exact size of its PNG, with no borders."
+            },
+            {
                 question: "How do I merge PNG to PDF for free without a watermark?",
                 answer: "This combiner is free and never adds a watermark. Drop your PNGs, arrange the order, and download the merged PDF. There is no daily limit, no locked “pro” mode, and no email required."
             },
@@ -320,7 +324,7 @@ export const toolSeoData = {
     },
     "pdf-to-png": {
         title: "PDF to PNG Free — Convert Each Page to PNG",
-        description: "Convert every PDF page to a lossless PNG at 2× page size (about 144 DPI). Multi-page files download as a ZIP. Free, and nothing is uploaded.",
+        description: "Convert every PDF page to a lossless PNG at 150, 220 or 300 DPI. Multi-page files download as a ZIP. Free, and nothing is uploaded.",
         keywords: [
             "pdf to png", "convert pdf to transparent png", "extract pdf as hq png", "pdf page to png 300 dpi",
             "high resolution pdf to png online", "save pdf as transparent image", "pdf to png for design",
@@ -338,7 +342,7 @@ export const toolSeoData = {
             },
             {
                 question: "Will the text be sharp enough for websites?",
-                answer: "Pages are rendered at 2× the PDF’s native size (about 144 DPI on a letter-size page) and PNG adds no compression artifacts, so text is crisp on screens. There is no DPI picker."
+                answer: "Choose 150, 220 (default) or 300 DPI. PNG adds no compression artifacts, so text and line art stay crisp; 300 DPI is print quality. Very large pages are capped at 8,000 pixels on the long side."
             }
         ],
         howToSteps: [
@@ -700,8 +704,8 @@ export const toolSeoData = {
         ]
     },
     "excel-to-pdf": {
-        title: "Excel to PDF — Convert XLSX Spreadsheets, No Upload",
-        description: "Convert Excel or XLSX to PDF in your browser. Cell values become a clean table. No Microsoft Excel, no watermark, nothing uploaded.",
+        title: "Excel to PDF — Convert XLS & XLSX Free, No Upload",
+        description: "Convert Excel (XLS or XLSX) to PDF in your browser. Every column kept, long text wrapped. No Microsoft Excel, no watermark, nothing uploaded.",
         keywords: [
             "excel to pdf", "xlsx to pdf", "xls to pdf", "convert excel to pdf",
             "excel to pdf converter", "excel to pdf free", "convert xlsx to pdf",
@@ -715,7 +719,7 @@ export const toolSeoData = {
             "excel to pdf convertor", "excel pdf converter",
             "best excel to pdf converter", "best excel to pdf converter free"
         ],
-        h1: "Excel to PDF — Convert XLSX Spreadsheets Online",
+        h1: "Excel to PDF — Convert XLS & XLSX Spreadsheets Online",
         faqs: [
             {
                 question: "How do I convert Excel or XLSX to PDF for free?",

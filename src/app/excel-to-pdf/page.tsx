@@ -34,7 +34,7 @@ export const metadata: Metadata = {
         url: "https://convertify.work/excel-to-pdf",
         siteName: "Convertify",
         type: "website",
-        images: [{ url: "https://convertify.work/images/og-banner.png", width: 1200, height: 630, alt: "Excel to PDF — Convert XLSX Spreadsheets, No Upload" }],
+        images: [{ url: "https://convertify.work/images/og-banner.png", width: 1200, height: 630, alt: "Excel to PDF — Convert XLS & XLSX Free, No Upload" }],
     },
     twitter: {
         card: "summary_large_image",

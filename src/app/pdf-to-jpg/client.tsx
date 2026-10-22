@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react"
+import { RENDER_QUALITIES, renderScale, type RenderQuality } from "@/lib/render-quality"
+import { RenderQualityPicker } from "@/components/tools/render-quality-picker"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { FileImage, Download, Loader2 } from "lucide-react"
@@ -18,6 +20,7 @@ export default function PdfToJpgPage() {
     const [isZip, setIsZip] = useState(false)
     const [progress, setProgress] = useState(0)
     const [total, setTotal] = useState(0)
+    const [quality, setQuality] = useState<RenderQuality>(RENDER_QUALITIES[1])
 
     const handleFilesSelected = (files: File[]) => {
         if (files.length > 0) setFile(files[0])
@@ -40,7 +43,8 @@ export default function PdfToJpgPage() {
 
             if (numPages === 1) {
                 const page = await pdf.getPage(1)
-                const viewport = page.getViewport({ scale: 2.0 })
+                const base = page.getViewport({ scale: 1 })
+                const viewport = page.getViewport({ scale: renderScale(quality.dpi, base.width, base.height) })
 
                 const canvas = document.createElement("canvas")
                 const context = canvas.getContext("2d")
@@ -65,7 +69,7 @@ export default function PdfToJpgPage() {
                             setIsZip(false)
                             setIsDone(true)
                         }
-                    }, "image/jpeg", 0.9)
+                    }, "image/jpeg", quality.jpeg)
                 }
                 setProgress(1)
             } else {
@@ -73,7 +77,8 @@ export default function PdfToJpgPage() {
 
                 for (let i = 1; i <= numPages; i++) {
                     const page = await pdf.getPage(i)
-                    const viewport = page.getViewport({ scale: 2.0 })
+                    const base = page.getViewport({ scale: 1 })
+                    const viewport = page.getViewport({ scale: renderScale(quality.dpi, base.width, base.height) })
 
                     const canvas = document.createElement("canvas")
                     const context = canvas.getContext("2d")
@@ -86,7 +91,7 @@ export default function PdfToJpgPage() {
                             viewport: viewport,
                         } as any).promise
 
-                        const imgData = canvas.toDataURL("image/jpeg", 0.8)
+                        const imgData = canvas.toDataURL("image/jpeg", quality.jpeg)
                         const data = imgData.split(',')[1]
                         zip.file(`page-${i.toString().padStart(3, '0')}.jpg`, data, { base64: true })
                     }
@@ -158,6 +163,8 @@ export default function PdfToJpgPage() {
                             <h3 className="text-2xl font-bold text-slate-800">{file.name}</h3>
                             <p className="text-slate-500">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
                         </div>
+
+                        <RenderQualityPicker value={quality} onChange={setQuality} disabled={isProcessing} />
 
                         <Button size="xl" onClick={handleConvert} disabled={isProcessing} className="bg-yellow-600 hover:bg-yellow-700 w-full md:w-auto px-12 text-white">
                             {isProcessing ? (

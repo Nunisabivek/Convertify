@@ -30,10 +30,12 @@ const T = [
   ['pdf-to-word', ['text.pdf'], ['zip']],
   ['word-to-pdf', ['letter.docx'], ['pdf']],
   ['pdf-to-jpg', ['text.pdf'], ['jpg', 'zip']],
+  ['pdf-to-jpg#max', ['text.pdf'], ['jpg', 'zip']],
   ['jpg-to-pdf', ['photo.jpg'], ['pdf']],
   ['jpg-to-pdf#exif', ['rotated6.jpg'], ['pdf']],
   ['pdf-to-png', ['text.pdf'], ['png', 'zip']],
   ['png-to-pdf', ['alpha.png', 'page2.png'], ['pdf']],
+  ['png-to-pdf#a4', ['alpha.png', 'page2.png'], ['pdf']],
   ['excel-to-pdf', ['sheet.xlsx'], ['pdf']],
   ['rotate-pdf', ['text.pdf'], ['pdf']],
   ['rotate-pdf#locked', ['locked.pdf'], ['pdf']],
@@ -100,6 +102,8 @@ const drag = async (p, sel) => {
 // (or leaving a text result on the page). Tools without an entry use the generic ACTION click.
 const STEPS = {
   'split-pdf': (p) => btn(p, /^Extract \d+ Pages?/).click(),
+  'pdf-to-jpg#max': async (p) => { await btn(p, /Maximum/).click(); await btn(p, /^Convert to Images/).click() },
+  'png-to-pdf#a4': async (p) => { await p.locator('main select').first().selectOption('a4'); await btn(p, /^Convert to PDF/).click() },
   'repair-pdf': (p) => btn(p, /Download Repaired/).click(),
   'pdf-to-excel': (p) => btn(p, /Download Excel/).click(),
   'passport-photo': (p) => btn(p, /^Make photo/).click(),
@@ -202,9 +206,10 @@ function browserPath() {
       const adScripts = () => p.evaluate(() => [...document.querySelectorAll('script[data-zone]')].map((s) => s.dataset.zone).sort().join(','))
       r.adsBefore = await adScripts() // must be empty: no ads while the visitor is working
       const dlPromise = p.waitForEvent('download', { timeout: 60000 }).catch(() => null)
-      if (STEPS[base]) {
+      const steps = STEPS[id] || STEPS[base]
+      if (steps) {
         r.clicked = 'steps'
-        await STEPS[base](p).catch((e) => errs.push('steps: ' + String(e).split('\n')[0].slice(0, 140)))
+        await steps(p).catch((e) => errs.push('steps: ' + String(e).split('\n')[0].slice(0, 140)))
       } else {
         const buttons = p.locator('main button:visible:not([disabled])')
         for (let i = 0, n = await buttons.count(); i < n; i++) {

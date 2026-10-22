@@ -15,7 +15,6 @@
 ## Known limitations
 
 - Excel to PDF writes cell values as text (all columns, long text wrapped). Cell colours, borders, charts and images are not carried over, and characters outside Western European scripts print as "?".
-- PDF to JPG and PDF to PNG render pages at 2x screen scale (about 144 DPI); there is no DPI setting.
 - Watermark PDF adds a text watermark; it is a visual stamp, not tamper-proof protection.
 - There is no OCR (text recognition). Scanned PDFs stay image-only.
 - Image Compressor re-encodes to JPEG; PNG and WebP transparency becomes white.
@@ -47,8 +46,8 @@
 
 - [PNG to PDF](https://convertify.work/png-to-pdf): combine many PNGs into one PDF; images are embedded at their original resolution
 - [JPG to PDF](https://convertify.work/jpg-to-pdf)
-- [PDF to JPG](https://convertify.work/pdf-to-jpg)
-- [PDF to PNG](https://convertify.work/pdf-to-png)
+- [PDF to JPG](https://convertify.work/pdf-to-jpg): 150, 220 or 300 DPI
+- [PDF to PNG](https://convertify.work/pdf-to-png): lossless, 150, 220 or 300 DPI
 - [PDF to Word](https://convertify.work/pdf-to-word): extracts the text into an editable .docx
 - [Word to PDF](https://convertify.work/word-to-pdf)
 - [Excel to PDF](https://convertify.work/excel-to-pdf)
