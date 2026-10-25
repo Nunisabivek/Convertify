@@ -16,8 +16,8 @@ export default function ClientLayout({
 }) {
     const pathname = usePathname();
 
-    // Ads never load while someone is working; see src/lib/monetag.ts for when they do.
-    useEffect(() => startMonetag(pathname || "/"), [pathname]);
+    // In-Page Push ad on every page after a short wait; see src/lib/monetag.ts.
+    useEffect(() => startMonetag(), [pathname]);
 
     return (
         <>
