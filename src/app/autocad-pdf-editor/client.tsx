@@ -99,9 +99,11 @@ export default function AutocadPdfEditorClient() {
     const loadingRef = useRef(new Set<number>())
     const genRef = useRef(0)
     const modelsRef = useRef(models)
+    const exportUrlRef = useRef<string | null>(null)
     useLayoutEffect(() => {
         modelsRef.current = models
-    }, [models])
+        exportUrlRef.current = exportUrl
+    }, [models, exportUrl])
 
     const model = models.get(currentPage)
 
@@ -120,6 +122,7 @@ export default function AutocadPdfEditorClient() {
     useEffect(
         () => () => {
             modelsRef.current.forEach((m) => URL.revokeObjectURL(m.url))
+            if (exportUrlRef.current) URL.revokeObjectURL(exportUrlRef.current)
             void pdfRef.current?.destroy()
         },
         [],
@@ -728,7 +731,7 @@ export default function AutocadPdfEditorClient() {
                         calibrated={!!cal}
                         onClose={() => setDialog(null)}
                         onAdd={() => {
-                            addMarkup({ kind: "measure", a: dialog.a, b: dialog.b, text: dialog.label.replace(" on paper", ""), size: Math.max(8, 7 * sheetUnit(model)) })
+                            addMarkup({ kind: "measure", a: dialog.a, b: dialog.b, text: dialog.label, size: Math.max(8, 7 * sheetUnit(model)) })
                             setDialog(null)
                         }}
                     />

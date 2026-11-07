@@ -84,6 +84,8 @@ export function DrawingView(p: Props) {
     const [spaceDown, setSpaceDown] = useState(false)
     const [panning, setPanning] = useState(false)
     const dragRef = useRef<Drag | null>(null)
+    // Space pans only while the pointer is over the drawing, so it still presses a focused button elsewhere.
+    const hoverRef = useRef(false)
     const touchesRef = useRef(0)
     const suppressClickUntil = useRef(0)
     // Latest props for native listeners registered once.
@@ -114,7 +116,7 @@ export function DrawingView(p: Props) {
             return !!t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable)
         }
         const down = (e: KeyboardEvent) => {
-            if (e.code === "Space" && !typing(e)) {
+            if (e.code === "Space" && !typing(e) && hoverRef.current) {
                 e.preventDefault()
                 setSpaceDown(true)
             }
@@ -309,6 +311,11 @@ export function DrawingView(p: Props) {
                 // One finger scrolls the web page in select mode; drawing tools take the finger.
                 touchAction: tool === "select" ? "pan-x pan-y" : "none",
                 cursor: panning ? "grabbing" : spaceDown ? "grab" : tool === "select" ? "default" : "crosshair",
+            }}
+            onPointerEnter={() => (hoverRef.current = true)}
+            onPointerLeave={() => {
+                hoverRef.current = false
+                setSpaceDown(false)
             }}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
