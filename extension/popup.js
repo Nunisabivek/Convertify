@@ -1,365 +1,404 @@
-// ============================================================================
-// CONVERTIFY CHROME EXTENSION - POPUP LOGIC
-// Search, navigation, usage tracking & monetization
-// ============================================================================
+// Convertify extension: popup.
+// Lists the tools, searches them (with synonyms), and opens the chosen tool on
+// convertify.work. Relies on tools.js, which popup.html loads first.
 
-const TOOLS_URL = 'https://convertify.work';
-const FREE_DAILY_LIMIT = 3;
+'use strict';
 
-// ============================================================================
-// INITIALIZATION
-// ============================================================================
+const RATE_PROMPT_MIN_OPENS = 3;
+const RATE_PROMPT_SNOOZE_MS = 14 * 24 * 60 * 60 * 1000;
+const PLAY_STORE_LINK = PLAY_STORE_URL + '&referrer=' + encodeURIComponent('utm_source=chrome_extension&utm_medium=popup');
 
-document.addEventListener('DOMContentLoaded', () => {
-    initUsageDisplay();
-    initToolButtons();
-    initSearch();
-    initUpgradeButtons();
-});
+// Words people type that don't narrow the search.
+const STOP_WORDS = new Set([
+    'a', 'an', 'and', 'as', 'at', 'by', 'for', 'from', 'how', 'i', 'in', 'into', 'is', 'it', 'me', 'my',
+    'of', 'on', 'online', 'or', 'the', 'to', 'tool', 'tools', 'with', 'free', 'file', 'files',
+    'convert', 'converter', 'conversion',
+]);
 
-// ============================================================================
-// USAGE TRACKING
-// ============================================================================
+// Query word -> words the tools actually use.
+const SYNONYMS = {
+    combine: ['merge'], join: ['merge'], append: ['merge'], unite: ['merge'], concatenate: ['merge'], together: ['merge'],
+    shrink: ['compress', 'resize'], reduce: ['compress'], smaller: ['compress'], small: ['compress'],
+    minimize: ['compress'], minimise: ['compress'], optimize: ['compress'], optimise: ['compress'], lighter: ['compress'],
+    kb: ['compress', 'fit'], mb: ['compress', 'fit'], size: ['compress', 'fit', 'resize'],
+    docx: ['word'], doc: ['word'],
+    xlsx: ['excel'], xls: ['excel'], spreadsheet: ['excel', 'csv'], sheet: ['excel'], sheets: ['excel'],
+    pptx: ['powerpoint'], ppt: ['powerpoint'], slides: ['powerpoint'], slide: ['powerpoint'],
+    presentation: ['powerpoint'], deck: ['powerpoint'],
+    photo: ['jpg', 'png', 'image'], photos: ['jpg', 'png', 'image'], picture: ['jpg', 'png', 'image'],
+    pictures: ['jpg', 'png', 'image'], pic: ['jpg', 'png', 'image'], pics: ['jpg', 'png', 'image'],
+    image: ['jpg', 'png'], images: ['jpg', 'png', 'image'], img: ['jpg', 'png', 'image'],
+    screenshot: ['png'], jpeg: ['jpg'],
+    heif: ['heic'], iphone: ['heic'],
+    tif: ['tiff'], txt: ['text'], md: ['markdown'],
+    scanner: ['scan'], camera: ['scan'], webcam: ['scan'], paper: ['scan'],
+    password: ['protect', 'unlock'], encrypt: ['protect'], lock: ['protect'], secure: ['protect'],
+    decrypt: ['unlock'], unprotect: ['unlock'],
+    signature: ['sign'], esign: ['sign'],
+    blackout: ['redact'], censor: ['redact'], hide: ['redact'],
+    turn: ['rotate'], flip: ['rotate'], sideways: ['rotate'], landscape: ['rotate'],
+    number: ['numbers'], numbering: ['numbers'], paginate: ['numbers'],
+    stamp: ['watermark'],
+    rearrange: ['reorder', 'organize'], arrange: ['reorder', 'organize'], sort: ['reorder', 'organize'],
+    order: ['reorder'], move: ['reorder'],
+    remove: ['delete', 'unlock'], erase: ['delete'],
+    annotate: ['edit'], highlight: ['edit'], draw: ['edit', 'sign'], write: ['edit'], fill: ['edit'], type: ['edit'],
+    fix: ['repair'], corrupt: ['repair'], corrupted: ['repair'], broken: ['repair'], damaged: ['repair'], recover: ['repair'],
+    diff: ['compare'], difference: ['compare'], differences: ['compare'],
+    trim: ['crop'], margin: ['crop'], margins: ['crop'], cut: ['crop', 'split'],
+    extract: ['split', 'text'], separate: ['split'],
+    cad: ['autocad'], dwg: ['autocad'],
+    bg: ['background'], transparent: ['background'], backdrop: ['background'],
+    dimensions: ['resize'], scale: ['resize'], pixels: ['resize'], px: ['resize'], enlarge: ['resize'],
+    id: ['passport'], visa: ['passport'],
+    barcode: ['qr'],
+    encode: ['base64'], decode: ['base64'], b64: ['base64'],
+    web: ['html'], webpage: ['html'], website: ['html'],
+    animated: ['gif'], animation: ['gif'], vector: ['svg'],
+};
+const SYNONYM_ENTRIES = Object.entries(SYNONYMS);
 
-async function initUsageDisplay() {
-    const badge = document.getElementById('usageBadge');
-    const usageText = document.getElementById('usageText');
-    const upgradeBanner = document.getElementById('upgradeBanner');
-    const proBanner = document.getElementById('proBanner');
+const CATEGORY_ICONS = {
+    organize: '<rect x="8" y="3" width="12" height="15" rx="2"/><path d="M5 7v12a2 2 0 0 0 2 2h9"/>',
+    edit: '<path d="M4 20h4L19.5 8.5a2.12 2.12 0 0 0-3-3L5 17v3Z"/><path d="m14.5 7.5 3 3"/>',
+    'from-pdf': '<path d="M13 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9l-6-6Z"/><path d="M13 3v6h6"/><path d="M9 15h6m-2.5-2.5L15 15l-2.5 2.5"/>',
+    'to-pdf': '<path d="M13 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9l-6-6Z"/><path d="M13 3v6h6"/><path d="M12 12v6m-2.5-2.5L12 18l2.5-2.5"/>',
+    image: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="m21 15-5-5L5 20"/>',
+    data: '<path d="M8 4H7a2 2 0 0 0-2 2v3.5a2 2 0 0 1-2 2v1a2 2 0 0 1 2 2V18a2 2 0 0 0 2 2h1"/><path d="M16 4h1a2 2 0 0 1 2 2v3.5a2 2 0 0 0 2 2v1a2 2 0 0 0-2 2V18a2 2 0 0 1-2 2h-1"/>',
+};
 
-    try {
-        const data = await getUsageData();
+const els = {
+    search: document.getElementById('search'),
+    shortcut: document.getElementById('shortcut'),
+    recent: document.getElementById('recent'),
+    recentTitle: document.getElementById('recentTitle'),
+    recentList: document.getElementById('recentList'),
+    results: document.getElementById('results'),
+    status: document.getElementById('status'),
+    rateCard: document.getElementById('rateCard'),
+    ratePlay: document.getElementById('ratePlay'),
+    rateExtension: document.getElementById('rateExtension'),
+    rateLater: document.getElementById('rateLater'),
+};
 
-        if (data.isPro) {
-            usageText.textContent = '👑 Pro';
-            badge.className = 'usage-badge pro';
+const searchIndex = TOOLS.map(tool => ({
+    tool,
+    nameWords: toWords(tool.name),
+    keywordWords: toWords(tool.keywords),
+    descWords: toWords(tool.desc),
+}));
 
-            upgradeBanner.classList.add('hidden');
-            proBanner.classList.remove('hidden');
+let shownSlugs = [];
+let activeIndex = -1;
+let recentSlugs = [];
 
-            if (data.licenseKey) {
-                // Show last 4 chars of license
-                const last4 = data.licenseKey.slice(-4);
-                document.getElementById('licenseKeyDisplay').textContent = `License: ••••-${last4}`;
-            }
-        } else {
-            const remaining = Math.max(0, FREE_DAILY_LIMIT - data.usage);
-            usageText.textContent = `${remaining}/${FREE_DAILY_LIMIT} left`;
+init();
 
-            upgradeBanner.classList.remove('hidden');
-            proBanner.classList.add('hidden');
+async function init() {
+    const isMac = /mac/i.test(navigator.userAgentData ? navigator.userAgentData.platform : navigator.platform);
+    els.shortcut.textContent = isMac ? '⌘K' : 'Ctrl K';
+    els.search.placeholder = `Search ${TOOLS.length} tools (try “combine”)`;
 
-            if (remaining === 0) {
-                badge.className = 'usage-badge expired';
-            } else if (remaining === 1) {
-                badge.className = 'usage-badge warning';
-            } else {
-                badge.className = 'usage-badge';
-            }
-        }
-    } catch (e) {
-        // Extension API not available (testing in browser)
-        usageText.textContent = `${FREE_DAILY_LIMIT}/${FREE_DAILY_LIMIT} left`;
+    els.search.addEventListener('input', render);
+    els.search.addEventListener('keydown', onSearchKeydown);
+    document.addEventListener('keydown', onDocumentKeydown);
+    for (const list of [els.results, els.recentList]) {
+        list.addEventListener('click', onToolClick);
+        list.addEventListener('auxclick', onToolClick);
+        // Keep focus in the search box so arrow keys keep working after a click.
+        list.addEventListener('mousedown', event => event.preventDefault());
     }
+    els.ratePlay.addEventListener('click', () => finishRatePrompt(PLAY_STORE_LINK));
+    els.rateExtension.addEventListener('click', () => finishRatePrompt(CHROME_STORE_REVIEWS_URL));
+    els.rateLater.addEventListener('click', snoozeRatePrompt);
+
+    await loadState();
+    render();
+    els.search.focus();
 }
 
-function getUsageData() {
-    return new Promise((resolve) => {
-        if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.sendMessage) {
-            chrome.runtime.sendMessage({ type: 'CHECK_USAGE' }, (response) => {
-                resolve(response || { usage: 0, limit: FREE_DAILY_LIMIT, isPro: false, licenseKey: null, canUse: true });
-            });
-        } else {
-            // Fallback for testing
-            resolve({ usage: 0, limit: FREE_DAILY_LIMIT, isPro: false, licenseKey: null, canUse: true });
+async function loadState() {
+    const data = await chrome.storage.local.get(['toolOpenCount', 'recentTools', 'ratePromptDone', 'ratePromptSnoozedUntil']);
+    recentSlugs = (Array.isArray(data.recentTools) ? data.recentTools : []).filter(slug => TOOLS_BY_SLUG.has(slug));
+    els.rateCard.hidden = !shouldShowRatePrompt(data, Date.now());
+}
+
+function shouldShowRatePrompt(data, now) {
+    return (Number(data.toolOpenCount) || 0) >= RATE_PROMPT_MIN_OPENS
+        && data.ratePromptDone !== true
+        && now >= (Number(data.ratePromptSnoozedUntil) || 0);
+}
+
+// ---------------------------------------------------------------------------
+// Rendering
+// ---------------------------------------------------------------------------
+
+function render() {
+    const query = els.search.value;
+    els.results.replaceChildren();
+    shownSlugs = [];
+
+    const hasQuery = query.trim() !== '';
+    renderRecent(!hasQuery);
+
+    if (!hasQuery) {
+        for (const category of CATEGORIES) {
+            const tools = TOOLS.filter(tool => tool.cat === category.id);
+            const group = document.createElement('div');
+            group.className = 'group';
+            group.setAttribute('role', 'group');
+            group.setAttribute('aria-labelledby', 'cat-' + category.id);
+            const label = document.createElement('div');
+            label.className = 'group-title';
+            label.id = 'cat-' + category.id;
+            label.textContent = category.label;
+            group.append(label, ...tools.map(createOption));
+            els.results.append(group);
         }
-    });
-}
-
-function incrementUsage() {
-    return new Promise((resolve) => {
-        if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.sendMessage) {
-            chrome.runtime.sendMessage({ type: 'INCREMENT_USAGE' }, (response) => {
-                resolve(response);
-            });
-        } else {
-            resolve({ success: true });
-        }
-    });
-}
-
-// ============================================================================
-// TOOL BUTTONS
-// ============================================================================
-
-function initToolButtons() {
-    // Quick action buttons
-    document.querySelectorAll('.quick-btn').forEach(btn => {
-        btn.addEventListener('click', () => handleToolClick(btn.dataset.tool));
-    });
-
-    // Full tool buttons
-    document.querySelectorAll('.tool-btn').forEach(btn => {
-        btn.addEventListener('click', () => handleToolClick(btn.dataset.tool));
-    });
-}
-
-async function handleToolClick(toolSlug) {
-    const data = await getUsageData();
-
-    if (!data.isPro && data.usage >= FREE_DAILY_LIMIT) {
-        showLimitModal();
+        els.status.textContent = '';
+        setActive(-1);
         return;
     }
 
-    // Increment usage
-    await incrementUsage();
-
-    // Open tool on convertify.work
-    const url = `${TOOLS_URL}/${toolSlug}?from=extension`;
-
-    if (typeof chrome !== 'undefined' && chrome.tabs) {
-        chrome.tabs.create({ url });
-    } else {
-        window.open(url, '_blank');
-    }
-
-    // Refresh usage display
-    initUsageDisplay();
-}
-
-// ============================================================================
-// SEARCH
-// ============================================================================
-
-function initSearch() {
-    const searchInput = document.getElementById('searchInput');
-    const toolsContainer = document.getElementById('toolsContainer');
-
-    searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase().trim();
-        filterTools(query);
-    });
-
-    // Auto-focus search
-    searchInput.focus();
-}
-
-function filterTools(query) {
-    const sections = document.querySelectorAll('.section');
-    const allToolBtns = document.querySelectorAll('.tool-btn');
-    const quickBtns = document.querySelectorAll('.quick-btn');
-    let anyVisible = false;
-
-    if (!query) {
-        // Show everything
-        sections.forEach(s => s.classList.remove('hidden'));
-        allToolBtns.forEach(b => b.classList.remove('hidden'));
-        quickBtns.forEach(b => b.style.display = '');
-        removeNoResults();
+    const matches = searchTools(query);
+    if (matches.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'empty';
+        const title = document.createElement('p');
+        title.className = 'empty-title';
+        title.textContent = `No tool matches “${query.trim()}”`;
+        const hint = document.createElement('p');
+        hint.textContent = 'Try a format or an action, like “pdf”, “jpg”, “merge” or “compress”.';
+        empty.append(title, hint);
+        els.results.append(empty);
+        els.status.textContent = 'No tools found';
+        setActive(-1);
         return;
     }
 
-    // Hide quick actions during search
-    const quickSection = sections[0];
-    quickSection.classList.add('hidden');
-
-    // Filter tool buttons
-    sections.forEach((section, index) => {
-        if (index === 0) return; // Skip quick actions
-
-        let sectionHasVisible = false;
-
-        section.querySelectorAll('.tool-btn').forEach(btn => {
-            const toolName = btn.querySelector('.tool-name').textContent.toLowerCase();
-            const toolDesc = btn.querySelector('.tool-desc').textContent.toLowerCase();
-            const toolSlug = btn.dataset.tool.toLowerCase().replace(/-/g, ' ');
-
-            const matches = toolName.includes(query) ||
-                toolDesc.includes(query) ||
-                toolSlug.includes(query);
-
-            if (matches) {
-                btn.classList.remove('hidden');
-                sectionHasVisible = true;
-                anyVisible = true;
-            } else {
-                btn.classList.add('hidden');
-            }
-        });
-
-        section.classList.toggle('hidden', !sectionHasVisible);
-    });
-
-    // Show/hide no results
-    if (!anyVisible) {
-        showNoResults(query);
-    } else {
-        removeNoResults();
-    }
+    els.results.append(...matches.map(createOption));
+    els.status.textContent = matches.length === 1 ? '1 tool found' : `${matches.length} tools found`;
+    setActive(0);
 }
 
-function showNoResults(query) {
-    removeNoResults();
-    const container = document.getElementById('toolsContainer');
-    const div = document.createElement('div');
-    div.className = 'no-results';
-    div.id = 'noResults';
-    div.innerHTML = `
-    <div class="no-results-emoji">🔍</div>
-    <div class="no-results-text">No tools found for "${query}"</div>
-  `;
-    container.appendChild(div);
+function renderRecent(visible) {
+    els.recent.hidden = !visible;
+    if (!visible) return;
+    const usingRecent = recentSlugs.length > 0;
+    els.recentTitle.textContent = usingRecent ? 'Recent' : 'Popular';
+    els.recentList.replaceChildren(...(usingRecent ? recentSlugs : POPULAR_TOOLS).map(slug => {
+        const tool = TOOLS_BY_SLUG.get(slug);
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'chip';
+        chip.dataset.slug = slug;
+        chip.title = tool.desc;
+        const name = document.createElement('span');
+        name.className = 'chip-name';
+        name.textContent = tool.name;
+        chip.append(createIcon(tool.cat), name);
+        return chip;
+    }));
 }
 
-function removeNoResults() {
-    const existing = document.getElementById('noResults');
-    if (existing) existing.remove();
+function createOption(tool) {
+    shownSlugs.push(tool.slug);
+    const option = document.createElement('button');
+    option.type = 'button';
+    option.className = 'tool';
+    option.id = 'opt-' + tool.slug;
+    option.dataset.slug = tool.slug;
+    option.tabIndex = -1;
+    option.setAttribute('role', 'option');
+    option.setAttribute('aria-selected', 'false');
+
+    const text = document.createElement('span');
+    text.className = 'tool-text';
+    const name = document.createElement('span');
+    name.className = 'tool-name';
+    name.textContent = tool.name;
+    const desc = document.createElement('span');
+    desc.className = 'tool-desc';
+    desc.textContent = tool.desc;
+    text.append(name, desc);
+
+    option.append(createIcon(tool.cat), text);
+    return option;
 }
 
-// ============================================================================
-// UPGRADE / MONETIZATION
-// ============================================================================
-
-const CHECKOUT_URL = 'https://convertifiy.lemonsqueezy.com/checkout/buy/dfca0e79-4d34-4d1a-951c-6d677143ad3e';
-const ACTIVATE_URL = 'https://api.lemonsqueezy.com/v1/licenses/activate';
-
-function initUpgradeButtons() {
-    // Open checkout
-    const upgradeBtn = document.getElementById('upgradeBtn');
-    const modalUpgradeBtn = document.getElementById('modalUpgradeBtn');
-
-    [upgradeBtn, modalUpgradeBtn].forEach(btn => {
-        if (btn) btn.addEventListener('click', openCheckout);
-    });
-
-    // Open License Modal
-    const enterLicenseBtn = document.getElementById('enterLicenseBtn');
-    const modalEnterLicenseBtn = document.getElementById('modalEnterLicenseBtn');
-
-    [enterLicenseBtn, modalEnterLicenseBtn].forEach(btn => {
-        if (btn) btn.addEventListener('click', showLicenseModal);
-    });
-
-    // Close License Modal
-    document.getElementById('licenseCloseBtn').addEventListener('click', hideLicenseModal);
-
-    // Activate Button
-    document.getElementById('activateBtn').addEventListener('click', activateLicense);
-
-    // Lost Key
-    document.getElementById('lostKeyBtn').addEventListener('click', openCustomerPortal);
-
-    // Manage Subscription
-    document.getElementById('manageSubBtn').addEventListener('click', openCustomerPortal);
-
-    // Handle Enter key in input
-    document.getElementById('licenseInput').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') activateLicense();
-    });
+function createIcon(category) {
+    const icon = document.createElement('span');
+    icon.className = 'icon icon-' + category;
+    icon.setAttribute('aria-hidden', 'true');
+    icon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+        + CATEGORY_ICONS[category] + '</svg>';
+    return icon;
 }
 
-function openCheckout() {
-    chrome.tabs.create({ url: CHECKOUT_URL });
+// ---------------------------------------------------------------------------
+// Search
+// ---------------------------------------------------------------------------
+
+function toWords(text) {
+    return text.toLowerCase().replace(/×/g, 'x').split(/[^a-z0-9]+/).filter(Boolean);
 }
 
-function openCustomerPortal() {
-    chrome.tabs.create({ url: 'https://convertifiy.lemonsqueezy.com/billing' });
+function queryTokens(query) {
+    // "100kb", "100 kb" and "2.5mb" all mean "a size in KB/MB".
+    const normalized = query.toLowerCase().replace(/\b\d+(?:\.\d+)?\s*(k|m)b?\b/g, ' $1b ');
+    const words = toWords(normalized);
+    const meaningful = words.filter(word => !STOP_WORDS.has(word));
+    return meaningful.length ? meaningful : words;
 }
 
-function showLimitModal() {
-    const modal = document.getElementById('limitModal');
-    modal.style.display = 'flex';
-}
-
-function hideLimitModal() {
-    const modal = document.getElementById('limitModal');
-    modal.style.display = 'none';
-}
-
-function showLicenseModal() {
-    hideLimitModal(); // Close potential other modal
-    document.getElementById('licenseModal').style.display = 'flex';
-    document.getElementById('licenseInput').focus();
-}
-
-function hideLicenseModal() {
-    document.getElementById('licenseModal').style.display = 'none';
-    document.getElementById('licenseError').style.display = 'none';
-}
-
-async function activateLicense() {
-    const input = document.getElementById('licenseInput');
-    const btn = document.getElementById('activateBtn');
-    const errorMsg = document.getElementById('licenseError');
-    const key = input.value.trim();
-
-    if (!key) return;
-
-    // UI Loading State
-    btn.textContent = 'Verifying...';
-    btn.classList.add('loading');
-    errorMsg.style.display = 'none';
-    input.disabled = true;
-
-    try {
-        const formData = new FormData();
-        formData.append('license_key', key);
-        formData.append('instance_name', 'Convertify Extension');
-
-        const response = await fetch(ACTIVATE_URL, {
-            method: 'POST',
-            body: formData
-        });
-
-        const data = await response.json();
-
-        if (data.activated) {
-            // Success!
-            await setProStatus(true, key);
-            hideLicenseModal();
-            initUsageDisplay(); // Refresh UI
-            alert('Success! Pro features unlocked. 🚀');
-        } else {
-            throw new Error(data.error || 'Invalid license key');
+// The token itself plus the synonyms of every word it is (or starts) spelling.
+function expandToken(token) {
+    const variants = new Set([token]);
+    for (const [word, targets] of SYNONYM_ENTRIES) {
+        if (word === token || (token.length >= 3 && word.startsWith(token))) {
+            variants.add(word);
+            for (const target of targets) variants.add(target);
         }
-    } catch (err) {
-        errorMsg.textContent = err.message || 'Validation failed';
-        errorMsg.style.display = 'block';
+    }
+    return variants;
+}
 
-        // Reset UI
-        btn.textContent = 'Activate License';
-        btn.classList.remove('loading');
-        input.disabled = false;
+function searchTools(query) {
+    const tokens = queryTokens(query).map(token => ({ token, variants: expandToken(token) }));
+    if (tokens.length === 0) return [];
+    return searchIndex
+        .map((entry, order) => ({ tool: entry.tool, order, score: scoreEntry(entry, tokens) }))
+        .filter(result => result.score > 0)
+        .sort((a, b) => b.score - a.score || a.order - b.order)
+        .map(result => result.tool);
+}
+
+// Every token must match. Name beats keywords beats description; the typed word
+// beats a synonym; tokens found in the name in the typed order earn a bonus, so
+// "pdf to jpg" ranks PDF to JPG above JPG to PDF.
+function scoreEntry(entry, tokens) {
+    let score = 0;
+    let namePositions = [];
+    for (const { token, variants } of tokens) {
+        let best = 0;
+        let namePos = -1;
+        for (const variant of variants) {
+            const exact = variant === token ? 1 : 0;
+            const pos = entry.nameWords.findIndex(word => word.startsWith(variant));
+            if (pos >= 0) {
+                best = Math.max(best, 5 + exact);
+                if (namePos < 0 || pos < namePos) namePos = pos;
+            } else if (entry.keywordWords.some(word => word.startsWith(variant))) {
+                best = Math.max(best, 3 + exact);
+            } else if (entry.descWords.some(word => word.startsWith(variant))) {
+                best = Math.max(best, 1 + exact);
+            }
+        }
+        if (best === 0) return 0;
+        score += best;
+        if (namePos >= 0) namePositions.push(namePos);
+    }
+    if (namePositions.length > 1 && namePositions.every((pos, i) => i === 0 || pos > namePositions[i - 1])) {
+        score += 2;
+    }
+    return score;
+}
+
+// ---------------------------------------------------------------------------
+// Keyboard and clicks
+// ---------------------------------------------------------------------------
+
+function onDocumentKeydown(event) {
+    if ((event.ctrlKey || event.metaKey) && !event.altKey && event.key.toLowerCase() === 'k') {
+        event.preventDefault();
+        els.search.focus();
+        els.search.select();
     }
 }
 
-function setProStatus(isPro, key) {
-    return new Promise((resolve) => {
-        chrome.storage.local.set({
-            isPro: isPro,
-            licenseKey: key
-        }, () => {
-            // Also notify background script
-            chrome.runtime.sendMessage({ type: 'SET_PRO', key: key });
-            resolve();
-        });
-    });
+function onSearchKeydown(event) {
+    switch (event.key) {
+        case 'ArrowDown':
+            event.preventDefault();
+            moveActive(1);
+            break;
+        case 'ArrowUp':
+            event.preventDefault();
+            moveActive(-1);
+            break;
+        case 'Enter': {
+            const slug = shownSlugs[activeIndex];
+            if (slug) {
+                event.preventDefault();
+                openTool(slug, event.ctrlKey || event.metaKey);
+            }
+            break;
+        }
+        case 'Escape':
+            if (els.search.value) {
+                event.preventDefault();
+                els.search.value = '';
+                render();
+            }
+            break;
+    }
 }
 
-// ============================================================================
-// KEYBOARD SHORTCUTS
-// ============================================================================
+function moveActive(step) {
+    if (shownSlugs.length === 0) return;
+    const next = activeIndex < 0
+        ? (step > 0 ? 0 : shownSlugs.length - 1)
+        : (activeIndex + step + shownSlugs.length) % shownSlugs.length;
+    setActive(next);
+}
 
-document.addEventListener('keydown', (e) => {
-    // Escape to close modal
-    if (e.key === 'Escape') {
-        hideLimitModal();
+function setActive(index) {
+    const previous = document.getElementById('opt-' + shownSlugs[activeIndex]);
+    if (previous) {
+        previous.classList.remove('active');
+        previous.setAttribute('aria-selected', 'false');
     }
+    activeIndex = index;
+    const current = document.getElementById('opt-' + shownSlugs[index]);
+    if (current) {
+        current.classList.add('active');
+        current.setAttribute('aria-selected', 'true');
+        els.search.setAttribute('aria-activedescendant', current.id);
+        current.scrollIntoView({ block: 'nearest' });
+    } else {
+        els.search.removeAttribute('aria-activedescendant');
+    }
+}
 
-    // Ctrl/Cmd + K to focus search
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault();
-        document.getElementById('searchInput').focus();
+function onToolClick(event) {
+    const target = event.target.closest('[data-slug]');
+    if (!target) return;
+    if (event.type === 'auxclick' && event.button !== 1) return;
+    openTool(target.dataset.slug, event.type === 'auxclick' || event.ctrlKey || event.metaKey);
+}
+
+// A foreground tab closes the popup, so storage is written before the tab opens.
+async function openTool(slug, inBackground) {
+    await recordToolOpen(slug);
+    await chrome.tabs.create({ url: siteUrl(slug, 'popup'), active: !inBackground });
+    if (inBackground) {
+        await loadState();
+        renderRecent(els.search.value.trim() === '');
     }
-});
+}
+
+// ---------------------------------------------------------------------------
+// Rating prompt
+// ---------------------------------------------------------------------------
+
+async function finishRatePrompt(url) {
+    await chrome.storage.local.set({ ratePromptDone: true });
+    els.rateCard.hidden = true;
+    await chrome.tabs.create({ url });
+}
+
+async function snoozeRatePrompt() {
+    await chrome.storage.local.set({ ratePromptSnoozedUntil: Date.now() + RATE_PROMPT_SNOOZE_MS });
+    els.rateCard.hidden = true;
+    els.search.focus();
+}

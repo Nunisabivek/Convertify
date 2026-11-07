@@ -2,8 +2,8 @@
     "manifest_version": 3,
     "name": "Convertify - All-in-One PDF & File Converter",
     "short_name": "Convertify",
-    "version": "1.0.1",
-    "description": "Free PDF tools: merge, split, compress, convert PDF to Word/JPG/Excel. Also: HEIC to JPG, image compressor, resize. 30+ tools.",
+    "version": "2.0.0",
+    "description": "Quick launcher for 50 free Convertify tools: merge, split, compress and convert PDFs, images and data files on convertify.work.",
     "icons": {
         "16": "icons/icon16.png",
         "32": "icons/icon32.png",
@@ -18,12 +18,11 @@
             "48": "icons/icon48.png",
             "128": "icons/icon128.png"
         },
-        "default_title": "Convertify - PDF Tools"
+        "default_title": "Convertify tools"
     },
     "permissions": [
         "storage",
-        "contextMenus",
-        "activeTab"
+        "contextMenus"
     ],
     "background": {
         "service_worker": "background.js"
@@ -31,16 +30,6 @@
     "content_security_policy": {
         "extension_pages": "script-src 'self'; object-src 'self'"
     },
-    "web_accessible_resources": [
-        {
-            "resources": [
-                "icons/*"
-            ],
-            "matches": [
-                "<all_urls>"
-            ]
-        }
-    ],
     "homepage_url": "https://convertify.work",
     "minimum_chrome_version": "102"
 }

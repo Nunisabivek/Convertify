@@ -1,155 +1,72 @@
-// Convertify Extension - Background Service Worker
-// Handles context menus, usage tracking, and premium checks
+// Convertify extension: service worker.
+// Cleans up storage left by v1 and provides a right-click menu that opens tools
+// on convertify.work. The menu only opens a page; it never sends the current
+// page, image or link anywhere.
 
-const FREE_DAILY_LIMIT = 3;
-const TOOLS_URL = 'https://convertify.work';
+importScripts('tools.js');
 
-// ============================================================================
-// CONTEXT MENUS
-// ============================================================================
+// v1 kept a paid tier and a daily limit in these keys. 2.0 is fully free.
+const LEGACY_STORAGE_KEYS = ['isPro', 'licenseKey', 'dailyUsage', 'lastResetDate'];
 
-chrome.runtime.onInstalled.addListener(() => {
-    // Create parent menu
-    chrome.contextMenus.create({
-        id: 'convertify-parent',
-        title: '🔧 Convertify Tools',
-        contexts: ['page', 'image', 'link']
-    });
+const MENU_PARENT_ID = 'convertify';
+const MENU_ALL_TOOLS_ID = 'all-tools';
+const MENU_TOOL_PREFIX = 'tool:';
 
-    // Image context menus
-    chrome.contextMenus.create({
-        id: 'convert-image-to-pdf',
-        parentId: 'convertify-parent',
-        title: '📸 Convert Image to PDF',
-        contexts: ['image']
-    });
+chrome.runtime.onInstalled.addListener(handleInstalled);
+chrome.contextMenus.onClicked.addListener(handleMenuClick);
 
-    // Page context menus
-    chrome.contextMenus.create({
-        id: 'save-page-as-pdf',
-        parentId: 'convertify-parent',
-        title: '📄 Save Page as PDF',
-        contexts: ['page']
-    });
+function handleInstalled() {
+    return Promise.all([
+        chrome.storage.local.remove(LEGACY_STORAGE_KEYS),
+        rebuildContextMenus(),
+    ]);
+}
 
-    // Separator
-    chrome.contextMenus.create({
-        id: 'separator-1',
-        parentId: 'convertify-parent',
-        type: 'separator',
-        contexts: ['page', 'image', 'link']
-    });
-
-    // Quick tools
-    chrome.contextMenus.create({
-        id: 'open-merge',
-        parentId: 'convertify-parent',
-        title: '📎 Merge PDFs',
-        contexts: ['page']
-    });
-
-    chrome.contextMenus.create({
-        id: 'open-compress',
-        parentId: 'convertify-parent',
-        title: '📦 Compress PDF',
-        contexts: ['page']
-    });
-
-    chrome.contextMenus.create({
-        id: 'open-all-tools',
-        parentId: 'convertify-parent',
-        title: '🛠️ All 30+ Tools →',
-        contexts: ['page', 'image', 'link']
-    });
-
-    // Initialize usage tracking
-    chrome.storage.local.get(['dailyUsage', 'lastResetDate', 'isPro'], (data) => {
-        const today = new Date().toDateString();
-        if (data.lastResetDate !== today) {
-            chrome.storage.local.set({
-                dailyUsage: 0,
-                lastResetDate: today
-            });
-        }
-        if (data.isPro === undefined) {
-            chrome.storage.local.set({ isPro: false });
-        }
-    });
-});
-
-// ============================================================================
-// CONTEXT MENU CLICKS
-// ============================================================================
-
-chrome.contextMenus.onClicked.addListener((info, tab) => {
-    switch (info.menuItemId) {
-        case 'convert-image-to-pdf':
-            chrome.tabs.create({ url: `${TOOLS_URL}/jpg-to-pdf?from=extension` });
-            break;
-        case 'save-page-as-pdf':
-            chrome.tabs.create({ url: `${TOOLS_URL}/html-to-pdf?url=${encodeURIComponent(tab.url)}&from=extension` });
-            break;
-        case 'open-merge':
-            chrome.tabs.create({ url: `${TOOLS_URL}/merge-pdf?from=extension` });
-            break;
-        case 'open-compress':
-            chrome.tabs.create({ url: `${TOOLS_URL}/compress-pdf?from=extension` });
-            break;
-        case 'open-all-tools':
-            chrome.tabs.create({ url: `${TOOLS_URL}/all-tools?from=extension` });
-            break;
-    }
-});
-
-// ============================================================================
-// USAGE TRACKING & LIMITS
-// ============================================================================
-
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.type === 'CHECK_USAGE') {
-        chrome.storage.local.get(['dailyUsage', 'lastResetDate', 'isPro', 'licenseKey'], (data) => {
-            const today = new Date().toDateString();
-            let usage = data.dailyUsage || 0;
-
-            // Reset if new day
-            if (data.lastResetDate !== today) {
-                usage = 0;
-                chrome.storage.local.set({ dailyUsage: 0, lastResetDate: today });
+// Menus persist across updates, so clear them first to avoid duplicate-id errors.
+function rebuildContextMenus() {
+    return new Promise(resolve => {
+        chrome.contextMenus.removeAll(() => {
+            const contexts = ['page'];
+            createMenu({ id: MENU_PARENT_ID, title: 'Convertify', contexts });
+            for (const slug of POPULAR_TOOLS) {
+                createMenu({
+                    id: MENU_TOOL_PREFIX + slug,
+                    parentId: MENU_PARENT_ID,
+                    title: `Open ${TOOLS_BY_SLUG.get(slug).name}`,
+                    contexts,
+                });
             }
-
-            sendResponse({
-                usage: usage,
-                limit: FREE_DAILY_LIMIT,
-                isPro: data.isPro || false,
-                licenseKey: data.licenseKey || null,
-                canUse: (data.isPro || false) || usage < FREE_DAILY_LIMIT
-            });
+            createMenu({ id: 'separator', parentId: MENU_PARENT_ID, type: 'separator', contexts });
+            createMenu({ id: MENU_ALL_TOOLS_ID, parentId: MENU_PARENT_ID, title: 'Open all tools', contexts }, resolve);
         });
-        return true; // async
+    });
+}
+
+function createMenu(properties, done) {
+    chrome.contextMenus.create(properties, () => {
+        if (chrome.runtime.lastError) {
+            console.error(`Context menu "${properties.id}":`, chrome.runtime.lastError.message);
+        }
+        if (done) done();
+    });
+}
+
+async function handleMenuClick(info, tab) {
+    const id = String(info.menuItemId);
+    let path;
+    if (id === MENU_ALL_TOOLS_ID) {
+        path = 'all-tools';
+    } else if (id.startsWith(MENU_TOOL_PREFIX) && TOOLS_BY_SLUG.has(id.slice(MENU_TOOL_PREFIX.length))) {
+        path = id.slice(MENU_TOOL_PREFIX.length);
+        await recordToolOpen(path);
+    } else {
+        return;
     }
 
-    if (message.type === 'INCREMENT_USAGE') {
-        chrome.storage.local.get(['dailyUsage', 'isPro'], (data) => {
-            if (!data.isPro) {
-                chrome.storage.local.set({ dailyUsage: (data.dailyUsage || 0) + 1 });
-            }
-            sendResponse({ success: true });
-        });
-        return true;
+    const createProperties = { url: siteUrl(path, 'context_menu') };
+    if (tab && tab.id >= 0) {
+        createProperties.windowId = tab.windowId;
+        createProperties.index = tab.index + 1;
     }
-
-    if (message.type === 'UPGRADE_PRO') {
-        chrome.tabs.create({ url: `${TOOLS_URL}/pricing?from=extension&upgrade=true` });
-        sendResponse({ success: true });
-        return true;
-    }
-
-    if (message.type === 'SET_PRO') {
-        chrome.storage.local.set({
-            isPro: true,
-            licenseKey: message.key
-        });
-        sendResponse({ success: true });
-        return true;
-    }
-});
+    await chrome.tabs.create(createProperties);
+}

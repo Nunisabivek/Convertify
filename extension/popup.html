@@ -9,360 +9,58 @@
 </head>
 
 <body>
-  <!-- Header -->
   <header class="header">
-    <div class="header-top">
-      <div class="logo">
-        <div class="logo-icon">C</div>
-        <div class="logo-text">
-          <span class="brand">Convertify</span>
-          <span class="tagline">30+ PDF Tools • 100% Free</span>
-        </div>
-      </div>
-      <div class="usage-badge" id="usageBadge">
-        <span id="usageText">3/3 left</span>
+    <div class="brand-row">
+      <img class="logo" src="icons/icon48.png" width="32" height="32" alt="">
+      <div class="brand-text">
+        <span class="brand">Convertify</span>
+        <span class="tagline">Free PDF, image &amp; data tools</span>
       </div>
     </div>
 
-    <!-- Search -->
-    <div class="search-box">
-      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="11" cy="11" r="8" />
-        <path d="m21 21-4.3-4.3" />
+    <div class="search">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" />
+        <path d="m20 20-3.5-3.5" />
       </svg>
-      <input type="text" id="searchInput" placeholder="Search tools... (merge, compress, convert)" autocomplete="off">
+      <input type="search" id="search" placeholder="Search tools" autocomplete="off" spellcheck="false"
+        role="combobox" aria-label="Search tools" aria-controls="results" aria-expanded="true"
+        aria-autocomplete="list" aria-describedby="searchHint">
+      <kbd class="shortcut" id="shortcut" aria-hidden="true">Ctrl K</kbd>
     </div>
+    <p class="visually-hidden" id="searchHint">Use the up and down arrow keys to pick a tool, then press Enter to open it.</p>
   </header>
 
-  <!-- Tools Container -->
-  <main class="tools-container" id="toolsContainer">
+  <section class="recent" id="recent" hidden>
+    <h2 class="row-title" id="recentTitle">Recent</h2>
+    <div class="chips" id="recentList"></div>
+  </section>
 
-    <!-- Quick Actions -->
-    <section class="section">
-      <h3 class="section-title">⚡ Quick Actions</h3>
-      <div class="quick-grid">
-        <button class="quick-btn" data-tool="merge-pdf" data-color="#DC2626">
-          <span class="quick-icon">📎</span>
-          <span>Merge</span>
-        </button>
-        <button class="quick-btn" data-tool="compress-pdf" data-color="#16A34A">
-          <span class="quick-icon">📦</span>
-          <span>Compress</span>
-        </button>
-        <button class="quick-btn" data-tool="split-pdf" data-color="#EA580C">
-          <span class="quick-icon">✂️</span>
-          <span>Split</span>
-        </button>
-        <button class="quick-btn" data-tool="pdf-to-jpg" data-color="#9333EA">
-          <span class="quick-icon">🖼️</span>
-          <span>PDF→JPG</span>
-        </button>
-        <button class="quick-btn" data-tool="jpg-to-pdf" data-color="#E11D48">
-          <span class="quick-icon">📸</span>
-          <span>JPG→PDF</span>
-        </button>
-        <button class="quick-btn" data-tool="pdf-to-word" data-color="#2563EB">
-          <span class="quick-icon">📝</span>
-          <span>PDF→Word</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- Organize PDF -->
-    <section class="section">
-      <h3 class="section-title">📁 Organize PDF</h3>
-      <div class="tools-grid">
-        <button class="tool-btn" data-tool="merge-pdf">
-          <span class="tool-emoji">📎</span>
-          <span class="tool-name">Merge PDF</span>
-          <span class="tool-desc">Combine multiple PDFs</span>
-        </button>
-        <button class="tool-btn" data-tool="split-pdf">
-          <span class="tool-emoji">✂️</span>
-          <span class="tool-name">Split PDF</span>
-          <span class="tool-desc">Extract pages</span>
-        </button>
-        <button class="tool-btn" data-tool="compress-pdf">
-          <span class="tool-emoji">📦</span>
-          <span class="tool-name">Compress PDF</span>
-          <span class="tool-desc">Reduce file size</span>
-        </button>
-        <button class="tool-btn" data-tool="rotate-pdf">
-          <span class="tool-emoji">🔄</span>
-          <span class="tool-name">Rotate PDF</span>
-          <span class="tool-desc">Fix page orientation</span>
-        </button>
-        <button class="tool-btn" data-tool="delete-pdf-pages">
-          <span class="tool-emoji">🗑️</span>
-          <span class="tool-name">Delete Pages</span>
-          <span class="tool-desc">Remove unwanted pages</span>
-        </button>
-        <button class="tool-btn" data-tool="reorder-pdf">
-          <span class="tool-emoji">↕️</span>
-          <span class="tool-name">Reorder Pages</span>
-          <span class="tool-desc">Rearrange page order</span>
-        </button>
-        <button class="tool-btn" data-tool="ocr-pdf">
-          <span class="tool-emoji">🔍</span>
-          <span class="tool-name">OCR PDF</span>
-          <span class="tool-desc">Extract text from scans</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- Convert from PDF -->
-    <section class="section">
-      <h3 class="section-title">📤 Convert from PDF</h3>
-      <div class="tools-grid">
-        <button class="tool-btn" data-tool="pdf-to-word">
-          <span class="tool-emoji">📝</span>
-          <span class="tool-name">PDF to Word</span>
-          <span class="tool-desc">Editable DOCX</span>
-        </button>
-        <button class="tool-btn" data-tool="pdf-to-jpg">
-          <span class="tool-emoji">🖼️</span>
-          <span class="tool-name">PDF to JPG</span>
-          <span class="tool-desc">High-res images</span>
-        </button>
-        <button class="tool-btn" data-tool="pdf-to-png">
-          <span class="tool-emoji">🎨</span>
-          <span class="tool-name">PDF to PNG</span>
-          <span class="tool-desc">Transparent images</span>
-        </button>
-        <button class="tool-btn" data-tool="pdf-to-excel">
-          <span class="tool-emoji">📊</span>
-          <span class="tool-name">PDF to Excel</span>
-          <span class="tool-desc">Extract tables</span>
-        </button>
-        <button class="tool-btn" data-tool="pdf-to-powerpoint">
-          <span class="tool-emoji">📽️</span>
-          <span class="tool-name">PDF to PowerPoint</span>
-          <span class="tool-desc">Editable slides</span>
-        </button>
-        <button class="tool-btn" data-tool="pdf-to-text">
-          <span class="tool-emoji">📃</span>
-          <span class="tool-name">PDF to Text</span>
-          <span class="tool-desc">Extract text content</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- Convert to PDF -->
-    <section class="section">
-      <h3 class="section-title">📥 Convert to PDF</h3>
-      <div class="tools-grid">
-        <button class="tool-btn" data-tool="word-to-pdf">
-          <span class="tool-emoji">📄</span>
-          <span class="tool-name">Word to PDF</span>
-          <span class="tool-desc">DOCX to PDF</span>
-        </button>
-        <button class="tool-btn" data-tool="jpg-to-pdf">
-          <span class="tool-emoji">📸</span>
-          <span class="tool-name">JPG to PDF</span>
-          <span class="tool-desc">Images to PDF</span>
-        </button>
-        <button class="tool-btn" data-tool="png-to-pdf">
-          <span class="tool-emoji">🎭</span>
-          <span class="tool-name">PNG to PDF</span>
-          <span class="tool-desc">PNG images to PDF</span>
-        </button>
-        <button class="tool-btn" data-tool="excel-to-pdf">
-          <span class="tool-emoji">📈</span>
-          <span class="tool-name">Excel to PDF</span>
-          <span class="tool-desc">Spreadsheet to PDF</span>
-        </button>
-        <button class="tool-btn" data-tool="powerpoint-to-pdf">
-          <span class="tool-emoji">🎞️</span>
-          <span class="tool-name">PowerPoint to PDF</span>
-          <span class="tool-desc">Slides to PDF</span>
-        </button>
-        <button class="tool-btn" data-tool="html-to-pdf">
-          <span class="tool-emoji">🌐</span>
-          <span class="tool-name">HTML to PDF</span>
-          <span class="tool-desc">Web page to PDF</span>
-        </button>
-        <button class="tool-btn" data-tool="text-to-pdf">
-          <span class="tool-emoji">📝</span>
-          <span class="tool-name">Text to PDF</span>
-          <span class="tool-desc">TXT to PDF</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- Edit & Secure PDF -->
-    <section class="section">
-      <h3 class="section-title">✏️ Edit & Secure PDF</h3>
-      <div class="tools-grid">
-        <button class="tool-btn" data-tool="edit-pdf">
-          <span class="tool-emoji">✏️</span>
-          <span class="tool-name">Edit PDF</span>
-          <span class="tool-desc">Add text & annotations</span>
-        </button>
-        <button class="tool-btn" data-tool="sign-pdf">
-          <span class="tool-emoji">✍️</span>
-          <span class="tool-name">Sign PDF</span>
-          <span class="tool-desc">E-signatures</span>
-        </button>
-        <button class="tool-btn" data-tool="watermark-pdf">
-          <span class="tool-emoji">💧</span>
-          <span class="tool-name">Watermark PDF</span>
-          <span class="tool-desc">Add watermarks</span>
-        </button>
-        <button class="tool-btn" data-tool="protect-pdf">
-          <span class="tool-emoji">🔒</span>
-          <span class="tool-name">Protect PDF</span>
-          <span class="tool-desc">Password encrypt</span>
-        </button>
-        <button class="tool-btn" data-tool="unlock-pdf">
-          <span class="tool-emoji">🔓</span>
-          <span class="tool-name">Unlock PDF</span>
-          <span class="tool-desc">Remove password</span>
-        </button>
-        <button class="tool-btn" data-tool="add-page-numbers">
-          <span class="tool-emoji">#️⃣</span>
-          <span class="tool-name">Page Numbers</span>
-          <span class="tool-desc">Add numbering</span>
-        </button>
-        <button class="tool-btn" data-tool="redact-pdf">
-          <span class="tool-emoji">🟥</span>
-          <span class="tool-name">Redact PDF</span>
-          <span class="tool-desc">Remove sensitive info</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- Advanced -->
-    <section class="section">
-      <h3 class="section-title">🚀 Advanced Tools</h3>
-      <div class="tools-grid">
-        <button class="tool-btn" data-tool="compare-pdf">
-          <span class="tool-emoji">🔎</span>
-          <span class="tool-name">Compare PDF</span>
-          <span class="tool-desc">Find differences</span>
-        </button>
-        <button class="tool-btn" data-tool="pdf-to-pdfa">
-          <span class="tool-emoji">📁</span>
-          <span class="tool-name">PDF to PDF/A</span>
-          <span class="tool-desc">Archival format</span>
-        </button>
-        <button class="tool-btn" data-tool="repair-pdf">
-          <span class="tool-emoji">🔧</span>
-          <span class="tool-name">Repair PDF</span>
-          <span class="tool-desc">Fix corrupt files</span>
-        </button>
-      </div>
-    </section>
+  <main class="scroller">
+    <div id="results" role="listbox" aria-label="Tools"></div>
   </main>
+  <p class="visually-hidden" id="status" role="status" aria-live="polite"></p>
 
-  <!-- Upgrade Banner (shown for free users) -->
-  <div class="upgrade-banner" id="upgradeBanner">
-    <div class="upgrade-content">
-      <span class="upgrade-icon">👑</span>
-      <div class="upgrade-text">
-        <strong>Upgrade to Pro</strong>
-        <span>Unlimited conversions • $4.99/mo</span>
-      </div>
-      <button class="upgrade-btn" id="upgradeBtn">Upgrade</button>
+  <aside class="rate-card" id="rateCard" aria-labelledby="rateTitle" hidden>
+    <div class="rate-head">
+      <h2 class="rate-title" id="rateTitle">Convertify is on Android too</h2>
+      <button type="button" class="btn-text" id="rateLater">Not now</button>
     </div>
-    <div class="license-link-container">
-      <button class="text-link" id="enterLicenseBtn">Have a license key?</button>
+    <p class="rate-text">Get the free Android app on Google Play, and leave a rating if it helps you.</p>
+    <div class="rate-actions">
+      <button type="button" class="btn btn-primary" id="ratePlay">Get it on Google Play</button>
+      <button type="button" class="btn btn-secondary" id="rateExtension">Rate this extension</button>
     </div>
-  </div>
+  </aside>
 
-  <!-- Pro Dashboard (shown for Pro users) -->
-  <div class="pro-banner hidden" id="proBanner">
-    <div class="pro-content">
-      <span class="pro-icon">💎</span>
-      <div class="pro-text">
-        <strong>Pro Active</strong>
-        <span id="licenseKeyDisplay">License: ••••-••••</span>
-      </div>
-      <button class="manage-btn" id="manageSubBtn">Manage</button>
-    </div>
-  </div>
-
-  <!-- Usage Limit Modal -->
-  <div class="modal-overlay" id="limitModal" style="display: none;">
-    <div class="modal">
-      <div class="modal-icon">🔒</div>
-      <h2>Daily Limit Reached</h2>
-      <p>You've used all <strong>3 free conversions</strong> today.</p>
-      <p class="modal-sub">Upgrade to Pro for unlimited conversions, batch processing, and all 30+ tools.</p>
-      <div class="modal-pricing">
-        <div class="price-tag">
-          <span class="price">$4.99</span>
-          <span class="period">/month</span>
-        </div>
-        <ul class="benefits">
-          <li>✅ Unlimited conversions</li>
-          <li>✅ Batch processing (multiple files)</li>
-          <li>✅ All 30+ tools unlocked</li>
-          <li>✅ No watermarks</li>
-        </ul>
-      </div>
-      <button class="upgrade-btn-large" id="modalUpgradeBtn">👑 Upgrade to Pro</button>
-      <button class="text-link-large" id="modalEnterLicenseBtn">I have a license key</button>
-      <button class="close-btn" id="modalCloseBtn">Maybe later</button>
-    </div>
-  </div>
-
-  <!-- License Activation Modal -->
-  <div class="modal-overlay" id="licenseModal" style="display: none;">
-    <div class="modal">
-      <div class="modal-icon">🔑</div>
-      <h2>Activate Pro</h2>
-      <p>Enter the license key sent to your email after purchase.</p>
-
-      <div class="input-group">
-        <input type="text" id="licenseInput" placeholder="Enter key (e.g. 1A2B-3C4D...)" autocomplete="off">
-        <div id="licenseError" class="error-msg" style="display: none;">Invalid license key</div>
-      </div>
-
-      <button class="upgrade-btn-large" id="activateBtn">Activate License</button>
-      <button class="close-btn" id="licenseCloseBtn">Cancel</button>
-
-      <div class="help-text">
-        <a href="#" id="lostKeyBtn">Lost your key?</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Share Section - KEY for SEO -->
-  <div class="share-section" id="shareSection">
-    <p class="share-title">❤️ Love Convertify? Help us grow!</p>
-    <div class="share-buttons">
-      <a href="https://twitter.com/intent/tweet?text=I%20use%20Convertify%20for%20free%20PDF%20tools%20-%20merge%2C%20compress%2C%20convert!%20Check%20it%20out%3A%20https%3A%2F%2Fconvertify.work" 
-         target="_blank" 
-         class="share-btn twitter">
-        <span>𝕏</span> Share on 𝕏
-      </a>
-      <a href="https://www.producthunt.com/posts/convertify" 
-         target="_blank" 
-         class="share-btn producthunt">
-        <span>🔥</span> Upvote on Product Hunt
-      </a>
-      <a href="https://chrome.google.com/webstore/detail/YOUR_EXTENSION_ID/reviews" 
-         target="_blank" 
-         class="share-btn review">
-        <span>⭐</span> Rate 5 Stars
-      </a>
-    </div>
-    <p class="share-tagline">Every share helps keep us 100% free! 🙏</p>
-  </div>
-
-  <!-- Footer -->
   <footer class="footer">
-    <a href="https://convertify.work?from=extension" target="_blank" class="footer-link">
-      🌐 convertify.work
-    </a>
-    <span class="footer-dot">•</span>
-    <a href="https://convertify.work/all-tools?from=extension" target="_blank" class="footer-link">
-      All Tools
-    </a>
-    <span class="footer-dot">•</span>
-    <span class="footer-privacy">🔒 100% Private</span>
+    <a class="footer-link" href="https://convertify.work/?utm_source=chrome_extension&amp;utm_medium=popup" target="_blank" rel="noopener">convertify.work</a>
+    <span aria-hidden="true">&middot;</span>
+    <a class="footer-link" href="https://convertify.work/all-tools?utm_source=chrome_extension&amp;utm_medium=popup" target="_blank" rel="noopener">All tools</a>
+    <span class="footer-note">Files stay in your browser</span>
   </footer>
 
+  <script src="tools.js"></script>
   <script src="popup.js"></script>
 </body>
 

@@ -1,96 +1,49 @@
 # Convertify Chrome Extension
 
-> 30+ PDF & File Conversion Tools — 100% Free & Private
+A free launcher for the tools on [convertify.work](https://convertify.work). The popup lists every tool, searches them, and opens the chosen one in a new tab. The tools themselves run on the website, in the browser; the extension never touches your files.
 
-## 🚀 Install Locally (Developer Mode)
+Chrome Web Store: https://chromewebstore.google.com/detail/bccnoegccgifcibpnmhaaehlpoaojpkb
 
-1. Open Chrome and go to `chrome://extensions/`
-2. Toggle **Developer mode** ON (top-right)
-3. Click **Load unpacked**
-4. Select this `extension/` folder
-5. Pin the Convertify icon in your toolbar — done!
+## Install locally (developer mode)
 
-## 💰 Monetization Model
+1. Open `chrome://extensions/`.
+2. Turn on **Developer mode** (top right).
+3. Click **Load unpacked** and select this `extension/` folder.
 
-### Free Tier
-- **3 conversions per day**
-- All basic tools available
-- Usage resets daily at midnight
+## What it does
 
-### Pro Tier ($4.99/month)
-- **Unlimited conversions**
-- Batch processing (multiple files)
-- All 30+ tools unlocked
-- No watermarks
-- Priority support
+- **Tool list:** every indexable tool page on the site, grouped by category, each with a one-line description.
+- **Search:** matches names, descriptions and synonyms (combine → merge, 100kb → compress, docx → word, photo → jpg/png). Arrow keys move through results, Enter opens one, Ctrl/⌘+K focuses the search box, Esc clears it.
+- **Recent tools:** the last 4 tools you opened. Until you've opened one, the row shows popular tools instead.
+- **Right-click menu** (on a page): opens Merge PDF, Compress PDF, PDF to Word, JPG to PDF or the full tool list. It only opens a page. Nothing from the current page is sent anywhere.
+- **Rating card:** after 3 tool opens, a small card links to the Android app on Google Play and to this extension's Chrome Web Store reviews. "Not now" hides it for 14 days; either link hides it for good. Nothing is ever locked behind a rating.
+- **Analytics:** links carry `utm_source=chrome_extension` and `utm_medium=popup` or `utm_medium=context_menu`, so Google Analytics on the website can attribute the visits. The extension itself sends no data anywhere.
 
-### How Revenue Works
-1. User hits 3-conversion daily limit → **Upgrade modal** appears
-2. Clicking "Upgrade" redirects to `convertify.work/pricing?from=extension&upgrade=true`
-3. User pays via Razorpay on your website
-4. Extension checks pro status via your API
-
-### Monetization Touchpoints
-- 👑 **Usage badge** in header (shows remaining free uses)
-- 🔒 **Limit modal** when free tier exhausted
-- ⬆️ **Upgrade banner** at bottom of popup
-- 🔗 **Website links** drive traffic back to convertify.work
-
-## 🛠️ Tools Included (30+)
-
-### Organize PDF
-- Merge PDF, Split PDF, Compress PDF, Rotate PDF
-- Delete Pages, Reorder Pages, OCR PDF
-
-### Convert from PDF
-- PDF to Word, PDF to JPG, PDF to PNG
-- PDF to Excel, PDF to PowerPoint, PDF to Text
-
-### Convert to PDF
-- Word to PDF, JPG to PDF, PNG to PDF
-- Excel to PDF, PowerPoint to PDF, HTML to PDF, Text to PDF
-
-### Edit & Secure
-- Edit PDF, Sign PDF, Watermark PDF
-- Protect PDF, Unlock PDF, Page Numbers, Redact PDF
-
-### Advanced
-- Compare PDF, PDF to PDF/A, Repair PDF
-
-## 📁 File Structure
+## Files
 
 ```
 extension/
-├── manifest.json      # Chrome Manifest V3 config
-├── background.js      # Service worker (context menus, usage tracking)
-├── popup.html         # Extension popup UI
-├── popup.css          # Premium dark mode styles
-├── popup.js           # Search, navigation, monetization logic
-├── icons/
-│   ├── icon.svg       # Source SVG icon
-│   ├── icon16.png     # 16x16 toolbar icon
-│   ├── icon32.png     # 32x32 icon
-│   ├── icon48.png     # 48x48 icon
-│   └── icon128.png    # 128x128 Chrome Web Store icon
-└── README.md          # This file
+├── manifest.json      Manifest V3
+├── tools.js           Tool catalog, URL builder, usage counter (shared)
+├── background.js      Service worker: v1 storage cleanup, right-click menu
+├── popup.html/.css/.js
+├── icons/             16, 32, 48, 128 px
+├── README.md          (not packaged)
+└── STORE_LISTING.md   Chrome Web Store listing text and upload steps (not packaged)
 ```
 
-## 🏪 Publish to Chrome Web Store
+Local storage keys: `toolOpenCount`, `recentTools`, `ratePromptDone`, `ratePromptSnoozedUntil`. Version 1 keys (`isPro`, `licenseKey`, `dailyUsage`, `lastResetDate`) are removed on install or update.
 
-1. Go to [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
-2. Pay $5 one-time developer fee
-3. Zip the `extension/` folder contents
-4. Upload the ZIP
-5. Fill in listing details:
-   - **Name**: Convertify - All-in-One PDF & File Converter
-   - **Category**: Productivity
-   - **Description**: Use the description from manifest.json
-   - **Screenshots**: Take 1280x800 screenshots of the popup
-6. Submit for review (takes 1-3 business days)
+## Keeping the tool list in sync
 
-## 🔗 SEO Benefits
+`tools.js` mirrors the tool slugs in `src/app/sitemap.ts`. When a tool is added to or removed from the sitemap, update `TOOLS` too. Take descriptions from `public/llms.txt` and the tool's own page, and keep them honest. Leave out pages that are noindexed (check `robots` in `src/app/<slug>/page.tsx`).
 
-- Chrome Web Store listing ranks on Google
-- Backlink to convertify.work
-- Branded search volume increases
-- Users from extension drive website traffic via `?from=extension` tracking
+## Packaging
+
+Zip the runtime files with `manifest.json` at the root of the archive. README.md and STORE_LISTING.md stay out of it:
+
+```
+manifest.json background.js tools.js popup.html popup.css popup.js icons/
+```
+
+See `STORE_LISTING.md` for the listing text and the upload steps.
