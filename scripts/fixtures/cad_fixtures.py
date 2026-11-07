@@ -2,6 +2,8 @@
 
     python scripts/fixtures/cad_fixtures.py [out_dir]     (default: <tmp>/convertify-cad)
 
+Committed copies live in scripts/fixtures/cad/ (browser test: cad_e2e.mjs, PDF check: cad_verify.py).
+
 Writes:
   cad-a1-mixed.pdf  A1 sheet: dense linework (walls, doors, hatch, stairs, grid), a title
                     block in embedded TrueType written one character per text operator,
