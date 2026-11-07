@@ -1551,13 +1551,13 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
 
     "autocad-pdf-editor": {
         intro: [
-            "PDF files exported from AutoCAD contain technical drawings — floor plans, engineering schematics, mechanical designs — and their text is often drawn with SHX fonts as plain vector strokes rather than real text. That is why ordinary PDF editors can't change a single dimension or label in them. Convertify's AutoCAD PDF Editor finds those text regions, lets you click one, and replaces or deletes it, without re-rasterizing the drawing.",
-            "The most common use case is a small correction to a drawing you don't have the DWG for: a wrong dimension, a revision number, a typo in a title block. The replacement is written in black Helvetica at the original position and size; the rest of the drawing stays vector. It is a text-replacement tool, not a markup tool, so there are no revision clouds, stamps or freehand drawing.",
+            "PDF files exported from AutoCAD contain technical drawings — floor plans, engineering schematics, mechanical designs — and their text is often drawn with SHX fonts as plain vector strokes rather than real text. That is why ordinary PDF editors can't change a single dimension or label in them. Convertify's AutoCAD PDF Editor finds those text regions, lets you click one, and replaces or deletes it, without re-rasterizing the drawing. Labels written one character at a time are joined back into one editable line.",
+            "The most common use case is a small correction to a drawing you don't have the DWG for: a wrong dimension, a revision number, a typo in a title block. The replacement is written in Helvetica at the original position, size and angle, in the colour sampled from the drawing; the rest of the drawing stays vector. For review comments there are markup tools too: arrows, revision clouds, boxes, highlights, notes, dated stamps and a measuring tool you calibrate from a known dimension. There is no freehand pen.",
         ],
         steps: [
-            { title: "Upload the AutoCAD-exported PDF", body: "Drop the PDF drawing file. Each page is scanned for text regions, whether stored as real text or drawn as SHX strokes. Large format sheets (A1, A0) work, though they take longer to scan." },
-            { title: "Click a text region and edit it", body: "Detected regions are highlighted on the drawing. Click one, type the replacement, or delete it. Zoom in for small dimension text, and move between sheets with the page arrows." },
-            { title: "Export the edited PDF", body: "Click Export PDF. Tick AutoCAD-friendly mode first if the file is going back into AutoCAD via PDFIMPORT; otherwise old SHX text is hidden under a white box behind the new text." },
+            { title: "Upload the AutoCAD-exported PDF", body: "Drop the PDF drawing file. Each page is scanned for text regions, whether stored as real text or drawn as SHX strokes. Large format sheets (A1, A0) work; each sheet is rendered when you open it, at a resolution capped so big sheets stay fast, also on phones." },
+            { title: "Click a text region and edit it", body: "Detected regions are highlighted on the drawing. Click one, type the replacement, or delete it. Zoom with Ctrl + mouse wheel (or pinch on a phone) for small dimension text, drag to pan, and move between sheets with the page arrows. Use the markup tools to add clouds, notes, stamps or measurements." },
+            { title: "Export the edited PDF", body: "Click Export PDF. Tick AutoCAD-friendly mode first if the file is going back into AutoCAD via PDFIMPORT; otherwise old SHX text is hidden under a paper-coloured box behind the new text." },
         ],
         scenarios: [
             { title: "Fixing a wrong dimension before sending", body: "A floor plan is ready to go to a client but one dimension is wrong and the drafter is unavailable. Click the dimension text, type the correct value, and export." },
@@ -1566,7 +1566,8 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
         ],
         troubleshooting: [
             { question: "The drawing looks pixelated after I edit and save.", answer: "The editor doesn't rasterize the drawing. If the original PDF was a raster export (low DPI) from AutoCAD rather than a vector export, it was already low-quality. Request a vector PDF export from the drafter (Plot → PDF, with 'High Quality Print' selected in AutoCAD)." },
-            { question: "A line next to my edited text disappeared.", answer: "SHX text is hidden under a white box sized to the old text, and any line running through that box is hidden with it. Use AutoCAD-friendly mode to skip the box, or keep replacement text short so the box stays small." },
+            { question: "A line next to my edited text disappeared.", answer: "SHX text is hidden under a paper-coloured box sized to the old text, and any line running through that box is hidden with it. Use AutoCAD-friendly mode to skip the box, or draw a tighter region with the Add text tool." },
+            { question: "Some SHX text isn't highlighted.", answer: "SHX text is found from the drawn strokes, so letters that touch hatching or other linework can be missed. Use the Add text tool to drag a box around the text, then type the replacement." },
             { question: "My PDF has multiple sheets — can I edit each sheet?", answer: "Yes — navigate between pages with the page arrows and edit text on any sheet. All changes are saved in the exported PDF." },
         ],
         comparison: [
@@ -1576,6 +1577,6 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
             { feature: "Large format drawings", convertify: "Yes", typical: "A4/Letter only" },
             { feature: "Daily limit", convertify: "Unlimited", typical: "Limited" },
         ],
-        lastUpdated: "2026-06-01",
+        lastUpdated: "2026-11-07",
     },
 }

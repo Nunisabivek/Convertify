@@ -1431,7 +1431,7 @@ export const toolSeoData = {
     },
     "autocad-pdf-editor": {
         title: "Edit AutoCAD PDF Text Free — SHX Text Editor",
-        description: "Edit text inside AutoCAD-exported PDFs, where normal editors fail because AutoCAD draws SHX text as vector strokes. Free, no AutoCAD needed.",
+        description: "Edit SHX and TrueType text in AutoCAD-exported PDFs, then add revision clouds, stamps and measurements. Free, runs in your browser, no AutoCAD needed.",
         keywords: [
             "edit autocad pdf", "edit autocad pdf text", "autocad pdf editor", "edit shx text in pdf",
             "edit vector text pdf", "autocad exported pdf editor", "edit cad pdf online",
@@ -1449,11 +1449,11 @@ export const toolSeoData = {
             },
             {
                 question: "Will the edited PDF still open correctly when I send it to my boss or client?",
-                answer: "Yes. The output is a standard PDF that opens in Adobe Acrobat, Foxit and browser viewers. Everything outside the edited text is left as it was. Stroke (SHX) text is hidden under a small white box before the new text is written, so a line passing through that box is covered too. If you plan to re-import into AutoCAD with PDFIMPORT, tick AutoCAD-friendly mode, which skips the white box (old and new text then overlap in normal viewers)."
+                answer: "Yes. The output is a standard PDF that opens in Adobe Acrobat, Foxit and browser viewers. Everything outside the edited text is left as it was. Real (TrueType) text is removed from the page where that can be done safely. Stroke (SHX) text can't be removed, so it is hidden under a small box in the paper colour before the new text is written, and a line passing through that box is covered too. If you plan to re-import into AutoCAD with PDFIMPORT, tick AutoCAD-friendly mode, which skips the box (any old text that couldn't be removed then shows under the new text in normal viewers)."
             },
             {
                 question: "Will the replacement text look exactly like the original SHX strokes?",
-                answer: "Not exactly. Position and size are matched to the original text, but the replacement is set in black Helvetica, not a thin single-stroke CAD font. At normal viewing size a changed dimension or label reads naturally; zoomed in, the different font is visible."
+                answer: "Not exactly. Position, size and angle are matched to the original text, and its colour is sampled from the drawing (you can change it before saving), but the replacement is set in Helvetica, not a thin single-stroke CAD font. At normal viewing size a changed dimension or label reads naturally; zoomed in, the different font is visible."
             },
             {
                 question: "What if my PDF was exported using TrueType fonts instead of SHX?",
@@ -1461,7 +1461,15 @@ export const toolSeoData = {
             },
             {
                 question: "Does this work for multi-page architectural drawing sets?",
-                answer: "Yes. You can navigate page by page, edit text on any page, and download the full multi-page PDF with all changes applied."
+                answer: "Yes. Each sheet is rendered when you open it, so large sets and A0 sheets open quickly. Edit text and add markups on any sheet, then download the full multi-page PDF with all changes applied."
+            },
+            {
+                question: "Can I mark up the drawing with revision clouds, arrows and stamps?",
+                answer: "Yes. Draw arrows, revision clouds, boxes and semi-transparent highlights, type notes, and place APPROVED, REVISED, FOR CONSTRUCTION or NOT FOR CONSTRUCTION stamps with today's date, in any colour and line width. Markups are saved as vector lines and text in the PDF, not as pictures, so they stay sharp when you zoom or print."
+            },
+            {
+                question: "Can I measure distances on the drawing?",
+                answer: "Yes. Set the scale once per sheet by dragging along a dimension you know and typing its real length (mm, cm, m, in or ft); after that, drag between two points to read the distance, and add it to the drawing if you like. Results are only as accurate as the PDF's scale and where you click, so check critical dimensions against the drawing itself."
             },
             {
                 question: "Is my drawing safe? Do you upload my files?",
@@ -1470,7 +1478,7 @@ export const toolSeoData = {
         ],
         howToSteps: [
             { name: "Upload AutoCAD PDF", text: "Drag and drop your AutoCAD-exported PDF file. We'll automatically detect SHX vector text." },
-            { name: "Click to Edit Text", text: "We highlight every editable text region. Click any region to type a replacement." },
+            { name: "Click to Edit Text", text: "We highlight every editable text region. Click any region to type a replacement, or use the markup tools to add clouds, notes, stamps and measurements." },
             { name: "Download Updated PDF", text: "Export your edited PDF instantly. Tick AutoCAD-friendly mode first if you'll re-import it into AutoCAD." }
         ]
     }

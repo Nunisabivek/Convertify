@@ -212,7 +212,7 @@ export const ANDROID_SHORT_DESCRIPTIONS: Record<string, string> = {
     'watermark-pdf': 'Stamp text on every page.',
     'add-page-numbers': 'Add page numbers to a PDF.',
     'qr-code-generator': 'Make a QR code from a link or some text.',
-    'autocad-pdf-editor': 'Correct labels and notes on AutoCAD-exported PDFs.',
+    'autocad-pdf-editor': 'Correct labels and mark up AutoCAD-exported PDFs.',
     'ocr-pdf': 'Scan paper with the camera into a clean, photocopy-style PDF.',
 }
 

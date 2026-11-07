@@ -151,7 +151,7 @@ const tools: { category: string; items: Tool[] }[] = [
             { title: "XML to JSON", description: "Convert XML API responses to JSON.", icon: Braces, href: "/xml-to-json", color: "text-purple-600 bg-purple-50" },
             { title: "Base64", description: "Encode and decode Base64 text and images.", icon: Code, href: "/base64", color: "text-slate-600 bg-slate-50" },
             { title: "QR Code Generator", description: "Generate a QR code for any link or text.", icon: QrCode, href: "/qr-code-generator", color: "text-neutral-700 bg-neutral-100" },
-            { title: "AutoCAD PDF Editor", description: "Edit SHX vector text inside CAD PDFs.", icon: PenLine, href: "/autocad-pdf-editor", color: "text-amber-600 bg-amber-50" },
+            { title: "AutoCAD PDF Editor", description: "Edit SHX text and mark up CAD PDFs.", icon: PenLine, href: "/autocad-pdf-editor", color: "text-amber-600 bg-amber-50" },
         ]
     }
 ]

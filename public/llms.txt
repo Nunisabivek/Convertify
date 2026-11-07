@@ -40,7 +40,7 @@
 - [Compare PDF](https://convertify.work/compare-pdf)
 - [Scan Documents to PDF](https://convertify.work/ocr-pdf): camera scanner with page-edge detection and Original, Magic Color, Grayscale and Xerox filters; several pages into one PDF
 - [Fit to Size](https://convertify.work/fit-to-size)
-- [AutoCAD PDF Editor](https://convertify.work/autocad-pdf-editor): for PDFs exported from AutoCAD
+- [AutoCAD PDF Editor](https://convertify.work/autocad-pdf-editor): for PDFs exported from AutoCAD: edit SHX and TrueType text, add revision clouds, stamps and measurements
 
 ## Convert to and from PDF
 

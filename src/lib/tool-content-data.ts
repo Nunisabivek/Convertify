@@ -822,14 +822,16 @@ export const toolContentData: Record<string, {
         keywords: ["qr code generator", "create qr code", "qr code maker", "generate qr code free", "qr code generator online", "custom qr code", "qr code with logo", "qr code creator free", "qr code png", "qr code svg", "free qr code generator", "wifi qr code generator"]
     },
     "autocad-pdf-editor": {
-        description: "Edit text inside AutoCAD-exported PDFs, which most PDF editors can't do. AutoCAD draws SHX text as raw vector strokes with no underlying text layer, so ordinary editors treat the page as uneditable. Convertify scans the drawing, groups strokes into clickable text regions, and lets you replace or delete them; new text is written in Helvetica at the original position and size. Fix that forgotten dimension or label without re-opening AutoCAD.",
+        description: "Edit text inside AutoCAD-exported PDFs, which most PDF editors can't do. AutoCAD draws SHX text as raw vector strokes with no underlying text layer, so ordinary editors treat the page as uneditable. Convertify finds both real text and SHX strokes, joins them into clickable labels, and lets you replace or delete them; new text is written in Helvetica at the original position, size, angle and colour. You can also mark up the sheet with revision clouds, arrows, notes, stamps and calibrated measurements. Fix that forgotten dimension or label without re-opening AutoCAD.",
         features: [
             "Detects SHX Vector Text: Finds clickable text regions other editors can't see",
             "Replace or Delete: Change a label's wording or remove it",
-            "Position & Size Match: Replacement text sits in the original location",
-            "Multi-Page Support: Edit any page in a full drawing set",
+            "Position, Size, Angle & Colour Match: Replacement text sits where the original was, rotated text included",
+            "CAD Markup: Arrows, revision clouds, boxes, highlights, notes and dated stamps, saved as vector PDF content",
+            "Calibrated Measuring: Set the scale from a known dimension, then measure distances",
+            "Big Sheets & Sets: Sheets render when opened; zoom at the cursor, pinch and pan on phones",
             "TrueType Text Too: Real text is removed and rewritten in place",
-            "AutoCAD-Friendly Mode: Skips the white cover box for clean PDFIMPORT",
+            "AutoCAD-Friendly Mode: Skips the cover box for clean PDFIMPORT",
             "100% Browser-Based: Your drawings never leave your device",
             "No AutoCAD License Needed: Works on any device with a browser",
             "Free Forever: No watermarks, sign-up, or download required"
@@ -841,7 +843,8 @@ export const toolContentData: Record<string, {
             "Changing schedule of openings data without re-exporting from AutoCAD",
             "Updating project addresses on architectural drawings",
             "Editing engineering drawings when you don't have AutoCAD on this device",
-            "Making last-minute label changes for site contractors and trades"
+            "Making last-minute label changes for site contractors and trades",
+            "Clouding and stamping revisions for review before a drawing is issued"
         ],
         keywords: ["edit autocad pdf", "edit autocad pdf text online", "autocad pdf editor", "edit shx pdf text", "modify autocad pdf", "edit cad drawing pdf", "edit dimension text in pdf", "blueprint text editor", "engineering pdf editor", "fix autocad pdf typo", "free autocad pdf text editor"]
     }
