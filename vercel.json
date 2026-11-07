@@ -140,6 +140,61 @@
             "source": "/sitemap_index.xml",
             "destination": "/sitemap.xml",
             "permanent": true
+        },
+        {
+            "source": "/llms-full.txt",
+            "destination": "/llms.txt",
+            "permanent": true
+        },
+        {
+            "source": "/how-to-combine-multiple-pdfs-into-one",
+            "destination": "/merge-pdf",
+            "permanent": true
+        },
+        {
+            "source": "/how-to-compress-pdf-to-100kb",
+            "destination": "/blog/compress-pdf-under-100kb-government-forms",
+            "permanent": true
+        },
+        {
+            "source": "/how-to-convert-excel-to-pdf-free",
+            "destination": "/excel-to-pdf",
+            "permanent": true
+        },
+        {
+            "source": "/how-to-convert-jpg-to-pdf-iphone",
+            "destination": "/jpg-to-pdf",
+            "permanent": true
+        },
+        {
+            "source": "/how-to-convert-pdf-to-word-editable",
+            "destination": "/pdf-to-word",
+            "permanent": true
+        },
+        {
+            "source": "/how-to-convert-word-to-pdf-without-office",
+            "destination": "/word-to-pdf",
+            "permanent": true
+        },
+        {
+            "source": "/how-to-extract-pages-from-pdf",
+            "destination": "/blog/extract-one-page-from-pdf",
+            "permanent": true
+        },
+        {
+            "source": "/how-to-merge-pdf-files-windows-10",
+            "destination": "/blog/merge-pdf-windows-10-without-software",
+            "permanent": true
+        },
+        {
+            "source": "/how-to-reduce-pdf-file-size-for-email",
+            "destination": "/compress-pdf",
+            "permanent": true
+        },
+        {
+            "source": "/how-to-split-pdf-by-page-number",
+            "destination": "/split-pdf",
+            "permanent": true
         }
     ],
     "trailingSlash": false,
@@ -206,19 +261,6 @@
         },
         {
             "source": "/llms.txt",
-            "headers": [
-                {
-                    "key": "Content-Type",
-                    "value": "text/plain; charset=utf-8"
-                },
-                {
-                    "key": "Cache-Control",
-                    "value": "public, max-age=86400"
-                }
-            ]
-        },
-        {
-            "source": "/llms-full.txt",
             "headers": [
                 {
                     "key": "Content-Type",
