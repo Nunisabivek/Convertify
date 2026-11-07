@@ -6,7 +6,6 @@ import MergePdfClient from "./client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import MobileToolFrame from "@/components/mobile/MobileToolFrame"
 import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -127,11 +126,6 @@ export default function Page() {
             <ToolDeepGuide toolSlug="merge-pdf" toolName="PDF Merger" />
 
             {/* How To Section with Schema */}
-            <HowToSchema
-                toolName="Merge PDF Files Online"
-                description="Learn how to combine multiple PDF files into a single document using Convertify's free online PDF merger tool."
-                steps={seoData.howToSteps}
-            />
 
             {/* FAQ Section with Schema */}
             <FAQSchema

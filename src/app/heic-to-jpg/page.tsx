@@ -5,7 +5,6 @@ import HeicToJpgClient from "./client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import MobileToolFrame from "@/components/mobile/MobileToolFrame"
 import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -50,16 +49,6 @@ export default function Page() {
             <div className="w-full max-w-4xl px-4 mx-auto">
                 <InToolPlayStoreCallout />
             </div>
-
-            <HowToSchema
-                toolName="Convert HEIC to JPG"
-                description="Learn how to convert iPhone HEIC photos to JPG format using Convertify's free online converter."
-                steps={[
-                    { name: "Upload HEIC", text: "Select or drag your iPhone HEIC photos to upload" },
-                    { name: "Convert", text: "Click convert - photos are processed in your browser" },
-                    { name: "Download JPG", text: "Download your converted JPG photos instantly" }
-                ]}
-            />
 
             <FAQSchema
                 toolName="HEIC to JPG Conversion"

@@ -7,7 +7,6 @@ import JpgToPdfMobileClient from "./mobile-client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import MobileToolFrame from "@/components/mobile/MobileToolFrame"
 import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -93,12 +92,6 @@ export default function Page() {
 
             {/* Long-form guide */}
             <ToolDeepGuide toolSlug="jpg-to-pdf" toolName="JPG to PDF Converter" />
-
-            <HowToSchema
-                toolName="JPG to PDF Converter"
-                description="Learn how to convert JPG images to PDF documents using Convertify's free online image to PDF converter."
-                steps={seoData.howToSteps}
-            />
 
             <FAQSchema
                 toolName="JPG to PDF Conversion"

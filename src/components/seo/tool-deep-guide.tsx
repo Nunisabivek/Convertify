@@ -46,17 +46,6 @@ export function ToolDeepGuide({ toolSlug, toolName }: ToolDeepGuideProps) {
     // visible content (still good for long-tail/AEO) — just not re-marked
     // up as a duplicate FAQPage.
 
-    // SpeakableSpecification — helps voice assistants surface the intro
-    // paragraphs when users ask "how do I X". AEO/voice search optimization.
-    const speakableSchema = {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        speakable: {
-            "@type": "SpeakableSpecification",
-            cssSelector: [".tool-guide-intro", ".tool-guide-steps"],
-        },
-    }
-
     return (
         <section className="w-full bg-slate-50 py-12 px-4 border-t border-slate-100">
             <div className="max-w-4xl mx-auto">
@@ -158,10 +147,6 @@ export function ToolDeepGuide({ toolSlug, toolName }: ToolDeepGuideProps) {
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }}
             />
         </section>
     )

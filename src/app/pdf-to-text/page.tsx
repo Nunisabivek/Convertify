@@ -2,7 +2,6 @@ import { Metadata } from "next"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import PdfToTextClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -78,12 +77,6 @@ export default function Page() {
             />
 
             <ToolDeepGuide toolSlug="pdf-to-text" toolName="PDF to Text Extractor" />
-
-            <HowToSchema
-                toolName="Extract Text from PDF"
-                description="Learn how to extract text from PDF documents using Convertify's free online PDF to text converter."
-                steps={seoData.howToSteps}
-            />
 
             <FAQSchema
                 toolName="PDF to Text Extraction"

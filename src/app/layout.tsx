@@ -58,7 +58,13 @@ const organizationSchema = {
     width: 512,
     height: 512
   },
-  sameAs: [],
+  // Official listings, so search engines and AI answers can tell this
+  // Convertify apart from unrelated apps with the same name.
+  sameAs: [
+    "https://play.google.com/store/apps/details?id=com.convertify.work",
+    "https://chromewebstore.google.com/detail/bccnoegccgifcibpnmhaaehlpoaojpkb",
+    "https://www.producthunt.com/products/convertify-3",
+  ],
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer support",

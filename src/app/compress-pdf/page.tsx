@@ -5,7 +5,6 @@ import CompressMobileClient from "./mobile-client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import MobileToolFrame from "@/components/mobile/MobileToolFrame"
 import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -109,12 +108,6 @@ export default function Page() {
             />
 
             <ToolDeepGuide toolSlug="compress-pdf" toolName="PDF Compressor" />
-
-            <HowToSchema
-                toolName="Compress PDF Files with Convertify"
-                description="Reduce a PDF to 100KB or 200KB for form uploads, or under 10MB / Gmail’s 25MB for email. Runs in your browser."
-                steps={seoData.howToSteps}
-            />
 
             <FAQSchema
                 toolName="Convertify PDF Compressor"

@@ -4,7 +4,6 @@ import PdfToPngClient from "./client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import MobileToolFrame from "@/components/mobile/MobileToolFrame"
 import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -82,12 +81,6 @@ export default function Page() {
             />
 
             <ToolDeepGuide toolSlug="pdf-to-png" toolName="PDF to PNG Converter" />
-
-            <HowToSchema
-                toolName="Convert PDF to PNG"
-                description="Learn how to convert PDF pages to PNG images using Convertify's free online PDF to PNG converter."
-                steps={seoData.howToSteps}
-            />
 
             <FAQSchema
                 toolName="PDF to PNG Conversion"

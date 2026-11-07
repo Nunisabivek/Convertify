@@ -5,7 +5,6 @@ import WebpConverterClient from "./client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import MobileToolFrame from "@/components/mobile/MobileToolFrame"
 import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -50,17 +49,6 @@ export default function Page() {
             <div className="w-full max-w-4xl px-4 mx-auto">
                 <InToolPlayStoreCallout />
             </div>
-
-            <HowToSchema
-                toolName="Convert Images to/from WebP"
-                description="Learn how to convert images to and from WebP format using Convertify's free online converter."
-                steps={[
-                    { name: "Upload Images", text: "Select JPG, PNG, or WebP images to upload" },
-                    { name: "Choose Output", text: "Select output format: WebP, JPG, or PNG" },
-                    { name: "Convert", text: "Click convert - images are processed in your browser" },
-                    { name: "Download", text: "Download your converted images instantly" }
-                ]}
-            />
 
             <FAQSchema
                 toolName="WebP Conversion"

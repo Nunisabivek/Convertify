@@ -3,7 +3,6 @@ import { ToolSwapper } from "@/components/tools/tool-swapper"
 import { InToolPlayStoreCallout } from "@/components/ui/google-play-badge"
 import PngToJpgClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -39,16 +38,6 @@ export default function Page() {
             <div className="w-full max-w-4xl px-4 mx-auto">
                 <InToolPlayStoreCallout />
             </div>
-
-            <HowToSchema
-                toolName="Convert PNG to JPG"
-                description="Learn how to convert PNG images to JPG format using Convertify's free online converter."
-                steps={[
-                    { name: "Upload PNG", text: "Select or drag your PNG images to upload" },
-                    { name: "Convert", text: "Click convert - images are processed locally in your browser" },
-                    { name: "Download JPG", text: "Download your converted JPG images instantly" }
-                ]}
-            />
 
             <FAQSchema
                 toolName="PNG to JPG Conversion"

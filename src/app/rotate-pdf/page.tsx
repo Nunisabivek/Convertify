@@ -3,7 +3,6 @@ import RotatePdfClient from "./client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import MobileToolFrame from "@/components/mobile/MobileToolFrame"
 import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -74,12 +73,6 @@ export default function Page() {
 
             {/* Long-form guide */}
             <ToolDeepGuide toolSlug="rotate-pdf" toolName="PDF Rotator" />
-
-            <HowToSchema
-                toolName="Convertify Rotate PDF Pages"
-                description="Learn how to rotate PDF pages using Convertify's free online tool."
-                steps={seoData.howToSteps}
-            />
 
             <FAQSchema toolName="PDF Rotation" faqs={seoData.faqs} />
             <RelatedBlogPosts

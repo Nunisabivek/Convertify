@@ -2,7 +2,6 @@
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import CsvToJsonClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -71,16 +70,6 @@ export default function Page() {
 
             {/* Long-form guide */}
             <ToolDeepGuide toolSlug="csv-to-json" toolName="CSV to JSON Converter" />
-
-            <HowToSchema
-                toolName="Convert CSV to JSON"
-                description="Learn how to convert CSV data to JSON format using Convertify's free online converter."
-                steps={[
-                    { name: "Input CSV Data", text: "Paste your CSV text or upload a .csv file." },
-                    { name: "Parse & Convert", text: "Click Convert to parse CSV and generate JSON output." },
-                    { name: "Copy or Download", text: "Copy the JSON to clipboard or download as a .json file." }
-                ]}
-            />
 
             <FAQSchema
                 toolName="CSV to JSON Conversion"

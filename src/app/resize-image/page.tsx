@@ -5,7 +5,6 @@ import ResizeImageClient from "./client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import MobileToolFrame from "@/components/mobile/MobileToolFrame"
 import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -50,17 +49,6 @@ export default function Page() {
             <div className="w-full max-w-4xl px-4 mx-auto">
                 <InToolPlayStoreCallout />
             </div>
-
-            <HowToSchema
-                toolName="Resize Images"
-                description="Learn how to resize images using Convertify's free online image resizer."
-                steps={[
-                    { name: "Upload Image", text: "Select or drag your images to upload" },
-                    { name: "Set Dimensions", text: "Enter new width and height or use presets" },
-                    { name: "Resize", text: "Click resize - images are processed in your browser" },
-                    { name: "Download", text: "Download your resized images as PNG files (several at once come as a ZIP)" }
-                ]}
-            />
 
             <FAQSchema
                 toolName="Image Resizing"

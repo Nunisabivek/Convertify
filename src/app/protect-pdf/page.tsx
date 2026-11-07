@@ -2,7 +2,6 @@ import { Metadata } from "next"
 import ProtectPdfClient from "./client"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -72,14 +71,6 @@ export default function Page() {
             <div className="w-full max-w-4xl px-4 mx-auto">
                 <InToolPlayStoreCallout />
             </div>
-
-            {seoData.howToSteps && (
-                <HowToSchema
-                    toolName="Protect PDF"
-                    description="Learn how to add AES-256 password protection to your PDF documents online for free with Convertify."
-                    steps={seoData.howToSteps}
-                />
-            )}
 
             {seoData.faqs && (
                 <FAQSchema

@@ -1,7 +1,6 @@
 ﻿import { Metadata } from "next"
 import HtmlToPdfClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -64,12 +63,6 @@ export default function Page() {
 
             {/* Long-form guide */}
             <ToolDeepGuide toolSlug="html-to-pdf" toolName="HTML to PDF Converter" />
-
-            <HowToSchema
-                toolName="Convert HTML to PDF Online"
-                description="Learn how to turn pasted HTML code into a plain-text PDF using Convertify's free converter."
-                steps={seoData.howToSteps}
-            />
 
             <FAQSchema toolName="HTML to PDF Conversion" faqs={seoData.faqs} />
             <RelatedTools currentTool="/html-to-pdf" />

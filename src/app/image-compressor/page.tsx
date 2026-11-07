@@ -6,7 +6,6 @@ import ImageCompressMobile from "./mobile-client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import MobileToolFrame from "@/components/mobile/MobileToolFrame"
 import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -51,17 +50,6 @@ export default function Page() {
             <div className="w-full max-w-4xl px-4 mx-auto">
                 <InToolPlayStoreCallout />
             </div>
-
-            <HowToSchema
-                toolName="Compress Images"
-                description="Learn how to compress images using Convertify's free online image compressor."
-                steps={[
-                    { name: "Upload Images", text: "Select or drag your images to upload" },
-                    { name: "Choose Quality", text: "Select compression level (higher = better quality, larger file)" },
-                    { name: "Compress", text: "Click compress - images are processed in your browser" },
-                    { name: "Download", text: "Download your compressed images instantly" }
-                ]}
-            />
 
             <FAQSchema
                 toolName="Image Compression"

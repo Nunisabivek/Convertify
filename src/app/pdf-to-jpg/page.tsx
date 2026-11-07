@@ -5,7 +5,6 @@ import PdfToJpgClient from "./client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import MobileToolFrame from "@/components/mobile/MobileToolFrame"
 import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -118,12 +117,6 @@ export default function Page() {
             />
 
             <ToolDeepGuide toolSlug="pdf-to-jpg" toolName="PDF to JPG Converter" />
-
-            <HowToSchema
-                toolName="Convert PDF to JPG Images"
-                description="Learn how to convert PDF pages to JPG images using Convertify's free online PDF to JPG converter."
-                steps={seoData.howToSteps}
-            />
 
             <FAQSchema
                 toolName="PDF to JPG Conversion"

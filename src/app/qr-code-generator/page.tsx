@@ -4,7 +4,6 @@ import QrCodeClient from "./client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import MobileToolFrame from "@/components/mobile/MobileToolFrame"
 import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -73,12 +72,6 @@ export default function Page() {
 
             {/* Long-form guide — 1000-1500 words of unique content */}
             <ToolDeepGuide toolSlug="qr-code-generator" toolName="QR Code Generator" />
-
-            <HowToSchema
-                toolName={seoData.title}
-                description={seoData.description}
-                steps={seoData.howToSteps}
-            />
 
             <FAQSchema
                 toolName={seoData.h1}

@@ -2,7 +2,6 @@ import { Metadata } from "next"
 import PowerpointToPdfClient from "./client"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -74,14 +73,6 @@ export default function Page() {
             <div className="w-full max-w-4xl px-4 mx-auto">
                 <InToolPlayStoreCallout />
             </div>
-
-            {seoData.howToSteps && (
-                <HowToSchema
-                    toolName="PowerPoint to PDF"
-                    description="Learn how to convert PPT and PPTX presentation slides to PDF format online with Convertify."
-                    steps={seoData.howToSteps}
-                />
-            )}
 
             {seoData.faqs && (
                 <FAQSchema

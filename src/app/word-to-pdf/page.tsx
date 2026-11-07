@@ -4,7 +4,6 @@ import WordToPdfClient from "./client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import MobileToolFrame from "@/components/mobile/MobileToolFrame"
 import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -103,12 +102,6 @@ export default function Page() {
             />
 
             <ToolDeepGuide toolSlug="word-to-pdf" toolName="Word to PDF Converter" />
-
-            <HowToSchema
-                toolName="Convert Word to PDF"
-                description="Learn how to convert Word documents to PDF using Convertify's free online DOCX to PDF converter."
-                steps={seoData.howToSteps}
-            />
 
             <FAQSchema
                 toolName="Word to PDF Conversion"

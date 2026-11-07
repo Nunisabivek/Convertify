@@ -2,7 +2,6 @@ import { Metadata } from "next"
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import TextToPdfClient from "./client"
 import { FAQSchema } from "@/components/seo/faq-schema"
-import { HowToSchema } from "@/components/seo/howto-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { SoftwareApplicationSchema } from "@/components/seo/software-schema"
 import { RelatedTools } from "@/components/seo/related-tools"
@@ -78,12 +77,6 @@ export default function Page() {
             />
 
             <ToolDeepGuide toolSlug="text-to-pdf" toolName="Text to PDF Converter" />
-
-            <HowToSchema
-                toolName="Convert Text to PDF"
-                description="Learn how to convert TXT files to PDF documents using Convertify's free online text to PDF converter."
-                steps={seoData.howToSteps}
-            />
 
             <FAQSchema
                 toolName="Text to PDF Conversion"
