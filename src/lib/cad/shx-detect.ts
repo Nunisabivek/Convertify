@@ -7,7 +7,15 @@ import { overlapArea, padBox, type Box } from './geometry.ts'
  * then vertically for the components left over (vertical dimension text).
  * All sizes are in canvas pixels; options take points × render scale.
  */
-export type Component = { minX: number; minY: number; maxX: number; maxY: number; count: number }
+export type Component = {
+    minX: number
+    minY: number
+    maxX: number
+    maxY: number
+    count: number
+    /** A rectangle outline (inked corners, empty middle): chairs, boxes, never an SHX letter. */
+    box?: boolean
+}
 export type GlyphGroup = Box & { vertical: boolean; count: number }
 
 /** 1 for "ink": any pixel clearly darker or more coloured than white paper. */
@@ -82,9 +90,36 @@ export async function findComponents(
         }
         work += count
         // Long lines and big outlines are never letters; don't keep millions of them.
-        if (maxX - minX + 1 <= maxDim && maxY - minY + 1 <= maxDim) out.push({ minX, minY, maxX, maxY, count })
+        if (maxX - minX + 1 <= maxDim && maxY - minY + 1 <= maxDim) {
+            const c: Component = { minX, minY, maxX, maxY, count }
+            if (isBox(binary, w, c)) c.box = true
+            out.push(c)
+        }
     }
     return out
+}
+
+/**
+ * True for a rectangle outline: ink in all four corners and along every side, none
+ * in the middle. SHX letters never have four sharp corners (O, 0 and D are cut or
+ * rounded), but furniture blocks and check boxes do.
+ */
+export function isBox(binary: Uint8Array, w: number, c: Component): boolean {
+    const bw = c.maxX - c.minX + 1
+    const bh = c.maxY - c.minY + 1
+    if (bw < 5 || bh < 5 || bw > 4 * bh || bh > 4 * bw) return false
+    const ink = (x: number, y: number) => binary[y * w + x] === 1
+    const near = (x: number, y: number) => ink(x, y) || ink(x + (x === c.minX ? 1 : -1), y) || ink(x, y + (y === c.minY ? 1 : -1))
+    if (!near(c.minX, c.minY) || !near(c.maxX, c.minY) || !near(c.minX, c.maxY) || !near(c.maxX, c.maxY)) return false
+    const mx = (c.minX + c.maxX) >> 1
+    const my = (c.minY + c.maxY) >> 1
+    if (!near(mx, c.minY) || !near(mx, c.maxY) || !near(c.minX, my) || !near(c.maxX, my)) return false
+    const x0 = c.minX + Math.ceil(bw * 0.3)
+    const x1 = c.maxX - Math.ceil(bw * 0.3)
+    const y0 = c.minY + Math.ceil(bh * 0.3)
+    const y1 = c.maxY - Math.ceil(bh * 0.3)
+    for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) if (ink(x, y)) return false
+    return true
 }
 
 export type GroupOptions = {
@@ -93,11 +128,11 @@ export type GroupOptions = {
     /** Smallest and largest letter height to accept, in points. */
     minTextPt?: number
     maxTextPt?: number
-    /** Largest gap between letters of one line, as a multiple of the letter height. */
+    /** Largest gap between letters of one line, as a multiple of the letter height (an SHX word space is ~1.33). */
     gapFactor?: number
 }
 
-const defaults = { minTextPt: 4.5, maxTextPt: 60, gapFactor: 0.9 }
+const defaults = { minTextPt: 4.5, maxTextPt: 60, gapFactor: 1.5 }
 
 type Ax = { lo: number; hi: number; clo: number; chi: number }
 
@@ -112,6 +147,12 @@ function groupAlong(
     const ax = (c: Component): Ax =>
         vertical ? { lo: c.minY, hi: c.maxY, clo: c.minX, chi: c.maxX } : { lo: c.minX, hi: c.maxX, clo: c.minY, chi: c.maxY }
     const parent = idx.map((_, k) => k)
+    // Tallest member of each group (across the line): checked again when two groups
+    // merge, so a stray fragment can't chain a line of text to a bubble beside it.
+    const tallest = idx.map((ci) => {
+        const c = comps[ci]
+        return vertical ? c.maxX - c.minX + 1 : c.maxY - c.minY + 1
+    })
     const find = (k: number): number => {
         while (parent[k] !== k) {
             parent[k] = parent[parent[k]]
@@ -161,7 +202,16 @@ function groupAlong(
                     if (crossOverlap < 0.3 * smaller && smaller > 0.35 * href) continue
                     const gap = Math.max(a.lo, b.lo) - Math.min(a.hi, b.hi)
                     if (gap > gapFactor * href) continue
-                    parent[find(j)] = find(k)
+                    const rj = find(j)
+                    const rk = find(k)
+                    const hi = Math.max(tallest[rj], tallest[rk])
+                    const lo = Math.min(tallest[rj], tallest[rk])
+                    // Letters next to something twice their size (a grid bubble or tag circle
+                    // touching the text) aren't one line. Dots, commas and dashes are far
+                    // smaller than any letter and still join.
+                    if (hi > 1.8 * lo && lo >= minText) continue
+                    parent[rj] = rk
+                    tallest[rk] = hi
                 }
             }
     })
@@ -208,6 +258,9 @@ function textLike(comps: Component[], members: number[], vertical: boolean, minT
     for (const i of members) sumLen += vertical ? comps[i].maxY - comps[i].minY + 1 : comps[i].maxX - comps[i].minX + 1
     if (sumLen > 1.3 * length) return null
     if (length / n < 0.25 * height) return null
+    // A row made only of rectangle outlines (chairs round a table) is symbols, not a
+    // word. One letter among them is enough to keep it ("1000" in a font with square zeros).
+    if (members.every((i) => comps[i].box)) return null
     if (n >= 3) {
         if (length < 1.0 * height) return null
     } else if (n === 2) {

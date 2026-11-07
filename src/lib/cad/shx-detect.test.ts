@@ -97,4 +97,51 @@ let pauses = 0
 await findComponents(new Uint8Array(2000 * 2000), 2000, 2000, async () => { pauses++ })
 assert.ok(pauses >= 2)
 
+// A bubble twice the letter height touching the line doesn't swallow it.
+{
+    const letters = [0, 1, 2, 3].map((k) => ({ minX: 100 + k * 14, minY: 100, maxX: 106 + k * 14 + (k % 2) * 3, maxY: 111, count: 24 + k * 5 }))
+    const bubble = { minX: 158, minY: 92, maxX: 182, maxY: 116, count: 80 }
+    const g = groupGlyphs([...letters, bubble], { scale: 2 })
+    assert.ok(g.some((x) => x.count === 4 && x.h === 12), JSON.stringify(g))
+    // ...even when a tiny fragment touches both and would chain them together.
+    const bar = { minX: 151, minY: 104, maxX: 160, maxY: 105, count: 10 }
+    const g2 = groupGlyphs([...letters, bar, bubble], { scale: 2 })
+    assert.ok(g2.some((x) => x.count >= 4 && x.h === 12), JSON.stringify(g2))
+}
+
+// A row of small square outlines (chairs round a table) is not a word; a row of
+// octagonal O's (corners cut, like SHX fonts draw them) still is.
+{
+    const W = 120
+    const H = 30
+    const draw = (shape: 'square' | 'octagon') => {
+        const bin = new Uint8Array(W * H)
+        for (let k = 0; k < 4; k++) {
+            const x0 = 5 + k * 16
+            for (let t = 0; t <= 10; t++) {
+                const cut = shape === 'octagon' && (t < 3 || t > 7)
+                if (!cut) {
+                    bin[(8) * W + x0 + t] = 1
+                    bin[(18) * W + x0 + t] = 1
+                    bin[(8 + t) * W + x0] = 1
+                    bin[(8 + t) * W + x0 + 10] = 1
+                }
+            }
+            if (shape === 'octagon')
+                for (let t = 0; t < 3; t++) {
+                    bin[(8 + 2 - t) * W + x0 + t] = 1
+                    bin[(8 + 2 - t) * W + x0 + 10 - t] = 1
+                    bin[(16 + t) * W + x0 + t] = 1
+                    bin[(16 + t) * W + x0 + 10 - t] = 1
+                }
+        }
+        return bin
+    }
+    const squares = await findComponents(draw('square'), W, H)
+    assert.ok(squares.length === 4 && squares.every((c) => c.box), JSON.stringify(squares))
+    assert.equal(groupGlyphs(squares, { scale: 2 }).length, 0)
+    const os = await findComponents(draw('octagon'), W, H)
+    assert.ok(os.length === 4 && os.every((c) => !c.box), JSON.stringify(os))
+}
+
 console.log('cad shx-detect tests passed')
