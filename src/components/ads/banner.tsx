@@ -17,22 +17,14 @@ interface AdBannerProps {
     className?: string
 }
 
-// Inactive units and no-fill answers leave the frame empty; after this long the slot gives its space back.
-const FILL_CHECK_MS = 4000
+// Adsterra's tag takes 5-9 s to place its creative. A unit that is inactive or has no fill answers
+// with an empty script and never adds anything; only after this long with nothing added does the
+// slot give its space back. Collapsing earlier would remove ads that already counted a view.
+const NO_FILL_AFTER_MS = 12000
 
-/** True when the banner document holds something visible (Adsterra draws an iframe, image or link). */
-function hasCreative(frame: HTMLIFrameElement | null): boolean {
-    let body: HTMLElement | null | undefined
-    try {
-        body = frame?.contentDocument?.body
-    } catch {
-        return true // can't look inside: assume it filled rather than hide a live ad
-    }
-    if (!body) return true
-    return [...body.querySelectorAll("iframe, img, a, ins, div, canvas, video")].some((el) => {
-        const r = el.getBoundingClientRect()
-        return r.width >= 20 && r.height >= 20
-    })
+/** True once the banner document holds anything besides its own scripts (Adsterra adds an iframe). */
+function hasCreative(body: HTMLElement): boolean {
+    return body.querySelector(":not(script):not(style):not(noscript):not(link)") !== null
 }
 
 /** One banner in its own iframe: Adsterra's tag reads a global, so each unit needs its own document. */
@@ -40,16 +32,35 @@ export function AdFrame({ size, onEmpty }: { size: BannerSize; onEmpty?: () => v
     const unit = UNITS[size]
     const doc = useMemo(() => (unit ? bannerDocument(unit, size) : null), [unit, size])
     const ref = useRef<HTMLIFrameElement>(null)
-    const timer = useRef<number | undefined>(undefined)
-    useEffect(() => () => window.clearTimeout(timer.current), [])
+    const watch = useRef<{ timer?: number; observer?: MutationObserver }>({})
+    const stopWatching = () => {
+        window.clearTimeout(watch.current.timer)
+        watch.current.observer?.disconnect()
+        watch.current = {}
+    }
+    useEffect(() => stopWatching, [])
     if (!doc) return null
     const { width, height } = SIZES[size]
-    const checkFill = () => {
+    const watchFill = () => {
+        stopWatching()
         if (!onEmpty) return
-        window.clearTimeout(timer.current)
-        timer.current = window.setTimeout(() => {
-            if (!hasCreative(ref.current)) onEmpty()
-        }, FILL_CHECK_MS)
+        let body: HTMLElement | null | undefined
+        try {
+            body = ref.current?.contentDocument?.body
+        } catch {
+            return // can't look inside: never hide what may be a live ad
+        }
+        if (!body || hasCreative(body)) return
+        const observer = new MutationObserver(() => {
+            if (body && hasCreative(body)) stopWatching()
+        })
+        observer.observe(body, { childList: true, subtree: true })
+        const timer = window.setTimeout(() => {
+            const filled = body ? hasCreative(body) : true
+            stopWatching()
+            if (!filled) onEmpty()
+        }, NO_FILL_AFTER_MS)
+        watch.current = { timer, observer }
     }
     return (
         <iframe
@@ -59,7 +70,7 @@ export function AdFrame({ size, onEmpty }: { size: BannerSize; onEmpty?: () => v
             width={width}
             height={height}
             scrolling="no"
-            onLoad={checkFill}
+            onLoad={watchFill}
             // No allow-top-navigation: an ad can open a new tab on click but can never send the
             // visitor away from a tool with their work in it.
             sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
