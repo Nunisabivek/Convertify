@@ -4,7 +4,8 @@ import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "re
 import { cmdsToSvg, markupBounds, markupPrims, type Markup, type MeasureText, type Prim } from "@/lib/cad/markup"
 import { ortho } from "@/lib/cad/measure"
 import type { Pt } from "@/lib/cad/geometry"
-import type { PageModel, Region, Tool } from "./types"
+import { ProgressBar } from "./panels"
+import type { PageImage, PageModel, Region, Tool } from "./types"
 
 /** Zoom = CSS px per display point; x/y = where the page's top-left sits in the frame. */
 export type View = { zoom: number; x: number; y: number }
@@ -46,6 +47,14 @@ export const CLICK_TOOLS = new Set<Tool>(["note", "stamp"])
 
 type Props = {
     model: PageModel
+    /** The rendered page; missing while it is (re-)rendering. */
+    image?: PageImage
+    /** The freshly rendered canvas, shown until `image` has loaded and decoded. */
+    preview?: HTMLCanvasElement | null
+    /** The page image is decoded and on screen (the preview can go). */
+    onImageShown?: () => void
+    /** Rendering/analysis progress for this page (`done` 0..1, or null when unknown). */
+    progress?: { label: string; done: number | null } | null
     pageNo: number
     height: number
     view: View
@@ -69,7 +78,6 @@ type Props = {
     /** A finished measurement to keep showing (display space). */
     measureLine?: { a: Pt; b: Pt; label: string } | null
     minHit: number
-    busy?: string | null
     overlay?: ReactNode
 }
 
@@ -80,6 +88,7 @@ type Drag =
 
 export function DrawingView(p: Props) {
     const frameRef = useRef<HTMLDivElement>(null)
+    const previewHost = useRef<HTMLDivElement>(null)
     const [draft, setDraft] = useState<{ a: Pt; b: Pt } | null>(null)
     const [spaceDown, setSpaceDown] = useState(false)
     const [panning, setPanning] = useState(false)
@@ -98,6 +107,17 @@ export function DrawingView(p: Props) {
     const W = model.width
     const H = model.height
     const z = view.zoom
+
+    // The preview canvas is a real element made by the renderer: mount it as is.
+    useEffect(() => {
+        const host = previewHost.current
+        const c = p.preview
+        if (!host || !c) return
+        host.appendChild(c)
+        return () => {
+            if (c.parentNode === host) host.removeChild(c)
+        }
+    }, [p.preview])
 
     // Frame size → parent (for fit and clamping).
     useEffect(() => {
@@ -339,16 +359,26 @@ export function DrawingView(p: Props) {
                 data-w={W}
                 data-h={H}
                 data-zoom={z}
+                data-analyzed={model.analyzed ? "true" : "false"}
                 className="absolute left-0 top-0 bg-white shadow"
                 style={{ width: W * z, height: H * z, transform: `translate3d(${view.x}px, ${view.y}px, 0)`, transformOrigin: "0 0" }}
             >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                    src={model.url}
-                    alt={`Page ${p.pageNo}`}
-                    draggable={false}
-                    style={{ width: W * z, height: H * z, display: "block", pointerEvents: "none" }}
-                />
+                {p.image && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                        src={p.image.url}
+                        alt={`Page ${p.pageNo}`}
+                        draggable={false}
+                        decoding="async"
+                        onLoad={(e) => {
+                            const im = e.currentTarget
+                            // Swap out the preview only once the image can paint, so nothing flashes.
+                            void (im.decode ? im.decode() : Promise.resolve()).catch(() => {}).then(() => p.onImageShown?.())
+                        }}
+                        style={{ width: W * z, height: H * z, display: "block", pointerEvents: "none" }}
+                    />
+                )}
+                {p.preview && <div ref={previewHost} data-testid="cad-preview" className="pointer-events-none absolute inset-0" />}
 
                 <svg
                     width={W * z}
@@ -512,9 +542,15 @@ export function DrawingView(p: Props) {
                 </div>
             )}
 
-            {p.busy && (
-                <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/60">
-                    <span className="rounded-lg bg-white px-4 py-2 text-sm text-slate-700 shadow">{p.busy}</span>
+            {p.progress && (
+                // Doesn't block the drawing: you can pan, zoom and mark up while text is found.
+                <div
+                    role="status"
+                    data-testid="cad-progress"
+                    className="pointer-events-none absolute left-1/2 top-2 z-10 w-[min(280px,calc(100%-16px))] -translate-x-1/2 rounded-lg bg-white/95 px-3 py-2 text-xs text-slate-700 shadow"
+                >
+                    <div className="mb-1.5 truncate">{p.progress.label}</div>
+                    <ProgressBar done={p.progress.done} />
                 </div>
             )}
             {p.overlay}

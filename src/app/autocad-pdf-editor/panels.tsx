@@ -542,6 +542,19 @@ export function MeasureResult({ label, calibrated, onAdd, onClose }: { label: st
     )
 }
 
+/** A thin bar: `done` 0..1, or null for "working, can't tell how far" (animated). */
+export function ProgressBar({ done }: { done: number | null }) {
+    return (
+        <div className="h-1.5 w-full max-w-[280px] overflow-hidden rounded-full bg-slate-200" aria-hidden>
+            {done == null ? (
+                <div className="h-full w-1/3 animate-pulse rounded-full bg-[#026EFF]/70" />
+            ) : (
+                <div className="h-full rounded-full bg-[#026EFF] transition-[width] duration-200" style={{ width: `${Math.round(Math.max(0.03, Math.min(1, done)) * 100)}%` }} />
+            )}
+        </div>
+    )
+}
+
 type ListItem = { key: string; original?: string; text?: string }
 
 export function ChangeLists({

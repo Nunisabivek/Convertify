@@ -66,9 +66,20 @@ const browser = await chromium.launch({ executablePath: CHROME, headless: true }
 async function openFile(page, file) {
     await page.goto(BASE + '/autocad-pdf-editor', { waitUntil: 'domcontentloaded' })
     await page.locator('input[type=file]').first().setInputFiles(path.join(FX, file))
-    await page.waitForSelector('[data-testid=cad-stage]', { timeout: 180000 })
+    await waitAnalysed(page)
     await page.waitForTimeout(700)
 }
+// The drawing shows as soon as it's rendered; regions arrive when analysis is done.
+const waitAnalysed = (page, n = null) =>
+    page.waitForFunction(
+        (n) => {
+            const s = document.querySelector('[data-testid=cad-stage]')
+            const img = s?.querySelector('img')
+            return s?.dataset.analyzed === 'true' && img?.complete && img.naturalWidth > 0 && (n == null || img.alt === `Page ${n}`)
+        },
+        n,
+        { timeout: 300000, polling: 100 },
+    )
 const stage = (page) =>
     page.evaluate(() => {
         const s = document.querySelector('[data-testid=cad-stage]')
@@ -370,7 +381,7 @@ async function set() {
     for (let p = 2; p <= 6; p++) {
         const t = Date.now()
         await page.locator('main button[title="Next page"]').click()
-        await page.waitForFunction((n) => document.querySelector('[data-testid=cad-stage] img')?.alt === `Page ${n}`, p, { timeout: 120000 })
+        await waitAnalysed(page, p)
         await page.waitForTimeout(300)
         const st = await stage(page)
         sizes.push(`p${p} ${(st.nat / 1e6).toFixed(1)}MP ${((Date.now() - t) / 1000).toFixed(1)}s`)

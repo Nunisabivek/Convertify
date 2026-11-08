@@ -19,10 +19,10 @@ export type Region = {
 }
 
 export type PageModel = {
-    /** Object URL of the rendered page (revoked on reset/unmount). */
-    url: string
-    /** Canvas pixels per point the page was rendered at. */
-    renderScale: number
+    /** Unique per loaded file and page (a newly shown sheet fits the frame once). */
+    key: string
+    /** False while text detection is still running (regions are empty until then). */
+    analyzed: boolean
     /** Displayed page size in points. */
     width: number
     height: number
@@ -33,6 +33,16 @@ export type PageModel = {
     /** Detection counts, for the legend. */
     textCount: number
     shxCount: number
+}
+
+/** A rendered page image. Only the current page and its neighbours keep one (see device.ts). */
+export type PageImage = {
+    /** Object URL of the PNG (revoked when evicted, on reset and on unmount). */
+    url: string
+    /** Canvas pixels per point the page was rendered at. */
+    scale: number
+    /** Megapixels, for the cache cap. */
+    mp: number
 }
 
 export type Tool =

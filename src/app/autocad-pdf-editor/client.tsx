@@ -15,12 +15,13 @@ import { loadPdfjs } from "@/lib/pdfjs"
 import type { Pt } from "@/lib/cad/geometry"
 import { stampBox, todayLabel, type Markup, type MeasureText, type StampLabel } from "@/lib/cad/markup"
 import { calibrate, formatLength, measure, parseLength, scaleRatio, type Calibration, type Unit } from "@/lib/cad/measure"
-import { pixelBudget } from "@/lib/cad/viewport"
+import { deviceProfile, pagesToKeep, type TierProfile } from "@/lib/cad/device"
 import type { ExportReport, PageInfo, RegionEdit } from "@/lib/cad/export"
 import { AlertTriangle, Check, ChevronLeft, Download, Type } from "lucide-react"
-import { analyzePage, manualRegion, sampleRegionColors } from "./analyze"
-import { CalibrateEditor, ChangeLists, MeasureResult, NoteEditor, Sheet, TextEditor, Toolbar, toolHint } from "./panels"
-import { regionKey, type PageModel, type Region, type Tool } from "./types"
+import { loadPage, manualRegion, release, sampleRegionColors } from "./analyze"
+import { PageWorker, isAbort } from "./engine"
+import { CalibrateEditor, ChangeLists, MeasureResult, NoteEditor, ProgressBar, Sheet, TextEditor, Toolbar, toolHint } from "./panels"
+import { regionKey, type PageImage, type PageModel, type Region, type Tool } from "./types"
 import { DrawingView, clampView, fitView, zoomAt, type View } from "./viewer"
 
 type Step = "upload" | "analyzing" | "editing" | "exporting" | "done"
@@ -32,10 +33,6 @@ type Dialog =
     | null
 
 const yieldToUi = () => new Promise<void>((r) => setTimeout(r, 0))
-const isPhoneLike = () =>
-    IS_MOBILE_BUILD || window.matchMedia("(max-width: 768px)").matches || window.matchMedia("(pointer: coarse)").matches
-/** About 16 MP of page image on desktop, 8 MP on phones. */
-const budget = () => pixelBudget(isPhoneLike())
 
 /** Markup sizes scale with the sheet so they read the same on A4 and A0. */
 const sheetUnit = (m: PageModel) => Math.max(0.6, Math.hypot(m.width, m.height) / 1200)
@@ -64,7 +61,11 @@ export default function AutocadPdfEditorClient() {
     const [numPages, setNumPages] = useState(0)
     const [currentPage, setCurrentPage] = useState(1)
     const [models, setModels] = useState<Map<number, PageModel>>(new Map())
-    const [pageBusy, setPageBusy] = useState<string | null>(null)
+    // Rendered page images: only the current page and its neighbours keep one.
+    const [images, setImages] = useState<Map<number, PageImage>>(new Map())
+    // The just-rendered canvas of the current page, shown until its PNG has decoded.
+    const [preview, setPreview] = useState<{ page: number; canvas: HTMLCanvasElement } | null>(null)
+    const [pageBusy, setPageBusy] = useState<{ page: number; label: string; done: number | null } | null>(null)
     const [pageError, setPageError] = useState<string | null>(null)
     const [edits, setEdits] = useState<Map<string, string>>(new Map())
     // Regions the user chose to delete entirely (remove original, write nothing).
@@ -96,14 +97,24 @@ export default function AutocadPdfEditorClient() {
     const pdfRef = useRef<PDFDocumentProxy | null>(null)
     const abortRef = useRef<AbortController | null>(null)
     const toolbarRef = useRef<HTMLDivElement>(null)
-    const loadingRef = useRef(new Set<number>())
     const genRef = useRef(0)
     const modelsRef = useRef(models)
+    const imagesRef = useRef(images)
+    const previewRef = useRef(preview)
     const exportUrlRef = useRef<string | null>(null)
     useLayoutEffect(() => {
         modelsRef.current = models
+        imagesRef.current = images
+        previewRef.current = preview
         exportUrlRef.current = exportUrl
-    }, [models, exportUrl])
+    }, [models, images, preview, exportUrl])
+    // Device tier (pixel budget, cache size), decided once in the browser.
+    const profileRef = useRef<TierProfile | null>(null)
+    const profile = () => (profileRef.current ??= deviceProfile(IS_MOBILE_BUILD))
+    const workerRef = useRef<PageWorker | null>(null)
+    // The page being rendered/analysed right now; leaving the page aborts it.
+    const jobRef = useRef<{ page: number; ac: AbortController } | null>(null)
+    const jobsStartedRef = useRef(0)
 
     const model = models.get(currentPage)
 
@@ -118,10 +129,13 @@ export default function AutocadPdfEditorClient() {
         return () => window.removeEventListener("resize", update)
     }, [])
 
-    // Page images are object URLs: free them when the editor goes away.
+    // Page images are object URLs: free them (and stop any page work) when the editor goes away.
     useEffect(
         () => () => {
-            modelsRef.current.forEach((m) => URL.revokeObjectURL(m.url))
+            jobRef.current?.ac.abort()
+            workerRef.current?.cancel()
+            imagesRef.current.forEach((im) => URL.revokeObjectURL(im.url))
+            if (previewRef.current) release(previewRef.current.canvas)
             if (exportUrlRef.current) URL.revokeObjectURL(exportUrlRef.current)
             void pdfRef.current?.destroy()
         },
@@ -140,6 +154,20 @@ export default function AutocadPdfEditorClient() {
         })
         return () => cancelAnimationFrame(id)
     }, [step, currentPage])
+
+    // Load pdf.js while the upload screen sits idle: on slow phones evaluating it is a
+    // few hundred ms that would otherwise land right after the file is chosen.
+    useEffect(() => {
+        if (step !== "upload") return
+        const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number; cancelIdleCallback?: (id: number) => void }
+        const go = () => void loadPdfjs().catch(() => {})
+        if (w.requestIdleCallback) {
+            const id = w.requestIdleCallback(go, { timeout: 4000 })
+            return () => w.cancelIdleCallback?.(id)
+        }
+        const t = window.setTimeout(go, 1200)
+        return () => window.clearTimeout(t)
+    }, [step])
 
     const measureText = useMemo<MeasureText>(() => {
         let ctx: CanvasRenderingContext2D | null = null
@@ -166,8 +194,8 @@ export default function AutocadPdfEditorClient() {
     const fittedRef = useRef("")
     useEffect(() => {
         if (!model || !frame.w || !frame.h) return
-        if (fittedRef.current !== model.url) {
-            fittedRef.current = model.url
+        if (fittedRef.current !== model.key) {
+            fittedRef.current = model.key
             fit("page", model)
         } else if (fitRef.current) fit(fitRef.current, model)
         else setView((v) => clampView(v, frame.w, frame.h, model.width, model.height))
@@ -194,21 +222,21 @@ export default function AutocadPdfEditorClient() {
             assertFitsPhone(selectedFile)
             const buffer = await selectedFile.arrayBuffer()
             pdfBytesRef.current = buffer.slice(0)
+            setProgress(30)
+            setProgressStatus("Opening the drawing...")
             const pdfjsLib = await loadPdfjs()
             const pdf = await pdfjsLib.getDocument({ data: new Uint8Array(buffer) }).promise
-            pdfRef.current = pdf
-            setNumPages(pdf.numPages)
-            setProgress(10)
-            // Only the first sheet is rendered now; the others render when you open them.
-            const first = await analyzePage(pdf, 1, budget(), (s, pct) => {
-                setProgressStatus(pdf.numPages > 1 ? `${s} (other sheets load when you open them)` : s)
-                setProgress(Math.round(10 + pct * 0.88))
-            })
             if (ac.signal.aborted || gen !== genRef.current) {
-                URL.revokeObjectURL(first.url)
+                void pdf.destroy()
                 throw new DOMException("Aborted", "AbortError")
             }
-            setModels(new Map([[1, first]]))
+            pdfRef.current = pdf
+            setNumPages(pdf.numPages)
+            // Sheets render when opened, the first one now: its image shows as soon as it's
+            // drawn, with progress on the drawing while its text is found.
+            jobsStartedRef.current = 0
+            setModels(new Map())
+            setImages(new Map())
             setCurrentPage(1)
             setFitMode("page")
             setProgress(100)
@@ -227,30 +255,97 @@ export default function AutocadPdfEditorClient() {
         }
     }, [])
 
-    // Lazy rendering: a sheet is rendered and analysed the first time it's opened.
-    useEffect(() => {
-        if (step !== "editing") return
-        const pdf = pdfRef.current
-        const n = currentPage
-        if (!pdf || models.has(n) || loadingRef.current.has(n)) return
-        loadingRef.current.add(n)
+    /** Frees the preview canvas unless it belongs to page `keep`. */
+    const dropPreview = (keep?: number) =>
+        setPreview((prev) => {
+            if (!prev || prev.page === keep) return prev
+            release(prev.canvas)
+            return null
+        })
+
+    /** Drops images of pages far from `current`, within the tier's megapixel cap. */
+    const trimImages = (current: number) =>
+        setImages((prev) => {
+            const prof = profileRef.current
+            if (!prof) return prev
+            const keep = pagesToKeep(new Map([...prev].map(([n, im]) => [n, im.mp])), current, prof.neighbours, prof.cacheMP)
+            if (keep.size === prev.size) return prev
+            const next = new Map<number, PageImage>()
+            prev.forEach((im, n) => (keep.has(n) ? next.set(n, im) : URL.revokeObjectURL(im.url)))
+            return next
+        })
+
+    // Renders (and, the first time, analyses) a page. Evicted images are re-rendered on return.
+    const runJob = async (pdf: PDFDocumentProxy, n: number, gen: number) => {
+        const ac = new AbortController()
+        jobRef.current = { page: n, ac }
+        jobsStartedRef.current++
+        const prof = profile()
+        workerRef.current ??= new PageWorker()
         setPageError(null)
-        setPageBusy(`Rendering page ${n}...`)
+        const live = () => !ac.signal.aborted && gen === genRef.current
+        try {
+            const m = await loadPage(pdf, n, {
+                budget: prof.budget,
+                maxScale: prof.maxScale,
+                analyse: !modelsRef.current.get(n)?.analyzed,
+                key: `${gen}:${n}`,
+                signal: ac.signal,
+                worker: workerRef.current,
+                onPreview: (canvas, base) => {
+                    if (!live()) return false
+                    setPreview((prev) => {
+                        if (prev && prev.canvas !== canvas) release(prev.canvas)
+                        return { page: n, canvas }
+                    })
+                    setModels((prev) => (prev.has(n) ? prev : new Map(prev).set(n, base)))
+                    return true
+                },
+                onImage: (img, base) => {
+                    if (!live()) return URL.revokeObjectURL(img.url)
+                    setImages((prev) => {
+                        const old = prev.get(n)
+                        if (old && old.url !== img.url) URL.revokeObjectURL(old.url)
+                        return new Map(prev).set(n, img)
+                    })
+                    setModels((prev) => (prev.has(n) ? prev : new Map(prev).set(n, base)))
+                    trimImages(n)
+                },
+                onStatus: (label, done) => {
+                    if (live()) setPageBusy({ page: n, label, done })
+                },
+            })
+            if (live() && m) setModels((prev) => new Map(prev).set(n, m))
+        } catch (e) {
+            if (isAbort(e) || !live()) return
+            console.error(e)
+            setPageError(`Couldn't render page ${n}: ${(e as Error)?.message || e}`)
+        } finally {
+            if (jobRef.current?.ac === ac) {
+                jobRef.current = null
+                setPageBusy(null)
+            } else setPageBusy((b) => (b?.page === n ? null : b))
+        }
+    }
+
+    // Leaving a page cancels its render and analysis, so quick paging never queues stale work.
+    useEffect(() => {
+        const job = jobRef.current
+        if (job && job.page !== currentPage) {
+            job.ac.abort()
+            jobRef.current = null
+        }
+    }, [currentPage])
+
+    const needsWork = step === "editing" && numPages > 0 && (!images.has(currentPage) || !models.get(currentPage)?.analyzed)
+    useEffect(() => {
+        const pdf = pdfRef.current
+        if (!needsWork || !pdf || jobRef.current?.page === currentPage) return
         const gen = genRef.current
-        analyzePage(pdf, n, budget(), (s) => setPageBusy(s))
-            .then((m) => {
-                if (gen !== genRef.current) return URL.revokeObjectURL(m.url)
-                setModels((prev) => new Map(prev).set(n, m))
-            })
-            .catch((e) => {
-                console.error(e)
-                if (gen === genRef.current) setPageError(`Couldn't render page ${n}: ${(e as Error)?.message || e}`)
-            })
-            .finally(() => {
-                loadingRef.current.delete(n)
-                if (gen === genRef.current) setPageBusy(null)
-            })
-    }, [step, currentPage, models])
+        // A short pause after paging, so flicking through sheets renders only the one you stop on.
+        const timer = window.setTimeout(() => void runJob(pdf, currentPage, gen), jobsStartedRef.current ? 80 : 0)
+        return () => window.clearTimeout(timer)
+    }, [needsWork, currentPage]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const updateModel = (n: number, fn: (m: PageModel) => PageModel) =>
         setModels((prev) => {
@@ -345,7 +440,7 @@ export default function AutocadPdfEditorClient() {
             const w = Math.abs(b.x - a.x)
             const h = Math.abs(b.y - a.y)
             if (w < 3 || h < 3) return
-            const { color, paper } = await sampleRegionColors(model, { x, y, w, h })
+            const { color, paper } = await sampleRegionColors(images.get(page), { x, y, w, h })
             const r = manualRegion(model, `m${Date.now().toString(36)}`, x, y, w, h, color, paper)
             updateModel(page, (m) => ({ ...m, regions: [...m.regions, r] }))
             setTool("select")
@@ -497,11 +592,14 @@ export default function AutocadPdfEditorClient() {
 
     const reset = () => {
         genRef.current++
+        jobRef.current?.ac.abort()
+        jobRef.current = null
         if (exportUrl) URL.revokeObjectURL(exportUrl)
-        models.forEach((m) => URL.revokeObjectURL(m.url))
+        images.forEach((im) => URL.revokeObjectURL(im.url))
+        setImages(new Map())
+        dropPreview()
         void pdfRef.current?.destroy()
         pdfRef.current = null
-        loadingRef.current.clear()
         setFile(null)
         setStep("upload")
         setNumPages(0)
@@ -753,7 +851,10 @@ export default function AutocadPdfEditorClient() {
                     onPage={(n) => {
                         closeEditors()
                         setSelectedMarkup(null)
-                        setCurrentPage(Math.max(1, Math.min(numPages, n)))
+                        const next = Math.max(1, Math.min(numPages, n))
+                        setCurrentPage(next)
+                        trimImages(next)
+                        dropPreview(next)
                     }}
                     zoomPct={Math.round(view.zoom * 100)}
                     onZoom={zoomBy}
@@ -806,11 +907,14 @@ export default function AutocadPdfEditorClient() {
             </div>
 
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-500">
-                {model && (
-                    <span>
-                        {model.textCount} text and {model.shxCount} SHX region{model.shxCount === 1 ? "" : "s"} found on this page
-                    </span>
-                )}
+                {model &&
+                    (model.analyzed ? (
+                        <span>
+                            {model.textCount} text and {model.shxCount} SHX region{model.shxCount === 1 ? "" : "s"} found on this page
+                        </span>
+                    ) : (
+                        <span>Finding text on this page...</span>
+                    ))}
                 <span className="inline-flex items-center gap-1">
                     <span className="inline-block h-3 w-3 rounded-sm border border-orange-400 bg-orange-200/60" /> Text
                 </span>
@@ -826,6 +930,10 @@ export default function AutocadPdfEditorClient() {
             {model ? (
                 <DrawingView
                     model={model}
+                    image={images.get(currentPage)}
+                    preview={preview?.page === currentPage ? preview.canvas : null}
+                    onImageShown={() => dropPreview(-1)}
+                    progress={pageBusy?.page === currentPage ? pageBusy : null}
                     pageNo={currentPage}
                     height={availH}
                     view={view}
@@ -858,8 +966,13 @@ export default function AutocadPdfEditorClient() {
                     overlay={overlay}
                 />
             ) : (
-                <div className="flex items-center justify-center rounded-xl border bg-slate-100 text-sm text-slate-600" style={{ height: availH }}>
-                    {pageError ?? pageBusy ?? `Rendering page ${currentPage}...`}
+                <div
+                    data-testid="cad-loading"
+                    className="flex flex-col items-center justify-center gap-3 rounded-xl border bg-slate-100 px-6 text-center text-sm text-slate-600"
+                    style={{ height: availH }}
+                >
+                    {pageError ?? (pageBusy?.page === currentPage ? pageBusy.label : `Rendering page ${currentPage}...`)}
+                    {!pageError && <ProgressBar done={pageBusy?.page === currentPage ? pageBusy.done : null} />}
                 </div>
             )}
 
