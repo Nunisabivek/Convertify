@@ -33,6 +33,14 @@ type Dialog =
     | null
 
 const yieldToUi = () => new Promise<void>((r) => setTimeout(r, 0))
+/** Timeline marks (cad:start:3, cad:shown:3, cad:analysed:3, cad:aborted:3) for DevTools and tests. */
+const mark = (name: string) => {
+    try {
+        performance.mark(name)
+    } catch {
+        // Old browsers without User Timing.
+    }
+}
 
 /** Markup sizes scale with the sheet so they read the same on A4 and A0. */
 const sheetUnit = (m: PageModel) => Math.max(0.6, Math.hypot(m.width, m.height) / 1200)
@@ -89,14 +97,20 @@ export default function AutocadPdfEditorClient() {
     const [view, setView] = useState<View>({ zoom: 0.5, x: 0, y: 0 })
     const [fitMode, setFitMode] = useState<"page" | "width" | null>("page")
     const [frame, setFrame] = useState({ w: 0, h: 0 })
-    const [winH, setWinH] = useState(800)
-    const [narrow, setNarrow] = useState(IS_MOBILE_BUILD)
+    // Layout follows the window size, not "is this a phone": width picks the bottom sheet
+    // or the popover and the toolbar shape; height sizes the drawing frame.
+    const [vp, setVp] = useState(IS_MOBILE_BUILD ? { w: 390, h: 800 } : { w: 1280, h: 800 })
     const [coarse, setCoarse] = useState(IS_MOBILE_BUILD)
+    // Toolbar and legend heights, so the frame can fill the rest of the screen.
+    const [chrome, setChrome] = useState({ toolbar: IS_MOBILE_BUILD ? 92 : 104, legend: 16 })
+    // Top of the bottom sheet on screen (CSS px), while one is open.
+    const [sheetTop, setSheetTop] = useState<number | null>(null)
 
     const pdfBytesRef = useRef<ArrayBuffer | null>(null)
     const pdfRef = useRef<PDFDocumentProxy | null>(null)
     const abortRef = useRef<AbortController | null>(null)
     const toolbarRef = useRef<HTMLDivElement>(null)
+    const legendRef = useRef<HTMLDivElement>(null)
     const genRef = useRef(0)
     const modelsRef = useRef(models)
     const imagesRef = useRef(images)
@@ -117,17 +131,51 @@ export default function AutocadPdfEditorClient() {
     const jobsStartedRef = useRef(0)
 
     const model = models.get(currentPage)
+    /** Bottom-sheet editor and compact toolbar below 640 px wide. */
+    const narrow = vp.w < 640
+    /** Compact toolbar: phones, and landscape phones (short screens) in a single row. */
+    const toolbarMode: "compact" | "medium" | "full" = vp.w < 640 || vp.h < 500 ? "compact" : vp.w < 1100 ? "medium" : "full"
 
     useEffect(() => {
         const update = () => {
-            setWinH(window.innerHeight)
-            setNarrow(IS_MOBILE_BUILD || window.innerWidth < 640)
+            const w = window.innerWidth
+            const h = window.innerHeight
+            setVp((old) => {
+                // A keyboard that shrinks the window (Android WebView) mustn't refit the drawing
+                // under the text you're typing; keep the old height until it closes.
+                const el = document.activeElement as HTMLElement | null
+                const typing = !!el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA") && w === old.w && h < old.h
+                const next = typing ? old : { w, h }
+                return old.w === next.w && old.h === next.h ? old : next
+            })
             setCoarse(IS_MOBILE_BUILD || window.matchMedia("(pointer: coarse)").matches)
         }
         update()
         window.addEventListener("resize", update)
-        return () => window.removeEventListener("resize", update)
+        window.addEventListener("orientationchange", update)
+        return () => {
+            window.removeEventListener("resize", update)
+            window.removeEventListener("orientationchange", update)
+        }
     }, [])
+
+    // Toolbar and legend sizes change rarely (wrapping, tool options): watch them.
+    useEffect(() => {
+        if (step !== "editing") return
+        const tb = toolbarRef.current
+        const lg = legendRef.current
+        if (!tb || !lg) return
+        const measure = () => {
+            const toolbar = Math.round(tb.offsetHeight)
+            const legend = Math.round(lg.offsetHeight)
+            setChrome((c) => (c.toolbar === toolbar && c.legend === legend ? c : { toolbar, legend }))
+        }
+        measure()
+        const ro = new ResizeObserver(measure)
+        ro.observe(tb)
+        ro.observe(lg)
+        return () => ro.disconnect()
+    }, [step])
 
     // Page images are object URLs: free them (and stop any page work) when the editor goes away.
     useEffect(
@@ -181,7 +229,8 @@ export default function AutocadPdfEditorClient() {
 
     const fit = (mode: "page" | "width", m: PageModel | undefined = model) => {
         if (!m || !frame.w || !frame.h) return
-        setView(fitView(mode, frame.w, frame.h, m.width, m.height))
+        // On narrow screens the sheet sits at the top so the bottom sheet covers empty space.
+        setView(fitView(mode, frame.w, frame.h, m.width, m.height, narrow ? "top" : "center"))
         setFitMode(mode)
     }
 
@@ -280,6 +329,7 @@ export default function AutocadPdfEditorClient() {
         const ac = new AbortController()
         jobRef.current = { page: n, ac }
         jobsStartedRef.current++
+        mark(`cad:start:${n}`)
         const prof = profile()
         workerRef.current ??= new PageWorker()
         setPageError(null)
@@ -303,6 +353,7 @@ export default function AutocadPdfEditorClient() {
                 },
                 onImage: (img, base) => {
                     if (!live()) return URL.revokeObjectURL(img.url)
+                    mark(`cad:shown:${n}`)
                     setImages((prev) => {
                         const old = prev.get(n)
                         if (old && old.url !== img.url) URL.revokeObjectURL(old.url)
@@ -315,9 +366,12 @@ export default function AutocadPdfEditorClient() {
                     if (live()) setPageBusy({ page: n, label, done })
                 },
             })
-            if (live() && m) setModels((prev) => new Map(prev).set(n, m))
+            if (live() && m) {
+                mark(`cad:analysed:${n}`)
+                setModels((prev) => new Map(prev).set(n, m))
+            }
         } catch (e) {
-            if (isAbort(e) || !live()) return
+            if (isAbort(e) || !live()) return mark(`cad:aborted:${n}`)
             console.error(e)
             setPageError(`Couldn't render page ${n}: ${(e as Error)?.message || e}`)
         } finally {
@@ -367,14 +421,6 @@ export default function AutocadPdfEditorClient() {
         // A deleted region starts empty; otherwise pending edit, else the detected text.
         setDraftText(deletedKeys.has(key) ? "" : (edits.get(key) ?? r.originalText ?? ""))
         setDraftColor(colorOverrides.get(key) ?? r.color)
-        if (narrow && model) {
-            // Keep the region above the bottom sheet.
-            const b = boxBounds(r.box)
-            const frameTop = document.querySelector("[data-testid=cad-frame]")?.getBoundingClientRect().top ?? 0
-            const bottom = frameTop + view.y + (b.y + b.h) * view.zoom
-            const limit = window.innerHeight - 200
-            if (bottom > limit) userView({ ...view, y: view.y - (bottom - limit) })
-        }
     }
 
     const activeRegion = (() => {
@@ -383,6 +429,25 @@ export default function AutocadPdfEditorClient() {
         if (pPart !== `p${currentPage}`) return null
         return model.regions.find((r) => r.id === id) ?? null
     })()
+
+    // The bottom sheet must not hide the text being edited: move the drawing so the region
+    // sits in the visible band between the toolbar and the sheet.
+    useEffect(() => {
+        if (!narrow || !activeRegion || sheetTop == null) return
+        const frameEl = document.querySelector<HTMLElement>("[data-testid=cad-frame]")
+        if (!frameEl) return
+        const fr = frameEl.getBoundingClientRect()
+        const tb = toolbarRef.current?.getBoundingClientRect()
+        const visTop = Math.max(fr.top, tb && tb.bottom < fr.bottom ? tb.bottom : 0) + 8
+        const visBottom = Math.min(fr.bottom, sheetTop) - 8
+        if (visBottom - visTop < 24) return
+        const b = boxBounds(activeRegion.box)
+        const top = fr.top + frameEl.clientTop + view.y + b.y * view.zoom
+        const h = b.h * view.zoom
+        if (top >= visTop && top + h <= visBottom) return
+        const want = h < visBottom - visTop ? visTop + (visBottom - visTop - h) / 2 : visTop
+        userView({ ...view, y: view.y + (want - top) })
+    }, [activeKey, sheetTop, narrow]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const saveDraft = () => {
         if (!activeKey) return
@@ -747,7 +812,11 @@ export default function AutocadPdfEditorClient() {
         )
     }
 
-    const availH = Math.max(IS_MOBILE_BUILD ? 280 : 320, winH - (IS_MOBILE_BUILD ? 230 : narrow ? 200 : 225))
+    // The frame fills the visible screen below the toolbar (stuck under the site header)
+    // and the legend: the whole drawing area is usable without scrolling the page.
+    const stickyTop = IS_MOBILE_BUILD ? 8 : 72
+    const reserve = IS_MOBILE_BUILD ? 96 : 12
+    const availH = Math.round(Math.max(vp.h < 500 ? 180 : 280, vp.h - stickyTop - chrome.toolbar - 12 - chrome.legend - 12 - reserve))
     const pageKeyPrefix = `p${currentPage}:`
     const pageMarkups = markups.filter((m) => m.page === currentPage)
     const regionByKey = (key: string) => model?.regions.find((r) => regionKey(currentPage, r.id) === key)
@@ -761,6 +830,7 @@ export default function AutocadPdfEditorClient() {
             <Sheet
                 narrow={narrow}
                 frame={frame}
+                onSheetTop={setSheetTop}
                 anchor={{ x: tl.x, y: tl.y, w: b.w * view.zoom, h: b.h * view.zoom }}
                 title={
                     <>
@@ -788,7 +858,7 @@ export default function AutocadPdfEditorClient() {
         const anchor = { x: f.x, y: f.y, w: 1, h: 1 }
         if (dialog.kind === "note") {
             overlay = (
-                <Sheet narrow={narrow} frame={frame} anchor={anchor} title="Add a note">
+                <Sheet narrow={narrow} frame={frame} anchor={anchor} onSheetTop={setSheetTop} title="Add a note">
                     <NoteEditor
                         onCancel={() => setDialog(null)}
                         onAdd={(text) => {
@@ -800,7 +870,7 @@ export default function AutocadPdfEditorClient() {
             )
         } else if (dialog.kind === "calibrate") {
             overlay = (
-                <Sheet narrow={narrow} frame={frame} anchor={anchor} title="Set the drawing scale">
+                <Sheet narrow={narrow} frame={frame} anchor={anchor} onSheetTop={setSheetTop} title="Set the drawing scale">
                     <CalibrateEditor
                         paperLabel={lengthLabel(dialog.a, dialog.b, null).replace(" on paper", "")}
                         defaultUnit={cal?.unit ?? "mm"}
@@ -823,7 +893,7 @@ export default function AutocadPdfEditorClient() {
             )
         } else {
             overlay = (
-                <Sheet narrow={narrow} frame={frame} anchor={anchor} title="Measurement">
+                <Sheet narrow={narrow} frame={frame} anchor={anchor} onSheetTop={setSheetTop} title="Measurement">
                     <MeasureResult
                         label={dialog.label}
                         calibrated={!!cal}
@@ -841,10 +911,11 @@ export default function AutocadPdfEditorClient() {
     const scaleLabel = cal ? `Scale ${scaleRatio(cal) ?? "set"} · ${cal.unit}` : null
 
     return (
-        <div className="mx-auto w-full max-w-[1400px] space-y-3 px-2 sm:px-4">
+        <div className="mx-auto w-full max-w-[1400px] space-y-3 pl-[max(0.5rem,env(safe-area-inset-left))] pr-[max(0.5rem,env(safe-area-inset-right))] sm:pl-[max(1rem,env(safe-area-inset-left))] sm:pr-[max(1rem,env(safe-area-inset-right))]">
             <div ref={toolbarRef}>
                 <Toolbar
-                    compact={narrow}
+                    mode={toolbarMode}
+                    oneRow={toolbarMode === "compact" && vp.w >= 640}
                     stickyClass={IS_MOBILE_BUILD ? "top-2 border-[#026EFF]/20" : "top-16"}
                     page={currentPage}
                     numPages={numPages}
@@ -906,25 +977,33 @@ export default function AutocadPdfEditorClient() {
                 />
             </div>
 
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-500">
+            <div
+                ref={legendRef}
+                className={`flex items-center gap-x-4 gap-y-1 text-xs text-slate-500 ${toolbarMode === "compact" ? "flex-nowrap overflow-hidden whitespace-nowrap" : "flex-wrap"}`}
+            >
                 {model &&
                     (model.analyzed ? (
-                        <span>
-                            {model.textCount} text and {model.shxCount} SHX region{model.shxCount === 1 ? "" : "s"} found on this page
+                        <span className={toolbarMode === "compact" ? "shrink-0" : ""}>
+                            {toolbarMode === "compact"
+                                ? `${model.textCount + model.shxCount} found`
+                                : `${model.textCount} text and ${model.shxCount} SHX region${model.shxCount === 1 ? "" : "s"} found on this page`}
                         </span>
                     ) : (
                         <span>Finding text on this page...</span>
                     ))}
-                <span className="inline-flex items-center gap-1">
+                {/* On phones the legend stays one line: the frame gets the height instead. */}
+                <span className="inline-flex shrink-0 items-center gap-1">
                     <span className="inline-block h-3 w-3 rounded-sm border border-orange-400 bg-orange-200/60" /> Text
                 </span>
-                <span className="inline-flex items-center gap-1">
-                    <span className="inline-block h-3 w-3 rounded-sm border border-violet-400 bg-violet-200/60" /> SHX lines
+                <span className="inline-flex shrink-0 items-center gap-1">
+                    <span className="inline-block h-3 w-3 rounded-sm border border-violet-400 bg-violet-200/60" /> SHX{toolbarMode === "compact" ? "" : " lines"}
                 </span>
-                <span className="inline-flex items-center gap-1">
+                <span className="inline-flex shrink-0 items-center gap-1">
                     <span className="inline-block h-3 w-3 rounded-sm border border-green-500 bg-green-200/70" /> Edited
                 </span>
-                <span className="hidden text-slate-400 sm:inline">{tool === "select" ? (narrow ? "Pinch to zoom, tap text to edit" : "Ctrl + wheel to zoom, drag to pan") : toolHint(tool)}</span>
+                <span className="hidden truncate text-slate-400 sm:inline">
+                    {tool === "select" ? (coarse ? "Pinch to zoom, tap text to edit" : "Ctrl + wheel to zoom, drag to pan") : toolHint(tool)}
+                </span>
             </div>
 
             {model ? (

@@ -50,7 +50,10 @@ export const toolHint = (t: Tool) =>
     t === "calibrate" ? "Drag along a dimension whose real length you know" : (TOOLS.find((x) => x.id === t)?.hint ?? "")
 
 type ToolbarProps = {
-    compact: boolean
+    /** Compact on a short (landscape phone) screen: everything in one row. */
+    oneRow?: boolean
+    /** compact: phones (two rows, or one on short landscape screens); medium: tablets; full: desktop. */
+    mode: "compact" | "medium" | "full"
     stickyClass: string
     page: number
     numPages: number
@@ -82,7 +85,12 @@ type ToolbarProps = {
     onExport: () => void
 }
 
+/** No double-tap zoom or 300 ms click delay on any control inside (iOS Safari). */
+const TOUCH = "touch-manipulation [&_button]:touch-manipulation [&_label]:touch-manipulation [&_select]:touch-manipulation [&_input]:touch-manipulation"
+
 export function Toolbar(p: ToolbarProps) {
+    const compact = p.mode === "compact"
+    const full = p.mode === "full"
     const [menu, setMenu] = useState(false)
     const menuRef = useRef<HTMLDivElement>(null)
     useEffect(() => {
@@ -94,14 +102,14 @@ export function Toolbar(p: ToolbarProps) {
         return () => window.removeEventListener("pointerdown", close)
     }, [menu])
 
-    const icon = p.compact ? "h-8 w-7 p-0 shrink-0" : "h-8 w-8 p-0 shrink-0"
+    const icon = compact ? "h-8 w-7 p-0 shrink-0" : "h-8 w-8 p-0 shrink-0"
     const nav = (
         <div className="flex items-center gap-1">
             <Button size="sm" variant="outline" className={icon} onClick={() => p.onPage(p.page - 1)} disabled={p.page <= 1} title="Previous page">
                 <ChevronLeft className="h-4 w-4" />
             </Button>
             <span className="whitespace-nowrap px-1 font-mono text-xs sm:text-sm">
-                {p.compact ? `${p.page}/${p.numPages}` : `Page ${p.page} / ${p.numPages}`}
+                {compact ? `${p.page}/${p.numPages}` : `Page ${p.page} / ${p.numPages}`}
             </span>
             <Button size="sm" variant="outline" className={icon} onClick={() => p.onPage(p.page + 1)} disabled={p.page >= p.numPages} title="Next page">
                 <ChevronRight className="h-4 w-4" />
@@ -115,7 +123,7 @@ export function Toolbar(p: ToolbarProps) {
             </Button>
             <button
                 type="button"
-                className={`${p.compact ? "min-w-[40px]" : "min-w-[48px]"} rounded px-1 text-center font-mono text-xs hover:bg-slate-100 sm:text-sm`}
+                className={`${compact ? "min-w-[40px]" : "min-w-[48px]"} h-8 rounded px-1 text-center font-mono text-xs hover:bg-slate-100 sm:text-sm`}
                 onClick={() => p.onFit("page")}
                 title="Fit page (0)"
             >
@@ -127,13 +135,13 @@ export function Toolbar(p: ToolbarProps) {
         </div>
     )
     const exportBtn = p.showExport ? (
-        <Button size="sm" onClick={p.onExport} disabled={p.changeCount === 0} className={`shrink-0 bg-orange-600 hover:bg-orange-700 ${p.compact ? "px-2" : ""}`}>
-            <Download className="mr-1 h-4 w-4" /> {p.compact ? "Export" : "Export PDF"}
+        <Button size="sm" onClick={p.onExport} disabled={p.changeCount === 0} className={`shrink-0 bg-orange-600 hover:bg-orange-700 ${compact ? "px-2" : ""}`}>
+            <Download className="mr-1 h-4 w-4" /> {compact ? "Export" : "Export PDF"}
         </Button>
     ) : null
     const autocadToggle = (
         <label
-            className="flex cursor-pointer select-none items-center gap-2 text-xs text-slate-600"
+            className="flex min-h-7 cursor-pointer select-none items-center gap-2 text-xs text-slate-600"
             title="Skip the paper-coloured cover behind replacement text. Text that can't be removed from the PDF stays visible under the new text, but the file imports into AutoCAD without filled-rectangle artefacts."
         >
             <input type="checkbox" checked={p.autocadMode} onChange={(e) => p.onAutocadMode(e.target.checked)} className="h-4 w-4 rounded border-slate-300" />
@@ -146,31 +154,31 @@ export function Toolbar(p: ToolbarProps) {
             key={t.id}
             size="sm"
             variant={p.tool === t.id || (t.id === "measure" && p.tool === "calibrate") ? "default" : "outline"}
-            className={p.compact ? icon : "h-8 shrink-0 px-2"}
+            className={full ? "h-8 shrink-0 px-2" : icon}
             onClick={() => p.onTool(t.id)}
             title={`${t.label}: ${t.hint}`}
             aria-label={t.label}
             aria-pressed={p.tool === t.id}
         >
             {t.icon}
-            {!p.compact && <span className="ml-1 hidden xl:inline">{t.label}</span>}
+            {full && <span className="ml-1 hidden xl:inline">{t.label}</span>}
         </Button>
     ))
     const style = (
         <div className="flex shrink-0 items-center gap-1">
-            {(p.compact ? [] : MARKUP_COLORS).map((c) => (
+            {(full ? MARKUP_COLORS : []).map((c) => (
                 <button
                     key={c}
                     type="button"
                     onClick={() => p.onColor(c)}
-                    className={`h-6 w-6 rounded-full border-2 ${p.color === c ? "border-slate-900 ring-2 ring-white ring-offset-1" : "border-white shadow"}`}
+                    className={`h-7 w-7 shrink-0 rounded-full border-2 ${p.color === c ? "border-slate-900 ring-2 ring-white ring-offset-1" : "border-white shadow"}`}
                     style={{ background: c }}
                     title={`Markup colour ${c}`}
                     aria-label={`Markup colour ${c}`}
                 />
             ))}
             <label className="relative h-7 w-7 shrink-0 cursor-pointer overflow-hidden rounded-full border shadow" title="Pick any markup colour">
-                <span className="absolute inset-0" style={{ background: p.compact ? p.color : "conic-gradient(red, yellow, lime, cyan, blue, magenta, red)" }} />
+                <span className="absolute inset-0" style={{ background: full ? "conic-gradient(red, yellow, lime, cyan, blue, magenta, red)" : p.color }} />
                 <input type="color" value={p.color} onChange={(e) => p.onColor(e.target.value)} className="absolute inset-0 h-full w-full cursor-pointer opacity-0" aria-label="Markup colour" />
             </label>
             <div className="ml-1 flex items-center gap-0.5 rounded-md border p-0.5" role="group" aria-label="Line width">
@@ -179,7 +187,7 @@ export function Toolbar(p: ToolbarProps) {
                         key={name}
                         type="button"
                         onClick={() => p.onWidth(i)}
-                        className={`flex h-6 w-7 items-center justify-center rounded ${p.widthLevel === i ? "bg-slate-800" : "hover:bg-slate-100"}`}
+                        className={`flex h-7 w-7 items-center justify-center rounded ${p.widthLevel === i ? "bg-slate-800" : "hover:bg-slate-100"}`}
                         title={`${name} lines`}
                         aria-label={`${name} lines`}
                     >
@@ -200,7 +208,7 @@ export function Toolbar(p: ToolbarProps) {
                         <option key={s}>{s}</option>
                     ))}
                 </select>
-                <label className="flex items-center gap-1 whitespace-nowrap">
+                <label className="flex min-h-7 items-center gap-1 whitespace-nowrap px-1">
                     <input type="checkbox" checked={p.stampDate} onChange={(e) => p.onStampDate(e.target.checked)} /> Date
                 </label>
             </div>
@@ -211,7 +219,7 @@ export function Toolbar(p: ToolbarProps) {
                     Set scale
                 </Button>
                 {p.scaleLabel && (
-                    <button type="button" className="text-slate-400 hover:text-red-600" onClick={p.onClearScale} title="Forget this sheet's scale" aria-label="Forget scale">
+                    <button type="button" className="inline-flex h-7 w-7 items-center justify-center text-slate-400 hover:text-red-600" onClick={p.onClearScale} title="Forget this sheet's scale" aria-label="Forget scale">
                         <X className="h-4 w-4" />
                     </button>
                 )}
@@ -224,7 +232,7 @@ export function Toolbar(p: ToolbarProps) {
                 <Ellipsis className="h-4 w-4" />
             </Button>
             {menu && (
-                <div className="absolute right-0 top-9 z-40 w-60 rounded-lg border bg-white p-1 text-sm shadow-lg">
+                <div className={`absolute right-0 top-9 z-40 w-60 rounded-lg border bg-white p-1 text-sm shadow-lg ${TOUCH}`}>
                     <MenuItem onClick={() => { p.onFit("page"); setMenu(false) }} icon={<Maximize2 className="h-4 w-4" />}>Fit page</MenuItem>
                     <MenuItem onClick={() => { p.onFit("width"); setMenu(false) }} icon={<MoveHorizontal className="h-4 w-4" />}>Fit width</MenuItem>
                     <MenuItem onClick={() => { p.onCalibrate(); setMenu(false) }} icon={<Ruler className="h-4 w-4" />}>Set drawing scale</MenuItem>
@@ -239,30 +247,84 @@ export function Toolbar(p: ToolbarProps) {
         </div>
     )
 
-    if (p.compact) {
+    const divider = <div className="mx-0.5 h-6 w-px shrink-0 bg-slate-200" />
+    const scroller = "flex min-w-0 items-center gap-1 overflow-x-auto [scrollbar-width:none] " + TOUCH
+    if (compact && p.oneRow) {
+        // Landscape phones: one row, so the drawing keeps most of the short screen.
         return (
-            <div className={`sticky z-20 space-y-2 rounded-xl border bg-white p-2 shadow-md ${p.stickyClass}`}>
+            <div data-testid="cad-toolbar" className={`sticky z-20 rounded-xl border bg-white p-1.5 shadow-md ${TOUCH} ${p.stickyClass}`}>
                 <div className="flex items-center gap-1">
                     {nav}
-                    <div className="mx-0.5 h-6 w-px bg-slate-200" />
+                    {divider}
+                    {zoom}
+                    {divider}
+                    <div className={`${scroller} flex-1`}>
+                        {tools}
+                        {divider}
+                        {style}
+                        {context && divider}
+                        {context}
+                    </div>
+                    {overflow}
+                    {exportBtn}
+                </div>
+            </div>
+        )
+    }
+    if (compact) {
+        return (
+            <div data-testid="cad-toolbar" className={`sticky z-20 space-y-2 rounded-xl border bg-white p-2 shadow-md ${TOUCH} ${p.stickyClass}`}>
+                <div className="flex items-center gap-1">
+                    {nav}
+                    {divider}
                     {zoom}
                     <div className="ml-auto flex items-center gap-1">
                         {overflow}
                         {exportBtn}
                     </div>
                 </div>
-                <div className="-mx-2 flex items-center gap-1 overflow-x-auto px-2 pb-0.5 [scrollbar-width:none]">
+                <div className={`-mx-2 px-2 pb-0.5 ${scroller}`}>
                     {tools}
-                    <div className="mx-0.5 h-6 w-px shrink-0 bg-slate-200" />
+                    {divider}
                     {style}
-                    {context && <div className="mx-0.5 h-6 w-px shrink-0 bg-slate-200" />}
+                    {context && divider}
+                    {context}
+                </div>
+            </div>
+        )
+    }
+    if (!full) {
+        // Tablets and mid-size windows: fit buttons as icons, AutoCAD mode and Clear in the
+        // menu, one swatch for colour. Two rows that never wrap into a third.
+        return (
+            <div data-testid="cad-toolbar" className={`sticky z-20 space-y-2 rounded-xl border bg-white p-2 shadow-md ${TOUCH} ${p.stickyClass}`}>
+                <div className="flex items-center gap-1.5">
+                    {nav}
+                    {divider}
+                    {zoom}
+                    <Button size="sm" variant={p.fitMode === "page" ? "default" : "outline"} className={icon} onClick={() => p.onFit("page")} title="Fit whole page in view (0)" aria-label="Fit page">
+                        <Maximize2 className="h-4 w-4" />
+                    </Button>
+                    <Button size="sm" variant={p.fitMode === "width" ? "default" : "outline"} className={icon} onClick={() => p.onFit("width")} title="Fit page width" aria-label="Fit width">
+                        <MoveHorizontal className="h-4 w-4" />
+                    </Button>
+                    <div className="ml-auto flex items-center gap-1.5">
+                        {overflow}
+                        {exportBtn}
+                    </div>
+                </div>
+                <div className={scroller}>
+                    {tools}
+                    {divider}
+                    {style}
+                    {context && divider}
                     {context}
                 </div>
             </div>
         )
     }
     return (
-        <div className={`sticky z-20 space-y-2 rounded-xl border bg-white p-2 shadow-md sm:p-3 ${p.stickyClass}`}>
+        <div data-testid="cad-toolbar" className={`sticky z-20 space-y-2 rounded-xl border bg-white p-2 shadow-md sm:p-3 ${TOUCH} ${p.stickyClass}`}>
             <div className="flex flex-wrap items-center gap-2">
                 {nav}
                 <div className="h-6 w-px bg-slate-200" />
@@ -312,15 +374,40 @@ export function Sheet({
     anchor,
     frame,
     title,
+    onSheetTop,
     children,
 }: {
     narrow: boolean
     anchor: { x: number; y: number; w: number; h: number } | null
     frame: { w: number; h: number }
     title?: ReactNode
+    /** The bottom sheet's top edge on screen (null when closed), so the drawing can move out from under it. */
+    onSheetTop?: (top: number | null) => void
     children: ReactNode
 }) {
     const ref = useRef<HTMLDivElement>(null)
+    const sheetRef = useRef<HTMLDivElement>(null)
+    const keyboard = useKeyboardInset(narrow)
+    const reportRef = useRef(onSheetTop)
+    useLayoutEffect(() => {
+        reportRef.current = onSheetTop
+    })
+    useLayoutEffect(() => {
+        const el = sheetRef.current
+        if (!narrow || !el) return
+        const report = () => reportRef.current?.(Math.round(el.getBoundingClientRect().top))
+        report()
+        const ro = new ResizeObserver(report)
+        ro.observe(el)
+        return () => {
+            ro.disconnect()
+            reportRef.current?.(null)
+        }
+    }, [narrow])
+    useLayoutEffect(() => {
+        const el = sheetRef.current
+        if (narrow && el) reportRef.current?.(Math.round(el.getBoundingClientRect().top))
+    }, [narrow, keyboard])
     const [pos, setPos] = useState<{ left: number; top: number } | null>(null)
     const pw = Math.min(360, Math.max(220, frame.w - 16))
     useLayoutEffect(() => {
@@ -340,8 +427,12 @@ export function Sheet({
     if (narrow) {
         return (
             <div
+                ref={sheetRef}
                 data-overlay=""
-                className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white p-3 pb-[max(12px,env(safe-area-inset-bottom))] shadow-[0_-8px_24px_rgba(2,110,255,0.12)]"
+                data-testid="cad-sheet"
+                className={`fixed inset-x-0 z-50 border-t border-slate-200 bg-white p-3 pb-[max(12px,env(safe-area-inset-bottom))] pl-[max(12px,env(safe-area-inset-left))] pr-[max(12px,env(safe-area-inset-right))] shadow-[0_-8px_24px_rgba(2,110,255,0.12)] ${TOUCH}`}
+                // Above the on-screen keyboard where the browser doesn't move fixed elements (iOS).
+                style={{ bottom: keyboard }}
                 {...stop}
             >
                 {title && <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-slate-600">{title}</p>}
@@ -353,7 +444,7 @@ export function Sheet({
         <div
             ref={ref}
             data-overlay=""
-            className="absolute z-30 rounded-md border-2 border-[#026EFF] bg-white p-2 shadow-lg"
+            className={`absolute z-30 rounded-md border-2 border-[#026EFF] bg-white p-2 shadow-lg ${TOUCH}`}
             style={{ left: pos?.left ?? 8, top: pos?.top ?? 8, width: pw, visibility: pos || !anchor ? "visible" : "hidden" }}
             {...stop}
         >
@@ -361,6 +452,24 @@ export function Sheet({
             {children}
         </div>
     )
+}
+
+/** How far the on-screen keyboard (or a zoomed visual viewport) covers the bottom of the layout viewport. */
+function useKeyboardInset(enabled: boolean) {
+    const [inset, setInset] = useState(0)
+    useEffect(() => {
+        const vv = window.visualViewport
+        if (!enabled || !vv) return
+        const update = () => setInset(Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop)))
+        update()
+        vv.addEventListener("resize", update)
+        vv.addEventListener("scroll", update)
+        return () => {
+            vv.removeEventListener("resize", update)
+            vv.removeEventListener("scroll", update)
+        }
+    }, [enabled])
+    return enabled ? inset : 0
 }
 
 export function TextEditor({
@@ -589,7 +698,7 @@ export function ChangeLists({
                                     {e.original && <span className="mr-2 text-slate-400 line-through">&ldquo;{e.original}&rdquo;</span>}
                                     <span className="text-green-700">&ldquo;{e.text}&rdquo;</span>
                                 </span>
-                                <button type="button" onClick={() => onRemoveEdit(e.key)} className="text-slate-400 hover:text-red-600" aria-label="Undo this edit">
+                                <button type="button" onClick={() => onRemoveEdit(e.key)} className="-m-1 inline-flex h-7 w-7 shrink-0 items-center justify-center text-slate-400 hover:text-red-600" aria-label="Undo this edit">
                                     <X className="h-4 w-4" />
                                 </button>
                             </li>
@@ -604,7 +713,7 @@ export function ChangeLists({
                         {deleted.map((e) => (
                             <li key={e.key} className="flex items-center justify-between gap-2 rounded border bg-white px-3 py-2">
                                 <span className="flex-1 truncate font-mono text-sm text-slate-400 line-through">{e.original ? `“${e.original}”` : "(text region)"}</span>
-                                <button type="button" onClick={() => onRestore(e.key)} className="inline-flex items-center gap-1 text-xs text-slate-400 hover:text-blue-600">
+                                <button type="button" onClick={() => onRestore(e.key)} className="inline-flex min-h-7 items-center gap-1 text-xs text-slate-400 hover:text-blue-600">
                                     <RotateCcw className="h-4 w-4" /> Restore
                                 </button>
                             </li>
@@ -625,7 +734,7 @@ export function ChangeLists({
                                     <span className="h-3 w-3 shrink-0 rounded-full" style={{ background: m.color }} />
                                     <span className="truncate">{markupTitle(m)}</span>
                                 </button>
-                                <button type="button" onClick={() => onDeleteMarkup(m.id)} className="text-slate-400 hover:text-red-600" aria-label="Delete markup" title="Delete markup">
+                                <button type="button" onClick={() => onDeleteMarkup(m.id)} className="-m-1 inline-flex h-7 w-7 shrink-0 items-center justify-center text-slate-400 hover:text-red-600" aria-label="Delete markup" title="Delete markup">
                                     <Trash2 className="h-4 w-4" />
                                 </button>
                             </li>

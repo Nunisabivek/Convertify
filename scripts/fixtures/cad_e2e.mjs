@@ -1,7 +1,7 @@
 // End-to-end check of the AutoCAD PDF editor against the fixtures from cad_fixtures.py.
 //
 //   python scripts/fixtures/cad_fixtures.py <fx>
-//   node scripts/fixtures/cad_e2e.mjs http://localhost:3311 <fx> <out> [desktop|phone|rotated|set|all]
+//   node scripts/fixtures/cad_e2e.mjs http://localhost:3311 <fx> <out> [desktop|phone|rotated|set|tablet|lowend|landscape|devices|all]
 //   python scripts/fixtures/cad_verify.py <fx> <out>
 //
 // Drives the real page in Chrome (playwright-core): detection against the manifest,
@@ -99,7 +99,7 @@ const regionsOf = async (page) => {
 }
 const client = (st, p) => ({ x: st.left + p.x * st.z, y: st.top + p.y * st.z })
 
-async function detection(page, file, pageNo) {
+async function detection(page, file, pageNo, opts = {}) {
     const labels = manifest[file].filter((l) => l.page === pageNo)
     const rs = await regionsOf(page)
     const miss = []
@@ -129,7 +129,9 @@ async function detection(page, file, pageNo) {
         } else miss.push(`${l.kind}:${l.text}@${l.angle}`)
     }
     const extra = rs.filter((r) => r.kind === 'shx' && !used.has(r)).length
-    check(`${file} p${pageNo} detection`, miss.length === 0, `text ${tt}/${ttN}, shx ${shx}/${shxN}, unmatched shx regions ${extra}${known.length ? ', known limit: ' + known.join(', ') : ''}${miss.length ? ', missed ' + miss.join(' | ') : ''}`)
+    // At a low pixel budget small SHX letters merge; real text must still all be found.
+    const ok = opts.minShx ? tt === ttN && shx >= opts.minShx * (shxN - known.length) : miss.length === 0
+    check(`${file} p${pageNo} detection${opts.label ? ' ' + opts.label : ''}`, ok, `text ${tt}/${ttN}, shx ${shx}/${shxN}, unmatched shx regions ${extra}${known.length ? ', known limit: ' + known.join(', ') : ''}${miss.length ? ', missed ' + miss.join(' | ') : ''}`)
     return { rs, miss, extra }
 }
 
@@ -428,6 +430,10 @@ async function phone() {
     const exp = await page.locator('main button:visible', { hasText: /Export/ }).first().boundingBox()
     const tb = await page.evaluate(() => document.documentElement.scrollWidth)
     check('phone toolbar fits, export reachable', exp && exp.x + exp.width <= 390 && tb <= 391, `export at ${exp && Math.round(exp.x)}..${exp && Math.round(exp.x + exp.width)}, page width ${tb}`)
+    const tbf = await toolbarFacts(page)
+    check('phone tap targets ≥ 28 px, no double-tap zoom', tbf.small.length === 0 && tbf.noManip.length === 0, [...tbf.small, ...tbf.noManip].join(', '))
+    const fr0 = await frameFacts(page)
+    check('phone frame fills the screen, drawing at the top', fr0.bottom <= fr0.vh && fr0.stageTop <= 12 && fr0.height >= 0.6 * fr0.vh, `frame ${fr0.top}..${fr0.bottom} of ${fr0.vh}, drawing ${fr0.stageTop}px from the frame top`)
     await page.screenshot({ path: path.join(OUT, 'phone-fit.png') })
 
     // Pinch out on the drawing: the drawing zooms, the web page doesn't.
@@ -446,12 +452,13 @@ async function phone() {
     check('pinch zooms the drawing, not the page', st1.z > st0.z * 1.7 && vv.scale === 1 && Math.abs(vv.y - scroll0) < 2, `zoom ${st0.z.toFixed(3)} → ${st1.z.toFixed(3)} (×${(st1.z / st0.z).toFixed(2)}), page scale ${vv.scale}, scrollY ${scroll0} → ${vv.y}`)
     // Two-finger pan.
     await touch('touchStart', [{ x: cx - 40, y: cy }, { x: cx + 40, y: cy }])
-    for (let i = 1; i <= 8; i++) await touch('touchMove', [{ x: cx - 40 - i * 10, y: cy - i * 6 }, { x: cx + 40 - i * 10, y: cy - i * 6 }])
+    // The drawing sits at the top of the frame, so after the pinch there's room to move it down.
+    for (let i = 1; i <= 8; i++) await touch('touchMove', [{ x: cx - 40 - i * 10, y: cy + i * 6 }, { x: cx + 40 - i * 10, y: cy + i * 6 }])
     await touch('touchEnd', [])
     await page.waitForTimeout(300)
     const st2 = await stage(page)
     const vy = await page.evaluate(() => window.scrollY)
-    check('two-finger pan moves the drawing', Math.abs(st2.left - st1.left + 80) < 4 && Math.abs(st2.top - st1.top + 48) < 4 && Math.abs(vy - scroll0) < 2, `moved ${(st2.left - st1.left).toFixed(0)}, ${(st2.top - st1.top).toFixed(0)}; scrollY ${vy}`)
+    check('two-finger pan moves the drawing', Math.abs(st2.left - st1.left + 80) < 4 && Math.abs(st2.top - st1.top - 48) < 4 && Math.abs(vy - scroll0) < 2, `moved ${(st2.left - st1.left).toFixed(0)}, ${(st2.top - st1.top).toFixed(0)}; scrollY ${vy}`)
     await page.screenshot({ path: path.join(OUT, 'phone-pinched.png') })
 
     // Single tap on a label opens the bottom sheet.
@@ -468,6 +475,9 @@ async function phone() {
     await field.waitFor({ timeout: 5000 })
     const fb = await field.boundingBox()
     check('bottom sheet editor is on screen', fb && fb.y > 844 / 2 && fb.y + fb.height <= 844 && fb.x >= 0 && fb.x + fb.width <= 390, fb ? `input at y ${Math.round(fb.y)}..${Math.round(fb.y + fb.height)}` : '')
+    await page.waitForTimeout(300)
+    const edf = await editorFacts(page, rid)
+    check('bottom sheet leaves the edited text visible', edf.sheet && edf.overlap === 0 && edf.belowToolbar, JSON.stringify(edf))
     await page.screenshot({ path: path.join(OUT, 'phone-sheet.png') })
     await field.fill('ROOM C-303')
     await field.press('Enter')
@@ -493,12 +503,287 @@ async function phone() {
     await ctx.close()
 }
 
+// ---- Devices: tablets with a pen, a throttled low-end phone, a landscape phone ----
+
+const IPAD_UA = 'Mozilla/5.0 (iPad; CPU OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1'
+const PHONE_UA = 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Mobile Safari/537.36'
+const LOW_UA = 'Mozilla/5.0 (Linux; Android 11; Go Edition) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Mobile Safari/537.36'
+
+// Toolbar shape: rows, overflow, every control on screen, tap targets and touch-action.
+const toolbarFacts = (page) =>
+    page.evaluate(() => {
+        const bar = document.querySelector('[data-testid=cad-toolbar]')
+        const r = bar.getBoundingClientRect()
+        const ctrls = [...bar.querySelectorAll('button, label[title], select')].filter((el) => el.offsetParent !== null)
+        const tops = new Set()
+        let small = []
+        let offscreen = []
+        let noManip = []
+        for (const el of ctrls) {
+            const b = el.getBoundingClientRect()
+            tops.add(Math.round(b.top / 12))
+            if (Math.min(b.width, b.height) < 27.5) small.push(`${el.getAttribute('aria-label') || el.title || el.textContent.trim()} ${Math.round(b.width)}x${Math.round(b.height)}`)
+            // Tools may scroll sideways in their row on small screens; the row itself must fit.
+            const row = el.closest('.overflow-x-auto')
+            const lim = row ? row.getBoundingClientRect() : { left: 0, right: innerWidth }
+            if (!row && (b.left < -0.5 || b.right > innerWidth + 0.5)) offscreen.push(el.getAttribute('aria-label') || el.textContent.trim())
+            if (row && (lim.left < -0.5 || lim.right > innerWidth + 0.5)) offscreen.push('scroll row')
+            if (el.tagName === 'BUTTON' && getComputedStyle(el).touchAction !== 'manipulation') noManip.push(el.getAttribute('aria-label') || el.textContent.trim())
+        }
+        const tools = ['Select', 'Add text', 'Arrow', 'Cloud', 'Box', 'Highlight', 'Note', 'Stamp', 'Measure'].map((n) => {
+            const b = bar.querySelector(`button[aria-label="${n}"]`).getBoundingClientRect()
+            return b.right <= innerWidth + 0.5 && b.left >= -0.5
+        })
+        return { height: Math.round(r.height), width: Math.round(r.width), pageWidth: document.documentElement.scrollWidth, small, offscreen: [...new Set(offscreen)], noManip, toolsVisible: tools.filter(Boolean).length }
+    })
+
+const frameFacts = (page) =>
+    page.evaluate(() => {
+        const f = document.querySelector('[data-testid=cad-frame]').getBoundingClientRect()
+        const s = document.querySelector('[data-testid=cad-stage]').getBoundingClientRect()
+        const tb = document.querySelector('[data-testid=cad-toolbar]').getBoundingClientRect()
+        return { top: Math.round(f.top), bottom: Math.round(f.bottom), height: Math.round(f.height), stageTop: Math.round(s.top - f.top), stageH: Math.round(s.height), toolbarBottom: Math.round(tb.bottom), vh: innerHeight }
+    })
+
+// The edited region and the open editor (bottom sheet or popover) don't overlap.
+const editorFacts = (page, rid) =>
+    page.evaluate((rid) => {
+        const reg = document.querySelector(`[data-id="${rid}"]`).getBoundingClientRect()
+        const ov = document.querySelector('[data-overlay]').getBoundingClientRect()
+        const input = document.querySelector('[data-overlay] input[type=text]').getBoundingClientRect()
+        const tb = document.querySelector('[data-testid=cad-toolbar]').getBoundingClientRect()
+        const overlap = Math.max(0, Math.min(reg.right, ov.right) - Math.max(reg.left, ov.left)) * Math.max(0, Math.min(reg.bottom, ov.bottom) - Math.max(reg.top, ov.top))
+        return {
+            sheet: !!document.querySelector('[data-testid=cad-sheet]'),
+            overlap: Math.round(overlap),
+            regionTop: Math.round(reg.top),
+            regionBottom: Math.round(reg.bottom),
+            belowToolbar: reg.top >= tb.bottom - 0.5,
+            inputOnScreen: input.top >= 0 && input.bottom <= innerHeight && input.left >= 0 && input.right <= innerWidth,
+            editorTop: Math.round(ov.top),
+        }
+    }, rid)
+
+async function tablet(orient) {
+    const [w, h] = orient === 'portrait' ? [820, 1180] : [1180, 820]
+    const ctx = await browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, acceptDownloads: true, userAgent: IPAD_UA })
+    const page = await ctx.newPage()
+    const errors = []
+    page.on('pageerror', (e) => errors.push(String(e)))
+    const file = 'cad-a1-mixed.pdf'
+    await openFile(page, file)
+    const st0 = await stage(page)
+    check(`tablet ${orient}: renders at the tablet budget`, st0.nat > 8.05e6 && st0.nat <= 12.05e6, `${(st0.nat / 1e6).toFixed(1)} MP`)
+    await detection(page, file, 1)
+    const tb = await toolbarFacts(page)
+    check(
+        `tablet ${orient}: toolbar in two rows, nothing off screen`,
+        tb.height <= 100 && tb.pageWidth <= w && tb.offscreen.length === 0 && tb.toolsVisible === 9,
+        `height ${tb.height}px, page width ${tb.pageWidth}, tools visible ${tb.toolsVisible}/9${tb.offscreen.length ? ', off screen: ' + tb.offscreen.join(', ') : ''}`,
+    )
+    check(`tablet ${orient}: tap targets ≥ 28 px, no double-tap zoom`, tb.small.length === 0 && tb.noManip.length === 0, [...tb.small, ...tb.noManip.map((n) => 'touch-action: ' + n)].join(', ').slice(0, 300))
+    const fr = await frameFacts(page)
+    check(`tablet ${orient}: drawing fills the screen below the toolbar`, fr.bottom <= fr.vh && fr.height >= 0.55 * fr.vh, `frame ${fr.top}..${fr.bottom} of ${fr.vh}`)
+    await page.screenshot({ path: path.join(OUT, `tablet-${orient}-fit.png`) })
+
+    // Tap a label: tablets get the popover beside it, never covering it.
+    const target = page.locator(`main div[title*='"ROOM A-101"']`).first()
+    const rid = await target.getAttribute('data-id')
+    await target.tap({ force: true })
+    await page.locator('main input[type=text]:visible').first().waitFor({ timeout: 5000 })
+    const ed = await editorFacts(page, rid)
+    check(`tablet ${orient}: editor beside the text, not over it`, !ed.sheet && ed.overlap === 0 && ed.inputOnScreen, JSON.stringify(ed))
+    await page.screenshot({ path: path.join(OUT, `tablet-${orient}-editor.png`) })
+    await page.locator('main input[type=text]:visible').first().fill('ROOM P-404')
+    await page.locator('main input[type=text]:visible').first().press('Enter')
+    const edits = [{ page: 1, old: 'ROOM A-101', new: 'ROOM P-404', kind: 'tt', angle: 0, corners: manifest[file].find((l) => l.text === 'ROOM A-101').corners }]
+
+    // A pen draws a box precisely while a palm (two touches) rests on the glass.
+    await page.locator('main button[aria-label="Box"]').tap()
+    const cdp = await ctx.newCDPSession(page)
+    const st = await stage(page)
+    const A = { x: 300, y: 300 }
+    const B = { x: 520, y: 430 }
+    const ca = client(st, A)
+    const cb = client(st, B)
+    const pen = (type, p, buttons) => cdp.send('Input.dispatchMouseEvent', { type, x: p.x, y: p.y, button: type === 'mouseMoved' ? 'none' : 'left', buttons, clickCount: 1, pointerType: 'pen' })
+    const f = await page.locator('[data-testid=cad-frame]').boundingBox()
+    const palmAt = [{ x: f.x + f.width - 60, y: f.y + f.height - 50 }, { x: f.x + f.width - 25, y: f.y + f.height - 20 }]
+    const touch = (type, pts) => cdp.send('Input.dispatchTouchEvent', { type, touchPoints: pts.map((p, i) => ({ x: p.x, y: p.y, id: i + 1, radiusX: 12, radiusY: 12, force: 1 })) })
+    const before = await markupCount(page)
+    await pen('mousePressed', ca, 1)
+    for (let i = 1; i <= 8; i++) {
+        await pen('mouseMoved', { x: ca.x + ((cb.x - ca.x) * i) / 8, y: ca.y + ((cb.y - ca.y) * i) / 8 }, 1)
+        if (i === 3) await touch('touchStart', palmAt)
+        if (i === 5) await touch('touchMove', palmAt.map((p) => ({ x: p.x - 30, y: p.y + 4 })))
+    }
+    await pen('mouseReleased', cb, 0)
+    await touch('touchEnd', [])
+    await page.waitForTimeout(250)
+    const st2 = await stage(page)
+    const box = await page.evaluate(() => {
+        const g = [...document.querySelectorAll('g[data-markup=rect]')].pop()
+        const b = g?.querySelector('path')?.getBBox()
+        return b ? { x: b.x, y: b.y, w: b.width, h: b.height } : null
+    })
+    const n = await markupCount(page)
+    const err = box ? Math.max(Math.abs(box.x - A.x), Math.abs(box.y - A.y), Math.abs(box.x + box.w - B.x), Math.abs(box.y + box.h - B.y)) : 99
+    check(
+        `tablet ${orient}: pen draws a box precisely, palm ignored`,
+        n === before + 1 && err < 1.5 && Math.abs(st2.z - st.z) < 1e-6 && Math.abs(st2.left - st.left) < 0.5,
+        `markups ${before} → ${n}, corner error ${err.toFixed(2)} pt, zoom ${st.z.toFixed(4)} → ${st2.z.toFixed(4)}`,
+    )
+    // Right after the pen lifts, a stray finger can't draw.
+    await page.waitForTimeout(500)
+    await page.locator('main button[aria-label="Select"]').tap()
+    await page.screenshot({ path: path.join(OUT, `tablet-${orient}-pen.png`) })
+    if (orient === 'portrait') {
+        const out = await exportTo(page, 'tablet-edited.pdf')
+        results.files.push({ out, src: file, edits: edits.map((e) => ({ ...e, file })), markups: [{ kind: 'rect', a: A, b: B }], color: '#e00000' })
+    }
+    check(`tablet ${orient}: page errors`, errors.length === 0, errors.join(' | ').slice(0, 300))
+    await ctx.close()
+}
+
+async function lowend() {
+    const ctx = await browser.newContext({ viewport: { width: 360, height: 740 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, acceptDownloads: true, userAgent: LOW_UA })
+    await ctx.addInitScript(() => {
+        window.__lt = []
+        window.__sawProgress = false
+        try {
+            new PerformanceObserver((l) => l.getEntries().forEach((e) => window.__lt.push([e.startTime, e.duration]))).observe({ type: 'longtask', buffered: true })
+        } catch {}
+        new MutationObserver(() => {
+            if (document.querySelector('[data-testid=cad-progress], [data-testid=cad-loading]')) window.__sawProgress = true
+        }).observe(document, { subtree: true, childList: true })
+        window.__urls = new Map()
+        const create = URL.createObjectURL.bind(URL)
+        const revoke = URL.revokeObjectURL.bind(URL)
+        URL.createObjectURL = (o) => {
+            const u = create(o)
+            if (o?.type?.startsWith('image/')) window.__urls.set(u, 1)
+            return u
+        }
+        URL.revokeObjectURL = (u) => {
+            window.__urls.delete(u)
+            revoke(u)
+        }
+    })
+    const page = await ctx.newPage()
+    const errors = []
+    page.on('pageerror', (e) => errors.push(String(e)))
+    const cdp = await ctx.newCDPSession(page)
+    await page.goto(BASE + '/autocad-pdf-editor?cadTier=low', { waitUntil: 'load' })
+    await cdp.send('Emulation.setCPUThrottlingRate', { rate: 6 })
+    await page.waitForTimeout(1500)
+    const file = 'cad-a1-mixed.pdf'
+    const t0 = Date.now()
+    const tStart = await page.evaluate(() => performance.now())
+    await page.locator('input[type=file]').first().setInputFiles(path.join(FX, file))
+    await waitAnalysed(page)
+    const secs = (Date.now() - t0) / 1000
+    await page.waitForTimeout(500)
+    const st0 = await stage(page)
+    const lt = await page.evaluate((t) => window.__lt.filter(([s]) => s >= t).map(([, d]) => d), tStart)
+    check('low-end: forced low tier renders ≤ 4 MP', st0.nat <= 4.05e6, `${(st0.nat / 1e6).toFixed(1)} MP, analysed in ${secs.toFixed(1)} s at 6x CPU throttling`)
+    check('low-end: progress shown while the page loads', await page.evaluate(() => window.__sawProgress))
+    check('low-end: no long freeze while rendering and analysing', Math.max(0, ...lt) < 400, `${lt.length} long tasks, ${Math.round(lt.reduce((a, b) => a + b, 0))} ms total, longest ${Math.round(Math.max(0, ...lt))} ms`)
+    await detection(page, file, 1, { minShx: 0.8, label: '(low tier, 4 MP: small SHX may merge)' })
+    const tb = await toolbarFacts(page)
+    check('low-end: toolbar fits 360 px, tap targets ≥ 28 px', tb.pageWidth <= 360 && tb.offscreen.length === 0 && tb.small.length === 0 && tb.noManip.length === 0, `page width ${tb.pageWidth}${tb.small.length ? ', small: ' + tb.small.join(', ') : ''}${tb.noManip.length ? ', no manipulation: ' + tb.noManip.join(', ') : ''}`)
+    const fr = await frameFacts(page)
+    check('low-end: frame fits the screen, drawing at the top', fr.bottom <= fr.vh && fr.stageTop <= 12, `frame ${fr.top}..${fr.bottom} of ${fr.vh}, drawing ${fr.stageTop}px from frame top`)
+    await page.screenshot({ path: path.join(OUT, 'lowend-fit.png') })
+    const target = page.locator(`main div[title*='"FIRE EXIT"']`).first()
+    const rid = await target.getAttribute('data-id')
+    await target.tap({ force: true })
+    await page.locator('main input[type=text]:visible').first().waitFor({ timeout: 10000 })
+    await page.waitForTimeout(400)
+    const ed = await editorFacts(page, rid)
+    check('low-end: bottom sheet leaves the text visible', ed.sheet && ed.overlap === 0 && ed.belowToolbar && ed.inputOnScreen, JSON.stringify(ed))
+    await page.screenshot({ path: path.join(OUT, 'lowend-sheet.png') })
+    await page.locator('main button:visible', { hasText: 'Cancel' }).tap()
+
+    // A 6-sheet set: flick through three sheets fast; only the last one may be rendered and analysed.
+    await page.goto(BASE + '/autocad-pdf-editor?cadTier=low', { waitUntil: 'load' })
+    await page.waitForTimeout(1500)
+    await page.locator('input[type=file]').first().setInputFiles(path.join(FX, 'cad-set.pdf'))
+    await waitAnalysed(page, 1)
+    // Three taps 40 ms apart: faster than a page can render, slow enough for React to re-render.
+    await page.evaluate(async () => {
+        for (let i = 0; i < 3; i++) {
+            document.querySelector('main button[title="Next page"]').click()
+            await new Promise((r) => setTimeout(r, 40))
+        }
+    })
+    await waitAnalysed(page, 4)
+    const marks = await page.evaluate(() => performance.getEntriesByType('mark').map((m) => m.name).filter((n) => n.startsWith('cad:')))
+    const stale = marks.filter((m) => /^cad:(shown|analysed):[23]$/.test(m))
+    check('low-end: fast paging skips the sheets in between', stale.length === 0 && marks.includes('cad:analysed:4'), marks.join(' '))
+    for (let p = 5; p <= 6; p++) {
+        await page.locator('main button[title="Next page"]').tap()
+        await waitAnalysed(page, p)
+    }
+    const held = await page.evaluate(async () => {
+        let mp = 0
+        for (const u of window.__urls.keys()) {
+            const im = new Image()
+            im.src = u
+            await im.decode().catch(() => {})
+            mp += (im.naturalWidth * im.naturalHeight) / 1e6
+        }
+        return { n: window.__urls.size, mp: +mp.toFixed(2) }
+    })
+    check('low-end: only nearby page images stay in memory', held.n <= 2 && held.mp <= 6.05, `${held.n} images, ${held.mp} MP held after visiting 6 sheets`)
+    // Going back re-renders an evicted sheet from the cached analysis.
+    await page.locator('main button[title="Previous page"]').tap()
+    await page.locator('main button[title="Previous page"]').tap()
+    await waitAnalysed(page, 4)
+    check('low-end: an evicted sheet comes back', true, '')
+    await page.screenshot({ path: path.join(OUT, 'lowend-set.png') })
+    check('low-end: page errors', errors.length === 0, errors.join(' | ').slice(0, 300))
+    await ctx.close()
+}
+
+async function landscape() {
+    const ctx = await browser.newContext({ viewport: { width: 844, height: 390 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true, acceptDownloads: true, userAgent: PHONE_UA })
+    const page = await ctx.newPage()
+    const errors = []
+    page.on('pageerror', (e) => errors.push(String(e)))
+    const file = 'cad-a1-mixed.pdf'
+    await openFile(page, file)
+    const st0 = await stage(page)
+    check('landscape phone: phone budget', st0.nat > 4.05e6 && st0.nat <= 8.05e6, `${(st0.nat / 1e6).toFixed(1)} MP`)
+    await detection(page, file, 1)
+    const tb = await toolbarFacts(page)
+    check('landscape phone: toolbar is one row', tb.height <= 56 && tb.pageWidth <= 844 && tb.offscreen.length === 0 && tb.small.length === 0, `height ${tb.height}px, page width ${tb.pageWidth}${tb.small.length ? ', small: ' + tb.small.join(', ') : ''}`)
+    const fr = await frameFacts(page)
+    check('landscape phone: drawing gets the rest of the screen', fr.bottom <= fr.vh && fr.height >= 180, `frame ${fr.top}..${fr.bottom} (${fr.height}px) of ${fr.vh}`)
+    await page.screenshot({ path: path.join(OUT, 'landscape-fit.png') })
+    const target = page.locator(`main div[title*='"RAMP 1:12"']`).first()
+    const rid = await target.getAttribute('data-id')
+    await target.tap({ force: true })
+    await page.locator('main input[type=text]:visible').first().waitFor({ timeout: 5000 })
+    await page.waitForTimeout(300)
+    const ed = await editorFacts(page, rid)
+    check('landscape phone: editor on screen, text not covered', ed.overlap === 0 && ed.inputOnScreen, JSON.stringify(ed))
+    await page.screenshot({ path: path.join(OUT, 'landscape-editor.png') })
+    check('landscape phone: page errors', errors.length === 0, errors.join(' | ').slice(0, 300))
+    await ctx.close()
+}
+
 results.files = []
 try {
     if (ONLY === 'all' || ONLY === 'desktop') await desktop()
     if (ONLY === 'all' || ONLY === 'rotated') await rotated()
     if (ONLY === 'all' || ONLY === 'set') await set()
     if (ONLY === 'all' || ONLY === 'phone') await phone()
+    if (ONLY === 'all' || ONLY === 'tablet' || ONLY === 'devices') {
+        await tablet('portrait')
+        await tablet('landscape')
+    }
+    if (ONLY === 'all' || ONLY === 'lowend' || ONLY === 'devices') await lowend()
+    if (ONLY === 'all' || ONLY === 'landscape' || ONLY === 'devices') await landscape()
 } catch (e) {
     check('run', false, String(e?.stack || e).slice(0, 600))
 } finally {

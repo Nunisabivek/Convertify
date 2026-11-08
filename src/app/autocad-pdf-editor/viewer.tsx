@@ -25,12 +25,16 @@ export function clampView(v: View, frameW: number, frameH: number, pageW: number
     return { zoom: v.zoom, x: axis(v.x, pageW * v.zoom, frameW), y: axis(v.y, pageH * v.zoom, frameH) }
 }
 
-/** The view that shows the whole sheet (or its full width), centred. */
-export function fitView(mode: "page" | "width", frameW: number, frameH: number, pageW: number, pageH: number): View {
+/**
+ * The view that shows the whole sheet (or its full width), centred across. Vertically
+ * centred, or at the top (`align: "top"`) on narrow screens, where the bottom sheet
+ * editor then covers empty frame instead of the drawing.
+ */
+export function fitView(mode: "page" | "width", frameW: number, frameH: number, pageW: number, pageH: number, align: "center" | "top" = "center"): View {
     const zoom = clampZoom(mode === "page" ? Math.min((frameW - 16) / pageW, (frameH - 16) / pageH) : (frameW - 16) / pageW)
     const sw = pageW * zoom
     const sh = pageH * zoom
-    return clampView({ zoom, x: (frameW - sw) / 2, y: sh <= frameH ? (frameH - sh) / 2 : 8 }, frameW, frameH, pageW, pageH)
+    return clampView({ zoom, x: (frameW - sw) / 2, y: sh <= frameH && align === "center" ? (frameH - sh) / 2 : 8 }, frameW, frameH, pageW, pageH)
 }
 
 /** Zoom by `factor` keeping the frame point (fx, fy) fixed under the cursor or fingers. */
@@ -81,10 +85,16 @@ type Props = {
     overlay?: ReactNode
 }
 
-type Drag =
+type Drag = (
     | { mode: "pan"; id: number; cx: number; cy: number; v0: View; moved: boolean }
     | { mode: "draw"; id: number; a: Pt; moved: boolean; cx: number; cy: number }
     | { mode: "click"; id: number; a: Pt; cx: number; cy: number; moved: boolean }
+) & { kind: string }
+
+/** After a pen lifts, touches stay ignored this long (the palm leaves the glass last). */
+const PALM_MS = 400
+/** iOS reports Apple Pencil contacts as touches too, with touchType "stylus". */
+const fingers = (list: TouchList) => [...list].filter((t) => (t as Touch & { touchType?: string }).touchType !== "stylus")
 
 export function DrawingView(p: Props) {
     const frameRef = useRef<HTMLDivElement>(null)
@@ -97,10 +107,16 @@ export function DrawingView(p: Props) {
     const hoverRef = useRef(false)
     const touchesRef = useRef(0)
     const suppressClickUntil = useRef(0)
+    // Palm rejection: while a pen is down (and briefly after), finger input is ignored.
+    const penDownRef = useRef(false)
+    const penUntilRef = useRef(0)
+    const palm = () => penDownRef.current || Date.now() < penUntilRef.current
     // Latest props for native listeners registered once.
     const live = useRef(p)
+    const palmRef = useRef(palm)
     useLayoutEffect(() => {
         live.current = p
+        palmRef.current = palm
     })
 
     const { model, view, tool } = p
@@ -127,6 +143,21 @@ export function DrawingView(p: Props) {
         ro.observe(el)
         live.current.onFrameSize(el.clientWidth, el.clientHeight)
         return () => ro.disconnect()
+    }, [])
+
+    // A pen lifted anywhere (even off the drawing) ends palm rejection shortly after.
+    useEffect(() => {
+        const up = (e: PointerEvent) => {
+            if (e.pointerType !== "pen") return
+            penDownRef.current = false
+            penUntilRef.current = Date.now() + PALM_MS
+        }
+        window.addEventListener("pointerup", up, true)
+        window.addEventListener("pointercancel", up, true)
+        return () => {
+            window.removeEventListener("pointerup", up, true)
+            window.removeEventListener("pointercancel", up, true)
+        }
     }, [])
 
     // Space held = pan with the mouse, whatever the tool.
@@ -193,12 +224,18 @@ export function DrawingView(p: Props) {
         }
         let pinch: { d0: number; m0: { x: number; y: number }; v0: View } | null = null
         const two = (e: TouchEvent) => {
-            const [a, b] = [e.touches[0], e.touches[1]]
+            const [a, b] = fingers(e.touches)
             return { d: Math.hypot(b.clientX - a.clientX, b.clientY - a.clientY), m: local((a.clientX + b.clientX) / 2, (a.clientY + b.clientY) / 2) }
         }
         const onTouchStart = (e: TouchEvent) => {
-            touchesRef.current = e.touches.length
-            if (e.touches.length >= 2) {
+            const n = fingers(e.touches).length
+            touchesRef.current = n
+            // A hand resting on the screen while the pen draws is not a pinch.
+            if (palmRef.current()) {
+                if (e.cancelable) e.preventDefault()
+                return
+            }
+            if (n >= 2) {
                 e.preventDefault()
                 const t = two(e)
                 pinch = { d0: Math.max(1, t.d), m0: t.m, v0: live.current.view }
@@ -208,8 +245,14 @@ export function DrawingView(p: Props) {
             }
         }
         const onTouchMove = (e: TouchEvent) => {
-            touchesRef.current = e.touches.length
-            if (!pinch || e.touches.length < 2) return
+            const n = fingers(e.touches).length
+            touchesRef.current = n
+            if (palmRef.current()) {
+                if (e.cancelable) e.preventDefault()
+                pinch = null
+                return
+            }
+            if (!pinch || n < 2) return
             e.preventDefault()
             const t = two(e)
             const { v0, m0, d0 } = pinch
@@ -218,8 +261,8 @@ export function DrawingView(p: Props) {
             live.current.setView(clamp({ zoom, x: t.m.x - (m0.x - v0.x) * k, y: t.m.y - (m0.y - v0.y) * k }))
         }
         const onTouchEnd = (e: TouchEvent) => {
-            touchesRef.current = e.touches.length
-            if (pinch && e.touches.length < 2) {
+            touchesRef.current = fingers(e.touches).length
+            if (pinch && touchesRef.current < 2) {
                 pinch = null
                 suppressClickUntil.current = Date.now() + 350
             }
@@ -250,15 +293,29 @@ export function DrawingView(p: Props) {
 
     const onPointerDown = (e: React.PointerEvent) => {
         if (e.pointerType === "mouse" && e.button !== 0 && e.button !== 1) return
-        if (dragRef.current) return
         if ((e.target as HTMLElement).closest?.("[data-overlay]")) return
         const touch = e.pointerType === "touch"
+        const pen = e.pointerType === "pen"
+        // Palm rejection: fingers do nothing while a pen is on the glass.
+        if (touch && palm()) return
+        if (pen) {
+            penDownRef.current = true
+            // The palm often lands before the pen tip: the pen takes over from it.
+            const d = dragRef.current
+            if (d && d.kind === "touch") {
+                if (frameRef.current?.hasPointerCapture(d.id)) frameRef.current.releasePointerCapture(d.id)
+                dragRef.current = null
+                setDraft(null)
+                setPanning(false)
+            }
+        }
+        if (dragRef.current) return
         if (touch && touchesRef.current >= 2) return
         const onHit = !!(e.target as HTMLElement).closest?.("[data-hit]")
         const pan = !touch && (e.button === 1 || spaceDown || (tool === "select" && !onHit))
         if (pan) {
             e.preventDefault()
-            dragRef.current = { mode: "pan", id: e.pointerId, cx: e.clientX, cy: e.clientY, v0: view, moved: false }
+            dragRef.current = { mode: "pan", kind: e.pointerType, id: e.pointerId, cx: e.clientX, cy: e.clientY, v0: view, moved: false }
             setPanning(true)
             frameRef.current?.setPointerCapture(e.pointerId)
             return
@@ -266,18 +323,18 @@ export function DrawingView(p: Props) {
         if (DRAG_TOOLS.has(tool)) {
             e.preventDefault()
             const a = toPage(e.clientX, e.clientY)
-            dragRef.current = { mode: "draw", id: e.pointerId, a, moved: false, cx: e.clientX, cy: e.clientY }
+            dragRef.current = { mode: "draw", kind: e.pointerType, id: e.pointerId, a, moved: false, cx: e.clientX, cy: e.clientY }
             setDraft({ a, b: a })
             frameRef.current?.setPointerCapture(e.pointerId)
         } else if (CLICK_TOOLS.has(tool)) {
-            dragRef.current = { mode: "click", id: e.pointerId, a: toPage(e.clientX, e.clientY), cx: e.clientX, cy: e.clientY, moved: false }
+            dragRef.current = { mode: "click", kind: e.pointerType, id: e.pointerId, a: toPage(e.clientX, e.clientY), cx: e.clientX, cy: e.clientY, moved: false }
         }
     }
 
     const onPointerMove = (e: React.PointerEvent) => {
         const d = dragRef.current
         if (!d || d.id !== e.pointerId) return
-        if (e.pointerType === "touch" && touchesRef.current >= 2) {
+        if (e.pointerType === "touch" && (touchesRef.current >= 2 || palm())) {
             dragRef.current = null
             setDraft(null)
             return
@@ -293,6 +350,10 @@ export function DrawingView(p: Props) {
     }
 
     const finish = (e: React.PointerEvent, cancelled: boolean) => {
+        if (e.pointerType === "pen") {
+            penDownRef.current = false
+            penUntilRef.current = Date.now() + PALM_MS
+        }
         const d = dragRef.current
         if (!d || d.id !== e.pointerId) return
         dragRef.current = null
