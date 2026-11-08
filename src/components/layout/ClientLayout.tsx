@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { PlayStoreBanner, PlayStoreTopBar } from "@/components/ui/google-play-badge";
 import { usePathname } from "next/navigation";
 import { startMonetag } from "@/lib/monetag";
+import { AnchorAd } from "@/components/ads/anchor-ad";
 
 /** Website chrome only. The Android shell never imports this file. */
 export default function ClientLayout({
@@ -36,6 +37,7 @@ export default function ClientLayout({
             </div>
 
             <Footer />
+            <AnchorAd />
             <JsonLd />
         </>
     );
