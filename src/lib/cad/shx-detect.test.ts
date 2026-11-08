@@ -145,3 +145,33 @@ assert.ok(pauses >= 2)
 }
 
 console.log('cad shx-detect tests passed')
+
+// detectPixels (worker and main-thread pipeline) matches the direct calls exactly,
+// whatever the slice size, and reports progress in order.
+{
+    const { detectPixels } = await import('./detect.ts')
+    const { sampleColors } = await import('./color.ts')
+    const red = new Img(900, 700)
+    red.text('2400', 100, 100, 7 * scale, false, [200, 0, 0])
+    red.text('NEAT', 100, 200, 7 * scale)
+    red.text('1200', 600, 400, 7 * scale, true)
+    red.text('TEN', 700, 100, 7 * scale)
+    const textBoxes = [{ x: 690, y: 75, w: 60, h: 35 }]
+    const b = binarize(red.rgba, red.w, red.h)
+    maskBoxes(b, red.w, red.h, textBoxes.map((t) => ({ x: t.x - 2, y: t.y - 2, w: t.w + 4, h: t.h + 4 })))
+    const direct = dropOverlapping(groupGlyphs(await findComponents(b, red.w, red.h, undefined, 60 * scale * 1.4), { scale }), textBoxes, 0.3, 2 * scale)
+    const expected = {
+        textColors: textBoxes.map((t) => sampleColors(red.rgba, red.w, red.h, t)),
+        groups: direct.map((g) => ({ ...g, ...sampleColors(red.rgba, red.w, red.h, g) })),
+    }
+    assert.equal(expected.groups.length, 3)
+    assert.deepEqual(await detectPixels(red.rgba, red.w, red.h, { scale, textBoxes }), expected)
+    const seen: number[] = []
+    const sliced = await detectPixels(red.rgba, red.w, red.h, { scale, textBoxes, slice: 10_000, pause: (f) => { seen.push(f) } })
+    assert.deepEqual(sliced, expected)
+    assert.ok(seen.length > 50 && seen.every((f, i) => f >= 0 && f <= 1 && (i === 0 || f >= seen[i - 1])), 'progress rises from 0 to 1')
+    assert.ok(expected.groups.some((g) => g.ink && g.ink.r > 150 && g.ink.g < 60), 'red SHX ink sampled')
+    // A pause that throws cancels the work.
+    await assert.rejects(detectPixels(red.rgba, red.w, red.h, { scale, textBoxes, slice: 10_000, pause: (f) => { if (f > 0.5) throw new Error('cancelled') } }), /cancelled/)
+}
+console.log('detectPixels matches the direct pipeline')

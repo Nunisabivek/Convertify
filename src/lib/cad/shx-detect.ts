@@ -21,11 +21,16 @@ export type GlyphGroup = Box & { vertical: boolean; count: number }
 /** 1 for "ink": any pixel clearly darker or more coloured than white paper. */
 export function binarize(rgba: Uint8ClampedArray | Uint8Array, w: number, h: number, inkBelow = 185): Uint8Array {
     const out = new Uint8Array(w * h)
-    for (let p = 0, j = 0; j < out.length; p += 4, j++) {
+    binarizeRange(rgba, out, 0, out.length, inkBelow)
+    return out
+}
+
+/** `binarize` for pixels [from, to) only, into `out` (lets callers work in slices). */
+export function binarizeRange(rgba: Uint8ClampedArray | Uint8Array, out: Uint8Array, from: number, to: number, inkBelow = 185): void {
+    for (let p = from * 4, j = from; j < to; p += 4, j++) {
         const m = Math.min(rgba[p], rgba[p + 1], rgba[p + 2])
         out[j] = m < inkBelow ? 1 : 0
     }
-    return out
 }
 
 /** Clears pixels inside the boxes (e.g. real text that getTextContent already found). */
@@ -39,25 +44,30 @@ export function maskBoxes(binary: Uint8Array, w: number, h: number, boxes: Box[]
     }
 }
 
+/** Called between slices of work with the fraction done (0..1); may yield or throw to cancel. */
+export type Pause = (done: number) => Promise<void> | void
+
 /**
- * 8-connected components. `pause` is awaited every ~1.5 M scanned pixels so a big
- * sheet doesn't freeze the page; tests call it without one.
+ * 8-connected components. `pause` is awaited every `every` scanned pixels (default
+ * ~1.5 M) so a big sheet on the main thread doesn't freeze the page, and so a worker
+ * can report progress; tests call it without one.
  */
 export async function findComponents(
     binary: Uint8Array,
     w: number,
     h: number,
-    pause?: () => Promise<void>,
+    pause?: Pause,
     maxDim = Infinity,
+    every = 1_500_000,
 ): Promise<Component[]> {
     const visited = new Uint8Array(w * h)
     const out: Component[] = []
     const stack: number[] = []
     let work = 0
     for (let i = 0; i < binary.length; i++) {
-        if (pause && ++work >= 1_500_000) {
+        if (pause && ++work >= every) {
             work = 0
-            await pause()
+            await pause(i / binary.length)
         }
         if (!binary[i] || visited[i]) continue
         let minX = w
