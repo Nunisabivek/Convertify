@@ -197,7 +197,6 @@ export default function CropPdfClient() {
                 </div>
 
                 <PostActionAd />
-                <AdBanner variant="rectangle" />
             </div>
         )
     }

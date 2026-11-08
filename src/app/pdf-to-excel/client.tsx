@@ -154,7 +154,6 @@ export default function PdfToExcelClient() {
                 </div>
 
                 <PostActionAd />
-                <AdBanner variant="rectangle" />
             </div>
         )
     }

@@ -3,6 +3,12 @@
 
 @plugin "tailwindcss-animate";
 
+/* Tailwind v4's `container` no longer centres itself; 22 pages (All Tools, the "file ready"
+   screens) relied on it and hugged the left edge on desktop. */
+@utility container {
+  margin-inline: auto;
+}
+
 /* Critical CSS for LCP optimization */
 html {
   font-display: swap;
