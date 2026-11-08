@@ -7,27 +7,36 @@
  *
  * Plain module (no "use client", no DOM) so the unit test can import it.
  */
-export type BannerSize = 'rectangle' | 'leaderboard' | 'mobile'
+export type BannerSize = 'rectangle' | 'leaderboard' | 'mobile' | 'skyscraper'
 
 export interface AdsterraUnit {
     key: string
     src: string
 }
 
+// Adsterra site convertify.work. Popunder and Native Banner units exist in the dashboard but are
+// deliberately not used: popunders open a window on the visitor's click.
+const HOST = 'https://tonicgoverness.com'
 export const UNITS: Record<BannerSize, AdsterraUnit | null> = {
-    rectangle: null, // 300x250
-    leaderboard: null, // 728x90
-    mobile: null, // 320x50
+    rectangle: { key: '616f9cf69cb04c34acb730e9239646e0', src: `${HOST}/616f9cf69cb04c34acb730e9239646e0/invoke.js` }, // 300x250
+    leaderboard: { key: 'd84ed579e24fb0e02224fedd00bed35b', src: `${HOST}/d84ed579e24fb0e02224fedd00bed35b/invoke.js` }, // 728x90
+    mobile: { key: 'ee2936c122e5b6cd6be8ae3b8019a581', src: `${HOST}/ee2936c122e5b6cd6be8ae3b8019a581/invoke.js` }, // 320x50
+    skyscraper: { key: 'c7edb639dc75a369ede3a87c6bbe2ee7', src: `${HOST}/c7edb639dc75a369ede3a87c6bbe2ee7/invoke.js` }, // 160x300
 }
 
 export const SIZES: Record<BannerSize, { width: number; height: number }> = {
     rectangle: { width: 300, height: 250 },
     leaderboard: { width: 728, height: 90 },
     mobile: { width: 320, height: 50 },
+    skyscraper: { width: 160, height: 300 },
 }
 
 /** Narrowest viewport (CSS px) that gets the 728x90 leaderboard instead of the 320x50. */
 export const LEADERBOARD_MIN_WIDTH = 768
+/** Side rails (160x300) only on screens this wide, and only when the margins are actually empty. */
+export const RAIL_MIN_WIDTH = 1600
+/** Width each rail needs at the screen edge: 160 px banner plus 16 px gap on each side. */
+export const RAIL_STRIP = 192
 
 /** The size a wide placement uses at a given viewport width, falling back when a unit is not set up. */
 export function wideSize(viewportWidth: number, units: Record<BannerSize, AdsterraUnit | null> = UNITS): BannerSize | null {
@@ -76,8 +85,8 @@ export function bannerDocument(unit: AdsterraUnit, size: BannerSize): string | n
 export const ADSTERRA_ON = Object.values(UNITS).some(Boolean)
 
 /**
- * Routes where a sticky bottom banner would sit on top of the working area (canvas editors and
- * page-picking grids). In-page banners still show there.
+ * Routes where sticky banners (bottom bar, side rails) would sit on top of the working area
+ * (canvas editors and page-picking grids). In-page banners still show there.
  */
 const NO_ANCHOR_PREFIXES = [
     '/autocad-pdf-editor',

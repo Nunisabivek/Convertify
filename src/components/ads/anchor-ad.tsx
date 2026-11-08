@@ -61,7 +61,7 @@ export function AnchorAd() {
                     >
                         <X className="h-4 w-4" />
                     </button>
-                    <AdFrame key={pathname} size={size} />
+                    <AdFrame key={pathname} size={size} onEmpty={() => setSize(null)} />
                 </div>
             </div>
         </>

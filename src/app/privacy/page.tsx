@@ -141,8 +141,9 @@ export default function PrivacyPolicyPage() {
               <strong>Website (current).</strong> The website shows ads from Monetag
               and Adsterra. Monetag shows a small card in a corner of the page after a
               few seconds and, after you save a converted file, may show a full-screen
-              ad when you move to another page. Adsterra shows banner ads inside pages
-              and a short banner at the bottom of the screen that you can close. Both may
+              ad when you move to another page. Adsterra shows banner ads inside pages,
+              in the empty side margins of very wide screens, and a short banner at the
+              bottom of the screen that you can close. Both may
               use cookies and similar technologies to serve and measure ads, including
               ads based on your visits to this and other websites. We do not control how
               these vendors set cookies.

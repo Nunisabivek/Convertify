@@ -8,6 +8,7 @@ import { PlayStoreBanner, PlayStoreTopBar } from "@/components/ui/google-play-ba
 import { usePathname } from "next/navigation";
 import { startMonetag } from "@/lib/monetag";
 import { AnchorAd } from "@/components/ads/anchor-ad";
+import { SideRails } from "@/components/ads/side-rails";
 
 /** Website chrome only. The Android shell never imports this file. */
 export default function ClientLayout({
@@ -38,6 +39,7 @@ export default function ClientLayout({
 
             <Footer />
             <AnchorAd />
+            <SideRails />
             <JsonLd />
         </>
     );
