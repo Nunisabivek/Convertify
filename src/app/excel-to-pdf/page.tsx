@@ -13,7 +13,6 @@ import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
 import { allIndexableBlogPosts } from "@/lib/blog-data"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
 import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
-import { AnswerBlock } from "@/components/seo/answer-block"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
 
@@ -77,21 +76,13 @@ export default function Page() {
                         <Link href="/pdf-to-jpg" className="text-indigo-600 hover:underline font-medium">PDF to JPG</Link>.
                     </p>
                 </div>
-                <AnswerBlock
-                    question="How do I convert XLS or Excel to PDF for free?"
-                    answer="Drop your XLS or XLSX file, pick the sheet if needed, and convert. Cell values are laid out as a clean table — no Microsoft Excel, no watermark, nothing uploaded. Charts and formatting are not carried over."
-                />
                 <ToolSwapper />
                 <ExcelToPdfClient />
             </section>
 
             <ToolSeoContent
                 toolName="Excel to PDF Converter"
-                toolSlug="excel-to-pdf"
                 description={contentData.description}
-                features={contentData.features}
-                useCases={contentData.useCases}
-                keywords={contentData.keywords}
             />
 
             {/* Long-form guide */}

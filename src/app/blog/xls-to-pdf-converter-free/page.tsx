@@ -2,7 +2,6 @@ import { Metadata } from "next"
 import Link from "next/link"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
-import { AnswerBlock } from "@/components/seo/answer-block"
 import { AuthorByline } from "@/components/seo/author-byline"
 
 export const metadata: Metadata = {
@@ -103,10 +102,6 @@ export default function BlogPost() {
                     readingTime={5}
                 />
 
-                <AnswerBlock
-                    question="How do I convert XLS to PDF for free?"
-                    answer="Open Convertify's Excel to PDF converter, drop your .xls or .xlsx file in, pick the sheet, and click Convert. You'll get a PDF in under 10 seconds. It's a values-only export — your data laid out as a clean table, without charts or cell formatting. Free, no watermark, no sign-up, no Microsoft Excel needed."
-                />
 
                 <nav className="bg-white rounded-xl p-6 my-10 shadow-sm border border-slate-200">
                     <h2 className="text-lg font-semibold mb-4">Table of Contents</h2>

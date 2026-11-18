@@ -9,7 +9,6 @@ import { RelatedFormTools } from '@/components/seo/related-form-tools'
 import { RelatedBlogPosts } from '@/components/seo/related-blog-posts'
 import { FAQSchema } from '@/components/seo/faq-schema'
 import { HowToSchema } from '@/components/seo/howto-schema'
-import { AnswerBlock } from '@/components/seo/answer-block'
 import { uniqueToolSeo } from '@/lib/unique-tools-seo'
 import { allIndexableBlogPosts } from '@/lib/blog-data'
 import { getBlogPostsForTool } from '@/lib/tool-blog-mapping'
@@ -103,10 +102,6 @@ export default function Page() {
                     </p>
                     <ToolFrontPlayBadge toolName="Passport Photo Maker" />
                 </div>
-                <AnswerBlock
-                    question="What size is a US 2×2 passport photo versus India 630×810?"
-                    answer="US digital passport photos are a 2-inch square, usually 600×600 pixels. India digital uploads are commonly 630×810, 10–250 KB, white background. This page has both presets, plus visa 35×45 (600×750), UPSC 3.5×4.5 cm, bank 200×230, and signature 140×60."
-                />
                 <PassportPhotoClient />
             </section>
 

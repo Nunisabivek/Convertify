@@ -61,11 +61,7 @@ export default function Page() {
 
             <ToolSeoContent
                 toolName="CSV to JSON Converter"
-                toolSlug="csv-to-json"
                 description={contentData.description}
-                features={contentData.features}
-                useCases={contentData.useCases}
-                keywords={contentData.keywords}
             />
 
             {/* Long-form guide */}

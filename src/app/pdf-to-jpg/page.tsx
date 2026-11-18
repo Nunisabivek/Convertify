@@ -109,11 +109,7 @@ export default function Page() {
             {/* SEO Content Section */}
             <ToolSeoContent
                 toolName="PDF to JPG Converter"
-                toolSlug="pdf-to-jpg"
                 description={contentData.description}
-                features={contentData.features}
-                useCases={contentData.useCases}
-                keywords={contentData.keywords}
             />
 
             <ToolDeepGuide toolSlug="pdf-to-jpg" toolName="PDF to JPG Converter" />

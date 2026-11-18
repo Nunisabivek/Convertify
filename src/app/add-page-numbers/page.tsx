@@ -78,11 +78,7 @@ export default function Page() {
             {/* SEO Content Section */}
             <ToolSeoContent
                 toolName="PDF Page Numbering Tool"
-                toolSlug={toolName}
                 description={contentData.description}
-                features={contentData.features}
-                useCases={contentData.useCases}
-                keywords={contentData.keywords}
             />
 
             {/* Long-form guide */}

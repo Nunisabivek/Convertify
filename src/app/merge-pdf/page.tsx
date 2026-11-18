@@ -115,11 +115,7 @@ export default function Page() {
             {/* SEO Content Section */}
             <ToolSeoContent
                 toolName="Convertify PDF Merger"
-                toolSlug="merge-pdf"
                 description={contentData.description}
-                features={contentData.features}
-                useCases={contentData.useCases}
-                keywords={contentData.keywords}
             />
 
             {/* Long-form guide — adds 1000-1500 words of unique content */}

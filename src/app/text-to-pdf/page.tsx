@@ -69,11 +69,7 @@ export default function Page() {
             {/* SEO Content Section */}
             <ToolSeoContent
                 toolName="Text to PDF Converter"
-                toolSlug="text-to-pdf"
                 description={contentData.description}
-                features={contentData.features}
-                useCases={contentData.useCases}
-                keywords={contentData.keywords}
             />
 
             <ToolDeepGuide toolSlug="text-to-pdf" toolName="Text to PDF Converter" />

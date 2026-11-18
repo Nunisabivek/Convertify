@@ -9,7 +9,6 @@ import { RelatedFormTools } from '@/components/seo/related-form-tools'
 import { RelatedBlogPosts } from '@/components/seo/related-blog-posts'
 import { FAQSchema } from '@/components/seo/faq-schema'
 import { HowToSchema } from '@/components/seo/howto-schema'
-import { AnswerBlock } from '@/components/seo/answer-block'
 import { uniqueToolSeo } from '@/lib/unique-tools-seo'
 import { allIndexableBlogPosts } from '@/lib/blog-data'
 import { getBlogPostsForTool } from '@/lib/tool-blog-mapping'
@@ -105,10 +104,6 @@ export default function Page() {
                     </p>
                     <ToolFrontPlayBadge toolName="Fit to Size" />
                 </div>
-                <AnswerBlock
-                    question="How do I make a photo or PDF land between 20–50 KB or 100–200 KB?"
-                    answer="Use Fit to size, not a one-way compressor. Pick 20–50 KB, 50–200 KB, or 100–200 KB — or type any window, including 1–2 MB for job and university uploads. The file stays on your device."
-                />
                 <FitToSizeClient />
             </section>
 

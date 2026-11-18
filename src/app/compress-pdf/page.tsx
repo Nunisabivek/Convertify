@@ -12,7 +12,6 @@ import { RelatedFormTools } from "@/components/seo/related-form-tools"
 import { RelatedBlogPosts } from "@/components/seo/related-blog-posts"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
 import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
-import { AnswerBlock } from "@/components/seo/answer-block"
 import { PostActionAd } from "@/components/ads/post-action-ad"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
@@ -87,10 +86,6 @@ export default function Page() {
                     </p>
                     <ToolFrontPlayBadge toolName="PDF Compressor" />
                 </div>
-                <AnswerBlock
-                    question="How do I compress a PDF to 100KB, 200KB, or a size Gmail will accept?"
-                    answer="Open this compressor, drop the PDF, and pick 100 KB or 200 KB for government and visa forms, 10 MB for most email desks, or 20 MB if you only need Gmail’s 25 MB headroom. Convertify searches quality until the file is at or under the target. Free, no watermark, and the file stays on your device."
-                />
                 <CompressPdfClient />
             </section>
 
@@ -100,11 +95,7 @@ export default function Page() {
             {/* SEO Content Section */}
             <ToolSeoContent
                 toolName="Convertify PDF Compressor"
-                toolSlug="compress-pdf"
                 description={contentData.description}
-                features={contentData.features}
-                useCases={contentData.useCases}
-                keywords={contentData.keywords}
             />
 
             <ToolDeepGuide toolSlug="compress-pdf" toolName="PDF Compressor" />

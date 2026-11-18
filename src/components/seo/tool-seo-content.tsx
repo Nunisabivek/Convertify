@@ -1,108 +1,28 @@
-import { CheckCircle, Shield, Zap, Globe, FileCheck } from 'lucide-react';
 import { AdBanner } from '@/components/ads/banner';
-import { toolBenefits } from '@/lib/tool-benefits';
 import { InToolPlayStoreCallout } from '@/components/ui/google-play-badge';
 
 interface ToolContentProps {
     toolName: string;
-    toolSlug: string;
     description: string;
-    features: string[];
-    useCases: string[];
-    keywords?: string[];
 }
 
-const ICON_MAP = { zap: Zap, shield: Shield, globe: Globe, fileCheck: FileCheck } as const;
-
-const FALLBACK_BENEFITS = [
-    { icon: "zap" as const, title: "Lightning Fast", description: "Process files instantly in your browser" },
-    { icon: "shield" as const, title: "100% Secure", description: "Files never leave your device" },
-    { icon: "globe" as const, title: "Works Everywhere", description: "Desktop, tablet, and mobile compatible" },
-    { icon: "fileCheck" as const, title: "No Watermarks", description: "Clean, professional output every time" },
-];
-
-export function ToolSeoContent({
-    toolName,
-    toolSlug,
-    description,
-    features,
-    useCases,
-    keywords
-}: ToolContentProps) {
+// Short "About" paragraph under a tool, plus the app callout and an ad slot. The feature list,
+// "Why use Convertify" benefit grid, use-case list and trust line that used to sit here were cut
+// (2026-11-18): the same blocks on ~60 tool pages read as mass-produced text to Google.
+export function ToolSeoContent({ toolName, description }: ToolContentProps) {
     return (
         <section className="w-full bg-white py-12 px-4">
             <div className="max-w-4xl mx-auto">
-                {/* Google Play In-Tool Promotion */}
                 <InToolPlayStoreCallout toolName={toolName} className="mb-12" />
-
-                {/* Rich Description Section */}
                 <div className="mb-12">
                     <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
                         About {toolName}
                     </h2>
-                    <p className="text-lg text-slate-600 leading-relaxed mb-6">
+                    <p className="text-lg text-slate-600 leading-relaxed">
                         {description}
                     </p>
-
-                    {/* Feature List */}
-                    <div className="grid md:grid-cols-2 gap-4">
-                        {features.map((feature, idx) => (
-                            <div key={idx} className="flex items-start gap-3">
-                                <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                                <span className="text-slate-700">{feature}</span>
-                            </div>
-                        ))}
-                    </div>
                 </div>
-
-                {/* Benefits Grid — tool-specific so every tool page has unique content */}
-                <div className="mb-12">
-                    <h2 className="text-2xl font-bold text-slate-900 mb-6">
-                        Why Use Convertify&apos;s {toolName}?
-                    </h2>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        {(toolBenefits[toolSlug] ?? FALLBACK_BENEFITS).map((benefit, idx) => {
-                            const Icon = ICON_MAP[benefit.icon];
-                            return (
-                                <div key={idx} className="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                    <Icon className="w-7 h-7 text-indigo-600 mb-2" />
-                                    <h3 className="font-semibold text-slate-900 mb-1 text-sm">{benefit.title}</h3>
-                                    <p className="text-xs text-slate-600">{benefit.description}</p>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
-
-                {/* Use Cases Section */}
-                <div className="mb-12">
-                    <h2 className="text-2xl font-bold text-slate-900 mb-6">
-                        Common Use Cases
-                    </h2>
-                    <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-6 border border-indigo-100">
-                        <ul className="space-y-3">
-                            {useCases.map((useCase, idx) => (
-                                <li key={idx} className="flex items-start gap-3">
-                                    <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-bold flex-shrink-0">
-                                        {idx + 1}
-                                    </span>
-                                    <span className="text-slate-700">{useCase}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-
-                {/* Native Ad — between content and trust signal */}
                 <AdBanner variant="rectangle" />
-
-                {/* Trust Signal */}
-                <div className="text-sm text-slate-500 leading-relaxed border-t border-slate-100 pt-6">
-                    <p>
-                        Convertify processes all files directly in your browser — nothing is uploaded to any server.
-                        Your documents stay private and secure on your device at all times.
-                    </p>
-                </div>
             </div>
         </section>
     );

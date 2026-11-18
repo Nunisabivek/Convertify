@@ -80,11 +80,7 @@ export default function Page() {
             {/* SEO Content Section */}
             <ToolSeoContent
                 toolName="Convertify PDF to Word Converter"
-                toolSlug="pdf-to-word"
                 description={contentData.description}
-                features={contentData.features}
-                useCases={contentData.useCases}
-                keywords={contentData.keywords}
             />
 
             {/* Long-form guide */}

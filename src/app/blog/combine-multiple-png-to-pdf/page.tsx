@@ -2,7 +2,6 @@ import { Metadata } from "next"
 import Link from "next/link"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
-import { AnswerBlock } from "@/components/seo/answer-block"
 import { AuthorByline } from "@/components/seo/author-byline"
 
 export const metadata: Metadata = {
@@ -98,10 +97,6 @@ export default function BlogPost() {
                     readingTime={6}
                 />
 
-                <AnswerBlock
-                    question="How do I combine multiple PNG files into one PDF?"
-                    answer="Open Convertify’s PNG to PDF combiner, drop all of your PNG files in at once, drag the thumbnails to set the page order, then click Convert. You’ll get a single multi-page HD PDF (300 DPI) in under 10 seconds — free, no watermark, no sign-up, and your files never leave your browser."
-                />
 
                 <nav className="bg-white rounded-xl p-6 my-10 shadow-sm border border-slate-200">
                     <h2 className="text-lg font-semibold mb-4">Table of Contents</h2>

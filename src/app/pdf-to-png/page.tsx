@@ -73,11 +73,7 @@ export default function Page() {
             {/* SEO Content Section */}
             <ToolSeoContent
                 toolName="PDF to PNG Converter"
-                toolSlug="pdf-to-png"
                 description={contentData.description}
-                features={contentData.features}
-                useCases={contentData.useCases}
-                keywords={contentData.keywords}
             />
 
             <ToolDeepGuide toolSlug="pdf-to-png" toolName="PDF to PNG Converter" />

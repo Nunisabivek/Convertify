@@ -11,31 +11,17 @@ interface FAQSchemaProps {
 }
 
 export function FAQSchema({ faqs, toolName }: FAQSchemaProps) {
-    const faqSchema = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": faqs.map(faq => ({
-            "@type": "Question",
-            "name": faq.question,
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": faq.answer
-            }
-        }))
-    }
-
+    // Visible Q&A only, at most 4. No FAQPage JSON-LD: Google stopped showing FAQ results in
+    // May 2026, and a long templated FAQ on every page adds bulk, not help.
+    const shown = faqs.slice(0, 4)
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-            />
             <section className="w-full max-w-4xl mx-auto px-4 py-12">
                 <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">
                     {toolName ? `Frequently Asked Questions about ${toolName}` : "Frequently Asked Questions"}
                 </h2>
                 <div className="space-y-4">
-                    {faqs.map((faq, index) => (
+                    {shown.map((faq, index) => (
                         <details
                             key={index}
                             className="group bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow"

@@ -9,7 +9,6 @@ import { RelatedFormTools } from '@/components/seo/related-form-tools'
 import { RelatedBlogPosts } from '@/components/seo/related-blog-posts'
 import { FAQSchema } from '@/components/seo/faq-schema'
 import { HowToSchema } from '@/components/seo/howto-schema'
-import { AnswerBlock } from '@/components/seo/answer-block'
 import { uniqueToolSeo } from '@/lib/unique-tools-seo'
 import { allIndexableBlogPosts } from '@/lib/blog-data'
 import { getBlogPostsForTool } from '@/lib/tool-blog-mapping'
@@ -100,10 +99,6 @@ export default function Page() {
                         never leaves this device.
                     </p>
                 </div>
-                <AnswerBlock
-                    question="How do I get a white background on a passport or LinkedIn photo without uploading it?"
-                    answer="Use this page on a photo shot against a plain wall. Convertify fills that backdrop with solid white (or light blue) in your browser. Then crop to US 2×2 or 630×810 on Passport photo, or hit a KB band on Fit to size."
-                />
                 <RemoveBackgroundClient />
             </section>
 

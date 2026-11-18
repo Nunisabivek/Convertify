@@ -6,16 +6,15 @@ interface ToolDeepGuideProps {
     toolName?: string
 }
 
-// Renders the long-form per-tool guide. Designed to add 1000-1500 words of
-// genuinely useful, tool-specific content to each page. This is the primary
-// fix for the "Crawled - currently not indexed" issue — the original pages
-// were too thin to deserve indexing on a young domain.
+// Renders a tool's how-to steps and its troubleshooting / limits. The guide data also holds
+// intro, scenarios and a comparison table; those are deliberately not shown (2026-11-18): the same
+// marketing blocks on ~60 pages read as mass-produced text to Google's quality systems.
 export function ToolDeepGuide({ toolSlug, toolName }: ToolDeepGuideProps) {
     const guide = toolDeepGuides[toolSlug]
     if (!guide) return null
 
     const resolvedToolName = toolName || toolLabel(toolSlug)
-    const { intro, steps, scenarios, troubleshooting, comparison, lastUpdated } = guide
+    const { steps, troubleshooting, lastUpdated } = guide
     const updatedHuman = new Date(lastUpdated).toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
@@ -39,60 +38,18 @@ export function ToolDeepGuide({ toolSlug, toolName }: ToolDeepGuideProps) {
         })),
     }
 
-    // No second FAQPage here on purpose. Google allows only one FAQPage
-    // entity per page; emitting a second one (alongside the page-level
-    // <FAQSchema/>) made Search Console flag "2 invalid items" and
-    // suppressed FAQ rich results. The troubleshooting Q&As below stay as
-    // visible content (still good for long-tail/AEO) — just not re-marked
-    // up as a duplicate FAQPage.
-
     return (
         <section className="w-full bg-slate-50 py-12 px-4 border-t border-slate-100">
             <div className="max-w-4xl mx-auto">
                 <div className="flex items-baseline justify-between mb-2">
                     <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
-                        The complete guide to {resolvedToolName}
+                        How to use {resolvedToolName}
                     </h2>
                     <span className="text-xs text-slate-500">Last updated {updatedHuman}</span>
                 </div>
 
-                <div className="tool-guide-intro space-y-4 text-slate-700 leading-relaxed mt-6">
-                    {intro.map((p, i) => (
-                        <p key={i}>{p}</p>
-                    ))}
-                </div>
-
-                {/* Comparison table — adds factual, structured content that
-                    differentiates from generic "free PDF tool" pages. */}
-                <h3 className="text-xl font-bold text-slate-900 mt-12 mb-4">
-                    How {resolvedToolName} on Convertify compares
-                </h3>
-                <div className="overflow-x-auto bg-white rounded-xl border border-slate-200">
-                    <table className="w-full text-sm">
-                        <thead>
-                            <tr className="bg-slate-100 text-left">
-                                <th className="px-4 py-3 font-semibold">Feature</th>
-                                <th className="px-4 py-3 font-semibold text-[#026EFF]">Convertify</th>
-                                <th className="px-4 py-3 font-semibold text-slate-500">Typical online tool</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {comparison.map((row, i) => (
-                                <tr key={i} className="border-t border-slate-100">
-                                    <td className="px-4 py-3 text-slate-700">{row.feature}</td>
-                                    <td className="px-4 py-3 font-medium text-slate-900">{row.convertify}</td>
-                                    <td className="px-4 py-3 text-slate-500">{row.typical}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-
                 {/* Steps — rendered with section ids that the HowTo schema points to */}
-                <h3 className="text-xl font-bold text-slate-900 mt-12 mb-4">
-                    Step-by-step: how to use {resolvedToolName}
-                </h3>
-                <ol className="tool-guide-steps space-y-5">
+                <ol className="tool-guide-steps space-y-5 mt-6">
                     {steps.map((s, i) => (
                         <li
                             key={i}
@@ -109,20 +66,6 @@ export function ToolDeepGuide({ toolSlug, toolName }: ToolDeepGuideProps) {
                         </li>
                     ))}
                 </ol>
-
-                {/* Real-world scenarios — adds keyword-rich context that
-                    directly addresses long-tail searches. */}
-                <h3 className="text-xl font-bold text-slate-900 mt-12 mb-4">
-                    Real-world scenarios
-                </h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                    {scenarios.map((sc, i) => (
-                        <div key={i} className="bg-white rounded-xl border border-slate-200 p-5">
-                            <h4 className="font-semibold text-slate-900 mb-2">{sc.title}</h4>
-                            <p className="text-sm text-slate-600 leading-relaxed">{sc.body}</p>
-                        </div>
-                    ))}
-                </div>
 
                 {/* Troubleshooting / extended FAQ */}
                 <h3 className="text-xl font-bold text-slate-900 mt-12 mb-4">

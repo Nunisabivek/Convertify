@@ -94,11 +94,7 @@ export default function Page() {
             {/* SEO Content Section */}
             <ToolSeoContent
                 toolName="Convertify Word to PDF Converter"
-                toolSlug="word-to-pdf"
                 description={contentData.description}
-                features={contentData.features}
-                useCases={contentData.useCases}
-                keywords={contentData.keywords}
             />
 
             <ToolDeepGuide toolSlug="word-to-pdf" toolName="Word to PDF Converter" />

@@ -3,7 +3,6 @@ import Link from "next/link"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { AuthorByline } from "@/components/seo/author-byline"
-import { AnswerBlock } from "@/components/seo/answer-block"
 
 export const metadata: Metadata = {
     title: "Passport Photo Size: US 2×2 vs India 630×810 vs Visa 35×45",
@@ -83,10 +82,6 @@ export default function BlogPost() {
                     <AuthorByline published="2026-08-27" readingTime={8} />
                 </header>
 
-                <AnswerBlock
-                    question="What size should my passport photo be?"
-                    answer="US digital photos are a 2-inch square, usually 600×600 pixels. India digital uploads are commonly 630×810, 10–250 KB. Visa 35×45 mm is the same shape as UPSC 3.5×4.5 cm — 600×750 or 413×531 depending on the portal. Crop on /passport-photo; do not stretch a selfie."
-                />
 
                 <div className="prose prose-slate max-w-none text-slate-700 leading-relaxed space-y-4">
                     <p>

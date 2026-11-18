@@ -14,7 +14,6 @@ import { getBlogPostsForTool } from "@/lib/tool-blog-mapping"
 import { allIndexableBlogPosts } from "@/lib/blog-data"
 import { ToolSeoContent } from "@/components/seo/tool-seo-content"
 import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
-import { AnswerBlock } from "@/components/seo/answer-block"
 import { PostActionAd } from "@/components/ads/post-action-ad"
 import { toolContentData } from "@/lib/tool-content-data"
 import { toolSeoData } from "@/lib/seo-data"
@@ -80,10 +79,6 @@ export default function Page() {
                         <Link href="/pdf-to-jpg" className="text-indigo-600 hover:underline font-medium">PDF to JPG</Link>.
                     </p>
                 </div>
-                <AnswerBlock
-                    question="How do I combine multiple PNG files into one PDF?"
-                    answer="Drop all your PNG images into the combiner, drag the thumbnails to set the page order, then click Convert. You get a single multi-page PDF in seconds — free, no watermark, no sign-up, and the files stay on your device."
-                />
                 <ToolSwapper />
                 <PngToPdfClient />
             </section>
@@ -94,11 +89,7 @@ export default function Page() {
             {/* SEO Content Section */}
             <ToolSeoContent
                 toolName="PNG to PDF Converter"
-                toolSlug="png-to-pdf"
                 description={contentData.description}
-                features={contentData.features}
-                useCases={contentData.useCases}
-                keywords={contentData.keywords}
             />
 
             <ToolDeepGuide toolSlug="png-to-pdf" toolName="PNG to PDF Converter" />

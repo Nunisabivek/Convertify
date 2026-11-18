@@ -2,7 +2,6 @@ import { Metadata } from "next"
 import { FAQSchema } from "@/components/seo/faq-schema"
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema"
 import { AuthorByline } from "@/components/seo/author-byline"
-import { AnswerBlock } from "@/components/seo/answer-block"
 
 export const metadata: Metadata = {
     title: "How to Compress PDF to Under 100KB for Government Forms (2026)",
@@ -87,10 +86,6 @@ export default function BlogPost() {
                     readingTime={8}
                 />
 
-                <AnswerBlock
-                    question="How do I compress a PDF to under 100KB for a government form?"
-                    answer="Open Convertify's PDF compressor, upload the PDF, choose 'High' compression, and download. A typical 1–2 page form PDF (500KB–2MB) drops to 60–120KB while keeping text readable. If you need even smaller, split the PDF first or convert color scans to grayscale."
-                />
 
                 {/* Table of Contents */}
                 <nav className="bg-white rounded-xl p-6 mb-10 shadow-sm border border-slate-200">

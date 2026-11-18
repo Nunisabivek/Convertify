@@ -58,11 +58,7 @@ export default function Page() {
 
             <ToolSeoContent
                 toolName="GIF to PNG Converter"
-                toolSlug={toolName}
                 description={contentData.description}
-                features={contentData.features}
-                useCases={contentData.useCases}
-                keywords={contentData.keywords}
             />
 
             {/* Long-form guide — 1000-1500 words of unique content */}
