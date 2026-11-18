@@ -16,6 +16,7 @@ export type SitemapBlogEntry = {
 
 export const INDEXABLE_BLOG_SITEMAP_ENTRIES: SitemapBlogEntry[] = [
   { slug: 'add-page-numbers-thesis-dissertation', date: '2026-07-06' },
+  { slug: 'combine-multiple-png-to-pdf', date: '2026-04-26' },
   { slug: 'combine-receipts-into-one-pdf', date: '2026-05-14' },
   { slug: 'combine-scanned-documents-into-one-pdf', date: '2026-01-13' },
   { slug: 'compress-image-for-website-speed', date: '2026-05-07' },
@@ -23,6 +24,7 @@ export const INDEXABLE_BLOG_SITEMAP_ENTRIES: SitemapBlogEntry[] = [
   { slug: 'compress-pdf-for-whatsapp-sharing', date: '2026-01-14' },
   { slug: 'compress-pdf-to-500kb', date: '2026-05-04' },
   { slug: 'compress-pdf-under-100kb-government-forms', date: '2026-04-04' },
+  { slug: 'convert-screenshots-to-pdf', date: '2026-05-18' },
   { slug: 'copy-text-from-pdf-that-wont-let-you', date: '2026-06-15' },
   { slug: 'extract-one-page-from-pdf', date: '2026-06-08' },
   { slug: 'heic-to-jpg-on-windows', date: '2026-05-25' },
@@ -35,5 +37,6 @@ export const INDEXABLE_BLOG_SITEMAP_ENTRIES: SitemapBlogEntry[] = [
   { slug: 'rotate-scanned-pdf-sideways', date: '2026-06-29' },
   { slug: 'scan-documents-iphone-to-pdf', date: '2026-01-04' },
   { slug: 'split-pdf-bank-statement-by-month', date: '2026-07-24' },
+  { slug: 'watermark-pdf-before-sending-draft', date: '2026-06-18' },
   { slug: 'webp-to-jpg-windows', date: '2026-05-21' },
 ]

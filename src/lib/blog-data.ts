@@ -3218,8 +3218,7 @@ const MIN_INDEXABLE_WORDS = 350
 // Only these distinct, specific posts stay indexed; the rest remain live for
 // readers but are noindex, out of the sitemap and out of every listing.
 // Dropped on purpose: posts that duplicate a tool page's own query
-// (combine-multiple-png-to-pdf vs /png-to-pdf, xls-to-pdf-converter-free vs
-// /excel-to-pdf), brand-stuffed titles, "2025" roundups, and posts pointing
+// (xls-to-pdf-converter-free vs /excel-to-pdf), brand-stuffed titles, "2025" roundups, and posts pointing
 // at noindexed tools (OCR, PDF/A). Add a slug here AND in
 // blog-sitemap-entries.ts; blog-sitemap.test.ts fails if they drift.
 export const INDEXED_BLOG_SLUGS = new Set([
@@ -3244,6 +3243,11 @@ export const INDEXED_BLOG_SLUGS = new Set([
   'add-page-numbers-thesis-dissertation',
   'png-to-pdf-without-white-borders',
   'compress-image-for-website-speed',
+  // Back in 2026-11-19: Bing ranked them around position 5 before the October prune
+  // (combine-multiple-png-to-pdf: 164 impressions in 6 months). Watch it against /png-to-pdf on Google.
+  'combine-multiple-png-to-pdf',
+  'convert-screenshots-to-pdf',
+  'watermark-pdf-before-sending-draft',
 ])
 
 export function isBlogPostIndexable(post: BlogPost): boolean {

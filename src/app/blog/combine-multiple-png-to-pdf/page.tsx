@@ -19,8 +19,8 @@ export const metadata: Metadata = {
         "png to pdf no watermark",
         "combine png to pdf online free",
     ],
-    // Not in INDEXED_BLOG_SLUGS (blog-data.ts): live for readers, kept out of the index.
-    robots: { index: false, follow: true },
+    // Indexed again 2026-11-19 (in INDEXED_BLOG_SLUGS): it ranked on Bing before the October prune.
+    robots: { index: true, follow: true },
     alternates: {
         canonical: "https://convertify.work/blog/combine-multiple-png-to-pdf",
     },
