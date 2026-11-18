@@ -16,12 +16,12 @@ import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { toolDocumentTitle } from "@/lib/document-title"
 
 export const metadata: Metadata = {
-    title: toolDocumentTitle("image-compressor", "Image Compressor - Compress Images Online Free | Convertify"),
+    title: toolDocumentTitle("image-compressor", "Image Compressor — Shrink JPG, PNG & WebP Photos Free"),
     description: "Compress JPG, PNG, and WebP images online for free. Each image is re-saved as a JPG at the quality you pick. No sign-up, no watermarks.",
     keywords: ["image compressor", "compress images", "reduce image size", "optimize images", "compress jpg", "compress png", "free image compression"],
     alternates: { canonical: "https://convertify.work/image-compressor" },
     openGraph: {
-        title: "Image Compressor - Free Online | Convertify",
+        title: "Image Compressor — Free, Runs in Your Browser",
         description: "Compress images to smaller JPGs in your browser. Free, fast, and private.",
         url: "/image-compressor",
     },

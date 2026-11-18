@@ -15,12 +15,12 @@ import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { toolDocumentTitle } from "@/lib/document-title"
 
 export const metadata: Metadata = {
-    title: toolDocumentTitle("heic-to-jpg", "HEIC to JPG Converter - Convert iPhone Photos Free | Convertify"),
+    title: toolDocumentTitle("heic-to-jpg", "HEIC to JPG Free — Open iPhone Photos on Windows & Android"),
     description: "Convert HEIC photos from iPhone to JPG format online for free. View Apple HEIC images on any device. No software needed, works in browser.",
     keywords: ["heic to jpg", "heic converter", "iphone photo converter", "heic to jpeg", "apple heic", "convert heic", "free heic converter"],
     alternates: { canonical: "https://convertify.work/heic-to-jpg" },
     openGraph: {
-        title: "HEIC to JPG Converter - Free Online | Convertify",
+        title: "HEIC to JPG Converter — Free, No Upload",
         description: "Convert iPhone HEIC photos to JPG format. Free, fast, and secure.",
         url: "/heic-to-jpg",
     },

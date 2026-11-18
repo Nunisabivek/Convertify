@@ -15,12 +15,12 @@ import { ToolDeepGuide } from "@/components/seo/tool-deep-guide"
 import { toolDocumentTitle } from "@/lib/document-title"
 
 export const metadata: Metadata = {
-    title: toolDocumentTitle("webp-converter", "WebP Converter - Convert Images to/from WebP Free | Convertify"),
+    title: toolDocumentTitle("webp-converter", "WebP Converter Free — WebP to JPG/PNG and Back, No Upload"),
     description: "Convert images to and from WebP format online for free. Compress JPG, PNG to WebP for smaller files. Convert WebP to JPG/PNG for compatibility. No sign-up.",
     keywords: ["webp converter", "convert to webp", "convert from webp", "webp to jpg", "png to webp", "image converter", "free webp converter"],
     alternates: { canonical: "https://convertify.work/webp-converter" },
     openGraph: {
-        title: "WebP Converter - Free Online | Convertify",
+        title: "WebP Converter — Free, No Upload",
         description: "Convert images to and from WebP format. Free, fast, and secure.",
         url: "/webp-converter",
     },
