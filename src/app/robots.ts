@@ -34,7 +34,8 @@ export default function robots(): MetadataRoute.Robots {
             { userAgent: 'CCBot', allow: '/', disallow: sharedDisallow },
             { userAgent: 'YouBot', allow: '/', disallow: sharedDisallow },
             { userAgent: 'Meta-ExternalAgent', allow: '/', disallow: sharedDisallow },
-            { userAgent: 'Bytespider', allow: '/', disallow: sharedDisallow },
+            // TikTok's scraper: about half of all crawler requests, no search value. Also blocked in Cloudflare.
+            { userAgent: 'Bytespider', disallow: '/' },
             { userAgent: 'DuckAssistBot', allow: '/', disallow: sharedDisallow },
             { userAgent: 'Amazonbot', allow: '/', disallow: sharedDisallow },
             { userAgent: 'cohere-ai', allow: '/', disallow: sharedDisallow },

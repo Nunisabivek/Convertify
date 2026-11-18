@@ -65,20 +65,22 @@ export function normalizeSrc(src: string): string | null {
 }
 
 /**
- * HTML for one banner's iframe. Each banner gets its own document because Adsterra's tag reads a
- * global `atOptions`; two tags on one page would overwrite each other.
+ * Origin that serves public/ad-frame.html. It must differ from the site's origin: an ad frame that
+ * shares the page's origin can reach into the page (history, navigation), which Google's
+ * back-button-hijacking policy holds the site responsible for.
  */
-export function bannerDocument(unit: AdsterraUnit, size: BannerSize): string | null {
+export const AD_FRAME_ORIGIN = 'https://ads.convertify.work'
+
+/**
+ * URL of one banner's iframe. Each banner gets its own document because Adsterra's tag reads a
+ * global `atOptions`; two tags on one page would overwrite each other. ad-frame.html only loads
+ * invoke.js from HOST, so the unit's src must point there too.
+ */
+export function bannerFrameUrl(unit: AdsterraUnit, size: BannerSize): string | null {
     const src = normalizeSrc(unit.src)
-    if (!src || !KEY_RE.test(unit.key)) return null
+    if (!src || !KEY_RE.test(unit.key) || src !== `${HOST}/${unit.key}/invoke.js`) return null
     const { width, height } = SIZES[size]
-    const options = JSON.stringify({ key: unit.key, format: 'iframe', height, width, params: {} })
-    return (
-        '<!doctype html><html><head><meta charset="utf-8">' +
-        '<style>html,body{margin:0;padding:0;overflow:hidden;background:transparent}</style>' +
-        `</head><body><script>atOptions=${options};</script>` +
-        `<script src="${src.replace(/"/g, '&quot;')}"></script></body></html>`
-    )
+    return `${AD_FRAME_ORIGIN}/ad-frame.html?k=${unit.key}&w=${width}&h=${height}`
 }
 
 /** True once at least one banner size is set up. */

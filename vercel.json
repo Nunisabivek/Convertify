@@ -2,7 +2,23 @@
     "redirects": [
         {
             "source": "/:path(.*)",
-            "has": [{ "type": "host", "value": "www.convertify.work" }],
+            "has": [
+                {
+                    "type": "host",
+                    "value": "www.convertify.work"
+                }
+            ],
+            "destination": "https://convertify.work/:path",
+            "permanent": true
+        },
+        {
+            "source": "/:path((?!ad-frame\\.html$).*)",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "ads.convertify.work"
+                }
+            ],
             "destination": "https://convertify.work/:path",
             "permanent": true
         },
@@ -226,7 +242,7 @@
             ]
         },
         {
-            "source": "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+            "source": "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|ad-frame.html).*)",
             "headers": [
                 {
                     "key": "Strict-Transport-Security",
@@ -287,6 +303,27 @@
                 {
                     "key": "X-Robots-Tag",
                     "value": "noindex, nofollow"
+                }
+            ]
+        },
+        {
+            "source": "/ad-frame.html",
+            "headers": [
+                {
+                    "key": "Content-Security-Policy",
+                    "value": "frame-ancestors https://convertify.work https://www.convertify.work"
+                },
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex, nofollow"
+                },
+                {
+                    "key": "X-Content-Type-Options",
+                    "value": "nosniff"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=3600"
                 }
             ]
         }

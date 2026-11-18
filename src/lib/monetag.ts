@@ -34,7 +34,11 @@ function loadZone({ zone, src }: { zone: string; src: string }) {
     document.body.appendChild(s)
 }
 
+/** Fired on window when a tool saves a file; the sticky banner waits for it (or a scroll). */
+export const FILE_SAVED_EVENT = 'cv:file-saved'
+
 function afterWork() {
+    window.dispatchEvent(new Event(FILE_SAVED_EVENT))
     setTimeout(() => {
         // One In-Page Push tag per page: the strong one replaces the regular one, never stacks on it.
         if (!loaded.has(ZONES.pushRegular.zone)) loadZone(ZONES.pushStrong)

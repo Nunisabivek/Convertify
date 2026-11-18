@@ -1,8 +1,8 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
-import { ADSTERRA_ON, SIZES, UNITS, bannerDocument, wideSize, type BannerSize } from "@/lib/adsterra"
+import { ADSTERRA_ON, AD_FRAME_ORIGIN, SIZES, UNITS, bannerFrameUrl, wideSize, type BannerSize } from "@/lib/adsterra"
 
 // Website banners are Adsterra (src/lib/adsterra.ts); Monetag (src/lib/monetag.ts) runs the corner
 // card and the after-download vignette. The Android build shows AdMob instead, so this renders nothing there.
@@ -17,62 +17,36 @@ interface AdBannerProps {
     className?: string
 }
 
-// Adsterra's tag takes 5-9 s to place its creative. A unit that is inactive or has no fill answers
-// with an empty script and never adds anything; only after this long with nothing added does the
-// slot give its space back. Collapsing earlier would remove ads that already counted a view.
-const NO_FILL_AFTER_MS = 12000
-
-/** True once the banner document holds anything besides its own scripts (Adsterra adds an iframe). */
-function hasCreative(body: HTMLElement): boolean {
-    return body.querySelector(":not(script):not(style):not(noscript):not(link)") !== null
-}
-
-/** One banner in its own iframe: Adsterra's tag reads a global, so each unit needs its own document. */
+/**
+ * One banner in its own iframe: Adsterra's tag reads a global, so each unit needs its own document.
+ * The frame comes from AD_FRAME_ORIGIN, so the ad can't touch this page. It reports "empty" itself
+ * (after 12 s with no creative) because the page can't look inside a cross-origin frame.
+ */
 export function AdFrame({ size, onEmpty }: { size: BannerSize; onEmpty?: () => void }) {
     const unit = UNITS[size]
-    const doc = useMemo(() => (unit ? bannerDocument(unit, size) : null), [unit, size])
+    const src = unit ? bannerFrameUrl(unit, size) : null
     const ref = useRef<HTMLIFrameElement>(null)
-    const watch = useRef<{ timer?: number; observer?: MutationObserver }>({})
-    const stopWatching = () => {
-        window.clearTimeout(watch.current.timer)
-        watch.current.observer?.disconnect()
-        watch.current = {}
-    }
-    useEffect(() => stopWatching, [])
-    if (!doc) return null
-    const { width, height } = SIZES[size]
-    const watchFill = () => {
-        stopWatching()
+    useEffect(() => {
         if (!onEmpty) return
-        let body: HTMLElement | null | undefined
-        try {
-            body = ref.current?.contentDocument?.body
-        } catch {
-            return // can't look inside: never hide what may be a live ad
+        const onMessage = (e: MessageEvent) => {
+            if (e.origin === AD_FRAME_ORIGIN && e.source === ref.current?.contentWindow && e.data?.cvAd === "empty") onEmpty()
         }
-        if (!body || hasCreative(body)) return
-        const observer = new MutationObserver(() => {
-            if (body && hasCreative(body)) stopWatching()
-        })
-        observer.observe(body, { childList: true, subtree: true })
-        const timer = window.setTimeout(() => {
-            const filled = body ? hasCreative(body) : true
-            stopWatching()
-            if (!filled) onEmpty()
-        }, NO_FILL_AFTER_MS)
-        watch.current = { timer, observer }
-    }
+        window.addEventListener("message", onMessage)
+        return () => window.removeEventListener("message", onMessage)
+    }, [onEmpty])
+    if (!src) return null
+    const { width, height } = SIZES[size]
     return (
         <iframe
             ref={ref}
             title="Advertisement"
-            srcDoc={doc}
+            src={src}
             width={width}
             height={height}
             scrolling="no"
-            onLoad={watchFill}
-            // No allow-top-navigation: an ad can open a new tab on click but can never send the
-            // visitor away from a tool with their work in it.
+            // allow-same-origin is safe here only because the frame's origin is not this site's: the
+            // ad keeps its own storage but can't reach this page. No allow-top-navigation: an ad can
+            // open a new tab on click but can never send the visitor away from a tool.
             sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
             style={{ border: 0, display: "block", maxWidth: "100%", overflow: "hidden" }}
         />

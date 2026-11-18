@@ -5,15 +5,15 @@ import { usePathname } from "next/navigation"
 import { X } from "lucide-react"
 import { AdFrame, AD_SLOTS_ON } from "./banner"
 import { SIZES, anchorAllowed, anchorSize, type BannerSize } from "@/lib/adsterra"
+import { FILE_SAVED_EVENT } from "@/lib/monetag"
 
 const CLOSED_KEY = "cv-anchor-ad-closed"
-// Let the page and the tool load first; the banner never competes with the first paint.
-const SHOW_AFTER_MS = 3000
 
 /**
  * A short banner pinned to the bottom of the screen (320x50 on phones, 728x90 on desktop) with a
- * close button that holds for the rest of the visit. Skipped on canvas editors, where it would sit
- * on the working area. Each page change loads a fresh ad; nothing refreshes on a timer.
+ * close button that holds for the rest of the visit. It appears only once the visitor has scrolled
+ * past the first screen or saved a file, so it never covers a tool's upload area on arrival (what a
+ * visitor from search sees first). Skipped on canvas editors. Each page change loads a fresh ad.
  */
 export function AnchorAd() {
     const pathname = usePathname()
@@ -22,15 +22,25 @@ export function AnchorAd() {
 
     useEffect(() => {
         if (!AD_SLOTS_ON) return
-        const t = setTimeout(() => {
+        const show = () => {
+            stop()
             try {
                 if (sessionStorage.getItem(CLOSED_KEY) === "1") return
             } catch {
                 // Storage blocked: the close button still works for this page.
             }
             setSize(anchorSize(window.innerWidth))
-        }, SHOW_AFTER_MS)
-        return () => clearTimeout(t)
+        }
+        const onScroll = () => {
+            if (window.scrollY > window.innerHeight) show()
+        }
+        const stop = () => {
+            window.removeEventListener("scroll", onScroll)
+            window.removeEventListener(FILE_SAVED_EVENT, show)
+        }
+        window.addEventListener("scroll", onScroll, { passive: true })
+        window.addEventListener(FILE_SAVED_EVENT, show)
+        return stop
     }, [])
 
     if (!AD_SLOTS_ON || closed || !size || !anchorAllowed(pathname)) return null
