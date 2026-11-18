@@ -177,11 +177,13 @@ def _(f, r):
     if fitz.open(f)[0].get_text().strip(): return 'text still extractable on the redacted page'
 
 
-# Ads (src/lib/monetag.ts): none while the visitor works, both zones once their file is saved.
+# Ads (src/lib/monetag.ts): once the file is saved, the vignette plus exactly one In-Page Push.
+# The regular push (12092108) loads after 8 s on every page, so on a tool that takes longer it is
+# already there and the strong one (12092107) is skipped rather than stacked.
 for tid, r in rep.items():
     if r.get('file') and 'adsAfter' in r:
         if r.get('adsBefore'): results[tid + ' (ads)'] = f"ads loaded before the download: {r['adsBefore']}"
-        elif r['adsAfter'] != '12092107,12092189': results[tid + ' (ads)'] = f"zones after the download: {r['adsAfter'] or 'none'}, expected strong push 12092107 + vignette 12092189"
+        elif r['adsAfter'] not in ('12092107,12092189', '12092108,12092189'): results[tid + ' (ads)'] = f"zones after the download: {r['adsAfter'] or 'none'}, expected one push (12092107 or 12092108) + vignette 12092189"
         else: results[tid + ' (ads)'] = None
 
 smoke_failed = [k for k, r in rep.items() if not r.get('ok')]
