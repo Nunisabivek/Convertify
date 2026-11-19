@@ -15,8 +15,8 @@ export function releaseNativeAds(_reason: string): void {}
 
 export function flushQueuedInterstitial(): void {}
 
-export function showInterstitialAfterConversion(): Promise<void> {
-    return Promise.resolve()
+export function showInterstitialAfterConversion(): Promise<boolean> {
+    return Promise.resolve(false)
 }
 
 export { shouldOfferInterstitial, type InterstitialGate } from './interstitial-gate'
