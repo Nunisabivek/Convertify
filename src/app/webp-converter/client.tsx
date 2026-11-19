@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { FileUploader } from "@/components/tools/file-uploader"
 import { Button } from "@/components/ui/button"
 import { Globe, Download, Loader2, X } from "lucide-react"
@@ -25,6 +25,10 @@ export default function WebpConverterClient() {
     const [webpUnsupported, setWebpUnsupported] = useState(false)
 
     const handleFilesSelected = (newFiles: File[]) => {
+        // WebP in, WebP out does nothing: default WebP pictures to JPG, everything else to WebP.
+        if (files.length === 0 && newFiles.length > 0) {
+            setOutputFormat(newFiles.every(f => /webp$/i.test(f.type) || /\.webp$/i.test(f.name)) ? 'jpg' : 'webp')
+        }
         setFiles(prev => [...prev, ...newFiles])
         setConverted([])
         setWebpUnsupported(false)
@@ -198,7 +202,7 @@ export default function WebpConverterClient() {
                             {files.map((file, i) => (
                                 <div key={i} className="relative group">
                                     <div className="aspect-square bg-slate-100 rounded-lg flex items-center justify-center overflow-hidden">
-                                        <Globe className="w-8 h-8 text-slate-400" />
+                                        <FileThumb file={file} />
                                     </div>
                                     <button onClick={() => removeFile(i)} className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
                                         <X className="w-4 h-4 mx-auto" />
@@ -222,4 +226,17 @@ export default function WebpConverterClient() {
             )}
         </div>
     )
+}
+
+/** The picture itself, not a placeholder icon. The object URL is freed when the file leaves the list. */
+function FileThumb({ file }: { file: File }) {
+    const [url, setUrl] = useState<string | null>(null)
+    useEffect(() => {
+        const u = URL.createObjectURL(file)
+        setUrl(u)
+        return () => URL.revokeObjectURL(u)
+    }, [file])
+    if (!url) return <Globe className="w-8 h-8 text-slate-400" />
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img src={url} alt="" className="w-full h-full object-cover" decoding="async" />
 }

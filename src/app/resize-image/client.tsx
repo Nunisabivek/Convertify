@@ -136,6 +136,9 @@ export default function ResizeImageClient() {
         { label: 'Icon (64×64)', w: 64, h: 64 },
     ]
 
+    // Same width and height as the picture: resizing would only re-save it.
+    const unchanged = files.length === 1 && width === originalDimensions.width && height === originalDimensions.height
+
     if (resized.length > 0) {
         return (
             <div className="container mx-auto py-12 max-w-4xl px-4 text-center">
@@ -224,11 +227,11 @@ export default function ResizeImageClient() {
                             ))}
                         </div>
                         
-                        <Button size="xl" onClick={resizeImages} disabled={isProcessing} className="w-full bg-orange-600 hover:bg-orange-700">
+                        <Button size="xl" onClick={resizeImages} disabled={isProcessing || unchanged} className="w-full bg-orange-600 hover:bg-orange-700">
                             {isProcessing ? (
                                 <><Loader2 className="mr-2 w-5 h-5 animate-spin" />Resizing {progress}/{files.length}...</>
                             ) : (
-                                `Resize ${files.length} Image${files.length > 1 ? 's' : ''}`
+                                unchanged ? 'Pick a new size first' : `Resize ${files.length} Image${files.length > 1 ? 's' : ''}`
                             )}
                         </Button>
                     </div>

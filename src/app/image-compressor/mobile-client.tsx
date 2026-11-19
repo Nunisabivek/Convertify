@@ -8,7 +8,7 @@ import MobileJobCta from '@/components/mobile/MobileJobCta'
 import { formatFileSize, finishConvert } from '@/lib/native-file'
 import { tapHaptic } from '@/lib/haptics'
 import { abortConvertWorker, assertFitsPhone, workerCompressImage } from '@/lib/jobs/media'
-import { qualityNote, releaseJob, takeJob } from '@/lib/jobs/session'
+import { sizeNote, releaseJob, takeJob } from '@/lib/jobs/session'
 import { TOO_BIG } from '@/lib/brand'
 
 const CHIPS = [50, 100, 200, 300]
@@ -46,7 +46,7 @@ export default function ImageCompressMobile() {
             await finishConvert(
                 result.blob,
                 file.name.replace(/\.[^.]+$/, '') + '-compressed.jpg',
-                qualityNote(result.shrunk)
+                sizeNote(file.size, result.blob.size, result.shrunk)
             )
         } catch (err) {
             if ((err as Error).name === 'AbortError') return
@@ -85,9 +85,11 @@ export default function ImageCompressMobile() {
                 </div>
             )}
 
-            <p className="mobile-live-size">
-                {formatFileSize(now)} → {targetKb} KB
-            </p>
+            {file ? (
+                <p className="mobile-live-size">
+                    {formatFileSize(now)} → {targetKb} KB
+                </p>
+            ) : null}
 
             <div className="mobile-range-chips">
                 {CHIPS.map((kb) => (

@@ -96,12 +96,8 @@ const isNativePlatform = () => {
 // Haptic feedback for mobile
 const triggerHaptic = async () => {
     if (!isNativePlatform()) return;
-    try {
-        const { Haptics, ImpactStyle } = await import('@capacitor/haptics');
-        await Haptics.impact({ style: ImpactStyle.Light });
-    } catch {
-        // Haptics not available
-    }
+    const { haptic } = await import('@/lib/haptics');
+    await haptic('tap');
 };
 
 interface ToolCardProps {

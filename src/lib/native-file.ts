@@ -211,13 +211,7 @@ export async function storeOutput(blob: Blob, filename: string): Promise<StoredO
         appPath,
     })
 
-    try {
-        const { Haptics, ImpactStyle } = await import('@capacitor/haptics')
-        await Haptics.impact({ style: ImpactStyle.Medium })
-    } catch {
-        // optional
-    }
-
+    // The result sheet plays the success or warning haptic when it opens.
     return { appPath, filename: name, mime, size: blob.size, uri }
 }
 

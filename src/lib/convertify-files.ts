@@ -29,6 +29,8 @@ export interface ConvertifyFilesPlugin {
     fileExists(options: { appPath: string }): Promise<{ exists: boolean }>
     getSafeAreaInsets(): Promise<SafeAreaInsets>
     shareFile(options: { appPath: string; mime?: string }): Promise<{ ok: boolean }>
+    /** System touch feedback: tap (keys), select (chips, sliders), heavy (shutter), success, error. */
+    haptic(options: { type: 'tap' | 'select' | 'heavy' | 'success' | 'error' }): Promise<void>
     /** Drops the Android system splash; the web splash under it starts on the same frame. */
     splashReady(): Promise<void>
 }

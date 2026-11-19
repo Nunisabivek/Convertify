@@ -9,9 +9,9 @@ export default function MobileHero() {
                 <ShieldCheck size={14} strokeWidth={2.4} />
                 <span>On-Device • 100% Private</span>
             </div>
-            <h1 className="mobile-hero-title">Convertify</h1>
+            <h1 className="mobile-hero-title">PDF &amp; photo tools</h1>
             <p className="mobile-hero-subtitle">
-                Compress, convert, and edit documents & photos instantly. Files never leave this device.
+                Fit files to any form, scan documents, convert and compress. Everything stays on this phone.
             </p>
         </div>
     )

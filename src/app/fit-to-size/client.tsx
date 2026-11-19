@@ -9,7 +9,7 @@ import { formatFileSize, finishConvert } from '@/lib/native-file'
 import { tapHaptic } from '@/lib/haptics'
 import { abortConvertWorker, assertFitsPhone, workerFitImage } from '@/lib/jobs/media'
 import { fitPdfToRange } from '@/lib/jobs/fit-pdf'
-import { qualityNote, missedBandNote, releaseJob, takeJob } from '@/lib/jobs/session'
+import { sizeNote, missedBandNote, releaseJob, takeJob } from '@/lib/jobs/session'
 import { TOO_BIG } from '@/lib/brand'
 
 const RANGES: { min: number; max: number; label: string; unit?: string }[] = [
@@ -93,7 +93,7 @@ export default function FitToSizeClient() {
                 setError(note)
                 await finishConvert(result.blob, name, note, 'warn')
             } else {
-                await finishConvert(result.blob, name, qualityNote(result.shrunk))
+                await finishConvert(result.blob, name, sizeNote(file.size, result.blob.size, result.shrunk))
             }
         } catch (err) {
             if ((err as Error).name === 'AbortError') return
@@ -137,9 +137,11 @@ export default function FitToSizeClient() {
                 </div>
             )}
 
-            <p className="mobile-live-size">
-                {formatFileSize(now)} → {minKb}–{maxKb} KB
-            </p>
+            {file ? (
+                <p className="mobile-live-size">
+                    {formatFileSize(now)} → {minKb}–{maxKb} KB
+                </p>
+            ) : null}
 
             <p className="mobile-chip-label">KB a form asks for</p>
             <div className="mobile-range-chips">

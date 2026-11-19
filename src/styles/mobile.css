@@ -3404,3 +3404,404 @@ html:not([data-launched]) .mobile-launch-splash ~ .mobile-top-bar .mobile-mark {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
+
+/* ==========================================================================
+   Design system v2 (Nov 2026)
+   One font, flat surfaces, one button language across every tool, real
+   bottom sheets. Everything is scoped to .mobile-app, so the website never
+   sees it. The rules above stay as the base; this layer wins on purpose.
+   Motion uses transform and opacity only, so low-end GPUs keep 60 fps.
+   ========================================================================== */
+
+.mobile-app {
+  --font-app: var(--font-inter);
+  --c-bg: #f5f6f8;
+  --c-card: #ffffff;
+  --c-line: #e6e8ec;
+  --c-line-strong: #d6dae1;
+  --c-text: #0f172a;
+  --c-text-2: #5b6474;
+  --c-text-3: #8a93a3;
+  --c-brand: #026eff;
+  --c-brand-press: #005bd6;
+  --c-brand-soft: #eaf2ff;
+  --c-ok: #12a150;
+  --c-warn: #c27803;
+  --c-danger: #dc2626;
+  --r-card: 16px;
+  --r-ctl: 14px;
+  --r-chip: 12px;
+  --shadow-1: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-sheet: 0 -8px 32px rgba(15, 23, 42, 0.14);
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --md-primary-lip: transparent;
+  --md-surface-dim: var(--c-bg);
+  --md-on-surface-variant: var(--c-text-2);
+  --md-outline: var(--c-line);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  color: var(--c-text);
+  letter-spacing: -0.006em;
+}
+
+/* Tool screens borrowed from the website set fonts of their own (system UI,
+   Tailwind font-sans). Inside the app everything inherits the one font. */
+.mobile-app :where(h1, h2, h3, h4, p, span, label, button, input, select, textarea, li, a, div) {
+  font-family: inherit;
+}
+
+.mobile-app .mobile-content,
+.mobile-app .mobile-route-page {
+  background: var(--c-bg);
+}
+
+/* ---------- Home ---------- */
+.mobile-app .mobile-hero {
+  padding-top: 8px;
+}
+.mobile-app .mobile-hero-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: var(--c-text);
+}
+.mobile-app .mobile-hero-subtitle {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--c-text-2);
+}
+.mobile-app .mobile-hero-badge {
+  background: var(--c-brand-soft);
+  border-color: transparent;
+  color: var(--c-brand);
+  font-weight: 600;
+}
+.mobile-app .mobile-section-title {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+.mobile-app .mobile-section-action {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* Quick tools: flat white cards, icon top-left, short hint, equal heights. */
+.mobile-app .mobile-tool-grid {
+  gap: 12px;
+}
+.mobile-app .mobile-tool-grid .mobile-tool-card,
+.mobile-app .mobile-tool-card {
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  gap: 4px;
+  min-height: 0;
+  height: 100%;
+  padding: 14px 14px 16px;
+  background: var(--c-card);
+  border: 1px solid var(--c-line) !important;
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-1) !important;
+  transition: transform 140ms var(--ease-out), background-color 140ms;
+}
+.mobile-app .mobile-tool-card:active {
+  transform: scale(0.97) !important;
+  box-shadow: var(--shadow-1) !important;
+  background: #fafbfc;
+}
+.mobile-app .mobile-tool-card .mobile-tool-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 0 !important;
+  margin-bottom: 8px;
+}
+.mobile-app .mobile-tool-card .mobile-tool-name {
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--c-text);
+}
+.mobile-app .mobile-tool-card .mobile-tool-hint {
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--c-text-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* All-tools list */
+.mobile-app .mobile-tool-list {
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-1);
+  background: var(--c-card);
+}
+.mobile-app .mobile-tool-list-icon {
+  border: 0 !important;
+  border-radius: 12px;
+}
+.mobile-app .mobile-tool-list-name {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.mobile-app .mobile-tool-list-desc {
+  font-size: 13.5px;
+  color: var(--c-text-2);
+}
+.mobile-app .mobile-category-name {
+  font-size: 12.5px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  color: var(--c-text-3);
+}
+
+/* ---------- One button language ---------- */
+.mobile-app .m-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: var(--r-ctl);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  touch-action: manipulation;
+  cursor: pointer;
+  transition: transform 120ms var(--ease-out), background-color 120ms, opacity 120ms;
+}
+.mobile-app .m-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+.mobile-app .m-btn:disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+.mobile-app .m-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.mobile-app .m-btn-lg { min-height: 52px; padding: 0 22px; font-size: 16px; }
+.mobile-app .m-btn-md { min-height: 46px; padding: 0 18px; font-size: 15px; }
+.mobile-app .m-btn-sm { min-height: 36px; padding: 0 12px; font-size: 13.5px; border-radius: var(--r-chip); }
+.mobile-app .m-btn-icon { width: 42px; height: 42px; padding: 0; border-radius: 12px; }
+.mobile-app .m-btn-primary { background: var(--c-brand); color: #fff; }
+.mobile-app .m-btn-primary:active:not(:disabled) { background: var(--c-brand-press); }
+.mobile-app .m-btn-secondary { background: #fff; color: var(--c-text); box-shadow: inset 0 0 0 1px var(--c-line-strong); }
+.mobile-app .m-btn-secondary:active:not(:disabled) { background: #f3f5f8; }
+.mobile-app .m-btn-ghost { background: transparent; color: var(--c-brand); }
+.mobile-app .m-btn-danger { background: #fdecec; color: var(--c-danger); }
+
+/* The app's own buttons lose the chunky 3D lip. */
+.mobile-app :is(.mobile-choose-btn, .mobile-result-primary, .mobile-result-secondary, .mobile-size-chip, .mobile-preset-chip, .mobile-swap-btn, .mobile-sheet-swap-btn, .mobile-icon-btn) {
+  box-shadow: none !important;
+  transition: transform 120ms var(--ease-out), background-color 120ms;
+}
+.mobile-app :is(.mobile-choose-btn, .mobile-result-primary, .mobile-result-secondary, .mobile-size-chip, .mobile-preset-chip, .mobile-swap-btn, .mobile-sheet-swap-btn):active:not(:disabled) {
+  transform: scale(0.97) !important;
+  box-shadow: none !important;
+}
+.mobile-app .mobile-choose-btn {
+  min-height: 52px !important;
+  max-width: none;
+  border-radius: var(--r-ctl) !important;
+  border-bottom: 0 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  background: var(--c-brand) !important;
+}
+.mobile-app .mobile-choose-btn:active:not(:disabled) {
+  border-bottom-width: 0 !important;
+}
+.mobile-app .mobile-choose-btn:active:not(:disabled) {
+  background: var(--c-brand-press) !important;
+}
+.mobile-app .mobile-size-chip,
+.mobile-app .mobile-preset-chip {
+  border-radius: var(--r-chip);
+  border: 1px solid var(--c-line-strong);
+  background: #fff;
+}
+.mobile-app .mobile-size-chip.is-selected,
+.mobile-app .mobile-preset-chip.is-selected {
+  border-color: var(--c-brand);
+  background: var(--c-brand-soft);
+  color: var(--c-brand);
+}
+.mobile-app .mobile-chip-label {
+  font-size: 12.5px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  color: var(--c-text-3);
+}
+.mobile-app .mobile-live-size {
+  background: var(--c-brand-soft);
+  border: 0;
+  color: var(--c-brand);
+  font-weight: 600;
+  border-radius: var(--r-chip);
+}
+.mobile-app .mobile-picked-row {
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-1);
+}
+
+/* ---------- Website tool screens inside the sheet ----------
+   Their markup is Tailwind; these rules give it the app's controls. */
+.mobile-app .mobile-sheet-body {
+  background: var(--c-bg);
+  color: var(--c-text);
+}
+.mobile-app .mobile-sheet-body :is(h2, h3) {
+  letter-spacing: -0.015em;
+}
+.mobile-app .mobile-sheet-body :is(input[type='text'], input[type='number'], input[type='search'], input[type='url'], input[type='password'], input:not([type]), textarea, select) {
+  min-height: 48px;
+  border: 1px solid var(--c-line-strong) !important;
+  border-radius: 12px !important;
+  background: #fff !important;
+  color: var(--c-text) !important;
+  font-size: 16px; /* 16px stops Android zooming into the field */
+  box-shadow: none !important;
+  outline: none;
+}
+.mobile-app .mobile-sheet-body textarea {
+  padding: 12px 14px;
+}
+.mobile-app .mobile-sheet-body :is(input, textarea, select):focus {
+  border-color: var(--c-brand) !important;
+  box-shadow: 0 0 0 3px rgba(2, 110, 255, 0.16) !important;
+}
+.mobile-app .mobile-sheet-body :is(input[type='range'], input[type='checkbox'], input[type='radio']) {
+  accent-color: var(--c-brand);
+}
+.mobile-app .mobile-sheet-body :is(input[type='checkbox'], input[type='radio']) {
+  width: 20px;
+  height: 20px;
+}
+/* Cards drawn with Tailwind borders: one radius, one hairline, no 3D lip. */
+.mobile-app .mobile-sheet-body :is(.rounded-xl, .rounded-2xl, .rounded-3xl):is(.border, .border-2, [class*='border-b-[']):not(button) {
+  border-radius: var(--r-card) !important;
+  border-width: 1px !important;
+  border-color: var(--c-line) !important;
+  box-shadow: var(--shadow-1) !important;
+}
+/* Raw Tailwind buttons: no 3D lip, and every coloured main action is the brand blue. */
+.mobile-app .mobile-sheet-body button[class*='border-b-['] {
+  border-bottom-width: 0 !important;
+}
+.mobile-app .mobile-sheet-body button:is([class*='bg-purple-6'], [class*='bg-violet-6'], [class*='bg-indigo-6'], [class*='bg-teal-6'], [class*='bg-emerald-6'], [class*='bg-orange-6'], [class*='bg-rose-6'], [class*='bg-blue-6'], [class*='bg-[#026EFF]'], [class*='bg-slate-900'], [class*='bg-black']):not(:disabled) {
+  background: var(--c-brand) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  border-radius: var(--r-ctl) !important;
+}
+.mobile-app .mobile-sheet-body button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* ---------- Result sheet: a real bottom sheet ---------- */
+.mobile-app .mobile-result-sheet {
+  align-items: flex-end;
+  padding: 0;
+  background: rgba(15, 23, 42, 0.42);
+  animation: m-fade-in 180ms ease-out both;
+}
+.mobile-app .mobile-result-card {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  border-radius: 24px 24px 0 0;
+  padding: 26px 20px calc(18px + var(--inset-bottom));
+  box-shadow: var(--shadow-sheet);
+  animation: m-sheet-up 280ms var(--ease-out) both;
+}
+.mobile-app .mobile-result-card h2 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.mobile-app .mobile-result-name {
+  font-size: 14px;
+  color: var(--c-text-2);
+  word-break: break-all;
+}
+.mobile-app .mobile-result-quality {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--c-ok);
+  background: #eaf7ef;
+  border-radius: 999px;
+  padding: 6px 12px;
+  display: inline-block;
+}
+.mobile-app .mobile-result-quality.is-warn {
+  color: var(--c-warn);
+  background: #fdf4e3;
+}
+.mobile-app .mobile-result-check {
+  animation: m-pop 420ms cubic-bezier(0.2, 1.4, 0.4, 1) both 60ms;
+}
+.mobile-app .mobile-result-primary,
+.mobile-app .mobile-result-secondary {
+  min-height: 52px;
+  border-radius: var(--r-ctl);
+  font-size: 16px;
+  font-weight: 600;
+}
+.mobile-app .mobile-result-primary { background: var(--c-brand); }
+.mobile-app .mobile-result-secondary { background: #fff; border: 0; box-shadow: inset 0 0 0 1px var(--c-line-strong) !important; }
+.mobile-app .mobile-result-ghost { font-weight: 600; color: var(--c-text-2); }
+
+/* ---------- Tool sheet ---------- */
+.mobile-app .mobile-tool-sheet {
+  box-shadow: var(--shadow-sheet);
+}
+.mobile-app .mobile-sheet-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+.mobile-app .mobile-sheet-tool-icon {
+  border: 0 !important;
+  border-radius: 12px;
+}
+
+/* Touch screens have no hover: controls the website reveals on hover are always shown in the app. */
+.mobile-app .mobile-sheet-body [class*='group-hover:opacity-100'],
+.mobile-app .mobile-sheet-body [class*='hover:opacity-100'] {
+  opacity: 1 !important;
+}
+/* Phone-width density for website cards and rows inside the sheet. */
+.mobile-app .mobile-sheet-body .p-6 { padding: 14px !important; }
+.mobile-app .mobile-sheet-body .p-8 { padding: 16px !important; }
+.mobile-app .mobile-sheet-body .p-4 { padding: 12px !important; }
+.mobile-app .mobile-sheet-body .p-3 { padding: 9px !important; }
+.mobile-app .mobile-sheet-body .m-btn-icon { width: 38px; height: 38px; }
+.mobile-app .mobile-sheet-body .min-w-0,
+.mobile-app .mobile-sheet-body .overflow-hidden.flex { min-width: 0; }
+
+@keyframes m-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes m-sheet-up { from { transform: translate3d(0, 100%, 0); } to { transform: none; } }
+@keyframes m-pop { from { transform: scale(0.4); opacity: 0; } to { transform: none; opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-app .mobile-result-sheet,
+  .mobile-app .mobile-result-card,
+  .mobile-app .mobile-result-check {
+    animation: none !important;
+  }
+  .mobile-app .m-btn,
+  .mobile-app .mobile-tool-card {
+    transition: none !important;
+  }
+}

@@ -14,6 +14,7 @@ import {
     type ResultTone,
 } from '@/lib/native-file'
 import { bindResultSheet, setResultSheetOpen } from '@/lib/result-sheet'
+import { haptic } from '@/lib/haptics'
 
 export interface OfferOutputDetail {
     blob?: Blob
@@ -126,7 +127,9 @@ export default function NativeResultSheet() {
                 })
                 setOutput(stored)
                 setResultSheetOpen(true)
+                void haptic(nextTone === 'warn' ? 'error' : 'success')
             } catch {
+                void haptic('error')
                 setError('Could not save that file. Try again.')
                 setResultSheetOpen(true)
                 if (typeof window !== 'undefined') {
@@ -166,7 +169,9 @@ export default function NativeResultSheet() {
                 })
                 setOutput(stored)
                 setResultSheetOpen(true)
+                void haptic(nextTone === 'warn' ? 'error' : 'success')
             } catch {
+                void haptic('error')
                 setError('Could not save that file. Try again.')
                 setResultSheetOpen(true)
                 if (typeof window !== 'undefined') {
@@ -240,7 +245,6 @@ export default function NativeResultSheet() {
     return (
         <div className="mobile-result-sheet" role="dialog" aria-label="Save or share">
             <div className="mobile-result-card">
-                <div style={{ width: 36, height: 5, borderRadius: 3, background: 'rgba(60, 60, 67, 0.25)', margin: '0 auto 16px' }} aria-hidden />
                 <div className="mobile-result-badge-wrap">
                     <div className={`mobile-result-check${warn ? ' is-warn' : ''}`}>
                         {warn ? <AlertTriangle size={26} /> : <Check size={28} strokeWidth={3} />}
@@ -303,6 +307,7 @@ export default function NativeResultSheet() {
                             try {
                                 await saveStoredOutputToDownloads(output)
                                 setSaved(true)
+                                void haptic('success')
                             } catch {
                                 setError('Could not save. Try Share and pick Files.')
                             } finally {

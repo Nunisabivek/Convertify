@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
+import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 
@@ -151,6 +152,41 @@ public class ConvertifyFilesPlugin extends Plugin {
         JSObject ret = new JSObject();
         ret.put("exists", src.exists());
         call.resolve(ret);
+    }
+
+    /**
+     * System touch feedback (the kind keyboards use) instead of raw vibrator
+     * patterns: tuned per device, crisp on cheap motors, and it follows the
+     * user's "Touch feedback" setting.
+     */
+    @PluginMethod
+    public void haptic(PluginCall call) {
+        String type = call.getString("type", "tap");
+        int constant;
+        switch (type == null ? "tap" : type) {
+            case "success":
+                constant = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+                        ? HapticFeedbackConstants.CONFIRM : HapticFeedbackConstants.CONTEXT_CLICK;
+                break;
+            case "error":
+                constant = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+                        ? HapticFeedbackConstants.REJECT : HapticFeedbackConstants.LONG_PRESS;
+                break;
+            case "select":
+                constant = HapticFeedbackConstants.CLOCK_TICK;
+                break;
+            case "heavy":
+                constant = HapticFeedbackConstants.CONTEXT_CLICK;
+                break;
+            default:
+                constant = HapticFeedbackConstants.KEYBOARD_TAP;
+        }
+        final int feedback = constant;
+        getActivity().runOnUiThread(() -> {
+            View view = getBridge().getWebView();
+            if (view != null) view.performHapticFeedback(feedback);
+            call.resolve();
+        });
     }
 
     /** The web launch splash has painted its first frame; drop the system splash over it. */

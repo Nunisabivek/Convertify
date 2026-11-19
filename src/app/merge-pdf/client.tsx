@@ -7,7 +7,7 @@ import { AdBanner } from "@/components/ads/banner"
 import { ProcessingWait } from "@/components/tools/processing-wait"
 import { Trash2, ArrowUp, ArrowDown, FileText, Download, Merge } from "lucide-react"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
-import { finishConvert } from "@/lib/native-file"
+import { finishConvert, formatFileSize } from "@/lib/native-file"
 import { nameFromSources } from "@/lib/human-filename"
 
 // PDFs, plus JPG and PNG pictures that become one page each.
@@ -165,7 +165,7 @@ export default function MergePdfPage() {
                                     </div>
                                     <div className="truncate font-medium text-slate-700">
                                         {file.name}
-                                        <span className="block text-xs text-slate-400">{(file.size / 1024 / 1024).toFixed(2)} MB</span>
+                                        <span className="block text-xs text-slate-400">{formatFileSize(file.size)}</span>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-2">

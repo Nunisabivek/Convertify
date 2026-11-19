@@ -51,4 +51,4 @@ export function releaseJob(controller: AbortController) {
     }
 }
 
-export { qualityNote, cropNote, missedBandNote } from '@/lib/result-notes'
+export { sizeNote, cropNote, missedBandNote } from '@/lib/result-notes'

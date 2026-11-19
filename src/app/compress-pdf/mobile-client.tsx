@@ -9,7 +9,7 @@ import { formatFileSize, finishConvert } from '@/lib/native-file'
 import { tapHaptic } from '@/lib/haptics'
 import { abortConvertWorker, assertFitsPhone, workerCompressImage } from '@/lib/jobs/media'
 import { fitPdfToRange } from '@/lib/jobs/fit-pdf'
-import { qualityNote, releaseJob, takeJob } from '@/lib/jobs/session'
+import { sizeNote, releaseJob, takeJob } from '@/lib/jobs/session'
 import { TOO_BIG } from '@/lib/brand'
 
 const CHIPS = [
@@ -68,7 +68,7 @@ export default function CompressMobileClient() {
             }
             const base = file.name.replace(/\.[^.]+$/, '')
             const name = isPdf(file) ? `${base}-compressed.pdf` : `${base}-compressed.jpg`
-            await finishConvert(result.blob, name, qualityNote(result.shrunk))
+            await finishConvert(result.blob, name, sizeNote(file.size, result.blob.size, result.shrunk))
         } catch (err) {
             if ((err as Error).name === 'AbortError') return
             setError((err as Error).message || TOO_BIG)
@@ -111,9 +111,11 @@ export default function CompressMobileClient() {
                 </div>
             )}
 
-            <p className="mobile-live-size">
-                {formatFileSize(now)} → {targetKb >= 1024 ? `${(targetKb / 1024).toFixed(1)} MB` : `${targetKb} KB`}
-            </p>
+            {file ? (
+                <p className="mobile-live-size">
+                    {formatFileSize(now)} → {targetKb >= 1024 ? `${(targetKb / 1024).toFixed(1)} MB` : `${targetKb} KB`}
+                </p>
+            ) : null}
 
             <p className="mobile-chip-label">Shortcuts</p>
             <div className="mobile-range-chips">
