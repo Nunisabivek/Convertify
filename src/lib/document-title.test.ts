@@ -23,7 +23,9 @@ const toolsSrc = readFileSync(join(root, 'src/app/all-tools/page.tsx'), 'utf8')
 assert.match(toolsSrc, /appDocumentTitle\("All Free PDF & Image Tools — No Sign-Up, No Download", MOBILE_TOOLS_TITLE\)/)
 
 const css = readFileSync(join(root, 'src/styles/mobile.css'), 'utf8')
-assert.match(css, /--chrome-bottom:\s*calc\(var\(--nav-h\) \+ var\(--inset-bottom\) \+ var\(--ad-banner-h\)\)/)
+// Content clears the tab bar, the banner, and the gap between them (0 when no ad shows).
+assert.match(css, /--chrome-bottom:\s*calc\(var\(--nav-h\) \+ var\(--inset-bottom\) \+ var\(--ad-banner-h\) \+ var\(--ad-gap\)\)/)
+assert.match(css, /\.mobile-bottom-nav \{[\s\S]{0,600}padding-bottom:\s*calc\(var\(--inset-bottom\) \+ var\(--ad-gap\)\)/)
 assert.match(css, /\.mobile-route-page[\s\S]{0,400}padding-bottom:\s*calc\(var\(--chrome-bottom\)/)
 assert.match(css, /\.mobile-app \.mobile-job:has\(\.mobile-job-cta\)[\s\S]{0,280}padding-bottom:\s*110px;/)
 assert.doesNotMatch(css, /\.mobile-app \.mobile-job:has\(\.mobile-job-cta\)[\s\S]{0,280}padding-bottom:\s*calc\(110px \+ var\(--chrome-bottom\)\)/)

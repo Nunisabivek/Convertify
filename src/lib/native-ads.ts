@@ -76,9 +76,13 @@ function setBannerInset(height: number): void {
     const px = Math.max(0, Math.round(height))
     if (px > 0) lastBannerHeight = px
     const value = `${px}px`
-    document.documentElement.style.setProperty('--ad-banner-h', value)
+    // Gap above the banner only while one is showing; no ad, no gap.
+    const gap = px > 0 ? '8px' : '0px'
     const root = document.querySelector('.mobile-app') as HTMLElement | null
-    root?.style.setProperty('--ad-banner-h', value)
+    for (const el of [document.documentElement, root]) {
+        el?.style.setProperty('--ad-banner-h', value)
+        el?.style.setProperty('--ad-gap', gap)
+    }
 }
 
 function onBannerSize(height: number): void {

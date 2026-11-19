@@ -31,13 +31,16 @@ body:has(.mobile-app),
   --md-tap: 52px;
   --nav-h: 60px;
   --ad-banner-h: 50px;
+  /* Space between the tab bar and a visible banner, so a tab tap can't land on
+     the ad. native-ads.ts sets it to 0 whenever no banner is showing. */
+  --ad-gap: 8px;
   --md-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
   /* Android WebView does not implement env(safe-area-inset-*). Capacitor and
      ConvertifyFiles.getSafeAreaInsets set these CSS variables on <html>. */
   --inset-top: var(--safe-area-inset-top, env(safe-area-inset-top, 0px));
   --inset-bottom: var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px));
   /* Fixed bottom nav sits above the AdMob banner. Scroll content must pad by this. */
-  --chrome-bottom: calc(var(--nav-h) + var(--inset-bottom) + var(--ad-banner-h));
+  --chrome-bottom: calc(var(--nav-h) + var(--inset-bottom) + var(--ad-banner-h) + var(--ad-gap));
 
   display: flex;
   flex-direction: column;
@@ -526,10 +529,14 @@ body:has(.mobile-app),
   bottom: var(--ad-banner-h);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  min-height: calc(var(--nav-h) + var(--inset-bottom));
-  padding-bottom: var(--inset-bottom);
+  min-height: calc(var(--nav-h) + var(--inset-bottom) + var(--ad-gap));
+  /* The gap is part of the bar (not see-through, not tappable); a hairline marks
+     where the ad starts. Both vanish when --ad-gap is 0 (no banner). */
+  padding-bottom: calc(var(--inset-bottom) + var(--ad-gap));
   background: #FFFFFF; /* no backdrop-filter, see .mobile-top-bar */
   border-top: 0.5px solid var(--md-outline);
+  border-bottom: solid var(--md-outline);
+  border-bottom-width: calc(var(--ad-gap) / 8);
   z-index: 30;
   pointer-events: auto;
 }
