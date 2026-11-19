@@ -25,6 +25,7 @@ import {
     Gauge,
     UserRound,
     Eraser,
+    FolderOpen,
     type LucideIcon,
 } from 'lucide-react'
 
@@ -53,6 +54,7 @@ const ICONS: Record<string, LucideIcon> = {
     Gauge,
     UserRound,
     Eraser,
+    FolderOpen,
 }
 
 export function AppIcon({

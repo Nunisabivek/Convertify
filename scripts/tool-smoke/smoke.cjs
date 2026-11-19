@@ -126,6 +126,16 @@ const STEPS = {
     await field.fill('ROOM B-202'); await field.press('Enter'); await p.waitForTimeout(800)
     await press(btn(p, /Export PDF/))
   },
+  // Resize refuses to re-save a picture at its own size, so pick a preset first.
+  'resize-image': async (p) => {
+    await btn(p, /^Square/).click()
+    await btn(p, /^Resize/).click()
+  },
+  // Scanner: wait until the page is flattened and cleaned (worker), then export.
+  'ocr-pdf': async (p) => {
+    await p.waitForFunction(() => document.querySelector('.scan-thumb img') && !document.querySelector('.scan-preview-busy'), null, { timeout: 30000 })
+    await btn(p, /^Save PDF/).click()
+  },
   'html-to-pdf': async (p) => { await p.fill('main textarea', fsr('page.html')); await btn(p, /^Convert to PDF/).click() },
   'csv-to-json': async (p) => { await p.fill('main textarea', fsr('data.csv')); await btn(p, /^Convert to JSON/).click() },
   'base64': async (p) => { await p.locator('main textarea').first().fill('hello convertify'); await btn(p, /^Encode to Base64/).click() },

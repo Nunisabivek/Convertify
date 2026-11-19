@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { AlertTriangle, Check, FileText } from 'lucide-react'
 import { IS_MOBILE_BUILD } from '@/lib/is-mobile-build'
@@ -15,6 +15,7 @@ import {
 } from '@/lib/native-file'
 import { bindResultSheet, setResultSheetOpen } from '@/lib/result-sheet'
 import { haptic } from '@/lib/haptics'
+import { maybeAskForReview, recordWin } from '@/lib/review-prompt'
 
 export interface OfferOutputDetail {
     blob?: Blob
@@ -63,6 +64,9 @@ export default function NativeResultSheet() {
     const [note, setNote] = useState<string | null>(null)
     const [tone, setTone] = useState<ResultTone>('ok')
     const [thumb, setThumb] = useState<string | null>(null)
+    // For the review prompt: was this a good result, and did an ad just cover it?
+    const wonRef = useRef(false)
+    const adShownRef = useRef(false)
 
     const reset = useCallback(() => {
         setOutput(null)
@@ -113,9 +117,10 @@ export default function NativeResultSheet() {
                 }
 
                 // Show interstitial ad immediately after conversion (if ready & allowed)
+                adShownRef.current = false
                 try {
                     const ads = await import('@/lib/native-ads')
-                    await ads.showInterstitialAfterConversion()
+                    adShownRef.current = await ads.showInterstitialAfterConversion()
                 } catch {
                     // fail open
                 }
@@ -128,6 +133,8 @@ export default function NativeResultSheet() {
                 setOutput(stored)
                 setResultSheetOpen(true)
                 void haptic(nextTone === 'warn' ? 'error' : 'success')
+                wonRef.current = nextTone !== 'warn'
+                if (wonRef.current) recordWin()
             } catch {
                 void haptic('error')
                 setError('Could not save that file. Try again.')
@@ -155,9 +162,10 @@ export default function NativeResultSheet() {
                 }
 
                 // Show interstitial ad immediately after conversion (if ready & allowed)
+                adShownRef.current = false
                 try {
                     const ads = await import('@/lib/native-ads')
-                    await ads.showInterstitialAfterConversion()
+                    adShownRef.current = await ads.showInterstitialAfterConversion()
                 } catch {
                     // fail open
                 }
@@ -170,6 +178,8 @@ export default function NativeResultSheet() {
                 setOutput(stored)
                 setResultSheetOpen(true)
                 void haptic(nextTone === 'warn' ? 'error' : 'success')
+                wonRef.current = nextTone !== 'warn'
+                if (wonRef.current) recordWin()
             } catch {
                 void haptic('error')
                 setError('Could not save that file. Try again.')
@@ -272,7 +282,7 @@ export default function NativeResultSheet() {
                 {note && !busy ? <p className={`mobile-result-quality${warn ? ' is-warn' : ''}`}>{note}</p> : null}
                 {saved && (
                     <p className="mobile-result-note">
-                        Saved. You can find it in Files → Downloads → Convertify.
+                        Saved to Downloads/Convertify. It's also in the Files tab.
                     </p>
                 )}
                 {error && <p className="mobile-result-error">{error}</p>}
@@ -315,9 +325,19 @@ export default function NativeResultSheet() {
                             }
                         }}
                     >
-                        {saving ? 'Saving…' : 'Save to Files'}
+                        {saving ? 'Saving…' : 'Save to phone'}
                     </button>
-                    <button type="button" className="mobile-result-ghost" onClick={reset}>
+                    <button
+                        type="button"
+                        className="mobile-result-ghost"
+                        onClick={() => {
+                            const won = wonRef.current
+                            wonRef.current = false
+                            reset()
+                            // The job is done and the sheet is closed: the least intrusive moment.
+                            if (won) setTimeout(() => void maybeAskForReview(adShownRef.current), 600)
+                        }}
+                    >
                         Close
                     </button>
                 </div>

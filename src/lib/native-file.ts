@@ -3,9 +3,8 @@ import type { PickedNativeFile } from '@/lib/convertify-files'
 const nativeFiles = () => import('@/lib/convertify-files').then((m) => m.default)
 import { IS_MOBILE_BUILD } from '@/lib/is-mobile-build'
 import { nextHumanFilename } from '@/lib/human-filename'
+import { addLibraryFile, loadLibrary, removeLibraryFile, type LibFile } from '@/lib/library'
 
-const RECENT_KEY = 'convertify-recent-files'
-const MAX_RECENTS = 12
 const OUTPUT_DIR = 'outputs'
 
 export interface RecentFile {
@@ -36,41 +35,17 @@ export function formatRecentTime(timestamp: number): string {
     return `${days} days ago`
 }
 
-export function loadRecentFiles(): RecentFile[] {
-    if (typeof window === 'undefined') return []
-    try {
-        const raw = localStorage.getItem(RECENT_KEY)
-        if (!raw) return []
-        const parsed = JSON.parse(raw)
-        if (!Array.isArray(parsed)) return []
-        return parsed.filter((item: RecentFile) => item?.name && item?.appPath)
-    } catch {
-        return []
-    }
-}
-
-export function saveRecentFiles(files: RecentFile[]): void {
-    if (typeof window === 'undefined') return
-    localStorage.setItem(RECENT_KEY, JSON.stringify(files.slice(0, MAX_RECENTS)))
-    window.dispatchEvent(new Event('convertify-recents-changed'))
-}
-
-export function recordRecentFile(entry: Omit<RecentFile, 'id' | 'timestamp'> & { timestamp?: number }): void {
-    const next: RecentFile = {
-        id: `${Date.now()}-${entry.name}`,
-        timestamp: entry.timestamp ?? Date.now(),
-        ...entry,
-    }
-    const existing = loadRecentFiles().filter((f) => f.appPath !== next.appPath)
-    saveRecentFiles([next, ...existing])
+/** Newest files in the library, for Home's "Recent files". */
+export function loadRecentFiles(limit = 5): RecentFile[] {
+    return loadLibrary()
+        .files.slice()
+        .sort((a, b) => b.createdAt - a.createdAt)
+        .slice(0, limit)
+        .map((f) => ({ id: f.id, name: f.name, timestamp: f.createdAt, size: f.size, type: f.type, appPath: f.appPath }))
 }
 
 export function dropRecentFile(id: string): void {
-    saveRecentFiles(loadRecentFiles().filter((f) => f.id !== id))
-}
-
-export function clearRecentFiles(): void {
-    saveRecentFiles([])
+    removeLibraryFile(id)
 }
 
 export async function isNativeAndroid(): Promise<boolean> {
@@ -99,19 +74,28 @@ function safeFileName(name: string): string {
     return nextHumanFilename(name)
 }
 
-function uniqueVisibleName(filename: string): string {
-    return nextHumanFilename(filename, loadRecentFiles().map((file) => file.name))
+/** Characters Android file systems refuse, trimmed to a sane length. */
+function safeDiskName(name: string): string {
+    const clean = name.replace(/[\\/:*?"<>|\x00-\x1f]/g, '-').trim() || 'file'
+    return clean.length > 120 ? clean.slice(0, 120) : clean
 }
 
-async function blobToBase64(blob: Blob): Promise<string> {
-    const buffer = await blob.arrayBuffer()
-    const bytes = new Uint8Array(buffer)
-    const chunk = 0x8000
-    let binary = ''
-    for (let i = 0; i < bytes.length; i += chunk) {
-        binary += String.fromCharCode(...bytes.subarray(i, i + chunk))
-    }
-    return btoa(binary)
+function uniqueVisibleName(filename: string): string {
+    return nextHumanFilename(filename, loadLibrary().files.map((file) => file.name))
+}
+
+function blobToBase64(blob: Blob): Promise<string> {
+    // FileReader encodes in native code: several times faster than a JS loop
+    // on low-end phones, and it never holds three copies of a big file.
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onload = () => {
+            const url = String(reader.result)
+            resolve(url.slice(url.indexOf(',') + 1))
+        }
+        reader.onerror = () => reject(reader.error ?? new Error('read failed'))
+        reader.readAsDataURL(blob)
+    })
 }
 
 function base64ToFile(base64: string, name: string, mime: string): File {
@@ -123,12 +107,23 @@ function base64ToFile(base64: string, name: string, mime: string): File {
 
 async function nativePickedToFile(picked: PickedNativeFile): Promise<File> {
     const { Filesystem, Directory } = await import('@capacitor/filesystem')
-    const { data } = await Filesystem.readFile({
-        path: picked.appPath,
-        directory: Directory.Data,
-    })
-    const base64 = typeof data === 'string' ? data : ''
-    return base64ToFile(base64, picked.name, picked.mime || mimeFromName(picked.name))
+    const type = picked.mime || mimeFromName(picked.name)
+    let file: File
+    try {
+        // Binary read through the WebView's local file server: no base64 over the
+        // bridge (a 20 MB PDF was a 27 MB string plus a JS decode loop).
+        const { Capacitor } = await import('@capacitor/core')
+        const { uri } = await Filesystem.getUri({ path: picked.appPath, directory: Directory.Data })
+        const res = await fetch(Capacitor.convertFileSrc(uri))
+        if (!res.ok) throw new Error(String(res.status))
+        file = new File([await res.blob()], picked.name, { type })
+    } catch {
+        const { data } = await Filesystem.readFile({ path: picked.appPath, directory: Directory.Data })
+        file = base64ToFile(typeof data === 'string' ? data : '', picked.name, type)
+    }
+    // The bytes are in memory now; the inbox copy would only fill the phone.
+    void Filesystem.deleteFile({ path: picked.appPath, directory: Directory.Data }).catch(() => undefined)
+    return file
 }
 
 /** System picker (SAF). Copies into app storage before JS sees the file. */
@@ -147,25 +142,24 @@ export async function pickFilesNative(options: {
     return files
 }
 
-/** WebView / website fallback: copy the picked File into app storage. */
-export async function persistPickedFiles(files: File[]): Promise<File[]> {
-    if (!(await isNativeAndroid())) return files
-    const { Filesystem, Directory } = await import('@capacitor/filesystem')
-    await Filesystem.mkdir({
-        path: 'inbox',
-        directory: Directory.Data,
-        recursive: true,
-    }).catch(() => undefined)
-
-    for (const file of files) {
-        const path = `inbox/${Date.now()}-${safeFileName(file.name)}`
-        await Filesystem.writeFile({
-            path,
-            data: await blobToBase64(file),
-            directory: Directory.Data,
-        })
+/** Leftover picker copies from older versions or interrupted picks: delete anything over an hour old. */
+export async function pruneInbox(): Promise<void> {
+    if (!(await isNativeAndroid())) return
+    try {
+        const { Filesystem, Directory } = await import('@capacitor/filesystem')
+        const { files } = await Filesystem.readdir({ path: 'inbox', directory: Directory.Data })
+        const cutoff = Date.now() - 60 * 60 * 1000
+        for (const f of files) {
+            const name = typeof f === 'string' ? f : f.name
+            const mtime = typeof f === 'string' ? 0 : Number(f.mtime ?? 0)
+            const stamp = Number(name.split('-')[0]) || mtime
+            if (stamp && stamp < cutoff) {
+                await Filesystem.deleteFile({ path: `inbox/${name}`, directory: Directory.Data }).catch(() => undefined)
+            }
+        }
+    } catch {
+        // no inbox yet
     }
-    return files
 }
 
 export interface StoredOutput {
@@ -186,17 +180,14 @@ export async function storeOutput(blob: Blob, filename: string): Promise<StoredO
     }
 
     const { Filesystem, Directory } = await import('@capacitor/filesystem')
-    await Filesystem.mkdir({
-        path: OUTPUT_DIR,
-        directory: Directory.Data,
-        recursive: true,
-    }).catch(() => undefined)
-
-    const appPath = `${OUTPUT_DIR}/${Date.now()}-${name}`
+    // One folder per file, so the file keeps its clean name: that's the name
+    // people see when they share it or save it to the phone.
+    const appPath = `${OUTPUT_DIR}/${Date.now().toString(36)}/${safeDiskName(name)}`
     await Filesystem.writeFile({
         path: appPath,
         data: await blobToBase64(blob),
         directory: Directory.Data,
+        recursive: true,
     })
 
     const { uri } = await Filesystem.getUri({
@@ -204,12 +195,7 @@ export async function storeOutput(blob: Blob, filename: string): Promise<StoredO
         directory: Directory.Data,
     })
 
-    recordRecentFile({
-        name,
-        size: blob.size,
-        type: mime,
-        appPath,
-    })
+    addLibraryFile({ name, size: blob.size, type: mime, appPath })
 
     // The result sheet plays the success or warning haptic when it opens.
     return { appPath, filename: name, mime, size: blob.size, uri }
@@ -229,7 +215,8 @@ export async function shareStoredOutput(output: StoredOutput): Promise<void> {
     })
 }
 
-export async function saveStoredOutputToDownloads(output: StoredOutput): Promise<void> {
+/** Copies into Downloads/Convertify (or Downloads/Convertify/<folder>) on the phone. */
+export async function saveStoredOutputToDownloads(output: StoredOutput, folder?: string): Promise<void> {
     if (!(await isNativeAndroid()) || !output.appPath) {
         await shareStoredOutput(output)
         return
@@ -238,19 +225,70 @@ export async function saveStoredOutputToDownloads(output: StoredOutput): Promise
         appPath: output.appPath,
         filename: output.filename,
         mime: output.mime,
+        folder,
     })
 }
 
-export async function shareRecentFile(file: RecentFile): Promise<void> {
+async function ensureOnDisk(file: { id: string; appPath: string }): Promise<void> {
     const exists = await (await nativeFiles()).fileExists({ appPath: file.appPath })
     if (!exists.exists) {
-        dropRecentFile(file.id)
-        throw new Error('gone')
+        removeLibraryFile(file.id)
+        throw new Error('This file is no longer on this phone.')
     }
-    await (await nativeFiles()).shareFile({
+}
+
+export async function shareRecentFile(file: RecentFile | LibFile): Promise<void> {
+    await ensureOnDisk(file)
+    await (await nativeFiles()).shareFile({ appPath: file.appPath, mime: file.type || mimeFromName(file.name) })
+}
+
+export async function openLibraryFile(file: LibFile): Promise<void> {
+    await ensureOnDisk(file)
+    await (await nativeFiles()).openFile({ appPath: file.appPath, mime: file.type || mimeFromName(file.name) })
+}
+
+export async function saveLibraryFileToPhone(file: LibFile, folder?: string): Promise<void> {
+    await ensureOnDisk(file)
+    await (await nativeFiles()).saveToDownloads({
         appPath: file.appPath,
+        filename: file.name,
         mime: file.type || mimeFromName(file.name),
+        folder,
     })
+}
+
+/** Renames on disk too, so shared copies carry the new name. Returns the new path. */
+export async function renameLibraryFileOnDisk(file: LibFile, newName: string): Promise<string> {
+    if (!(await isNativeAndroid())) return file.appPath
+    const { Filesystem, Directory } = await import('@capacitor/filesystem')
+    const to = `${OUTPUT_DIR}/${Date.now().toString(36)}/${safeDiskName(newName)}`
+    await Filesystem.mkdir({ path: to.slice(0, to.lastIndexOf('/')), directory: Directory.Data, recursive: true }).catch(() => undefined)
+    await Filesystem.rename({ from: file.appPath, to, directory: Directory.Data, toDirectory: Directory.Data })
+    return to
+}
+
+/** Frees the space; the library entry is removed by the caller. */
+export async function deleteLibraryFileOnDisk(file: LibFile): Promise<void> {
+    if (!(await isNativeAndroid())) return
+    const { Filesystem, Directory } = await import('@capacitor/filesystem')
+    await Filesystem.deleteFile({ path: file.appPath, directory: Directory.Data }).catch(() => undefined)
+    const dir = file.appPath.slice(0, file.appPath.lastIndexOf('/'))
+    if (dir.startsWith(`${OUTPUT_DIR}/`) && dir !== OUTPUT_DIR) {
+        await Filesystem.rmdir({ path: dir, directory: Directory.Data, recursive: true }).catch(() => undefined)
+    }
+}
+
+/** URL the WebView can show directly (thumbnails), without reading the file into JS. */
+export async function libraryFileUrl(file: LibFile): Promise<string | null> {
+    if (!(await isNativeAndroid())) return null
+    try {
+        const { Filesystem, Directory } = await import('@capacitor/filesystem')
+        const { Capacitor } = await import('@capacitor/core')
+        const { uri } = await Filesystem.getUri({ path: file.appPath, directory: Directory.Data })
+        return Capacitor.convertFileSrc(uri)
+    } catch {
+        return null
+    }
 }
 
 export const CONVERT_OFFER = 'convertify-offer-output'
@@ -263,12 +301,7 @@ export async function finishConvert(
     note?: string,
     tone: ResultTone = 'ok',
 ): Promise<void> {
-    try {
-        const { tapHaptic } = await import('@/lib/haptics')
-        await tapHaptic('medium')
-    } catch {
-        // optional
-    }
+    // No haptic here: the result sheet plays success or warning when it opens.
     if (IS_MOBILE_BUILD || (await isNativeAndroid())) {
         window.dispatchEvent(new CustomEvent(CONVERT_OFFER, { detail: { blob, filename, note, tone } }))
         return

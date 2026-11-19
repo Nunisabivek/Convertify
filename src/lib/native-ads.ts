@@ -377,32 +377,34 @@ function tryShowInterstitial(): void {
  * Resolves when the user closes the ad (or if failed/not loaded), so the result
  * screen showing where the file is saved can be revealed smoothly afterwards.
  */
-export async function showInterstitialAfterConversion(): Promise<void> {
-    if (!adsAllowed()) return
+export async function showInterstitialAfterConversion(): Promise<boolean> {
+    if (!adsAllowed()) return false
     const plugin = await loadPlugin()
-    if (!plugin) return
+    if (!plugin) return false
 
     const now = Date.now()
-    if (now - lastNoteAt < NOTE_DEBOUNCE_MS) return
+    if (now - lastNoteAt < NOTE_DEBOUNCE_MS) return false
     lastNoteAt = now
 
     const gate = readGate()
     gate.conversions += 1
     writeGate(gate)
 
-    if (!shouldOfferInterstitial(gate, now)) return
+    if (!shouldOfferInterstitial(gate, now)) return false
     if (!interstitialReady || interstitialShowing) {
         // Interstitial was not ready yet; prefetch now so subsequent conversions have one ready
         void prepareInterstitial(plugin)
-        return
+        return false
     }
 
-    return new Promise<void>((resolve) => {
+    /** Resolves true when an ad was actually on screen (the review prompt skips that moment). */
+    return new Promise<boolean>((resolve) => {
         let settled = false
+        let shownOk = false
         const done = () => {
             if (settled) return
             settled = true
-            resolve()
+            resolve(shownOk)
         }
 
         // 35s safety timer to accommodate 15-30s video interstitials
@@ -436,6 +438,7 @@ export async function showInterstitialAfterConversion(): Promise<void> {
 
         plugin.AdMob.showInterstitial()
             .then(() => {
+                shownOk = true
                 const shown = readGate()
                 shown.lastShownAt = Date.now()
                 shown.conversionsAtLastShow = shown.conversions

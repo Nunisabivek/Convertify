@@ -21,6 +21,14 @@ const KEEP_ROUTES = new Set([
   'about.txt',
   'privacy.html',
   'privacy.txt',
+  'files.html',
+  'files.txt',
+  // The route folders hold Next's segment prefetch files (__next._tree.txt...).
+  // Pruning them made every tab switch refetch instead of using the prefetch.
+  'all-tools',
+  'about',
+  'privacy',
+  'files',
   'fit-to-size',
   'passport-photo',
   'remove-background',

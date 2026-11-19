@@ -6,6 +6,7 @@ export const MOBILE_HOME_TITLE = 'Convertify'
 export const MOBILE_TOOLS_TITLE = 'All tools'
 export const MOBILE_ABOUT_TITLE = 'About'
 export const MOBILE_PRIVACY_TITLE = 'Privacy'
+export const MOBILE_FILES_TITLE = 'Files'
 
 export function appDocumentTitle(webTitle: string, mobileTitle = MOBILE_HOME_TITLE): string {
     return IS_MOBILE_BUILD ? mobileTitle : webTitle
@@ -22,6 +23,7 @@ export function mobileRouteTitle(pathname: string): string {
     if (path === '/all-tools') return MOBILE_TOOLS_TITLE
     if (path === '/about') return MOBILE_ABOUT_TITLE
     if (path === '/privacy') return MOBILE_PRIVACY_TITLE
+    if (path === '/files') return MOBILE_FILES_TITLE
     const slug = path.replace(/^\//, '')
     return ANDROID_SHORT_NAMES[slug] ?? MOBILE_HOME_TITLE
 }

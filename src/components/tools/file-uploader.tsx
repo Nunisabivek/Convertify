@@ -5,7 +5,7 @@ import { useDropzone } from "react-dropzone"
 import { FileText, Image, FileSpreadsheet, Presentation, FileType } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
-import { persistPickedFiles, pickFilesNative, isNativeAndroid } from "@/lib/native-file"
+import { pickFilesNative, isNativeAndroid } from "@/lib/native-file"
 import { tapHaptic } from "@/lib/haptics"
 
 interface FileUploaderProps {
@@ -103,8 +103,7 @@ export function FileUploader({
         if (maxFiles && valid.length > maxFiles) {
             valid = valid.slice(0, maxFiles)
         }
-        const persisted = await persistPickedFiles(valid)
-        onFilesSelected(persisted)
+        onFilesSelected(valid)
     }, [accept, fileTypeLabel, maxFiles, onFilesSelected])
 
     const onDrop = useCallback((acceptedFiles: File[]) => {

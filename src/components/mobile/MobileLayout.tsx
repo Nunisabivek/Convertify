@@ -23,6 +23,7 @@ interface MobileLayoutProps {
 const navItems = [
     { href: '/', icon: 'Home', label: 'Home' },
     { href: '/all-tools', icon: 'LayoutGrid', label: 'Tools' },
+    { href: '/files', icon: 'FolderOpen', label: 'Files' },
     { href: '/about', icon: 'Info', label: 'About' },
 ]
 
@@ -30,7 +31,7 @@ const LAST_TAB_KEY = 'convertify-last-tab'
 
 function toolTitleFromPath(pathname: string): string | null {
     const slug = pathname.replace(/^\//, '').replace(/\/$/, '')
-    if (!slug || slug === 'all-tools' || slug === 'about' || slug === 'privacy') return null
+    if (!slug || slug === 'all-tools' || slug === 'about' || slug === 'privacy' || slug === 'files') return null
     const tool = getToolById(slug)
     if (tool) return ANDROID_SHORT_NAMES[tool.id] ?? tool.name
     return null
@@ -45,6 +46,7 @@ function isNavActive(href: string, pathname: string): boolean {
     const path = normalizePath(pathname)
     if (href === '/') return path === '/'
     if (href === '/all-tools') return path === '/all-tools'
+    if (href === '/files') return path === '/files'
     if (href === '/about') return path === '/about' || path === '/privacy'
     return false
 }
@@ -125,11 +127,20 @@ function MobileLayoutInner({ children }: MobileLayoutProps) {
         document.title = mobileRouteTitle(pathname)
     }, [pathname])
 
+    // Leftover picker copies (older versions kept every picked file): clear them when idle.
+    useEffect(() => {
+        const t = window.setTimeout(() => {
+            void import('@/lib/native-file').then((m) => m.pruneInbox())
+        }, 4000)
+        return () => window.clearTimeout(t)
+    }, [])
+
     useEffect(() => {
         ANDROID_V1_TOOL_IDS.forEach((id) => {
             void router.prefetch(`/${id}`)
         })
         void router.prefetch('/all-tools')
+        void router.prefetch('/files')
         void router.prefetch('/about')
     }, [router])
 
@@ -218,14 +229,16 @@ function MobileLayoutInner({ children }: MobileLayoutProps) {
     }, [router, isSheetOpen, closeSheet])
 
     const path = normalizePath(pathname)
-    const isTab = isRootTab(path) || path === '/about' || path === '/privacy'
+    const isTab = isRootTab(path) || path === '/about' || path === '/privacy' || path === '/files'
     const toolTitle = toolTitleFromPath(path)
     const showBack = !isTab
     const heading =
         toolTitle ||
         (path === '/all-tools'
             ? 'All tools'
-            : path === '/about' || path === '/privacy'
+            : path === '/files'
+              ? 'Files'
+              : path === '/about' || path === '/privacy'
                 ? 'About'
                 : 'Convertify')
 

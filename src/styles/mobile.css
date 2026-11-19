@@ -525,7 +525,7 @@ body:has(.mobile-app),
   right: 0;
   bottom: var(--ad-banner-h);
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   min-height: calc(var(--nav-h) + var(--inset-bottom));
   padding-bottom: var(--inset-bottom);
   background: #FFFFFF; /* no backdrop-filter, see .mobile-top-bar */
@@ -3387,7 +3387,7 @@ html:not([data-launched]) .mobile-launch-splash ~ .mobile-top-bar .mobile-mark {
   }
 
   .mobile-bottom-nav {
-    grid-template-columns: repeat(3, minmax(0, 168px));
+    grid-template-columns: repeat(4, minmax(0, 150px));
     justify-content: center;
   }
 
@@ -3804,4 +3804,307 @@ html:not([data-launched]) .mobile-launch-splash ~ .mobile-top-bar .mobile-mark {
   .mobile-app .mobile-tool-card {
     transition: none !important;
   }
+}
+
+/* ---------- Files tab (library) ---------- */
+.mobile-app .files-page {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 16px 0;
+}
+.mobile-app .files-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.mobile-app .files-head p { margin: 0; font-size: 15px; color: var(--c-text-2); }
+.mobile-app .files-head strong { color: var(--c-text); font-weight: 700; }
+.mobile-app .files-icon-btn {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 12px;
+  background: var(--c-brand-soft);
+  color: var(--c-brand);
+}
+.mobile-app .files-icon-btn:active { transform: scale(0.94); }
+.mobile-app .files-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 12px;
+  border: 1px solid var(--c-line-strong);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--c-text-3);
+}
+.mobile-app .files-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+  color: var(--c-text);
+}
+.mobile-app .files-search input::-webkit-search-cancel-button { display: none; }
+.mobile-app .files-search button { border: 0; background: transparent; color: var(--c-text-3); padding: 6px; }
+.mobile-app .files-folders {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin: 0 -16px;
+  padding: 0 16px 2px;
+  scrollbar-width: none;
+}
+.mobile-app .files-folders::-webkit-scrollbar { display: none; }
+.mobile-app .files-chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--c-line-strong);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--c-text);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.mobile-app .files-chip span { color: var(--c-text-3); font-weight: 600; }
+.mobile-app .files-chip.is-on { background: var(--c-brand); border-color: var(--c-brand); color: #fff; }
+.mobile-app .files-chip.is-on span { color: rgba(255, 255, 255, 0.8); }
+.mobile-app .files-chip.is-add { border-style: dashed; color: var(--c-brand); }
+.mobile-app .files-bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.mobile-app .files-sort { display: inline-flex; padding: 3px; border-radius: 10px; background: #e9ecf1; }
+.mobile-app .files-sort button {
+  height: 30px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--c-text-2);
+  font-size: 13px;
+  font-weight: 600;
+}
+.mobile-app .files-sort button.is-on { background: #fff; color: var(--c-text); box-shadow: 0 1px 2px rgba(15, 23, 42, 0.1); }
+.mobile-app .files-folder-actions { display: flex; gap: 4px; }
+.mobile-app .files-folder-actions button {
+  border: 0;
+  background: transparent;
+  color: var(--c-brand);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 6px 8px;
+}
+.mobile-app .files-folder-actions .is-danger { color: var(--c-danger); }
+.mobile-app .files-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-card);
+  background: #fff;
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+}
+.mobile-app .files-list li { display: flex; align-items: center; }
+.mobile-app .files-list li + li { border-top: 1px solid var(--c-line); }
+.mobile-app .files-row {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 4px 10px 12px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+.mobile-app .files-row:active { background: #f5f7fa; }
+.mobile-app .files-thumb {
+  flex: none;
+  width: 44px;
+  height: 52px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #eef1f5;
+}
+.mobile-app .files-badge {
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+.mobile-app .files-badge.is-pdf { background: #e5484d; }
+.mobile-app .files-badge.is-img { background: #12a150; }
+.mobile-app .files-badge.is-doc { background: #2f6fde; }
+.mobile-app .files-badge.is-xls { background: #1d8a4e; }
+.mobile-app .files-badge.is-ppt { background: #d9622b; }
+.mobile-app .files-badge.is-zip { background: #7c5cd6; }
+.mobile-app .files-badge.is-other { background: #64748b; }
+.mobile-app .files-meta { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.mobile-app .files-meta strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--c-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mobile-app .files-meta span { font-size: 13px; color: var(--c-text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mobile-app .files-more {
+  flex: none;
+  width: 44px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--c-text-3);
+}
+.mobile-app .files-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 36px 20px;
+  border: 1px dashed var(--c-line-strong);
+  border-radius: var(--r-card);
+  background: #fff;
+  color: var(--c-text-3);
+  text-align: center;
+}
+.mobile-app .files-empty strong { color: var(--c-text); font-size: 16px; }
+.mobile-app .files-empty span { font-size: 14px; color: var(--c-text-2); }
+
+.mobile-app .files-sheet-scrim {
+  position: fixed;
+  inset: 0;
+  bottom: var(--ad-banner-h, 0px);
+  z-index: 95;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.42);
+  animation: m-fade-in 160ms ease-out both;
+}
+.mobile-app .files-sheet {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 8px calc(10px + var(--inset-bottom));
+  border-radius: 22px 22px 0 0;
+  background: #fff;
+  box-shadow: var(--shadow-sheet);
+  animation: m-sheet-up 240ms var(--ease-out) both;
+}
+.mobile-app .files-sheet-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px 12px;
+  border-bottom: 1px solid var(--c-line);
+  margin-bottom: 4px;
+}
+.mobile-app .files-sheet > button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 50px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--c-text);
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+}
+.mobile-app .files-sheet > button svg { color: var(--c-text-2); }
+.mobile-app .files-sheet > button:active { background: #f3f5f8; }
+.mobile-app .files-sheet > button.is-danger,
+.mobile-app .files-sheet > button.is-danger svg { color: var(--c-danger); }
+
+.mobile-app .files-dialog {
+  width: calc(100% - 32px);
+  max-width: 420px;
+  margin: auto auto calc(16px + var(--inset-bottom));
+  padding: 20px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: var(--shadow-sheet);
+  animation: m-sheet-up 240ms var(--ease-out) both;
+}
+.mobile-app .files-dialog h2 { margin: 0 0 10px; font-size: 19px; font-weight: 700; letter-spacing: -0.015em; }
+.mobile-app .files-dialog p { margin: 0 0 12px; font-size: 15px; line-height: 1.45; color: var(--c-text-2); }
+.mobile-app .files-input-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 48px;
+  padding: 0 12px;
+  border: 1px solid var(--c-line-strong);
+  border-radius: 12px;
+}
+.mobile-app .files-input-row:focus-within { border-color: var(--c-brand); box-shadow: 0 0 0 3px rgba(2, 110, 255, 0.16); }
+.mobile-app .files-input-row input { flex: 1; min-width: 0; border: 0; outline: none; font-size: 16px; background: transparent; }
+.mobile-app .files-input-row span { color: var(--c-text-3); font-size: 15px; }
+.mobile-app .files-problem { margin: 8px 0 0 !important; color: var(--c-danger) !important; font-size: 14px !important; }
+.mobile-app .files-dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+.mobile-app .files-dialog-actions button {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--c-text-2);
+  font-size: 15px;
+  font-weight: 600;
+}
+.mobile-app .files-dialog-actions .is-primary { background: var(--c-brand); color: #fff; }
+.mobile-app .files-dialog-actions .is-danger { background: #fdecec; color: var(--c-danger); }
+.mobile-app .files-move-list { display: flex; flex-direction: column; max-height: 46vh; overflow-y: auto; }
+.mobile-app .files-move-list button,
+.mobile-app .files-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--c-text);
+  font-size: 15px;
+  font-weight: 500;
+  text-align: left;
+}
+.mobile-app .files-move-list button.is-on { background: var(--c-brand-soft); color: var(--c-brand); font-weight: 600; }
+.mobile-app .files-link { color: var(--c-brand); font-weight: 600; }
+.mobile-app .files-toast {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: calc(var(--chrome-bottom) + 12px);
+  z-index: 96;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #0f172a;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  animation: m-fade-in 160ms ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobile-app .files-sheet-scrim,
+  .mobile-app .files-sheet,
+  .mobile-app .files-dialog,
+  .mobile-app .files-toast { animation: none !important; }
 }

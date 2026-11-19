@@ -20,6 +20,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
+
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -120,6 +124,7 @@ public class ConvertifyFilesPlugin extends Plugin {
         String appPath = call.getString("appPath");
         String filename = call.getString("filename");
         String mime = call.getString("mime", "application/octet-stream");
+        String folder = call.getString("folder", "");
         if (appPath == null || filename == null) {
             call.reject("Missing file");
             return;
@@ -135,7 +140,7 @@ public class ConvertifyFilesPlugin extends Plugin {
         }
 
         try {
-            Uri dest = writeToDownloads(src, filename, mime);
+            Uri dest = writeToDownloads(src, filename, mime, folder);
             JSObject ret = new JSObject();
             ret.put("ok", true);
             ret.put("uri", dest != null ? dest.toString() : "");
@@ -187,6 +192,27 @@ public class ConvertifyFilesPlugin extends Plugin {
             if (view != null) view.performHapticFeedback(feedback);
             call.resolve();
         });
+    }
+
+    /**
+     * Google Play in-app review. Play decides whether the dialog shows (quota),
+     * and never says whether a review was left; the app only asks at good moments.
+     */
+    @PluginMethod
+    public void requestReview(PluginCall call) {
+        try {
+            ReviewManager manager = ReviewManagerFactory.create(getContext());
+            manager.requestReviewFlow().addOnCompleteListener(task -> {
+                if (!task.isSuccessful()) {
+                    call.resolve();
+                    return;
+                }
+                ReviewInfo info = task.getResult();
+                manager.launchReviewFlow(getActivity(), info).addOnCompleteListener(done -> call.resolve());
+            });
+        } catch (Exception e) {
+            call.resolve();
+        }
     }
 
     /** The web launch splash has painted its first frame; drop the system splash over it. */
@@ -271,6 +297,28 @@ public class ConvertifyFilesPlugin extends Plugin {
         }
     }
 
+    /** Opens the file in another app (PDF reader, gallery...), or offers a chooser. */
+    @PluginMethod
+    public void openFile(PluginCall call) {
+        String appPath = call.getString("appPath");
+        String mime = call.getString("mime", "application/octet-stream");
+        File src = appPath == null ? null : new File(getContext().getFilesDir(), appPath);
+        if (src == null || !src.exists()) {
+            call.reject("File is no longer on this phone");
+            return;
+        }
+        try {
+            Uri uri = FileProvider.getUriForFile(getContext(), getContext().getPackageName() + ".fileprovider", src);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(uri, mime != null ? mime : "application/octet-stream");
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            getActivity().startActivity(Intent.createChooser(intent, "Open with"));
+            call.resolve();
+        } catch (Exception e) {
+            call.reject("No app on this phone can open this file.");
+        }
+    }
+
     private void takePersistablePermission(Uri uri) {
         try {
             getContext().getContentResolver().takePersistableUriPermission(
@@ -341,12 +389,19 @@ public class ConvertifyFilesPlugin extends Plugin {
         return fallback;
     }
 
-    private Uri writeToDownloads(File src, String filename, String mime) throws Exception {
+    /** "Convertify" or "Convertify/<folder>" under Downloads; the folder name is made path-safe. */
+    private static String subPath(String folder) {
+        String safe = folder == null ? "" : folder.replaceAll("[/\\\\?%*:|\"<>]", "-").trim();
+        if (safe.length() > 60) safe = safe.substring(0, 60);
+        return safe.isEmpty() ? "Convertify" : "Convertify/" + safe;
+    }
+
+    private Uri writeToDownloads(File src, String filename, String mime, String folder) throws Exception {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             ContentValues values = new ContentValues();
             values.put(MediaStore.Downloads.DISPLAY_NAME, filename);
             values.put(MediaStore.Downloads.MIME_TYPE, mime);
-            values.put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/Convertify");
+            values.put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/" + subPath(folder));
             values.put(MediaStore.Downloads.IS_PENDING, 1);
             Uri uri = getContext().getContentResolver().insert(
                 MediaStore.Downloads.EXTERNAL_CONTENT_URI,
@@ -372,7 +427,7 @@ public class ConvertifyFilesPlugin extends Plugin {
             return uri;
         }
 
-        File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "Convertify");
+        File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), subPath(folder));
         if (!dir.exists() && !dir.mkdirs()) {
             throw new Exception("Could not save");
         }
