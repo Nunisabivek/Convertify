@@ -63,6 +63,7 @@ build_log.txt
 # Copied from pdfjs-dist during the mobile build
 /public/pdf.worker.min.mjs
 /public/cad-detect-worker.js
+/public/scan-worker.js
 .mobile-build-stash/
 test.pdf
 *.tmp

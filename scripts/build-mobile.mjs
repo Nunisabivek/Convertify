@@ -2,7 +2,7 @@ import { copyFileSync, cpSync, existsSync, mkdirSync, readdirSync, renameSync, r
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { spawnSync } from 'node:child_process'
-import { buildCadWorker } from './build-cad-worker.mjs'
+import { buildCadWorker, buildScanWorker } from './build-cad-worker.mjs'
 
 // PowerShell cannot parse `FOO=bar cmd`. npm scripts use cross-env; this is the
 // equivalent if someone runs `node scripts/build-mobile.mjs` directly.
@@ -49,6 +49,7 @@ const KEEP_ROUTES = new Set([
   '_next',
   'pdf.worker.min.mjs',
   'cad-detect-worker.js',
+  'scan-worker.js',
   'brand-c.webp',
   'file.svg',
   'vercel.svg',
@@ -94,6 +95,7 @@ function copyWorker() {
   }
   copyFileSync(src, join(publicDir, 'pdf.worker.min.mjs'))
   buildCadWorker(join(publicDir, 'cad-detect-worker.js'))
+  buildScanWorker(join(publicDir, 'scan-worker.js'))
 }
 
 function mirrorHtml(outDir) {
