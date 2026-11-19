@@ -1,9 +1,12 @@
 import type { PickedNativeFile } from '@/lib/convertify-files'
 // The plugin pulls in @capacitor/core; load it only on the code paths that run inside the app.
-const nativeFiles = () => import('@/lib/convertify-files').then((m) => m.default)
+// Wrapped in an object ON PURPOSE: a promise resolved WITH the Capacitor plugin proxy calls
+// proxy.then(), which Capacitor forwards to native ("then() is not implemented") and the await
+// hangs forever (file picking, share and save all froze). Never return the plugin from a promise.
+const nativeFiles = async () => ({ files: (await import('@/lib/convertify-files')).default })
 import { IS_MOBILE_BUILD } from '@/lib/is-mobile-build'
 import { nextHumanFilename } from '@/lib/human-filename'
-import { addLibraryFile, loadLibrary, removeLibraryFile, type LibFile } from '@/lib/library'
+import { addLibraryFile, loadLibrary, patchLibraryFile, removeLibraryFile, type LibFile } from '@/lib/library'
 
 const OUTPUT_DIR = 'outputs'
 
@@ -131,7 +134,7 @@ export async function pickFilesNative(options: {
     multiple?: boolean
     mimeTypes?: string[]
 }): Promise<File[]> {
-    const result = await (await nativeFiles()).pickFiles({
+    const result = await (await nativeFiles()).files.pickFiles({
         multiple: options.multiple ?? false,
         mimeTypes: options.mimeTypes?.length ? options.mimeTypes : ['*/*'],
     })
@@ -159,6 +162,52 @@ export async function pruneInbox(): Promise<void> {
         }
     } catch {
         // no inbox yet
+    }
+}
+
+/**
+ * Versions before 1.3 listed only the last 12 outputs but kept every file.
+ * Once, bring every untracked file in outputs/ into the library so people
+ * can see (and delete) them.
+ */
+export async function adoptOrphanOutputs(): Promise<void> {
+    const FLAG = 'convertify-library-adopted'
+    try {
+        if (localStorage.getItem(FLAG)) return
+    } catch {
+        return
+    }
+    if (!(await isNativeAndroid())) return
+    try {
+        const { Filesystem, Directory } = await import('@capacitor/filesystem')
+        const known = new Set(loadLibrary().files.map((f) => f.appPath))
+        const found: { appPath: string; name: string; size: number; mtime: number }[] = []
+        const { files } = await Filesystem.readdir({ path: OUTPUT_DIR, directory: Directory.Data })
+        for (const entry of files) {
+            if (entry.type === 'directory') {
+                const inner = await Filesystem.readdir({ path: `${OUTPUT_DIR}/${entry.name}`, directory: Directory.Data }).catch(() => ({ files: [] }))
+                for (const f of inner.files) {
+                    if (f.type === 'file') found.push({ appPath: `${OUTPUT_DIR}/${entry.name}/${f.name}`, name: f.name, size: f.size, mtime: Number(f.mtime) })
+                }
+            } else {
+                // Old layout: outputs/<timestamp>-<name>
+                const m = /^(\d{10,})-(.+)$/.exec(entry.name)
+                found.push({ appPath: `${OUTPUT_DIR}/${entry.name}`, name: m ? m[2] : entry.name, size: entry.size, mtime: m ? Number(m[1]) : Number(entry.mtime) })
+            }
+        }
+        for (const f of found.sort((a, b) => a.mtime - b.mtime)) {
+            if (known.has(f.appPath)) continue
+            const added = addLibraryFile({ name: f.name, appPath: f.appPath, size: f.size, type: mimeFromName(f.name) })
+            if (f.mtime > 0) patchLibraryFile(added.id, { createdAt: f.mtime })
+        }
+        localStorage.setItem(FLAG, '1')
+    } catch {
+        // no outputs folder yet: nothing to adopt
+        try {
+            localStorage.setItem(FLAG, '1')
+        } catch {
+            // ignore
+        }
     }
 }
 
@@ -209,7 +258,7 @@ export async function shareStoredOutput(output: StoredOutput): Promise<void> {
         a.click()
         return
     }
-    await (await nativeFiles()).shareFile({
+    await (await nativeFiles()).files.shareFile({
         appPath: output.appPath,
         mime: output.mime,
     })
@@ -221,7 +270,7 @@ export async function saveStoredOutputToDownloads(output: StoredOutput, folder?:
         await shareStoredOutput(output)
         return
     }
-    await (await nativeFiles()).saveToDownloads({
+    await (await nativeFiles()).files.saveToDownloads({
         appPath: output.appPath,
         filename: output.filename,
         mime: output.mime,
@@ -230,7 +279,7 @@ export async function saveStoredOutputToDownloads(output: StoredOutput, folder?:
 }
 
 async function ensureOnDisk(file: { id: string; appPath: string }): Promise<void> {
-    const exists = await (await nativeFiles()).fileExists({ appPath: file.appPath })
+    const exists = await (await nativeFiles()).files.fileExists({ appPath: file.appPath })
     if (!exists.exists) {
         removeLibraryFile(file.id)
         throw new Error('This file is no longer on this phone.')
@@ -239,17 +288,17 @@ async function ensureOnDisk(file: { id: string; appPath: string }): Promise<void
 
 export async function shareRecentFile(file: RecentFile | LibFile): Promise<void> {
     await ensureOnDisk(file)
-    await (await nativeFiles()).shareFile({ appPath: file.appPath, mime: file.type || mimeFromName(file.name) })
+    await (await nativeFiles()).files.shareFile({ appPath: file.appPath, mime: file.type || mimeFromName(file.name) })
 }
 
 export async function openLibraryFile(file: LibFile): Promise<void> {
     await ensureOnDisk(file)
-    await (await nativeFiles()).openFile({ appPath: file.appPath, mime: file.type || mimeFromName(file.name) })
+    await (await nativeFiles()).files.openFile({ appPath: file.appPath, mime: file.type || mimeFromName(file.name) })
 }
 
 export async function saveLibraryFileToPhone(file: LibFile, folder?: string): Promise<void> {
     await ensureOnDisk(file)
-    await (await nativeFiles()).saveToDownloads({
+    await (await nativeFiles()).files.saveToDownloads({
         appPath: file.appPath,
         filename: file.name,
         mime: file.type || mimeFromName(file.name),

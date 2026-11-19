@@ -332,11 +332,11 @@ export const toolContentData: Record<string, {
         keywords: ["edit pdf online free", "annotate pdf", "pdf markup tool", "flatten pdf"]
     },
     "ocr-pdf": {
-        description: "Scan paper documents to PDF with your phone or webcam. Convertify's scanner finds the page edges live, crops and straightens each capture, and applies a Xerox B&W, Magic Color, Grayscale or Original filter. Pages are saved as images in one PDF; there is no OCR, so the text is not searchable. Everything is processed in your browser.",
+        description: "Scan paper documents to PDF with your phone or webcam. Convertify's scanner finds the page edges live, crops and straightens each capture, and applies an Auto, Grayscale, B&W or Original filter that removes shadows. Pages are saved as images in one PDF; there is no OCR, so the text is not searchable. Everything is processed in your browser.",
         features: [
             "Live Edge Detection: Outlines the page in the camera view",
             "Auto Crop & Straighten: Corrects the perspective of each capture",
-            "Scan Filters: Xerox B&W, Magic Color, Grayscale or Original",
+            "Scan Filters: Auto (shadow-free color), Grayscale, B&W or Original",
             "Multi-Page: Scan many pages and save them as one PDF",
             "Add Files: Import photos or PDF pages alongside camera scans",
             "100% Secure: Files are processed locally, never uploaded to a cloud"

@@ -130,7 +130,10 @@ function MobileLayoutInner({ children }: MobileLayoutProps) {
     // Leftover picker copies (older versions kept every picked file): clear them when idle.
     useEffect(() => {
         const t = window.setTimeout(() => {
-            void import('@/lib/native-file').then((m) => m.pruneInbox())
+            void import('@/lib/native-file').then(async (m) => {
+                await m.pruneInbox()
+                await m.adoptOrphanOutputs()
+            })
         }, 4000)
         return () => window.clearTimeout(t)
     }, [])

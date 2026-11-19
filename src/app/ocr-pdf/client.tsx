@@ -288,8 +288,15 @@ export default function OcrPdfClient() {
                 const caps = (track.getCapabilities?.() || {}) as { torch?: boolean }
                 setHasTorch(Boolean(caps.torch))
                 // Full-resolution stills where the WebView supports them; video frames otherwise.
-                const IC = (window as unknown as { ImageCapture?: new (t: MediaStreamTrack) => PhotoCapture }).ImageCapture
-                photoRef.current = IC && !photoBrokenRef.current ? new IC(track) : null
+                // Its own try: a failure here must not look like "camera couldn't open"
+                // while the stream (and the camera light) stays on.
+                try {
+                    const IC = (window as unknown as { ImageCapture?: new (t: MediaStreamTrack) => PhotoCapture }).ImageCapture
+                    photoRef.current = IC && !photoBrokenRef.current ? new IC(track) : null
+                } catch {
+                    photoBrokenRef.current = true
+                    photoRef.current = null
+                }
             }
             if (videoRef.current) {
                 videoRef.current.srcObject = stream

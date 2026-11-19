@@ -118,7 +118,7 @@ export function PlayStoreBanner({ className = "" }: { className?: string }) {
                         </h3>
 
                         <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                            Scan paper documents with direct camera auto-edge tracking, Xerox photocopy filters, and compress & convert 40+ file formats offline on your phone. 100% Free & Private.
+                            Scan paper documents with automatic edge detection and shadow removal, and compress & convert 40+ file formats offline on your phone. 100% Free & Private.
                         </p>
 
                         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 pt-1 text-[11px] text-slate-400">
@@ -208,7 +208,7 @@ export function InToolPlayStoreCallout({
                         </h3>
 
                         <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl">
-                            Scan paper documents with live camera auto-edge detection, apply Xerox photocopy filters, and convert 40+ formats offline on your Android phone. 100% Free &amp; Private.
+                            Scan paper documents with automatic edge detection and shadow removal, and convert 40+ formats offline on your Android phone. 100% Free &amp; Private.
                         </p>
 
                         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 pt-1 text-[11px] text-slate-400">
@@ -310,7 +310,7 @@ export function PlayStoreTopBar({ className = "" }: { className?: string }) {
                     </div>
                     <p className="truncate text-slate-200 text-xs">
                         <span className="font-bold text-white">Convertify on Google Play</span>
-                        <span className="hidden md:inline text-slate-300"> — Camera document scanner, Xerox photocopy filters &amp; 100% offline conversion.</span>
+                        <span className="hidden md:inline text-slate-300"> — Camera document scanner with shadow removal &amp; 100% offline conversion.</span>
                         <span className="inline md:hidden text-slate-300"> — Free offline scanner &amp; converter.</span>
                     </p>
                 </div>

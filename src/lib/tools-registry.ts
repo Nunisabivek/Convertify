@@ -221,7 +221,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
             {
                 id: 'ocr-pdf',
                 name: 'Scan Document',
-                description: 'Scan paper to PDF with your camera: auto-crop and Xerox filters.',
+                description: 'Scan paper to PDF with your camera: auto-crop and shadow removal.',
                 icon: { lucide: 'ScanLine', material: 'document_scanner' },
                 href: 'ocr-pdf',
                 color: { text: 'text-teal-600', bg: 'bg-teal-50', hex: '#0D9488' },

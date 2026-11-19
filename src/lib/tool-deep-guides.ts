@@ -819,19 +819,19 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
         steps: [
             { title: "Open the camera or add files", body: "Allow camera access when the browser asks. On a phone the rear camera is used; you can switch cameras and turn on the torch where the device supports it. You can also add photos or PDF pages from your files instead." },
             { title: "Capture each page", body: "Lay the page on a darker, contrasting surface and hold it in view until the edge outline settles on the paper, then tap the shutter. The page is cropped and straightened from that frame. Repeat for every page; the counter shows how many you have." },
-            { title: "Pick a filter and tidy up", body: "Choose Xerox B&W (clean black-and-white photocopy), Magic Color (bright paper that keeps colored stamps and ink), Grayscale, or Original. Change it per page or apply it to all pages. Rotate or delete pages as needed." },
+            { title: "Pick a filter and tidy up", body: "Choose Auto (white paper, shadows removed, colored stamps and ink kept), B&W (crisp black-and-white copy), Grayscale, or Original. Change it per page or apply it to all pages. Rotate or delete pages as needed." },
             { title: "Save as PDF", body: "Tap Save as PDF. Every page is placed in one PDF in the order you scanned it, and the file downloads straight to your device." },
         ],
         scenarios: [
-            { title: "Receipts and expense claims", body: "Scan a stack of receipts into one PDF for an expense report. The Xerox B&W filter removes the grey paper tint and shadows so thermal-paper receipts stay legible when printed." },
-            { title: "Forms and signed paperwork", body: "Fill in and sign a paper form, scan it, and email it back without a trip to a photocopier. Magic Color keeps blue ink signatures and red stamps visible." },
+            { title: "Receipts and expense claims", body: "Scan a stack of receipts into one PDF for an expense report. The B&W filter removes the grey paper tint and shadows so thermal-paper receipts stay legible when printed." },
+            { title: "Forms and signed paperwork", body: "Fill in and sign a paper form, scan it, and email it back without a trip to a photocopier. The Auto filter keeps blue ink signatures and red stamps visible." },
             { title: "Notes and handouts", body: "Capture handwritten notes, whiteboard printouts or class handouts as a single PDF you can share or archive." },
             { title: "Documents for online applications", body: "Many portals want a PDF rather than a phone photo. Scan the page here, then use Compress PDF if the portal has a size limit." },
         ],
         troubleshooting: [
             { question: "The edge outline doesn't find my page.", answer: "Edge detection looks for a brightness step between the paper and what is behind it. Put white paper on a darker surface, make sure all four corners are in the frame, and avoid strong glare across the page." },
             { question: "Can I search or copy the text in my scanned PDF?", answer: "No. The scanner saves pages as images and does not run OCR, so the text is not searchable. Only PDFs you add that already have a text layer give you text through Copy text." },
-            { question: "My uploaded photo wasn't cropped.", answer: "Automatic cropping and straightening only run on live camera captures. Photos added from your files get the filter and rotation, but keep their original framing." },
+            { question: "My uploaded photo wasn't cropped.", answer: "Imported photos get the same automatic edge detection as camera shots, but a page on a background of nearly the same color (white paper on a white desk) can be missed. Tap Crop and drag the four corners onto the page; the zoom circle under your finger helps you land them exactly." },
             { question: "The camera doesn't start.", answer: "Check that the browser has camera permission for this site and that no other app is using the camera. Camera access also requires the page to be opened over HTTPS." },
         ],
         comparison: [

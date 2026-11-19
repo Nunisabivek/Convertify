@@ -627,7 +627,7 @@ export const toolSeoData = {
             },
             {
                 question: "Can I scan photos I already took?",
-                answer: "Yes. Add images or PDF pages from your files, then apply the Xerox B&W, Magic Color, Grayscale or Original filter and rotate pages. Automatic edge cropping only runs on live camera captures."
+                answer: "Yes. Import photos or a PDF from your files. Photos get the same automatic edge detection as camera captures, and you can drag the corners to fix any crop. Then choose the Auto, Grayscale, B&W or Original filter, rotate or reorder pages, and save one PDF."
             },
             {
                 question: "Is my scanned document uploaded to any cloud server?",
