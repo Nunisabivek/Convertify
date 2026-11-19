@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import { rectToQuad, applyH, warpPerspective, rotateRGBA } from './homography.ts'
 import { enhance } from './enhance.ts'
 import { pageSize, pdfPageSize, paperFor } from './paper.ts'
+import { edgeMid, slideEdge } from './crop.ts'
 
 // --- Homography: page corners land exactly on the quad corners.
 {
@@ -141,6 +142,27 @@ assert.equal(paperFor(2.5).kind, 'other')
     assert.ok(lw > lh)
     const [rw, rh] = pdfPageSize(600, 2400) // receipt: A4 width, tall
     assert.ok(Math.abs(rw - 595.28) < 0.1 && Math.abs(rh - 2381.1) < 1, `${rw}x${rh}`)
+}
+
+// --- Crop editor: edge handles slide a whole edge along its normal.
+{
+    const q = { tl: { x: 100, y: 100 }, tr: { x: 500, y: 100 }, br: { x: 500, y: 700 }, bl: { x: 100, y: 700 } }
+    // Top edge dragged 30 px down and 50 px sideways: only the 30 px across the edge counts.
+    const t = slideEdge(q, 'top', 50, 30, 1000, 1000)
+    assert.deepEqual([t.tl, t.tr], [{ x: 100, y: 130 }, { x: 500, y: 130 }])
+    assert.deepEqual([t.br, t.bl], [q.br, q.bl])
+    // Right edge dragged out past the photo: clamped at the border.
+    const r = slideEdge(q, 'right', 900, 0, 1000, 1000)
+    assert.equal(r.tr.x, 1000)
+    assert.equal(r.br.x, 1000)
+    assert.equal(r.tl.x, 100)
+    // A slanted edge keeps its angle.
+    const s2 = { ...q, tr: { x: 500, y: 140 } }
+    const m = slideEdge(s2, 'top', 0, 20, 1000, 1000)
+    const before = Math.atan2(s2.tr.y - s2.tl.y, s2.tr.x - s2.tl.x)
+    const after = Math.atan2(m.tr.y - m.tl.y, m.tr.x - m.tl.x)
+    assert.ok(Math.abs(before - after) < 1e-9)
+    assert.deepEqual(edgeMid(q, 'left'), { x: 100, y: 400 })
 }
 
 // --- Speed check on a full A4 page at 300 dpi (informational; the worker runs this).

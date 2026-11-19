@@ -4,9 +4,13 @@ import { useEffect, useRef, useState } from "react"
 import { Check, Maximize2, Wand2, X } from "lucide-react"
 import type { Quad } from "@/lib/document-scanner"
 import { haptic } from "@/lib/haptics"
+import { EDGES, EDGE_ENDS, edgeMid, slideEdge, type Corner, type Edge } from "@/lib/scan/crop"
 
-type Corner = "tl" | "tr" | "br" | "bl"
 const CORNERS: Corner[] = ["tl", "tr", "br", "bl"]
+
+type Drag =
+    | { kind: "corner"; corner: Corner; x: number; y: number }
+    | { kind: "edge"; edge: Edge; start: Quad; fromX: number; fromY: number; x: number; y: number }
 const LOUPE = 112 // px
 const ZOOM = 2.5
 
@@ -29,8 +33,9 @@ function convex(q: Quad): boolean {
 }
 
 /**
- * Full-screen crop: drag the four corners onto the page's corners. A loupe
- * above the finger shows the corner magnified, so it lands exactly on the
+ * Full-screen crop: drag the four corners onto the page's corners, or the
+ * handle in the middle of an edge to slide that whole edge in or out. A loupe
+ * above the finger shows the spot magnified, so it lands exactly on the
  * paper's edge even on a small screen.
  */
 export default function CornerEditor({
@@ -53,7 +58,7 @@ export default function CornerEditor({
     const boxRef = useRef<HTMLDivElement>(null)
     const [box, setBox] = useState({ w: 0, h: 0 })
     const [q, setQ] = useState<Quad>(quad ?? autoQuad ?? full(width, height))
-    const [drag, setDrag] = useState<{ corner: Corner; x: number; y: number } | null>(null)
+    const [drag, setDrag] = useState<Drag | null>(null)
 
     useEffect(() => {
         const el = boxRef.current
@@ -77,13 +82,20 @@ export default function CornerEditor({
         const x = Math.min(width, Math.max(0, (clientX - r.left - ox) / s))
         const y = Math.min(height, Math.max(0, (clientY - r.top - oy) / s))
         setQ((prev) => ({ ...prev, [corner]: { x, y } }))
-        setDrag({ corner, x: clientX - r.left, y: clientY - r.top })
+        setDrag({ kind: "corner", corner, x: clientX - r.left, y: clientY - r.top })
+    }
+
+    const moveEdge = (d: Extract<Drag, { kind: "edge" }>, clientX: number, clientY: number) => {
+        const r = boxRef.current?.getBoundingClientRect()
+        if (!r || !s) return
+        setQ(slideEdge(d.start, d.edge, (clientX - d.fromX) / s, (clientY - d.fromY) / s, width, height))
+        setDrag({ ...d, x: clientX - r.left, y: clientY - r.top })
     }
 
     const ok = convex(q)
     const pts = CORNERS.map((c) => toScreen(q[c]))
     const poly = pts.map((p) => `${p.x},${p.y}`).join(" ")
-    const dragPt = drag ? q[drag.corner] : null
+    const dragPt = !drag ? null : drag.kind === "corner" ? q[drag.corner] : edgeMid(q, drag.edge)
 
     return (
         <div className="scan-editor" role="dialog" aria-label="Adjust page corners">
@@ -91,7 +103,7 @@ export default function CornerEditor({
                 <button type="button" className="scan-icon-btn" aria-label="Cancel" onClick={onCancel}>
                     <X size={22} />
                 </button>
-                <span className="scan-editor-title">Drag the corners onto the page</span>
+                <span className="scan-editor-title">Drag the points onto the page edges</span>
                 <span style={{ width: 44 }} />
             </div>
 
@@ -119,7 +131,7 @@ export default function CornerEditor({
                         {CORNERS.map((c, i) => (
                             <div
                                 key={c}
-                                className={`scan-handle${drag?.corner === c ? " is-active" : ""}`}
+                                className={`scan-handle${drag?.kind === "corner" && drag.corner === c ? " is-active" : ""}`}
                                 style={{ transform: `translate3d(${pts[i].x - 22}px, ${pts[i].y - 22}px, 0)` }}
                                 onPointerDown={(e) => {
                                     e.currentTarget.setPointerCapture(e.pointerId)
@@ -127,7 +139,7 @@ export default function CornerEditor({
                                     move(c, e.clientX, e.clientY)
                                 }}
                                 onPointerMove={(e) => {
-                                    if (drag?.corner === c) move(c, e.clientX, e.clientY)
+                                    if (drag?.kind === "corner" && drag.corner === c) move(c, e.clientX, e.clientY)
                                 }}
                                 onPointerUp={() => setDrag(null)}
                                 onPointerCancel={() => setDrag(null)}
@@ -135,6 +147,41 @@ export default function CornerEditor({
                                 <span />
                             </div>
                         ))}
+                        {EDGES.map((edge) => {
+                            const m = toScreen(edgeMid(q, edge))
+                            const [a, b] = EDGE_ENDS[edge]
+                            const angle = (Math.atan2(q[b].y - q[a].y, q[b].x - q[a].x) * 180) / Math.PI
+                            const active = drag?.kind === "edge" && drag.edge === edge
+                            return (
+                                <div
+                                    key={edge}
+                                    className={`scan-edge-handle${active ? " is-active" : ""}`}
+                                    aria-label={`Move the ${edge} edge`}
+                                    style={{ transform: `translate3d(${m.x - 22}px, ${m.y - 22}px, 0)` }}
+                                    onPointerDown={(e) => {
+                                        e.currentTarget.setPointerCapture(e.pointerId)
+                                        void haptic("select")
+                                        const r = boxRef.current?.getBoundingClientRect()
+                                        setDrag({
+                                            kind: "edge",
+                                            edge,
+                                            start: q,
+                                            fromX: e.clientX,
+                                            fromY: e.clientY,
+                                            x: e.clientX - (r?.left ?? 0),
+                                            y: e.clientY - (r?.top ?? 0),
+                                        })
+                                    }}
+                                    onPointerMove={(e) => {
+                                        if (drag?.kind === "edge" && drag.edge === edge) moveEdge(drag, e.clientX, e.clientY)
+                                    }}
+                                    onPointerUp={() => setDrag(null)}
+                                    onPointerCancel={() => setDrag(null)}
+                                >
+                                    <span style={{ transform: `rotate(${angle}deg)` }} />
+                                </div>
+                            )
+                        })}
                         {drag && dragPt && (
                             <div
                                 className="scan-loupe"
@@ -153,7 +200,7 @@ export default function CornerEditor({
                 )}
             </div>
 
-            {!ok && <p className="scan-editor-warn">The corners cross over. Drag them back into a four-sided shape.</p>}
+            {!ok && <p className="scan-editor-warn">The edges cross over. Drag the points back into a four-sided shape.</p>}
 
             <div className="scan-editor-actions">
                 <button

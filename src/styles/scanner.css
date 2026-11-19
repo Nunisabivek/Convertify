@@ -491,6 +491,28 @@
   transition: transform 120ms;
 }
 .scan-handle.is-active > span { transform: scale(1.3); }
+.scan-edge-handle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  touch-action: none;
+  cursor: grab;
+}
+/* A short pill along the edge, like the paid scanners: reads as "slide this side". */
+.scan-edge-handle > span {
+  width: 26px;
+  height: 8px;
+  border-radius: 4px;
+  background: #fff;
+  border: 2px solid #3b8bff;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+  transition: width 120ms, height 120ms;
+}
+.scan-edge-handle.is-active > span { width: 34px; height: 10px; }
 .scan-loupe {
   position: absolute;
   left: 0;
@@ -524,5 +546,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .scan-flash, .scan-spin { animation: none; }
-  .scan-shutter, .scan-mode, .scan-switch-track::after, .scan-handle > span { transition: none; }
+  .scan-shutter, .scan-mode, .scan-switch-track::after, .scan-handle > span, .scan-edge-handle > span { transition: none; }
 }

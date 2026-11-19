@@ -482,6 +482,12 @@ export default function OcrPdfClient() {
                             g.arc(p.x, p.y, 6, 0, Math.PI * 2)
                             g.fill()
                         }
+                        // In-between points on each edge: the same handles the crop screen gives you.
+                        for (const [a, b] of [[tl, tr], [tr, br], [br, bl], [bl, tl]]) {
+                            g.beginPath()
+                            g.arc((a.x + b.x) / 2, (a.y + b.y) / 2, 4, 0, Math.PI * 2)
+                            g.fill()
+                        }
                     }
                 }
             }
