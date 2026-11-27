@@ -167,12 +167,12 @@ export default function RootLayout({
       </head>
       {!IS_MOBILE_BUILD && (
         <>
-      {/* Google Analytics */}
+      {/* Google Analytics: after load and idle, so gtag.js never competes with the page on slow phones. */}
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
-      <Script id="google-analytics" strategy="afterInteractive">
+      <Script id="google-analytics" strategy="lazyOnload">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}

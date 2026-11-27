@@ -1,7 +1,7 @@
 
 import { Metadata } from "next"
 import CompressPdfClient from "./client"
-import CompressMobileClient from "./mobile-client"
+import CompressMobileClient from "@/app/compress-pdf/mobile-client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import MobileToolFrame from "@/components/mobile/MobileToolFrame"
 import { FAQSchema } from "@/components/seo/faq-schema"

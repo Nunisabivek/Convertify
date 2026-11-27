@@ -8,7 +8,23 @@ import type { NextConfig } from "next";
 const isMobileBuild = process.env.NEXT_PUBLIC_MOBILE_BUILD === 'true';
 const isDevServer =
   process.env.NODE_ENV === 'development' || process.argv.includes('dev');
-const nativeAdsWeb = path.join(path.dirname(fileURLToPath(import.meta.url)), 'src/lib/native-ads.web.ts');
+const root = path.dirname(fileURLToPath(import.meta.url));
+const nativeAdsWeb = path.join(root, 'src/lib/native-ads.web.ts');
+
+// Android-only screens. Pages and AppShell import them statically and render them only
+// behind IS_MOBILE_BUILD, but Next still ships every imported client component, so website
+// visitors downloaded ~55 KB gz of app code (and pdf-lib on three tools) they never ran.
+// Website builds resolve them to an empty stub instead.
+const WEB_STUBS = [
+  '@/components/mobile',
+  '@/components/mobile/MobileLayout',
+  '@/components/mobile/MobileToolFrame',
+  '@/components/mobile/MobileFilesPage',
+  '@/app/compress-pdf/mobile-client',
+  '@/app/image-compressor/mobile-client',
+  '@/app/jpg-to-pdf/mobile-client',
+];
+const webStub = path.join(root, 'src/components/mobile/web-stub.tsx');
 
 const nextConfig: NextConfig = {
   ...(isMobileBuild && !isDevServer && { output: 'export' }),
@@ -25,12 +41,14 @@ const nextConfig: NextConfig = {
     turbopack: {
       resolveAlias: {
         '@/lib/native-ads': './src/lib/native-ads.web.ts',
+        ...Object.fromEntries(WEB_STUBS.map((m) => [m, './src/components/mobile/web-stub.tsx'])),
       },
     },
     webpack: (config) => {
       config.resolve.alias = {
         ...config.resolve.alias,
         '@/lib/native-ads': nativeAdsWeb,
+        ...Object.fromEntries(WEB_STUBS.map((m) => [`${m}$`, webStub])),
       };
       return config;
     },

@@ -6,12 +6,15 @@ import { Button } from "@/components/ui/button"
 import { AdBanner } from "@/components/ads/banner"
 import { ProcessingWait } from "@/components/tools/processing-wait"
 import { Download } from "lucide-react"
-import { ImageReorderList } from "@/components/tools/image-reorder-list"
+import dynamic from "next/dynamic"
 import { friendlyFileError } from "@/lib/file-types"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import { finishConvert } from "@/lib/native-file"
 import { nameFromSources } from "@/lib/human-filename"
 import { placeImage, type PageSize } from "@/lib/image-page"
+
+// framer-motion (~40 KB gz) only loads once files are picked, not with the page.
+const ImageReorderList = dynamic(() => import("@/components/tools/image-reorder-list").then((m) => m.ImageReorderList), { ssr: false })
 
 export default function PngToPdfPage() {
     const [files, setFiles] = useState<File[]>([])

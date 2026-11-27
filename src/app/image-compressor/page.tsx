@@ -2,7 +2,7 @@
 import { ToolSwapper } from "@/components/tools/tool-swapper"
 import { InToolPlayStoreCallout } from "@/components/ui/google-play-badge"
 import ImageCompressorClient from "./client"
-import ImageCompressMobile from "./mobile-client"
+import ImageCompressMobile from "@/app/image-compressor/mobile-client"
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import MobileToolFrame from "@/components/mobile/MobileToolFrame"
 import { FAQSchema } from "@/components/seo/faq-schema"
