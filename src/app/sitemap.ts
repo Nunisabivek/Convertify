@@ -74,8 +74,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ]
 
     // Keep these honest: Google stops trusting lastmod on sites whose dates don't match real changes.
-    // Every tool page's copy and/or behaviour changed on 2026-10-21/22.
+    // Home and static pages last changed 2026-10-22. Every tool page changed again on
+    // 2026-11-18 (3673284 cut the templated blocks), so tools carry that date.
     const lastUpdated = '2026-10-22'
+    const toolsUpdated = '2026-11-18'
 
     const entries: MetadataRoute.Sitemap = [
         {
@@ -92,19 +94,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
         })),
         ...coreTools.map(tool => ({
             url: `${baseUrl}/${tool}`,
-            lastModified: lastUpdated,
+            lastModified: toolsUpdated,
             changeFrequency: 'weekly' as const,
             priority: 0.9,
         })),
         ...uniqueTools.map(tool => ({
             url: `${baseUrl}/${tool}`,
-            lastModified: lastUpdated,
+            lastModified: toolsUpdated,
             changeFrequency: 'weekly' as const,
             priority: 0.9,
         })),
         ...secondaryTools.map(tool => ({
             url: `${baseUrl}/${tool}`,
-            lastModified: lastUpdated,
+            lastModified: toolsUpdated,
             changeFrequency: 'monthly' as const,
             priority: 0.7,
         })),
