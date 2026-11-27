@@ -760,13 +760,13 @@ export const toolContentData: Record<string, {
     "markdown-to-pdf": {
         description: "Turn a Markdown file or pasted Markdown into a styled PDF. Convertify renders headings, lists, links, bold and italic text, blockquotes, horizontal rules and fenced code blocks with a clean document stylesheet, showing you a live preview as you type. Everything is processed in your browser.",
         features: [
-            "Headings, paragraphs and bullet lists (numbered items print as bullets)",
+            "Headings, paragraphs, bulleted, numbered and nested lists, and simple tables",
             "Bold, italic, inline code and fenced code blocks",
             "Links, blockquotes and horizontal rules",
             "Live preview beside the editor as you type",
             "Upload a .md file or paste Markdown directly",
             "100% private: nothing is uploaded",
-            "Note: Tables, task lists, syntax highlighting, LaTeX math and embedded images are not supported. Export opens your browser's print dialog — choose 'Save as PDF' there.",
+            "Note: Task lists, syntax highlighting, LaTeX math and embedded images are not supported. Documents in non-Latin scripts open your browser's print window instead — choose 'Save as PDF' there.",
         ],
         useCases: [
             "Generating professional PDF documentation from README files",

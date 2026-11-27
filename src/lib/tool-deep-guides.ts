@@ -66,7 +66,7 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
         intro: [
             "Compressing a PDF to a specific KB target — 100 KB, 200 KB, 500 KB — is one of those small problems that gets surprisingly hard to solve well. Government forms, university applications, and visa portals enforce strict size caps, and most online compressors give you three vague choices (\"low\", \"medium\", \"high\") that rarely hit the number you actually need.",
             "Convertify's PDF compressor takes a target-size-first approach. You type the limit (e.g. 100 KB), and the compressor uses a multi-pass engine to auto-tune both DPI and JPEG quality until the output is at or below your number. It runs entirely in your browser using PDF.js for rendering and PDF-Lib for re-assembly — your document never touches a server.",
-            "If you came here because a portal rejected your upload (\"file must be under 200 KB\"), you're in the right place. The result is a standard PDF, but each page is re-encoded as a JPEG image, so text is no longer selectable. A file already under your target is returned unchanged.",
+            "If you came here because a portal rejected your upload (\"file must be under 200 KB\"), you're in the right place. The compressor first shrinks just the photos inside the PDF, which keeps text selectable and sharp. Only if that can't reach your target are the pages redrawn as JPEG images, and then the text is no longer selectable. A file already under your target is returned unchanged.",
         ],
         steps: [
             { title: "Drop the PDF you want to shrink", body: "Drag a single PDF or any common image (JPG, PNG, WebP) into the upload zone. The current file size is shown so you can see how aggressive a target you'll need." },
@@ -84,9 +84,9 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
         ],
         troubleshooting: [
             { question: "I set a target of 100 KB and got 130 KB — why?", answer: "Auto-tuning gets close on most files but can't always hit aggressive targets without making text unreadable. Clear the target, open Advanced and set quality to 30-40% and resolution scale to 0.7×. If the source PDF is mostly photos (a passport scan) you can usually go to 100 KB; if it's a 10-page text document, 100 KB requires very aggressive settings." },
-            { question: "The compressed PDF text is no longer selectable.", answer: "Convertify's compressor rasterizes pages — each page becomes a JPEG embedded in a new PDF — so text in a compressed file is no longer selectable or searchable. That is the trade-off for hitting tight size targets. Keep your original for anything that needs copyable text and send the compressed copy only where a size limit demands it. If your PDF is already under the target, it is returned unchanged with its text intact." },
+            { question: "The compressed PDF text is no longer selectable.", answer: "Convertify tries a text-preserving pass first: it re-encodes only the photos inside the PDF. When the size comes from text and fonts rather than photos, or the target is very small, that pass can't get there, so each page is redrawn as a JPEG to hit the target and the text stops being selectable. Try a larger target to keep the text, and keep your original for anything that needs copyable text." },
             { question: "My scan is unreadable after compression.", answer: "Scans of small text (e.g. ID cards) are particularly sensitive. Clear the target and try 60% quality with 1.0× resolution first — that usually keeps small text legible." },
-            { question: "Why does compressing a small PDF make it bigger?", answer: "It doesn't. Compressing re-encodes each page as an image, which can inflate small or text-only PDFs, so when the result would not be smaller Convertify returns your original file unchanged and tells you so. A PDF that is already under your size target is also returned as-is, with its text intact." },
+            { question: "Why does compressing a small PDF make it bigger?", answer: "It doesn't. When the photos can't be shrunk, compressing redraws each page as an image, which can inflate small or text-only PDFs, so when the result would not be smaller Convertify returns your original file unchanged and tells you so. A PDF that is already under your size target is also returned as-is, with its text intact." },
         ],
         comparison: [
             { feature: "Hit exact KB target", convertify: "Yes (preset + custom)", typical: "Vague \"low/medium/high\"" },
@@ -776,14 +776,14 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
 
     "markdown-to-pdf": {
         intro: [
-            "Writing in Markdown and needing to hand someone a document are two different jobs. Convertify's Markdown to PDF tool bridges them: paste your Markdown or upload a .md file, watch the live preview beside the editor, and export a clean, typeset PDF with a readable sans-serif body, ruled headings and monospaced code blocks.",
-            "It covers the everyday Markdown you actually write: headings (H1 to H6), paragraphs, single-level lists (numbered items print as bullets), bold, italic, bold-italic, inline code, fenced code blocks, links, blockquotes and horizontal rules. That's enough for a README, a spec, a set of notes or a draft article.",
-            "It does not cover the heavier GitHub-flavoured extensions — tables, task lists, syntax highlighting inside code blocks, LaTeX math and embedded images all render as plain text or not at all. If your document depends on those, a dedicated toolchain like Pandoc will serve you better.",
+            "Writing in Markdown and needing to hand someone a document are two different jobs. Convertify's Markdown to PDF tool bridges them: paste your Markdown or upload a .md file, watch the live preview beside the editor, and download a clean A4 PDF with real, selectable text: a readable sans-serif body, ruled headings, tables and monospaced code blocks.",
+            "It covers the everyday Markdown you actually write: headings (H1 to H6), paragraphs, bulleted, numbered and nested lists, simple tables, bold, italic, bold-italic, inline code, fenced code blocks, links (kept as their text), blockquotes and horizontal rules. That's enough for a README, a spec, a set of notes or a draft article.",
+            "It does not cover the heavier extensions — task lists, syntax highlighting inside code blocks, LaTeX math and embedded images render as plain text or not at all. Documents in non-Latin scripts (Hindi, Chinese, Arabic and so on) are saved through your browser's print window instead, so every character comes out right. If your document depends on those, a dedicated toolchain like Pandoc will serve you better.",
         ],
         steps: [
             { title: "Paste or upload Markdown", body: "Type or paste Markdown into the editor, or click 'Upload .md file' to load a .md, .markdown or .txt file from your device." },
             { title: "Check the live preview", body: "The pane beside the editor renders as you type. Confirm heading levels, lists and code blocks look the way you expect before exporting." },
-            { title: "Export the PDF", body: "Click Download PDF. This opens your browser's print dialog with the styled document loaded — choose 'Save as PDF' as the destination to write the file to your device." },
+            { title: "Export the PDF", body: "Click Download PDF. The PDF is built in your browser and saved straight to your device, named after your first heading." },
         ],
         scenarios: [
             { title: "Turning a README into a shareable document", body: "Stakeholders who don't use GitHub get a proper document instead of raw markup, with headings and code blocks already formatted." },
@@ -792,22 +792,22 @@ export const toolDeepGuides: Record<string, ToolDeepGuide> = {
             { title: "Article and blog drafts", body: "If you write for a static site generator, exporting a draft to PDF gives you an offline reading copy or something to send a reviewer." },
         ],
         troubleshooting: [
-            { question: "My tables came out as plain text with pipe characters.", answer: "Markdown tables aren't supported. Either restructure the content as a list, or paste the table into a spreadsheet and use our Excel to PDF tool for that part." },
+            { question: "My table came out as plain text with pipe characters.", answer: "Each table row has to start and end with a pipe (|) and sit on its own line, with a separator row like |---|---| under the header. Columns share the page width equally, so very wide tables wrap inside their cells." },
             { question: "My code block isn't syntax-highlighted.", answer: "Code blocks render in a monospaced font on a tinted background, but without language colouring. The language tag after the opening fence is accepted and ignored." },
             { question: "Images in my Markdown are missing.", answer: "Embedded images aren't rendered — image syntax comes out as a link to the image. Add them to the PDF afterwards, or use a full Markdown toolchain if images are essential." },
-            { question: "Clicking Download PDF opened a print dialog instead of downloading a file.", answer: "That's expected: the export renders the styled document into your browser's print flow. Set the destination to 'Save as PDF' (Chrome and Edge) or use the PDF button (Safari and Firefox) to write the file." },
+            { question: "Clicking Download PDF opened a print dialog instead of downloading a file.", answer: "That happens when the document contains non-Latin text (for example Hindi or Chinese): the built-in PDF fonts can't draw those characters, so the print window uses your system fonts instead. Set the destination to 'Save as PDF' to write the file." },
             { question: "My list items merged into one paragraph.", answer: "Leave a blank line before the first list item and make sure each item starts at the beginning of its line with '-', '*' or '1.' followed by a space." },
         ],
         comparison: [
             { feature: "Files uploaded", convertify: "Never", typical: "Yes" },
             { feature: "Headings, lists, code, links", convertify: "Yes", typical: "Yes" },
-            { feature: "Tables and task lists", convertify: "No", typical: "Sometimes" },
+            { feature: "Tables", convertify: "Yes (simple)", typical: "Sometimes" },
             { feature: "Syntax highlighting", convertify: "No", typical: "Sometimes" },
             { feature: "Live preview", convertify: "Yes", typical: "Rarely" },
             { feature: "Daily limit", convertify: "Unlimited", typical: "3-5 per day" },
             { feature: "Sign-up", convertify: "No", typical: "Often" },
         ],
-        lastUpdated: "2026-07-26",
+        lastUpdated: "2026-11-27",
     },
 
     "ocr-pdf": {

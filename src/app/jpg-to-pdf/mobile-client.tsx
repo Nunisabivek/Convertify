@@ -10,7 +10,8 @@ import { nameFromSources } from '@/lib/human-filename'
 import { isJpegFile, isPngFile, friendlyFileError } from '@/lib/file-types'
 import { tapHaptic } from '@/lib/haptics'
 import { releaseJob, takeJob } from '@/lib/jobs/session'
-import { PDFDocument } from 'pdf-lib'
+import { PDFDocument, degrees } from 'pdf-lib'
+import { jpegOrientation, uprightPlacement } from '@/lib/jpeg-orientation'
 
 export default function JpgToPdfMobileClient() {
     const [files, setFiles] = useState<File[]>([])
@@ -49,19 +50,23 @@ export default function JpgToPdfMobileClient() {
                 )
                 const imageBytes = await file.arrayBuffer()
                 let image
+                let orientation = 1
                 if (isJpegFile(file)) {
                     image = await pdfDoc.embedJpg(imageBytes)
+                    orientation = jpegOrientation(imageBytes)
                 } else if (isPngFile(file)) {
                     image = await pdfDoc.embedPng(imageBytes)
                 } else {
                     continue
                 }
-                const page = pdfDoc.addPage([image.width, image.height])
-                page.drawImage(image, {
-                    x: 0,
-                    y: 0,
+                // Phone photos are often stored sideways with an EXIF flag; turn the page, not the pixels.
+                const place = uprightPlacement(orientation, image.width, image.height)
+                pdfDoc.addPage([...place.page]).drawImage(image, {
+                    x: place.x,
+                    y: place.y,
                     width: image.width,
                     height: image.height,
+                    rotate: degrees(place.rotate),
                 })
                 added += 1
             }

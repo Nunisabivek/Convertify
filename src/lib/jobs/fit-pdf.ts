@@ -18,6 +18,17 @@ export async function fitPdfToRange(
         return { blob: file, size: file.size, shrunk: false }
     }
 
+    // Text-preserving pass first: shrink only the photos inside, so text stays selectable
+    // and sharp. Pages are redrawn as pictures only if that can't reach the size.
+    onProgress({ size: file.size, note: 'Shrinking photos…' })
+    const { shrinkPdfImages, canvasReencode } = await import('@/lib/pdf-image-recompress')
+    const kept = await shrinkPdfImages(await file.arrayBuffer(), minBytes, maxBytes, canvasReencode, undefined, signal)
+    if (signal.aborted) throw new DOMException('Cancelled', 'AbortError')
+    if (kept) {
+        const blob = new Blob([kept as BlobPart], { type: 'application/pdf' })
+        return { blob, size: blob.size, shrunk: true }
+    }
+
     const { loadPdfjs } = await import('@/lib/pdfjs')
     const pdfjsLib = await loadPdfjs()
     const data = await file.arrayBuffer()
@@ -94,8 +105,9 @@ async function buildPdf(
         })
         const bytes = new Uint8Array(await blob.arrayBuffer())
         const jpg = await out.embedJpg(bytes)
-        const newPage = out.addPage([jpg.width, jpg.height])
-        newPage.drawImage(jpg, { x: 0, y: 0, width: jpg.width, height: jpg.height })
+        // Keep the page's real size in points; only the picture inside is downsampled.
+        const [w, h] = [viewport.width / scale, viewport.height / scale]
+        out.addPage([w, h]).drawImage(jpg, { x: 0, y: 0, width: w, height: h })
         canvas.width = 1
         canvas.height = 1
         onPage(i)

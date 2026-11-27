@@ -60,6 +60,20 @@ open(p('logo.svg'), 'w').write('<svg xmlns="http://www.w3.org/2000/svg" width="2
 
 # image-only "scanned" PDF and a password-protected PDF
 doc = fitz.open(); pg = doc.new_page(width=595, height=842); pg.insert_image(pg.rect, filename=p('photo.jpg')); doc.save(p('scan.pdf'))
+# A 2 MB detailed photo plus real text: compress must shrink the photo and keep the text selectable.
+from PIL import ImageFilter
+g = Image.linear_gradient('L').resize((2400, 3200))
+n = Image.effect_noise((2400, 3200), 40).filter(ImageFilter.GaussianBlur(1.2))
+big = Image.merge('RGB', (g, n, Image.blend(g, n, 0.5)))
+dd = ImageDraw.Draw(big)
+for i in range(0, 2400, 160): dd.line((i, 0, 2400 - i, 3200), fill=(250, 240, 200), width=6)
+big.save(p('bigphoto.jpg'), quality=93)
+doc = fitz.open(); pg = doc.new_page(width=595, height=842)
+pg.insert_image(fitz.Rect(50, 120, 545, 780), filename=p('bigphoto.jpg')); pg.insert_text((50, 80), 'Invoice 4471 keeps selectable text', fontsize=16)
+doc.save(p('phototext.pdf'))
+# Same photo in CMYK: the text-preserving pass skips CMYK, so this exercises the page-to-picture fallback.
+big.convert('CMYK').save(p('bigcmyk.jpg'), quality=93)
+doc = fitz.open(); pg = doc.new_page(width=595, height=842); pg.insert_image(pg.rect, filename=p('bigcmyk.jpg')); doc.save(p('cmykscan.pdf'))
 doc = fitz.open(p('text.pdf')); doc.save(p('locked.pdf'), encryption=fitz.PDF_ENCRYPT_AES_256, user_pw='1234', owner_pw='owner5678')
 
 # docx (minimal valid WordprocessingML)

@@ -9,6 +9,7 @@ import { Trash2, ArrowUp, ArrowDown, FileText, Download, Merge } from "lucide-re
 import { IS_MOBILE_BUILD } from "@/lib/is-mobile-build"
 import { finishConvert, formatFileSize } from "@/lib/native-file"
 import { nameFromSources } from "@/lib/human-filename"
+import { jpegOrientation, uprightPlacement } from "@/lib/jpeg-orientation"
 
 // PDFs, plus JPG and PNG pictures that become one page each.
 const MERGE_ACCEPT = {
@@ -64,7 +65,7 @@ export default function MergePdfPage() {
         setIsProcessing(true)
         try {
             // Loaded on click, not with the page: pdf-lib is ~400 KB of JavaScript a visitor may never use.
-            const [{ PDFDocument }, { loadPdf }] = await Promise.all([import("pdf-lib"), import("@/lib/pdf-password")])
+            const [{ PDFDocument, degrees }, { loadPdf }] = await Promise.all([import("pdf-lib"), import("@/lib/pdf-password")])
             const mergedPdf = await PDFDocument.create()
 
             for (const file of files) {
@@ -75,15 +76,17 @@ export default function MergePdfPage() {
                         const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices())
                         copiedPages.forEach((page) => mergedPdf.addPage(page))
                     } else {
-                        // A picture becomes one page sized to the picture.
-                        const image = isPngFile(file)
-                            ? await mergedPdf.embedPng(fileBuffer)
-                            : await mergedPdf.embedJpg(fileBuffer)
-                        mergedPdf.addPage([image.width, image.height]).drawImage(image, {
-                            x: 0,
-                            y: 0,
+                        // A picture becomes one page sized to the picture, turned upright
+                        // when a phone stored it sideways with an EXIF flag.
+                        const png = isPngFile(file)
+                        const image = png ? await mergedPdf.embedPng(fileBuffer) : await mergedPdf.embedJpg(fileBuffer)
+                        const place = uprightPlacement(png ? 1 : jpegOrientation(fileBuffer), image.width, image.height)
+                        mergedPdf.addPage([...place.page]).drawImage(image, {
+                            x: place.x,
+                            y: place.y,
                             width: image.width,
                             height: image.height,
+                            rotate: degrees(place.rotate),
                         })
                     }
                 } catch (fileError) {

@@ -23,10 +23,13 @@ const ONLY = process.argv[3] ? process.argv[3].split(',') : null
 // [tool or tool#variant, input files, accepted output kinds]
 const T = [
   ['merge-pdf', ['text.pdf', 'scan.pdf'], ['pdf']],
+  ['merge-pdf#exif', ['text.pdf', 'rotated6.jpg'], ['pdf']],
   ['merge-pdf#locked', ['locked.pdf', 'text.pdf'], ['pdf']],
   ['split-pdf', ['text.pdf'], ['pdf', 'zip']],
   ['split-pdf#locked', ['locked.pdf'], ['pdf', 'zip']],
   ['compress-pdf', ['scan.pdf'], ['pdf']],
+  ['compress-pdf#text', ['phototext.pdf'], ['pdf']],
+  ['compress-pdf#raster', ['cmykscan.pdf'], ['pdf']],
   ['pdf-to-word', ['text.pdf'], ['zip']],
   ['word-to-pdf', ['letter.docx'], ['pdf']],
   ['pdf-to-jpg', ['text.pdf'], ['jpg', 'zip']],
@@ -45,7 +48,7 @@ const T = [
   ['pdf-to-text', ['text.pdf'], ['txt']],
   ['text-to-pdf', ['notes.txt'], ['pdf']],
   ['html-to-pdf', [], ['pdf']],
-  ['markdown-to-pdf', ['readme.md'], ['text']],
+  ['markdown-to-pdf', ['readme.md'], ['pdf']],
   ['tiff-to-pdf', ['scan.tiff'], ['pdf']],
   ['autocad-pdf-editor', ['cad.pdf'], ['pdf']],
   ['sign-pdf', ['text.pdf'], ['pdf']],
@@ -150,15 +153,7 @@ const STEPS = {
     await press(btn(p, /Compare Documents/))
     await press(btn(p, /Download Report/), 45000)
   },
-  'markdown-to-pdf': async (p) => {
-    // Saving goes through the print dialog (by design). Capture what the print frame would print.
-    await p.evaluate(() => new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach((n) => {
-      if (n.tagName === 'IFRAME') setTimeout(() => { window.__printed = n.contentDocument?.body?.innerText || '' }, 300)
-    }))).observe(document.body, { childList: true }))
-    await btn(p, /^Download PDF/).click(); await p.waitForTimeout(1500)
-    const printed = await p.evaluate(() => window.__printed || '')
-    await p.evaluate((t) => { const pre = document.createElement('pre'); pre.textContent = t; document.querySelector('main').appendChild(pre) }, printed)
-  },
+  'markdown-to-pdf': async (p) => { await btn(p, /^Download PDF/).click() },
 }
 const NO_UPLOAD = new Set(['html-to-pdf', 'csv-to-json', 'base64', 'compare-pdf', 'qr-code-generator'])
 const ACTION = /^(convert|merge|split|compress|rotate|add|extract|crop|organize|delete|reorder|resize|remove background|generate|make|save|apply|fit|scan)/i

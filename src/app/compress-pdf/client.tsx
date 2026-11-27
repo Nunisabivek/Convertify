@@ -125,8 +125,9 @@ export default function CompressPdfPage() {
                 const imgBytes = await fetch(imgData).then(res => res.arrayBuffer())
 
                 const jpgImage = await newPdf.embedJpg(imgBytes)
-                const newPage = newPdf.addPage([jpgImage.width, jpgImage.height])
-                newPage.drawImage(jpgImage, { x: 0, y: 0, width: jpgImage.width, height: jpgImage.height })
+                // Keep the page's real size in points; only the picture inside is downsampled.
+                const [w, h] = [viewport.width / scale, viewport.height / scale]
+                newPdf.addPage([w, h]).drawImage(jpgImage, { x: 0, y: 0, width: w, height: h })
             }
             onPageDone?.(i)
         }
@@ -167,6 +168,18 @@ export default function CompressPdfPage() {
                 setProcessedFileUrl(URL.createObjectURL(source))
                 setCompressionStats({ original: source.size, compressed: source.size })
                 return
+            }
+
+            if (isPdf && targetBytes > 0) {
+                // Text-preserving pass first: shrink only the photos inside the PDF, so text stays
+                // selectable and sharp. Pages are redrawn as pictures only if that can't reach the size.
+                const { shrinkPdfImages, canvasReencode } = await import("@/lib/pdf-image-recompress")
+                const kept = await shrinkPdfImages(await file.arrayBuffer(), 1, targetBytes, canvasReencode, (i, n) => setProgress(Math.round((i / n) * 30)))
+                if (kept) {
+                    setProgress(100)
+                    showResult(new Blob([kept as BlobPart], { type: "application/pdf" }))
+                    return
+                }
             }
 
             if (isPdf) {

@@ -63,6 +63,27 @@ def _(f, r):
     if 'Paragraph 24' not in t or 'Résumé' not in t: return 'document text missing'
 
 
+def a4(f):
+    w, h = fitz.open(f)[0].rect.width, fitz.open(f)[0].rect.height
+    if abs(w - 595) > 2 or abs(h - 842) > 2: return f'page is {w:.0f}x{h:.0f}pt, not A4 595x842'
+
+
+@check('compress-pdf#raster')
+def _(f, r):
+    # CMYK photo: the page-to-picture fallback runs. Pages were once re-sized to the render's pixel count (1.5x A4).
+    if r.get('bytes', 0) > 200 * 1024: return f"{r['bytes'] // 1024} KB, over the 200 KB default target"
+    return a4(f)
+
+
+@check('compress-pdf#text')
+def _(f, r):
+    # Photo-heavy PDF with real text: the photo shrinks, the text stays a text layer.
+    d, t = text(f)
+    if r.get('bytes', 0) > 200 * 1024: return f"{r['bytes'] // 1024} KB, over the 200 KB default target"
+    if 'Invoice 4471' not in t: return 'text layer lost (pages were rasterised)'
+    return a4(f)
+
+
 @check('watermark-pdf')
 def _(f, r):
     pg = fitz.open(f)[0]
@@ -85,6 +106,12 @@ def _(f, r):
     ws = openpyxl.load_workbook(f).worksheets[0]
     cells = [c for row in ws.iter_rows(values_only=True) for c in row if isinstance(c, str)]
     if not any('Confidential sample text' in c and c.startswith('Line') for c in cells): return 'a sentence was split across cells'
+
+
+@check('merge-pdf#exif')
+def _(f, r):
+    pg = fitz.open(f)[-1]
+    if pg.rect.width >= pg.rect.height: return f'photo page {pg.rect.width:.0f}x{pg.rect.height:.0f}: still sideways'
 
 
 @check('jpg-to-pdf#exif')
@@ -160,9 +187,13 @@ def _(f, r):
 
 
 @check('markdown-to-pdf')
-def _(r):
-    t = r.get('text') or ''
-    if 'Title' not in t or 'item one' not in t: return 'print frame did not contain the rendered markdown'
+def _(f, r):
+    # Was a print dialog; now a real PDF. Markup must be rendered, not printed literally.
+    d, t = text(f)
+    for want in ('Title', 'item one', 'console.log(1)', 'More text paragraph.'):
+        if want not in t: return f'{want!r} missing from the PDF'
+    if '**' in t or '```' in t or '|---' in t: return 'markdown syntax printed literally'
+    if not any('Bold' in fnt[3] for fnt in d[0].get_fonts()): return 'no bold font: headings/bold not styled'
 
 
 @check('compare-pdf')

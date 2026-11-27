@@ -52,6 +52,27 @@ function markdownToHtml(md: string): string {
     return html
 }
 
+// Browser print-to-PDF in a hidden frame: for scripts the built-in PDF fonts can't draw.
+async function printHtml(body: string) {
+    const iframe = document.createElement("iframe")
+    iframe.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0"
+    document.body.appendChild(iframe)
+    const doc = iframe.contentDocument
+    if (!doc) throw new Error("Could not create print frame")
+    doc.open()
+    doc.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+        body { font-family: system-ui, sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; color: #1e293b; font-size: 14px; line-height: 1.6; }
+        h1 { font-size: 28px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
+        h2 { font-size: 22px; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; }
+        pre { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px; white-space: pre-wrap; }
+        code { font-family: monospace; }
+    </style></head><body>${body}</body></html>`)
+    doc.close()
+    await new Promise((r) => setTimeout(r, 500))
+    iframe.contentWindow?.print()
+    setTimeout(() => iframe.remove(), 1000)
+}
+
 export default function MarkdownToPdfClient() {
     const [input, setInput] = useState("")
     const [isProcessing, setIsProcessing] = useState(false)
@@ -70,36 +91,19 @@ export default function MarkdownToPdfClient() {
         setIsProcessing(true)
         setError(null)
         try {
-            const htmlContent = markdownToHtml(input)
-            const fullHtml = `<!DOCTYPE html><html><head><style>
-                body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; color: #1e293b; font-size: 14px; line-height: 1.6; }
-                h1 { font-size: 28px; margin: 24px 0 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
-                h2 { font-size: 22px; margin: 20px 0 10px; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; }
-                h3 { font-size: 18px; margin: 16px 0 8px; }
-                pre { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px; overflow-x: auto; }
-                code { font-family: 'Courier New', monospace; }
-            </style></head><body>${htmlContent}</body></html>`
-
-            // Use print-to-PDF via iframe
-            const iframe = document.createElement("iframe")
-            iframe.style.position = "fixed"
-            iframe.style.right = "0"
-            iframe.style.bottom = "0"
-            iframe.style.width = "0"
-            iframe.style.height = "0"
-            iframe.style.border = "none"
-            document.body.appendChild(iframe)
-
-            const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document
-            if (!iframeDoc) throw new Error("Could not create print frame")
-            iframeDoc.open()
-            iframeDoc.write(fullHtml)
-            iframeDoc.close()
-
-            // Wait for content to render
-            await new Promise(resolve => setTimeout(resolve, 500))
-            iframe.contentWindow?.print()
-            setTimeout(() => document.body.removeChild(iframe), 1000)
+            // Loaded on click: the renderer pulls in pdf-lib (~400 KB) that a visitor may never need.
+            const { markdownToPdf, latinOnly } = await import("@/lib/markdown-pdf")
+            // The built-in PDF fonts are Latin-only; other scripts go through the browser's
+            // print-to-PDF, which uses system fonts, so no character turns into "?".
+            if (!latinOnly(input)) return await printHtml(markdownToHtml(input))
+            const bytes = await markdownToPdf(input)
+            const url = URL.createObjectURL(new Blob([bytes as BlobPart], { type: "application/pdf" }))
+            const a = document.createElement("a")
+            const title = /^#\s+(.+)$/m.exec(input)?.[1]?.replace(/[^\w\- ]+/g, "").trim().slice(0, 60)
+            a.href = url
+            a.download = `${title || "document"}.pdf`
+            a.click()
+            setTimeout(() => URL.revokeObjectURL(url), 60_000)
         } catch (e) {
             setError(e instanceof Error ? e.message : "Failed to generate PDF")
         } finally {
@@ -138,7 +142,7 @@ export default function MarkdownToPdfClient() {
                 {isProcessing ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Generating...</> : <><Download className="w-4 h-4 mr-2" />Download PDF</>}
             </Button>
             <p className="text-center text-xs text-slate-500 mt-2">
-                Your browser&apos;s print window opens. Choose &ldquo;Save as PDF&rdquo; as the destination.
+                Saves an A4 PDF with real, selectable text. Documents in non-Latin scripts (Hindi, Chinese, Arabic…) open your browser&apos;s print window instead; choose &ldquo;Save as PDF&rdquo;.
             </p>
         </div>
     )

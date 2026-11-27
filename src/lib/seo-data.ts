@@ -115,7 +115,7 @@ export const toolSeoData = {
             },
             {
                 question: "Will the text stay selectable?",
-                answer: "Not after this compressor. Pages are rasterized to JPEG so we can hit a hard KB target. The result still opens as a PDF and stays readable at sensible targets; it is no longer a text layer. Do not use this pass if you must keep selectable text or a digital signature."
+                answer: "Usually, yes. Convertify first shrinks only the photos inside the PDF and leaves the text alone, which keeps it selectable. If that can't reach your target (typically a text-only PDF or a very small target), pages are redrawn as JPEG images to hit the size, and then the text is no longer selectable. Any digital signature is lost either way."
             },
             {
                 question: "Does compressing a PDF upload my file?",
@@ -1336,11 +1336,11 @@ export const toolSeoData = {
         faqs: [
             {
                 question: "Does it support GitHub-Flavored Markdown (GFM)?",
-                answer: "Only the everyday parts: headings, bold, italic, links, lists, blockquotes, horizontal rules, inline code and fenced code blocks. Tables, task lists, strikethrough and syntax highlighting are not supported, and numbered lists print as bullets."
+                answer: "The everyday parts: headings, bold, italic, links, bulleted, numbered and nested lists, simple tables, blockquotes, horizontal rules, inline code and fenced code blocks. Task lists, strikethrough and syntax highlighting are not supported."
             },
             {
                 question: "Can I customize the PDF styling?",
-                answer: "No. There is one clean built-in style. Page size and margins come from your browser's print dialog, which is where the PDF is saved."
+                answer: "No. There is one clean built-in style on A4 pages with comfortable margins, and the PDF downloads straight to your device."
             },
             {
                 question: "Are images and diagrams included in the PDF?",
